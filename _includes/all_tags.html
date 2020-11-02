@@ -21,6 +21,6 @@
   {% assign tags = tags | shift %}
   {% for tag in tags %}
     {% capture tag_name %}{{ tag }}{% endcapture %}
-    <a href="/tags/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}s</nobr></code></a>&nbsp;
+    <a href="/tags/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code></a>&nbsp;
   {% endfor %}
 ]</span>
