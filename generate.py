@@ -7,6 +7,8 @@ import yaml
 # Directories
 BASE_DIR = Path(__file__).parent.absolute()
 TAGS_DIR = Path(BASE_DIR, "_tags")
+if not os.path.exists(TAGS_DIR):
+    os.makedirs(TAGS_DIR)
 
 def get_unique_tags(dir):
     """Get set of unique tags from all
@@ -74,4 +76,4 @@ if __name__ == "__main__":
     generate_tag_pages()
 
     # Reminder
-    print(f"\n{bcolors.WARNING}Dont forget to update the LATEST frontmatter in {bcolors.OKGREEN}{bcolors.UNDERLINE}index.md{bcolors.ENDC}{bcolors.ENDC}{bcolors.ENDC}\n")
+    print(f"\n{bcolors.WARNING}Don't forget to update the LATEST frontmatter in {bcolors.OKGREEN}{bcolors.UNDERLINE}index.md{bcolors.ENDC}{bcolors.ENDC}{bcolors.ENDC}\n")
