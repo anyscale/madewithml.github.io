@@ -1,0 +1,58 @@
+# Details
+title: "Made With ML"
+tagline: "Applied ML · MLOps · Production"
+description: "Learn how to responsibly develop, deploy and maintain applications that are made with ML."
+url: https://madewithml.github.io
+
+# Build settings
+baseurl: '/'
+permalink: /:title/
+highlighter: rouge
+syntax_theme: monokai
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# SEO tag
+author:
+  type: Organization
+  name: "Made With ML"
+  url: https://madewithml.com/
+  twitter: madewithml
+  picture: assets/images/card.png
+twitter:
+  username: madewithml
+  card: summary_large_image
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      image: assets/images/card.png
+
+
+# Custom vars
+version: 1.0.0
+signup_url: "https://fe6c7da2.sibforms.com/serve/MUIEAOP26luC60mcMO_NBXS_ILYwwqN1aAdk4yyk3Sgn3NIN7jx8IOkIZc_uE-gRfX3M16Lm0HjDeAm-tWy1f06-U2-GlVwEl235gFCqEUj7T2uQ6lr_-wQgL5UBsuYCoacZ5P1JzxtbrHQuHozjux2xot7zGUeu_fmpqcphdYva6a8FF0IDIp7mzsK89VAzcB95iALVnSpd5pJR"
+
+# Collections
+collections:
+  pages:
+    output: true
+  courses:
+    output: true
+  resources:
+    output: true
+  tags:
+    output: true
+
+# Feed
+feed:
+  collections:
+    - pages
+    - courses
+    - resources
