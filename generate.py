@@ -58,7 +58,22 @@ def generate_tag_pages():
     print(f"{len(tags)} tag pages created")
 
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 if __name__ == "__main__":
 
     # Generate tag pages
     generate_tag_pages()
+
+    # Reminder
+    print(f"\n{bcolors.WARNING}Don't forget to update the LATEST frontmatter in {bcolors.OKGREEN}{bcolors.UNDERLINE}index.md{bcolors.ENDC}{bcolors.ENDC}{bcolors.ENDC}\n")
