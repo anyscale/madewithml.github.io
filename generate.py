@@ -74,4 +74,4 @@ if __name__ == "__main__":
     generate_tag_pages()
 
     # Reminder
-    print(f"\n{bcolors.WARNING}Don't forget to update the LATEST frontmatter in {bcolors.OKGREEN}{bcolors.UNDERLINE}index.md{bcolors.ENDC}{bcolors.ENDC}{bcolors.ENDC}\n")
+    print(f"\n{bcolors.WARNING}Dont forget to update the LATEST frontmatter in {bcolors.OKGREEN}{bcolors.UNDERLINE}index.md{bcolors.ENDC}{bcolors.ENDC}{bcolors.ENDC}\n")
