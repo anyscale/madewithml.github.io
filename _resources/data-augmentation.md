@@ -6,8 +6,7 @@ image: /assets/images/resources/data-augmentation.png
 tags: data-augmentation text-augmentation image-augmentation augmentation
 
 image-credit: https://cdn-images-1.medium.com/max/1000/1*dJNlEc7yf93K4pjRJL55PA.png
-topic-description: "Data augmentation is a set of techniques to increase both the quantity and diversity of the dataset without collecting more data.
-The specific techniques are dependent on the application area (NLP, CV, audio, etc.)."
+topic-description: "Data augmentation is a set of techniques to increase both the quantity and diversity of the dataset without collecting more data. The specific techniques are dependent on the application area (NLP, CV, audio, etc.)."
 
 overviews:
     -

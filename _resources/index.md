@@ -15,8 +15,8 @@ redirect_from: /topics/
 <div style="overflow-x: auto;">
     <table class="ai-resources-table">
     <tr>
-        <td>🐍 Python</td>
-        <td>📦 NumPy</td>
+        <td><a href="{% link _resources/python.md %}">🐍 Python</a></td>
+        <td><a href="{% link _resources/numpy.md %}">📦 NumPy</a></td>
         <td>🐼 Pandas</td>
         <td>🔬 Scikit-learn</td>
     </tr>
