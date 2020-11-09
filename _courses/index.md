@@ -1,10 +1,11 @@
 ---
 layout: page
 title: Courses
+display-title: true
 permalink: /courses/
 ---
 
-<div class="card-deck">
+<div class="card-deck mt-4">
 
   <div class="card ai-card">
     <a href="https://github.com/madewithml/basics" target="_blank">

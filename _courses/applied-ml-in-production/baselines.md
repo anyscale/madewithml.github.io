@@ -1,0 +1,1 @@
+https://smerity.com/articles/2017/baselines_need_love.html

@@ -5,29 +5,31 @@ permalink: /
 
 latest:
   -
-    title: Machine Learning Basics
-    description: Learn ML with clean code, simplified math and illustrative visuals. Available in both PyTorch and TensorFlow.
-    image: /assets/images/courses/machine-learning-basics/card.png
-    url: /courses/applied-ml-in-production
+    title: Iteration
+    description: Improving on our solution iteratively over time.
+    image: /assets/images/courses/applied-ml-in-production/iteration.png
+    url: /courses/applied-ml-in-production/iteration/
   -
-    title: Applied ML in Production
-    description: A guide and code-driven case study on MLOps for software engineers, data scientists and product managers.
-    image: /assets/images/courses/applied-ml-in-production/card.png
-    url: /courses/applied-ml-in-production
+    title: Evaluation
+    description: Determining how well our solution is performing over time.
+    image: /assets/images/courses/applied-ml-in-production/evaluation.png
+    url: /courses/applied-ml-in-production/evaluation/
   -
-    title: Machine Learning Basics
-    description: Learn ML with clean code, simplified math and illustrative visuals. Available in both PyTorch and TensorFlow.
-    image: /assets/images/courses/machine-learning-basics/card.png
-    url: /courses/applied-ml-in-production
+    title: Solution
+    description: Designing a solution with constraints.
+    image: /assets/images/courses/applied-ml-in-production/solution.png
+    url: /courses/applied-ml-in-production/solution/
 
 ---
 
-# Welcome to Made With ML
-<span class="post-date">Join over <b>20K+</b> developers in learning machine learning without the <a
-    href="{% link _pages/about.md %}">overwhelm</a>.</span>
+<h1 class="page-title">Welcome to Made With ML</h1>
+<hr class="mt-0">
+<span class="post-date">Join <b>20K+</b> developers in learning how to
+<a href="{% link _pages/about.md %}">deliver (actual) value</a> with machine learning.
+Read about our recent <a href="{% link _pages/pivot.md %}">pivot</a> from our dynamic platform.</span>
 
 ### Stay updated
-- [Sign up]({{ site.signup_url }}){:target="_blank"} for our weekly newsletter to receive updates on new content.
+- [Sign up]({{ site.signup_url }}){:target="_blank"} for our newsletter to receive updates on new content.
 - [Subscribe](https://www.youtube.com/madewithml?sub_confirmation=1){:target="_blank"} to our new YouTube channel for new lessons.
 - Connect with us on [Twitter](https://twitter.com/madewithml){:target="_blank"} and
 [LinkedIn](https://www.linkedin.com/company/madewithml){:target="_blank"} for updates on useful resources.
@@ -47,11 +49,11 @@ latest:
 <div class="card-deck">
   {% for item in page.latest %}
     <div class="card ai-card">
-      <a href="{{ item.url | absolute_url }}" target="_blank">
+      <a href="{{ item.url | absolute_url }}">
         <img class="card-img-top" src="{{ item.image }}" alt="Card image cap">
       </a>
       <div class="card-body">
-        <a href="{{ item.url | absolute_url }}" target="_blank">
+        <a href="{{ item.url | absolute_url }}">
           <h5 class="card-title mb-2" style="font-size: 0.95rem;">{{ item.title }}</h5>
         </a>
         <p class="card-text" style="font-size: 0.85rem !important;">{{ item.description }}</p>
