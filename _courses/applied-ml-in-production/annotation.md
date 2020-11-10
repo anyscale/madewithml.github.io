@@ -2,7 +2,7 @@
 layout: page
 title: Annotation
 description: Preparing and labeling our data for exploration.
-image: /assets/images/courses/applied-ml-in-production/annotation.png
+image: /static/images/courses/applied-ml-in-production/annotation.png
 tags: annotation labeling
 
 course-url: /courses/applied-ml-in-production/

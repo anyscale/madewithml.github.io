@@ -7,17 +7,17 @@ latest:
   -
     title: Iteration
     description: Improving on our solution iteratively over time.
-    image: /assets/images/courses/applied-ml-in-production/iteration.png
+    image: /static/images/courses/applied-ml-in-production/iteration.png
     url: /courses/applied-ml-in-production/iteration/
   -
     title: Evaluation
     description: Determining how well our solution is performing over time.
-    image: /assets/images/courses/applied-ml-in-production/evaluation.png
+    image: /static/images/courses/applied-ml-in-production/evaluation.png
     url: /courses/applied-ml-in-production/evaluation/
   -
     title: Solution
     description: Designing a solution with constraints.
-    image: /assets/images/courses/applied-ml-in-production/solution.png
+    image: /static/images/courses/applied-ml-in-production/solution.png
     url: /courses/applied-ml-in-production/solution/
 
 ---

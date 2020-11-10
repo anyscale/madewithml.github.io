@@ -1,0 +1,196 @@
+// main.css
+
+// Table
+.ai-resources-table {
+  td {
+    padding: 0.75rem;
+  }
+  tbody tr:nth-child(odd) td,
+  tbody tr:nth-child(odd) th {
+    background-color: #fff;
+  }
+  @media (max-width: 480px) {
+    tbody > tr td {
+      display: inline-block;
+      width: 100%
+    }
+  }
+}
+
+
+// Image
+.ai-resource-img {
+  width: 20rem;
+  margin-bottom: 0rem !important;
+}
+.ai-resource-badge {
+  display: inline;
+  margin-bottom: 0rem !important;
+  border-radius: 0rem !important;
+}
+
+// Colors
+.ai-color-primary {
+  color: #467fcf;
+}
+.ai-color-primary:hover {
+  color: #316cbe;
+}
+.ai-color-info {
+  color: #45aaf2;
+}
+.ai-color-info:hover {
+  color: #219af0;
+}
+.ai-color-purple {
+  color: rgb(156, 102, 223);
+}
+.ai-color-purple:hover {
+  color: rgb(148, 88, 223);
+}
+.ai-color-pink {
+  color: #F54EA2;
+}
+.ai-color-pink:hover {
+  color: rgb(243, 57, 150);
+}
+.ai-color-success {
+  color: #5eba00;
+}
+.ai-color-success:hover {
+  color: #4b9400;
+}
+.ai-color-light {
+  color: #f8f9fa;
+}
+.ai-color-light:hover {
+  color: #e2e6ea;
+}
+.ai-color-warning {
+  color: #f1c40f;
+}
+.ai-color-warning:hover {
+  color: #cea70c;
+}
+.ai-color-danger {
+  color: #cd201f;
+}
+.ai-color-danger:hover {
+  color: #ac1b1a;
+}
+.ai-color-orange {
+  color: #fd9644;
+}
+.ai-color-orange:hover {
+  color: #fd811e;
+}
+.ai-color-dark-orange {
+  color: #e86a02;
+}
+.ai-color-dark-orange:hover {
+  color: #c95b02;
+}
+.ai-color-blue2 {
+  color: #82aae2;
+}
+.ai-color-blue2:hover {
+  color: #6a9be0;
+}
+.ai-color-dark {
+  color: #343a40;
+}
+.ai-color-dark:hover {
+  color: #23272b;
+}
+.ai-color-gray {
+  color: #868e96;
+}
+.ai-color-gray:hover {
+  color: #70777e;
+}
+.ai-color-pink {
+  color: #f66d9b;
+}
+.ai-color-pink:hover {
+  color: #f66d9b;
+}
+.ai-color-youtube {
+  color: #F40105;
+}
+.ai-color-youtube:hover {
+  color: #cf0104;
+}
+
+// Buttons
+.ai-btn-blue-gradient {
+  background: linear-gradient(135deg, #45aaf2, #467fcf);
+  border: none;
+}
+.ai-btn-blue-gradient:hover {
+  background: linear-gradient(135deg, #2b9ff1, #2b6fce);
+  border: none;
+}
+
+// Forms
+.ai-input-box {
+  border-width: 0.05rem;
+  box-shadow: 0px 0px 0px #285d8b;
+  border-color: #cdd3d8;
+  font-size: 0.85rem;
+}
+
+// Cards
+.ai-card {
+  img {
+    margin-bottom: 0rem !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+  }
+  h5 {
+    margin-top: 0rem !important;
+  }
+  p {
+    font-size: 0.9rem !important;
+  }
+  .card-footer, .card-footer-link {
+    display: flex;
+    align-items: center;
+    vertical-align: center;
+    justify-content: right;
+  }
+}
+
+.ai-lesson-section-title {
+  margin-bottom: 0rem;
+}
+
+figure {
+  text-align: center;
+}
+.image > img {
+vertical-align: middle;
+}
+figcaption {
+  font-size: 0.9rem;
+}
+
+.ai-center-all {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.ai-video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+}
+.ai-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

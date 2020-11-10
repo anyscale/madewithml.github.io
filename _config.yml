@@ -23,7 +23,7 @@ author:
   name: "Made With ML"
   url: https://madewithml.com/
   twitter: madewithml
-  picture: assets/images/card.png
+  picture: static/images/card.png
 twitter:
   username: madewithml
   card: summary_large_image
@@ -32,7 +32,7 @@ defaults:
     scope:
       path: "" # an empty string here means all files in the project
     values:
-      image: assets/images/card.png
+      image: static/images/card.png
 
 
 # Custom vars

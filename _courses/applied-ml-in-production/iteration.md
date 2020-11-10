@@ -2,7 +2,7 @@
 layout: page
 title: Iteration
 description: Improving on our solution iteratively over time.
-image: /assets/images/courses/applied-ml-in-production/iteration.png
+image: /static/images/courses/applied-ml-in-production/iteration.png
 tags: product product-management evaluation
 
 course-url: /courses/applied-ml-in-production/
@@ -41,7 +41,7 @@ We don't want to spend months of time developing a complicated solution only to 
 3. Constantly reassess to ensure your objective hasn't changed.
 
 <figure>
-  <img src="/assets/images/courses/applied-ml-in-production/development_cycle.png" width="700" alt="product development cycle">
+  <img src="/static/images/courses/applied-ml-in-production/development_cycle.png" width="700" alt="product development cycle">
   <figcaption>Product development cycle</figcaption>
 </figure>
 

@@ -2,7 +2,7 @@
 layout: page
 title: Applied ML in Production
 description: "A guide and code-driven case study on MLOps for software engineers, data scientists and product managers."
-image: /assets/images/courses/applied-ml-in-production/card.png
+image: /static/images/courses/applied-ml-in-production/card.png
 redirect_from: /courses/putting-ml-in-production/
 tags: applied-ml mlops production
 
@@ -10,22 +10,22 @@ product-lessons:
   -
     title: Objectives
     description: How to identify the core objective for your task.
-    image: /assets/images/courses/machine-learning-basics/card.png
+    image: /static/images/courses/machine-learning-basics/card.png
     url: /courses/applied-ml-in-production
   -
     title: Solutions
     description: Designing solution with UX and technical constraints.
-    image: /assets/images/courses/applied-ml-in-production/card.png
+    image: /static/images/courses/applied-ml-in-production/card.png
     url: /courses/applied-ml-in-production
   -
     title: Evaluation
     description: Evaluating your solution over time.
-    image: /assets/images/courses/machine-learning-basics/card.png
+    image: /static/images/courses/machine-learning-basics/card.png
     url: /courses/applied-ml-in-production
   -
     title: Iteration
     description: How to improve on our solution over time.
-    image: /assets/images/courses/machine-learning-basics/card.png
+    image: /static/images/courses/machine-learning-basics/card.png
     url: /courses/applied-ml-in-production
 
 ---

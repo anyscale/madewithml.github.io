@@ -2,7 +2,7 @@
 layout: page
 title: Solution
 description: Designing a solution with constraints.
-image: /assets/images/courses/applied-ml-in-production/evaluation.png
+image: /static/images/courses/applied-ml-in-production/evaluation.png
 tags: product product-management problem-solving
 
 course-url: /courses/applied-ml-in-production/
@@ -105,7 +105,7 @@ Our main objective is to allow users to discover the precise resource.
 3. **Design** So we would like all projects to have the appropriate tags and we have the necessary information (title, description, etc.) to meet that requirement. We will decide to augment the user with our solution as opposed to automating the process of adding tags. This is so we can ensure that our suggested tags are in fact relevant to the project and this gives us an opportunity to use the author's decision as feedback for our solution.
 
 <figure>
-  <img src="/assets/images/courses/applied-ml-in-production/suggested_tags.png" width="550" alt="pivot">
+  <img src="/static/images/courses/applied-ml-in-production/suggested_tags.png" width="550" alt="pivot">
   <figcaption>UX of our hypothetical solution</figcaption>
 </figure>
 

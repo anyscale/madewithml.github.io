@@ -2,7 +2,7 @@
 layout: page
 title: Objective
 description: Defining the core objective of our task.
-image: /assets/images/courses/applied-ml-in-production/objective.png
+image: /static/images/courses/applied-ml-in-production/objective.png
 tags: product product-management problem-solving
 
 course-url: /courses/applied-ml-in-production/

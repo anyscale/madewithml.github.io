@@ -2,7 +2,7 @@
 layout: page
 title: Evaluation
 description: Determining how well our solution is performing over time.
-image: /assets/images/courses/applied-ml-in-production/evaluation.png
+image: /static/images/courses/applied-ml-in-production/evaluation.png
 tags: product product-management evaluation
 
 course-url: /courses/applied-ml-in-production/
@@ -36,14 +36,14 @@ Evaluation doesn't just involve measuring how well we're doing but we also need 
 For our task, we want to be able to suggest highly relevant tags (precision) so we don't fatigue the user with noise. But remember that the whole point of this task is to suggest tags that the author will miss (recall) so we can allow our users to find the best resource! So we'll need to tradeoff between precision and recall.
 
 <figure>
-  <img src="/assets/images/courses/applied-ml-in-production/confusion_matrix.png" width="550" alt="pivot">
+  <img src="/static/images/courses/applied-ml-in-production/confusion_matrix.png" width="550" alt="pivot">
   <figcaption>Confusion matrix [<a href="https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks" target="_blank">source</a>]</figcaption>
 </figure>
 
 Normally, the goto option would be the F1 score (weighted precision and recall) but we shouldn't be afraid to craft our own evaluation metrics that best represents our needs. For example, we may want to account for both precision and recall but give more weight to recall.
 
 <figure>
-  <img src="/assets/images/courses/applied-ml-in-production/metrics_table.png" width="550" alt="pivot">
+  <img src="/static/images/courses/applied-ml-in-production/metrics_table.png" width="550" alt="pivot">
   <figcaption>Sample of different evaluation metrics [<a href="https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks" target="_blank">source</a>]</figcaption>
 </figure>
 

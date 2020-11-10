@@ -9,7 +9,7 @@ permalink: /courses/
 
   <div class="card ai-card">
     <a href="https://github.com/madewithml/basics" target="_blank">
-      <img class="card-img-top" src="/assets/images/courses/machine-learning-basics/card.png" alt="Card image cap">
+      <img class="card-img-top" src="/static/images/courses/machine-learning-basics/card.png" alt="Card image cap">
     </a>
     <div class="card-body">
       <a href="https://github.com/madewithml/basics" target="_blank">
@@ -31,7 +31,7 @@ permalink: /courses/
 
   <div class="card ai-card">
     <a href="{% link _courses/applied-ml-in-production.md %}">
-      <img class="card-img-top" src="/assets/images/courses/applied-ml-in-production/card.png" alt="Card image cap">
+      <img class="card-img-top" src="/static/images/courses/applied-ml-in-production/card.png" alt="Card image cap">
     </a>
     <div class="card-body">
       <a href="{% link _courses/applied-ml-in-production.md %}">
