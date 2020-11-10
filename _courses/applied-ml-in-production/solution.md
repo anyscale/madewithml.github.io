@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Solution
+title: Solution · Applied ML in Production
 description: Designing a solution with constraints.
 image: /static/images/courses/applied-ml-in-production/evaluation.png
 tags: product product-management problem-solving

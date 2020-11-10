@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Evaluation
+title: Evaluation · Applied ML in Production
 description: Determining how well our solution is performing over time.
 image: /static/images/courses/applied-ml-in-production/evaluation.png
 tags: product product-management evaluation

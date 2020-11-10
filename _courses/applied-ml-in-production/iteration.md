@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Iteration
+title: Iteration · Applied ML in Production
 description: Improving on our solution iteratively over time.
 image: /static/images/courses/applied-ml-in-production/iteration.png
 tags: product product-management evaluation
