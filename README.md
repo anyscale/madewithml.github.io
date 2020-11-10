@@ -1,5 +1,6 @@
 # Made With ML
-Your one-stop platform to explore, learn and build with machine learning.
+Applied ML · MLOps · Production
+Learn how and (more importantly) what should be made with ML.
 
 ### Instructions:
 
