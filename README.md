@@ -1,6 +1,6 @@
 # Made With ML
-<!-- Applied ML · MLOps · Production
-Learn how and (more importantly) what should be made with ML. -->
+Applied ML · MLOps · Production
+Learn how and (more importantly) what should be made with ML.
 
 ### Instructions:
 

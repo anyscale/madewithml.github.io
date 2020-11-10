@@ -2,7 +2,7 @@
 title: "Made With ML"
 tagline: "Applied ML · MLOps · Production"
 description: "Learn the how and (more importantly) what should be made with ML."
-url: "https://mwml.xyz"
+url: https://madewithml.github.io
 
 # Build settings
 baseurl: '/'
