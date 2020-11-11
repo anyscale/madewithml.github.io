@@ -98,7 +98,7 @@ Once we've identified our main objective, we can hypothesize solutions using a t
 
 Our main objective is to allow users to discover the precise resource.
 
-1. **Visualize** The ideal solution would be to ensure that all projects have the proper metadata (tags) so users can discover them. "Ensure proper metadata" is easier said than done so our solution will involve satisfying this requirement through creative ways.
+1. **Visualize** The ideal solution would be to ensure that all projects have the proper metadata (tags) so users can discover them.
 
 2. **Understand** So far users search for projects using tags. It's important to note here that there are other available signals about each project such as the title, description, details, etc. which are not used in the search process. So this is good time to ask why we only rely on tags as opposed to the full text available? Tags are added by the project's author and they represent core concepts that the project covers. This is more meaningful than keywords found in the project's details because the presence of a keyword does not necessarily signify that it's a core concept. Additionally, many tags are inferred and don't explicitly exist in the metadata such as `natural-language-processing`, etc. But what we will do is use the other text metadata to determine relevant tags.
 

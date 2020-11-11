@@ -6,28 +6,6 @@ image: /static/images/courses/applied-ml-in-production/card.png
 redirect_from: /courses/putting-ml-in-production/
 tags: applied-ml mlops production
 
-product-lessons:
-  -
-    title: Objectives
-    description: How to identify the core objective for your task.
-    image: /static/images/courses/machine-learning-basics/card.png
-    url: /courses/applied-ml-in-production
-  -
-    title: Solutions
-    description: Designing solution with UX and technical constraints.
-    image: /static/images/courses/applied-ml-in-production/card.png
-    url: /courses/applied-ml-in-production
-  -
-    title: Evaluation
-    description: Evaluating your solution over time.
-    image: /static/images/courses/machine-learning-basics/card.png
-    url: /courses/applied-ml-in-production
-  -
-    title: Iteration
-    description: How to improve on our solution over time.
-    image: /static/images/courses/machine-learning-basics/card.png
-    url: /courses/applied-ml-in-production
-
 ---
 
 <div class="row">
@@ -69,7 +47,7 @@ A guide and code-driven case study on MLOps for software engineers, data scienti
     </ul>
     <b>🔢 Data</b>
     <ul>
-      <li>Annotation</li>
+      <li><a href="{% link _courses/applied-ml-in-production/annotation.md %}">Annotation</a></li>
       <li>Exploratory data analysis</li>
       <li>Splitting</li>
       <li>Preprocessing</li>

@@ -52,7 +52,7 @@ Our assigned task is to *improve search and discoverability*. We shouldn't prema
 - we need better search infrastructure
 - we need a sleeker search interface
 
-Though some of these objectives may be valid, they may not resolve the underlying issue. In the next section, we'll dive into why the *user* isn't able to discover the right resource.
+Though some of these objectives may be valid, they may not resolve the underlying issue. What we need to think about is why the *user* isn't able to discover the right resource. This becomes our core objective and we'll further refine it in the [next lesson]({% link _courses/applied-ml-in-production/solution.md %}) when we design our solution.
 
 > This is analogous to development in ML where you can iterate on model architectures (to gain incremental improvements) but we can gain massive improvements by improving the quality of your underlying dataset.
 
