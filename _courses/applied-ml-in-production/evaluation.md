@@ -12,7 +12,7 @@ next-lesson-url: /courses/applied-ml-in-production/iteration/
 <!-- Header -->
 <div class="row">
   <div class="col-md-8 col-6 mr-auto">
-    <h1 class="page-title">{{ page.title }}</h1>
+    <h1 class="page-title">{{ page.title | split: " · " | first }}</h1>
   </div>
   <div class="col-md-4 col-6">
     <div class="btn-group float-right mb-0" role="group">
@@ -24,7 +24,7 @@ next-lesson-url: /courses/applied-ml-in-production/iteration/
 <hr class="mt-0">
 
 <h3><u>Intuition</u></h3>
-Before we start building our solution, we need to make sure we have methods to evaluate it. We will fall back our objective here to determine the evaluation criteria.
+Before we start building our solution, we need to make sure we have methods to evaluate it. We'll use our objective here to determine the evaluation criteria.
 - be clear about what metrics you are prioritizing
 - be careful not to over optimize on any one metric
 
@@ -33,7 +33,7 @@ Evaluation doesn't just involve measuring how well we're doing but we also need 
 - what feedback are we collecting?
 
 <h3><u>Application</u></h3>
-For our task, we want to be able to suggest highly relevant tags (precision) so we don't fatigue the user with noise. But remember that the whole point of this task is to suggest tags that the author will miss (recall) so we can allow our users to find the best resource! So we'll need to tradeoff between precision and recall.
+For our task, we want to be able to suggest highly relevant tags (precision) so we don't fatigue the user with noise. But *recall* that the whole point of this task is to suggest tags that the author will miss (recall) so we can allow our users to find the best resource! So we'll need to tradeoff between precision and recall.
 
 <figure>
   <img src="/static/images/courses/applied-ml-in-production/confusion_matrix.png" width="550" alt="pivot">
@@ -47,9 +47,9 @@ Normally, the goto option would be the F1 score (weighted precision and recall) 
   <figcaption>Sample of different evaluation metrics [<a href="https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks" target="_blank">source</a>]</figcaption>
 </figure>
 
-Fortunately, when we make a mistake, it's not catastrophic. The author will simply ignore it and we'll know based on the tags that the author does add. We'll use this feedback (in addition to an annotation workflow) to improve on our solution over time.
+Fortunately, when we make a mistake, it's not catastrophic. The author will simply ignore it but we'll capture the error based on the tags that the author does add. We'll use this feedback (in addition to an annotation workflow) to improve on our solution over time.
 
-> If we want to be very deliberate, we can provide the authors an option to report erroneous tags. Not everyone may act of this but it could reveal underlying issues we may not be aware of.
+> If we want to be very deliberate, we can provide the authors an option to report erroneous tags. Not everyone may act on this but it could reveal underlying issues we may not be aware of.
 
 <!-- Footer -->
 <hr>

@@ -12,7 +12,7 @@ next-lesson-url: /courses/applied-ml-in-production/exploratory-data-analysis/
 <!-- Header -->
 <div class="row">
   <div class="col-md-8 col-6 mr-auto">
-    <h1 class="page-title">{{ page.title }}</h1>
+    <h1 class="page-title">{{ page.title | split: " · " | first }}</h1>
   </div>
   <div class="col-md-4 col-6">
     <div class="btn-group float-right mb-0" role="group">

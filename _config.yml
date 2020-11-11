@@ -1,8 +1,8 @@
 # Details
 title: "Made With ML"
 tagline: "Applied ML · MLOps · Production"
-description: "Learn the how and (more importantly) what should be made with ML."
-url: https://madewithml.github.io
+description: "Learn how to responsibly develop, deploy and maintain applications that are made with ML."
+url: "https://madewithml.com/"
 
 # Build settings
 baseurl: '/'
@@ -37,7 +37,7 @@ defaults:
 
 # Custom vars
 version: 1.0.0
-signup_url: "https://fe6c7da2.sibforms.com/serve/MUIEAOP26luC60mcMO_NBXS_ILYwwqN1aAdk4yyk3Sgn3NIN7jx8IOkIZc_uE-gRfX3M16Lm0HjDeAm-tWy1f06-U2-GlVwEl235gFCqEUj7T2uQ6lr_-wQgL5UBsuYCoacZ5P1JzxtbrHQuHozjux2xot7zGUeu_fmpqcphdYva6a8FF0IDIp7mzsK89VAzcB95iALVnSpd5pJR"
+signup_url: "https://fe6c7da2.sibforms.com/serve/MUIEAFGYHgdTB8z1ETUytFE5SHsrp701ue3uI0ZhqQabG9HLqFkvlFkmNY7g2MudzR7K7_V0dPboLFlvxpSlahMlc-yH5GzwvqopbY8n7QA3XZbM97fiEaUmX50McwTaa5zLfUlhD-cRO3rkTMb62fosmNQlPfUXP1YKJ8bQafRIzpSaCgVy7AeoIkPNyjBK2EsXmgB4U_0w-_Vk"
 
 # Collections
 collections:

@@ -1,6 +1,6 @@
 # Made With ML
 Applied ML · MLOps · Production
-Learn how and (more importantly) what should be made with ML.
+Learn how to responsibly develop, deploy and maintain applications that are made with ML.
 
 ### Instructions:
 

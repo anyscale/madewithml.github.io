@@ -12,7 +12,7 @@ next-lesson-url: /courses/applied-ml-in-production/solution/
 <!-- Header -->
 <div class="row">
   <div class="col-md-8 col-6 mr-auto">
-    <h1 class="page-title">{{ page.title }}</h1>
+    <h1 class="page-title">{{ page.title | split: " · " | first }}</h1>
   </div>
   <div class="col-md-4 col-6">
     <div class="btn-group float-right mb-0" role="group">
@@ -24,12 +24,12 @@ next-lesson-url: /courses/applied-ml-in-production/solution/
 <hr class="mt-0">
 
 <h3><u>Intuition</u></h3>
-When solving any problem, it's important to first identify the key objective that you're trying to solve. This becomes the **guide** for all subsequent decisions and will keep you from getting distracted along the way. However, identifying the objective isn't always straightforward, especially when we aren't analyzing the problem through the appropriate lens.
+Identifying the objective should always be the first step when solving any problem. It's acts as the **guide** for all subsequent decision making and will prevent us from getting distracted along the way. However, identifying the objective isn't always straightforward, especially when we aren't analyzing the problem through the appropriate lens.
 
 > A proven way to identify the key objective is to think about the problem from the **user's perspective** so that we're positioned to think about the underlying issue as opposed to technological shortcomings.
 
 <h3><u>Application</u></h3>
-In our application we have a set of projects (with tags) that users search for (using tags).
+In our application, we have a set of projects (with tags) that users search for (using tags).
 
 ```json
 {
@@ -47,12 +47,13 @@ In our application we have a set of projects (with tags) that users search for (
 ```
 
 
-The problem we are addressing is that *users are not able to discover the appropriate resource*. So to identify the objective, we need to ask ourselves why the *user* is unable to discover the best resource. **Incorrect** objectives to fixate on include:
+The problem we're addressing is that *sometimes users can't find the right resource even though it exists*. We shouldn't prematurely jump to technological objectives such as:
 - we need a better search algorithm
 - we need better search infrastructure
 - we need a sleeker search interface
 
-Though some of these objectives may be valid, addressing them in isolation won't solve our root problem.
+Though some of these objectives may be valid, it may not resolve the underlying issue. In the next section, we'll explore why the *user* isn't able to discover the resource they're looking for.
+
 > This is analogous to development in ML where you can iterate on model architectures (to gain incremental improvements) but we can gain massive improvements by improving the quality of your underlying dataset.
 
 <h3><u>Resources</u></h3>

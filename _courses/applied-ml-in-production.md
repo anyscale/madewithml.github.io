@@ -73,15 +73,22 @@ A guide and code-driven case study on MLOps for software engineers, data scienti
       <li>Exploratory data analysis</li>
       <li>Splitting</li>
       <li>Preprocessing</li>
+      <li>Imbalanced data</li>
       <li>Augmentation</li>
       <li>Versioning</li>
-      <li>Bias</li>
+    </ul>
+    <b>📈 Baselines</b>
+    <ul>
+      <li>Random</li>
+      <li>Rule-based</li>
+      <li>Sklearn</li>
+      <li>CNN</li>
+      <li>Transformers</li>
     </ul>
   </div>
   <div class="col-md-4">
     <b>🤖 Modeling</b>
     <ul>
-      <li>Baselines</li>
       <li>Experiment tracking</li>
       <li>Evaluation</li>
       <li>Optimization</li>
@@ -92,26 +99,26 @@ A guide and code-driven case study on MLOps for software engineers, data scienti
       <li>OOPs</li>
       <li>Virtualenv</li>
       <li>Logging</li>
-      <li>Testing</li>
+      <li>Testing (basics)</li>
+      <li>Testing (ML)</li>
       <li>Formatting</li>
       <li>Makefile</li>
       <li>Precommit</li>
       <li>Git</li>
     </ul>
-  </div>
-  <div class="col-md-4">
     <b>🛠 API</b>
     <ul>
       <li>FastAPI</li>
       <li>Databases</li>
       <li>Authentication</li>
-      <li>Docker</li>
       <li>Documentation</li>
     </ul>
+  </div>
+  <div class="col-md-4">
     <b>🚀 Production</b>
     <ul>
+      <li>Docker</li>
       <li>Serving</li>
-      <li>Environments</li>
       <li>Monitoring (performance, drift)</li>
       <li>CI/CD (GitHub actions)</li>
       <li>Active learning</li>
