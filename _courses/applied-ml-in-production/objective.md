@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Objectives · Applied ML in Production
+title: Objective · Applied ML in Production
 description: Defining the core objective of our task.
 image: /static/images/courses/applied-ml-in-production/objective.png
 tags: product product-management problem-solving
@@ -47,12 +47,12 @@ In our application, we have a set of projects (with tags) that users search for 
 ```
 
 
-The problem we're addressing is that *sometimes users can't find the right resource even though it exists*. We shouldn't prematurely jump to technological objectives such as:
+Our assigned task is to *improve search and discoverability*. We shouldn't prematurely jump to technological objectives such as:
 - we need a better search algorithm
 - we need better search infrastructure
 - we need a sleeker search interface
 
-Though some of these objectives may be valid, it may not resolve the underlying issue. In the next section, we'll explore why the *user* isn't able to discover the resource they're looking for.
+Though some of these objectives may be valid, they may not resolve the underlying issue. In the next section, we'll dive into why the *user* isn't able to discover the right resource.
 
 > This is analogous to development in ML where you can iterate on model architectures (to gain incremental improvements) but we can gain massive improvements by improving the quality of your underlying dataset.
 
