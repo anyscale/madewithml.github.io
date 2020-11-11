@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Objective · Applied ML in Production
+title: Objectives · Applied ML in Production
 description: Defining the core objective of our task.
 image: /static/images/courses/applied-ml-in-production/objective.png
 tags: product product-management problem-solving
