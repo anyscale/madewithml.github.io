@@ -23,6 +23,16 @@ next-lesson-url: /courses/applied-ml-in-production/evaluation/
 </div>
 <hr class="mt-0">
 
+<!-- Video -->
+<div class="ai-center-all mt-2">
+    <iframe width="600" height="337.5" src="https://www.youtube.com/embed/Gi1VlFV8e_k?rel=0" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>
+</div>
+<div class="ai-center-all mt-2">
+  <small>Accompanying video for this lesson. <a href="https://www.youtube.com/madewithml?sub_confirmation=1" target="_blank">Subscribe</a> for updates!</small>
+</div>
+
 <h3><u>Intuition</u></h3>
 Once we've identified our main objective, we can hypothesize solutions using a three-step process.
 
@@ -94,6 +104,8 @@ Once we've identified our main objective, we can hypothesize solutions using a t
   </tr>
 </table>
 
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:00](https://www.youtube.com/watch?v=Gi1VlFV8e_k&t=0s){:target="_blank"} for a video walkthrough of this section.
+
 <h3><u>Application</u></h3>
 
 Our main objective is to allow users to discover the precise resource.
@@ -114,6 +126,7 @@ Our main objective is to allow users to discover the precise resource.
 
 > For the purpose of this course, we're going to develop a solution that involves applied machine learning in production. However, we would also do A/B testing with other approaches such as simply altering the process where users add tags to projects. Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags. This is a simple solution that needs to be tested against other approaches for effectiveness.
 
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [4:19](https://www.youtube.com/watch?v=Gi1VlFV8e_k&t=259s){:target="_blank"} for a video walkthrough of this section.
 
 <h3><u>Resources</u></h3>
 - [Guidelines for Human-AI Interaction](https://www.microsoft.com/en-us/research/uploads/prod/2019/01/AI-Guidelines-poster_nogradient_final.pdf){:target="_blank"}

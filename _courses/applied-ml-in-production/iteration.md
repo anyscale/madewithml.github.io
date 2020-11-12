@@ -23,15 +23,15 @@ next-lesson-url: /courses/applied-ml-in-production/annotation/
 </div>
 <hr class="mt-0">
 
-<!-- Video
+<!-- Video -->
 <div class="ai-center-all mt-2">
-    <iframe width="600" height="337.5" src="https://www.youtube.com/embed/8ntrWE12HNE?rel=0" frameborder="0"
+    <iframe width="600" height="337.5" src="https://www.youtube.com/embed/Bit1IUVWrkY?rel=0" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen></iframe>
 </div>
 <div class="ai-center-all mt-2">
   <small>Accompanying video for this lesson. <a href="https://www.youtube.com/madewithml?sub_confirmation=1" target="_blank">Subscribe</a> for updates!</small>
-</div> -->
+</div>
 
 
 <h3><u>Intuition</u></h3>
@@ -56,7 +56,7 @@ Deploying solutions is actually quite easy (from an engineering POV) but maintai
 - constantly reassess your objective
 - iteration bottlenecks (ex. data quality checks)
 
-<!-- <i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch **[1:02 - 4:36]()** for a video walkthrough of this section. -->
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:00](https://www.youtube.com/watch?v=Bit1IUVWrkY&t=0s){:target="_blank"} for a video walkthrough of this section.
 
 <h3><u>Application</u></h3>
 For our solution, we'll have an initial set of baselines where we'll start with a rule-based approach and then slowly add complexity (regression &rarr; CNN &rarr; Transformers).
@@ -64,7 +64,7 @@ For our solution, we'll have an initial set of baselines where we'll start with 
 
 As for monitoring and iterating on our solution, we'll be looking at things like overall performance, class specific performances, # of relevant tags, etc. We'll also create workflows to look at new data for anomalies, apply active learning, ease the annotation process, etc.
 
-<!-- <i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch **[1:02 - 4:36]()** for a video walkthrough of this section. -->
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [3:08](https://www.youtube.com/watch?v=Bit1IUVWrkY&t=188s){:target="_blank"} for a video walkthrough of this section.
 
 <h3><u>Resources</u></h3>
 - [Machine Learning Systems Design](https://github.com/chiphuyen/machine-learning-systems-design/blob/master/build/build1/consolidated.pdf){:target="_blank"}
