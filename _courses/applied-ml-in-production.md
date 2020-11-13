@@ -38,14 +38,14 @@ A guide and code-driven case study on MLOps for software engineers, data scienti
 
 <div class="row mt-4">
   <div class="col-md-4">
-    <b>📦 Product</b>
+    <b><span class="mr-1">📦</span> Product</b>
     <ul>
       <li><a href="{% link _courses/applied-ml-in-production/objective.md %}">Objective</a></li>
       <li><a href="{% link _courses/applied-ml-in-production/solution.md %}">Solution</a></li>
       <li><a href="{% link _courses/applied-ml-in-production/evaluation.md %}">Evaluation</a></li>
       <li><a href="{% link _courses/applied-ml-in-production/iteration.md %}">Iteration</a></li>
     </ul>
-    <b>🔢 Data</b>
+    <b><span class="mr-1">🔢</span> Data</b>
     <ul>
       <li><a href="{% link _courses/applied-ml-in-production/annotation.md %}">Annotation</a></li>
       <li>Exploratory data analysis</li>
@@ -55,27 +55,21 @@ A guide and code-driven case study on MLOps for software engineers, data scienti
       <li>Augmentation</li>
       <li>Versioning</li>
     </ul>
-    <b>📈 Baselines</b>
+    <b><span class="mr-1">🤖</span> Modeling</b>
     <ul>
       <li>Random</li>
       <li>Rule-based</li>
       <li>Sklearn</li>
       <li>CNN</li>
       <li>Transformers</li>
+      <li>Interpretability</li>
     </ul>
   </div>
   <div class="col-md-4">
-    <b>🤖 Modeling</b>
-    <ul>
-      <li>Experiment tracking</li>
-      <li>Evaluation</li>
-      <li>Optimization</li>
-      <li>Inference</li>
-    </ul>
-    <b>📝 Scripting</b>
+    <b><span class="mr-1">📝</span> Scripting</b>
     <ul>
       <li>OOPs</li>
-      <li>Virtualenv</li>
+      <li>Packaging</li>
       <li>Logging</li>
       <li>Testing (basics)</li>
       <li>Testing (ML)</li>
@@ -84,17 +78,23 @@ A guide and code-driven case study on MLOps for software engineers, data scienti
       <li>Precommit</li>
       <li>Git</li>
     </ul>
-    <b>🛠 API</b>
+    <b><span class="mr-1">🎛</span> Tuning</b>
     <ul>
-      <li>FastAPI</li>
+      <li>Experiment tracking</li>
+      <li>Optimization</li>
+    </ul>
+    <b><span class="mr-1">🛠</span> API</b>
+    <ul>
+      <li>RESTful API</li>
       <li>Databases</li>
       <li>Authentication</li>
       <li>Documentation</li>
     </ul>
   </div>
   <div class="col-md-4">
-    <b>🚀 Production</b>
+    <b><span class="mr-1">🚀</span> Production</b>
     <ul>
+      <li>Dashboard</li>
       <li>Docker</li>
       <li>Serving</li>
       <li>Monitoring (performance, drift)</li>
