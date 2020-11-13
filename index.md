@@ -5,6 +5,11 @@ permalink: /
 
 latest:
   -
+    title: Annotation
+    description: Preparing and labeling our data for exploration.
+    image: /static/images/courses/applied-ml-in-production/annotation.png
+    url: /courses/applied-ml-in-production/annotation/
+  -
     title: Iteration
     description: Improving on our solution iteratively over time.
     image: /static/images/courses/applied-ml-in-production/iteration.png
@@ -14,11 +19,6 @@ latest:
     description: Determining how well our solution is performing over time.
     image: /static/images/courses/applied-ml-in-production/evaluation.png
     url: /courses/applied-ml-in-production/evaluation/
-  -
-    title: Solution
-    description: Designing a solution with constraints.
-    image: /static/images/courses/applied-ml-in-production/solution.png
-    url: /courses/applied-ml-in-production/solution/
 
 ---
 

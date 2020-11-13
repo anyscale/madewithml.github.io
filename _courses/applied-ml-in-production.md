@@ -62,7 +62,6 @@ A guide and code-driven case study on MLOps for software engineers, data scienti
       <li>Sklearn</li>
       <li>CNN</li>
       <li>Transformers</li>
-      <li>Interpretability</li>
     </ul>
   </div>
   <div class="col-md-4">
