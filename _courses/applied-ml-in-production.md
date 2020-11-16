@@ -32,6 +32,9 @@ A guide and code-driven case study on MLOps for software engineers, data scienti
   </span>
 </div>
 
+- <span class="mr-1">🎥</span> Videos: [Applied ML in Production](https://www.youtube.com/playlist?list=PLqy_sIcckLC2jrxQhyqWDhL_9Uwxz8UFq){:target="_blank"}
+- <span class="mr-1">💻</span> Code: [madewithml/applied-ml-in-production](https://github.com/madewithml/applied-ml-in-production){:target="_blank"}
+
 <hr>
 
 <h2><u>Lessons</u></h2>

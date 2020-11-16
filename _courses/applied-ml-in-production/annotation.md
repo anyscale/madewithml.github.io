@@ -62,12 +62,12 @@ And it isn't just about identifying and labeling our initial dataset but also in
 <h3><u>Application</u></h3>
 
 - *Datasets*
-  - [projects.json](https://raw.githubusercontent.com/madewithml/datasets/main/projects.json): projects with title, description and tags (cleaned by mods).
-  - [projects_detailed.json](https://raw.githubusercontent.com/madewithml/datasets/main/projects_detailed.json): projects with full-text details and additional URLs.
-  - [tags.json](https://raw.githubusercontent.com/madewithml/datasets/main/tags.json): tags used in dropdown to aid autocompletion.
+  - [projects.json](https://raw.githubusercontent.com/madewithml/datasets/main/projects.json){:target="_blank"}: projects with title, description and tags (cleaned by mods).
+  - [projects_detailed.json](https://raw.githubusercontent.com/madewithml/datasets/main/projects_detailed.json){:target="_blank"}: projects with full-text details and additional URLs.
+  - [tags.json](https://raw.githubusercontent.com/madewithml/datasets/main/tags.json){:target="_blank"}: tags used in dropdown to aid autocompletion.
 - *Code*
-  - [madewithml/applied-ml-in-production](https://github.com/madewithml/applied-ml-in-production): repository for the code in this course.
-  - [tagifai.ipynb](https://github.com/madewithml/applied-ml-in-production/blob/master/notebooks/tagifai.ipynb): notebook we'll be using until we get to scripting.
+  - [madewithml/applied-ml-in-production](https://github.com/madewithml/applied-ml-in-production){:target="_blank"}: repository for the code in this course.
+  - [tagifai.ipynb](https://github.com/madewithml/applied-ml-in-production/blob/master/notebooks/tagifai.ipynb){:target="_blank"}: notebook we'll be using until we get to scripting.
 
 > We'll have a small GitHub Action that runs on a schedule (cron) to constantly update these datasets over time. We'll learn about how these work when we get to the CI/CD lesson.
 
