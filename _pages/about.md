@@ -21,7 +21,7 @@ There are many reasons for this, including but not limited to:
   - *trust*: ML needs to be engineered reliably and robustly.
 
 - <u><i>Solution</i></u>:
-We will steadily address all the issues mentioned above but we're going to start at the bottom with *trust*.
+We will steadily address all the issues mentioned above but we're going to work backwards starting with *trust*.
 This is why we created our [Courses]({% link _courses/index.md %}) page to educate the community on how to responsibly develop, deploy and maintain applications that are made with ML.
 
 Read about our recent <a href="{% link _pages/pivot.md %}">pivot</a> from our dynamic platform.

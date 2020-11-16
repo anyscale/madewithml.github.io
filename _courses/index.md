@@ -45,7 +45,7 @@ permalink: /courses/
     <div class="card-footer">
       <small class="text-muted mr-1">In Progress</small>
       &middot;
-      <a href="https://github.com/madewithml/tagifai" target="_blank">
+      <a href="https://github.com/madewithml/applied-ml-in-production" target="_blank">
         <i class="fab fa-github ai-color-dark mx-1"></i>
       </a>
       &middot;

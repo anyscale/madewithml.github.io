@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Redefining Made With ML
+title: Pivot
 permalink: /pivot/
 redirect_from: /topics/
 ---
@@ -20,19 +20,19 @@ Made With ML was an open platform (**20K** monthly active users) where the ML co
 We had indexed nearly 3K tutorials, surveys, blog posts, libraries, etc. to help people build.
 But, in fact, this was not what was happening.
 
-- mostly only hype projects were trending (transformer architectures, image generation with GANs, etc.) adding to the overwhelm.
-- quality of projects decreased as the platform grew in popularity.
-- started becoming a social platform where people gamified the project upvotes.
-- many tutorials and blog posts written by the general public had errors.
-- many libraries quickly became stale after the initial hype phase.
+- **hype**: mostly only hype projects were trending (transformer architectures, image generation with GANs, etc.) and very little on applied ML.
+- **quality**: quality of projects decreased as the platform grew in popularity.
+- **misuse**: became a social platform where people gamified project upvotes.
+- **mistakes**: many tutorials and blog posts written by the general public had errors (*caution*: this is happening in a lot of places).
+- **stale**: many libraries quickly became stale after the initial hype phase.
 
 Luckily, we don't depend on ads or traffic so we decided to make the changes necessary to realign with our goal of helping people build.
 So while we will continue to end the hype and reduce the overwhelm, we unfortunately can't do the same for the rest of the internet. So here are some tips to follow:
 
-- **Relax**: Don't obsess over every new paper, blog post, library, etc. that you see online. Focus on the resources that matter most to what you're building.
-- **Build**: While it's good to explore trending topics (transformers, GANs, etc.), always try to build something that has practical utility. You'll learn that these trending topics won't usually be the best choice. And if you're looking for a career in industry, a practical project will go a long way compared to yet another "finetuned image generation with GANs" tutorial.
-- **Unfollow**: There are these "influencers" and "evangelists" on Twitter and LinkedIn who repost daily content but they themselves would have contributed very little original content. It's overwhelming and they're doing it for followers.
-- **Ignore**: When you see large dumps of resources you'll rarely refer back to them when actually building something and guarenteed the poster did not go through them all. But they'll always stay in the back of your head making you feel like if you aren't learning about everything, you know nothing. Here are a few examples:
+- **relax**: Don't obsess over every new paper, blog post, library, etc. that you see online. Focus on the resources that matter most to what you're building.
+- **build**: While it's good to explore trending topics (transformers, GANs, etc.), always try to build something that has practical utility. You'll learn that these trending topics won't usually be the best choice. And if you're looking for a career in industry, a practical project will go a long way compared to yet another "finetuned image generation with GANs" tutorial.
+- **unfollow**: There are these "influencers" and "evangelists" on Twitter and LinkedIn who repost daily content but they themselves would have contributed very little original content. It's overwhelming and they're doing it for followers.
+- **ignore**: When you see large dumps of resources you'll rarely refer back to them when actually building something and guarenteed the poster did not go through them all. But they'll always stay in the back of your head making you feel like if you aren't learning about everything, you know nothing. Just use Google and GitHub search *as you're building*. Here are a few examples:
     - awesome lists on GitHub
     - lists of books to read
     - list of courses to take

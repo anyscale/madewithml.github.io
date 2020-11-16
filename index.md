@@ -26,7 +26,7 @@ latest:
 <hr class="mt-0">
 <span class="post-date">Join <b>20K+</b> developers in learning how to
 <a href="{% link _pages/about.md %}">deliver (actual) value</a> with machine learning.
-Read about our recent <a href="{% link _pages/pivot.md %}">pivot</a> from our dynamic platform.</span>
+<br>⮑ Read about our recent <a href="{% link _pages/pivot.md %}">pivot</a> from our dynamic platform.</span>
 
 ### Stay updated
 - [Sign up]({{ site.signup_url }}){:target="_blank"} for our newsletter to receive updates on new content.
