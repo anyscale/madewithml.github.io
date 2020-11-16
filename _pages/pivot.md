@@ -16,10 +16,10 @@ redirect_from: /topics/
 </figure> -->
 
 After nine months of running Made With ML, we're redefining our focus to end the hype and [deliver actual value]({% link _pages/about.md %}).
-Which means **no more**:
+Which means **no more** overwhelming:
 - <span class="mr-1">❌</span> pointing to projects
 - <span class="mr-1">❌</span> posting daily trends
-- <span class="mr-1">❌</span> giant Topics page
+- <span class="mr-1">❌</span> Topics page
 
 But instead, we will have more **original content** focused on:
 - <span class="mr-1">✅</span> applied ML in production
