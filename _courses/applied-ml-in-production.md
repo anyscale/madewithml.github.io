@@ -132,7 +132,7 @@ You should have some familiarity with Python and [basic ML algorithms](https://g
 - *Intuition-first*: We will never jump straight to code. In every lesson, we will develop intuition for the concepts and think about it from a product perspective.
 - *Software engineering*: This course isn't just about ML. In fact, it's mostly about clean software engineering! We'll cover important concepts like versioning, testing, logging, etc. that really makes this a production-grade product.
 - *Focused yet holistic*: For every concept, we'll not only cover what's most important for our specific task (this is the case study aspect) but we'll also cover related methods (this is the guide aspect) which may prove to be useful in other situations. For example, when we're serving our application, we'll expose our latest model as an API endpoint. However, there are several other popular ways to serving models and we'll briefly illustrate those and talk about advantages / disadvantages.
-- *Open source tools*: We will be using only open source tools for this project, with the exception of Google Cloud Platform for storage and compute (free credit will be plenty). The reason we're constraining to open source tools is because:
+- *Open source*: We will be using only open source tools for this project, with the exception of Google Cloud Platform for storage and compute (free credit will be plenty). The reason we're constraining to open source tools is because:
 We can focus on the fundamentals, everyone can do it and you will have much better understanding when you do use a paid tool at work (if you want to).
 Large companies that deploy ML to production have complicated and scaled processes that don’t make sense for the vast majority of companies / individuals.
 
