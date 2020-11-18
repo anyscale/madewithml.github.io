@@ -5,6 +5,11 @@ permalink: /
 
 latest:
   -
+    title: Exploratory Data Analysis (EDA)
+    description: Exploring our dataset for insights with intention.
+    image: /static/images/courses/applied-ml-in-production/eda.png
+    url: /courses/applied-ml-in-production/exploratory-data-analysis/
+  -
     title: Annotation
     description: Preparing and labeling our data for exploration.
     image: /static/images/courses/applied-ml-in-production/annotation.png
@@ -14,11 +19,6 @@ latest:
     description: Improving on our solution iteratively over time.
     image: /static/images/courses/applied-ml-in-production/iteration.png
     url: /courses/applied-ml-in-production/iteration/
-  -
-    title: Evaluation
-    description: Determining how well our solution is performing over time.
-    image: /static/images/courses/applied-ml-in-production/evaluation.png
-    url: /courses/applied-ml-in-production/evaluation/
 
 ---
 

@@ -51,10 +51,9 @@ A guide and code-driven case study on MLOps for software engineers, data scienti
     <b><span class="mr-1">🔢</span> Data</b>
     <ul>
       <li><a href="{% link _courses/applied-ml-in-production/annotation.md %}">Annotation</a></li>
-      <li>Exploratory data analysis</li>
+      <li><a href="{% link _courses/applied-ml-in-production/exploratory-data-analysis.md %}">Exploratory data analysis</a></li>
       <li>Splitting</li>
       <li>Preprocessing</li>
-      <li>Imbalanced data</li>
       <li>Augmentation</li>
       <li>Versioning</li>
     </ul>
