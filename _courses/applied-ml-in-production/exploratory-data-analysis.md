@@ -82,6 +82,9 @@ Exploratory data analysis (EDA) is a vital (and fun) step in the data science pr
 
 <i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [1:37](https://www.youtube.com/watch?v=3Vrlvrjigvs&t=97s){:target="_blank"} for a video walkthrough of this section.
 
+<h3><u>Resources</u></h3>
+- [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/)
+- [Data Viz](https://armsp.github.io/covidviz/)
 
 <!-- Footer -->
 <hr>
