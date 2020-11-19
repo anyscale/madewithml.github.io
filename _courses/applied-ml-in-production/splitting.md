@@ -2,7 +2,7 @@
 layout: page
 title: Splitting · Applied ML in Production
 description: Appropriately splitting our dataset for training, validation and testing.
-image: /static/images/courses/applied-ml-in-production/exploratory-data-analysis.png
+image: /static/images/courses/applied-ml-in-production/splitting.png
 tags: splitting
 
 course-url: /courses/applied-ml-in-production/
@@ -24,6 +24,10 @@ next-lesson-url: /courses/applied-ml-in-production/preprocessing/
 <hr class="mt-0">
 
 📅 Coming out Monday, November 30, 2020
+
+In the mean time, watch the previous lessons and code along side the course because we're about to start moving pretty fast.
+
+Happy Thanksgiving break everyone 🦃 and stay safe!
 
 
 <!-- Footer -->

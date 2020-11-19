@@ -52,7 +52,7 @@ A guide and code-driven case study on MLOps for software engineers, data scienti
     <ul>
       <li><a href="{% link _courses/applied-ml-in-production/annotation.md %}">Annotation</a></li>
       <li><a href="{% link _courses/applied-ml-in-production/exploratory-data-analysis.md %}">Exploratory data analysis</a></li>
-      <li>Splitting</li>
+      <li><a href="{% link _courses/applied-ml-in-production/splitting.md %}">Splitting</a></li>
       <li>Preprocessing</li>
       <li>Augmentation</li>
       <li>Versioning</li>
