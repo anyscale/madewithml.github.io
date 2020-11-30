@@ -38,7 +38,7 @@ Identifying the objective should always be the first step when solving any probl
 
 > A proven way to identify the key objective is to think about the problem from the **user's perspective** so that we're positioned to think about the underlying issue as opposed to technological shortcomings.
 
-<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:00](https://www.youtube.com/watch?v=_sYrVHGRqPo&t=0s){:target="_blank"} for a video walkthrough of this section.
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:00](https://www.youtube.com/watch?v=_sYrVHGRqPo&list=PLqy_sIcckLC2jrxQhyqWDhL_9Uwxz8UFq&index=1&t=0s){:target="_blank"} for a video walkthrough of this section.
 
 <h3><u>Application</u></h3>
 In our application, we have a set of projects (with tags) that users search for (using tags).
@@ -67,7 +67,7 @@ Though some of these objectives may be valid, they may not resolve the underlyin
 
 > This is analogous to development in ML where you can iterate on model architectures (to gain incremental improvements) but we can gain massive improvements by improving the quality of your underlying dataset.
 
-<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:36](https://www.youtube.com/watch?v=_sYrVHGRqPo&t=36s){:target="_blank"} for a video walkthrough of this section.
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:36](https://www.youtube.com/watch?v=_sYrVHGRqPo&list=PLqy_sIcckLC2jrxQhyqWDhL_9Uwxz8UFq&index=1&t=36s){:target="_blank"} for a video walkthrough of this section.
 
 <h3><u>Resources</u></h3>
 - [Know Your Customers’ “Jobs to Be Done”](https://hbr.org/2016/09/know-your-customers-jobs-to-be-done){:target="_blank"}

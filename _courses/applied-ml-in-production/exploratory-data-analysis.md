@@ -49,11 +49,11 @@ Exploratory data analysis (EDA) is a vital (and fun) step in the data science pr
 - use EDA to answer questions and ask yourself why those questions are important.
 - not a one time process; as your data grows, you want to revisit EDA to catch distribution shifts, anomalies, etc.
 
-<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:00](https://www.youtube.com/watch?v=Kj_5ZO6nsfk&t=0s){:target="_blank"} for a video walkthrough of this section.
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:00](https://www.youtube.com/watch?v=3Vrlvrjigvs&list=PLqy_sIcckLC2jrxQhyqWDhL_9Uwxz8UFq&index=6&t=0s){:target="_blank"} for a video walkthrough of this section.
 
 <h3><u>Application</u></h3>
 
-> The code for this section can be found [here](https://github.com/madewithml/applied-ml-in-production/blob/master/notebooks/tagifai.ipynb){:target="_blank"}.
+> The notebook for this section can be found [here](https://github.com/madewithml/applied-ml-in-production/blob/master/notebooks/tagifai.ipynb){:target="_blank"}.
 
 **Q1**. How many (post filtered) tags do the projects have? We care about this because we want to make sure we don't overwhelm the user with too many tags (UX constraint).
 
@@ -76,11 +76,11 @@ Exploratory data analysis (EDA) is a vital (and fun) step in the data science pr
   <figcaption>Wordcloud for the tag pytorch</figcaption>
 </figure>
 
-<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [3:27](https://www.youtube.com/watch?v=3Vrlvrjigvs&t=207s){:target="_blank"} to see what all of this looks like in [code](https://github.com/madewithml/applied-ml-in-production/blob/master/notebooks/tagifai.ipynb){:target="_blank"}.
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [3:27](https://www.youtube.com/watch?v=3Vrlvrjigvs&list=PLqy_sIcckLC2jrxQhyqWDhL_9Uwxz8UFq&index=6&t=207s){:target="_blank"} to see what all of this looks like in [code](https://github.com/madewithml/applied-ml-in-production/blob/master/notebooks/tagifai.ipynb){:target="_blank"}.
 
 > All of the work we've done so far are inside IPython notebooks but in a later lesson, we'll transfer all of this into an interactive dashboard using a tool called [Streamlit](https://streamlit.io/){:target="_blank"}.
 
-<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [1:37](https://www.youtube.com/watch?v=3Vrlvrjigvs&t=97s){:target="_blank"} for a video walkthrough of this section.
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [1:37](https://www.youtube.com/watch?v=3Vrlvrjigvs&list=PLqy_sIcckLC2jrxQhyqWDhL_9Uwxz8UFq&index=6&t=97s){:target="_blank"} for a video walkthrough of this section.
 
 <h3><u>Resources</u></h3>
 - [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/)

@@ -42,7 +42,7 @@ Evaluation doesn't just involve measuring how well we're doing but we also need 
 - what are the fallbacks?
 - what feedback are we collecting?
 
-<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:00](https://www.youtube.com/watch?v=AwajdDVR_C4&t=0s){:target="_blank"} for a video walkthrough of this section.
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:00](https://www.youtube.com/watch?v=AwajdDVR_C4&list=PLqy_sIcckLC2jrxQhyqWDhL_9Uwxz8UFq&index=3&t=0s){:target="_blank"} for a video walkthrough of this section.
 
 <h3><u>Application</u></h3>
 For our task, we want to be able to suggest highly relevant tags (precision) so we don't fatigue the user with noise. But *recall* that the whole point of this task is to suggest tags that the author will miss (recall) so we can allow our users to find the best resource! So we'll need to tradeoff between precision and recall.
@@ -63,7 +63,7 @@ Fortunately, when we make a mistake, it's not catastrophic. The author will simp
 
 > If we want to be very deliberate, we can provide the authors an option to report erroneous tags. Not everyone may act on this but it could reveal underlying issues we may not be aware of.
 
-<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [1:38](https://www.youtube.com/watch?v=AwajdDVR_C4&t=98s){:target="_blank"} for a video walkthrough of this section.
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [1:38](https://www.youtube.com/watch?v=AwajdDVR_C4&list=PLqy_sIcckLC2jrxQhyqWDhL_9Uwxz8UFq&index=3&t=98s){:target="_blank"} for a video walkthrough of this section.
 
 <!-- Footer -->
 <hr>

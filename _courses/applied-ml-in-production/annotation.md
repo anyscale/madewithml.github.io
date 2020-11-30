@@ -48,6 +48,8 @@ Annotation is the process of identifying the inputs and outputs that are **worth
 - explore creating new signals (via combining data, collecting new data, etc.)
 -  iteratively add more features to control complexity and effort
 
+> Be careful not to include features in the dataset that will not be available during inference time, causing `data leakage`.
+
 It's also the phase where we can use our deep understanding of the problem, processes, constraints and domain expertise to:
 - enhance using supplementary data
 - simplify using constraints
@@ -57,7 +59,9 @@ And it isn't just about identifying and labeling our initial dataset but also in
 - what tools will be used to accelerate the annotation process
 - what workflows will be established to track the annotation process
 
-<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:00](https://www.youtube.com/watch?v=Kj_5ZO6nsfk&t=0s){:target="_blank"} for a video walkthrough of this section.
+> You should have overlaps where different annotators are working on the same samples. A meaningful `inter-labeler discrepancy` (>2%) indicates that the annotation task is subjective and requires more explicit labeling criteria.
+
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:00](https://www.youtube.com/watch?v=Kj_5ZO6nsfk&list=PLqy_sIcckLC2jrxQhyqWDhL_9Uwxz8UFq&index=5&t=0s){:target="_blank"} for a video walkthrough of this section.
 
 <h3><u>Application</u></h3>
 
@@ -127,13 +131,13 @@ Tags that just missed the cut:
  [('model-compression', 29), ('fastai', 29), ('graph-classification', 29), ('recurrent-neural-networks', 28), ('adversarial-learning', 28)]
  ```
 
-<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [8:14](https://www.youtube.com/watch?v=Kj_5ZO6nsfk&t=494s){:target="_blank"} to see what all of this looks like in [code](https://github.com/madewithml/applied-ml-in-production/blob/master/notebooks/tagifai.ipynb){:target="_blank"}.
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [8:14](https://www.youtube.com/watch?v=Kj_5ZO6nsfk&list=PLqy_sIcckLC2jrxQhyqWDhL_9Uwxz8UFq&index=5&t=494s){:target="_blank"} to see what all of this looks like in [code](https://github.com/madewithml/applied-ml-in-production/blob/master/notebooks/tagifai.ipynb){:target="_blank"}.
 
 Over time, our dataset will grow and we'll need to label new data. So far, we had a team of moderators clean the existing data but we'll need to establish proper workflow to make this process easier and reliable. Typically, we'll use collaborative UIs where annotators can fix errors, etc. and then use a tool like [Airflow](https://airflow.apache.org/) for workflow management to know when new data is ready to be annotated and also when it's ready to be used for modeling.
 
 > In the next section we'll be performing exploratory data analysis (EDA) on our labeled dataset. However, the order of the `annotation` and `EDA` steps can be reversed depending on how well the problem is defined. If you're unsure about what inputs and outputs are worth mapping, use can use EDA to figure it out.
 
-<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [2:50](https://www.youtube.com/watch?v=Kj_5ZO6nsfk&t=170s){:target="_blank"} for a video walkthrough of this section.
+<i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [2:50](https://www.youtube.com/watch?v=Kj_5ZO6nsfk&list=PLqy_sIcckLC2jrxQhyqWDhL_9Uwxz8UFq&index=5&t=170s){:target="_blank"} for a video walkthrough of this section.
 
 <h3><u>Resources</u></h3>
 - [Human in the Loop: Deep Learning without Wasteful Labelling](https://oatml.cs.ox.ac.uk/blog/2019/06/24/batchbald.html)

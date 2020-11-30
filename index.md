@@ -5,6 +5,11 @@ permalink: /
 
 latest:
   -
+    title: Splitting
+    description: Appropriately splitting our dataset (multi-label) for training, validation and testing.
+    image: /static/images/courses/applied-ml-in-production/splitting.png
+    url: /courses/applied-ml-in-production/splitting/
+  -
     title: Exploratory Data Analysis (EDA)
     description: Exploring our dataset for insights with intention.
     image: /static/images/courses/applied-ml-in-production/eda.png
@@ -14,11 +19,6 @@ latest:
     description: Preparing and labeling our data for exploration.
     image: /static/images/courses/applied-ml-in-production/annotation.png
     url: /courses/applied-ml-in-production/annotation/
-  -
-    title: Iteration
-    description: Improving on our solution iteratively over time.
-    image: /static/images/courses/applied-ml-in-production/iteration.png
-    url: /courses/applied-ml-in-production/iteration/
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Applied ML in Production
-description: "A guide and code-driven case study on MLOps for software engineers, data scientists and product managers."
+description: "A hands-on course on MLOps for software engineers, data scientists and product managers."
 image: /static/images/courses/applied-ml-in-production/card.png
 redirect_from: /courses/putting-ml-in-production/
 tags: applied-ml mlops production
@@ -21,7 +21,7 @@ tags: applied-ml mlops production
 </div>
 <hr class="mt-0">
 
-A guide and code-driven case study on MLOps for software engineers, data scientists and product managers. We will be developing an end-to-end ML feature, from product → ML → production, with open source tools.
+A hands-on course on MLOps for software engineers, data scientists and product managers. We will be developing an end-to-end ML feature, from product → ML → production, with open source tools.
 
 <div class="alert info" role="alert">
   <span style="text-align: left;">
@@ -72,8 +72,9 @@ A guide and code-driven case study on MLOps for software engineers, data scienti
       <li>OOPs</li>
       <li>Packaging</li>
       <li>Logging</li>
-      <li>Testing (basics)</li>
-      <li>Testing (ML)</li>
+      <li>Testing (code)</li>
+      <li>Testing (data)</li>
+      <li>Testing (model)</li>
       <li>Formatting</li>
       <li>Makefile</li>
       <li>Precommit</li>
@@ -101,10 +102,13 @@ A guide and code-driven case study on MLOps for software engineers, data scienti
       <li>Monitoring (performance, drift)</li>
       <li>CI/CD (GitHub actions)</li>
       <li>Active learning</li>
+      <li>Feature stores</li>
       <li>Scaling</li>
     </ul>
   </div>
 </div>
+
+> <i class="fas fa-info-circle mr-1"></i> If are are planning to use this as a guide for applying ML in production, be aware that it takes **a lot** of effort (initial, maintenance, adaptation) compared to deploying traditional software. The use case should demand large scale experimentation where small improvements provide large business impact.
 
 
 <hr>
