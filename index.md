@@ -5,6 +5,11 @@ permalink: /
 
 latest:
   -
+    title: Preprocesing
+    description: Preparing and transforming our data for modeling.
+    image: /static/images/courses/applied-ml-in-production/preprocessing.png
+    url: /courses/applied-ml-in-production/preprocessing/
+  -
     title: Splitting
     description: Appropriately splitting our dataset (multi-label) for training, validation and testing.
     image: /static/images/courses/applied-ml-in-production/splitting.png
@@ -14,11 +19,6 @@ latest:
     description: Exploring our dataset for insights with intention.
     image: /static/images/courses/applied-ml-in-production/eda.png
     url: /courses/applied-ml-in-production/exploratory-data-analysis/
-  -
-    title: Annotation
-    description: Preparing and labeling our data for exploration.
-    image: /static/images/courses/applied-ml-in-production/annotation.png
-    url: /courses/applied-ml-in-production/annotation/
 
 ---
 

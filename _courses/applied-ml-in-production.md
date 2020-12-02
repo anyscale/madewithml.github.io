@@ -53,9 +53,7 @@ A hands-on course on MLOps for software engineers, data scientists and product m
       <li><a href="{% link _courses/applied-ml-in-production/annotation.md %}">Annotation</a></li>
       <li><a href="{% link _courses/applied-ml-in-production/exploratory-data-analysis.md %}">Exploratory data analysis</a></li>
       <li><a href="{% link _courses/applied-ml-in-production/splitting.md %}">Splitting</a></li>
-      <li>Preprocessing</li>
-      <li>Augmentation</li>
-      <li>Versioning</li>
+      <li><a href="{% link _courses/applied-ml-in-production/preprocessing.md %}">Preprocessing</a></li>
     </ul>
     <b><span class="mr-1">🤖</span> Modeling</b>
     <ul>
@@ -80,11 +78,14 @@ A hands-on course on MLOps for software engineers, data scientists and product m
       <li>Precommit</li>
       <li>Git</li>
     </ul>
-    <b><span class="mr-1">🎛</span> Tuning</b>
+    <b><span class="mr-1">🧪</span> Experimentation</b>
     <ul>
       <li>Experiment tracking</li>
       <li>Optimization</li>
+      <li>Versioning</li>
     </ul>
+  </div>
+  <div class="col-md-4">
     <b><span class="mr-1">🛠</span> API</b>
     <ul>
       <li>RESTful API</li>
@@ -92,8 +93,6 @@ A hands-on course on MLOps for software engineers, data scientists and product m
       <li>Authentication</li>
       <li>Documentation</li>
     </ul>
-  </div>
-  <div class="col-md-4">
     <b><span class="mr-1">🚀</span> Production</b>
     <ul>
       <li>Dashboard</li>

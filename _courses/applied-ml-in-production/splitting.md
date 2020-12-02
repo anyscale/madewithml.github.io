@@ -87,7 +87,8 @@ label_encoder.class_to_index = {
 and convert each input's list of tags into a one-hot representation.
 
 ```python
-label_encoder.transform([["attention", "data-augmentation"]]) = [1, 0, 0, 1, 0, ..., 0]
+label_encoder.transform([["attention", "data-augmentation"]])
+> [1, 0, 0, 1, 0, ..., 0]
 ```
 
 For traditional `multi-class` tasks (each input has one label), we want to ensure that each data split has similar class distributions. However, our task is `multi-label` classification (an input can have many labels) which complicates the stratification process.
