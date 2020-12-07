@@ -63,6 +63,8 @@ If you are not familiar with some of these terms, be sure to check out any of th
 - shuffle your data if it's organized in a way that prevents input variance
 - avoid random shuffles if you task can suffer from data leaks (ex. `time-series`)
 
+> You need to [clean]({% link _courses/applied-ml-in-production/preprocessing.md %}) your data first before splitting, at least for the features that splitting depends on. So the process is more like: preprocessing (global, cleaning) → splitting → preprocessing (local, transformations).
+
 <i class="fab fa-youtube ai-color-youtube mr-1"></i> Watch from [0:00](https://www.youtube.com/watch?v=pKzjkb-M4f0&list=PLqy_sIcckLC2jrxQhyqWDhL_9Uwxz8UFq&index=7&t=0s){:target="_blank"} for a video walkthrough of this section.
 
 <h3><u>Application</u></h3>

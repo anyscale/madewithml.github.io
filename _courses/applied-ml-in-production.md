@@ -55,33 +55,33 @@ A hands-on course on MLOps for software engineers, data scientists and product m
       <li><a href="{% link _courses/applied-ml-in-production/splitting.md %}">Splitting</a></li>
       <li><a href="{% link _courses/applied-ml-in-production/preprocessing.md %}">Preprocessing</a></li>
     </ul>
-    <b><span class="mr-1">🤖</span> Modeling</b>
+    <b><span class="mr-1">📈</span> Modeling</b>
     <ul>
-      <li>Random</li>
-      <li>Rule-based</li>
-      <li>Sklearn</li>
-      <li>CNN</li>
-      <li>Transformers</li>
+      <li><a href="{% link _courses/applied-ml-in-production/baselines.md %}">Baselines</a></li>
+      <li>Experiment tracking</li>
+      <li>Optimization</li>
+
     </ul>
   </div>
   <div class="col-md-4">
     <b><span class="mr-1">📝</span> Scripting</b>
     <ul>
       <li>OOPs</li>
+      <li>Formatting</li>
       <li>Packaging</li>
       <li>Logging</li>
-      <li>Testing (code)</li>
-      <li>Testing (data)</li>
-      <li>Testing (model)</li>
-      <li>Formatting</li>
       <li>Makefile</li>
-      <li>Precommit</li>
-      <li>Git</li>
     </ul>
-    <b><span class="mr-1">🧪</span> Experimentation</b>
+    <b><span class="mr-1">✅</span> Testing</b>
     <ul>
-      <li>Experiment tracking</li>
-      <li>Optimization</li>
+      <li>Testing <small>(code)</small></li>
+      <li>Testing <small>(data)</small></li>
+      <li>Testing <small>(model)</small></li>
+    </ul>
+    <b><span class="mr-1">⏰</span> Version control</b>
+    <ul>
+      <li>Git</li>
+      <li>Precommit</li>
       <li>Versioning</li>
     </ul>
   </div>
@@ -98,8 +98,8 @@ A hands-on course on MLOps for software engineers, data scientists and product m
       <li>Dashboard</li>
       <li>Docker</li>
       <li>Serving</li>
-      <li>Monitoring (performance, drift)</li>
-      <li>CI/CD (GitHub actions)</li>
+      <li>Monitoring <small>(performance, drift)</small></li>
+      <li>CI/CD</li>
       <li>Active learning</li>
       <li>Feature stores</li>
       <li>Scaling</li>
