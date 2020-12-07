@@ -6,7 +6,7 @@ image: /static/images/courses/applied-ml-in-production/preprocessing.png
 tags: preprocessing feature-engineering
 
 course-url: /courses/applied-ml-in-production/
-next-lesson-url: /courses/applied-ml-in-production/augmentation/
+next-lesson-url: /courses/applied-ml-in-production/baselines/
 ---
 
 <!-- Header -->

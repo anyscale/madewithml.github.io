@@ -57,7 +57,7 @@ A hands-on course on MLOps for software engineers, data scientists and product m
     </ul>
     <b><span class="mr-1">📈</span> Modeling</b>
     <ul>
-      <li><a href="{% link _courses/applied-ml-in-production/baselines.md %}">Baselines</a></li>
+      <li>Baselines</li>
       <li>Experiment tracking</li>
       <li>Optimization</li>
 
