@@ -8,7 +8,6 @@ url: "https://madewithml.com"
 baseurl: '/'
 permalink: /:title/
 highlighter: rouge
-syntax_theme: monokai
 
 # Plugins
 plugins:

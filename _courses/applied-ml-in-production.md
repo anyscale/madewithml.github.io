@@ -57,7 +57,7 @@ A hands-on course on MLOps for software engineers, data scientists and product m
     </ul>
     <b><span class="mr-1">📈</span> Modeling</b>
     <ul>
-      <li>Baselines</li>
+      <li><a href="{% link _courses/applied-ml-in-production/baselines.md %}">Baselines</a></li>
       <li>Experiment tracking</li>
       <li>Optimization</li>
 
@@ -107,7 +107,7 @@ A hands-on course on MLOps for software engineers, data scientists and product m
   </div>
 </div>
 
-> <i class="fas fa-info-circle mr-1"></i> If are are planning to use this as a guide for applying ML in production, be aware that it takes **a lot** of effort (initial, maintenance, adaptation) compared to deploying traditional software. The use case should demand large scale experimentation where small improvements provide large business impact.
+> <i class="fas fa-info-circle mr-1"></i> If are are planning to use this as a guide for applying ML in production, be aware that it takes **a lot** of effort (initial, maintenance, iteration) compared to deploying traditional software. The use case should demand large scale experimentation where small improvements provide large business impact.
 
 
 <hr>
@@ -121,27 +121,27 @@ A hands-on course on MLOps for software engineers, data scientists and product m
 
 #### What is the structure?
 Lessons will be released weekly and each one will include:
-- *Intuition*: high level overview of the concepts that will be covered and how it all fits together.
-- *Code*: simple code examples to illustrate the concept.
-- *Application*: applying the concept to our specific task.
-- *Extensions*: brief look at other tools and techniques that will be useful for difference situations.
+- `intuition`: high level overview of the concepts that will be covered and how it all fits together.
+- `code`: simple code examples to illustrate the concept.
+- `application`: applying the concept to our specific task.
+- `extensions`: brief look at other tools and techniques that will be useful for difference situations.
 
 #### What are the prerequisites?
-You should have some familiarity with Python and [basic ML algorithms](https://github.com/madewithml/basics). While we will be experimenting with complex model architectures, you can easily apply the lessons to any class of ML models.
+You should have some familiarity with Python and [basic ML algorithms](https://github.com/madewithml/basics){:target="_blank"}. While we will be experimenting with complex model architectures, you can easily apply the lessons to any class of ML models.
 
 #### What makes this course unique?
-- *Hands-on*: If you search production ML or MLOps online, you'll find great blog posts and tweets. But in order to really understand these concepts, you need to implement them. Unfortunately, you don’t see a lot of the inner workings of running production ML because of scale, proprietary content & expensive tools. However, Made With ML is free, open and live which makes it a perfect learning opportunity for the community.
-- *Intuition-first*: We will never jump straight to code. In every lesson, we will develop intuition for the concepts and think about it from a product perspective.
-- *Software engineering*: This course isn't just about ML. In fact, it's mostly about clean software engineering! We'll cover important concepts like versioning, testing, logging, etc. that really makes this a production-grade product.
-- *Focused yet holistic*: For every concept, we'll not only cover what's most important for our specific task (this is the case study aspect) but we'll also cover related methods (this is the guide aspect) which may prove to be useful in other situations. For example, when we're serving our application, we'll expose our latest model as an API endpoint. However, there are several other popular ways to serving models and we'll briefly illustrate those and talk about advantages / disadvantages.
-- *Open source*: We will be using only open source tools for this project, with the exception of Google Cloud Platform for storage and compute (free credit will be plenty). The reason we're constraining to open source tools is because:
+- `hands-on`: If you search production ML or MLOps online, you'll find great blog posts and tweets. But in order to really understand these concepts, you need to implement them. Unfortunately, you don’t see a lot of the inner workings of running production ML because of scale, proprietary content & expensive tools. However, Made With ML is free, open and live which makes it a perfect learning opportunity for the community.
+- `intuition-first`: We will never jump straight to code. In every lesson, we will develop intuition for the concepts and think about it from a product perspective.
+- `software engineering`: This course isn't just about ML. In fact, it's mostly about clean software engineering! We'll cover important concepts like versioning, testing, logging, etc. that really makes this a production-grade product.
+- `focused yet holistic`: For every concept, we'll not only cover what's most important for our specific task (this is the case study aspect) but we'll also cover related methods (this is the guide aspect) which may prove to be useful in other situations. For example, when we're serving our application, we'll expose our latest model as an API endpoint. However, there are several other popular ways to serving models and we'll briefly illustrate those and talk about advantages / disadvantages.
+- `open-source`: We will be using only open source tools for this project, with the exception of Google Cloud Platform for storage and compute (free credit will be plenty). The reason we're constraining to open source tools is because:
 We can focus on the fundamentals, everyone can do it and you will have much better understanding when you do use a paid tool at work (if you want to).
 Large companies that deploy ML to production have complicated and scaled processes that don’t make sense for the vast majority of companies / individuals.
 
 #### Who is the author?
 - I've deployed large scale ML systems at Apple as well as smaller systems with constraints at startups and want to share the common principles I've learned along the way.
 - I created Made With ML so that the community can explore, learn and build ML and I learned how to build it into an end-to-end product that's currently used by over 20K monthly active users.
-- You can learn more at my [personal website](https://goku.me/) or [LinkedIn](https://www.linkedin.com/in/goku/).
+- You can learn more at my [personal website](https://goku.me/){:target="_blank"} or [LinkedIn](https://www.linkedin.com/in/goku/){:target="_blank"}.
 
 #### Why is this free?
 This is especially targeted for people who don't have as much opportunity around the world. I firmly believe that creativity and intelligence are randomly distributed but opportunity is siloed. I want to enable more people to create and contribute to innovation.
