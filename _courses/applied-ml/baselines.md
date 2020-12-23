@@ -81,7 +81,7 @@ Each application's baseline trajectory varies based on the task and motivations.
 
 We'll motivate the need for slowly adding complexity from both the *representation* (ex. embeddings) and *architecture* (ex. CNNs) views, as well as address the limitation at each step of the way.
 
-> If you're unfamiliar with of the concepts here, be sure to check out the [GokuMohandas/ml-foundations](https://github.com/GokuMohandas/ml-foundations){:target="_blank"} (🔥 Among [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub).
+> If you're unfamiliar with of the concepts here, be sure to check out the [GokuMohandas/madewithml](https://github.com/GokuMohandas/madewithml){:target="_blank"} (🔥 Among [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub).
 
 
 We'll first set up some functions that we'll be using across the different baseline experiments.

@@ -35,7 +35,7 @@ latest:
 
 <h3 id="ml-foundations"><u>ML Foundations</u></h3>
 
-> <i class="fab fa-github ai-color-black mr-1"></i>: [GokuMohandas/ml-foundations](https://github.com/GokuMohandas/ml-foundations){:target="_blank"}<br>
+> <i class="fab fa-github ai-color-black mr-1"></i>: [GokuMohandas/madewithml](https://github.com/GokuMohandas/madewithml){:target="_blank"}<br>
 ⮑ 🔥 Among [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub
 
 <div class="row mt-4">
