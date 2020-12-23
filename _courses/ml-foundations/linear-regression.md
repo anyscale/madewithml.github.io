@@ -15,8 +15,8 @@ next-lesson-url: /courses/ml-foundations/logistic-regression/
   </div>
   <div class="col-md-4 col-6">
     <div class="btn-group float-right mb-0" role="group">
-      <a href="{{ page.course-url }}" class="btn btn-sm btn-outline-secondary"><i
-          class="fas fa-sm fa-arrow-left mr-1"></i>Return to course</a>
+      <a href="{% link index.md %}" class="btn btn-sm btn-outline-secondary"><i
+          class="fas fa-sm fa-arrow-left mr-1"></i>Return home</a>
     </div>
   </div>
 </div>
@@ -193,7 +193,7 @@ Since our task is a regression task, we will randomly split our dataset into thr
 - `train`: used to train our model.
 - `val` : used to validate our model's performance during training.
 - `test`: used to do an evaluation of our fully trained model.
-> Be sure to check out our entire lesson focused on *properly* [splitting](https://madewithml.com/courses/applied-ml/splitting/){:target="_blank"} data in our [applied-ml](https://madewithml.com/courses/applied-ml/){:target="_blank"} course.
+> Be sure to check out our entire lesson focused on *properly* [splitting](https://madewithml.com/courses/applied-ml/splitting/){:target="_blank"} data in our [applied-ml](https://madewithml.com/#applied-ml){:target="_blank"} course.
 
 ```python
 TRAIN_SIZE = 0.7
@@ -956,7 +956,7 @@ Regularization didn't make a difference in performance with this specific exampl
 <hr>
 <div class="row mb-4">
   <div class="col-6 mr-auto">
-    <a href="{{ page.course-url }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-sm fa-arrow-left mr-1"></i>Return to course</a>
+    <a href="{% link index.md %}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-sm fa-arrow-left mr-1"></i>Return home</a>
   </div>
   <div class="col-6">
     <div class="float-right">

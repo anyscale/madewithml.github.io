@@ -15,8 +15,8 @@ next-lesson-url: /courses/applied-ml/evaluation/
   </div>
   <div class="col-md-4 col-6">
     <div class="btn-group float-right mb-0" role="group">
-      <a href="{{ page.course-url }}" class="btn btn-sm btn-outline-secondary"><i
-          class="fas fa-sm fa-arrow-left mr-1"></i>Return to course</a>
+      <a href="{% link index.md %}" class="btn btn-sm btn-outline-secondary"><i
+          class="fas fa-sm fa-arrow-left mr-1"></i>Return home</a>
     </div>
   </div>
 </div>
@@ -133,7 +133,7 @@ Our main objective is to allow users to discover the precise resource.
 <hr>
 <div class="row mb-4">
   <div class="col-6 mr-auto">
-    <a href="{{ page.course-url }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-sm fa-arrow-left mr-1"></i>Return to course</a>
+    <a href="{% link index.md %}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-sm fa-arrow-left mr-1"></i>Return home</a>
   </div>
   <div class="col-6">
     <div class="float-right">
