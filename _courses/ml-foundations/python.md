@@ -38,7 +38,7 @@ In this lesson, we'll learn about the basics of Python programming for machine l
 - [Callbacks](#callbacks)
 - [Putting it all together](#combining)
 
-> 📓 Follow along this lesson with the accompanying [notebook](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/02_Python.ipynb){:target="_blank"}.
+> 📓 Follow along this lesson with the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/02_Python.ipynb){:target="_blank"}.
 
 <h3 id="variables">Variables</h3>
 Variables are containers for holding data and they're defined by a name and value.

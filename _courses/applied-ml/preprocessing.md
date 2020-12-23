@@ -225,7 +225,7 @@ print (y.toarray())
 
 <h3 id="application"><u>Application</u></h3>
 
-> <i class="fab fa-github ai-color-black mr-1"></i>: Code for this lesson can be found here: [applied-ml/tagifai.ipynb](https://github.com/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
+> <i class="fab fa-github ai-color-black mr-1"></i>: Code for this lesson can be found here: [applied-ml/tagifai.ipynb](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
 Our dataset is pretty straight forward so we'll only need to use a few of the preprocessing techniques from above. To *prepare* our data, we're going to clean up our input text (all global actions).
 1. lower (conditional)

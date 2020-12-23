@@ -29,7 +29,7 @@ In this lesson we will learn how to process sequential data (sentences, time-ser
 - [Vanilla RNN](#vanilla)
 - [Gated RNN](#gated)
 
-> 📓 Follow along this lesson with the accompanying [notebook](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb){:target="_blank"}.
+> 📓 Follow along this lesson with the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb){:target="_blank"}.
 
 <h3 id="overview">Overview</h3>
 

@@ -30,7 +30,7 @@ In this lesson, we're going to implement logistic regression for a classificatio
 - [PyTorch](#pytorch)
 - [Unscaled weights](#unscaled)
 
-> 📓 Follow along this lesson with the accompanying [notebook](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/07_Logistic_Regression.ipynb){:target="_blank"}.
+> 📓 Follow along this lesson with the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/07_Logistic_Regression.ipynb){:target="_blank"}.
 
 <h3 id="overview">Overview</h3>
 

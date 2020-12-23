@@ -30,7 +30,7 @@ In this lesson we'll introduce and illusrate the fundamental concept of data qua
 - [Reduced dataset](#reduced)
 - [Takeaway](#takeaway)
 
-> 📓 Follow along this lesson with the accompanying [notebook](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/09_Data_Quality.ipynb){:target="_blank"}.
+> 📓 Follow along this lesson with the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/09_Data_Quality.ipynb){:target="_blank"}.
 
 <h3 id="overview">Overview</h3>
 In a nutshell, a machine learning model consumes input data and produces predictions. The quality of the predictions directly corresponds to the quality of data you train the model with; **garbage in, garbage out**. Check out this [article](https://venturebeat.com/2018/06/30/understanding-the-practical-applications-of-business-ai/){:target="_blank"} on where it makes sense to use AI and how to properly apply it.

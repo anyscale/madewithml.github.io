@@ -35,7 +35,7 @@ In this lesson, we'll learn about numerical analysis with the NumPy computing li
 - [Reshape](#reshape)
 - [Expanding/reducing](#expand)
 
-> 📓 Follow along this lesson with the accompanying [notebook](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/03_NumPy.ipynb){:target="_blank"}.
+> 📓 Follow along this lesson with the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/03_NumPy.ipynb){:target="_blank"}.
 
 <h3 id="setup">Set up</h3>
 First we'll import the NumPy package and set seeds for reproducability so that we can receive the exact same results every time.

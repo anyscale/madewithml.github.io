@@ -35,7 +35,7 @@ In this lesson, we'll learn the basics of data manipulation using the Pandas lib
 - [Feature engineering](#features)
 - [Save data](#save)
 
-> 📓 Follow along this lesson with the accompanying [notebook](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/04_Pandas.ipynb){:target="_blank"}.
+> 📓 Follow along this lesson with the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/04_Pandas.ipynb){:target="_blank"}.
 
 <h3 id="setup">Set up</h3>
 

@@ -42,7 +42,7 @@ In this lesson, we will motivate the need for embeddings, which are capable of c
 - [Inference](#inference)
 - [Interpretability](#interpretability)
 
-> 📓 Follow along this lesson with the accompanying [notebook](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/12_Embeddings.ipynb){:target="_blank"}.
+> 📓 Follow along this lesson with the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/12_Embeddings.ipynb){:target="_blank"}.
 
 <h3 id="overview">Overview</h3>
 

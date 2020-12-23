@@ -38,7 +38,7 @@ In this lesson, we will explore utilities to extend and simplify preprocessing a
 
 
 
-> 📓 Follow along this lesson with the accompanying [notebook](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/10_Utilities.ipynb){:target="_blank"}.
+> 📓 Follow along this lesson with the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/10_Utilities.ipynb){:target="_blank"}.
 
 <h3 id="setup">Set up</h3>
 - [Load data](#load)

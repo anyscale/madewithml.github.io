@@ -69,7 +69,7 @@ When choosing what model architecture(s) to proceed with, there are a few import
 
 <h3 id="application"><u>Application</u></h3>
 
-> <i class="fab fa-github ai-color-black mr-1"></i>: Code for this lesson can be found here: [applied-ml/tagifai.ipynb](https://github.com/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
+> <i class="fab fa-github ai-color-black mr-1"></i>: Code for this lesson can be found here: [applied-ml/tagifai.ipynb](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
 Each application's baseline trajectory varies based on the task and motivations. For our application, we're going to follow this path:
 1. [Random](#random)
@@ -793,8 +793,8 @@ print (json.dumps(performance, indent=2))
 
 
 <u><i>motivation</i></u>:
-- *representation*: we want to have more robust (split tokens to characters) and meaningful ([embeddings](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/12_Embeddings.ipynb){:target="_blank"}) representations for our input tokens.
-- *architecture*: we want to process our encoded inputs using [convolution (CNN)](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/11_Convolutional_Neural_Networks.ipynb){:target="_blank"} filters that can learn to analyze windows of embedded tokens to extract meaningful signal.
+- *representation*: we want to have more robust (split tokens to characters) and meaningful ([embeddings](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/12_Embeddings.ipynb){:target="_blank"}) representations for our input tokens.
+- *architecture*: we want to process our encoded inputs using [convolution (CNN)](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/11_Convolutional_Neural_Networks.ipynb){:target="_blank"} filters that can learn to analyze windows of embedded tokens to extract meaningful signal.
 
 
 <h4 id="setup_cnn">Set up</h4>
@@ -1075,7 +1075,7 @@ Sample batch:
 
 <h4 id="model_cnn">Model</h4>
 
-We'll be using a convolutional neural network on top of our embedded tokens to extract meaningful spatial signal. This time, we'll be using many filter widths to act as n-gram feature extractors. If you're not familiar with CNNs be sure to check out the [CNN lesson](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/11_Convolutional_Neural_Networks.ipynb){:target="_blank"} where we walkthrough every component of the architecture.
+We'll be using a convolutional neural network on top of our embedded tokens to extract meaningful spatial signal. This time, we'll be using many filter widths to act as n-gram feature extractors. If you're not familiar with CNNs be sure to check out the [CNN lesson](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/11_Convolutional_Neural_Networks.ipynb){:target="_blank"} where we walkthrough every component of the architecture.
 
 <div class="ai-center-all">
     <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/cnn/convolution.gif">
@@ -1556,7 +1556,7 @@ label_encoder.decode(y_pred)
 - [Evaluation](#evaluation_rnn)
 - [Inference](#inference_rnn)
 
-<u><i>motivation</i></u>: let's see if processing our embedded tokens in a sequential fashion using [recurrent neural networks (RNNs)](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb){:target="_blank"} can yield better performance.
+<u><i>motivation</i></u>: let's see if processing our embedded tokens in a sequential fashion using [recurrent neural networks (RNNs)](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb){:target="_blank"} can yield better performance.
 
 <h4 id="setup_rnn">Set up</h4>
 
@@ -1749,7 +1749,7 @@ Sample batch:
 
 <h4 id="model_rnn">Model</h4>
 
-We'll be using a recurrent neural network to process our embedded tokens one at a time (sequentially). If you're not familiar with RNNs be sure to check out the [RNN lesson](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb){:target="_blank"} *where* we walkthrough every component of the architecture.
+We'll be using a recurrent neural network to process our embedded tokens one at a time (sequentially). If you're not familiar with RNNs be sure to check out the [RNN lesson](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb){:target="_blank"} *where* we walkthrough every component of the architecture.
 
 <div class="ai-center-all">
     <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/rnn/vanilla.png">
@@ -1965,7 +1965,7 @@ print (json.dumps(performance['overall'], indent=2))
 
 <h4 id="inference_rnn">Inference</h4>
 
-> Detailed inspection and inference in the [notebook](https://github.com/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}.
+> Detailed inspection and inference in the [notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}.
 
 <u><i>limitations</i></u>: since we're using character embeddings our encoded sequences are quite long (>100), the RNNs may potentially be suffering from memory issues. We also can't process our tokens in parallel because we're restricted by sequential processing.
 
@@ -2382,7 +2382,7 @@ print (json.dumps(performance['overall'], indent=2))
 
 <h4 id="inference_transformer">Inference</h4>
 
-> Detailed inspection, inference and visualization of attention heads in the [notebook](https://github.com/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}.
+> Detailed inspection, inference and visualization of attention heads in the [notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}.
 
 <u><i>limitations</i></u>: transformers can be quite large and we'll have to weigh tradeoffs before deciding on a model.
 

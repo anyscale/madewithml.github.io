@@ -28,7 +28,7 @@ next-lesson-url: /courses/applied-ml/splitting/
   - [Tag distribution](#distribution)
   - [Wordcloud](#worcloud)
 
-> <i class="fab fa-github ai-color-black mr-1"></i>: Code for this lesson can be found here: [applied-ml/tagifai.ipynb](https://github.com/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
+> <i class="fab fa-github ai-color-black mr-1"></i>: Code for this lesson can be found here: [applied-ml/tagifai.ipynb](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
 <h3 id="intuition"><u>Intuition</u></h3>
 Exploratory data analysis (EDA) is a vital (and fun) step in the data science process but it's often misconstrued. Here's how to think about EDA:
@@ -39,7 +39,7 @@ Exploratory data analysis (EDA) is a vital (and fun) step in the data science pr
 
 <h3 id="application"><u>Application</u></h3>
 
-> <i class="fab fa-github ai-color-black mr-1"></i>: Code for this lesson can be found here: [applied-ml/tagifai.ipynb](https://github.com/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
+> <i class="fab fa-github ai-color-black mr-1"></i>: Code for this lesson can be found here: [applied-ml/tagifai.ipynb](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
 ```python
 import matplotlib.pyplot as plt

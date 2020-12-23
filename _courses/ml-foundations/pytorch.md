@@ -31,7 +31,7 @@ In this lesson, we'll learn the basics of [PyTorch](https://pytorch.org), which 
 - [Gradients](#gradients)
 - [CUDA](#cuda)
 
-> 📓 Follow along this lesson with the accompanying [notebook](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/05_PyTorch.ipynb){:target="_blank"}.
+> 📓 Follow along this lesson with the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/05_PyTorch.ipynb){:target="_blank"}.
 
 <h3 id="setup">Set up</h3>
 

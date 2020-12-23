@@ -48,7 +48,7 @@ next-lesson-url: /courses/applied-ml/preprocessing/
 
 <h3 id="application"><u>Application</u></h3>
 
-> <i class="fab fa-github ai-color-black mr-1"></i>: Code for this lesson can be found here: [applied-ml/tagifai.ipynb](https://github.com/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
+> <i class="fab fa-github ai-color-black mr-1"></i>: Code for this lesson can be found here: [applied-ml/tagifai.ipynb](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
 <h4 id="label">Label encoding</h4>
 Before we split our dataset, we're going to encode our output labels where we'll be assigning each tag a unique index.

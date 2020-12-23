@@ -33,7 +33,7 @@ In this lesson, we'll learn how to use interactive notebooks for developing in P
 - [Deleting a cell](#delete)
 - [Code cells](#code)
 
-> 📓 Follow along this lesson with the accompanying [notebook](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/01_Notebooks.ipynb){:target="_blank"}.
+> 📓 Follow along this lesson with the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/01_Notebooks.ipynb){:target="_blank"}.
 
 <h3 id="setup">Set up</h3>
 1. Click on this link to open the accompanying [notebook](){:target="_blank"} for this lesson or create a blank one on [Google Colab](https://colab.research.google.com/){:target="_blank"}.

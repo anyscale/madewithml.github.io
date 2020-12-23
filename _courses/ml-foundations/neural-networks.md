@@ -34,7 +34,7 @@ In this lesson, we will explore multilayer perceptrons (MLPs) which are a basic 
 - [Dropout](#dropout)
 - [Overfitting](#overfitting)
 
-> 📓 Follow along this lesson with the accompanying [notebook](https://github.com/GokuMohandas/madewithml/blob/main/notebooks/08_Neural_Networks.ipynb){:target="_blank"}.
+> 📓 Follow along this lesson with the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/08_Neural_Networks.ipynb){:target="_blank"}.
 
 <h3 id="overview">Overview</h3>
 
