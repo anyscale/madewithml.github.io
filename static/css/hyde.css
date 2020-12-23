@@ -86,6 +86,21 @@ html {
 }
 
 /* Author section */
+@media (max-width: 480px) {
+  .sidebar-author {
+    text-align: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
 .sidebar-author h1 {
   color: #fff;
   font-weight: 500;
@@ -106,7 +121,7 @@ html {
   margin-bottom: 0rem;
 }
 
-.sidebar-author hr {
+.grey-hr {
   -o-border-image: linear-gradient(135deg, #ffffff80, #ffffff80) 1 stretch !important;
      border-image: linear-gradient(135deg, #ffffff80, #ffffff80) 1 stretch !important;
   border-top: none;

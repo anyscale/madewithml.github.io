@@ -15,34 +15,33 @@ redirect_from: /topics/
   <figcaption>This is a caption</figcaption>
 </figure> -->
 
-After nine months of running Made With ML, we're redefining our focus to end the hype and [deliver actual value]({% link _pages/about.md %}).
-Which means **no more** overwhelming:
+If you're not familiar with the [old MWML platform](https://twitter.com/madewithml/status/1284503478685978625){:target="_blank"}, it used to be the [ProductHunt](https://producthunt.com/){:target="_blank"} of ML where the community could share and upvote projects. We had nearly 5K daily active users and now after nine months, we're redefining our focus to end the hype and [deliver (actual) value]({% link _pages/about.md %}).
+Which means *no more* overwhelming:
 - <span class="mr-1">❌</span> pointing to projects
 - <span class="mr-1">❌</span> posting daily trends
 - <span class="mr-1">❌</span> Topics page
 
 But instead, we will have more **original content** focused on:
-- <span class="mr-1">✅</span> applied ML in production
+- <span class="mr-1">✅</span> applied ML
 - <span class="mr-1">✅</span> sound software engineering
 - <span class="mr-1">✅</span> delivering (actual) value with ML
 
-Made With ML was an open platform (**20K** monthly active users) where the ML community shared what they were building.
 We had indexed nearly 3K tutorials, surveys, blog posts, libraries, etc. to help people build.
 But, in fact, this was not what was happening.
 
-- **hype**: mostly only hype projects were trending (transformer architectures, image generation with GANs, etc.) and very little on applied ML.
-- **quality**: quality of projects decreased as the platform grew in popularity.
-- **misuse**: became a social platform where people gamified project upvotes.
-- **mistakes**: many tutorials and blog posts written by the general public had errors (*caution*: this is happening in a lot of places).
-- **stale**: many libraries quickly became stale after the initial hype phase.
+- `hype`: mostly only hype projects were trending (transformer architectures, image generation with GANs, etc.) and very little on applied ML.
+- `quality`: quality of projects decreased as the platform grew in popularity.
+- `misuse`: became a social platform where people gamified project upvotes.
+- `mistakes`: many tutorials and blog posts written by the general public had errors (*caution*: this is happening in a lot of places).
+- `stale`: many libraries quickly became stale after the initial hype phase.
 
-Luckily, we **don't** depend on ads or traffic so we decided to make the changes necessary to realign with our goal of [helping people build]({% link _pages/about.md %}).
+Luckily, we *don't* depend on ads or traffic so we decided to make the changes necessary to realign with our goal of [helping people build]({% link _pages/about.md %}).
 Here are some tips to follow:
 
-- **relax**: Don't obsess over every new paper, blog post, library, etc. that you see online. Focus on the resources that matter most to what you're building.
-- **build**: While it's good to explore trending topics (transformers, GANs, etc.), always try to build something that has practical utility. You'll learn that these trending topics won't usually be the best choice. And if you're looking for a career in industry, a practical project will go a long way compared to yet another "finetuned image generation with GANs" tutorial.
-- **unfollow**: There are these *influencers* and *evangelists* on Twitter and LinkedIn who repost daily content but they themselves would have contributed very little original content. It's overwhelming and they're doing it for followers.
-- **ignore**: When you see large dumps of resources you'll rarely refer back to them when actually building something and guaranteed the poster did not go through them all. But they'll always stay in the back of your head making you feel like if you aren't learning about everything, you know nothing. Just use Google and GitHub search *as you're building*. Here are a few examples:
+- `relax`: Don't obsess over every new paper, blog post, library, etc. that you see online. Focus on the resources that matter most to what you're building.
+- `build`: While it's good to explore trending topics (transformers, GANs, etc.), always try to build something that has practical utility. You'll learn that these trending topics won't usually be the best choice. And if you're looking for a career in industry, a practical project will go a long way compared to yet another "finetuned image generation with GANs" tutorial.
+- `block`: There are these *influencers* and *evangelists* on Twitter and LinkedIn who repost daily content but they themselves would have contributed very little original content. It's overwhelming and they're doing it for followers. Block them.
+- `ignore`: When you see large dumps of resources you'll rarely refer back to them when actually building something and guaranteed the poster did not go through them all. But they'll always stay in the back of your head making you feel like if you aren't learning about everything, you know nothing. Just use Google and GitHub search *as you're building*. Here are a few examples:
     - awesome lists on GitHub
     - lists of books to read
     - list of courses to take

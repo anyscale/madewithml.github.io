@@ -12,15 +12,15 @@ repos:
     -   id: check-json
     -   id: check-merge-conflict
     -   id: check-json
-- repo: local
-  hooks:
-    - id: makegenerate
-      name: makegenerate
-      entry: make
-      args: ["generate"]
-      language: system
-      types: [python]
-      pass_filenames: false
-      always_run: true
-      verbose: true
+# - repo: local
+#   hooks:
+#     - id: makegenerate
+#       name: makegenerate
+#       entry: make
+#       args: ["generate"]
+#       language: system
+#       types: [python]
+#       pass_filenames: false
+#       always_run: true
+#       verbose: true
 

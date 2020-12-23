@@ -89,6 +89,14 @@ html {
 }
 
 /* Author section */
+.sidebar-author {
+  @media (max-width: 480px) {
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
+}
 .sidebar-author h1 {
   color: #fff;
   font-weight: 500;
@@ -103,7 +111,7 @@ html {
   vertical-align: top;
   margin-bottom: 0rem;
 }
-.sidebar-author hr {
+.grey-hr {
   border-image: linear-gradient(135deg,#ffffff80,#ffffff80) 1 stretch !important;
   border-top: none;
 }

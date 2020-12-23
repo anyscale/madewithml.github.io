@@ -41,7 +41,7 @@ Different styling options for content.
 
 ### Code
 
-**What are they?** Baselines are simple benchmarks which pave the way for iterative development.
+**What are they?** Baselines are simple benchmarks which pave the way for iterative deve...
 
 ```python
 from collections import Counter, OrderedDict
@@ -84,7 +84,8 @@ So far we've treated the words in our input text as isolated tokens and we haven
 
 $$ w_{i, j} = {tf}_{i, j} * log(\frac{N}{df}_i) $$
 
-<table style="width: 50%; margin-top: 1.5rem; margin-left: auto; margin-right: auto;">
+<div class="ai-center-all">
+<table class="mathjax-table">
   <tbody>
     <tr>
       <th>$$ w_{i, j} $$</th>
@@ -104,6 +105,7 @@ $$ w_{i, j} = {tf}_{i, j} * log(\frac{N}{df}_i) $$
     </tr>
   </tbody>
 </table>
+</div>
 
 ### Plots
 <div id="tags_per_project" class="ai-center-all">

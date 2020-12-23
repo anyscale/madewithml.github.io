@@ -136,6 +136,14 @@
   background: linear-gradient(135deg, #2b9ff1, #2b6fce);
   border: none;
 }
+.ai-btn-purple-gradient {
+  background: linear-gradient(135deg,rgb(114, 145, 248),rgb(172, 127, 226));
+  border: none;
+}
+.ai-btn-purple-gradient:hover {
+  background: linear-gradient(135deg,rgb(98, 133, 247), rgb(162, 111, 224));
+  border: none;
+}
 
 // Forms
 .ai-input-box {
@@ -258,6 +266,12 @@ mjx-container[jax="CHTML"][display="true"] {
     text-align: center;
     margin: 0.5em 0 !important;
 }
+.mathjax-table {
+  width: 50%;
+  margin-top: 0.5rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
 
 
 // Dataframes
@@ -283,13 +297,13 @@ div.output_area .rendered_html table {
   margin-top: 1em;
 }
 .rendered_html table {
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: 0rem;
+  margin-right: 0rem;
   border: none;
   border-collapse: collapse;
   border-spacing: 0;
   color: black;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   table-layout: auto;
 }
 .rendered_html tr, .rendered_html th, .rendered_html td {
@@ -367,3 +381,4 @@ th {
 .dataframe thead th {
   text-align: right;
 }
+

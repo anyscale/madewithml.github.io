@@ -166,6 +166,16 @@
   border: none;
 }
 
+.ai-btn-purple-gradient {
+  background: linear-gradient(135deg, #7291f8, #ac7fe2);
+  border: none;
+}
+
+.ai-btn-purple-gradient:hover {
+  background: linear-gradient(135deg, #6285f7, #a26fe0);
+  border: none;
+}
+
 .ai-input-box {
   border-width: 0.05rem;
   -webkit-box-shadow: 0px 0px 0px #285d8b;
@@ -297,6 +307,13 @@ mjx-container[jax="CHTML"][display="true"] {
   margin: 0.5em 0 !important;
 }
 
+.mathjax-table {
+  width: 50%;
+  margin-top: 0.5rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+
 table.dataframe {
   border-collapse: collapse;
   border-spacing: 0;
@@ -323,13 +340,13 @@ div.output_area .rendered_html table {
 }
 
 .rendered_html table {
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: 0rem;
+  margin-right: 0rem;
   border: none;
   border-collapse: collapse;
   border-spacing: 0;
   color: black;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   table-layout: auto;
 }
 

@@ -168,8 +168,8 @@ pre {
   margin-top: 0rem;
   margin-bottom: 1rem;
   padding: 0.5rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
   font-size: .75rem;
   line-height: 1.4;
   overflow-x: scroll;
@@ -180,10 +180,10 @@ pre {
 
 .output {
   display: block;
-  margin-top: 0rem;
+  margin-top: 0.5rem;
   margin-bottom: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
   padding-top: 0rem;
   padding-bottom: 0rem;
   padding-left: 0.5rem;
@@ -204,8 +204,8 @@ pre code {
 
 /* Pygments via Jekyll */
 .highlight {
-  margin-top: 0rem;
-  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   border-radius: 5px;
 }
 
@@ -259,9 +259,11 @@ blockquote p:last-child {
 }
 
 img {
-  display: inline;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   max-width: 100%;
-  margin: 0 0 0.5rem;
+  margin: 0 0 1rem;
   border-radius: 3px;
 }
 
