@@ -5,7 +5,7 @@ permalink: /
 
 latest:
   -
-    title: Preprocesing
+    title: Preprocessing
     description: Preparing and transforming our data for modeling.
     image: /static/images/courses/applied-ml/preprocessing.png
     url: /courses/applied-ml/preprocessing/
@@ -26,7 +26,6 @@ latest:
 <hr class="mt-0">
 <span class="post-date">Join <b>20K+</b> developers in learning how to responsibly
 <a href="{% link _pages/about.md %}">deliver value</a> with applied ML.
-<br>⮑ Read about our recent <a href="{% link _pages/pivot.md %}">pivot</a> from our dynamic platform.</span>
 
 - New content delivered monthly to your inbox →
 <a class="btn btn-sm btn-primary ai-btn-purple-gradient" href="{% link _pages/subscribe.md %}"><i class="fas fa-envelope mr-2"></i>Subscribe</a>
@@ -36,7 +35,8 @@ latest:
 
 <h3 id="ml-foundations"><u>ML Foundations</u></h3>
 
-> <i class="fab fa-github ai-color-black mr-1"></i>: [GokuMohandas/ml-foundations](https://github.com/GokuMohandas/ml-foundations){:target="_blank"} (🔥 Among [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub)
+> <i class="fab fa-github ai-color-black mr-1"></i>: [GokuMohandas/ml-foundations](https://github.com/GokuMohandas/ml-foundations){:target="_blank"}<br>
+⮑ 🔥 Among [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub
 
 <div class="row mt-4">
   <div class="col-md-4">
@@ -71,7 +71,7 @@ latest:
   </div>
 </div>
 
-<span class="ml-1 mr-1"> 📆 </span> more topics coming in 2021
+<span class="ml-1 mr-1"> 📆 </span> more topics coming in 2021!
 
 <hr>
 
@@ -154,9 +154,9 @@ latest:
 ## FAQ
 
 #### Who is this content for?
-- ML developers looking to become end-to-end ML developers.
-- Software engineers looking to learn how to responsibly deliver value with applied ML.
-- Product managers who want to have a comprehensive understanding of the different stages of ML dev.
+- ML developers who want to become end-to-end ML developers.
+- Software engineers who want to responsibly deliver value with applied ML.
+- Product managers who want to have a comprehensive understanding of applied ML.
 
 #### What is the structure?
 Lessons will be released weekly and each one will include:
@@ -168,15 +168,12 @@ Lessons will be released weekly and each one will include:
 #### What makes this content unique?
 - `hands-on`: If you search production ML or MLOps online, you'll find great blog posts and tweets. But in order to really understand these concepts, you need to implement them. Unfortunately, you don’t see a lot of the inner workings of running production ML because of scale, proprietary content & expensive tools. However, Made With ML is free, open and live which makes it a perfect learning opportunity for the community.
 - `intuition-first`: We will never jump straight to code. In every lesson, we will develop intuition for the concepts and think about it from a product perspective.
-- `software engineering`: This course isn't just about ML. In fact, it's mostly about clean software engineering! We'll cover important concepts like versioning, testing, logging, etc. that really makes this a production-grade product.
-- `focused yet holistic`: For every concept, we'll not only cover what's most important for our specific task (this is the case study aspect) but we'll also cover related methods (this is the guide aspect) which may prove to be useful in other situations. For example, when we're serving our application, we'll expose our latest model as an API endpoint. However, there are several other popular ways to serving models and we'll briefly illustrate those and talk about advantages / disadvantages.
-- `open-source`: We will be using only open source tools for this project, with the exception of Google Cloud Platform for storage and compute (free credit will be plenty). The reason we're constraining to open source tools is because:
-We can focus on the fundamentals, everyone can do it and you will have much better understanding when you do use a paid tool at work (if you want to).
-Large companies that deploy ML to production have complicated and scaled processes that don’t make sense for the vast majority of companies / individuals.
+- `software engineering`: This course isn't just about ML. In fact, it's mostly about clean software engineering! We'll cover important concepts like versioning, testing, logging, etc. that really makes something production-grade product.
+- `focused yet holistic`: For every concept, we'll not only cover what's most important for our specific task (this is the case study aspect) but we'll also cover related methods (this is the guide aspect) which may prove to be useful in other situations.
 
 #### Who is the author?
-- I've deployed large scale ML systems at Apple as well as smaller systems with constraints at startups and want to share the common principles I've learned along the way.
-- I created Made With ML so that the community can explore, learn and build ML and I learned how to build it into an end-to-end product that's currently used by over 20K monthly active users.
+- I've deployed large scale ML systems at Apple as well as smaller systems with constraints at startups and want to share the common principles I've learned.
+- I created the ([old](hhttps://twitter.com/madewithml/status/1284503478685978625)) Made With ML so that the community can explore, learn and build ML and I learned how to build it into an end-to-end product that's currently used by over 20K monthly active users.
 - Connect with me on <a href="https://twitter.com/GokuMohandas" target="_blank"><i class="fab fa-twitter ai-color-info mr-1"></i>Twitter</a> and <a href="https://www.linkedin.com/in/goku" target="_blank"><i class="fab fa-linkedin ai-color-primary mr-1"></i>LinkedIn</a>
 
 #### Why is this free?
