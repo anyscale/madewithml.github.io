@@ -34,7 +34,7 @@ latest:
 
 <hr>
 
-<h3><u><a href="{% link _courses/ml-foundations.md %}" style="color: #000;">ML Foundations</a></u></h3>
+<h3 id="ml-foundations"><u>ML Foundations</u></h3>
 
 > <i class="fab fa-github ai-color-black mr-1"></i>: [GokuMohandas/ml-foundations](https://github.com/GokuMohandas/ml-foundations){:target="_blank"} (🔥 Among [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub)
 
@@ -75,7 +75,7 @@ latest:
 
 <hr>
 
-<h3><u><a href="{% link _courses/applied-ml.md %}" style="color: #000;">Applied ML</a></u></h3>
+<h3 id="applied-ml"><u>Applied ML</u></h3>
 
 > <i class="fab fa-github ai-color-black mr-1"></i>: [GokuMohandas/applied-ml](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
 
@@ -150,6 +150,39 @@ latest:
 <span class="ml-1 mr-1"> 📆 </span> new lesson every week!
 
 <hr>
+
+## FAQ
+
+#### Who is this content for?
+- ML developers looking to become end-to-end ML developers.
+- Software engineers looking to learn how to responsibly deliver value with applied ML.
+- Product managers who want to have a comprehensive understanding of the different stages of ML dev.
+
+#### What is the structure?
+Lessons will be released weekly and each one will include:
+- `intuition`: high level overview of the concepts that will be covered and how it all fits together.
+- `code`: simple code examples to illustrate the concept.
+- `application`: applying the concept to our specific task.
+- `extensions`: brief look at other tools and techniques that will be useful for difference situations.
+
+#### What makes this content unique?
+- `hands-on`: If you search production ML or MLOps online, you'll find great blog posts and tweets. But in order to really understand these concepts, you need to implement them. Unfortunately, you don’t see a lot of the inner workings of running production ML because of scale, proprietary content & expensive tools. However, Made With ML is free, open and live which makes it a perfect learning opportunity for the community.
+- `intuition-first`: We will never jump straight to code. In every lesson, we will develop intuition for the concepts and think about it from a product perspective.
+- `software engineering`: This course isn't just about ML. In fact, it's mostly about clean software engineering! We'll cover important concepts like versioning, testing, logging, etc. that really makes this a production-grade product.
+- `focused yet holistic`: For every concept, we'll not only cover what's most important for our specific task (this is the case study aspect) but we'll also cover related methods (this is the guide aspect) which may prove to be useful in other situations. For example, when we're serving our application, we'll expose our latest model as an API endpoint. However, there are several other popular ways to serving models and we'll briefly illustrate those and talk about advantages / disadvantages.
+- `open-source`: We will be using only open source tools for this project, with the exception of Google Cloud Platform for storage and compute (free credit will be plenty). The reason we're constraining to open source tools is because:
+We can focus on the fundamentals, everyone can do it and you will have much better understanding when you do use a paid tool at work (if you want to).
+Large companies that deploy ML to production have complicated and scaled processes that don’t make sense for the vast majority of companies / individuals.
+
+#### Who is the author?
+- I've deployed large scale ML systems at Apple as well as smaller systems with constraints at startups and want to share the common principles I've learned along the way.
+- I created Made With ML so that the community can explore, learn and build ML and I learned how to build it into an end-to-end product that's currently used by over 20K monthly active users.
+- Connect with me on <a href="https://twitter.com/GokuMohandas" target="_blank"><i class="fab fa-twitter ai-color-info mr-1"></i>Twitter</a> and <a href="https://www.linkedin.com/in/goku" target="_blank"><i class="fab fa-linkedin ai-color-primary mr-1"></i>LinkedIn</a>
+
+#### Why is this free?
+While this content is for everyone, it's especially targeted towards people who don't have as much opportunity to learn. I firmly believe that creativity and intelligence are randomly distributed but opportunity is siloed. I want to enable more people to create and contribute to innovation.
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">🔥 Putting ML in Production! We&#39;re going to publicly develop <a href="https://twitter.com/madewithml?ref_src=twsrc%5Etfw">@madewithml</a>&#39;s first ML service. Here is the broad curriculum: <br><br>- 📦 Product<br>- 🔢 Data<br>- 🤖 Modeling<br>- 📝 Scripting<br>- 🛠 API<br>- 🚀 Production<br><br>More details (lessons, task, etc.) here: <a href="https://t.co/xmMm9XGK9j">https://t.co/xmMm9XGK9j</a><br><br>Thread 👇 <a href="https://t.co/T0uLPb2QbR">pic.twitter.com/T0uLPb2QbR</a></p>&mdash; Goku Mohandas (@GokuMohandas) <a href="https://twitter.com/GokuMohandas/status/1315990996849627136?ref_src=twsrc%5Etfw">October 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <!-- <h2 class="page-title mb-4">Latest</h2>
 <div class="card-deck">
