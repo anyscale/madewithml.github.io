@@ -179,7 +179,11 @@ Lessons will be released weekly and each one will include:
 #### Why is this free?
 While this content is for everyone, it's especially targeted towards people who don't have as much opportunity to learn. I firmly believe that creativity and intelligence are randomly distributed but opportunity is siloed. I want to enable more people to create and contribute to innovation.
 
+<div class="row">
+  <div class="col-md-6">
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">🔥 Putting ML in Production! We&#39;re going to publicly develop <a href="https://twitter.com/madewithml?ref_src=twsrc%5Etfw">@madewithml</a>&#39;s first ML service. Here is the broad curriculum: <br><br>- 📦 Product<br>- 🔢 Data<br>- 🤖 Modeling<br>- 📝 Scripting<br>- 🛠 API<br>- 🚀 Production<br><br>More details (lessons, task, etc.) here: <a href="https://t.co/xmMm9XGK9j">https://t.co/xmMm9XGK9j</a><br><br>Thread 👇 <a href="https://t.co/T0uLPb2QbR">pic.twitter.com/T0uLPb2QbR</a></p>&mdash; Goku Mohandas (@GokuMohandas) <a href="https://twitter.com/GokuMohandas/status/1315990996849627136?ref_src=twsrc%5Etfw">October 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </div>
+</div>
 
 <!-- <h2 class="page-title mb-4">Latest</h2>
 <div class="card-deck">
