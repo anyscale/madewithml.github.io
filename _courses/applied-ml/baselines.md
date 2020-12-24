@@ -1167,7 +1167,7 @@ class CNN(nn.Module):
 * **SAME**: adds padding evenly to the right (preferred) and left sides of the input so that all values in the input are processed.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/cnn/padding.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/cnn/padding.png">
 </div>
 
 We're add SAME` padding so that the convolutional outputs are the same shape as our inputs. The amount of padding for the SAME padding can be determined using the same equation. We want out output to have the same width as our input, so we solve for P:
