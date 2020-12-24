@@ -3,6 +3,7 @@ layout: page
 title: Exploratory Data Analysis · Applied ML
 description: Exploring our dataset for insights with intention.
 image: /static/images/applied_ml.png
+redirect_from: /courses/applied-ml-in-production/exploratory-data-analysis/
 
 course-url: /courses/applied-ml/
 next-lesson-url: /courses/applied-ml/splitting/

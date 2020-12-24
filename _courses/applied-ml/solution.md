@@ -3,6 +3,7 @@ layout: page
 title: Solution · Applied ML
 description: Designing a solution with constraints.
 image: /static/images/applied_ml.png
+redirect_from: /courses/applied-ml-in-production/solution/
 
 course-url: /courses/applied-ml/
 next-lesson-url: /courses/applied-ml/evaluation/

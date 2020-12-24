@@ -3,6 +3,7 @@ layout: page
 title: Iteration · Applied ML
 description: Improving on our solution iteratively over time.
 image: /static/images/applied_ml.png
+redirect_from: /courses/applied-ml-in-production/iteration/
 
 course-url: /courses/applied-ml/
 next-lesson-url: /courses/applied-ml/annotation/

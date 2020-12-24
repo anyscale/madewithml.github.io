@@ -3,6 +3,7 @@ layout: page
 title: Preprocessing · Applied ML
 description: Preparing and transforming our data for modeling.
 image: /static/images/applied_ml.png
+redirect_from: /courses/applied-ml-in-production/preprocessing/
 
 course-url: /courses/applied-ml/
 next-lesson-url: /courses/applied-ml/baselines/

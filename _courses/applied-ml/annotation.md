@@ -3,6 +3,7 @@ layout: page
 title: Annotation · Applied ML
 description: Preparing and labeling our data for exploration.
 image: /static/images/applied_ml.png
+redirect_from: /courses/applied-ml-in-production/annotation/
 
 course-url: /courses/applied-ml/
 next-lesson-url: /courses/applied-ml/exploratory-data-analysis/

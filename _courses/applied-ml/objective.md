@@ -3,6 +3,7 @@ layout: page
 title: Objective · Applied ML
 description: Defining the core objective of our task.
 image: /static/images/applied_ml.png
+redirect_from: /courses/applied-ml-in-production/objective/
 
 course-url: /courses/applied-ml/
 next-lesson-url: /courses/applied-ml/solution/

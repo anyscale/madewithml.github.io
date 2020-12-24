@@ -3,6 +3,7 @@ layout: page
 title: Baselines · Applied ML
 description: Motivating the use of baselines for iterative modeling.
 image: /static/images/applied_ml.png
+redirect_from: /courses/applied-ml-in-production/baselines/
 
 course-url: /courses/applied-ml/
 next-lesson-url: /courses/applied-ml/experiment-tracking/

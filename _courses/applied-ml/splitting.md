@@ -3,6 +3,7 @@ layout: page
 title: Splitting · Applied ML
 description: Appropriately splitting our dataset (multi-label) for training, validation and testing.
 image: /static/images/applied_ml.png
+redirect_from: /courses/applied-ml-in-production/splitting/
 
 course-url: /courses/applied-ml/
 next-lesson-url: /courses/applied-ml/preprocessing/
