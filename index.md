@@ -29,7 +29,7 @@ latest:
 
 - New content delivered monthly to your inbox 👉
 <a class="btn btn-sm btn-primary ai-btn-purple-gradient ml-1" href="{% link _pages/subscribe.md %}"><i class="fas fa-envelope mr-2"></i>Subscribe</a>
-- Follow on <a href="https://twitter.com/GokuMohandas" target="_blank"><i class="fab fa-twitter ai-color-info mr-1"></i>Twitter</a> and <a href="https://www.linkedin.com/in/goku" target="_blank"><i class="fab fa-linkedin ai-color-primary mr-1"></i>LinkedIn</a> for tips and conversations.
+- Follow on <a href="https://twitter.com/GokuMohandas" target="_blank"><i class="fab fa-twitter ai-color-info"></i></a> and <a href="https://www.linkedin.com/in/goku" target="_blank"><i class="fab fa-linkedin ai-color-primary"></i></a> for tips and conversations.
 
 <hr>
 
