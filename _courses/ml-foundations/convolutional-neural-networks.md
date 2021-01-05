@@ -354,12 +354,14 @@ from more_itertools import take
 class Tokenizer(object):
     def __init__(self, char_level, num_tokens=None,
                  pad_token='<PAD>', oov_token='<UNK>',
-                 token_to_index={'<PAD>': 0, '<UNK>': 1}):
+                 token_to_index=None):
         self.char_level = char_level
         self.separator = '' if self.char_level else ' '
         if num_tokens: num_tokens -= 2 # pad + unk tokens
         self.num_tokens = num_tokens
         self.oov_token = oov_token
+        if not token_to_index:
+            token_to_index = {'<PAD>': 0, '<UNK>': 1}
         self.token_to_index = token_to_index
         self.index_to_token = {v: k for k, v in self.token_to_index.items()}
 

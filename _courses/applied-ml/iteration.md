@@ -41,7 +41,7 @@ We don't want to spend months of time developing a complicated solution only to 
 3. Constantly reassess to ensure your objective hasn't changed.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/applied-ml/development_cycle.png" width="700" alt="product development cycle">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/applied-ml/iteration/development_cycle.png" width="700" alt="product development cycle">
 </div>
 <div class="ai-center-all mb-3">
   <small>Product development cycle</small>
