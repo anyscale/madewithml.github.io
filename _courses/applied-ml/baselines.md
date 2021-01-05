@@ -538,19 +538,19 @@ def display_tag_analysis(tag='transformers'):
     # Samples
     num_samples = 3
     if len(tp):
-        print ("\n=== True positives ===")
+        print ("\n=== True positives ===\n")
         for i in tp[:num_samples]:
             print (f"  {X_test[i]}")
             print (f"    true: {label_encoder.decode([y_test[i]])[0]}")
             print (f"    pred: {label_encoder.decode([y_pred[i]])[0]}\n")
     if len(fp):
-        print ("=== False positives === ")
+        print ("=== False positives ===\n")
         for i in fp[:num_samples]:
             print (f"  {X_test[i]}")
             print (f"    true: {label_encoder.decode([y_test[i]])[0]}")
             print (f"    pred: {label_encoder.decode([y_pred[i]])[0]}\n")
     if len(fn):
-        print ("=== False negatives ===")
+        print ("=== False negatives ===\n")
         for i in fn[:num_samples]:
             print (f"  {X_test[i]}")
             print (f"    true: {label_encoder.decode([y_test[i]])[0]}")
@@ -566,6 +566,7 @@ This is the output for the `transformers` tag:
 }
 
 === True positives ===
+
   insight project insight design creat nlp servic code base front end gui streamlit backend server fastapi usag transform
     true: ['attention', 'huggingface', 'natural-language-processing', 'pytorch', 'transfer-learning', 'transformers']
     pred: ['natural-language-processing', 'transformers']
@@ -579,11 +580,13 @@ This is the output for the `transformers` tag:
     pred: ['natural-language-processing', 'transformers']
 
 === False positives ===
+
   multi target albument mani imag mani mask bound box key point transform sync
     true: ['computer-vision', 'data-augmentation']
     pred: ['natural-language-processing', 'transformers']
 
 === False negatives ===
+
   size fill blank multi mask fill roberta size fill blank condit text fill idea fill miss word sentenc probabl choic word
     true: ['attention', 'huggingface', 'language-modeling', 'natural-language-processing', 'transformers']
     pred: []
@@ -794,8 +797,8 @@ print (json.dumps(performance, indent=2))
 
 
 <u><i>motivation</i></u>:
-- *representation*: we want to have more robust (split tokens to characters) and meaningful ([embeddings](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/12_Embeddings.ipynb){:target="_blank"}) representations for our input tokens.
-- *architecture*: we want to process our encoded inputs using [convolution (CNN)](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/11_Convolutional_Neural_Networks.ipynb){:target="_blank"} filters that can learn to analyze windows of embedded tokens to extract meaningful signal.
+- *representation*: we want to have more robust (split tokens to characters) and meaningful [embeddings]({% link _courses/ml-foundations/embeddings.md %}){:target="_blank"} representations for our input tokens.
+- *architecture*: we want to process our encoded inputs using [convolution (CNN)]({% link _courses/ml-foundations/convolutional-neural-networks.md %}){:target="_blank"} filters that can learn to analyze windows of embedded tokens to extract meaningful signal.
 
 
 <h4 id="setup_cnn">Set up</h4>
@@ -956,7 +959,7 @@ Text to indices:
 
 <h4 id="imbalance_cnn">Data imbalance</h4>
 
-We'll factor class weights in our objective function ([binary cross entropy with logits](https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html)){:target="_blank"} to help with class imbalance. There are many other techniques such as over sampling from underrepresented classes, undersampling, etc. but we'll cover these in a separate unit lesson on data imbalance.
+We'll factor class weights in our objective function ([binary cross entropy with logits](https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html){:target="_blank"}) to help with class imbalance. There are many other techniques such as over sampling from underrepresented classes, undersampling, etc. but we'll cover these in a separate unit lesson on data imbalance.
 
 ```python
 # Class weights
@@ -1076,7 +1079,7 @@ Sample batch:
 
 <h4 id="model_cnn">Model</h4>
 
-We'll be using a convolutional neural network on top of our embedded tokens to extract meaningful spatial signal. This time, we'll be using many filter widths to act as n-gram feature extractors. If you're not familiar with CNNs be sure to check out the [CNN lesson](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/11_Convolutional_Neural_Networks.ipynb){:target="_blank"} where we walkthrough every component of the architecture.
+We'll be using a convolutional neural network on top of our embedded tokens to extract meaningful spatial signal. This time, we'll be using many filter widths to act as n-gram feature extractors. If you're not familiar with CNNs be sure to check out the [CNN lesson](https://madewithml.com/courses/ml-foundations/convolutional-neural-networks/){:target="_blank"} where we walkthrough every component of the architecture.
 
 <div class="ai-center-all">
     <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/cnn/convolution.gif">
@@ -1170,7 +1173,7 @@ class CNN(nn.Module):
     <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/cnn/padding.png">
 </div>
 
-We're add SAME` padding so that the convolutional outputs are the same shape as our inputs. The amount of padding for the SAME padding can be determined using the same equation. We want out output to have the same width as our input, so we solve for P:
+We're add `SAME` padding so that the convolutional outputs are the same shape as our inputs. The amount of padding for the SAME padding can be determined using the same equation. We want out output to have the same width as our input, so we solve for P:
 
 $$ \frac{W-F+2P}{S} + 1 = W $$
 
@@ -1211,6 +1214,8 @@ bound method Module.named_parameters of CNN(
 
 <h4 id="training_cnn">Training</h4>
 
+We'll define a Trainer object which we will use for training, validation and inference.
+
 ```python
 # Arguments
 lr = 2e-4
@@ -1219,12 +1224,12 @@ patience = 10
 ```
 ```python
 class Trainer(object):
-    def __init__(self, model, device, loss=None, optimizer=None, scheduler=None):
+    def __init__(self, model, device, loss_fn=None, optimizer=None, scheduler=None):
 
         # Set params
         self.model = model
         self.device = device
-        self.loss = loss
+        self.loss_fn = loss_fn
         self.optimizer = optimizer
         self.scheduler = scheduler
 
@@ -1242,7 +1247,7 @@ class Trainer(object):
             inputs, targets = batch[:-1], batch[-1]
             self.optimizer.zero_grad()  # Reset gradients
             z = self.model(inputs)  # Forward pass
-            J = self.loss(z, targets)  # Define loss
+            J = self.loss_fn(z, targets)  # Define loss
             J.backward()  # Backward pass
             self.optimizer.step()  # Update weights
 
@@ -1266,7 +1271,7 @@ class Trainer(object):
                 batch = [item.to(self.device) for item in batch]  # Set device
                 inputs, y_true = batch[:-1], batch[-1]
                 z = self.model(inputs)  # Forward pass
-                J = self.loss(z, y_true).item()
+                J = self.loss_fn(z, y_true).item()
 
                 # Cumulative Metrics
                 loss += (J - loss) / (i + 1)
@@ -1303,7 +1308,7 @@ class Trainer(object):
             # Steps
             train_loss = self.train_step(dataloader=train_dataloader)
             val_loss, _, _ = self.eval_step(dataloader=val_dataloader)
-            scheduler.step(val_loss)
+            self.scheduler.step(val_loss)
 
             # Early stopping
             if val_loss < best_val_loss:
@@ -1340,7 +1345,7 @@ scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
 ```python
 # Trainer module
 trainer = Trainer(
-    model=model, device=device, loss=loss,
+    model=model, device=device, loss_fn=loss_fn,
     optimizer=optimizer, scheduler=scheduler)
 ```
 ```python
@@ -1427,6 +1432,7 @@ We can do the same type of inspection as with the rule-based baseline. This is t
 }
 
 === True positives ===
+
   insight project insight designed create nlp service code base front end gui streamlit backend server fastapi usage transformers
     true: ['attention', 'huggingface', 'natural-language-processing', 'pytorch', 'transfer-learning', 'transformers']
     pred: ['natural-language-processing', 'transformers']
@@ -1440,6 +1446,7 @@ We can do the same type of inspection as with the rule-based baseline. This is t
     pred: ['huggingface', 'natural-language-processing', 'transformers']
 
 === False positives ===
+
   evaluation metrics language modeling article focus traditional intrinsic metrics extremely useful process training language model
     true: ['language-modeling', 'natural-language-processing']
     pred: ['language-modeling', 'natural-language-processing', 'transformers']
@@ -1453,6 +1460,7 @@ We can do the same type of inspection as with the rule-based baseline. This is t
     pred: ['natural-language-processing', 'transformers']
 
 === False negatives ===
+
   sized fill blank multi mask filling roberta sized fill blank conditional text filling idea filling missing words sentence probable choice words
     true: ['attention', 'huggingface', 'language-modeling', 'natural-language-processing', 'transformers']
     pred: ['natural-language-processing']
@@ -1557,7 +1565,7 @@ label_encoder.decode(y_pred)
 - [Evaluation](#evaluation_rnn)
 - [Inference](#inference_rnn)
 
-<u><i>motivation</i></u>: let's see if processing our embedded tokens in a sequential fashion using [recurrent neural networks (RNNs)](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb){:target="_blank"} can yield better performance.
+<u><i>motivation</i></u>: let's see if processing our embedded tokens in a sequential fashion using [recurrent neural networks (RNNs)]({% link _courses/ml-foundations/recurrent-neural-networks.md %}){:target="_blank"} can yield better performance.
 
 <h4 id="setup_rnn">Set up</h4>
 
@@ -1635,7 +1643,7 @@ Text to indices:
 
 <h4 id="imbalance_rnn">Data imbalance</h4>
 
-We'll factor class weights in our objective function ([binary cross entropy with logits](https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html)){:target="_blank"} to help with class imbalance. There are many other techniques such as over sampling from underrepresented classes, undersampling, etc. but we'll cover these in a separate unit lesson on data imbalance.
+We'll factor class weights in our objective function ([binary cross entropy with logits](https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html){:target="_blank"}) to help with class imbalance. There are many other techniques such as over sampling from underrepresented classes, undersampling, etc. but we'll cover these in a separate unit lesson on data imbalance.
 
 ```python
 # Class weights
@@ -1750,7 +1758,7 @@ Sample batch:
 
 <h4 id="model_rnn">Model</h4>
 
-We'll be using a recurrent neural network to process our embedded tokens one at a time (sequentially). If you're not familiar with RNNs be sure to check out the [RNN lesson](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb){:target="_blank"} *where* we walkthrough every component of the architecture.
+We'll be using a recurrent neural network to process our embedded tokens one at a time (sequentially). If you're not familiar with RNNs be sure to check out the [RNN lesson]({% link _courses/ml-foundations/recurrent-neural-networks.md %}){:target="_blank"} *where* we walkthrough every component of the architecture.
 
 <div class="ai-center-all">
     <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/rnn/vanilla.png">
@@ -1899,7 +1907,7 @@ scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
 ```python
 # Trainer module
 trainer = Trainer(
-    model=model, device=device, loss=loss,
+    model=model, device=device, loss_fn=loss_fn,
     optimizer=optimizer, scheduler=scheduler)
 ```
 ```python
@@ -2316,7 +2324,7 @@ scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
 ```python
 # Trainer module
 trainer = Trainer(
-    model=model, device=device, loss=loss,
+    model=model, device=device, loss_fn=loss_fn,
     optimizer=optimizer, scheduler=scheduler)
 ```
 ```python

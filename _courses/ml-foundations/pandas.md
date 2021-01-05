@@ -146,7 +146,7 @@ These are the different features:
 <h3 id="eda">Exploratory data analysis (EDA)</h3>
 Now that we loaded our data, we're ready to start exploring it to find interesting information.
 
-> Be sure to check out our entire lesson focused on [EDA]](https://madewithml.com/courses/applied-ml/exploratory-data-analysis/){:target="_blank"} in our [applied-ml](https://madewithml.com/#applied-ml){:target="_blank"} course.
+> Be sure to check out our entire lesson focused on [EDA]](https://madewithml.com/courses/applied-ml/exploratory-data-analysis/){:target="_blank"} in our [applied-ml](https://madewithml.com/courses/applied-ml/){:target="_blank"} course.
 
 ```python
 import matplotlib.pyplot as plt
@@ -570,7 +570,7 @@ df.iloc[0, 1]
 <h3 id="preprocessing">Preprocessing</h3>
 After exploring, we can clean and preprocess our dataset.
 
-> Be sure to check out our entire lesson focused on [preprocessing](https://madewithml.com/courses/applied-ml/preprocessing/){:target="_blank"} in our [applied-ml](https://madewithml.com/#applied-ml){:target="_blank"} course.
+> Be sure to check out our entire lesson focused on [preprocessing](https://madewithml.com/courses/applied-ml/preprocessing/){:target="_blank"} in our [applied-ml](https://madewithml.com/courses/applied-ml/){:target="_blank"} course.
 
 ```python
 # Rows with at least one NaN value

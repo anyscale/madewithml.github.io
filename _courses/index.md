@@ -1,4 +1,4 @@
-<!-- ---
+---
 layout: page
 title: Courses
 display-title: true
@@ -51,4 +51,4 @@ permalink: /courses/
     </div>
   </div>
 
-</div> -->
+</div>

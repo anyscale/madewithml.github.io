@@ -1,5 +1,5 @@
 ---
 layout: page
 redirect_from: /courses/putting-ml-in-production/
-redirect_to: /#applied-ml
+redirect_to: /courses/applied-ml/
 ---

@@ -518,7 +518,7 @@ def train_step(self, dataloader):
         inputs, targets = batch[:-1], batch[-1]
         self.optimizer.zero_grad()  # Reset gradients
         z = self.model(inputs)  # Forward pass
-        J = self.loss(z, targets)  # Define loss
+        J = self.loss_fn(z, targets)  # Define loss
         J.backward()  # Backward pass
         self.optimizer.step()  # Update weights
 
@@ -546,7 +546,7 @@ def eval_step(self, dataloader):
             batch = [item.to(self.device) for item in batch]  # Set device
             inputs, y_true = batch[:-1], batch[-1]
             z = self.model(inputs)  # Forward pass
-            J = self.loss(z, y_true).item()
+            J = self.loss_fn(z, y_true).item()
 
             # Cumulative Metrics
             loss += (J - loss) / (i + 1)
@@ -583,7 +583,7 @@ def predict_step(self, dataloader):
 ```
 
 <h3 id="lr">LR scheduler</h3>
-As our model starts to optimize and perform better, the loss will reduce and we'll need to make smaller adjustments. If we keep using a fixed learning rate, we'll be overshooting back and forth. Therefore, we're going to add a learning rate scheduler to our optimizer to adjust our learning rate during training. There are many [schedulers](https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate){:target="_blank"} schedulers to choose from but a popular one is `ReduceLROnPlateau` which reduces the learning rate when a metric (ex. validation loss) stops improving. In the example below we'll reduce the learning rate by a factor of 0.1 (`factor=0.1`) when our metric of interest (`scheduler.step(val_loss)`) stops decreasing (`mode='min'`) for three (`patience=3`) straight epochs.
+As our model starts to optimize and perform better, the loss will reduce and we'll need to make smaller adjustments. If we keep using a fixed learning rate, we'll be overshooting back and forth. Therefore, we're going to add a learning rate scheduler to our optimizer to adjust our learning rate during training. There are many [schedulers](https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate){:target="_blank"} schedulers to choose from but a popular one is `ReduceLROnPlateau` which reduces the learning rate when a metric (ex. validation loss) stops improving. In the example below we'll reduce the learning rate by a factor of 0.1 (`factor=0.1`) when our metric of interest (`self.scheduler.step(val_loss)`) stops decreasing (`mode='min'`) for three (`patience=3`) straight epochs.
 
 ```python
 # Initialize the LR scheduler
@@ -595,7 +595,7 @@ train_loop():
     # Steps
     train_loss = trainer.train_step(dataloader=train_dataloader)
     val_loss, _, _ = trainer.eval_step(dataloader=val_dataloader)
-    scheduler.step(val_loss)
+    self.scheduler.step(val_loss)
     ...
 ```
 
@@ -639,12 +639,12 @@ scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
 ```
 ```python
 class Trainer(object):
-    def __init__(self, model, device, loss=None, optimizer=None, scheduler=None):
+    def __init__(self, model, device, loss_fn=None, optimizer=None, scheduler=None):
 
         # Set params
         self.model = model
         self.device = device
-        self.loss = loss
+        self.loss_fn = loss_fn
         self.optimizer = optimizer
         self.scheduler = scheduler
 
@@ -662,7 +662,7 @@ class Trainer(object):
             inputs, targets = batch[:-1], batch[-1]
             self.optimizer.zero_grad()  # Reset gradients
             z = self.model(inputs)  # Forward pass
-            J = self.loss(z, targets)  # Define loss
+            J = self.loss_fn(z, targets)  # Define loss
             J.backward()  # Backward pass
             self.optimizer.step()  # Update weights
 
@@ -686,7 +686,7 @@ class Trainer(object):
                 batch = [item.to(self.device) for item in batch]  # Set device
                 inputs, y_true = batch[:-1], batch[-1]
                 z = self.model(inputs)  # Forward pass
-                J = self.loss(z, y_true).item()
+                J = self.loss_fn(z, y_true).item()
 
                 # Cumulative Metrics
                 loss += (J - loss) / (i + 1)
@@ -723,7 +723,7 @@ class Trainer(object):
             # Steps
             train_loss = self.train_step(dataloader=train_dataloader)
             val_loss, _, _ = self.eval_step(dataloader=val_dataloader)
-            scheduler.step(val_loss)
+            self.scheduler.step(val_loss)
 
             # Early stopping
             if val_loss < best_val_loss:
@@ -749,7 +749,7 @@ class Trainer(object):
 ```python
 # Trainer module
 trainer = Trainer(
-    model=model, device=device, loss=loss,
+    model=model, device=device, loss_fn=loss_fn,
     optimizer=optimizer, scheduler=scheduler)
 ```
 ```python
@@ -889,7 +889,7 @@ There are lots of other utilities to cover as well such as:
 - Hyperparameter optimization to tune our parameters (layers, learning rate, etc.)
 - and many more!
 
-We'll explore these as we require them in future lessons including some in our [Applied ML](https://madewithml.com/#applied-ml) course!
+We'll explore these as we require them in future lessons including some in our [Applied ML](https://madewithml.com/courses/applied-ml/) course!
 
 
 <!-- Footer -->

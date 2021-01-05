@@ -2,3 +2,7 @@
   url: /
 - name: About
   url: /about/
+- name: Courses
+  url: /courses/
+- name: FAQ
+  url: /faq/

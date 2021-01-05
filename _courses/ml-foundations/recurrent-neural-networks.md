@@ -630,12 +630,12 @@ Let's create the `Trainer` class that we'll use to facilitate training for our e
 
 ```python
 class Trainer(object):
-    def __init__(self, model, device, loss=None, optimizer=None, scheduler=None):
+    def __init__(self, model, device, loss_fn=None, optimizer=None, scheduler=None):
 
         # Set params
         self.model = model
         self.device = device
-        self.loss = loss
+        self.loss_fn = loss_fn
         self.optimizer = optimizer
         self.scheduler = scheduler
 
@@ -653,7 +653,7 @@ class Trainer(object):
             inputs, targets = batch[:-1], batch[-1]
             self.optimizer.zero_grad()  # Reset gradients
             z = self.model(inputs)  # Forward pass
-            J = self.loss(z, targets)  # Define loss
+            J = self.loss_fn(z, targets)  # Define loss
             J.backward()  # Backward pass
             self.optimizer.step()  # Update weights
 
@@ -677,7 +677,7 @@ class Trainer(object):
                 batch = [item.to(self.device) for item in batch]  # Set device
                 inputs, y_true = batch[:-1], batch[-1]
                 z = self.model(inputs)  # Forward pass
-                J = self.loss(z, y_true).item()
+                J = self.loss_fn(z, y_true).item()
 
                 # Cumulative Metrics
                 loss += (J - loss) / (i + 1)
@@ -714,7 +714,7 @@ class Trainer(object):
             # Steps
             train_loss = self.train_step(dataloader=train_dataloader)
             val_loss, _, _ = self.eval_step(dataloader=val_dataloader)
-            scheduler.step(val_loss)
+            self.scheduler.step(val_loss)
 
             # Early stopping
             if val_loss < best_val_loss:
@@ -1008,7 +1008,7 @@ scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
 ```python
 # Trainer module
 trainer = Trainer(
-    model=model, device=device, loss=loss,
+    model=model, device=device, loss_fn=loss_fn,
     optimizer=optimizer, scheduler=scheduler)
 ```
 ```python
@@ -1214,7 +1214,7 @@ scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
 ```python
 # Trainer module
 trainer = Trainer(
-    model=model, device=device, loss=loss,
+    model=model, device=device, loss_fn=loss_fn,
     optimizer=optimizer, scheduler=scheduler)
 ```
 ```python

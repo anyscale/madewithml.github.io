@@ -27,163 +27,30 @@ latest:
 <span class="post-date">Join <b>20K+</b> developers in learning how to responsibly
 <a href="{% link _pages/about.md %}">deliver value</a> with applied ML.
 
-- New content delivered monthly to your inbox →
-<a class="btn btn-sm btn-primary ai-btn-purple-gradient" href="{% link _pages/subscribe.md %}"><i class="fas fa-envelope mr-2"></i>Subscribe</a>
+- New content delivered monthly to your inbox 👉
+<a class="btn btn-sm btn-primary ai-btn-purple-gradient ml-1" href="{% link _pages/subscribe.md %}"><i class="fas fa-envelope mr-2"></i>Subscribe</a>
 - Follow on <a href="https://twitter.com/GokuMohandas" target="_blank"><i class="fab fa-twitter ai-color-info mr-1"></i>Twitter</a> and <a href="https://www.linkedin.com/in/goku" target="_blank"><i class="fab fa-linkedin ai-color-primary mr-1"></i>LinkedIn</a> for tips and conversations.
 
 <hr>
 
-<h3 id="ml-foundations"><u>ML Foundations</u></h3>
-
-> <i class="fab fa-github ai-color-black mr-1"></i>: [GokuMohandas/madewithml](https://github.com/GokuMohandas/madewithml){:target="_blank"}<br>
-⮑ 🔥 Among [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub
-
-<div class="row mt-4">
-  <div class="col-md-4">
-    <b><span class="mr-1">🔢</span> Basics</b>
-    <ul>
-      <li><a href="{% link _courses/ml-foundations/notebooks.md %}">Notebooks</a></li>
-      <li><a href="{% link _courses/ml-foundations/python.md %}">Python</a></li>
-      <li><a href="{% link _courses/ml-foundations/numpy.md %}">NumPy</a></li>
-      <li><a href="{% link _courses/ml-foundations/pandas.md %}">Pandas</a></li>
-      <li><a href="{% link _courses/ml-foundations/pytorch.md %}">PyTorch</a></li>
-    </ul>
-  </div>
-  <div class="col-md-4">
-    <b><span class="mr-1">📈</span> Modeling</b>
-    <ul>
-      <li><a href="{% link _courses/ml-foundations/linear-regression.md %}">Linear Regression</a></li>
-      <li><a href="{% link _courses/ml-foundations/logistic-regression.md %}">Logistic Regression</a></li>
-      <li><a href="{% link _courses/ml-foundations/neural-networks.md %}">Neural Networks</a></li>
-      <li><a href="{% link _courses/ml-foundations/data-quality.md %}">Data Quality</a></li>
-      <li><a href="{% link _courses/ml-foundations/utilities.md %}">Utilities</a></li>
-    </ul>
-  </div>
-  <div class="col-md-4">
-    <b><span class="mr-1">🤖</span> Deep Learning</b>
-    <ul>
-      <li><a href="{% link _courses/ml-foundations/convolutional-neural-networks.md %}">CNNs</a></li>
-      <li><a href="{% link _courses/ml-foundations/embeddings.md %}">Embeddings</a></li>
-      <li><a href="{% link _courses/ml-foundations/recurrent-neural-networks.md %}">RNNs</a></li>
-      <li>Attention <small>(TBD)</small></li>
-      <li>Transformers <small>(TBD)</small></li>
-    </ul>
-  </div>
-</div>
-
-<span class="ml-1 mr-1"> 📆 </span> more topics coming in 2021!
+{% assign ml_foundations_course_page = site.courses | where:"title", "ML Foundations · Made With ML" | first %}
+{{ ml_foundations_course_page.content }}
 
 <hr>
 
-<h3 id="applied-ml"><u>Applied ML</u></h3>
-
-> <i class="fab fa-github ai-color-black mr-1"></i>: [GokuMohandas/applied-ml](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
-
-<div class="row mt-4">
-  <div class="col-md-4">
-    <b><span class="mr-1">📦</span> Product</b>
-    <ul>
-      <li><a href="{% link _courses/applied-ml/objective.md %}">Objective</a></li>
-      <li><a href="{% link _courses/applied-ml/solution.md %}">Solution</a></li>
-      <li><a href="{% link _courses/applied-ml/evaluation.md %}">Evaluation</a></li>
-      <li><a href="{% link _courses/applied-ml/iteration.md %}">Iteration</a></li>
-    </ul>
-    <b><span class="mr-1">🔢</span> Data</b>
-    <ul>
-      <li><a href="{% link _courses/applied-ml/annotation.md %}">Annotation</a></li>
-      <li><a href="{% link _courses/applied-ml/exploratory-data-analysis.md %}">Exploratory data analysis</a></li>
-      <li><a href="{% link _courses/applied-ml/splitting.md %}">Splitting</a></li>
-      <li><a href="{% link _courses/applied-ml/preprocessing.md %}">Preprocessing</a></li>
-    </ul>
-    <b><span class="mr-1">📈</span> Modeling</b>
-    <ul>
-      <li><a href="{% link _courses/applied-ml/baselines.md %}">Baselines</a></li>
-      <li>Experiment tracking</li>
-      <li>Optimization</li>
-
-    </ul>
-  </div>
-  <div class="col-md-4">
-    <b><span class="mr-1">📝</span> Scripting</b>
-    <ul>
-      <li>OOPs</li>
-      <li>Formatting</li>
-      <li>Packaging</li>
-      <li>Logging</li>
-    </ul>
-    <b><span class="mr-1">✅</span> Testing</b>
-    <ul>
-      <li>Testing <small>(code)</small></li>
-      <li>Testing <small>(data)</small></li>
-      <li>Testing <small>(model)</small></li>
-    </ul>
-    <b><span class="mr-1">⏰</span> Version control</b>
-    <ul>
-      <li>Git</li>
-      <li>Precommit</li>
-      <li>Makefile</li>
-      <li>Versioning</li>
-    </ul>
-  </div>
-  <div class="col-md-4">
-    <b><span class="mr-1">🛠</span> API</b>
-    <ul>
-      <li>RESTful API</li>
-      <li>Databases</li>
-      <li>Authentication</li>
-      <li>Documentation</li>
-    </ul>
-    <b><span class="mr-1">🚀</span> Production</b>
-    <ul>
-      <li>Dashboard</li>
-      <li>Docker</li>
-      <li>Serving</li>
-      <li>CI/CD</li>
-      <li>Monitoring <small>(performance, drift)</small></li>
-      <li>Active learning</li>
-      <li>Feature stores</li>
-      <li>Scaling</li>
-    </ul>
-  </div>
-</div>
-
-<span class="ml-1 mr-1"> 📆 </span> new lesson every week!
+{% assign applied_ml_course_page = site.courses | where:"title", "Applied ML · Made With ML" | first %}
+{{ applied_ml_course_page.content }}
 
 <hr>
 
-## FAQ
+{% assign faq_page = site.pages | where:"title", "FAQ · Made With ML" | first %}
+{{ faq_page.content }}
 
-#### Who is this content for?
-- ML developers who want to become end-to-end ML developers.
-- Software engineers who want to responsibly deliver value with applied ML.
-- Product managers who want to have a comprehensive understanding of applied ML.
-
-#### What is the structure?
-Lessons will be released weekly and each one will include:
-- `intuition`: high level overview of the concepts that will be covered and how it all fits together.
-- `code`: simple code examples to illustrate the concept.
-- `application`: applying the concept to our specific task.
-- `extensions`: brief look at other tools and techniques that will be useful for difference situations.
-
-#### What makes this content unique?
-- `hands-on`: If you search production ML or MLOps online, you'll find great blog posts and tweets. But in order to really understand these concepts, you need to implement them. Unfortunately, you don’t see a lot of the inner workings of running production ML because of scale, proprietary content & expensive tools. However, Made With ML is free, open and live which makes it a perfect learning opportunity for the community.
-- `intuition-first`: We will never jump straight to code. In every lesson, we will develop intuition for the concepts and think about it from a product perspective.
-- `software engineering`: This course isn't just about ML. In fact, it's mostly about clean software engineering! We'll cover important concepts like versioning, testing, logging, etc. that really makes something production-grade product.
-- `focused yet holistic`: For every concept, we'll not only cover what's most important for our specific task (this is the case study aspect) but we'll also cover related methods (this is the guide aspect) which may prove to be useful in other situations.
-
-#### Who is the author?
-- I've deployed large scale ML systems at Apple as well as smaller systems with constraints at startups and want to share the common principles I've learned.
-- I created the ([old](hhttps://twitter.com/madewithml/status/1284503478685978625)) Made With ML so that the community can explore, learn and build ML and I learned how to build it into an end-to-end product that's currently used by over 20K monthly active users.
-- Connect with me on <a href="https://twitter.com/GokuMohandas" target="_blank"><i class="fab fa-twitter ai-color-info mr-1"></i>Twitter</a> and <a href="https://www.linkedin.com/in/goku" target="_blank"><i class="fab fa-linkedin ai-color-primary mr-1"></i>LinkedIn</a>
-
-#### Why is this free?
-While this content is for everyone, it's especially targeted towards people who don't have as much opportunity to learn. I firmly believe that creativity and intelligence are randomly distributed but opportunity is siloed. I want to enable more people to create and contribute to innovation.
-
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-6">
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">🔥 Putting ML in Production! We&#39;re going to publicly develop <a href="https://twitter.com/madewithml?ref_src=twsrc%5Etfw">@madewithml</a>&#39;s first ML service. Here is the broad curriculum: <br><br>- 📦 Product<br>- 🔢 Data<br>- 🤖 Modeling<br>- 📝 Scripting<br>- 🛠 API<br>- 🚀 Production<br><br>More details (lessons, task, etc.) here: <a href="https://t.co/xmMm9XGK9j">https://t.co/xmMm9XGK9j</a><br><br>Thread 👇 <a href="https://t.co/T0uLPb2QbR">pic.twitter.com/T0uLPb2QbR</a></p>&mdash; Goku Mohandas (@GokuMohandas) <a href="https://twitter.com/GokuMohandas/status/1315990996849627136?ref_src=twsrc%5Etfw">October 13, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
-</div>
+</div> -->
 
 <!-- <h2 class="page-title mb-4">Latest</h2>
 <div class="card-deck">
