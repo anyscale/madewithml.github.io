@@ -25,7 +25,7 @@ There are many options for hyperparameter tuning ([Optuna](https://github.com/op
 
 There are many factors to consider when performing hyperparameter optimization and luckily Optuna allows us to [implement](https://optuna.readthedocs.io/en/stable/reference/) them with ease. We'll be conducting a small study where we'll tune a set of arguments (we'll do a much more thorough [study](https://optuna.readthedocs.io/en/stable/reference/study.html) of the parameter space when we move our code to Python scripts). Here's the process for the study:
 
-1. Identifying the [direction](https://optuna.readthedocs.io/en/stable/reference/generated/optuna.study.StudyDirection.html#optuna.study.StudyDirection){:target="_blank"} to optimize.
+1. Define an objective (metric) and identifying the [direction](https://optuna.readthedocs.io/en/stable/reference/generated/optuna.study.StudyDirection.html#optuna.study.StudyDirection){:target="_blank"} to optimize.
 2. `[OPTIONAL]` Choose a [sampler](https://optuna.readthedocs.io/en/stable/reference/samplers.html){:target="_blank"} for determining parameters for subsequent trials. (default is a tree based sampler).
 3. `[OPTIONAL]` Choose a [pruner](https://optuna.readthedocs.io/en/stable/reference/pruners.html){:target="_blank"} to end unpromising trials early.
 4. Define the parameters to tune in each [trial](https://optuna.readthedocs.io/en/stable/reference/trial.html){:target="_blank"} and the [distribution](https://optuna.readthedocs.io/en/stable/reference/generated/optuna.trial.Trial.html#optuna-trial-trial){:target="_blank"} of values to sample.
