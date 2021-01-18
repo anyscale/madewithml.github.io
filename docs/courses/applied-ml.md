@@ -7,23 +7,23 @@ Learn how to apply ML to build a production grade product to deliver value.
 <div class="col-md-4">
     <b><span class="mr-1">📦</span> Product</b>
     <ul>
-    <li><a href="objective">Objective</a></li>
-    <li><a href="solution">Solution</a></li>
-    <li><a href="evaluation">Evaluation</a></li>
-    <li><a href="iteration">Iteration</a></li>
+    <li><a href="/courses/applied-ml/objective/">Objective</a></li>
+    <li><a href="/courses/applied-ml/solution/">Solution</a></li>
+    <li><a href="/courses/applied-ml/evaluation/">Evaluation</a></li>
+    <li><a href="/courses/applied-ml/iteration/">Iteration</a></li>
     </ul>
     <b><span class="mr-1">🔢</span> Data</b>
     <ul>
-    <li><a href="annotation">Annotation</a></li>
-    <li><a href="exploratory-data-analysis">Exploratory data analysis</a></li>
-    <li><a href="splitting">Splitting</a></li>
-    <li><a href="preprocessing">Preprocessing</a></li>
+    <li><a href="/courses/applied-ml/annotation/">Annotation</a></li>
+    <li><a href="/courses/applied-ml/exploratory-data-analysis/">Exploratory data analysis</a></li>
+    <li><a href="/courses/applied-ml/splitting/">Splitting</a></li>
+    <li><a href="/courses/applied-ml/preprocessing/">Preprocessing</a></li>
     </ul>
     <b><span class="mr-1">📈</span> Modeling</b>
     <ul>
-    <li><a href="baselines">Baselines</a></li>
-    <li><a href="experiment-tracking">Experiment tracking</a></li>
-    <li><a href="optimization">Optimization</a></li>
+    <li><a href="/courses/applied-ml/baselines/">Baselines</a></li>
+    <li><a href="/courses/applied-ml/experiment-tracking/">Experiment tracking</a></li>
+    <li><a href="/courses/applied-ml/optimization/">Optimization</a></li>
     </ul>
 </div>
 <div class="col-md-4">

@@ -9,29 +9,29 @@ Learn the foundations of ML through intuitive explanations, clean code and visua
 <div class="col-md-4">
     <b><span class="mr-1">🔢</span> Basics</b>
     <ul>
-    <li><a href="notebooks">Notebooks</a></li>
-    <li><a href="python">Python</a></li>
-    <li><a href="numpy">NumPy</a></li>
-    <li><a href="pandas">Pandas</a></li>
-    <li><a href="pytorch">PyTorch</a></li>
+    <li><a href="/courses/ml-foundations/notebooks/">Notebooks</a></li>
+    <li><a href="/courses/ml-foundations/python/">Python</a></li>
+    <li><a href="/courses/ml-foundations/numpy/">NumPy</a></li>
+    <li><a href="/courses/ml-foundations/pandas/">Pandas</a></li>
+    <li><a href="/courses/ml-foundations/pytorch/">PyTorch</a></li>
     </ul>
 </div>
 <div class="col-md-4">
     <b><span class="mr-1">📈</span> Modeling</b>
     <ul>
-    <li><a href="linear-regression">Linear Regression</a></li>
-    <li><a href="logistic-regression">Logistic Regression</a></li>
-    <li><a href="neural-networks">Neural Networks</a></li>
-    <li><a href="data-quality">Data Quality</a></li>
-    <li><a href="utilities">Utilities</a></li>
+    <li><a href="/courses/ml-foundations/linear-regression/">Linear Regression</a></li>
+    <li><a href="/courses/ml-foundations/logistic-regression/">Logistic Regression</a></li>
+    <li><a href="/courses/ml-foundations/neural-networks/">Neural Networks</a></li>
+    <li><a href="/courses/ml-foundations/data-quality/">Data Quality</a></li>
+    <li><a href="/courses/ml-foundations/utilities/">Utilities</a></li>
     </ul>
 </div>
 <div class="col-md-4">
     <b><span class="mr-1">🤖</span> Deep Learning</b>
     <ul>
-    <li><a href="convolutional-neural-networks">CNNs</a></li>
-    <li><a href="embeddings">Embeddings</a></li>
-    <li><a href="recurrent-neural-networks">RNNs</a></li>
+    <li><a href="/courses/ml-foundations/convolutional-neural-networks/">CNNs</a></li>
+    <li><a href="/courses/ml-foundations/embeddings/">Embeddings</a></li>
+    <li><a href="/courses/ml-foundations/recurrent-neural-networks/">RNNs</a></li>
     <li>Attention <small>(TBD)</small></li>
     <li>Transformers <small>(TBD)</small></li>
     </ul>
