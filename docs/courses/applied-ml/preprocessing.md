@@ -1,6 +1,6 @@
 ---
 description: Preparing and transforming our data for modeling.
-image: "/static/images/applied_ml.png"
+image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}

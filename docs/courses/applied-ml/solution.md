@@ -1,6 +1,6 @@
 ---
 description: Designing a solution with constraints.
-image: "/static/images/applied_ml.png"
+image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-device-camera-video-24: [Video](https://www.youtube.com/watch?v=Gi1VlFV8e_k){:target="_blank"}

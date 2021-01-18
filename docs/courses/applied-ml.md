@@ -1,6 +1,7 @@
 ---
+title: Applied ML
 description: Learn how to apply ML to build a production grade product to deliver value.
-image: "/static/images/applied_ml.png"
+image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 <!-- Applied ML -->

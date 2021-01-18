@@ -1,6 +1,6 @@
 ---
 description: Convolutional Neural Networks (CNNs) applied to text for natural language processing (NLP) tasks.
-image: "/static/images/ml_foundations.png"
+image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/11_Convolutional_Neural_Networks.ipynb){:target="_blank"}

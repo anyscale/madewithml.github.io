@@ -1,6 +1,6 @@
 ---
 description: Learn how to use the PyTorch machine learning framework.
-image: "/static/images/ml_foundations.png"
+image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/05_PyTorch.ipynb){:target="_blank"}
