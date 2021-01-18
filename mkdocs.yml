@@ -14,7 +14,7 @@ copyright: Copyright &copy; 2021 Maintained by <a href="https://twitter.com/Goku
 
 # Google Analytics (key picked up by GitHub Actions from repo secrets)
 google_analytics:
-  - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
+  - UA-157540204-1
   - auto
 
 # Social media
