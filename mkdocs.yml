@@ -1,0 +1,174 @@
+# Project information
+site_name: Made With ML
+site_url: https://madewithml.com/
+site_description: Learn how to responsibly deliver value with applied ML.
+site_author: Goku Mohandas
+
+# Repository
+repo_url: https://github.com/GokuMohandas/madewithml
+repo_name: GokuMohandas/madewithml
+edit_uri: ''  #disables edit button
+
+# Copyright
+copyright: Copyright &copy; 2021 Maintained by <a href="https://twitter.com/GokuMohandas" target="_blank">Goku Mohandas</a>.
+
+# Google Analytics (key picked up by GitHub Actions from repo secrets)
+google_analytics:
+  - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
+  - auto
+
+# Social media
+extra:
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/GokuMohandas
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/goku
+    - icon: fontawesome/brands/github
+      link: https://github.com/GokuMohandas
+    - icon: fontawesome/brands/youtube
+      link: https://github.com/GokuMohandas
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:hello@madewithml.com
+
+# Page tree
+nav:
+  - Home:
+    - Made With ML: index.md
+    - About: about.md
+    - ML Foundations: courses/ml-foundations.md
+    - Applied ML: courses/applied-ml.md
+    - FAQ: faq.md
+  - About: about.md
+  - ML Foundations:
+    - Lessons: courses/ml-foundations.md
+    - <b>🔢 &nbsp; Basics</b>:
+      - Notebooks: courses/ml-foundations/notebooks.md
+      - Python: courses/ml-foundations/python.md
+      - NumPy: courses/ml-foundations/numpy.md
+      - Pandas: courses/ml-foundations/pandas.md
+      - PyTorch: courses/ml-foundations/pytorch.md
+    - <b>📈 &nbsp; Modeling</b>:
+      - Linear regression: courses/ml-foundations/linear-regression.md
+      - Logistic regression: courses/ml-foundations/logistic-regression.md
+      - Neural networks: courses/ml-foundations/neural-networks.md
+      - Data quality: courses/ml-foundations/data-quality.md
+      - Utilities: courses/ml-foundations/utilities.md
+    - <b>🤖 &nbsp; Deep Learning</b>:
+      - CNNs: courses/ml-foundations/convolutional-neural-networks.md
+      - Embeddings: courses/ml-foundations/embeddings.md
+      - RNNs: courses/ml-foundations/recurrent-neural-networks.md
+      - Attention: courses/ml-foundations/attention.md
+      - Transformers: courses/ml-foundations/transformers.md
+  - Applied ML:
+    - Lessons: courses/applied-ml.md
+    - <b>📦 &nbsp; Product</b>:
+      - Objective: courses/applied-ml/objective.md
+      - Solution: courses/applied-ml/solution.md
+      - Evaluation: courses/applied-ml/evaluation.md
+      - Iteration: courses/applied-ml/iteration.md
+    - <b>🔢 &nbsp; Data</b>:
+      - Annotation: courses/applied-ml/annotation.md
+      - Exploratory data analysis: courses/applied-ml/exploratory-data-analysis.md
+      - Splitting: courses/applied-ml/splitting.md
+      - Preprocessing: courses/applied-ml/preprocessing.md
+    - <b>📈 &nbsp; Modeling</b>:
+      - Baselines: courses/applied-ml/baselines.md
+      - Experiment tracking: courses/applied-ml/experiment-tracking.md
+      - Optimization: courses/applied-ml/optimization.md
+    - <b>📝 &nbsp; Scripting</b>:
+      - OOPs: courses/applied-ml/object-oriented-programming.md
+      - Logging: courses/applied-ml/logging.md
+      - Styling: courses/applied-ml/styling.md
+      - Packaging: courses/applied-ml/packaging.md
+      - Makefile: courses/applied-ml/makefile.md
+    - <b>✅ &nbsp; Testing</b>:
+      - Testing (code): courses/applied-ml/testing-code.md
+      - Testing (data): courses/applied-ml/testing-data.md
+      - Testing (model): courses/applied-ml/testing-model.md
+    - <b>⏰ &nbsp; Version control</b>:
+      - Git: courses/applied-ml/git.md
+      - Precommit: courses/applied-ml/precommit.md
+      - Versioning: courses/applied-ml/versioning.md
+    - <b>🛠 &nbsp; API</b>:
+      - RESTful API: courses/applied-ml/apis.md
+      - Databases: courses/applied-ml/databases.md
+      - Authentication: courses/applied-ml/authentication.md
+      - Documentation: courses/applied-ml/documentation.md
+    - <b>🚀 &nbsp; Production</b>:
+      - Dashboard: courses/applied-ml/dashboard.md
+      - Docker: courses/applied-ml/docker.md
+      - CI/CD: courses/applied-ml/cicd.md
+      - Monitoring: courses/applied-ml/monitoring.md
+      - Serving: courses/applied-ml/serving.md
+      - Feature stores: courses/applied-ml/feature-stores.md
+      - Workflow management: courses/applied-ml/workflow-management.md
+      - Active learning: courses/applied-ml/active-learning.md
+  - FAQ: faq.md
+  - Subscribe: subscribe.md
+
+# Configuration
+theme:
+  name: material
+  custom_dir: docs/overrides
+  logo: static/images/logo.png
+  favicon: static/images/favicon.ico
+  palette:
+    primary: indigo
+    accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    # - navigation.instant # causes mathjax issues
+    - navigation.tabs
+    - navigation.expand
+  icon:
+    repo: fontawesome/brands/github
+
+# Extensions
+markdown_extensions:
+  - meta
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - admonition # alerts
+  - pymdownx.details #  collapsible alerts
+  - pymdownx.superfences # nest code and content inside alerts
+  - attr_list # add HTML and CSS to Markdown elements
+  - pymdownx.inlinehilite # inline code highlights
+  - pymdownx.keys # show keystroke symbols
+  - pymdownx.snippets # insert content from other files
+  - pymdownx.tabbed # content tabs
+  - footnotes
+  - def_list
+  - pymdownx.arithmatex: # mathjax
+      generic: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: true
+  - codehilite
+  - pymdownx.highlight:
+      use_pygments: true
+  - toc:
+      toc_depth: 4
+
+# Extra CSS
+extra_css:
+    - static/css/extra.css
+    - static/css/bs.css
+
+# Extra JS
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# Plugins
+plugins:
+  - search
+  - macros
+  - redirects:
+        redirect_maps:
+            "courses/applied-ml-in-production.md": "courses/applied-ml.md"
+            "courses/putting-ml-in-production.md": "courses/applied-ml.md"

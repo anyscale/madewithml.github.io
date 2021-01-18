@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+
+<!-- Content -->
+{% block content %}
+<h1>Coming soon</h1>
+<span class="twemoji">
+  {% include ".icons/octicons/calendar-24.svg" %}
+</span>
+This content will be coming soon!
+In the meantime, be sure to connect with us for updates and tips.
+<ul>
+<li><a href="subscribe.md" target="_blank">
+  <span class="twemoji">
+    {% include ".icons/octicons/mail-24.svg" %}
+  </span> subscribe</a> to our monthly newsletter</a>
+</li>
+<li>
+  follow us on
+  <a href="https://twitter.com/GokuMohandas" target="_blank">
+    <span class="twemoji twitter">
+      {% include ".icons/fontawesome/brands/twitter.svg" %}
+    </span> Twitter</a> and
+    <a href="https://linkedin.com/in/goku" target="_blank">
+      <span class="twemoji linkedin">
+        {% include ".icons/fontawesome/brands/linkedin.svg" %}
+      </span> LinkedIn</a>
+</li>
+</ul>
+{% endblock %}
+
+<!-- Disqus integration -->
+{% block disqus %}{% endblock %}

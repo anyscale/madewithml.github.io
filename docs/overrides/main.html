@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block announce %}
+<div style="text-align: center;">
+    Follow on
+    <a href="https://twitter.com/GokuMohandas" target="_blank" style="color: #fff;">
+      <span class="twemoji twitter">
+        {% include ".icons/fontawesome/brands/twitter.svg" %}
+      </span>
+      <strong>Twitter</strong>
+    </a> and
+    <a href="https://linkedin.com/in/goku" target="_blank" style="color: #fff;">
+      <span class="twemoji linkedin" style="color: #4C6DF5;">
+        {% include ".icons/fontawesome/brands/linkedin.svg" %}
+      </span>
+      <strong>LinkedIn</strong>
+    </a>
+    for updates and tips.
+</div>
+{% endblock %}
+
+{% block extrahead %}
+
+  <!-- Set title -->
+  {% set title = config.site_name %}
+  {% if page and page.meta and page.meta.title %}
+    {% set title = page.meta.title ~ " - " ~ title %}
+  {% elif page and page.title and not page.is_homepage %}
+    {% set title = page.title | striptags ~ " - " ~ title %}
+  {% endif %}
+
+  <!-- Set description -->
+  {% set description = config.site_description %}
+  {% if page and page.meta and page.meta.description %}
+    {% set description = page.meta.description %}
+  {% endif %}
+
+  <!-- Set image -->
+  {% set card_image = "static/images/card.png" %}
+  {% if page and page.meta and page.meta.image %}
+    {% set card_image = page.meta.image %}
+  {% endif %}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{ title }}" />
+  <meta property="og:description" content="{{ description }}" />
+  <meta property="og:url" content="{{ page.canonical_url }}" />
+  <meta property="og:image" content="{{ card_image }}" />
+  <meta property="og:image:type" content="image/png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@GokuMohandas" />
+  <meta name="twitter:creator" content="@GokuMohandas" />
+  <meta name="twitter:title" content="{{ title }}" />
+  <meta name="twitter:description" content="{{ description }}" />
+  <meta name="twitter:image" content="{{ card_image }}" />
+{% endblock %}

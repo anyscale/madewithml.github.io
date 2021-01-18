@@ -1,19 +1,16 @@
 # Made With ML
-Applied ML · MLOps · Production
-Learn how to responsibly deliver value with applied ML.
 
-### Instructions:
+https://madewithml.com/
 
-0. Installs:
-```
-brew install ruby
-```
-
-1. Set up:
+### Set up
 ```bash
-# Don't use venv with ruby (it kills the CPU)
+pyenv local 3.8.5
+python3 -m venv venv
+source ven/bin/activate
 pip install -r requirements.txt
-gem install jekyll bundler
-bundle install
-bundle exec jekyll serve --livereload
+```
+
+### Serve docs
+```
+python3 -m mkdocs serve
 ```
