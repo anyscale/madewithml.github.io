@@ -10,23 +10,23 @@ on:
     - main
 
 jobs:
-  deploy-website:
+  build-mkdocs:
+    name: Build mkdocs
     runs-on: ubuntu-latest
     steps:
-
-    - name: Build mkdocs
-      uses: |
-        actions/checkout@v2
-        actions/setup-python@v2
-      with:
-        python-version: 3.8.5
-      run: |
-        pip install -r requirements.txt
-        mkdocs gh-deploy --force
-
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.5
+      - run: pip install -r requirements.txt
+      - run: mkdocs gh-deploy --force
+  purge-cache:
+    name: Purge Cloudflare cache
+    runs-on: ubuntu-latest
+    steps:
     - name: Purge cache
       uses: jakejarvis/cloudflare-purge-action@master
       env:
-        CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
-        CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-        CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
+          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
