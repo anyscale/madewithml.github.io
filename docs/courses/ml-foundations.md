@@ -1,7 +1,7 @@
 ---
 title: ML Foundations
 description: Learn the foundations of ML through intuitive explanations, clean code and visuals.
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 <!-- ML Foundations -->
