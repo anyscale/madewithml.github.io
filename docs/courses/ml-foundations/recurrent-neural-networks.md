@@ -1,5 +1,6 @@
 ---
 description: Explore and motivate the need for representation via embeddings.
+image: "/static/images/ml_foundations.png"
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb){:target="_blank"}

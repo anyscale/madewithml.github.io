@@ -1,3 +1,8 @@
+---
+description: Learn the foundations of ML through intuitive explanations, clean code and visuals.
+image: "/static/images/applied_ml.png"
+---
+
 <!-- ML Foundations -->
 Learn the foundations of ML through intuitive explanations, clean code and visuals.
 

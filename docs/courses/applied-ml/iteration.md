@@ -1,5 +1,6 @@
 ---
 description: Improving on our solution iteratively over time.
+image: "/static/images/applied_ml.png"
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-device-camera-video-24: [Video](https://www.youtube.com/watch?v=Bit1IUVWrkY){:target="_blank"}

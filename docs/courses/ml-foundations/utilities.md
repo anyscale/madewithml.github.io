@@ -1,5 +1,6 @@
 ---
 description: Explore utilities to extend and simplify preprocessing and training.
+image: "/static/images/ml_foundations.png"
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/10_Utilities.ipynb){:target="_blank"}

@@ -1,5 +1,6 @@
 ---
 description: Learn how to use interactive notebooks for developing in Python.
+image: "/static/images/ml_foundations.png"
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/01_Notebooks.ipynb){:target="_blank"}
