@@ -1,16 +1,28 @@
-name: Deploy my website
+name: Pur
 on:
   push:
     branches:
     - master
+    - main
   pull_request:
     branches:
     - master
+    - main
 
 jobs:
   deploy-website:
     runs-on: ubuntu-latest
     steps:
+
+    - name: Build mkdocs
+      uses: |
+        actions/checkout@v2
+        actions/setup-python@v2
+      with:
+        python-version: 3.8.5
+      run: |
+        pip install -r requirements.txt
+        mkdocs gh-deploy --force
 
     - name: Purge cache
       uses: jakejarvis/cloudflare-purge-action@master
