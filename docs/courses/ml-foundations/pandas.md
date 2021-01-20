@@ -928,8 +928,12 @@ def get_family_size(sibsp, parch):
     family_size = sibsp + parch
     return family_size
 ```
-<pre class="output"></pre>
 Once we define the function, we can use `lambda` to `apply` that function on each row (using the numbers of siblings and parents in each row to determine the family size for each row).
+```python linenums="1"
+df["family_size"] = df[["sibsp", "parch"]].apply(lambda x: get_family_size(x["sibsp"], x["parch"]), axis=1)
+df.head()
+```
+
 <div class="output_subarea output_html rendered_html"><div>
 <table border="1" class="dataframe">
   <thead>
