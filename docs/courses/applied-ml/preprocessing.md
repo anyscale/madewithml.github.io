@@ -42,6 +42,9 @@ Preparing the data involves organizing and cleaning the data.
 ### Transforming
 Transforming the data involves feature encoding and engineering.
 
+!!! warning
+    Before transformation, be sure to detect (and potentially remove) outliers using distributions and/or domain expertise. You should constantly revisit these explicit decisions because they may change over time and you don’t want to be including or removing data you shouldn’t be.
+
 #### Scaling
 - required for most models that are not decision tree based
 - learn constructs from train split and apply to other splits (local)
