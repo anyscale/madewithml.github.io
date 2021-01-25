@@ -6,7 +6,8 @@ https://madewithml.com/
 ```bash
 pyenv local 3.8.5
 python3 -m venv venv
-source ven/bin/activate
+source venv/bin/activate
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
