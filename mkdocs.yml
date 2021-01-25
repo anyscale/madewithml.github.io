@@ -77,24 +77,23 @@ nav:
       - Experiment tracking: courses/applied-ml/experiment-tracking.md
       - Optimization: courses/applied-ml/optimization.md
     - <b>📝 &nbsp; Scripting</b>:
-      - OOPs: courses/applied-ml/object-oriented-programming.md
+      - Organization: courses/applied-ml/organization.md
+      - Documentation: courses/applied-ml/documentation.md
       - Logging: courses/applied-ml/logging.md
       - Styling: courses/applied-ml/styling.md
-      - Packaging: courses/applied-ml/packaging.md
       - Makefile: courses/applied-ml/makefile.md
     - <b>✅ &nbsp; Testing</b>:
       - Testing (code): courses/applied-ml/testing-code.md
       - Testing (data): courses/applied-ml/testing-data.md
       - Testing (model): courses/applied-ml/testing-model.md
+    - <b>📦 &nbsp; Application</b>:
+      - RESTful API: courses/applied-ml/apis.md
+      - Databases: courses/applied-ml/databases.md
+      - Authentication: courses/applied-ml/authentication.md
     - <b>⏰ &nbsp; Version control</b>:
       - Git: courses/applied-ml/git.md
       - Precommit: courses/applied-ml/precommit.md
       - Versioning: courses/applied-ml/versioning.md
-    - <b>🛠 &nbsp; API</b>:
-      - RESTful API: courses/applied-ml/apis.md
-      - Databases: courses/applied-ml/databases.md
-      - Authentication: courses/applied-ml/authentication.md
-      - Documentation: courses/applied-ml/documentation.md
     - <b>🚀 &nbsp; Production</b>:
       - Dashboard: courses/applied-ml/dashboard.md
       - Docker: courses/applied-ml/docker.md
@@ -155,14 +154,17 @@ markdown_extensions:
 
 # Extra CSS
 extra_css:
-    - static/css/extra.css
-    - static/css/bs.css
+  - static/css/extra.css
+  - static/css/bs.css
+  - static/css/termynal.css
 
 # Extra JS
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - static/js/custom.js
+  - static/js/termynal.js
 
 # Plugins
 plugins:

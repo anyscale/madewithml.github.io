@@ -105,6 +105,10 @@ class LabelEncoder(object):
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
+
+!!! note
+    If you're not familiar with the `@classmethod` decorator, learn more about it from our [Python lesson](../ml-foundations/python.md#methods){:target="_blank"}.
+
 ```python linenums="1"
 # Encode
 label_encoder = LabelEncoder()

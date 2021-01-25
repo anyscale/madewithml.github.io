@@ -12,7 +12,7 @@ Preparing and transforming our data for modeling.
 Data preprocessing can be categorized into two types of processes: *preparation* and *transformation*.
 
 !!! note
-    Certain preprocessing steps are `global` (don't depend on our dataset, ex. removing stop words) and others are `local` (constructs are learned only from the training split, ex. vocabulary or min-max scaling). For the local, dataset-dependent preprocessing steps, we want to ensure that we split the data first before preprocessing to avoid data leaks.
+    Certain preprocessing steps are `global` (don't depend on our dataset, ex. removing stop words) and others are `local` (constructs are learned only from the training split, ex. vocabulary). For the local, dataset-dependent preprocessing steps, we want to ensure that we split the data first before preprocessing to avoid data leaks.
 
 ### Preparing
 

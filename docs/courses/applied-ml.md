@@ -35,11 +35,10 @@ Learn how to apply ML to build a production grade product to deliver value.
 <div class="col-md-4">
     <b><span class="mr-1">📝</span> Scripting</b>
     <ul>
-    <li>OOPs</li>
+    <li><a href="/courses/applied-ml/organization/">Organization</a></li>
+    <li>Documentation</li>
     <li>Logging</li>
     <li>Styling</li>
-    <li>Packaging</li>
-    <li>Makefile</li>
     </ul>
     <b><span class="mr-1">✅</span> Testing</b>
     <ul>
@@ -47,27 +46,26 @@ Learn how to apply ML to build a production grade product to deliver value.
     <li>Testing <small>(data)</small></li>
     <li>Testing <small>(model)</small></li>
     </ul>
+    <b><span class="mr-1">📦</span> Application</b>
+    <ul>
+    <li>RESTful API</li>
+    <li>Databases</li>
+    <li>Authentication</li>
+    </ul>
+</div>
+<div class="col-md-4">
     <b><span class="mr-1">⏰</span> Version control</b>
     <ul>
     <li>Git</li>
     <li>Precommit</li>
     <li>Versioning</li>
     </ul>
-</div>
-<div class="col-md-4">
-    <b><span class="mr-1">🛠</span> API</b>
-    <ul>
-    <li>RESTful API</li>
-    <li>Databases</li>
-    <li>Authentication</li>
-    <li>Documentation</li>
-    </ul>
     <b><span class="mr-1">🚀</span> Production</b>
     <ul>
     <li>Dashboard</li>
     <li>Docker</li>
     <li>CI/CD</li>
-    <li>Monitoring <small>(performance, drift)</small></li>
+    <li>Monitoring</li>
     <li>Serving</li>
     <li>Feature stores</li>
     <li>Workflow management</li>

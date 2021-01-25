@@ -27,7 +27,7 @@ Baselines are simple benchmarks which pave the way for iterative development.
 5. Revisit and iterate on baselines as your dataset grows.
 
 !!! note
-    🔄 You can also baseline on your dataset. Instead of using a fixed dataset and iterating on the models, choose a good baseline and iterate on the dataset.
+    You can also baseline on your dataset. Instead of using a fixed dataset and iterating on the models, choose a good baseline and iterate on the dataset.
         - remove or fix data samples (FP, FN)
         - prepare and transform features
         - expand or consolidate classes
@@ -232,6 +232,18 @@ def get_performance(y_true, y_pred, classes):
 
     return performance
 ```
+
+!!! note
+    Our dataset is small so we'll train using the whole dataset but for larger datasets, we should always test on a small subset  (after shuffling when necessary) so we aren't wasting time on compute. Here's how you can easily do this:
+    ```python
+    # Shuffling since projects are chronologically organized
+    if shuffle:
+        df = df.sample(frac=1).reset_index(drop=True)
+
+    # Subset
+    if num_samples:
+        df = df[:num_samples]
+    ```
 
 <hr>
 
@@ -532,6 +544,10 @@ y_pred = label_encoder.encode(y_pred)
 ```
 
 #### Evaluation
+We can look at overall and per-class performance on our test set.
+
+!!! note
+    When considering overall and per-class performance across different models, we should be aware of [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox){:target="_blank"} where a model can perform better on every class subset but not overall.
 
 ```python linenums="1"
 # Evaluate

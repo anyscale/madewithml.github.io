@@ -14,9 +14,9 @@ If you're not familiar with the [old MWML platform](https://twitter.com/madewith
 We had nearly 5K daily active users and now after nine months, we're redefining our focus to end the hype and [deliver (actual) value](about.md).
 Which means *no more* overwhelming:
 
-❌ pointing to projects<br>
-❌ posting daily trends<br>
-❌ Topics page
+<span class="mr-1">❌</span> pointing to projects<br>
+<span class="mr-1">❌</span> posting daily trends<br>
+<span class="mr-1">❌</span> Topics page
 
 <img width="300px;" src="https://media1.tenor.com/images/5e4fff30948fe04f18f2a866ce0a2e87/tenor.gif?itemid=16902898" alt="pivot">
 

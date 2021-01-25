@@ -11,7 +11,7 @@ In this lesson, we'll learn about the basics of Python programming for machine l
 Variables are containers for holding data and they're defined by a name and value.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/variables.png" width="225">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/variables.png" width="250">
 </div>
 
 ```python linenums="1"
@@ -24,6 +24,9 @@ print (type(x))
 5
 <class 'int'>
 </pre>
+
+!!! tip
+    Here we use the variable name `x` in our examples but when you're working on a specific task, be sure to be explicit (ex. `first_name`) when creating variables (applies to functions, classes, etc. as well).
 
 We can change the value of a variable by simply assigning a new value to it.
 
@@ -103,9 +106,7 @@ print (a + b)
 
 ## Lists
 Lists are an ordered, mutable (changeable) collection of values that are comma separated and enclosed by square brackets. A list can be comprised of many different types of variables. Below is a list with an integer, string and a float:
-<div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/lists.png" width="280">
-</div>
+
 ```python linenums="1"
 # Creating a list
 x = [3, "hello", 1.2]
@@ -155,7 +156,7 @@ print (z)
 ## Indexing
 Indexing and slicing from lists allow us to retrieve specific values within lists. Note that indices can be positive (starting from 0) or negative (-1 and lower, where -1 is the last item in the list).
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/indexing.png" width="280">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/indexing.png" width="300">
 </div>
 
 ```python linenums="1"
@@ -221,7 +222,7 @@ TypeError: 'tuple' object does not support item assignment
 ## Dictionaries
 Dictionaries are an unordered, mutable and indexed collection of key-value pairs. You can retrieve values based on the key and a dictionary cannot have two of the same keys.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/dictionaries.png" width="300">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/dictionaries.png" width="350">
 </div>
 
 ```python linenums="1"
@@ -266,9 +267,6 @@ print (len(person))
 
 ## If statements
 We can use `if` statements to conditionally do something. The conditions are defined by the words `if`, `elif` (which stands for else if) and `else`. We can have as many `elif` statements as we want. The indented code below each condition is the code that will execute if the condition is `True`.
-<div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/conditionals.png" width="550">
-</div>
 
 ```python linenums="1"
 # If statement
@@ -358,21 +356,20 @@ while x > 0:
 ## Functions
 Functions are a way to modularize reusable pieces of code. They're defined by the keyword `def` which stands for definition and they can have the following components.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/functions.png" width="300">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/functions.png" width="350">
 </div>
 
 ```python linenums="1"
 # Define the function
 def add_two(x):
-    """Increase x by 2.""" # explains what this function will do
+    """Increase x by 2."""
     x += 2
     return x
 ```
-<pre class="output"></pre>
 
 Here are the components that may be required when we want to use the function. we need to ensure that the function name and the input parameters match with how we defined the function above.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/calling_functions.png" width="300">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/calling_functions.png" width="400">
 </div>
 
 ```python linenums="1"
@@ -426,9 +423,6 @@ x: 5, y: 2
 ## Classes
 
 Classes are object constructors and are a fundamental component of object oriented programming in Python. They are composed of a set of functions that define the class and it's operations.
-<div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/classes.png" width="500">
-</div>
 
 ### Magic functions
 Classes can be customized with magic functions like `__init__` and `__str__`, to enable powerful operations.
@@ -483,8 +477,9 @@ print (my_dog.name)
 dog named Scooby
 Scooby
 </pre>
+
 !!! note
-We'll be exploring additional built-in functions in subsequent notebooks (like `__len__`, `__iter__` and `__getitem__`, etc.) but if you're curious, here is a [tutorial](https://rszalski.github.io/magicmethods/){:target="_blank"} on more magic methods.
+    We'll be exploring additional built-in functions in subsequent notebooks (like `__len__`, `__iter__` and `__getitem__`, etc.) but if you're curious, here is a [tutorial](https://rszalski.github.io/magicmethods/){:target="_blank"} on more magic methods.
 
 
 ### Object functions
@@ -556,11 +551,54 @@ print (scooby)
 Great Dane named Scooby Doo
 </pre>
 
-Notice how we inherited the initialized variables from the parent `Pet` class like species and name. We also inherited the `change_name` function. But for the `__str__` function, we define our own version to overwrite the `Pet` class' `__str__` function.
+Notice how we inherited the initialized variables from the parent `Pet` class like species and name. We also inherited the `change_name` function. But for the `__str__` function, we define our own version to overwrite the `Pet` `__str__` function. We can similarly overwrite any object functions as well.
 
+
+### Methods
+There are two important decorator methods to know about when it comes to classes: `@classmethod` and `@staticmethod`. We'll learn about decorators in the next section below but these specific methods pertain to classes so we'll cover them here.
+
+```python linenums="1"
+class Dog(Pet):
+    def __init__(self, name, breed):
+        super().__init__(species="dog", name=name)
+        self.breed = breed
+
+    def __str__(self):
+        return f"{self.breed} named {self.name}"
+
+    @classmethod
+    def from_dict(cls, d):
+        return cls(name=d["name"], breed=d["breed"])
+
+    @staticmethod
+    def is_cute(breed):
+        return True  # all animaals are cute!
+```
+
+A `@classmethod` allows us to create class instances by passing in the uninstantiated class itself (`cls`). This is a great way to create (or load) classes from objects (ie. dictionaries).
+
+```python linenums="1"
+# Create instance
+d = {"name": "Cassie", "breed": "Border Collie"}
+cassie = Dog.from_dict(d=d)
+print(cassie)
+```
+<pre class="output">
+Border Collie named Cassie
+</pre>
+
+A `@staticmethod` can be called from an uninstantiated class object so we can do things like this:
+```python linenums="1"
+# Static method
+Dog.is_cute(breed="Border Collie")
+```
+<pre class="output">
+True
+</pre>
 
 ## Decorators
 Recall that functions allow us to modularize code and reuse them. However, we'll often want to add some functionality before or after the main function executes and we may want to do this for many different functions. Instead of adding more code to the original function, we can use decorators!
+
 - **decorators**: augment a function with pre/post-processing. Decorators wrap around the main function and allow us to operate on the inputs and or outputs.
 
 Suppose we have a function called operations which increments the input value x by 1.
@@ -678,6 +716,7 @@ Awesome! We were able to decorate our main function `operation()` to achieve the
 
 ### Callbacks
 Decorators allow for customized operations before and after the main function's execution but what about in between? Suppose we want to conditionally/situationally do some operations. Instead of writing a whole bunch of if-statements and make our functions bulky, we can use callbacks!
+
 - **callbacks**: conditional/situational processing within the function.
 
 Our callbacks will be classes that have functions with key names that will execute at various periods during the main function's execution. The function names are up to us but we need to invoke the same callback functions within our main function.
@@ -719,9 +758,6 @@ tracker.history
 
 ### Putting it all together
 decorators + callbacks = powerful customization before, during and after the main function’s execution without increasing its complexity. We will be using this duo to create powerful ML training scripts that are highly customizable in future lessons.
-<div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/python/callbacks.png" width="350">
-</div>
 
 ```python linenums="1"
 from functools import wraps
