@@ -11,7 +11,7 @@ Documenting code for your users and your future self.
 
 > Code tells you *how*, comments tell you *why*. -- [Jeff Atwood](https://blog.codinghorror.com/code-tells-you-how-comments-tell-you-why/){:target="_blank"}
 
-Another way to [organize](organization.md){:target="_blank"} our code is to document it. We want to do this so we can make it easier for others (and our future selves) to easily navigate the code base and build on it. We know out code base best the moment we finish writing it but fortunately documenting it will allow us to quickly get back to that stage time and time again. Documentation involves many different things to developers so let's define the most common (and required) components:
+Another way to [organize](organization.md){:target="_blank"} our code is to document it. We want to do this so we can make it easier for others (and our future selves) to easily navigate the code base and build on it. We know our code base best the moment we finish writing it but fortunately documenting it will allow us to quickly get back to that stage time and time again. Documentation involves many different things to developers so let's define the most common (and required) components:
 
 - `#!js comments`: Terse descriptions of why a piece of code exists.
 - `#!js typing`: Specification of a function's inputs and outputs data types, providing insight into what a function consumes and produces at a quick glance.
@@ -23,7 +23,7 @@ Another way to [organize](organization.md){:target="_blank"} our code is to docu
 Let's look at what documentation looks like for our [application](https://github.com/GokuMohandas/applied-ml){:target="_blank"} and be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/applied-ml/){:target="_blank"} for it as well.
 
 ### Typing
-It's important to be as explicit as possible with our code. We're already discussed choose explicit names for variables, functions, etc. but another way we can be explicit is by defining the types for our function's inputs and outputs. We want to do this so we can quickly know what data types a function expects and how we can utilize it's outputs for downstream processes.
+It's important to be as explicit as possible with our code. We're already discussed choosing explicit names for variables, functions, etc. but another way we can be explicit is by defining the types for our function's inputs and outputs. We want to do this so we can quickly know what data types a function expects and how we can utilize it's outputs for downstream processes.
 
 So far, our functions have looked like this:
 ```python
