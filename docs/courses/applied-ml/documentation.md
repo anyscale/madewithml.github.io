@@ -184,7 +184,7 @@ nav:
 ```
 5. Fill in `mkdocstrings` plugin information inside `mkdocs.yml`.
 6. Rerun `make install-dev` to make sure you have the required packages for documentation.
-7. Add `::: tagifai.data` Markdown file to populate it with the information from function and class docstrings from `tagifai/data.py`.
+7. Add ` ::: tagifai.data ` Markdown file to populate it with the information from function and class docstrings from `tagifai/data.py`.
     Repeat for other scripts as well. We can add our own text directly to the Markdown file as well, like we do in `tagifai/config.md`.
 8. Run `python -m mkdocs serve` to serve your docs to `http://localhost:8000/`.
 <div class="animated-code">
