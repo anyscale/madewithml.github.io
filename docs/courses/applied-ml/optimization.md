@@ -301,16 +301,16 @@ def train_cnn(args, df, trial=None):
 
 ### Objective
 
-We need to define an `objective` function that will consume a trial and a set of arguments and produce the metric to optimize on (`best_val_loss` in our case).
+We need to define an `objective` function that will consume a trial and a set of arguments and produce the metric to optimize on (`f1` in our case).
 ```python
 def objective(trial, args):
     """Objective function for optimization trials."""
 
     # Paramters (to tune)
-    args.embedding_dim = trial.suggest_int("embedding_dim", 100, 300)
-    args.num_filters = trial.suggest_int("num_filters", 100, 300)
-    args.hidden_dim = trial.suggest_int("hidden_dim", 128, 256)
-    args.dropout_p = trial.suggest_uniform("dropout_p", 0.0, 0.8)
+    args.embedding_dim = trial.suggest_int("embedding_dim", 128, 512)
+    args.num_filters = trial.suggest_int("num_filters", 128, 512)
+    args.hidden_dim = trial.suggest_int("hidden_dim", 128, 512)
+    args.dropout_p = trial.suggest_uniform("dropout_p", 0.3, 0.8)
     args.lr = trial.suggest_loguniform("lr", 5e-5, 5e-4)
 
     # Train & evaluate
@@ -322,7 +322,7 @@ def objective(trial, args):
     trial.set_user_attr("f1", artifacts["performance"]["overall"]["f1"])
     trial.set_user_attr("threshold", artifacts["threshold"])
 
-    return artifacts["best_val_loss"]
+    return artifacts["performance"]["overall"]["f1"]
 ```
 
 ### Study
@@ -337,38 +337,32 @@ NUM_TRIALS = 50 # small sample for now
 ```python
 # Optimize
 pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=5)
-study = optuna.create_study(study_name="optimization", direction="minimize", pruner=pruner)
+study = optuna.create_study(study_name="optimization", direction="maximize", pruner=pruner)
 mlflow_callback = MLflowCallback(
-    tracking_uri=mlflow.get_tracking_uri(), metric_name='val_loss')
+    tracking_uri=mlflow.get_tracking_uri(), metric_name='f1')
 study.optimize(lambda trial: objective(trial, args),
                n_trials=NUM_TRIALS,
                callbacks=[mlflow_callback])
 ```
 <pre class="output">
-[I 2021-01-05 22:24:25,247] A new study created in memory with name: optimization
-Epoch: 1 | train_loss: 0.00611, val_loss: 0.00277, lr: 8.10E-05, _patience: 10
+A new study created in memory with name: optimization
+Epoch: 1 | train_loss: 0.00645, val_loss: 0.00314, lr: 3.48E-04, _patience: 10
 ...
-Epoch: 71 | train_loss: 0.00059, val_loss: 0.00146, lr: 8.10E-07, _patience: 1
+Epoch: 23 | train_loss: 0.00029, val_loss: 0.00175, lr: 3.48E-05, _patience: 1
 Stopping early!
-[I 2021-01-05 22:25:43,895] Trial 0 finished with value: 0.0014537220413330942 and parameters: {'embedding_dim': 183, 'num_filters': 250, 'hidden_dim': 163, 'dropout_p': 0.4361347102554463, 'lr': 8.102678985973712e-05}. Best is trial 0 with value: 0.0014537220413330942.
+Trial 0 finished with value: 0.5999225606985846 and parameters: {'embedding_dim': 508, 'num_filters': 359, 'hidden_dim': 262, 'dropout_p': 0.6008497926241321, 'lr': 0.0003484755175747328}. Best is trial 0 with value: 0.5999225606985846.
 INFO: 'optimization' does not exist. Creating a new experiment
 
 ...
 
-[I 2021-01-05 22:31:47,722] Trial 10 pruned.
+Trial 10 pruned.
 
 ...
 
 Epoch: 25 | train_loss: 0.00029, val_loss: 0.00156, lr: 2.73E-05, _patience: 2
 Epoch: 26 | train_loss: 0.00028, val_loss: 0.00152, lr: 2.73E-05, _patience: 1
 Stopping early!
-[I 2021-01-05 22:43:38,529] Trial 47 finished with value: 0.0014839080977253616 and parameters: {'embedding_dim': 250, 'num_filters': 268, 'hidden_dim': 189, 'dropout_p': 0.33611557767537004, 'lr': 0.000273415896212767}. Best is trial 28 with value: 0.0013889532128814608.
-
-...
-
-Epoch: 5 | train_loss: 0.00286, val_loss: 0.00236, lr: 3.12E-04, _patience: 10
-Epoch: 6 | train_loss: 0.00263, val_loss: 0.00224, lr: 3.12E-04, _patience: 10
-[I 2021-01-05 22:43:58,699] Trial 49 pruned.
+Trial 49 finished with value: 0.6220047640997922 and parameters: {'embedding_dim': 485, 'num_filters': 420, 'hidden_dim': 477, 'dropout_p': 0.7984462152799114, 'lr': 0.0002619841505205434}. Best is trial 46 with value: 0.63900047716579.
 </pre>
 ```python
 # MLFlow dashboard
@@ -398,7 +392,7 @@ We can then view the results through various lens (contours, parallel coordinate
 ```python
 # All trials
 trials_df = study.trials_dataframe()
-trials_df = trials_df.sort_values(["value"], ascending=True)  # sort by metric
+trials_df = trials_df.sort_values(["value"], ascending=False)  # sort by metric
 trials_df.head()
 ```
 <div class="output_subarea output_html rendered_html"><div>
@@ -425,93 +419,93 @@ trials_df.head()
   </thead>
   <tbody>
     <tr>
-      <th>28</th>
-      <td>28</td>
-      <td>0.001389</td>
-      <td>2021-01-05 22:38:22.896834</td>
-      <td>2021-01-05 22:38:54.515581</td>
-      <td>0 days 00:00:31.618747</td>
-      <td>0.738263</td>
-      <td>230</td>
-      <td>216</td>
-      <td>0.000500</td>
-      <td>238</td>
-      <td>0.611860</td>
-      <td>0.863897</td>
-      <td>0.514516</td>
-      <td>0.221920</td>
+      <th>46</th>
+      <td>46</td>
+      <td>0.639000</td>
+      <td>2021-01-26 21:29:09.435991</td>
+      <td>2021-01-26 21:30:20.637867</td>
+      <td>0 days 00:01:11.201876</td>
+      <td>0.670784</td>
+      <td>335</td>
+      <td>458</td>
+      <td>0.000298</td>
+      <td>477</td>
+      <td>0.639000</td>
+      <td>0.852947</td>
+      <td>0.540094</td>
+      <td>0.221352</td>
       <td>COMPLETE</td>
     </tr>
     <tr>
-      <th>11</th>
-      <td>11</td>
-      <td>0.001408</td>
-      <td>2021-01-05 22:31:47.755110</td>
-      <td>2021-01-05 22:32:54.725288</td>
-      <td>0 days 00:01:06.970178</td>
-      <td>0.572462</td>
-      <td>296</td>
-      <td>216</td>
-      <td>0.000255</td>
-      <td>291</td>
-      <td>0.608866</td>
-      <td>0.872787</td>
-      <td>0.497144</td>
-      <td>0.328791</td>
+      <th>32</th>
+      <td>32</td>
+      <td>0.638382</td>
+      <td>2021-01-26 21:08:27.456865</td>
+      <td>2021-01-26 21:09:54.151386</td>
+      <td>0 days 00:01:26.694521</td>
+      <td>0.485060</td>
+      <td>322</td>
+      <td>329</td>
+      <td>0.000143</td>
+      <td>458</td>
+      <td>0.638382</td>
+      <td>0.860706</td>
+      <td>0.535624</td>
+      <td>0.285308</td>
       <td>COMPLETE</td>
     </tr>
     <tr>
-      <th>18</th>
-      <td>18</td>
-      <td>0.001410</td>
-      <td>2021-01-05 22:35:23.967917</td>
-      <td>2021-01-05 22:36:04.190109</td>
-      <td>0 days 00:00:40.222192</td>
-      <td>0.460376</td>
-      <td>228</td>
-      <td>222</td>
-      <td>0.000316</td>
-      <td>221</td>
-      <td>0.599672</td>
-      <td>0.847859</td>
-      <td>0.500275</td>
-      <td>0.315493</td>
+      <th>33</th>
+      <td>33</td>
+      <td>0.638135</td>
+      <td>2021-01-26 21:09:54.182560</td>
+      <td>2021-01-26 21:11:14.038009</td>
+      <td>0 days 00:01:19.855449</td>
+      <td>0.567419</td>
+      <td>323</td>
+      <td>405</td>
+      <td>0.000163</td>
+      <td>482</td>
+      <td>0.638135</td>
+      <td>0.872309</td>
+      <td>0.537566</td>
+      <td>0.298093</td>
       <td>COMPLETE</td>
     </tr>
     <tr>
-      <th>22</th>
-      <td>22</td>
-      <td>0.001426</td>
-      <td>2021-01-05 22:36:52.953326</td>
-      <td>2021-01-05 22:37:26.792074</td>
-      <td>0 days 00:00:33.838748</td>
-      <td>0.498631</td>
-      <td>205</td>
-      <td>208</td>
-      <td>0.000288</td>
-      <td>246</td>
-      <td>0.628976</td>
-      <td>0.854277</td>
-      <td>0.525414</td>
-      <td>0.281477</td>
+      <th>39</th>
+      <td>39</td>
+      <td>0.637652</td>
+      <td>2021-01-26 21:18:37.735567</td>
+      <td>2021-01-26 21:20:01.271413</td>
+      <td>0 days 00:01:23.535846</td>
+      <td>0.689044</td>
+      <td>391</td>
+      <td>401</td>
+      <td>0.000496</td>
+      <td>512</td>
+      <td>0.637652</td>
+      <td>0.852757</td>
+      <td>0.536279</td>
+      <td>0.258009</td>
       <td>COMPLETE</td>
     </tr>
     <tr>
-      <th>23</th>
-      <td>23</td>
-      <td>0.001431</td>
-      <td>2021-01-05 22:37:26.822999</td>
-      <td>2021-01-05 22:37:56.216911</td>
-      <td>0 days 00:00:29.393912</td>
-      <td>0.520217</td>
-      <td>203</td>
-      <td>207</td>
-      <td>0.000469</td>
-      <td>224</td>
-      <td>0.631419</td>
-      <td>0.860776</td>
-      <td>0.526648</td>
-      <td>0.281263</td>
+      <th>34</th>
+      <td>34</td>
+      <td>0.634339</td>
+      <td>2021-01-26 21:11:14.068099</td>
+      <td>2021-01-26 21:12:33.645090</td>
+      <td>0 days 00:01:19.576991</td>
+      <td>0.592627</td>
+      <td>371</td>
+      <td>379</td>
+      <td>0.000213</td>
+      <td>486</td>
+      <td>0.634339</td>
+      <td>0.863092</td>
+      <td>0.531822</td>
+      <td>0.263524</td>
       <td>COMPLETE</td>
     </tr>
   </tbody>
@@ -524,8 +518,8 @@ print (f"Best value (val loss): {study.best_trial.value}")
 print (f"Best hyperparameters: {study.best_trial.params}")
 ```
 <pre class="output">
-Best value (val loss): 0.0013889532128814608
-Best hyperparameters: {'embedding_dim': 230, 'num_filters': 238, 'hidden_dim': 216, 'dropout_p': 0.7382628825813314, 'lr': 0.0004998249007788683}
+Best value (f1): 0.63900047716579
+Best hyperparameters: {'embedding_dim': 335, 'num_filters': 477, 'hidden_dim': 458, 'dropout_p': 0.6707843486583486, 'lr': 0.00029782100137454434}
 </pre>
 
 !!! note
@@ -553,14 +547,14 @@ print (json.dumps(params, indent=2, cls=NumpyEncoder))
     10
   ],
   "batch_size": 64,
-  "embedding_dim": 230,
-  "num_filters": 238,
-  "hidden_dim": 216,
-  "dropout_p": 0.7382628825813314,
-  "lr": 0.0004998249007788683,
+  "embedding_dim": 335,
+  "num_filters": 477,
+  "hidden_dim": 458,
+  "dropout_p": 0.6707843486583486,
+  "lr": 0.00029782100137454434,
   "num_epochs": 200,
   "patience": 10,
-  "threshold": 0.22192028164863586
+  "threshold": 0.22135180234909058
 }
 </pre>
 

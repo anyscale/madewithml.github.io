@@ -11,10 +11,10 @@ Organizing our code when moving from notebooks to Python scripts.
 
 To have organized code is to have readable, reproducible, scalable and efficient code.
 
-- **readable**: easy for your users, fellow developers and your future self to navigate and extend.
-- **reproducible**: replicate the necessary environment and receive consistent results when executing the code.
-- **scalable**: easily extend and combine with other applications
-- **efficient**: minimizing repetitions minimizes errors and increases efficiency.
+- `#!js readable`: easy for your users, fellow developers and your future self to navigate and extend.
+- `#!js reproducible`: replicate the necessary environment and receive consistent results when executing the code.
+- `#!js scalable`: easily extend and combine with other applications
+- `#!js efficient`: minimizing repetitions minimizes errors and increases efficiency.
 
 ## Application
 
@@ -299,7 +299,7 @@ With Typer, a function's input arguments automatically get rendered as command l
 </div>
 
 !!! note
-    We'll cover how to train using compute instances on the cloud from Amazon Web Services (AWS) or Google Cloud Platforms (GCP) in a later lesson. But in the meantime, if you don't have access to GPUs, check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Colab and transfer to local. We essentially run optimization, then train the best model to download and transfer it's arguments and artifacts. Once we have them in our local machine, we can run `tagifai set-artifact-metadata` to match all metadata as if it were run from your machine.
+    We'll cover how to train using compute instances on the cloud from Amazon Web Services (AWS) or Google Cloud Platforms (GCP) in a later lesson. But in the meantime, if you don't have access to GPUs, check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Google Colab and transfer to local. We essentially run optimization, then train the best model to download and transfer it's arguments and artifacts. Once we have them in our local machine, we can run `tagifai set-artifact-metadata` to match all metadata as if it were run from your machine.
 
 <!--
 ```python

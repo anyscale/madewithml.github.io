@@ -36,7 +36,7 @@ Learn how to apply ML to build a production grade product to deliver value.
     <b><span class="mr-1">📝</span> Scripting</b>
     <ul>
     <li><a href="/courses/applied-ml/organization/">Organization</a></li>
-    <li>Documentation</li>
+    <li><a href="/courses/applied-ml/documentation/">Documentation</a></li>
     <li>Logging</li>
     <li>Styling</li>
     </ul>

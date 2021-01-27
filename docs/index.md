@@ -10,7 +10,7 @@ hide:
             <div class="ai-hero-text">
                 <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
                 <p style="margin-top: 0rem; color: #807e7e;">Applied ML · MLOps · Production</p>
-                <p style="font-size: 0.9rem;">Join <b>20K+ developers</b> in learning how to <a href="examples">responsibly</a> deliver value with applied ML.</p>
+                <p style="font-size: 0.89rem;">Join <b>20K+ developers</b> in learning how to <a href="examples">responsibly</a> deliver value with applied ML.</p>
                 <a class="md-button md-button--primary mr-2 mb-2 mb-md-0 px-3 py-2" href="/subscribe">
                     <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 3A1.75 1.75 0 000 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0024 18.75v-14A1.75 1.75 0 0022.25 3H1.75zM1.5 4.75a.25.25 0 01.25-.25h20.5a.25.25 0 01.25.25v.852l-10.36 7a.25.25 0 01-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"></path></svg></span> Subscribe</a>
                 <a class="md-button mb-3 mb-md-0 px-3 py-2" href="#ml-foundations">View courses</a>
@@ -70,12 +70,118 @@ hide:
 <hr style="background-color: #c4c3c3; height: 1px; border: 0;">
 
 ## ML Foundations
-{% include "courses/ml-foundations.md" %}
+<!-- ML Foundations -->
+Learn the foundations of ML through intuitive explanations, clean code and visuals.
+
+> :octicons-mark-github-16: [GokuMohandas/madewithml](https://github.com/GokuMohandas/madewithml){:target="_blank"} :octicons-arrow-right-24: <span class="mr-1">🔥</span>Among the [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub
+<br>
+:octicons-calendar-24: New topics coming later this year!
+
+<div class="row mt-4 ai-course-list">
+<div class="col-md-4">
+    <b><span class="mr-1">🔢</span> Basics</b>
+    <ul>
+    <li><a href="/courses/ml-foundations/notebooks/">Notebooks</a></li>
+    <li><a href="/courses/ml-foundations/python/">Python</a></li>
+    <li><a href="/courses/ml-foundations/numpy/">NumPy</a></li>
+    <li><a href="/courses/ml-foundations/pandas/">Pandas</a></li>
+    <li><a href="/courses/ml-foundations/pytorch/">PyTorch</a></li>
+    </ul>
+</div>
+<div class="col-md-4">
+    <b><span class="mr-1">📈</span> Modeling</b>
+    <ul>
+    <li><a href="/courses/ml-foundations/linear-regression/">Linear Regression</a></li>
+    <li><a href="/courses/ml-foundations/logistic-regression/">Logistic Regression</a></li>
+    <li><a href="/courses/ml-foundations/neural-networks/">Neural Networks</a></li>
+    <li><a href="/courses/ml-foundations/data-quality/">Data Quality</a></li>
+    <li><a href="/courses/ml-foundations/utilities/">Utilities</a></li>
+    </ul>
+</div>
+<div class="col-md-4">
+    <b><span class="mr-1">🤖</span> Deep Learning</b>
+    <ul>
+    <li><a href="/courses/ml-foundations/convolutional-neural-networks/">CNNs</a></li>
+    <li><a href="/courses/ml-foundations/embeddings/">Embeddings</a></li>
+    <li><a href="/courses/ml-foundations/recurrent-neural-networks/">RNNs</a></li>
+    <li>Attention <small>(TBD)</small></li>
+    <li>Transformers <small>(TBD)</small></li>
+    </ul>
+</div>
+</div>
 
 <hr style="background-color: #c4c3c3; height: 1px; border: 0;">
 
 ## Applied ML
-{% include "courses/applied-ml.md" %}
+<!-- Applied ML -->
+Learn how to apply ML to build a production grade product to deliver value.
+
+> :octicons-mark-github-16: [GokuMohandas/applied-ml](https://github.com/GokuMohandas/applied-ml){:target="_blank"} :octicons-arrow-right-24: :octicons-calendar-24: New lesson every week!
+
+<div class="row mt-4 ai-course-list">
+<div class="col-md-4">
+    <b><span class="mr-1">📦</span> Product</b>
+    <ul>
+    <li><a href="/courses/applied-ml/objective/">Objective</a></li>
+    <li><a href="/courses/applied-ml/solution/">Solution</a></li>
+    <li><a href="/courses/applied-ml/evaluation/">Evaluation</a></li>
+    <li><a href="/courses/applied-ml/iteration/">Iteration</a></li>
+    </ul>
+    <b><span class="mr-1">🔢</span> Data</b>
+    <ul>
+    <li><a href="/courses/applied-ml/annotation/">Annotation</a></li>
+    <li><a href="/courses/applied-ml/exploratory-data-analysis/">Exploratory data analysis</a></li>
+    <li><a href="/courses/applied-ml/splitting/">Splitting</a></li>
+    <li><a href="/courses/applied-ml/preprocessing/">Preprocessing</a></li>
+    </ul>
+    <b><span class="mr-1">📈</span> Modeling</b>
+    <ul>
+    <li><a href="/courses/applied-ml/baselines/">Baselines</a></li>
+    <li><a href="/courses/applied-ml/experiment-tracking/">Experiment tracking</a></li>
+    <li><a href="/courses/applied-ml/optimization/">Optimization</a></li>
+    </ul>
+</div>
+<div class="col-md-4">
+    <b><span class="mr-1">📝</span> Scripting</b>
+    <ul>
+    <li><a href="/courses/applied-ml/organization/">Organization</a></li>
+    <li><a href="/courses/applied-ml/documentation/">Documentation</a></li>
+    <li>Logging</li>
+    <li>Styling</li>
+    </ul>
+    <b><span class="mr-1">✅</span> Testing</b>
+    <ul>
+    <li>Testing <small>(code)</small></li>
+    <li>Testing <small>(data)</small></li>
+    <li>Testing <small>(model)</small></li>
+    </ul>
+    <b><span class="mr-1">📦</span> Application</b>
+    <ul>
+    <li>RESTful API</li>
+    <li>Databases</li>
+    <li>Authentication</li>
+    </ul>
+</div>
+<div class="col-md-4">
+    <b><span class="mr-1">⏰</span> Version control</b>
+    <ul>
+    <li>Git</li>
+    <li>Precommit</li>
+    <li>Versioning</li>
+    </ul>
+    <b><span class="mr-1">🚀</span> Production</b>
+    <ul>
+    <li>Dashboard</li>
+    <li>Docker</li>
+    <li>CI/CD</li>
+    <li>Monitoring</li>
+    <li>Serving</li>
+    <li>Feature stores</li>
+    <li>Workflow management</li>
+    <li>Active learning</li>
+    </ul>
+</div>
+</div>
 
 <hr style="background-color: #c4c3c3; height: 1px; border: 0;">
 

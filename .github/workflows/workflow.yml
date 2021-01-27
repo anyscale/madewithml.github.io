@@ -1,4 +1,4 @@
-name: Pur
+name: Build
 on:
   push:
     branches:
@@ -10,23 +10,31 @@ on:
     - main
 
 jobs:
-  build-mkdocs:
+  documentation:
     name: Build mkdocs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.8.5
-      - run: pip install -r requirements.txt
-      - run: mkdocs gh-deploy --force
+          python-version: 3.6.9
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Deploy documentation
+        run: mkdocs gh-deploy --force
+
   purge-cache:
     name: Purge Cloudflare cache
     runs-on: ubuntu-latest
     steps:
-    - name: Purge cache
-      uses: jakejarvis/cloudflare-purge-action@master
-      env:
+      - name: Purge cache
+        uses: jakejarvis/cloudflare-purge-action@master
+        env:
           CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
           CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
           CLOUDFLARE_KEY: ${{ secrets.CLOUDFLARE_KEY }}
