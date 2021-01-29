@@ -15,7 +15,7 @@ Another way to [organize](organization.md){:target="_blank"} our code is to docu
 
 - `#!js comments`: Terse descriptions of why a piece of code exists.
 - `#!js typing`: Specification of a function's inputs and outputs data types, providing insight into what a function consumes and produces at a quick glance.
-- `#!js doctrings`: Meaningful descriptions for functions and classes that describe overall utility as wel as arguments, returns, etc.
+- `#!js docstrings`: Meaningful descriptions for functions and classes that describe overall utility as wel as arguments, returns, etc.
 - `#!js documentation`: A rendered webpage that summarizes all the functions, classes, API calls, workflows, examples, etc. so we can view and traverse through the code base without actually having to look at the code just yet.
 
 ## Application
