@@ -106,26 +106,9 @@ Let's unpack the different parts of this function's docstring:
 - `#!js [Lines 28-29]`: Description of the function's output(s).
 
 !!! tip
-    If you're using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank"} (highly recommend), you can type `"""` under a function and then hit the ++shift++ key to generate a template docstring. It will autofill parts of the docstring using the typing information and even exception in your code!
+    If you're using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank"} (highly recommend), you should get the free [Python Docstrings Generator](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring){:target="_blank"} extension so you can type `"""` under a function and then hit the ++shift++ key to generate a template docstring. It will autofill parts of the docstring using the typing information and even exception in your code!
 
-    ```python
-    def pad_sequences(sequences: Sequence, max_seq_len: int = 0) -> np.ndarray:
-        """[summary]
-
-        Args:
-            sequences (Sequence): [description]
-            max_seq_len (int, optional): [description]. Defaults to 0.
-
-        Raises:
-            ValueError: [description]
-
-        Returns:
-            np.ndarray: [description]
-        """
-        ...
-        return padded_sequences
-    ```
-    Now all we have to do is fill in the `[summary]` and `[description]` pieces for our arguments.
+    ![vscode docstring generation](https://github.com/NilsJPWerner/autoDocstring/raw/master/images/demo.gif)
 
 ### Mkdocs
 

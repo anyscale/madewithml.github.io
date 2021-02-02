@@ -78,18 +78,18 @@ nav:
       - Optimization: courses/applied-ml/optimization.md
     - <b>📝 &nbsp; Scripting</b>:
       - Organization: courses/applied-ml/organization.md
+      - Packaging: courses/applied-ml/packaging.md
       - Documentation: courses/applied-ml/documentation.md
       - Logging: courses/applied-ml/logging.md
       - Styling: courses/applied-ml/styling.md
       - Makefile: courses/applied-ml/makefile.md
-    - <b>✅ &nbsp; Testing</b>:
-      - Testing (code): courses/applied-ml/testing-code.md
-      - Testing (data): courses/applied-ml/testing-data.md
-      - Testing (model): courses/applied-ml/testing-model.md
     - <b>📦 &nbsp; Application</b>:
+      - Command line: courses/applied-ml/cli.md
       - RESTful API: courses/applied-ml/apis.md
       - Databases: courses/applied-ml/databases.md
       - Authentication: courses/applied-ml/authentication.md
+    - <b>✅ &nbsp; Testing</b>:
+      - Testing: courses/applied-ml/testing.md
     - <b>⏰ &nbsp; Version control</b>:
       - Git: courses/applied-ml/git.md
       - Precommit: courses/applied-ml/precommit.md

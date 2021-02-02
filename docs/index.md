@@ -145,21 +145,22 @@ Learn how to apply ML to build a production grade product to deliver value.
     <b><span class="mr-1">📝</span> Scripting</b>
     <ul>
     <li><a href="/courses/applied-ml/organization/">Organization</a></li>
+    <li><a href="/courses/applied-ml/packaging/">Packaging</a></li>
     <li><a href="/courses/applied-ml/documentation/">Documentation</a></li>
-    <li>Logging</li>
-    <li>Styling</li>
-    </ul>
-    <b><span class="mr-1">✅</span> Testing</b>
-    <ul>
-    <li>Testing <small>(code)</small></li>
-    <li>Testing <small>(data)</small></li>
-    <li>Testing <small>(model)</small></li>
+    <li><a href="/courses/applied-ml/logging/">Logging</a></li>
+    <li><a href="/courses/applied-ml/styling/">Styling</a></li>
+    <li><a href="/courses/applied-ml/makefile/">Makefile</a></li>
     </ul>
     <b><span class="mr-1">📦</span> Application</b>
     <ul>
+    <li><a href="/courses/applied-ml/cli/">Command line</a></li>
     <li>RESTful API</li>
     <li>Databases</li>
     <li>Authentication</li>
+    </ul>
+    <b><span class="mr-1">✅</span> Testing</b>
+    <ul>
+    <li>Code, data <br>and models</li>
     </ul>
 </div>
 <div class="col-md-4">
