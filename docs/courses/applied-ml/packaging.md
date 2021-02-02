@@ -1,11 +1,11 @@
 ---
-description: Using configurations and virtual environments to create an setting for reproducing results.
+description: Using configurations and virtual environments to create a setting for reproducing results.
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
 
-Using configurations and virtual environments to create an setting for reproducing results.
+Using configurations and virtual environments to create a setting for reproducing results.
 
 ## Intuition
 
