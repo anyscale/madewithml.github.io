@@ -45,13 +45,11 @@ Learn how to apply ML to build a production grade product to deliver value.
     <b><span class="mr-1">📦</span> Application</b>
     <ul>
     <li><a href="/courses/applied-ml/cli/">Command line</a></li>
-    <li>RESTful API</li>
-    <li>Databases</li>
-    <li>Authentication</li>
+    <li><a href="/courses/applied-ml/api/">RESTful API</a></li>
     </ul>
     <b><span class="mr-1">✅</span> Testing</b>
     <ul>
-    <li>Code, data & models</li>
+    <li>Code, data <br>and models</li>
     </ul>
 </div>
 <div class="col-md-4">

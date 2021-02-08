@@ -68,7 +68,7 @@ setup(
 )
 ```
 
-The final lines of the file define various entry points we can use to interact with the application. Here we define some console scripts (commands) we can type on our terminal to execute certain actions. For example, after we install our package, we can type the command `tagifai` to run the `app` variable inside `tagifai/main.py`.
+The final lines of the file define various entry points we can use to interact with the application. Here we define some console scripts (commands) we can type on our terminal to execute certain actions. For example, after we install our package, we can type the command `tagifai` to run the `app` variable inside `tagifai/cli.py`.
 
 ```python linenums="59"
 setup(

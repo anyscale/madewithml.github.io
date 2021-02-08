@@ -85,9 +85,7 @@ nav:
       - Makefile: courses/applied-ml/makefile.md
     - <b>📦 &nbsp; Application</b>:
       - Command line: courses/applied-ml/cli.md
-      - RESTful API: courses/applied-ml/apis.md
-      - Databases: courses/applied-ml/databases.md
-      - Authentication: courses/applied-ml/authentication.md
+      - RESTful API: courses/applied-ml/api.md
     - <b>✅ &nbsp; Testing</b>:
       - Testing: courses/applied-ml/testing.md
     - <b>⏰ &nbsp; Version control</b>:

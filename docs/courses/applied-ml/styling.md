@@ -93,10 +93,10 @@ Here we setting up some configurations like before but we're including an `ignor
 Besides defining configuration options here, which are applied globally, we can also choose specifically ignore certain conventions on a line-by-line basis. Here are a few example in our code of where we utilized this method:
 
 ```python
-# config.py
+# tagifai/config.py
 import pretty_errors  # NOQA: F401 (imported but unused)
 ...
-# main.py
+# app/cli.py
 with mlflow.start_run(
     run_name="cnn"
 ) as run:  # NOQA: F841 (assigned to but never used)

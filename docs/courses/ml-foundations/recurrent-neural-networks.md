@@ -485,9 +485,10 @@ class Dataset(torch.utils.data.Dataset):
     def collate_fn(self, batch):
         """Processing on a batch."""
         # Get inputs
-        X = np.array(batch, dtype=object)[:, 0]
-        seq_lens = np.array(batch, dtype=object)[:, 1]
-        y = np.stack(np.array(batch, dtype=object)[:, 2], axis=0)
+        batch = np.array(batch, dtype=object)
+        X = batch[:, 0]
+        seq_lens = batch[:, 1]
+        y = np.stack(batch[:, 2], axis=0)
 
         # Pad inputs
         X = pad_sequences(sequences=X)

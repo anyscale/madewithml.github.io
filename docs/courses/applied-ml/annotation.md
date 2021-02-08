@@ -12,7 +12,7 @@ Annotation is the process of identifying the inputs and outputs that are **worth
 
 - use objective as a guide to determine the necessary signals
 - explore creating new signals (via combining data, collecting new data, etc.)
--  iteratively add more features to control complexity and effort
+- iteratively add more features to control complexity and effort
 
 !!! warning
     Be careful not to include features in the dataset that will not be available during inference time, causing *data leakage*.

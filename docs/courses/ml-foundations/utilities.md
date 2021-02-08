@@ -327,8 +327,9 @@ class Dataset(torch.utils.data.Dataset):
     def collate_fn(self, batch):
         """Processing on a batch."""
         # Get inputs
-        X = np.vstack(np.array(batch, dtype=object)[:, 0])
-        y = np.stack(np.array(batch, dtype=object)[:, 1], axis=0)
+        batch = np.array(batch, dtype=object)
+        X = batch[:, 0]
+        y = np.stack(batch[:, 1], axis=0)
 
         # Cast
         X = torch.FloatTensor(X.astype(np.float32))

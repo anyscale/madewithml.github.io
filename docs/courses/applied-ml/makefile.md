@@ -56,10 +56,6 @@ We'll be adding more targets to our Makefile in subsequent lessons (testing, sty
 We can fix this by defining a `PHONY` target in our makefile by adding this line:
 ```bash
 # Inside your Makefile
-...
-docs:
-	mkdocs serve
-
 .PHONY: docs
 ```
 

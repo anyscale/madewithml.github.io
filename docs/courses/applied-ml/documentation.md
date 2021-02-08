@@ -81,7 +81,7 @@ def pad_sequences(sequences: np.ndarray, max_seq_len: int = 0) -> np.ndarray:
 
     """
     # Check shape
-    if not np.shape(sequences)[0] == 2:
+    if not sequences.ndim == 2:
         raise ValueError("Input sequences are not two-dimensional.")
 
     # Get max sequence length

@@ -13,7 +13,7 @@ We want to enable others to be able to interact with our application without hav
 
 ## Application
 
-The `app` that we defined inside our `tagifai/main.py` is created using [Typer](https://typer.tiangolo.com/){:target="_blank"}, an open-source tool for building command line interface (CLI) applications. It starts by initializing the app and then adding the appropriate decorator to each function we wish to use as a CLI command.
+The `app` that we defined inside our `app/cli.py` is created using [Typer](https://typer.tiangolo.com/){:target="_blank"}, an open-source tool for building command line interface (CLI) applications. It starts by initializing the app and then adding the appropriate decorator to each function we wish to use as a CLI command.
 
 !!! note
     We're combining console scripts (from `setup.py`) and our Typer app to create a CLI application but there are many [different ways](https://typer.tiangolo.com/typer-cli/){:target="_blank"} to use Typer as well. We're going to have other programs use our application so our approach works best for that.
@@ -33,7 +33,7 @@ def predict_tags(
 
 We can list all the CLI commands for our application like so:
 
-In `main.py` we have the following functions:
+In `app/cli.py` we have the following functions:
 
 - `download-data`: download data from online to local drive.
 - `optimize`: optimize a subset of hyperparameters towards an objective.

@@ -52,6 +52,7 @@ Now let's go ahead and create more configured loggers that will be useful for ou
 # Logger
 logging_config = {
     "version": 1,
+    "disable_existing_loggers": False,
     "formatters": {
         "minimal": {"format": "%(message)s"},
         "detailed": {
@@ -82,9 +83,12 @@ logging_config = {
             "level": logging.ERROR,
         },
     },
-    "root": {
-        "handlers": ["console", "info", "error"],
-        "level": logging.DEBUG
+    "loggers": {
+        "root": {
+            "handlers": ["console", "info", "error"],
+            "level": logging.INFO,
+            "propagate": True,
+        },
     },
 }
 ```
@@ -99,7 +103,7 @@ logging_config = {
 We can load our configuration dict like so:
 ```python linenums="1"
 logging.config.dictConfig(logging_config)
-logger = logging.getLogger()
+logger = logging.getLogger("root")
 logger.handlers[0] = RichHandler(markup=True)
 
 # Sample messages (not we use configured `logger` now)
@@ -141,14 +145,12 @@ We chose to define a dictionary configuration for our logger but there are other
     # Create handlers
     console_handler = RichHandler(markup=True)
     console_handler.setLevel(logging.DEBUG)
-
     info_handler = logging.handlers.RotatingFileHandler(
         filename=Path(LOGS_DIR, "info.log"),
         maxBytes=10485760,  # 1 MB
         backupCount=10,
     )
     info_handler.setLevel(logging.INFO)
-
     error_handler = logging.handlers.RotatingFileHandler(
         filename=Path(LOGS_DIR, "error.log"),
         maxBytes=10485760,  # 1 MB
@@ -162,7 +164,7 @@ We chose to define a dictionary configuration for our logger but there are other
         fmt="%(levelname)s %(asctime)s [%(filename)s:%(funcName)s:%(lineno)d]\n%(message)s\n"
     )
 
-    # Set it all up
+    # Hook it all up
     console_handler.setFormatter(fmt=minimal_formatter)
     info_handler.setFormatter(fmt=detailed_formatter)
     error_handler.setFormatter(fmt=detailed_formatter)
@@ -201,7 +203,7 @@ We chose to define a dictionary configuration for our logger but there are other
     formatter=detailed
     backupCount=10
     maxBytes=10485760
-    args=(Path(LOGS_DIR, "error.log"),)
+    args=("logs/info.log",)
 
     [handler_error]
     class=handlers.RotatingFileHandler
@@ -209,13 +211,13 @@ We chose to define a dictionary configuration for our logger but there are other
     formatter=detailed
     backupCount=10
     maxBytes=10485760
-    args=(Path(LOGS_DIR, "error.log"),)
+    args=("logs/error.log",)
 
     [loggers]
     keys=root
 
     [logger_root]
-    level=DEBUG
+    level=INFO
     handlers=console,info,error
     ```
 
@@ -227,6 +229,6 @@ We chose to define a dictionary configuration for our logger but there are other
 
     # Use config file to initialize logger
     logging.config.fileConfig(Path(CONFIG_DIR, "logging.config"))
-    logger = logging.getLogger()
+    logger = logging.getLogger("root")
     logger.handlers[0] = RichHandler(markup=True)  # set rich handler
     ```
