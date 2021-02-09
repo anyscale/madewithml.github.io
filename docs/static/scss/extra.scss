@@ -25,16 +25,6 @@
     color: var(--md-accent-fg-color);
 }
 
-// Sidebar
-// .md-sidebar {
-//   width: 10rem;
-// }
-// @media (min-width: 76.25em) {
-//   .md-sidebar--secondary:not([hidden])~.md-content>.md-content__inner {
-//       margin-right: 5rem;
-//   }
-// }
-
 // Header nav
 .md-header-nav__button.md-logo img {
   width: 1.5rem;
@@ -45,6 +35,22 @@
   padding: .4rem;
   margin-right: 0rem;
   padding-right: 0rem;
+}
+
+// Sidebar
+.md-sidebar {
+  width: 11rem !important;
+}
+.md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
+    background-color: #dfdede !important;
+}
+
+// Content
+.md-content__inner {
+    margin: 0 2rem 1.2rem !important;
+    @media (max-width: 480px) {
+        margin: 0 1rem 1.2rem !important;
+    }
 }
 
 // Features

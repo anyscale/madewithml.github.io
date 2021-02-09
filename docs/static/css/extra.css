@@ -47,6 +47,24 @@
   padding-right: 0rem;
 }
 
+.md-sidebar {
+  width: 11rem !important;
+}
+
+.md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
+  background-color: #dfdede !important;
+}
+
+.md-content__inner {
+  margin: 0 2rem 1.2rem !important;
+}
+
+@media (max-width: 480px) {
+  .md-content__inner {
+    margin: 0 1rem 1.2rem !important;
+  }
+}
+
 .ai-feature {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
