@@ -13,13 +13,19 @@ Logging the process of tracking and recording key events that occur in our appli
 
 ## Application
 
-Let's look at what logging looks like in our [application](https://github.com/GokuMohandas/applied-ml){:target="_blank"}. There are a few overarching concepts to be aware of first before we can create and use our loggers.
+Let's look at what logging looks like in our [application](https://github.com/GokuMohandas/applied-ml){:target="_blank"}.
+
+### Components
+
+There are a few overarching concepts to be aware of first before we can create and use our loggers.
 
 - `#!js Logger`: the main object that emits the log messages from our application.
 - `#!js Handler`: used for sending log records to a specific location and specifications for that location (name, size, etc.).
 - `#!js Formatter`: used for style and layout of the log records.
 
 There is so much [more](https://docs.python.org/3/library/logging.html){:target="_blank"} to logging such as filters, exception logging, etc. but these basics will allows us to do everything we need for our application.
+
+### Levels
 
 Before we create our specialized, configured logger, let's look at what logged messages even look like by using a very basic configuration.
 ```python linenums="1"
@@ -45,6 +51,8 @@ CRITICAL:root:There is something terribly wrong and process may terminate.
 </pre>
 
 These are the basic [levels](https://docs.python.org/3/library/logging.html#logging-levels){:target="_blank"} of logging where `DEBUG` is the lowest priority and `CRITICAL` is the highest. We defined out logger using [`basicConfig`](https://docs.python.org/3/library/logging.html#logging.basicConfig){:target="_blank"} to emit log messages to our stdout console (we also could've written to any other stream or even a file) and to be sensitive to log messages starting from level `DEBUG`. This means that all of our logged messages will be displayed since `DEBUG` is the lowest level. Had we made the level `ERROR`, then only `ERROR` and `CRITICAL` log message would be displayed.
+
+### Configuration
 
 Now let's go ahead and create more configured loggers that will be useful for our application (our code is inside [`tagifai/config.py`](https://github.com/GokuMohandas/applied-ml/blob/main/tagifai/config.py){:target="_blank"}. First, we'll define a configuration dictionary object:
 
@@ -114,11 +122,11 @@ logger.error("There's been a mistake with the process.")
 logger.critical("There is something terribly wrong and process may terminate.")
 ```
 <pre style="font-size: 0.7rem;">
-<span style="font-weight: 600; color: #39BC70;">DEBUG</span>    Used for debugging your code.                                 <span style="font-weight: 600; color: #A2A2A2;">config.py:71</span>
-<span style="font-weight: 600; color: #2871CF;">INFO</span>     Informative messages from your code.                          <span style="font-weight: 600; color: #A2A2A2;">config.py:72</span>
-<span style="font-weight: 600; color: #BF1825;">WARNING</span>  Everything works but there is something to be aware of.       <span style="font-weight: 600; color: #A2A2A2;">config.py:73</span>
-<span style="font-weight: 600; color: #F53745;">ERROR</span>    There's been a mistake with the process.                      <span style="font-weight: 600; color: #A2A2A2;">config.py:74</span>
-<span style="font-weight: 600; color: #1E1E1E; background-color: #DF1426;">CRITICAL</span> There is something terribly wrong and process may terminate.  <span style="font-weight: 600; color: #A2A2A2;">config.py:75</span>
+<span style="color: #39BC70;">DEBUG</span>    Used for debugging your code.                                 <span style="color: #A2A2A2;">config.py:71</span>
+<span style="color: #2871CF;">INFO</span>     Informative messages from your code.                          <span style="color: #A2A2A2;">config.py:72</span>
+<span style="color: #BF1825;">WARNING</span>  Everything works but there is something to be aware of.       <span style="color: #A2A2A2;">config.py:73</span>
+<span style="color: #F53745;">ERROR</span>    There's been a mistake with the process.                      <span style="color: #A2A2A2;">config.py:74</span>
+<span style="color: #1E1E1E; background-color: #DF1426;">CRITICAL</span> There is something terribly wrong and process may terminate.  <span style="color: #A2A2A2;">config.py:75</span>
 </pre>
 
 !!! note
@@ -126,7 +134,7 @@ logger.critical("There is something terribly wrong and process may terminate.")
 
 We can also check our `logs/info.log` and `logs/error.log` files to see the log messages that should go to each of those files based on the levels we set for their handlers. Because we used the `detailed` formatter, we should be seeing more informative log messages there:
 <pre>
-<span style="font-weight: 600; color: #2871CF;">INFO</span> <span style="font-weight: 600; color: #5A9C4B;">2020-10-21</span> 11:18:42,102 [<span style="font-weight: 600; color: #3985B9;">config.py</span>:module:<span style="font-weight: 600; color: #3D9AD9;">72</span>]
+<span style="color: #2871CF;">INFO</span> <span style="color: #5A9C4B;">2020-10-21</span> 11:18:42,102 [<span style="color: #3985B9;">config.py</span>:module:<span style="color: #3D9AD9;">72</span>]
 Informative messages from your code.
 </pre>
 
