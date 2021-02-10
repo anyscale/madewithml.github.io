@@ -13,25 +13,30 @@ We have just started and there are already so many different commands to keep tr
 
 ## Application
 
-Inside our Makefile, we can see a list of functions (help, install, etc.). These functions (also known as `targets`) can sometimes have `prerequisites` that need to be met (can be other targets) and on the next line a ++tab++ followed by a `recipe`.
+### Components
 
-```bash
+Inside our [Makefile](https://github.com/GokuMohandas/applied-ml/tree/main/Makefile){:target="_blank"}, we can see a list of rules (help, install, etc.). These rules have a `target` which can sometimes have `prerequisites` that need to be met (can be other targets) and on the next line a ++tab++ followed by a `recipe` which specifies how to create the target.
+
+```bash linenums="1"
+# Makefile
 target: prerequisites
 <TAB> recipe
 ```
 
-We can execute any of our targets by typing `make <target>`:
+### Targets
+We can execute any of the rules by typing `make <target>`:
 
 <div class="animated-code">
 
     ```console
-    # View all targets
+    # View all rules
     $ make help
     Usage: tagifai [OPTIONS] COMMAND [ARGS]
     👉  Commands:
         install         : installs required packages.
         install-dev     : installs development requirements.
         install-test    : installs test requirements.
+        ...
 
     # Make a target
     $ make install-dev
@@ -42,7 +47,27 @@ We can execute any of our targets by typing `make <target>`:
 </div>
 <script src="../../../static/js/termynal.js"></script>
 
-We'll be adding more targets to our Makefile in subsequent lessons (testing, styling, etc.) but there's one more concept to illustrate. A Makefile is called as such because traditionally the `targets` are supposed to be files we can make. However, Makefiles are also commonly used as command shortcuts which can lead to confusion when a file with a certain name exists and a command with the same name exists! For example if you a directory called `docs` and a `target` in your Makefile called `docs`, when you run `make docs` you'll get this message:
+!!! note
+    Each line in a recipe for a rule will execute in a separate sub-shell. However for certain recipes such as activating a virtual environment and loading packages, we want to do it all in one shell. To do this, we can add the [`.ONESHELL`](https://www.gnu.org/software/make/manual/make.html#One-Shell){:target="blank"} special target above any target like so:
+    ```bash linenums="1" hl_lines="1"
+    .ONESHELL:
+    venv:
+        python3 -m venv ${name}
+        source ${name}/bin/activate
+        python -m pip install --upgrade pip setuptools wheel
+        make install-dev
+    ```
+    However this is only available in Make version 3.82 and above and most Macs currently user version 3.81. You can either update to the current version or chain your commands with `&&` like so:
+    ```bash linenums="1"
+    venv:
+        python3 -m venv ${name}
+        source ${name}/bin/activate && \
+        python -m pip install --upgrade pip setuptools wheel && \
+        make install-dev
+    ```
+
+### PHONY
+A Makefile is called as such because traditionally the `targets` are supposed to be files we can make. However, Makefiles are also commonly used as command shortcuts which can lead to confusion when a file with a certain name exists and a Makefile rule with the same name exists! For example if you a directory called `docs` and a `target` in your Makefile called `docs`, when you run `make docs` you'll get this message:
 
 <div class="animated-code">
 
@@ -53,18 +78,29 @@ We'll be adding more targets to our Makefile in subsequent lessons (testing, sty
 
 </div>
 
-We can fix this by defining a `PHONY` target in our makefile by adding this line:
+We can fix this by defining a [`PHONY`](https://www.gnu.org/software/make/manual/make.html#Phony-Targets){:target="_blank"} target in our makefile by adding this line above the target:
 ```bash
-# Inside your Makefile
-.PHONY: docs
+.PHONY: <target_name>
 ```
 
-Putting this all together, we can now install our package for different situations like so:
-```bash
-make install         # installs required packages only
-make install-dev     # installs required + dev packages
-make install-test    # installs required + test packages
+Most of the rules in our Makefile will require the `PHONY` target because we want them to execute even if there is a file sharing the target's name. An exception to this is the `venv` target because we don't want to create a `venv` directory if it already exists.
+
+### Variables
+We can also set and use [variables](https://www.gnu.org/software/make/manual/make.html#Using-Variables){:target="_blank"} inside our Makefile to organize all of our rules.
+
+- We can set the variables directly inside the Makefile. If the variable isn't defined in the Makefile, then it would default to any environment variable with the same name.
+```bash linenums="1"
+# Set variable
+MESSAGE := "hello world"
+
+# Use variable
+greeting:
+    @echo ${MESSAGE}
 ```
 
-!!! note
-    There's a whole lot [more](https://www.gnu.org/software/make/manual/make.html){:target="_blank"} to Makefiles but this is plenty for our application most applied ML projects.
+- We can also use variables passed in when executing the rule like so (ensure that the variable is not overriden inside the Makefile):
+```bash
+make greeting MESSAGE="hi"
+```
+
+There's a whole lot [more](https://www.gnu.org/software/make/manual/make.html){:target="_blank"} to Makefiles but this is plenty for most applied ML projects.

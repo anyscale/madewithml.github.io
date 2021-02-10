@@ -468,7 +468,7 @@ When designing the resources for our API service, we need to think about the fol
 
 Our first resource endpoint will be to `GET` all the runs. Recall that we've already loaded all the `runs` (sorted) using the `load_best_artifacts` function wrapped by the startup Event decorator (`@app.on_event("startup")`):
 
-```python linenums="1" hl_lines="4-6"
+```python linenums="1"
 @app.on_event("startup")
 def load_best_artifacts():
     global runs, run_ids, best_artifacts, best_run_id
@@ -524,7 +524,7 @@ curl -X GET "http://localhost:5000/runs/264ac530b78c42608e5dea1086bc2c73" -H  "a
 #### Schemas
 
 Users can list all runs, find out more information about a specific run and now we want to enable them to get predictions on some input text from any of these runs.
-```python linenums="1" hl_lines="1 4"
+```python linenums="1" hl_lines="4"
 @app.post("/runs/{run_id}/predict", tags=["Runs"])
 @construct_response
 @validate_run_id
@@ -542,7 +542,7 @@ def _predict(request: Request, run_id: str, payload: PredictPayload) -> Dict:
 ```
 
 Like before, we'll consume the `run_id` as a path parameter and validate it. But this time, we're also receiving a payload from the request's body which contains information as to what to predict on. The definition of this `PredictionPayload` is defined in our [`app/schemas.py`](https://github.com/GokuMohandas/applied-ml/tree/main/app/schemas.py){:target="_blank"} script:
-```python linenums="1" hl_lines="12"
+```python linenums="1"
 from typing import List
 
 from fastapi import Query
@@ -577,7 +577,7 @@ In line 12, we're defining the `PredictPayload` object as a list of `Text` objec
 
 !!! note
     We could've just defined our `PredictPayload` like so:
-    ```python linenums="1" hl_lines="2"
+    ```python linenums="1"
     class PredictPayload(BaseModel):
         texts: List[str] = Query(None, min_length=1)
     ```
