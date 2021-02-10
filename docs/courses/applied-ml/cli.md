@@ -13,11 +13,7 @@ We want to enable others to be able to interact with our application without hav
 
 ## Application
 
-The `app` that we defined inside our `app/cli.py` is created using [Typer](https://typer.tiangolo.com/){:target="_blank"}, an open-source tool for building command line interface (CLI) applications. It starts by initializing the app and then adding the appropriate decorator to each function we wish to use as a CLI command.
-
-!!! note
-    We're combining console scripts (from `setup.py`) and our Typer app to create a CLI application but there are many [different ways](https://typer.tiangolo.com/typer-cli/){:target="_blank"} to use Typer as well. We're going to have other programs use our application so our approach works best for that.
-
+The `app` that we defined inside our [`cli.py`](https://github.com/GokuMohandas/applied-ml/tree/main/app/cli.py){:target="_blank"} script is created using [Typer](https://typer.tiangolo.com/){:target="_blank"}, an open-source tool for building command line interface (CLI) applications. It starts by initializing the app and then adding the appropriate decorator to each function we wish to use as a CLI command.
 
 ```python
 # Typer CLI app
@@ -31,15 +27,32 @@ def predict_tags(
 ...
 ```
 
-We can list all the CLI commands for our application like so:
+!!! note
+    We're combining console scripts (from `setup.py`) and our Typer app to create a CLI application but there are many [different ways](https://typer.tiangolo.com/typer-cli/){:target="_blank"} to use Typer as well. We're going to have other programs use our application so this approach works best.
+    ```python
+    # setup.py
+    setup(
+        name="tagifai",
+        version="0.1",
+        ...
+        entry_points={
+            "console_scripts": [
+                "tagifai = app.cli:app",
+            ],
+        },
+    )
+    ```
 
-In `app/cli.py` we have the following functions:
+### Commands
+
+In [`cli.py`](https://github.com/GokuMohandas/applied-ml/tree/main/app/cli.py){:target="_blank"} script we have define the following commands:
 
 - `download-data`: download data from online to local drive.
 - `optimize`: optimize a subset of hyperparameters towards an objective.
 - `train-model`: train a model using the specified parameters.
 - `predict-tags`: predict tags for a give input text using a trained model.
 
+We can list all the CLI commands for our application like so:
 
 <div class="animated-code">
 
@@ -57,8 +70,32 @@ In `app/cli.py` we have the following functions:
 </div>
 <script src="../../../static/js/termynal.js"></script>
 
+### Arguments
 
 With Typer, a function's input arguments automatically get rendered as command line options. For example, our `predict_tags` function consumes `text` and an optional `run_id` as inputs which automatically become arguments for the `predict-tags` CLI command.
+
+```python
+@app.command()
+def predict_tags(
+    text: str = "Transfer learning with BERT for self-supervised learning",
+    run_id: str = "",
+) -> Dict:
+    """Predict tags for a give input text using a trained model.
+
+    Warning:
+        Make sure that you have a trained model first!
+
+    Args:
+        text (str, optional): Input text to predict tags for.
+                              Defaults to "Transfer learning with BERT for self-supervised learning".
+        run_id (str, optional): ID of the run to load model artifacts from.
+                                Defaults to model with lowest `best_val_loss` from the `best` experiment.
+
+    Returns:
+        Predicted tags for input text.
+    """
+    ...
+```
 
 <div class="animated-code">
 
@@ -85,7 +122,15 @@ With Typer, a function's input arguments automatically get rendered as command l
         --text TEXT    [default: Transfer learning with BERT.]
         --run-id TEXT  [default: ]
         --help         Show this message and exit.
+    ```
+</div>
 
+### Executing
+
+And we can easily use our CLI app to execute these commands with the appropriate options:
+<div class="animated-code">
+
+    ```console
     # Prediction
     $ tagifai predict-tags --text "Transfer learning with BERT."
     {
@@ -103,4 +148,4 @@ With Typer, a function's input arguments automatically get rendered as command l
 </div>
 
 !!! note
-    We'll cover how to train using compute instances on the cloud from Amazon Web Services (AWS) or Google Cloud Platforms (GCP) in a later lesson. But in the meantime, if you don't have access to GPUs, check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Google Colab and transfer to local. We essentially run optimization, then train the best model to download and transfer it's arguments and artifacts. Once we have them in our local machine, we can run `tagifai set-artifact-metadata` to match all metadata as if it were run from your machine.
+    You'll most likely be using the CLI application to optimize and train you models. We'll cover how to train using compute instances on the cloud from Amazon Web Services (AWS) or Google Cloud Platforms (GCP) in a later lesson. But in the meantime, if you don't have access to GPUs, check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Google Colab and transfer to local. We essentially run optimization, then train the best model to download and transfer it's arguments and artifacts. Once we have them in our local machine, we can run `tagifai set-artifact-metadata` to match all metadata as if it were run from your machine.
