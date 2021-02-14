@@ -27,12 +27,13 @@ Baselines are simple benchmarks which pave the way for iterative development.
 5. Revisit and iterate on baselines as your dataset grows.
 
 !!! note
-    You can also baseline on your dataset. Instead of using a fixed dataset and iterating on the models, choose a good baseline and iterate on the dataset.
+    You can also baseline on your dataset. Instead of using a fixed dataset and iterating on the models, choose a good baseline and iterate on the dataset:
 
-        - remove or fix data samples (FP, FN)
-        - prepare and transform features
-        - expand or consolidate classes
-        - auxiliary datasets
+    - remove or fix data samples (FP, FN)
+    - prepare and transform features
+    - expand or consolidate classes
+    - incorporate auxiliary datasets
+    - identify unique slices to improve / upsample
 
 **Tradeoffs to consider**
 
