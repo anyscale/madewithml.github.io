@@ -237,7 +237,7 @@ class LabelEncoder(object):
         return f"<LabelEncoder(num_classes={len(self)})>"
 
     def fit(self, y):
-        classes = np.unique(y_train)
+        classes = np.unique(y)
         for i, class_ in enumerate(classes):
             self.class_to_index[class_] = i
         self.index_to_class = {v: k for k, v in self.class_to_index.items()}
@@ -318,9 +318,10 @@ class Tokenizer(object):
         self.separator = '' if self.char_level else ' '
         if num_tokens: num_tokens -= 2 # pad + unk tokens
         self.num_tokens = num_tokens
+        self.pad_token = pad_token
         self.oov_token = oov_token
         if not token_to_index:
-            token_to_index = {'<PAD>': 0, '<UNK>': 1}
+            token_to_index = {pad_token: 0, oov_token: 1}
         self.token_to_index = token_to_index
         self.index_to_token = {v: k for k, v in self.token_to_index.items()}
 
@@ -331,10 +332,9 @@ class Tokenizer(object):
         return f"<Tokenizer(num_tokens={len(self)})>"
 
     def fit_on_texts(self, texts):
-        if self.char_level:
-            all_tokens = [token for text in texts for token in text]
         if not self.char_level:
-            all_tokens = [token for text in texts for token in text.split(' ')]
+            texts = [text.split(" ") for text in texts]
+        all_tokens = [token for text in texts for token in text]
         counts = Counter(all_tokens).most_common(self.num_tokens)
         self.min_token_freq = counts[-1][1]
         for token, count in counts:

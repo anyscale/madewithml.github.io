@@ -224,7 +224,7 @@ class LabelEncoder(object):
         return f"<LabelEncoder(num_classes={len(self)})>"
 
     def fit(self, y):
-        classes = np.unique(y_train)
+        classes = np.unique(y)
         for i, class_ in enumerate(classes):
             self.class_to_index[class_] = i
         self.index_to_class = {v: k for k, v in self.class_to_index.items()}

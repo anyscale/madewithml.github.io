@@ -49,7 +49,7 @@ Learn how to apply ML to build a production grade product to deliver value.
     </ul>
     <b><span class="mr-1">✅</span> Testing</b>
     <ul>
-    <li>Code, data <br>and models</li>
+    <li><a href="/courses/applied-ml/testing/">Code, data <br>and models</a></li>
     </ul>
 </div>
 <div class="col-md-4">
@@ -67,7 +67,7 @@ Learn how to apply ML to build a production grade product to deliver value.
     <li>Monitoring</li>
     <li>Serving</li>
     <li>Feature stores</li>
-    <li>Workflow management</li>
+    <li>Workflows</li>
     <li>Active learning</li>
     </ul>
 </div>

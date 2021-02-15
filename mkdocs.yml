@@ -99,7 +99,7 @@ nav:
       - Monitoring: courses/applied-ml/monitoring.md
       - Serving: courses/applied-ml/serving.md
       - Feature stores: courses/applied-ml/feature-stores.md
-      - Workflow management: courses/applied-ml/workflow-management.md
+      - Workflows: courses/applied-ml/workflows.md
       - Active learning: courses/applied-ml/active-learning.md
   - FAQ: faq.md
   - Subscribe: subscribe.md
