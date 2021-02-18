@@ -1,25 +1,21 @@
 ---
+template: lesson.html
+title: Experiment Tracking
 description: Managing and tracking ML experiments and runs.
+keywords: experiment tracking, mlflow, weights and biases, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
-Managing and tracking ML experiments and runs.
-
 ## Intuition
-So far, we've been training and evaluating our different baselines but haven't really been tracking these experiments. We'll fix this but defining a proper process for experiment tracking which we'll use for all future experiments (including hyperparameter optimization).
-
-### What is it?
-Experiment tracking is the processing of managing all the different experiments and their components, such as parameters, metrics, models and other artifacts.
-
-### Why do we need it?
+So far, we've been training and evaluating our different baselines but haven't really been tracking these experiments. We'll fix this but defining a proper process for experiment tracking which we'll use for all future experiments (including hyperparameter optimization). Experiment tracking is the processing of managing all the different experiments and their components, such as parameters, metrics, models and other artifacts and it enables us to:
 
 - *Organize* all the necessary components of a specific experiment. It's important to have everything in one place and know where it is so you can use them later.
 - *Reproduce* past results (easily) using saved experiments.
 - *Log* iterative improvements across time, data, ideas, teams, etc.
 
-### How can we do it?
+## Tools
 There are many options for experiment tracking but we're going to use [MLFlow](https://mlflow.org/){:target="_blank"} (100% free and [open-source](https://github.com/mlflow/mlflow){:target="_blank"}) because it has all the functionality we'll need (and [growing integration support](https://medium.com/pytorch/mlflow-and-pytorch-where-cutting-edge-ai-meets-mlops-1985cf8aa789){:target="_blank"}). You can run MLFlow on your own servers and databases so there are no storage cost / limitations, making it one of the most popular options and is used by Microsoft, Facebook, Databricks and others. You can also set up your own Tracking servers to synchronize runs amongst multiple team members collaborating on the same task.
 
 There are also several popular options such as a [Comet ML](https://www.comet.ml/site/){:target="_blank"} (Used by Google AI, HuggingFace, etc.) and [Weights and Biases](https://www.wandb.com/){:target="_blank"} (Used by Open AI, Toyota Research, etc.). These are fantastic tools that provide features like dashboards, seamless integration, hyperparameter search, reports and even [debugging](https://wandb.ai/latentspace/published-work/The-Science-of-Debugging-with-W-B-Reports--Vmlldzo4OTI3Ng){:target="_blank"}!
@@ -67,7 +63,7 @@ mlflow.set_tracking_uri("file://" + str(EXPERIMENTS_DIR.absolute()))
 experiments  ...
 </pre>
 
-### Training
+## Training
 
 Next, we're going to modify our `Trainer` object so that we can log the metrics from each epoch. The only addition are these lines:
 ```python linenums="1"
@@ -319,7 +315,7 @@ The input argument `args`contains all the parameters needed and it's nice to hav
         }
     ```
 
-### Tracking
+## Tracking
 With MLFlow we need to first initialize an experiment and then you can do runs under that experiment.
 
 ```python linenums="1"
@@ -374,7 +370,7 @@ Epoch: 44 | train_loss: 0.00067, val_loss: 0.00149, lr: 2.00E-05, _patience: 1
 Stopping early!
 </pre>
 
-### Viewing
+## Viewing
 Let's view what we've tracked from our experiment. MLFlow serves a dashboard for us to view and explore our experiments on a localhost port but since we're inside a notebook, we're going to use public tunnel ([ngrok](https://ngrok.com/){:target="_blank"}) to view it.
 
 ```python linenums="1"
@@ -520,3 +516,7 @@ label_encoder.decode(y_pred)
   'transfer-learning',
   'transformers']]
 </pre>
+
+
+<!-- Citation -->
+{% include "cite.md" %}

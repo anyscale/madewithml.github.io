@@ -1,12 +1,13 @@
-// Section
-.ai-section {
-  padding-left: 0rem;
-  padding-right: 0rem;
-  @media (max-width: 480px) {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+.md-typeset h1 {
+    font-weight: 500 !important;
 }
+.md-typeset h2 {
+    font-weight: 400 !important;
+}
+.md-typeset h3 {
+    font-weight: 300 !important;
+}
+
 .ai-center-all {
   text-align: center;
   align-items: center;
@@ -24,6 +25,9 @@
     font-size: .75rem !important;
     color: var(--md-accent-fg-color);
 }
+.md-nav__icon {
+    display: none !important;
+}
 
 // Header nav
 .md-header-nav__button.md-logo img {
@@ -38,11 +42,8 @@
 }
 
 // Sidebar
-.md-sidebar {
-  width: 11rem !important;
-}
 .md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
-    background-color: #dfdede !important;
+    background-color: #ebebeb !important;
 }
 
 // Content
@@ -87,6 +88,9 @@
 }
 .linkedin {
   color: #4267B2;
+}
+.github {
+  color: grey;
 }
 
 // Code outputs

@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Makefiles
 description: An automation tool that organizes commands for our application's processes.
+keywords: makefile, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
-
-An automation tool that organizes commands for our application's processes.
 
 ## Intuition
 
@@ -13,7 +14,7 @@ We have just started and there are already so many different commands to keep tr
 
 ## Application
 
-### Components
+## Components
 
 Inside our [Makefile](https://github.com/GokuMohandas/applied-ml/tree/main/Makefile){:target="_blank"}, we can see a list of rules (help, install, etc.). These rules have a `target` which can sometimes have `prerequisites` that need to be met (can be other targets) and on the next line a ++tab++ followed by a `recipe` which specifies how to create the target.
 
@@ -23,7 +24,7 @@ target: prerequisites
 <TAB> recipe
 ```
 
-### Targets
+## Targets
 We can execute any of the rules by typing `make <target>`:
 
 <div class="animated-code">
@@ -66,7 +67,7 @@ We can execute any of the rules by typing `make <target>`:
         make install-dev
     ```
 
-### PHONY
+## PHONY
 A Makefile is called as such because traditionally the `targets` are supposed to be files we can make. However, Makefiles are also commonly used as command shortcuts which can lead to confusion when a file with a certain name exists and a Makefile rule with the same name exists! For example if you a directory called `docs` and a `target` in your Makefile called `docs`, when you run `make docs` you'll get this message:
 
 <div class="animated-code">
@@ -85,7 +86,7 @@ We can fix this by defining a [`PHONY`](https://www.gnu.org/software/make/manual
 
 Most of the rules in our Makefile will require the `PHONY` target because we want them to execute even if there is a file sharing the target's name. An exception to this is the `venv` target because we don't want to create a `venv` directory if it already exists.
 
-### Variables
+## Variables
 We can also set and use [variables](https://www.gnu.org/software/make/manual/make.html#Using-Variables){:target="_blank"} inside our Makefile to organize all of our rules.
 
 - We can set the variables directly inside the Makefile. If the variable isn't defined in the Makefile, then it would default to any environment variable with the same name.
@@ -104,3 +105,6 @@ make greeting MESSAGE="hi"
 ```
 
 There's a whole lot [more](https://www.gnu.org/software/make/manual/make.html){:target="_blank"} to Makefiles but this is plenty for most applied ML projects.
+
+<!-- Citation -->
+{% include "cite.md" %}

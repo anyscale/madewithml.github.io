@@ -1,12 +1,12 @@
 ---
+template: lesson.html
+title: Logistic Regression
 description: Implement logistic regression from scratch using NumPy and then using PyTorch.
+keywords: logistic regression, regression, numpy, pytorch, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/07_Logistic_Regression.ipynb){:target="_blank"}
-
-In this lesson, we're going to implement logistic regression for a classification task where we want to probabilistically determine the outcome for a given set of inputs. We will understand the basic math behind it, implement it in just NumPy and then in PyTorch.
-
 
 ## Overview
 Logistic regression is an extension on linear regression (both are generalized linear methods). We will still learn to model a line (plane) that models $y$ given $X$. Except now we are dealing with classification problems as opposed to regression problems so we'll be predicting probability distributions as opposed to a discrete value. We'll be using the softmax operation to normalize our logits ($XW$) to derive probabilities.
@@ -891,3 +891,7 @@ print (b_unscaled)
  [-0.95664431  0.89996245]]
  [ 8.913242 10.183178]
 </pre>
+
+
+<!-- Citation -->
+{% include "cite.md" %}

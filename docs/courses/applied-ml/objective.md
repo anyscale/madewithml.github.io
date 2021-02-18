@@ -1,19 +1,21 @@
 ---
+template: lesson.html
+title: Outlining Objectives for ML Systems
 description: Defining the core objective of our task.
+keywords: objectives, product management, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-device-camera-video-24: [Video](https://www.youtube.com/watch?v=_sYrVHGRqPo){:target="_blank"}
 
-Defining the core objective of our task.
-
-<div class="ai-center-all">
+<!-- <div class="ai-center-all">
     <iframe width="600" height="337.5" src="https://www.youtube.com/embed/_sYrVHGRqPo?rel=0" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen></iframe>
-</div>
+</div> -->
 
 ## Intuition
+
 Identifying the objective should always be the first step when solving any problem. It acts as the **guide** for all subsequent decision making and will prevent us from getting distracted along the way. However, identifying the objective isn't always straightforward, especially when we aren't analyzing the problem through the appropriate lens.
 
 !!! note
@@ -51,3 +53,6 @@ Though some of these objectives may be valid, they may not resolve the underlyin
 ## Resources
 - [Know Your Customers’ “Jobs to Be Done”](https://hbr.org/2016/09/know-your-customers-jobs-to-be-done){:target="_blank"}
 
+
+<!-- Citation -->
+{% include "cite.md" %}

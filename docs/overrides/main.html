@@ -15,7 +15,7 @@
       </span>
       <strong>LinkedIn</strong>
     </a>
-    for updates and tips.
+    for updates.
 </div>
 {% endblock %}
 
@@ -56,4 +56,25 @@
   <meta name="twitter:title" content="{{ title }}" />
   <meta name="twitter:description" content="{{ description }}" />
   <meta name="twitter:image" content="{{ card_image }}" />
+{% endblock %}
+
+{% block content %}
+  {% if page.edit_url %}
+    <a href="{{ page.edit_url }}" title="{{ lang.t('edit.link.title') }}" class="md-content__button md-icon">
+      {% include ".icons/material/pencil.svg" %}
+    </a>
+  {% endif %}
+  {% if not "\x3ch1" in page.content %}
+    <h1>{{ page.meta.title | d(config.site_name, true)}}</h1>
+    {% if page and page.meta.description %}
+      <span>{{ page.meta.description }}</span>
+    {% endif %}
+  {% endif %}
+  {{ page.content }}
+  {% if page and page.meta %}
+    {% if page.meta.git_revision_date_localized or page.meta.revision_date%}
+      {% include "partials/source-date.html" %}
+    {% endif %}
+  {% endif %}
+  <br>
 {% endblock %}

@@ -1,24 +1,23 @@
 ---
+template: lesson.html
+title: Optimizing Hyperparameters
 description: Optimizing a subset of hyperparameters to achieve an objective.
+keywords: optimization, hyperparameters, optuna, ray, hyperopt, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
-Optimizing a subset of hyperparameters to achieve an objective.
-
 ## Intuition
 
-### What is it?
 Optimization is the process of fine-tuning the hyperparameters in our experiment to optimize towards a particular objective. It can be a computationally involved process depending on the number of parameters, search space and model architectures. Hyperparameters don't just include the model's parameters but they also include parameters (choices) from preprocessing, splitting, etc. When we look at all the different parameters that can be tuned, it quickly becomes a very large search space. However, just because something is a hyperparameter doesn't mean we need to tune it.
 
 - It's absolutely alright to fix some hyperparameters (ex. `lower=True` during preprocessing) and remove them from the current tuning subset. Just be sure to note which parameters you are fixing and your reasoning for doing so.
 - You can initially just tune a small, yet influential, subset of hyperparameters that you believe will yield best results.
 
-### Why do we need it?
 We want to optimize our hyperparameters so that we can understand how each of them affects our objective. By running many trials across a reasonable search space, we can determine near ideal values for our different parameters. It's also a great opportunity to determine if a smaller parameters yield similar performances as larger ones (efficiency).
 
-### How can we do it?
+## Tools
 There are many options for hyperparameter tuning ([Optuna](https://github.com/optuna/optuna){:target="_blank"}, [Ray tune](https://github.com/ray-project/ray/tree/master/python/ray/tune){:target="_blank"}, [Hyperopt](https://github.com/hyperopt/hyperopt){:target="_blank"}, etc.). We'll be using Optuna for it's simplicity, popularity and efficiency though they are all equally so. It really comes down to familiarity and whether a library has a specific implementation readily tested and available.
 
 ## Application
@@ -299,7 +298,7 @@ def train_cnn(args, df, trial=None):
         }
     ```
 
-### Objective
+## Objective
 
 We need to define an `objective` function that will consume a trial and a set of arguments and produce the metric to optimize on (`f1` in our case).
 ```python
@@ -325,7 +324,7 @@ def objective(trial, args):
     return artifacts["performance"]["overall"]["f1"]
 ```
 
-### Study
+## Study
 
 We're ready to kick off our study with our [MLFlowCallback](https://optuna.readthedocs.io/en/stable/reference/generated/optuna.integration.MLflowCallback.html){:target="_blank"} so we can track all of the different trials.
 ```python
@@ -560,20 +559,5 @@ print (json.dumps(params, indent=2, cls=NumpyEncoder))
 
 ... and now we're finally ready to move from working in Jupyter notebooks to Python scripts. We'll be revisiting everything we did so far, but this time with proper software engineering principles such as object oriented programming (OOPs), testing, styling, etc.
 
-<!--
-```python
-
-```
-<pre class="output">
-
-</pre>
-
-<div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/applied-ml/solution/suggested_tags.png" width="550" alt="pivot">
-</div>
-<div class="ai-center-all">
-  <small>UX of our hypothetical solution</small>
-</div>
-
-{:target="_blank"}
- -->
+<!-- Citation -->
+{% include "cite.md" %}

@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Python Basics for Machine Learning
 description: The basics of Python programming for machine learning.
+keywords: python, decorators, functions, classes, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/02_Python.ipynb){:target="_blank"}
-
-In this lesson, we'll learn about the basics of Python programming for machine learning.
 
 ## Variables
 Variables are containers for holding data and they're defined by a name and value.
@@ -811,3 +812,7 @@ tracker.history
 <pre class="output">
 [1, 2, 3]
 </pre>
+
+
+<!-- Citation -->
+{% include "cite.md" %}

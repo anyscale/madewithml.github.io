@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Utilities for Machine Learning
 description: Explore utilities to extend and simplify preprocessing and training.
+keywords: utilities, random seed, data loader, training, pytorch, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/10_Utilities.ipynb){:target="_blank"}
-
-In this lesson, we will explore utilities to extend and simplify preprocessing and training.
 
 ## Set up
 We're having to set a lot of seeds for reproducability now, so let's wrap it all up in a function.
@@ -852,3 +853,7 @@ There are lots of other utilities to cover, such as:
 - and many more!
 
 We'll explore these as we require them in future lessons including some in our [Applied ML](https://madewithml.com/courses/applied-ml/) course!
+
+
+<!-- Citation -->
+{% include "cite.md" %}

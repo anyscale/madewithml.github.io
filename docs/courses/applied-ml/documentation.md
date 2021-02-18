@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Documenting Code
 description: Documenting code for your users and your future self.
+keywords: documentation, mkdocs, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-info-24: [Documentation](https://gokumohandas.github.io/applied-ml/){:target="_blank"}
-
-Documenting code for your users and your future self.
 
 ## Intuition
 
@@ -22,7 +23,7 @@ Another way to [organize](organization.md){:target="_blank"} our code is to docu
 
 Let's look at what documentation looks like for our [application](https://github.com/GokuMohandas/applied-ml){:target="_blank"} and be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/applied-ml/){:target="_blank"} for it as well.
 
-### Typing
+## Typing
 It's important to be as explicit as possible with our code. We're already discussed choosing explicit names for variables, functions, etc. but another way we can be explicit is by defining the types for our function's inputs and outputs. We want to do this so we can quickly know what data types a function expects and how we can utilize it's outputs for downstream processes.
 
 So far, our functions have looked like this:
@@ -45,7 +46,7 @@ Here we're defining that our input argument `sequences` is a NumPy array, `max_s
     Starting from Python 3.9+, common types are [built in](https://docs.python.org/3/whatsnew/3.9.html#type-hinting-generics-in-standard-collections){:target="_blank"} so we don't need to import them with ```from typing import List, Set, Dict, Tuple, Sequence``` anymore.
 
 
-### Docstring
+## Docstrings
 We can make our code even more explicit by adding docstrings to functions and classes to describe overall utility, arguments, returns, exceptions and more. Let's take a look at an example:
 
 ```python linenums="1"
@@ -110,7 +111,7 @@ Let's unpack the different parts of this function's docstring:
 
     ![vscode docstring generation](https://github.com/NilsJPWerner/autoDocstring/raw/master/images/demo.gif)
 
-### Mkdocs
+## Mkdocs
 
 So we're going through all this effort to including typing and docstrings to our functions but it's all tucked away inside our scripts. But what if we can collect all this effort and **automatically** surface it as documentation? Well that's exactly what we'll do with the following open-source packages → final result [here](https://gokumohandas.github.io/applied-ml/){:target="_blank"}.
 
@@ -188,23 +189,9 @@ nav:
 !!! note
     We can easily serve our documentation for free using [GitHub pages](https://squidfunk.github.io/mkdocs-material/publishing-your-site/){:target="_blank"} and even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"}. All we had to do was add the file [`.github/workflows/documentation.yml`](https://github.com/GokuMohandas/applied-ml/blob/main/.github/workflows/documentation.yml){:target="_blank"} which [GitHub Actions](https://github.com/features/actions){:target="_blank"}  will use to build and deploy our documentation every time we push to the `main` branch (we'll learn about GitHub Actions in our CI/CD lesson soon).
 
+<!-- Citation -->
+{% include "cite.md" %}
 
 
 
-<!--
-```python
 
-```
-<pre class="output">
-
-</pre>
-
-<div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/applied-ml/solution/suggested_tags.png" width="550" alt="pivot">
-</div>
-<div class="ai-center-all">
-  <small>UX of our hypothetical solution</small>
-</div>
-
-{:target="_blank"}
- -->

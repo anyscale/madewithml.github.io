@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Working in Notebooks
 description: Learn how to use interactive notebooks for developing in Python.
+keywords: notebooks, jupyter, ipython, jupyterlab, python, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/01_Notebooks.ipynb){:target="_blank"}
-
-In this lesson, we'll learn how to use interactive notebooks for developing in Python.
 
 ## Set up
 1. Click on this link to open the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/01_Notebooks.ipynb){:target="_blank"} for this lesson or create a blank one on [Google Colab](https://colab.research.google.com/){:target="_blank"}.
@@ -68,3 +69,7 @@ Hello world!
 </pre>
 
 These are the basic concepts we'll need to use these notebooks but we'll learn few more tricks in subsequent lessons.
+
+
+<!-- Citation -->
+{% include "cite.md" %}

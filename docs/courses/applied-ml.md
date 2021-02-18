@@ -1,11 +1,9 @@
 ---
+template: course.html
 title: Applied ML
 description: Learn how to apply ML to build a production grade product to deliver value.
 image: "https://madewithml.com/static/images/applied_ml.png"
 ---
-
-<!-- Applied ML -->
-Learn how to apply ML to build a production grade product to deliver value.
 
 > :octicons-mark-github-16: [GokuMohandas/applied-ml](https://github.com/GokuMohandas/applied-ml){:target="_blank"} :octicons-arrow-right-24: :octicons-calendar-24: New lesson every week!
 
@@ -44,8 +42,8 @@ Learn how to apply ML to build a production grade product to deliver value.
     </ul>
     <b><span class="mr-1">📦</span> Application</b>
     <ul>
-    <li><a href="/courses/applied-ml/cli/">Command line</a></li>
-    <li><a href="/courses/applied-ml/api/">RESTful API</a></li>
+    <li><a href="/courses/applied-ml/cli/">CLI</a></li>
+    <li><a href="/courses/applied-ml/api/">API</a></li>
     </ul>
     <b><span class="mr-1">✅</span> Testing</b>
     <ul>
@@ -72,3 +70,17 @@ Learn how to apply ML to build a production grade product to deliver value.
     </ul>
 </div>
 </div>
+
+<!-- Citation -->
+<hr>
+###
+To cite this course, please use:
+
+```bash
+@miscful API{madewithml,
+    title  = "Applied ML - Made With ML",
+    author = "Goku Mohandas",
+    url    = "{{ page.canonical_url }}"
+    year   = "2021",
+}
+```

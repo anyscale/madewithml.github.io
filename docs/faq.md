@@ -1,3 +1,8 @@
+---
+template: page.html
+title: Frequently Asked Questions (FAQ)
+---
+
 ### Who is this content for?
 - ML developers who want to become end-to-end ML developers.
 - Software engineers who want to responsibly deliver value with applied ML.

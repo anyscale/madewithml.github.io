@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Pandas for Machine Learning
 description: Data manipulation using the Pandas library.
+keywords: pandas, exploratory data analysis, eda, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/04_Pandas.ipynb){:target="_blank"}
-
-In this lesson, we'll learn the basics of data manipulation using the Pandas library.
 
 ## Set up
 
@@ -1125,3 +1126,7 @@ total 96
 drwxr-xr-x 1 root root  4096 Nov 21 16:30 sample_data
 -rw-r--r-- 1 root root 85153 Dec  3 17:36 titanic.csv
 </pre>
+
+
+<!-- Citation -->
+{% include "cite.md" %}

@@ -1,4 +1,8 @@
-
+---
+title: Pivot from Hype and Overwhelm
+description: Read about our pivot to end the perpetuation of hype and realigning to create original content to help people responsibly deliver value with ML.
+keywords: madewithml, producthunt
+---
 
 ## Problem
 If you're not familiar with the [old MWML platform](https://twitter.com/madewithml/status/1284503478685978625){:target="_blank"}, it used to be the [ProductHunt](https://producthunt.com/){:target="_blank"} of ML where the community could share and upvote projects. We had indexed nearly 3K tutorials, surveys, blog posts, libraries, etc. to help people build. But, in fact, this was not what was happening.

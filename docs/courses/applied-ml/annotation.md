@@ -1,13 +1,15 @@
 ---
+template: lesson.html
+title: Annotation
 description: Preparing and labeling our data for exploration.
+keywords: annotation, labeling, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
-Preparing and labeling our data for exploration.
-
 ## Intuition
+
 Annotation is the process of identifying the inputs and outputs that are **worth** modeling (*not* just what could be modeled).
 
 - use objective as a guide to determine the necessary signals
@@ -33,7 +35,7 @@ And it isn't just about identifying and labeling our initial dataset but also in
 
 ## Application
 
-### Datasets
+## Datasets
 - [projects.json](https://raw.githubusercontent.com/GokuMohandas/applied-ml/main/datasets/projects.json){:target="_blank"}: projects with title, description and tags (cleaned by mods).
 - [projects_detailed.json](https://raw.githubusercontent.com/GokuMohandas/applied-ml/main/datasets/projects_detailed.json){:target="_blank"}: projects with full-text details and additional URLs.
 - [tags.json](https://raw.githubusercontent.com/GokuMohandas/applied-ml/main/datasets/tags.json){:target="_blank"}: tags used in dropdown to aid autocompletion.
@@ -47,7 +49,7 @@ Recall that our objective was to augment authors to add the appropriate tags for
 - ^ + details
 - ^ + relevant html text from URLs
 
-### Load data
+## Load data
 We'll first load our dataset from the JSON file.
 
 ```python linenums="1"
@@ -140,7 +142,7 @@ df.head(5)
 
 The reason we want to iteratively add more features is because it introduces more complexity and effort. For example, extracting the relevant HTML from the URLs is not trivial but recall that we want to *close the loop* with a simple solution first. We're going to use just the title and description because we hypothesize that the project's core concepts will be there whereas the details may have many other keywords.
 
-### Auxiliary data
+## Auxiliary data
 
 We're also going to be using an [auxiliary dataset](https://raw.githubusercontent.com/madewithml/datasets/main/tags.json) which contains a collection of all the tags with their aliases and parent/child relationships.
 ```python linenums="1"
@@ -168,14 +170,14 @@ def display_tag_details(tag='question-answering'):
   }
 </pre>
 
-### Features
+## Features
 We could use a project's title and description separately as features but we'll combine them to create one input feature.
 ```python linenums="1"
 # Input
 df['text'] = df.title + " " + df.description
 ```
 
-### Constraints
+## Constraints
 ```python linenums="1"
 def filter(l, include=[], exclude=[]):
     """Filter a list using inclusion and exclusion lists of items."""
@@ -258,3 +260,6 @@ Over time, our dataset will grow and we'll need to label new data. So far, we ha
 ## Resources
 - [Human in the Loop: Deep Learning without Wasteful Labelling](https://oatml.cs.ox.ac.uk/blog/2019/06/24/batchbald.html){:target="_blank"}
 - [Harnessing Organizational Knowledge for Machine Learning](https://ai.googleblog.com/2019/03/harnessing-organizational-knowledge-for.html){:target="_blank"}
+
+<!-- Citation -->
+{% include "cite.md" %}

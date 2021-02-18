@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Preprocessing Data for Machine Learning
 description: Preparing and transforming our data for modeling.
+keywords: preprocessing, cleaning, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
-
-Preparing and transforming our data for modeling.
 
 ## Intuition
 
@@ -14,7 +15,7 @@ Data preprocessing can be categorized into two types of processes: *preparation*
 !!! note
     Certain preprocessing steps are `global` (don't depend on our dataset, ex. removing stop words) and others are `local` (constructs are learned only from the training split, ex. vocabulary). For the local, dataset-dependent preprocessing steps, we want to ensure that we split the data first before preprocessing to avoid data leaks.
 
-### Preparing
+## Preparing
 
 Preparing the data involves organizing and cleaning the data.
 
@@ -39,13 +40,13 @@ Preparing the data involves organizing and cleaning the data.
 !!! note
     You need to clean your data first before splitting, at least for the features that splitting depends on. So the process is more like: preprocessing (global, cleaning) → splitting → preprocessing (local, transformations). We covered splitting first since many preprocessing transformations depend on the training split.
 
-### Transforming
+## Transforming
 Transforming the data involves feature encoding and engineering.
 
 !!! warning
     Before transformation, be sure to detect (and potentially remove) outliers using distributions and/or domain expertise. You should constantly revisit these explicit decisions because they may change over time and you don’t want to be including or removing data you shouldn’t be.
 
-#### Scaling
+### Scaling
 - required for most models that are not decision tree based
 - learn constructs from train split and apply to other splits (local)
 - don't blindly scale features (ex. categorical features)
@@ -113,7 +114,7 @@ Transforming the data involves feature encoding and engineering.
     When we move our code from notebooks to Python scripts, we'll be testing all our preprocessing functions (these workflows can also be captured in feature stores and applied as features are updated).
 
 
-#### Encoding
+### Encoding
 
 - allows for representing data efficiently (maintains signal) & effectively (learns pattern)
 
@@ -160,7 +161,7 @@ Transforming the data involves feature encoding and engineering.
 - [target](https://contrib.scikit-learn.org/category_encoders/targetencoder.html){:target="_blank"}: represent a categorical feature with the average of the target values that share that categorical value
 - and many [more](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing){:target="_blank"}!
 
-#### Extraction
+### Extraction
 - signal extraction from existing features
 - combine existing features
 - [transfer learning](https://ruder.io/transfer-learning/){:target="_blank"}: using a pretrained model as a feature extractor and finetuning on it's results
@@ -181,8 +182,8 @@ Transforming the data involves feature encoding and engineering.
     ```
     <pre class="outout">
     [[-1.44245791 -0.1744313 ]
-    [-0.1148688   0.31291575]
-    [ 1.55732672 -0.13848446]]
+     [-0.1148688   0.31291575]
+     [ 1.55732672 -0.13848446]]
     [0.96838847 0.03161153]
     [2.12582835 0.38408396]
     </pre>
@@ -207,8 +208,8 @@ Transforming the data involves feature encoding and engineering.
     <pre class="output">
     ['acetone', 'acetyl', 'chloride', 'hydroxide']
     [[1 1 0 0]
-    [0 1 1 0]
-    [0 0 1 1]]
+     [0 1 1 0]
+     [0 0 1 1]]
     </pre>
 
 - [similarity](https://github.com/dirty-cat/dirty_cat){:target="_blank"}: similar to count vectorization but based on similarities in tokens
@@ -263,3 +264,7 @@ albumentations fast image augmentation library easy use wrapper around libraries
     Our data splits were dependent only on the target labels (tags) which were already cleaned. However, if your splits depend on other features as well, you need to at least clean them first before splitting. So the process is more like: preprocessing (global, cleaning) → splitting → preprocessing (local, transformations).
 
 Many of the *transformations* we're going to do are model specific. For example, for our simple baselines we may do `label encoding` → `tf-idf` while for the more involved architectures we may do `label encoding` → `one-hot encoding` → `embeddings`. So we'll cover these in the next suite of lessons as we implement each baseline.
+
+
+<!-- Citation -->
+{% include "cite.md" %}

@@ -1,17 +1,18 @@
 ---
-description: Using first principles to designing and implement a RESTful API to wrap ML functionality.
+template: lesson.html
+title: APIs for Machine Learning
+description: Using first principles to designing and implement a API to wrap ML functionality.
+keywords: api, fastapi, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
 
-Using first principles to designing and implement a RESTful API to wrap ML functionality.
-
 ## Intuition
 
 So far our workflows have involved directly running functions from our Python scripts and more recently, using the [CLI application](cli.md){:target="_blank"} to quickly execute commands. But not all of our users will want to work at the code level or even download the package as we would need to for the CLI app. Instead, many users will simply want to use the functionality of our model and inspect the relevant details around it. To address this, we can develop an application programming interface (API) that provides the appropriate level of abstraction that enables our users to interact with the underlying data in our application.
 
-### Interactions
+## Interactions
 
 The interactions in our situation involve the client (users, other applications, etc.) sending a *request* to the server (our application) and receiving a *response* in return.
 
@@ -19,15 +20,15 @@ The interactions in our situation involve the client (users, other applications,
     <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/applied-ml/api/interactions.png">
 </div>
 
-#### Request
+### Request
 
 We'll first take a look at the different components of a request:
 
-##### URI
+#### URI
 
 A uniform resource identifier (URI) is an identifier for a specific resource.
 
-<pre class="output" style="padding-left: 0rem; padding-right: 0rem; font-weight: 600;">
+<pre class="output ai-center-all" style="padding-left: 0rem; padding-right: 0rem; font-weight: 600;">
 <span style="color:#d63939">https://</span><span style="color:#206bc4">localhost:</span><span style="color: #4299e1">5000</span><span style="color:#2fb344">/users/{userId}/models/{modelId}/</span><span style="color:#ae3ec9">?filter=completed</span><span style="color:#f76707">#details</span>
 </pre>
 
@@ -132,7 +133,7 @@ A uniform resource identifier (URI) is an identifier for a specific resource.
   </div>
 </div>
 
-##### Method
+#### Method
 
 The method is the operation to execute on the specific resource defined by the URI. There are many possible [methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods){:target="_blank"} to choose from, but here are the four most popular, which are often referred to as [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete){:target="_blank"} because they allow you to Create, Read, Update and Delete.
 
@@ -177,7 +178,7 @@ curl -X GET "http://localhost:5000/users"
 
 <br>
 
-##### Headers
+#### Headers
 
 Headers contain information about a certain event and are usually found in both the client's request as well as the server's response. It can range from what type of format they'll send and receive, authentication and caching info, etc.
 ```bash
@@ -188,7 +189,7 @@ curl -X GET "http://localhost:5000/" \          # method and URI
 
 <br>
 
-##### Body
+#### Body
 
 The body contains information that may be necessary for the request to be processed. It's usually a JSON object sent during `POST`, `PUT`/`PATCH`, `DELETE` request methods.
 
@@ -201,7 +202,7 @@ curl -X POST "http://localhost:5000/models" \   # method and URI
 
 <br>
 
-#### Response
+### Response
 
 The response we receive from our server is the result of the request we sent. The response also includes headers and a body which should include the proper HTTP status code as well as explicit messages, data, etc.
 
@@ -233,7 +234,7 @@ There are many [HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_st
 
 </center>
 
-### Best practices
+## Best practices
 
 When designing our API, there are some best practices to follow:
 
@@ -252,7 +253,7 @@ We're going to organize our API under the [`app`](https://github.com/GokuMohanda
 
 We'll step through the components in these scripts to show how we'll design our API.
 
-### FastAPI
+## FastAPI
 
 We're going to use [FastAPI](https://fastapi.tiangolo.com/){:target="_blank"} as our framework to build our API service. There are plenty of other framework options out there such as Flask, Django and even non-Python based options like Node, Angular, etc. FastAPI is a relative newcomer that combines many of the advantages across these frameworks and is maturing quickly and becoming more widely adopted. It's notable advantages include:
 
@@ -267,7 +268,7 @@ We're going to use [FastAPI](https://fastapi.tiangolo.com/){:target="_blank"} as
 
 To show how intuitive and powerful FastAPI is, we could laboriously go through the [documentation](https://fastapi.tiangolo.com/){:target="_blank"} but instead we'll walk through everything as we cover the components of our own application.
 
-### Initialization
+## Initialization
 
 The first step is to initialize our API in our [`app/api.py`](https://github.com/GokuMohandas/applied-ml/tree/main/app/api.py){:target="_blank"} file by defining metadata like the title, description and version.
 ```python linenums="1"
@@ -302,7 +303,7 @@ We let our application know that the endpoint is at `/` through the path operati
     In our actual [`api.py`](https://github.com/GokuMohandas/applied-ml/tree/main/app/api.py){:target="_blank"} script, you'll notice that even our index function looks different. Don't worry, we're slowly adding components to our endpoints and justifying them along the way.
 
 
-### Launching
+## Launching
 
 We can launch our application with the following command (also saved as a Makefile target as `make app`):
 
@@ -323,7 +324,7 @@ We're using [Uvicorn](https://www.uvicorn.org/){:target="_blank"}, a fast ASGI s
     gunicorn -c config/gunicorn.py -k uvicorn.workers.UvicornWorker app.api:app
     ```
 
-### Requests
+## Requests
 
 Now that we have our application running, we can submit our `GET` request using several different methods:
 
@@ -353,7 +354,7 @@ For all of these, we'll see the exact same response from our API:
 </pre>
 
 
-### Decorators
+## Decorators
 We're going to use [decorators](../ml-foundations/python.md#decorators){:target="_blank"} to wrap some of our endpoints so we can customize our function's inputs and outputs. In our `GET \` request's response above, there was not a whole lot of information about the actual request, so we should append details such as URL, timestamp, etc. But we don't want to do this individually for each endpoint so let's use a decorator to append the request information for every response.
 
 ```python linenums="1" hl_lines="6"
@@ -424,7 +425,7 @@ def load_best_artifacts():
 ```
 
 
-### Documentation
+## Documentation
 
 When we define an endpoint, FastAPI automatically generates some documentation, adhering to [OpenAPI](https://swagger.io/specification/){:target="_blank"} standards, based on the function's inputs, typing, outputs, etc. We can access the [Swagger UI](https://swagger.io/tools/swagger-ui/){:target="_blank"} for our documentation by going to `/docs` endpoints on any browser.
 
@@ -455,7 +456,7 @@ def _index(request: Request):
 !!! note
     You can also use `/redoc` endpoint to view the [ReDoc](https://redocly.github.io/redoc/){:target="_blank"} documentation or [Postman](https://www.postman.com/use-cases/application-development/){:target="_blank"} to execute and manage tests that you can save and share with others.
 
-### Resources
+## Resources
 
 When designing the resources for our API service, we need to think about the following questions:
 
@@ -478,7 +479,7 @@ def load_best_artifacts():
     ...
 ```
 
-#### Query parameters
+### Query parameters
 
 ```python linenums="1" hl_lines="3"
 @app.get("/runs", tags=["Runs"])
@@ -498,7 +499,7 @@ You'll notice that we're passing an optional query parameter `top` here to indic
 curl -X GET "http://localhost:5000/runs?top=10" -H  "accept: application/json"
 ```
 
-#### Path parameters
+### Path parameters
 Our next endpoint will be to `GET` information about a specific run (ex. granular performance) based on it's `run_id`. This time, we're using a path parameter which is a required field in the URI. This `run_id` will be passed to the function after it's validated through the `validate_run_id` function.
 
 ```python linenums="1" hl_lines="1 4"
@@ -521,7 +522,7 @@ We'd perform our `GET` request like so, where the `run_id` is part of the reques
 curl -X GET "http://localhost:5000/runs/264ac530b78c42608e5dea1086bc2c73" -H  "accept: application/json"
 ```
 
-#### Schemas
+### Schemas
 
 Users can list all runs, find out more information about a specific run and now we want to enable them to get predictions on some input text from any of these runs.
 ```python linenums="1" hl_lines="4"
@@ -584,9 +585,9 @@ In line 12, we're defining the `PredictPayload` object as a list of `Text` objec
     But we wanted to create very explicit schemas in case we add different parameters in the future and to show how to apply granular validation to them.
 
 
-#### Validation
+### Validation
 
-##### Built-in
+#### Built-in
 
 We're using pydantic's [`BaseModel`](pydantic BaseModel: https://pydantic-docs.helpmanual.io/usage/models/){:target="_blank"} object here because it offers built-in validation for all of our schemas. In our case, if a `Text` instance is less than 1 character, then our service will return the appropriate error message and code.
 
@@ -614,7 +615,7 @@ curl -X POST "http://localhost:5000/predict" -H  "accept: application/json" -H  
 }
 </pre>
 
-##### Custom
+#### Custom
 
 We can also add custom validation on a specific entity by using the `@validator` decorator, like we do to ensure that list of `texts` is not empty.
 
@@ -649,7 +650,7 @@ curl -X POST "http://localhost:5000/predict" -H  "accept: application/json" -H  
 }
 </pre>
 
-#### Extras
+### Extras
 
 Lastly, we have a [`schema_extra`](https://fastapi.tiangolo.com/tutorial/schema-extra-example/){:target="_blank"} object under the `Config` class to depict what an example `PredictPayload` should look like. When we do this, it automatically appears in our endpoint's documentation when we want to "Try it out".
 
@@ -677,7 +678,7 @@ Lastly, we have a [`schema_extra`](https://fastapi.tiangolo.com/tutorial/schema-
     ```
 
 
-### Projects
+## Projects
 
 To make our API a standalone product, we'll need to create and manage a database for our users and resources. These users will have credentials which they will use for authentication and use their privileges to be able to communicate with our service. And of course, we can display a rendered frontend to make all of this seamless with HTML forms, buttons, etc. This is exactly how the [old MWML platform](https://twitter.com/madewithml/status/1284503478685978625){:target="_blank"} was built and we leveraged FastAPI to deliver high performance for 500K+ daily service requests.
 
@@ -695,3 +696,6 @@ However, for the majority of ML developers, thanks to the wide adoption of micro
 
 !!! note
     We've only covered the foundations of using FastAPI but there's so much more we can do. Be sure to check out their [advanced documentation](https://fastapi.tiangolo.com/advanced/){:target="_blank"} to see everything we can leverage.
+
+<!-- Citation -->
+{% include "cite.md" %}

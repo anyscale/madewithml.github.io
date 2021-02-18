@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: PyTorch Fundamentals
 description: Learn how to use the PyTorch machine learning framework.
+keywords: pytorch, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/05_PyTorch.ipynb){:target="_blank"}
-
-In this lesson, we'll learn the basics of [PyTorch](https://pytorch.org), which is a machine learning library used to build dynamic neural networks. We'll learn about the basics, like creating and using Tensors.
 
 ## Set up
 
@@ -371,3 +372,7 @@ print (x.is_cuda)
 False
 True
 </pre>
+
+
+<!-- Citation -->
+{% include "cite.md" %}

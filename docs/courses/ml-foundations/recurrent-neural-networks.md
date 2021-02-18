@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Recurrent Neural Networks (RNN)
 description: Explore and motivate the need for representation via embeddings.
+keywords: recurrent neural networks, numpy, pytorch, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb){:target="_blank"}
-
-In this lesson we will learn how to process sequential data (sentences, time-series, etc.) with recurrent neural networks (RNNs).
 
 ## Overview
 So far we've processed inputs as whole (ex. applying filters across the entire input to extract features) but we can also process our inputs sequentially. For example we can think of each token in our text as an event in time (timestep). We can process each timestep, one at a time, and predict the class after the last timestep (token) has been processed. This is very powerful because the model now has a meaningful way to account for the sequential order of tokens in our sequence and predict accordingly.
@@ -1237,3 +1238,7 @@ print (json.dumps(prob_dist, indent=2))
 
 !!! note
     We will learn how to get a little bit of interpretability with RNNs in the next lesson on attentional interfaces.
+
+
+<!-- Citation -->
+{% include "cite.md" %}

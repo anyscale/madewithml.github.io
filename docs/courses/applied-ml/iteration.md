@@ -1,20 +1,23 @@
 ---
+template: lesson.html
+title: Iteratively Improving ML Systems
 description: Improving on our solution iteratively over time.
+keywords: iteration, active learning, monitoring, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-device-camera-video-24: [Video](https://www.youtube.com/watch?v=Bit1IUVWrkY){:target="_blank"}
 
-Improving on our solution iteratively over time.
-
-<div class="ai-center-all mt-2">
+<!-- <div class="ai-center-all mt-2">
     <iframe width="600" height="337.5" src="https://www.youtube.com/embed/Bit1IUVWrkY?rel=0" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen></iframe>
-</div>
+</div> -->
 
 ## Intuition
+
 We don't want to spend months of time developing a complicated solution only to learn that the entire problem has changed. The main idea here is to **close the loop**, which involves:
+
 1. Create a minimum viable product (MVP) that satisfies a baseline performance.
 2. Iterate on your solution by using the feedback.
 3. Constantly reassess to ensure your objective hasn't changed.
@@ -34,7 +37,8 @@ Creating the MVP for solutions that requires machine learning often involves goi
 
 Deploying solutions is actually quite easy (from an engineering POV) but maintaining and iterating upon it is quite the challenge.
 
-- collect signals from UX
+- collect signals from UI/UX to best approximate how your deployed model is performing
+- determine window / rolling performances on overall and key slices of data
 - monitor (performance, concept drift, etc.) to know when to update
 - constantly reassess your objective
 - iteration bottlenecks (ex. data quality checks)
@@ -50,3 +54,7 @@ As for monitoring and iterating on our solution, we'll be looking at things like
 ## Resources
 - [Machine Learning Systems Design](https://github.com/chiphuyen/machine-learning-systems-design/blob/master/build/build1/consolidated.pdf){:target="_blank"}
 - [Building Machine Learning Products: A Problem Well-Defined](http://jeremyjordan.me/ml-requirements/){:target="_blank"}
+
+
+<!-- Citation -->
+{% include "cite.md" %}

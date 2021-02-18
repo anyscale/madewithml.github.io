@@ -1,8 +1,11 @@
-## Our Mission
+---
+template: page.html
+title: Our Mission
+description: We exist to end the hype and educate how to responsibly deliver value with ML.
+keywords: applied ml, machine learning
+---
 
-Made With ML exists to end the hype and deliver actual value.
-
-## :octicons-gift-24: Deliver value
+## 🌍 &nbsp;Deliver value
 
 - <u>Problem</u>:
 How come there's a lot of buzz around ML but we grossly fall short when it comes to deployed ML in real world applications (especially in certain industries).

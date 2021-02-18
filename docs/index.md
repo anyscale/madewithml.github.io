@@ -1,30 +1,28 @@
 ---
-hide:
-    # - toc
+template: page.html
+keywords: applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 ---
 
 <!-- Hero -->
-<div class="ai-section">
-    <div class="row flex-column-reverse flex-md-row">
-        <div class="col-md-6">
-            <div class="ai-hero-text">
-                <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
-                <p style="margin-top: 0rem; color: #807e7e;">Applied ML · MLOps · Production</p>
-                <p style="font-size: 0.89rem;">Join <b>20K+ developers</b> in learning how to <a href="examples">responsibly</a> deliver value with applied ML.</p>
-                <a class="md-button md-button--primary mr-2 mb-2 mb-md-0 px-3 py-2" href="/subscribe">
-                    <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 3A1.75 1.75 0 000 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0024 18.75v-14A1.75 1.75 0 0022.25 3H1.75zM1.5 4.75a.25.25 0 01.25-.25h20.5a.25.25 0 01.25.25v.852l-10.36 7a.25.25 0 01-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"></path></svg></span> Subscribe</a>
-                <a class="md-button mb-3 mb-md-0 px-3 py-2" href="#ml-foundations">View courses</a>
-            </div>
+<div class="row flex-column-reverse flex-md-row">
+    <div class="col-md-7">
+        <div class="ai-hero-text">
+            <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
+            <p style="margin-top: 0rem; color: #807e7e;">Applied ML · MLOps · Production</p>
+            <p style="font-size: 0.89rem;">Join <b>20K+ developers</b> in learning how to <a href="about">responsibly</a> deliver value with applied ML.</p>
+            <a class="md-button md-button--primary mr-2 mb-2 mb-md-0 px-3 py-2" href="/subscribe">
+                <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 3A1.75 1.75 0 000 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0024 18.75v-14A1.75 1.75 0 0022.25 3H1.75zM1.5 4.75a.25.25 0 01.25-.25h20.5a.25.25 0 01.25.25v.852l-10.36 7a.25.25 0 01-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"></path></svg></span> Subscribe</a>
+            <a class="md-button mb-3 mb-md-0 px-3 py-2" href="#ml-foundations">View courses</a>
         </div>
-        <div class="col-md-6 ai-center-all">
-            <div class="ai-hero-media mb-md-0 mb-3">
-                <a href="#applied-ml"><img src="static/images/logos.png" style="width: 12rem; border-radius: 10px; box-shadow: 0px 0px 15px 0.1px #fff"></a>
-            </div>
+    </div>
+    <div class="col-md-5 ai-center-all">
+        <div class="mb-md-0 mb-3">
+            <a href="#applied-ml"><img src="static/images/logos.png" style="width: 12rem; border-radius: 10px; box-shadow: 0px 0px 15px 0.1px #fff"></a>
         </div>
     </div>
 </div>
 
-<hr style="background-color: #c4c3c3; height: 1px; border: 0;">
+<hr>
 
 <!-- Features -->
 ## Features
@@ -67,7 +65,7 @@ hide:
     </div>
 </div>
 
-<hr style="background-color: #c4c3c3; height: 1px; border: 0;">
+<hr>
 
 ## ML Foundations
 <!-- ML Foundations -->
@@ -110,7 +108,7 @@ Learn the foundations of ML through intuitive explanations, clean code and visua
 </div>
 </div>
 
-<hr style="background-color: #c4c3c3; height: 1px; border: 0;">
+<hr>
 
 ## Applied ML
 <!-- Applied ML -->
@@ -153,8 +151,8 @@ Learn how to apply ML to build a production grade product to deliver value.
     </ul>
     <b><span class="mr-1">📦</span> Application</b>
     <ul>
-    <li><a href="/courses/applied-ml/cli/">Command line</a></li>
-    <li><a href="/courses/applied-ml/api/">RESTful API</a></li>
+    <li><a href="/courses/applied-ml/cli/">CLI</a></li>
+    <li><a href="/courses/applied-ml/api/">API</a></li>
     </ul>
     <b><span class="mr-1">✅</span> Testing</b>
     <ul>
@@ -182,9 +180,40 @@ Learn how to apply ML to build a production grade product to deliver value.
 </div>
 </div>
 
-<hr style="background-color: #c4c3c3; height: 1px; border: 0;">
+<hr>
 
 <!-- FAQ -->
 ## Frequently Asked Questions (FAQ)
 
-{% include "faq.md" %}
+### Who is this content for?
+- ML developers who want to become end-to-end ML developers.
+- Software engineers who want to responsibly deliver value with applied ML.
+- Product managers who want to have a comprehensive understanding of applied ML.
+
+### What makes this content unique?
+- `#!js hands-on`: If you search production ML or MLOps online, you'll find great blog posts and tweets. But in order to really understand these concepts, you need to implement them. Unfortunately, you don’t see a lot of the inner workings of running production ML because of scale, proprietary content & expensive tools. However, Made With ML is free, open and live which makes it a perfect learning opportunity for the community.
+- `#!js intuition-first`: We will never jump straight to code. In every lesson, we will develop intuition for the concepts and think about it from a product perspective.
+- `#!js software engineering`: This course isn't just about ML. In fact, it's mostly about clean software engineering! We'll cover important concepts like versioning, testing, logging, etc. that really makes something production-grade product.
+- `#!js focused yet holistic`: For every concept, we'll not only cover what's most important for our specific task (this is the case study aspect) but we'll also cover related methods (this is the guide aspect) which may prove to be useful in other situations.
+
+### Who is the author?
+- I've deployed large scale ML systems at Apple as well as smaller systems with constraints at startups and want to share the common principles I've learned.
+- I created the ([old](hhttps://twitter.com/madewithml/status/1284503478685978625)) Made With ML so that the community can explore, learn and build ML and I learned how to build it into an end-to-end product that was used by over 20K monthly active users (5K DAU).
+- Connect with me on [:fontawesome-brands-twitter: Twitter](https://twitter.com/GokuMohandas){:target="_blank"} and [:fontawesome-brands-linkedin: LinkedIn](https://www.linkedin.com/in/goku){:target="_blank"} for updates and tips.
+
+### Why is this free?
+While this content is for everyone, it's especially targeted towards people who don't have as much opportunity to learn. I firmly believe that creativity and intelligence are randomly distributed but opportunity is siloed. I want to enable more people to create and contribute to innovation.
+
+<hr>
+
+<!-- Citation -->
+To cite this content, please use:
+
+```bash
+@misc{madewithml,
+    title  = "Made With ML",
+    author = "Goku Mohandas",
+    url    = "https://madewithml.com/"
+    year   = "2021",
+}
+```

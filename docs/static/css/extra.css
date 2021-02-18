@@ -1,13 +1,13 @@
-.ai-section {
-  padding-left: 0rem;
-  padding-right: 0rem;
+.md-typeset h1 {
+  font-weight: 500 !important;
 }
 
-@media (max-width: 480px) {
-  .ai-section {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+.md-typeset h2 {
+  font-weight: 400 !important;
+}
+
+.md-typeset h3 {
+  font-weight: 300 !important;
 }
 
 .ai-center-all {
@@ -35,6 +35,10 @@
   color: var(--md-accent-fg-color);
 }
 
+.md-nav__icon {
+  display: none !important;
+}
+
 .md-header-nav__button.md-logo img {
   width: 1.5rem;
   height: auto;
@@ -47,12 +51,8 @@
   padding-right: 0rem;
 }
 
-.md-sidebar {
-  width: 11rem !important;
-}
-
 .md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
-  background-color: #dfdede !important;
+  background-color: #ebebeb !important;
 }
 
 .md-content__inner {
@@ -104,6 +104,10 @@
 
 .linkedin {
   color: #4267B2;
+}
+
+.github {
+  color: grey;
 }
 
 .output {

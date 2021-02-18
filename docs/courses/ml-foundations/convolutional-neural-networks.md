@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Convolutional Neural Networks (CNN)
 description: Convolutional Neural Networks (CNNs) applied to text for natural language processing (NLP) tasks.
+keywords: convolutional neural networks, CNN, computer vision, image classification, image recognition, batchnorm, batch normalization, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/11_Convolutional_Neural_Networks.ipynb){:target="_blank"}
-
-In this lesson we will explore the basics of Convolutional Neural Networks (CNNs) applied to text for natural language processing (NLP) tasks.
 
 ## Overview
 At the core of CNNs are filters (aka weights, kernels, etc.) which convolve (slide) across our input to extract relevant features. The filters are initialized randomly but learn to act as feature extractors via parameter sharing.
@@ -1290,3 +1291,7 @@ The filters have high values for the words `stock` and `market` which influenced
 
 !!! warning
     This is a crude technique (maxpool doesn't strictly behave this way on a batch) loosely based off of more elaborate [interpretability](https://arxiv.org/abs/1312.6034){:target="_blank"} methods.
+
+
+<!-- Citation -->
+{% include "cite.md" %}

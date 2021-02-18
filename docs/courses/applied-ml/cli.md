@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Command Line Interface (CLI) Applications
 description: Using a command line interface (CLI) application to organize our application's processes.
+keywords: cli, application, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
-
-Using a command line interface (CLI) application to organize our application's processes.
 
 ## Intuition
 
@@ -43,7 +44,7 @@ def predict_tags(
     )
     ```
 
-### Commands
+## Commands
 
 In [`cli.py`](https://github.com/GokuMohandas/applied-ml/tree/main/app/cli.py){:target="_blank"} script we have define the following commands:
 
@@ -70,7 +71,7 @@ We can list all the CLI commands for our application like so:
 </div>
 <script src="../../../static/js/termynal.js"></script>
 
-### Arguments
+## Arguments
 
 With Typer, a function's input arguments automatically get rendered as command line options. For example, our `predict_tags` function consumes `text` and an optional `run_id` as inputs which automatically become arguments for the `predict-tags` CLI command.
 
@@ -125,7 +126,7 @@ def predict_tags(
     ```
 </div>
 
-### Executing
+## Executing
 
 And we can easily use our CLI app to execute these commands with the appropriate options:
 <div class="animated-code">
@@ -149,3 +150,6 @@ And we can easily use our CLI app to execute these commands with the appropriate
 
 !!! note
     You'll most likely be using the CLI application to optimize and train you models. We'll cover how to train using compute instances on the cloud from Amazon Web Services (AWS) or Google Cloud Platforms (GCP) in a later lesson. But in the meantime, if you don't have access to GPUs, check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Google Colab and transfer to local. We essentially run optimization, then train the best model to download and transfer it's arguments and artifacts. Once we have them in our local machine, we can run `tagifai set-artifact-metadata` to match all metadata as if it were run from your machine.
+
+<!-- Citation -->
+{% include "cite.md" %}

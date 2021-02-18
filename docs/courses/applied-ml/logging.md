@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Logging for ML Systems
 description: Keep records of the important events in our application.
+keywords: logging, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
-
-Keep records of the important events in your application.
 
 ## Intuition
 
@@ -15,7 +16,7 @@ Logging the process of tracking and recording key events that occur in our appli
 
 Let's look at what logging looks like in our [application](https://github.com/GokuMohandas/applied-ml){:target="_blank"}.
 
-### Components
+## Components
 
 There are a few overarching concepts to be aware of first before we can create and use our loggers.
 
@@ -25,7 +26,7 @@ There are a few overarching concepts to be aware of first before we can create a
 
 There is so much [more](https://docs.python.org/3/library/logging.html){:target="_blank"} to logging such as filters, exception logging, etc. but these basics will allows us to do everything we need for our application.
 
-### Levels
+## Levels
 
 Before we create our specialized, configured logger, let's look at what logged messages even look like by using a very basic configuration.
 ```python linenums="1"
@@ -52,7 +53,7 @@ CRITICAL:root:There is something terribly wrong and process may terminate.
 
 These are the basic [levels](https://docs.python.org/3/library/logging.html#logging-levels){:target="_blank"} of logging where `DEBUG` is the lowest priority and `CRITICAL` is the highest. We defined out logger using [`basicConfig`](https://docs.python.org/3/library/logging.html#logging.basicConfig){:target="_blank"} to emit log messages to our stdout console (we also could've written to any other stream or even a file) and to be sensitive to log messages starting from level `DEBUG`. This means that all of our logged messages will be displayed since `DEBUG` is the lowest level. Had we made the level `ERROR`, then only `ERROR` and `CRITICAL` log message would be displayed.
 
-### Configuration
+## Configuration
 
 Now let's go ahead and create more configured loggers that will be useful for our application (our code is inside [`tagifai/config.py`](https://github.com/GokuMohandas/applied-ml/blob/main/tagifai/config.py){:target="_blank"}. First, we'll define a configuration dictionary object:
 
@@ -240,3 +241,6 @@ We chose to define a dictionary configuration for our logger but there are other
     logger = logging.getLogger("root")
     logger.handlers[0] = RichHandler(markup=True)  # set rich handler
     ```
+
+<!-- Citation -->
+{% include "cite.md" %}

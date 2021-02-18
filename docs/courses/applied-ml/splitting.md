@@ -1,15 +1,15 @@
 ---
+template: lesson.html
+title: Splitting a Dataset for Multilabel Classification
 description: Appropriately splitting our dataset (multi-label) for training, validation and testing.
+keywords: splitting, multilabel, skmultilearn, data splits, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
-Appropriately splitting our dataset (multi-label) for training, validation and testing.
-
 ## Intuition
 
-### Why do we need it?
 To determine the efficacy of our models, we need to have an unbiased measuring approach. To do this, we split our dataset into `training`, `validation`, and `testing` data splits. Here is the process:
 
 1. Use the training split to train the model.
@@ -19,7 +19,6 @@ To determine the efficacy of our models, we need to have an unbiased measuring a
 3. After training stops (epoch(s)), we will use the testing split to perform a one-time assessment of the model.
   > This is our best measure of how the model may behave on new, unseen data. Note that *training stops* when the performance improvement is not significant or any other stopping criteria that we may have specified.
 
-### How can we do it?
 We need to ensure that our data is properly split so we can trust our evaluations. A few criteria are:
 
 - the dataset (and each data split) should be representative of data we will encounter
@@ -32,7 +31,7 @@ We need to ensure that our data is properly split so we can trust our evaluation
 
 ## Application
 
-### Label encoding
+## Label encoding
 Before we split our dataset, we're going to encode our output labels where we'll be assigning each tag a unique index.
 
 ```python linenums="1"
@@ -144,7 +143,7 @@ array([[1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 y = label_encoder.encode(y)
 ```
 
-### Naive split
+## Naive split
 For traditional `multi-class` tasks (each input has one label), we want to ensure that each data split has similar class distributions. However, our task is `multi-label` classification (an input can have many labels) which complicates the stratification process.
 
 First, we'll naively split our dataset randomly and show the large deviations between the (adjusted) class distributions across the splits. We'll use scikit-learn's [`train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html){:target="_blank"} function to do the splits.
@@ -565,7 +564,7 @@ np.mean(np.std(dist_df.to_numpy(), axis=0))
     For simple multiclass classification, you can specify how to stratify the split by adding the [`stratify`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html){:target="_blank"} keyword argument. But our task is multilabel classification, so we'll need to use other techniques to create even splits.
 
 
-### Stratified split
+## Stratified split
 Now we'll apply [iterative stratification](http://lpis.csd.auth.gr/publications/sechidis-ecmlpkdd-2011.pdf){:target="_blank"} via the [skmultilearn](http://scikit.ml/index.html){:target="_blank"} library, which essentially splits each input into subsets (where each label is considered individually) and then it distributes the samples starting with fewest "positive" samples and working up to the inputs that have the most labels.
 
 ```python linenums="1"
@@ -823,3 +822,6 @@ The standard deviation is much better but not 0 (perfect splits) because keep in
 
 ## Resources
 - [How (and why) to create a good validation set](https://www.fast.ai/2017/11/13/validation-sets/){:target="_blank"}
+
+<!-- Citation -->
+{% include "cite.md" %}

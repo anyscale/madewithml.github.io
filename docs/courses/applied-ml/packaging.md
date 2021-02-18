@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Packaging a Python Codebase
 description: Using configurations and virtual environments to create a setting for reproducing results.
+keywords: packaging, pip, setup.py, virtual environment, reproducability, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
-
-Using configurations and virtual environments to create a setting for reproducing results.
 
 ## Intuition
 
@@ -13,7 +14,7 @@ It's integral to be able to consistently create an environment to develop in so 
 
 ## Application
 
-### Virtual environment
+## Virtual environment
 
 When we used our [notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}, we had a preloaded set of packages (run `!pip list` inside the notebook to see all of them). But now we want to define our environment so we can reproduce it for our Python scripts. There are [many recommended options](https://packaging.python.org/guides/tool-recommendations/){:target="_blank"} when it comes to packaging in Python and we'll be using the traditional and recommended [Pip](https://pip.pypa.io/en/stable/){:target="_blank"}.
 
@@ -36,9 +37,13 @@ Let's unpack what's happening here:
 3. Upgrading required packages so we download the latest package wheels.
 4. Install from `setup.py` (`-e`, `--editable` installs a project in develop mode)
 
-### setup.py
+## setup.py
 
-Let's dive into our [`setup.py`](https://github.com/GokuMohandas/applied-ml/blob/main/setup.py){:target="_blank"} to see how what we're installing inside our virtual environment. First, we're retrieving our required packages from our `requirements.txt` file. While we could place these requirements directly inside `setup.py`, many applications still look for a `requirements.txt` file so we'll keep it separate.
+Let's dive into our [`setup.py`](https://github.com/GokuMohandas/applied-ml/blob/main/setup.py){:target="_blank"} to see how what we're installing inside our virtual environment.
+
+### Requirements
+
+First, we're retrieving our required packages from our `requirements.txt` file. While we could place these requirements directly inside `setup.py`, many applications still look for a `requirements.txt` file so we'll keep it separate.
 ```python linenums="10"
 # Load packages from requirements.txt
 with open(Path(BASE_DIR, "requirements.txt"), "r") as file:
@@ -52,6 +57,8 @@ The next several lines in our `setup.py` file include some packages required for
 
 !!! note
     We have test and dev packages separated because later on, we'll be using [GitHub actions](https://github.com/features/actions){:target="_blank"} that will only be testing our code so we wanted to specify a way to load only the required packages for testing.
+
+### Setup
 
 The heart of the `setup.py` file is the `setup` object which describes how to set up our package and it's dependencies. The first several lines cover metadata (name, description, etc.) and then we define the requirements. Here we're stating that we require a Python version equal to or above 3.6 and then passing in our required packages to `install_requires`. Finally, we define extra requirements that different types of users may require.
 
@@ -68,6 +75,8 @@ setup(
 )
 ```
 
+### Entry points
+
 The final lines of the file define various entry points we can use to interact with the application. Here we define some console scripts (commands) we can type on our terminal to execute certain actions. For example, after we install our package, we can type the command `tagifai` to run the `app` variable inside `tagifai/cli.py`.
 
 ```python linenums="59"
@@ -81,6 +90,8 @@ setup(
 )
 ```
 
+## Usage
+
 We can install our package for different situations like so:
 ```bash
 python -m pip install -e .            # installs required packages only
@@ -90,3 +101,6 @@ python -m pip install -e ".[test]"    # installs required + test packages
 
 !!! note
     There are many alternatives to a setup.py file such as the [`setup.cfg`](https://docs.python.org/3/distutils/configfile.html){:target="_blank"} and the more recent (and increasingly adopted) [`pyproject.toml`](https://github.com/GokuMohandas/applied-ml/blob/main/pyproject.toml){:target="_blank"}.
+
+<!-- Citation -->
+{% include "cite.md" %}

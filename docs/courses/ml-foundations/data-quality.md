@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Data Quality for Machine Learning
 description: An illustrative look at the importance of data quality in machine learning.
+keywords: data quality, cleaning, overfitting, underfitting, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/09_Data_Quality.ipynb){:target="_blank"}
-
-In this lesson we'll introduce and illusrate the fundamental concept of data quality.
 
 ## Overview
 In a nutshell, a machine learning model consumes input data and produces predictions. The quality of the predictions directly corresponds to the quality of data you train the model with; **garbage in, garbage out**. Check out this [article](https://venturebeat.com/2018/06/30/understanding-the-practical-applications-of-business-ai/){:target="_blank"} on where it makes sense to use AI and how to properly apply it.
@@ -735,3 +736,7 @@ Models are not crystal balls. So it's important that before any machine learning
 Once you are confident that your data is of good quality, you can finally start thinking about modeling. The type of model you choose depends on many factors, including the task, type of data, complexity required, etc.
 
 So once you figure out what type of model your task needs, start with simple models and then slowly add complexity. You don’t want to start with neural networks right away because that may not be right model for your data and task. Striking this balance in model complexity is one of the key tasks of your data scientists. **simple models → complex models**
+
+
+<!-- Citation -->
+{% include "cite.md" %}

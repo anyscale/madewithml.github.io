@@ -1,43 +1,51 @@
 ---
+template: lesson.html
+title: Designing Solutions for ML Systems
 description: Designing a solution with constraints.
+keywords: solutions, design, systems, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-device-camera-video-24: [Video](https://www.youtube.com/watch?v=Gi1VlFV8e_k){:target="_blank"}
 
-Designing a solution with constraints.
-
-<div class="ai-center-all">
+<!-- <div class="ai-center-all">
     <iframe width="600" height="337.5" src="https://www.youtube.com/embed/Gi1VlFV8e_k?rel=0" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen></iframe>
-</div>
-
+</div> -->
 
 ## Intuition
-Once we've identified our main objective, we can hypothesize solutions using a three-step process.
 
-### Visualize
+Once we've identified our main objective, we can hypothesize solutions using a three-step process: visualize, understand and design.
+
+## Visualize
 Visualize an ideal solution to our problem **without** factoring in constraints. It may seem like a waste of time to think freely without constraints, but it's a chance to think creatively.
+
 - most creative solutions start from a blank slate
 - void of the bias from previous approaches
 
-### Understand
+## Understand
 Understand how the problem is currently being solved (if at all) and the **how** and **why** things are currently done the way they are.
+
 - prevents us from reinventing the wheel
 - gives insight into processes and signals
 - opportunity to question everything
 
-### Design
+## Design
 Design from our ideal solution while factoring in **constraints**.
 
-#### Automate or augment?
+### Automate or augment?
+
 - be wary of completely removing the user
 - transition from augment to automate as trust grows
-#### UX constraints
+
+### UX constraints
+
 - privacy, personalization, property
 - dictate the components of our solution
-#### Tech constraints
+
+### Tech constraints
+
 - data, time, performance, cost, interpretability, latency
 - dictate the complexity of our solutions
 
@@ -82,3 +90,6 @@ Our main objective is to allow users to discover the precise resource.
 - [Guidelines for Human-AI Interaction](https://www.microsoft.com/en-us/research/uploads/prod/2019/01/AI-Guidelines-poster_nogradient_final.pdf){:target="_blank"}
 - [People + AI Guidebook](https://pair.withgoogle.com/guidebook/){:target="_blank"}
 
+
+<!-- Citation -->
+{% include "cite.md" %}

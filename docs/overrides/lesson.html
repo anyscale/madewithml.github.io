@@ -1,0 +1,79 @@
+<style>
+  .md-content {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .md-content {
+      padding-left: 0rem;
+      padding-right: 0rem;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    /* .md-nav--primary {
+      display: none !important;
+    } */
+    .md-sidebar--primary {
+      width: 8rem !important;
+    }
+    .md-sidebar--secondary {
+      width: 9rem !important;
+    }
+  }
+
+</style>
+
+{% extends "main.html" %}
+
+{% block content %}
+  {% if page.edit_url %}
+    <a href="{{ page.edit_url }}" title="{{ lang.t('edit.link.title') }}" class="md-content__button md-icon">
+      {% include ".icons/material/pencil.svg" %}
+    </a>
+  {% endif %}
+  {% if not "\x3ch1" in page.content %}
+    <h1 style="margin-bottom: 0.75em;">{{ page.meta.title | d(config.site_name, true)}}</h1>
+    <hr style="margin-top: 0rem;">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col-md-3 col-2 ai-center-all" style="padding-right: 10px;">
+            <img src="/static/images/goku_circle.png" style="width: 3rem;">
+          </div>
+          <div class="col-md-9 col-10" style="padding-left: 0rem;">
+            <div>Goku Mohandas</div>
+            <div>
+              <a href="https://twitter.com/GokuMohandas" target="_blank">
+                <span class="twemoji twitter">
+                  {% include ".icons/fontawesome/brands/twitter.svg" %}
+                </span></a> &middot;
+              <a href="https://linkedin.com/in/goku" target="_blank">
+                <span class="twemoji linkedin">
+                  {% include ".icons/fontawesome/brands/linkedin.svg" %}
+                </span></a> &middot;
+              <a href="https://github.com/gokumohandas" target="_blank">
+                <span class="twemoji github">
+                  {% include ".icons/fontawesome/brands/github.svg" %}
+                </span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    {% if page and page.meta.description %}
+      <span>{{ page.meta.description }}</span>
+    {% endif %}
+  {% endif %}
+  {{ page.content }}
+  {% if page and page.meta %}
+    {% if page.meta.git_revision_date_localized or page.meta.revision_date%}
+      {% include "partials/source-date.html" %}
+    {% endif %}
+  {% endif %}
+  <br>
+{% endblock %}

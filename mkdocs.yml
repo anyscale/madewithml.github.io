@@ -10,7 +10,7 @@ repo_name: GokuMohandas/madewithml
 edit_uri: ''  #disables edit button
 
 # Copyright
-copyright: Copyright &copy; 2021 Maintained by <a href="https://twitter.com/GokuMohandas" target="_blank">Goku Mohandas</a>.
+copyright: Maintained by <a href="https://twitter.com/GokuMohandas" target="_blank">Goku Mohandas</a>.
 
 # Google Analytics (key picked up by GitHub Actions from repo secrets)
 google_analytics:
@@ -84,8 +84,8 @@ nav:
       - Styling: courses/applied-ml/styling.md
       - Makefile: courses/applied-ml/makefile.md
     - <b>📦 &nbsp; Application</b>:
-      - Command line: courses/applied-ml/cli.md
-      - RESTful API: courses/applied-ml/api.md
+      - CLI: courses/applied-ml/cli.md
+      - API: courses/applied-ml/api.md
     - <b>✅ &nbsp; Testing</b>:
       - Testing: courses/applied-ml/testing.md
     - <b>⏰ &nbsp; Version control</b>:
@@ -102,7 +102,6 @@ nav:
       - Workflows: courses/applied-ml/workflows.md
       - Active learning: courses/applied-ml/active-learning.md
   - FAQ: faq.md
-  - Subscribe: subscribe.md
 
 # Configuration
 theme:
@@ -114,7 +113,7 @@ theme:
     primary: indigo
     accent: indigo
   font:
-    text: Roboto
+    text: Epilogue
     code: Roboto Mono
   features:
     # - navigation.instant # causes mathjax issues

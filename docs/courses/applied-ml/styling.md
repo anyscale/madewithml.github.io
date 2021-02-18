@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Styling and Formatting Code
 description: Style and formatting conventions to keep your code looking consistent.
+keywords: styling, formatting, pep8, black, isort, flake8, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
-
-Style and formatting conventions to keep your code looking consistent.
 
 ## Intuition
 
@@ -17,7 +18,7 @@ There are many options when it comes to Python style conventions to adhere to, b
 
 ## Application
 
-### Tools
+## Tools
 
 We will be using a very popular blend of style and formatting conventions that makes some very opinionated decisions on our behalf (with configurable options).
 
@@ -32,7 +33,7 @@ We installed all of these as they were defined in out `setup.py` file under `dev
 "isort==5.5.3",
 ```
 
-### Configuration
+## Configuration
 
 Before we can properly use these tools, we'll have to configure them because they may have some discrepancies amongst them since they follow slightly different conventions that extend from PEP8. To configure Black, we could just pass in options using the [CLI method](https://black.readthedocs.io/en/stable/installation_and_usage.html#command-line-options){:target="_blank"}, but it's much more efficient (especially so others can easily find all our configurations) to do this through a file. So we'll need to create a [`pyproject.toml`](https://github.com/GokuMohandas/applied-ml/blob/main/pyproject.toml){:target="_blank"} file and place the following configurations:
 
@@ -104,7 +105,7 @@ with mlflow.start_run(
 
 By placing the `# NOQA: <error-code>` on a line, we're telling flake8 to do NO Quality Assurance for that particular error on this line.
 
-### Usage
+## Usage
 
 To use these tools that we've configured, we could run these commands individually (the `.` signifies that the configuration file for that package is in the current directory) but we can also use the `style` target command from our `Makefile`:
 ```bash
@@ -125,5 +126,5 @@ Fixing ...
     We may sometimes forget to run these style checks after we finish development. We'll cover how to automate this process using [pre-commit](https://pre-commit.com/){:target="_blank"} so that these checks are automatically executed whenever we want to commit our code.
 
 
-
-
+<!-- Citation -->
+{% include "cite.md" %}

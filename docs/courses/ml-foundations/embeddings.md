@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Embeddings
 description: Explore and motivate the need for representation via embeddings.
+keywords: embeddings, word2vec, skipgram, glove, fasttext, CNN, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/12_Embeddings.ipynb){:target="_blank"}
-
-In this lesson, we will motivate the need for embeddings, which are capable of capturing the contextual, semantic and syntactic meaning in data.
 
 ## Overview
 While one-hot encoding allows us to preserve the structural information, it does poses two major disadvantages.
@@ -1644,3 +1645,7 @@ Most important n-grams:
 [2-gram]: tennis tournament
 [3-gram]: final tennis tournament
 </pre>
+
+
+<!-- Citation -->
+{% include "cite.md" %}

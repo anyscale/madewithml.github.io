@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Neural Networks
 description: Implement basic neural networks from scratch using NumPy and then using PyTorch.
+keywords: neural networks, MLP, numpy, pytorch, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/08_Neural_Networks.ipynb){:target="_blank"}
-
-In this lesson, we will explore multilayer perceptrons (MLPs) which are a basic type of neural network. We'll first motivate non-linear activation functions by trying to fit a linear model (logistic regression) on our non-linear spiral data. Then we'll implement an MLP using just NumPy and then with PyTorch.
 
 ## Overview
 Our goal is to learn a model $\hat{y}$ that models $y$ given $X$ . You'll notice that neural networks are just extensions of the generalized linear methods we've seen so far but with non-linear activation functions since our data will be highly non-linear.
@@ -1290,3 +1291,7 @@ It's important that we experiment, starting with simple models that underfit (hi
 <div class="ai-center-all">
     <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/ml-foundations/neural-networks/fit.png">
 </div>
+
+
+<!-- Citation -->
+{% include "cite.md" %}

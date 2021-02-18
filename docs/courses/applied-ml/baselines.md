@@ -1,24 +1,24 @@
 ---
+template: lesson.html
+title: Modeling Baselines
 description: Motivating the use of baselines for iterative modeling.
+keywords: baselines, modeling, pytorch, transformers, huggingface, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
-Motivating the use of baselines for iterative modeling.
-
 ## Intuition
 
-### What is it?
-Baselines are simple benchmarks which pave the way for iterative development.
-
-### Why do we need it?
+Baselines are simple benchmarks which pave the way for iterative development:
 
 - Rapid experimentation via hyperparameter tuning thanks to low model complexity.
 - Discovery of data issues, false assumptions, bugs in code, etc. since model itself is not complex.
 - [Pareto's principle](https://en.wikipedia.org/wiki/Pareto_principle){:target="_blank"}: we can achieve decent performance with minimal initial effort.
 
-### How can we do it?
+## Process
+
+Here is the high level approach to establishing baselines:
 
 1. Start with the simplest possible baseline to compare subsequent development with. This is often a random (chance) model.
 2. Develop a rule-based approach (when possible) using IFTT, auxiliary data, etc.
@@ -35,7 +35,7 @@ Baselines are simple benchmarks which pave the way for iterative development.
     - incorporate auxiliary datasets
     - identify unique slices to improve / upsample
 
-**Tradeoffs to consider**
+## Tradeoffs
 
 When choosing what model architecture(s) to proceed with, there are a few important aspects to consider:
 
@@ -249,7 +249,7 @@ def get_performance(y_true, y_pred, classes):
 
 <hr>
 
-### Random
+## Random
 <u><i>motivation</i></u>: We want to know what random (chance) performance looks like. All of our efforts should be well above this.
 
 ```python linenums="1"
@@ -350,7 +350,7 @@ print (json.dumps(performance['overall'], indent=2))
 
 <hr>
 
-### Rule-based
+## Rule-based
 <u><i>motivation</i></u>: we want to use signals in our inputs (along with domain expertise and auxiliary data) to determine the labels.
 
 ```python linenums="1"
@@ -358,7 +358,7 @@ print (json.dumps(performance['overall'], indent=2))
 set_seeds()
 ```
 
-#### Unstemmed
+### Unstemmed
 
 ```python linenums="1"
 # Get data splits
@@ -459,7 +459,7 @@ print (json.dumps(performance["class"][tag], indent=2))
 }
 </pre>
 
-#### Stemmed
+### Stemmed
 
 Before we do a more involved analysis, let's see if we can do better. We're looking for exact matches with the aliases which isn't always perfect, for example:
 ```python linenums="1"
@@ -545,7 +545,7 @@ for text in X_test:
 y_pred = label_encoder.encode(y_pred)
 ```
 
-#### Evaluation
+### Evaluation
 We can look at overall and per-class performance on our test set.
 
 !!! note
@@ -706,7 +706,7 @@ This is the output for the `transformers` tag:
 
 Though we achieved decent precision, the recall is quite low. This is because rule-based approaches can yield labels with high certainty when there is an absolute condition match but it fails to generalize or learn implicit patterns.
 
-#### Inference
+### Inference
 
 ```python linenums="1"
 # Infer
@@ -741,7 +741,7 @@ transfer learn bert self supervis learn
 
 <hr>
 
-### Simple ML
+## Simple ML
 <u><i>motivation</i></u>:
 - *representation*: use term frequency-inverse document frequency [(TF-IDF)](https://en.wikipedia.org/wiki/Tf%E2%80%93idf){:target="_blank"} to capture the significance of a token to a particular input with respect to all the inputs, as opposed to treating the words in our input text as isolated tokens.
 - *architecture*: we want our model to meaningfully extract the encoded signal to predict the output labels.
@@ -877,7 +877,7 @@ print (json.dumps(performance, indent=2))
 
 <hr>
 
-### CNN w/ Embeddings
+## CNN w/ Embeddings
 
 <u><i>motivation</i></u>:
 
@@ -885,7 +885,7 @@ print (json.dumps(performance, indent=2))
 - *architecture*: we want to process our encoded inputs using [convolution (CNN)](../ml-foundations/convolutional-neural-networks.md){:target="_blank"} filters that can learn to analyze windows of embedded tokens to extract meaningful signal.
 
 
-#### Set up
+### Set up
 
 We'll set up the task by setting seeds for reproducability, creating our data splits abd setting the device.
 ```python linenums="1"
@@ -919,7 +919,7 @@ print (device)
 cuda
 </pre>
 
-#### Tokenizer
+### Tokenizer
 
 We're going to tokenize our input text as character tokens so we can be robust to spelling errors and learn to generalize across tags. (ex. learning that RoBERTa, or any other future BERT based archiecture, warrants same tag as BERT).
 
@@ -1043,7 +1043,7 @@ Text to indices:
   4 20  8  7  8  4  3  9]
 </pre>
 
-#### Data imbalance
+### Data imbalance
 
 We'll factor class weights in our objective function ([binary cross entropy with logits](https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html){:target="_blank"}) to help with class imbalance. There are many other techniques such as over sampling from underrepresented classes, undersampling, etc. but we'll cover these in a separate unit lesson on data imbalance.
 
@@ -1059,7 +1059,7 @@ class counts: [120  41 388 106  41  75  34  73  51  78  64  51  55  93  51 429  
 class weights: {0: 0.008333333333333333, 1: 0.024390243902439025, 2: 0.002577319587628866, 3: 0.009433962264150943, 4: 0.024390243902439025, 5: 0.013333333333333334, 6: 0.029411764705882353, 7: 0.0136986301369863, 8: 0.0196078431372549, 9: 0.01282051282051282, 10: 0.015625, 11: 0.0196078431372549, 12: 0.01818181818181818, 13: 0.010752688172043012, 14: 0.0196078431372549, 15: 0.002331002331002331, 16: 0.030303030303030304, 17: 0.014492753623188406, 18: 0.03333333333333333, 19: 0.0196078431372549, 20: 0.003875968992248062, 21: 0.03125, 22: 0.02040816326530612, 23: 0.01694915254237288, 24: 0.017543859649122806, 25: 0.016666666666666666, 26: 0.020833333333333332, 27: 0.025, 28: 0.004694835680751174, 29: 0.025, 30: 0.029411764705882353, 31: 0.021739130434782608, 32: 0.00510204081632653, 33: 0.02564102564102564, 34: 0.02564102564102564}
 </pre>
 
-#### Datasets
+### Datasets
 
 We're going to place our data into a [`Dataset`](https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset){:target="_blank"} and use a [`DataLoader`](https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader){:target="_blank"} to efficiently create batches for training and evaluation.
 
@@ -1164,7 +1164,7 @@ Sample batch:
   y: [64, 35]
 </pre>
 
-#### Model
+### Model
 
 We'll be using a convolutional neural network on top of our embedded tokens to extract meaningful spatial signal. This time, we'll be using many filter widths to act as n-gram feature extractors. If you're not familiar with CNNs be sure to check out the [CNN lesson](https://madewithml.com/courses/ml-foundations/convolutional-neural-networks/){:target="_blank"} where we walkthrough every component of the architecture.
 
@@ -1299,7 +1299,7 @@ bound method Module.named_parameters of CNN(
 )
 </pre>
 
-#### Training
+### Training
 
 ```python linenums="1"
 # Arguments
@@ -1342,7 +1342,7 @@ Epoch: 52 | train_loss: 0.00057, val_loss: 0.00156, lr: 2.00E-05, _patience: 1
 Stopping early!
 </pre>
 
-#### Evaluation
+### Evaluation
 
 ```python linenums="1"
 from pathlib import Path
@@ -1460,7 +1460,7 @@ with open(Path(dir, 'performance.json'), "w") as fp:
     json.dump(performance, indent=2, sort_keys=False, fp=fp)
 ```
 
-#### Inference
+### Inference
 
 ```python linenums="1"
 # Load artifacts
@@ -1533,11 +1533,11 @@ label_encoder.decode(y_pred)
 
 <hr>
 
-### RNN w/ Embeddings
+## RNN w/ Embeddings
 
 <u><i>motivation</i></u>: let's see if processing our embedded tokens in a sequential fashion using [recurrent neural networks (RNNs)](../ml-foundations/recurrent-neural-networks.md){:target="_blank"} can yield better performance.
 
-#### Set up
+### Set up
 ```python linenums="1"
 # Set seeds
 set_seeds()
@@ -1560,7 +1560,7 @@ if device.type == 'cuda':
 print (device)
 ```
 
-#### Tokenizer
+### Tokenizer
 
 ```python linenums="1"
 # Tokenize
@@ -1610,7 +1610,7 @@ Text to indices:
   4 20  8  7  8  4  3  9]
 </pre>
 
-#### Data imbalance
+### Data imbalance
 
 We'll factor class weights in our objective function ([binary cross entropy with logits](https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html){:target="_blank"}) to help with class imbalance. There are many other techniques such as over sampling from underrepresented classes, undersampling, etc. but we'll cover these in a separate unit lesson on data imbalance.
 
@@ -1626,7 +1626,7 @@ class counts: [120  41 388 106  41  75  34  73  51  78  64  51  55  93  51 429  
 class weights: {0: 0.008333333333333333, 1: 0.024390243902439025, 2: 0.002577319587628866, 3: 0.009433962264150943, 4: 0.024390243902439025, 5: 0.013333333333333334, 6: 0.029411764705882353, 7: 0.0136986301369863, 8: 0.0196078431372549, 9: 0.01282051282051282, 10: 0.015625, 11: 0.0196078431372549, 12: 0.01818181818181818, 13: 0.010752688172043012, 14: 0.0196078431372549, 15: 0.002331002331002331, 16: 0.030303030303030304, 17: 0.014492753623188406, 18: 0.03333333333333333, 19: 0.0196078431372549, 20: 0.003875968992248062, 21: 0.03125, 22: 0.02040816326530612, 23: 0.01694915254237288, 24: 0.017543859649122806, 25: 0.016666666666666666, 26: 0.020833333333333332, 27: 0.025, 28: 0.004694835680751174, 29: 0.025, 30: 0.029411764705882353, 31: 0.021739130434782608, 32: 0.00510204081632653, 33: 0.02564102564102564, 34: 0.02564102564102564}
 </pre>
 
-#### Datasets
+### Datasets
 ```python linenums="1"
 class RNNTextDataset(torch.utils.data.Dataset):
     def __init__(self, X, y):
@@ -1725,7 +1725,7 @@ Sample batch:
   y: [64, 35]
 </pre>
 
-#### Model
+### Model
 
 We'll be using a recurrent neural network to process our embedded tokens one at a time (sequentially). If you're not familiar with RNNs be sure to check out the [RNN lesson](../ml-foundations/recurrent-neural-networks.md){:target="_blank"} *where* we walkthrough every component of the architecture.
 
@@ -1827,7 +1827,7 @@ bound method Module.named_parameters of RNN(
 )
 </pre>
 
-#### Training
+### Training
 
 ```python linenums="1"
 # Arguments
@@ -1870,7 +1870,7 @@ Epoch: 30 | train_loss: 0.00153, val_loss: 0.00250, lr: 2.00E-04, _patience: 1
 Stopping early!
 </pre>
 
-#### Evaluation
+### Evaluation
 
 ```python linenums="1"
 # Threshold-PR curve
@@ -1914,7 +1914,7 @@ print (json.dumps(performance['overall'], indent=2))
 }
 </pre>
 
-#### Inference
+### Inference
 
 !!! note
     Detailed inspection and inference in the [notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}.
@@ -1926,7 +1926,7 @@ print (json.dumps(performance['overall'], indent=2))
 
 <hr>
 
-### Transformers w/ Contextual Embeddings
+## Transformers w/ Contextual Embeddings
 
 <u><i>motivation</i></u>:
 
@@ -1940,7 +1940,7 @@ print (json.dumps(performance['overall'], indent=2))
   <small>Transformer base architecture [<a href="https://miro.medium.com/max/2880/1*BHzGVskWGS_3jEcYYi6miQ.png" target="_blank">source</a>]</small>
 </div>
 
-#### Set up
+### Set up
 
 ```python linenums="1"
 # Set seeds
@@ -2024,7 +2024,7 @@ print (tokenizer.convert_ids_to_tokens(ids=X_train_ids[0]))
 ['[CLS]', 'alb', '##ument', '##ations', 'fast', 'image', 'augmentation', 'library', 'easy', 'use', 'wrap', '##per', 'around', 'libraries', '[SEP]', '[PAD]', ...]
 </pre>
 
-#### Data imbalance
+### Data imbalance
 
 ```python linenums="1"
 # Class weights
@@ -2044,7 +2044,7 @@ class weights:
   {0: 0.008333333333333333, 1: 0.024390243902439025, 2: 0.002577319587628866, 3: 0.009433962264150943, 4: 0.024390243902439025, 5: 0.013333333333333334, 6: 0.029411764705882353, 7: 0.0136986301369863, 8: 0.0196078431372549, 9: 0.01282051282051282, 10: 0.015625, 11: 0.0196078431372549, 12: 0.01818181818181818, 13: 0.010752688172043012, 14: 0.0196078431372549, 15: 0.002331002331002331, 16: 0.030303030303030304, 17: 0.014492753623188406, 18: 0.03333333333333333, 19: 0.0196078431372549, 20: 0.003875968992248062, 21: 0.03125, 22: 0.02040816326530612, 23: 0.01694915254237288, 24: 0.017543859649122806, 25: 0.016666666666666666, 26: 0.020833333333333332, 27: 0.025, 28: 0.004694835680751174, 29: 0.025, 30: 0.029411764705882353, 31: 0.021739130434782608, 32: 0.00510204081632653, 33: 0.02564102564102564, 34: 0.02564102564102564}
 </pre>
 
-#### Datasets
+### Datasets
 
 ```python linenums="1"
 class TransformerTextDataset(torch.utils.data.Dataset):
@@ -2126,7 +2126,7 @@ Sample batch:
   targets: torch.Size([64, 35])
 </pre>
 
-#### Model
+### Model
 
 We're going to use a pretrained [BertModel](https://huggingface.co/transformers/model_doc/bert.html#bertmodel) to act as a feature extractor. We'll only use the encoder to receive sequential and pooled outputs (`is_decoder=False` is default).
 
@@ -2240,7 +2240,7 @@ bound method Module.named_parameters of Transformer(
 )
 </pre>
 
-#### Training
+### Training
 
 ```python linenums="1"
 # Arguments
@@ -2283,7 +2283,7 @@ Epoch: 46 | train_loss: 0.00038, val_loss: 0.00130, lr: 1.00E-06, _patience: 1
 Stopping early!
 </pre>
 
-#### Evaluation
+### Evaluation
 
 ```python linenums="1"
 # Threshold-PR curve
@@ -2327,7 +2327,7 @@ print (json.dumps(performance['overall'], indent=2))
 }
 </pre>
 
-#### Inference
+### Inference
 
 !!! note
     Detailed inspection, inference and visualization of attention heads in the [notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}.
@@ -2336,7 +2336,7 @@ print (json.dumps(performance['overall'], indent=2))
 
 <hr>
 
-### Tradeoffs
+## Tradeoffs
 We're going to go with the embeddings via CNN approach and optimize it because performance is quite similar to the contextualized embeddings via transformers approach but at much lower cost.
 
 ```python linenums="1"
@@ -2375,3 +2375,7 @@ We'll consider other tradeoffs such as maintenance overhead, bias test passes, e
 
 - [Backing off towards simplicity - why baselines need more love](https://smerity.com/articles/2017/baselines_need_love.html){:target="_blank"}
 - [Model Evaluation, Model Selection, and Algorithm Selection in Machine Learning](https://arxiv.org/abs/1811.12808){:target="_blank"}
+
+
+<!-- Citation -->
+{% include "cite.md" %}

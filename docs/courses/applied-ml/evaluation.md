@@ -1,19 +1,21 @@
 ---
+template: lesson.html
+title: Evaluating our ML Systems
 description: Determining how well our solution is performing over time.
+keywords: evaluation, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-device-camera-video-24: [Video](https://www.youtube.com/watch?v=AwajdDVR_C4){:target="_blank"}
 
-Determining how well our solution is performing over time.
-
-<div class="ai-center-all mt-2">
+<!-- <div class="ai-center-all mt-2">
     <iframe width="600" height="337.5" src="https://www.youtube.com/embed/AwajdDVR_C4?rel=0" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen></iframe>
-</div>
+</div> -->
 
 ## Intuition
+
 Before we start building our solution, we need to make sure we have methods to evaluate it. We'll use our objective here to determine the evaluation criteria.
 
 - be clear about what metrics you are prioritizing
@@ -56,3 +58,7 @@ Fortunately, when we make a mistake, it's not catastrophic. The author will simp
 
 !!! note
     If we want to be very deliberate, we can provide the authors an option to report erroneous tags. Not everyone may act on this but it could reveal underlying issues we may not be aware of.
+
+
+<!-- Citation -->
+{% include "cite.md" %}

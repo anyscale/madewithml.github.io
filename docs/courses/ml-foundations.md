@@ -1,11 +1,9 @@
 ---
+template: course.html
 title: ML Foundations
 description: Learn the foundations of ML through intuitive explanations, clean code and visuals.
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
-
-<!-- ML Foundations -->
-Learn the foundations of ML through intuitive explanations, clean code and visuals.
 
 > :octicons-mark-github-16: [GokuMohandas/madewithml](https://github.com/GokuMohandas/madewithml){:target="_blank"} :octicons-arrow-right-24: <span class="mr-1">🔥</span>Among the [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub
 <br>
@@ -43,3 +41,18 @@ Learn the foundations of ML through intuitive explanations, clean code and visua
     </ul>
 </div>
 </div>
+
+
+<!-- Citation -->
+<hr>
+###
+To cite this course, please use:
+
+```bash
+@misc{madewithml,
+    title  = "ML Foundations - Made With ML",
+    author = "Goku Mohandas",
+    url    = "{{ page.canonical_url }}"
+    year   = "2021",
+}
+```

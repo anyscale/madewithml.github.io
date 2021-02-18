@@ -1,11 +1,12 @@
 ---
+template: lesson.html
+title: Organizing a Code Repository
 description: Organizing our code when moving from notebooks to Python scripts.
+keywords: organization, repository, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 ---
 
 :octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
-
-Organizing our code when moving from notebooks to Python scripts.
 
 ## Intuition
 
@@ -15,7 +16,7 @@ To have organized code is to have readable, reproducible, scalable and efficient
 
 Let's look at what organizing a code base looks like for our [application](https://github.com/GokuMohandas/applied-ml){:target="_blank"}.
 
-### Organizing
+## Organizing
 There are several ways to organize our code from the notebooks but they're all based on utility. For example, we're organizing our code based on the part of the pipeline (data, training, prediction, etc.):
 
 ```bash
@@ -36,7 +37,7 @@ Organizing our code base this way also makes it easier for readers to understand
 !!! note
     Another way to supplement organized code is through documentation, which we'll cover in the next lesson.
 
-### Reading
+## Reading
 So what's the best way to read a code base like this? We could look at the [documentation](documentation.md){:target="_blank"} but that's usually useful if you're looking for specific functions or classes within a script. What if you want to understand the overall functionality and how it's all organized? Well, we can start with the options in `app/cli.py` and dive deeper into the specific utilities. Let's say we wanted to see how a single model is trained, then we'd go to the `train_model` function and inspect each line and build a mental model of the process. For example, when you reach the line:
 ```python
 # Train
@@ -63,20 +64,5 @@ You can dive as deep as you'd like which really depends on your task (general un
 !!! note
     When looking a code base for the first, it's a good item to create a mental model of the entire application and writing it down for yourself so you easily navigate it in the future.
 
-<!--
-```python
-
-```
-<pre class="output">
-
-</pre>
-
-<div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/applied-ml/solution/suggested_tags.png" width="550" alt="pivot">
-</div>
-<div class="ai-center-all">
-  <small>UX of our hypothetical solution</small>
-</div>
-
-{:target="_blank"}
- -->
+<!-- Citation -->
+{% include "cite.md" %}
