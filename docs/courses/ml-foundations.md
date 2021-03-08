@@ -5,6 +5,23 @@ description: Learn the foundations of ML through intuitive explanations, clean c
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
+<style>
+  .md-sidebar {
+    width: 9rem !important;
+  }
+
+  .md-nav--secondary {
+    display: none !important;
+  }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    .md-nav--primary {
+      display: none !important;
+    }
+  }
+</style>
+
 <div class="admonition example">
     <p>
         <a href="https://github.com/gokumohandas/madewithml" target="_blank">

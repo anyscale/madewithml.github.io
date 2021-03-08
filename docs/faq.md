@@ -3,6 +3,25 @@ template: page.html
 title: Frequently Asked Questions (FAQ)
 ---
 
+<style>
+html {
+    scroll-behavior: smooth;
+}
+.md-sidebar {
+    width: 9rem !important;
+}
+
+@media (min-width: 768px) {
+    .md-nav--primary {
+        display: none !important;
+    }
+}
+
+.md-nav--secondary {
+    display: none !important;
+}
+</style>
+
 ### Who is this content for?
 - ML developers who want to become end-to-end ML developers.
 - Software engineers who want to responsibly deliver value with applied ML.
@@ -21,15 +40,3 @@ title: Frequently Asked Questions (FAQ)
 
 ### Why is this free?
 While this content is for everyone, it's especially targeted towards people who don't have as much opportunity to learn. I firmly believe that creativity and intelligence are randomly distributed but opportunity is siloed. I want to enable more people to create and contribute to innovation.
-
-### Citation
-To cite this content, please use:
-
-```bash linenums="1"
-@misc{madewithml,
-    title  = "Made With ML",
-    author = "Goku Mohandas",
-    url    = "https://madewithml.com/"
-    year   = "2021",
-}
-```
