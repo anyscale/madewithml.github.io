@@ -3,12 +3,6 @@ template: page.html
 keywords: applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 ---
 
-<style>
-html {
-    scroll-behavior: smooth;
-}
-</style>
-
 <!-- Hero -->
 <div class="row flex-column-reverse flex-md-row">
     <div class="col-md-7">
@@ -163,9 +157,9 @@ html {
     </ul>
     <b><span class="mr-1">✅</span> Testing</b>
     <ul>
-    <li>Code</li>
-    <li>Data</li>
-    <li>Models</li>
+    <li><a href="/courses/applied-ml/testing/">Code</a></li>
+    <li><a href="/courses/applied-ml/testing/#data">Data</a></li>
+    <li><a href="/courses/applied-ml/testing/#models">Models</a></li>
     </ul>
 </div>
 <div class="col-md-4">
