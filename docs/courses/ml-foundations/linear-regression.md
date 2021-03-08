@@ -4,9 +4,9 @@ title: Linear Regression
 description: Implement linear regression from scratch using NumPy and then using PyTorch.
 keywords: linear regression, regression, numpy, pytorch, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
+repository: https://github.com/GokuMohandas/madewithml
+notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/06_Linear_Regression.ipynb
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/06_Linear_Regression.ipynb){:target="_blank"}
 
 ## Overview
 Our goal is to learn a linear model $\hat{y}$ that models $y$ given $X$ using weights $W$ and bias $b$:

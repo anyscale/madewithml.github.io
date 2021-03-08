@@ -4,9 +4,9 @@ title: Exploratory Data Analysis (EDA)
 description: Exploring our dataset for insights with intention.
 keywords: EDA, datasets, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
+notebook: https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
 ## Intuition
 Exploratory data analysis (EDA) is a vital (and fun) step in the data science process but it's often misconstrued. Here's how to think about EDA:

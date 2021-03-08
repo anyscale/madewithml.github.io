@@ -1,12 +1,12 @@
 ---
 template: lesson.html
 title: Annotation
-description: Preparing and labeling our data for exploration.
+description: Annotating and labeling our data for exploration.
 keywords: annotation, labeling, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
+notebook: https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
 ## Intuition
 
@@ -21,13 +21,14 @@ Annotation is the process of identifying the inputs and outputs that are **worth
 
 It's also the phase where we can use our deep understanding of the problem, processes, constraints and domain expertise to:
 
+- augment the existing dataset
 - enhance using auxiliary data
 - simplify using constraints
 
 And it isn't just about identifying and labeling our initial dataset but also involves thinking about how to make the annotation process more efficient as our dataset grows.
 
 - who will annotate new (streaming) data
-- what tools will be used to accelerate the annotation process
+- what tools will be used to accelerate the annotation process (ie. labeling functions)
 - what workflows will be established to track the annotation process
 
 !!! note
@@ -37,17 +38,12 @@ And it isn't just about identifying and labeling our initial dataset but also in
 
 ## Datasets
 - [projects.json](https://raw.githubusercontent.com/GokuMohandas/applied-ml/main/datasets/projects.json){:target="_blank"}: projects with title, description and tags (cleaned by mods).
-- [projects_detailed.json](https://raw.githubusercontent.com/GokuMohandas/applied-ml/main/datasets/projects_detailed.json){:target="_blank"}: projects with full-text details and additional URLs.
 - [tags.json](https://raw.githubusercontent.com/GokuMohandas/applied-ml/main/datasets/tags.json){:target="_blank"}: tags used in dropdown to aid autocompletion.
 
 !!! note
     We'll have a small GitHub Action that runs on a schedule (cron) to constantly update these datasets over time. We'll learn about how these work when we get to the CI/CD lesson.
 
-Recall that our objective was to augment authors to add the appropriate tags for their project so the community can discover them. So we want to use the metadata provided in each project to determine what the relevant tags are. We'll want to start with the highly influential features and iteratively experiment with additional features:
-
-- title + description
-- ^ + details
-- ^ + relevant html text from URLs
+Recall that our objective was to augment authors to add the appropriate tags for their project so the community can discover them. So we want to use the metadata provided in each project to determine what the relevant tags are. We'll want to start with the highly influential features and iteratively experiment with additional features.
 
 ## Load data
 We'll first load our dataset from the JSON file.
@@ -139,16 +135,20 @@ df.head(5)
 </table>
 </div></div>
 
-
 The reason we want to iteratively add more features is because it introduces more complexity and effort. For example, extracting the relevant HTML from the URLs is not trivial but recall that we want to *close the loop* with a simple solution first. We're going to use just the title and description because we hypothesize that the project's core concepts will be there whereas the details may have many other keywords.
+
 
 ## Auxiliary data
 
 We're also going to be using an [auxiliary dataset](https://raw.githubusercontent.com/madewithml/datasets/main/tags.json) which contains a collection of all the tags with their aliases and parent/child relationships.
 ```python linenums="1"
 # Load tags
-url = "https://raw.githubusercontent.com/madewithml/datasets/main/tags.json"
-tags_dict = OrderedDict(json.loads(urlopen(url).read()))
+url = "https://raw.githubusercontent.com/GokuMohandas/applied-ml/main/datasets/tags.json"
+tags = json.loads(urlopen(url).read())
+tags_dict = {}
+for item in tags:
+    key = item.pop("tag")
+    tags_dict[key] = item
 print (f"{len(tags_dict)} tags")
 ```
 <pre class="output">
@@ -170,14 +170,39 @@ def display_tag_details(tag='question-answering'):
   }
 </pre>
 
+
+
 ## Features
-We could use a project's title and description separately as features but we'll combine them to create one input feature.
+We can also combine existing input features to create new meaningful signal (helping the model a bit). Here, we could use a project's title and description separately as features but we'll combine them to create one input feature.
 ```python linenums="1"
 # Input
 df['text'] = df.title + " " + df.description
 ```
 
+## Data augmentation
+Depending on the tasks, there are many data augmentation libraries:
+
+- Natural language processing (NLP)
+    - [NLPAug](https://github.com/makcedward/nlpaug){:target="_blank"}: data augmentation for NLP.
+    - [TextAttack](https://github.com/QData/TextAttack){:target="_blank"}: a framework for adversarial attacks, data augmentation, and model training in NLP.
+    - [TextAugment](https://github.com/dsfsi/textaugment){:target="_blank"}: text augmentation library.
+- Computer vision (CV)
+    - [Imgaug](https://github.com/aleju/imgaug){:target="_blank"}: image augmentation for machine learning experiments.
+    - [Albumentations](https://github.com/albumentations-team/albumentations){:target="_blank"}: fast image augmentation library.
+    - [Augmentor](https://github.com/mdbloice/Augmentor){:target="_blank"}: image augmentation library in Python for machine learning.
+    - [Kornia.augmentation](https://github.com/kornia/kornia){:target="_blank"}: a module to perform data augmentation in the GPU.
+    - [SOLT](https://github.com/MIPT-Oulu/solt){:target="_blank"}: data augmentation library for Deep Learning, which supports images, segmentation masks, labels and key points.
+- Other
+    - [Snorkel](https://github.com/snorkel-team/snorkel){:target="_blank"}: system for generating training data with weak supervision.
+    - [DeltaPy⁠⁠](https://github.com/firmai/deltapy){:target="_blank"}: tabular data augmentation and feature engineering.
+    - [Audiomentations](https://github.com/iver56/audiomentations){:target="_blank"}: a Python library for audio data augmentation.
+    - [Tsaug](https://github.com/arundo/tsaug){:target="_blank"}: a Python package for time series augmentation.
+
+Regardless of what tool we use, it's important to validate that we're not just augmenting for the sake of augmentation. For example, in many NLP data augmentation scenarios, the adjectives are replaced with other adjectives. We need to ensure that this generalized change doesn't affect key aspects of our dataset. For more fine-grained data augmentation, we can use concepts like [transformation functions](https://www.snorkel.org/use-cases/02-spam-data-augmentation-tutorial){:target="_blank"} to apply specific types of augmentation to a subset of our dataset.
+
 ## Constraints
+In the same vain, we can also reduce the size of our data by placing constraints as to what data is worth annotation or labeling. Here we decide to filter tags above a certain frequency threshold because those with fewer samples won't be adequate for training.
+
 ```python linenums="1"
 def filter(l, include=[], exclude=[]):
     """Filter a list using inclusion and exclusion lists of items."""
@@ -252,7 +277,13 @@ print (f"{len(df)} projects")
 1444 projects
 </pre>
 
+## Workflows
+
 Over time, our dataset will grow and we'll need to label new data. So far, we had a team of moderators clean the existing data but we'll need to establish proper workflow to make this process easier and reliable. Typically, we'll use collaborative UIs where annotators can fix errors, etc. and then use a tool like [Airflow](https://airflow.apache.org/){:target="_blank"} or [KubeFlow](https://www.kubeflow.org/){:target="_blank"} for worflow orchestration to know when new data is ready to be annotated and also when it's ready to be used for modeling.
+
+## Labeling functions
+
+We could utilize weak supervision via [labeling functions](https://www.snorkel.org/use-cases/01-spam-tutorial){:target="_blank"} to label our existing (validate) and new data. We can create constructs based on keywords, pattern expressions, knowledge bases and generalized models to create these labeling functions to label our data, even with conflicts amongst the different labeling functions.
 
 !!! note
     In the next section we'll be performing exploratory data analysis (EDA) on our labeled dataset. However, the order of the `annotation` and `EDA` steps can be reversed depending on how well the problem is defined. If you're unsure about what inputs and outputs are worth mapping, use can use EDA to figure it out.

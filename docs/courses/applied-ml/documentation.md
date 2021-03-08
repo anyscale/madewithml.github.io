@@ -4,9 +4,9 @@ title: Documenting Code
 description: Documenting code for your users and your future self.
 keywords: documentation, mkdocs, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
+documentation: https://gokumohandas.github.io/applied-ml/
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-info-24: [Documentation](https://gokumohandas.github.io/applied-ml/){:target="_blank"}
 
 ## Intuition
 
@@ -27,14 +27,14 @@ Let's look at what documentation looks like for our [application](https://github
 It's important to be as explicit as possible with our code. We're already discussed choosing explicit names for variables, functions, etc. but another way we can be explicit is by defining the types for our function's inputs and outputs. We want to do this so we can quickly know what data types a function expects and how we can utilize it's outputs for downstream processes.
 
 So far, our functions have looked like this:
-```python
+```python linenums="1"
 def pad_sequences(sequences, max_seq_len):
     ...
     return padded_sequences
 ```
 
 But we can incorporate so much more information using typing:
-```python
+```python linenums="1"
 def pad_sequences(sequences: Sequence, max_seq_len: int = 0) -> np.ndarray:
     ...
     return padded_sequences
@@ -123,11 +123,11 @@ So we're going through all this effort to including typing and docstrings to our
 Here are the steps we'll follow to automatically generate our documentation and serve it. You can find all the files we're talking about in our [repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}.
 
 1. Create `mkdocs.yml` in root directory.
-```bash
+```bash linenums="1"
 touch mkdocs.yaml
 ```
 2. Fill in metadata, config, extensions and plugins (more setup options like custom styling, overrides, etc. [here](https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/){:target="_blank"}). I add some custom CSS inside `docs/static/csc` to make things look a little bit nicer :)
-```yaml
+```yaml linenums="1"
 # Project information
 site_name: TagifAI
 site_url: https://madewithml.com/#applied-ml
@@ -141,7 +141,7 @@ edit_uri: "" #disables edit button
 ...
 ```
 3. Add logo image and favicon to `static/images`.
-```yaml
+```yaml linenums="1"
 # Configuration
 theme:
   name: material
@@ -149,7 +149,7 @@ theme:
   favicon: static/images/favicon.ico
 ```
 4. Fill in navigation in `mkdocs.yml`.
-```yaml
+```yaml linenums="1"
 # Page tree
 nav:
   - Home:

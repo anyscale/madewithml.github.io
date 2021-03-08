@@ -4,9 +4,8 @@ title: Makefiles
 description: An automation tool that organizes commands for our application's processes.
 keywords: makefile, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
 
 ## Intuition
 
@@ -80,7 +79,7 @@ A Makefile is called as such because traditionally the `targets` are supposed to
 </div>
 
 We can fix this by defining a [`PHONY`](https://www.gnu.org/software/make/manual/make.html#Phony-Targets){:target="_blank"} target in our makefile by adding this line above the target:
-```bash
+```bash linenums="1"
 .PHONY: <target_name>
 ```
 
@@ -100,7 +99,7 @@ greeting:
 ```
 
 - We can also use variables passed in when executing the rule like so (ensure that the variable is not overriden inside the Makefile):
-```bash
+```bash linenums="1"
 make greeting MESSAGE="hi"
 ```
 

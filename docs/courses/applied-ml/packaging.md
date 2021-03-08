@@ -4,9 +4,8 @@ title: Packaging a Python Codebase
 description: Using configurations and virtual environments to create a setting for reproducing results.
 keywords: packaging, pip, setup.py, virtual environment, reproducability, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
 
 ## Intuition
 
@@ -93,14 +92,14 @@ setup(
 ## Usage
 
 We can install our package for different situations like so:
-```bash
+```bash linenums="1"
 python -m pip install -e .            # installs required packages only
 python -m pip install -e ".[dev]"     # installs required + dev packages
 python -m pip install -e ".[test]"    # installs required + test packages
 ```
 
 !!! note
-    There are many alternatives to a setup.py file such as the [`setup.cfg`](https://docs.python.org/3/distutils/configfile.html){:target="_blank"} and the more recent (and increasingly adopted) [`pyproject.toml`](https://github.com/GokuMohandas/applied-ml/blob/main/pyproject.toml){:target="_blank"}.
+    There are many alternatives to a setup.py file such as the [`setup.cfg`](https://docs.python.org/3/distutils/configfile.html){:target="_blank"} and the more recent (and increasingly adopted) [pyproject.toml](https://github.com/GokuMohandas/applied-ml/blob/main/pyproject.toml){:target="_blank"}.
 
 <!-- Citation -->
 {% include "cite.md" %}

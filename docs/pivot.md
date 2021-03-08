@@ -1,4 +1,5 @@
 ---
+template: page.html
 title: Pivot from Hype and Overwhelm
 description: Read about our pivot to end the perpetuation of hype and realigning to create original content to help people responsibly deliver value with ML.
 keywords: madewithml, producthunt
@@ -21,8 +22,6 @@ Which means *no more* overwhelming:
 <span class="mr-1">❌</span> pointing to projects<br>
 <span class="mr-1">❌</span> posting daily trends<br>
 <span class="mr-1">❌</span> Topics page
-
-<img width="300px;" src="https://media1.tenor.com/images/5e4fff30948fe04f18f2a866ce0a2e87/tenor.gif?itemid=16902898" alt="pivot">
 
 Luckily, we *don't* depend on ads or traffic so we decided to make the changes necessary to realign with our goal of helping people build. But instead, we will have more **original content** focused on:
 

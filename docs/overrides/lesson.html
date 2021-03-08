@@ -18,7 +18,7 @@
       display: none !important;
     } */
     .md-sidebar--primary {
-      width: 8rem !important;
+      width: 9rem !important;
     }
     .md-sidebar--secondary {
       width: 9rem !important;
@@ -36,9 +36,10 @@
     </a>
   {% endif %}
   {% if not "\x3ch1" in page.content %}
-    <h1 style="margin-bottom: 0.75em;">{{ page.meta.title | d(config.site_name, true)}}</h1>
-    <hr style="margin-top: 0rem;">
     <div class="row">
+      <div class="col-md-8">
+        <h1 style="margin-bottom: 0.75em;">{{ page.meta.title | d(config.site_name, true)}}</h1>
+      </div>
       <div class="col-md-4">
         <div class="row">
           <div class="col-md-3 col-2 ai-center-all" style="padding-right: 10px;">
@@ -64,10 +65,44 @@
         </div>
       </div>
     </div>
-    <br>
+    <hr class="ai-lesson-hr">
     {% if page and page.meta.description %}
       <span>{{ page.meta.description }}</span>
     {% endif %}
+
+    <!-- Links -->
+    {% if page and page.meta.repository %}
+      <br>
+      <span class="twemoji">
+        {% include ".icons/octicons/mark-github-16.svg" %}
+      </span>
+      <a href="{{ page.meta.repository }}" target="_blank">Repository</a>
+    {% endif %}
+    {% if page and page.meta.notebook %}
+      <span> · </span>
+      <span class="twemoji">
+        {% include ".icons/octicons/book-24.svg" %}
+      </span>
+      <a href="{{ page.meta.notebook }}" target="_blank">Notebook</a>
+    {% endif %}
+    {% if page and page.meta.video %}
+      <span> · </span>
+      <span class="twemoji">
+        {% include ".icons/octicons/device-camera-video-24.svg" %}
+      </span>
+      <a href="{{ page.meta.video }}" target="_blank">Video</a>
+    {% endif %}
+    {% if page and page.meta.documentation %}
+      <span> · </span>
+      <span class="twemoji">
+        {% include ".icons/octicons/info-24.svg" %}
+      </span>
+      <a href="{{ page.meta.documentation }}" target="_blank">Documentation</a>
+    {% endif %}
+
+    <!-- Subscribe -->
+    {% include "newsletter.html" %}
+
   {% endif %}
   {{ page.content }}
   {% if page and page.meta %}

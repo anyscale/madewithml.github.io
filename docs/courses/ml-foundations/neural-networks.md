@@ -4,9 +4,9 @@ title: Neural Networks
 description: Implement basic neural networks from scratch using NumPy and then using PyTorch.
 keywords: neural networks, MLP, numpy, pytorch, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
+repository: https://github.com/GokuMohandas/madewithml
+notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/08_Neural_Networks.ipynb
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/08_Neural_Networks.ipynb){:target="_blank"}
 
 ## Overview
 Our goal is to learn a model $\hat{y}$ that models $y$ given $X$ . You'll notice that neural networks are just extensions of the generalized linear methods we've seen so far but with non-linear activation functions since our data will be highly non-linear.
@@ -384,23 +384,24 @@ from sklearn.metrics import precision_recall_fscore_support
 ```python linenums="1"
 def get_performance(y_true, y_pred, classes):
     """Per-class performance metrics."""
-    # Get metrics
-    performance = {'overall': {}, 'class': {}}
-    metrics = precision_recall_fscore_support(y_true, y_pred)
+    # Performance
+    performance = {"overall": {}, "class": {}}
 
     # Overall performance
-    performance['overall']['precision'] = np.mean(metrics[0])
-    performance['overall']['recall'] = np.mean(metrics[1])
-    performance['overall']['f1'] = np.mean(metrics[2])
-    performance['overall']['num_samples'] = np.float64(np.sum(metrics[3]))
+    metrics = precision_recall_fscore_support(y_true, y_pred, average="weighted")
+    performance["overall"]["precision"] = metrics[0]
+    performance["overall"]["recall"] = metrics[1]
+    performance["overall"]["f1"] = metrics[2]
+    performance["overall"]["num_samples"] = np.float64(len(y_true))
 
     # Per-class performance
+    metrics = precision_recall_fscore_support(y_true, y_pred, average=None)
     for i in range(len(classes)):
-        performance['class'][classes[i]] = {
+        performance["class"][classes[i]] = {
             "precision": metrics[0][i],
             "recall": metrics[1][i],
             "f1": metrics[2][i],
-            "num_samples": np.float64(metrics[3][i])
+            "num_samples": np.float64(metrics[3][i]),
         }
 
     return performance

@@ -3,20 +3,31 @@ template: page.html
 keywords: applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 ---
 
+<style>
+html {
+    scroll-behavior: smooth;
+}
+</style>
+
 <!-- Hero -->
 <div class="row flex-column-reverse flex-md-row">
     <div class="col-md-7">
         <div class="ai-hero-text">
             <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
-            <p style="margin-top: 0rem; color: #807e7e;">Applied ML · MLOps · Production</p>
+            <p style="margin-top: 0rem; margin-bottom: 0rem !important; color: #807e7e;">Applied ML · MLOps · Production</p>
             <p style="font-size: 0.89rem;">Join <b>20K+ developers</b> in learning how to <a href="about">responsibly</a> deliver value with applied ML.</p>
-            <a class="md-button md-button--primary mr-2 mb-2 mb-md-0 px-3 py-2" href="/subscribe">
-                <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 3A1.75 1.75 0 000 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0024 18.75v-14A1.75 1.75 0 0022.25 3H1.75zM1.5 4.75a.25.25 0 01.25-.25h20.5a.25.25 0 01.25.25v.852l-10.36 7a.25.25 0 01-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"></path></svg></span> Subscribe</a>
-            <a class="md-button mb-3 mb-md-0 px-3 py-2" href="#ml-foundations">View courses</a>
+            <div id="revue-embed">
+                <form action="https://www.getrevue.co/profile/mwml/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
+                    <input class="revue-form-field" placeholder="Your email address..." type="email" name="member[email]" id="member_email" style="width: 80%; border: 1px solid #b3b3b3; border-radius: 3px;">
+                    <button class="md-button md-button--purple-gradient mr-2 mb-2 mb-md-0 mt-md-2 mt-2" type="submit" style="cursor: pointer !important;">
+                        <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 3A1.75 1.75 0 000 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0024 18.75v-14A1.75 1.75 0 0022.25 3H1.75zM1.5 4.75a.25.25 0 01.25-.25h20.5a.25.25 0 01.25.25v.852l-10.36 7a.25.25 0 01-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"></path></svg></span> Subscribe</button>
+                        <a href="#ml-foundations"><span class="md-button md-button--grey-secondary mr-2 mb-2 mb-md-0 mt-md-2 px-3 py-1">View courses</span></a>
+                </form>
+            </div>
         </div>
     </div>
     <div class="col-md-5 ai-center-all">
-        <div class="mb-md-0 mb-3">
+        <div class="mb-md-0 mb-4">
             <a href="#applied-ml"><img src="static/images/logos.png" style="width: 12rem; border-radius: 10px; box-shadow: 0px 0px 15px 0.1px #fff"></a>
         </div>
     </div>
@@ -69,11 +80,8 @@ keywords: applied ml, mlops, machine learning, ml in production, machine learnin
 
 ## ML Foundations
 <!-- ML Foundations -->
-Learn the foundations of ML through intuitive explanations, clean code and visuals.
-
-> :octicons-mark-github-16: [GokuMohandas/madewithml](https://github.com/GokuMohandas/madewithml){:target="_blank"} :octicons-arrow-right-24: <span class="mr-1">🔥</span>Among the [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub
-<br>
-:octicons-calendar-24: New topics coming later this year!
+> Learn the foundations of ML through intuitive explanations, clean code and visuals.
+[GokuMohandas/madewithml](https://github.com/gokumohandas/madewithml){:target="_blank"} &rarr; 🔥 Among the [top ML repos](https://github.com/topics/deep-learning){:target="blank"} on GitHub
 
 <div class="row mt-4 ai-course-list">
 <div class="col-md-4">
@@ -112,9 +120,8 @@ Learn the foundations of ML through intuitive explanations, clean code and visua
 
 ## Applied ML
 <!-- Applied ML -->
-Learn how to apply ML to build a production grade product to deliver value.
-
-> :octicons-mark-github-16: [GokuMohandas/applied-ml](https://github.com/GokuMohandas/applied-ml){:target="_blank"} :octicons-arrow-right-24: :octicons-calendar-24: New lesson every week!
+> Learn how to apply ML to build a production grade product and deliver value.
+[GokuMohandas/applied-ml](https://github.com/GokuMohandas/applied-ml){:target="_blank"} &rarr; New lesson every week!
 
 <div class="row mt-4 ai-course-list">
 <div class="col-md-4">
@@ -156,7 +163,9 @@ Learn how to apply ML to build a production grade product to deliver value.
     </ul>
     <b><span class="mr-1">✅</span> Testing</b>
     <ul>
-    <li><a href="/courses/applied-ml/testing/">Code, data <br>and models</a></li>
+    <li>Code</li>
+    <li>Data</li>
+    <li>Models</li>
     </ul>
 </div>
 <div class="col-md-4">
@@ -209,7 +218,7 @@ While this content is for everyone, it's especially targeted towards people who 
 <!-- Citation -->
 To cite this content, please use:
 
-```bash
+```bash linenums="1"
 @misc{madewithml,
     title  = "Made With ML",
     author = "Goku Mohandas",

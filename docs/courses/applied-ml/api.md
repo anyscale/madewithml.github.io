@@ -4,15 +4,12 @@ title: APIs for Machine Learning
 description: Using first principles to designing and implement a API to wrap ML functionality.
 keywords: api, fastapi, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
 
 ## Intuition
 
 So far our workflows have involved directly running functions from our Python scripts and more recently, using the [CLI application](cli.md){:target="_blank"} to quickly execute commands. But not all of our users will want to work at the code level or even download the package as we would need to for the CLI app. Instead, many users will simply want to use the functionality of our model and inspect the relevant details around it. To address this, we can develop an application programming interface (API) that provides the appropriate level of abstraction that enables our users to interact with the underlying data in our application.
-
-## Interactions
 
 The interactions in our situation involve the client (users, other applications, etc.) sending a *request* to the server (our application) and receiving a *response* in return.
 
@@ -20,11 +17,11 @@ The interactions in our situation involve the client (users, other applications,
     <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/applied-ml/api/interactions.png">
 </div>
 
-### Request
+## Request
 
 We'll first take a look at the different components of a request:
 
-#### URI
+### URI
 
 A uniform resource identifier (URI) is an identifier for a specific resource.
 
@@ -133,7 +130,7 @@ A uniform resource identifier (URI) is an identifier for a specific resource.
   </div>
 </div>
 
-#### Method
+### Method
 
 The method is the operation to execute on the specific resource defined by the URI. There are many possible [methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods){:target="_blank"} to choose from, but here are the four most popular, which are often referred to as [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete){:target="_blank"} because they allow you to Create, Read, Update and Delete.
 
@@ -145,7 +142,7 @@ The method is the operation to execute on the specific resource defined by the U
 !!! note
     You could use either the `POST` or `PUT` request method to create and modify resources but the main difference is that `PUT` is idempotent which means you can call the method repeatedly and it'll produce the same state every time. Whereas, calling `POST` multiple times can result in creating multiple instance and so changing the overall state each time.
 
-    ```bash
+    ```bash linenums="1"
     POST /models/<new_model> -d {}       # error since we haven't created the `new_model` resource yet
     POST /models -d {}                   # creates a new model based on information provided in data
     POST /models/<existing_model> -d {}  # updates an existing model based on information provided in data
@@ -172,16 +169,16 @@ We can use [cURL](https://linuxize.com/post/curl-rest-api/){:target="_blank"} to
 <script src="../../../static/js/termynal.js"></script>
 
 For example, if we want to GET all `users`:
-```bash
+```bash linenums="1"
 curl -X GET "http://localhost:5000/users"
 ```
 
 <br>
 
-#### Headers
+### Headers
 
 Headers contain information about a certain event and are usually found in both the client's request as well as the server's response. It can range from what type of format they'll send and receive, authentication and caching info, etc.
-```bash
+```bash linenums="1"
 curl -X GET "http://localhost:5000/" \          # method and URI
     -H  "accept: application/json"  \           # client accepts JSON
     -H  "Content-Type: application/json" \      # client sends JSON
@@ -189,11 +186,11 @@ curl -X GET "http://localhost:5000/" \          # method and URI
 
 <br>
 
-#### Body
+### Body
 
 The body contains information that may be necessary for the request to be processed. It's usually a JSON object sent during `POST`, `PUT`/`PATCH`, `DELETE` request methods.
 
-```bash
+```bash linenums="1"
 curl -X POST "http://localhost:5000/models" \   # method and URI
     -H  "accept: application/json" \            # client accepts JSON
     -H  "Content-Type: application/json" \      # client sends JSON
@@ -202,11 +199,11 @@ curl -X POST "http://localhost:5000/models" \   # method and URI
 
 <br>
 
-### Response
+## Response
 
 The response we receive from our server is the result of the request we sent. The response also includes headers and a body which should include the proper HTTP status code as well as explicit messages, data, etc.
 
-```bash
+```bash linenums="1"
 {
   "message": "OK",
   "method": "GET",
@@ -246,7 +243,7 @@ When designing our API, there are some best practices to follow:
 
 ## Application
 
-We're going to organize our API under the [`app`](https://github.com/GokuMohandas/applied-ml/tree/main/app){:target="_blank"} directory because in the future we may have additional packages like `tagifai` so we don't want our app to be attached to any one package. Our API will be defined in the following scripts:
+We're going to organize our API under the [app](https://github.com/GokuMohandas/applied-ml/tree/main/app){:target="_blank"} directory because in the future we may have additional packages like `tagifai` so we don't want our app to be attached to any one package. Our API will be defined in the following scripts:
 
 - [`api.py`](https://github.com/GokuMohandas/applied-ml/tree/main/app/api.py){:target="_blank"}: the main script that will include our API initialization and endpoints.
 - [`schemas.py`](https://github.com/GokuMohandas/applied-ml/tree/main/app/schemas.py){:target="_blank"}: definitions for the different objects we'll use in our resource endpoints.
@@ -270,7 +267,7 @@ To show how intuitive and powerful FastAPI is, we could laboriously go through t
 
 ## Initialization
 
-The first step is to initialize our API in our [`app/api.py`](https://github.com/GokuMohandas/applied-ml/tree/main/app/api.py){:target="_blank"} file by defining metadata like the title, description and version.
+The first step is to initialize our API in our [app/api.py](https://github.com/GokuMohandas/applied-ml/tree/main/app/api.py){:target="_blank"} file by defining metadata like the title, description and version.
 ```python linenums="1"
 from fastapi import FastAPI
 
@@ -307,7 +304,7 @@ We let our application know that the endpoint is at `/` through the path operati
 
 We can launch our application with the following command (also saved as a Makefile target as `make app`):
 
-```bash
+```bash linenums="1"
 uvicorn app.api:app \       # location of app (`app` directory > `api.py` script > `app` object)
     --host 0.0.0.0 \        # localhost
     --port 5000 \           # port 5000
@@ -320,7 +317,7 @@ We're using [Uvicorn](https://www.uvicorn.org/){:target="_blank"}, a fast ASGI s
 
 !!! note
     If we want to manage multiple uvicorn workers to enable parallelism in our application, we can use [Gunicorn](https://gunicorn.org/){:target="_blank"} in conjunction with Uvicorn. This will usually be done in a production environment where we'll be dealing with meaningful traffic. I've included a [`config/gunicorn.py`](https://github.com/GokuMohandas/applied-ml/tree/main/config/gunicorn.py){:target="_blank"} script with the customizable configuration and we can launch all the workers with the follow command (or `make app-prod`):
-    ```bash
+    ```bash linenums="1"
     gunicorn -c config/gunicorn.py -k uvicorn.workers.UvicornWorker app.api:app
     ```
 
@@ -330,7 +327,7 @@ Now that we have our application running, we can submit our `GET` request using 
 
 - Visit the endpoint on your browser at [http://localhost:5000/](http://localhost:5000/){:target="_blank"}
 - cURL
-```bash
+```bash linenums="1"
 curl -X GET http://localhost:5000/
 ```
 - Access endpoints via code. Here we show how to do it with the [requests](https://requests.readthedocs.io/en/master/){:target="_blank"} library in Python but it can be done with most popular languages. You can even use an [online tool](https://curl.trillworks.com/){:target="_blank"} to convert your cURL commands into code!
@@ -495,7 +492,7 @@ def _runs(request: Request, top: Optional[int] = None) -> Dict:
 ```
 You'll notice that we're passing an optional query parameter `top` here to indicate the top N runs to retrieve (None will return all runs). We'd include this parameter in our `GET` request like so:
 
-```bash
+```bash linenums="1"
 curl -X GET "http://localhost:5000/runs?top=10" -H  "accept: application/json"
 ```
 
@@ -518,7 +515,7 @@ def _run(request: Request, run_id: str) -> Dict:
 ```
 
 We'd perform our `GET` request like so, where the `run_id` is part of the request URI's path as opposed to being part of it's query string.
-```bash
+```bash linenums="1"
 curl -X GET "http://localhost:5000/runs/264ac530b78c42608e5dea1086bc2c73" -H  "accept: application/json"
 ```
 
@@ -542,7 +539,7 @@ def _predict(request: Request, run_id: str, payload: PredictPayload) -> Dict:
     return response
 ```
 
-Like before, we'll consume the `run_id` as a path parameter and validate it. But this time, we're also receiving a payload from the request's body which contains information as to what to predict on. The definition of this `PredictionPayload` is defined in our [`app/schemas.py`](https://github.com/GokuMohandas/applied-ml/tree/main/app/schemas.py){:target="_blank"} script:
+Like before, we'll consume the `run_id` as a path parameter and validate it. But this time, we're also receiving a payload from the request's body which contains information as to what to predict on. The definition of this `PredictionPayload` is defined in our [app/schemas.py](https://github.com/GokuMohandas/applied-ml/tree/main/app/schemas.py){:target="_blank"} script:
 ```python linenums="1"
 from typing import List
 
@@ -591,7 +588,7 @@ In line 12, we're defining the `PredictPayload` object as a list of `Text` objec
 
 We're using pydantic's [`BaseModel`](pydantic BaseModel: https://pydantic-docs.helpmanual.io/usage/models/){:target="_blank"} object here because it offers built-in validation for all of our schemas. In our case, if a `Text` instance is less than 1 character, then our service will return the appropriate error message and code.
 
-```bash
+```bash linenums="1"
 curl -X POST "http://localhost:5000/predict" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"texts\":[{\"text\":\"\"}]}"
 ```
 <pre class="output">
@@ -632,7 +629,7 @@ class PredictPayload(BaseModel):
     ...
 ```
 
-```bash
+```bash linenums="1"
 curl -X POST "http://localhost:5000/predict" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"texts\":[]}"
 ```
 <pre class="output">

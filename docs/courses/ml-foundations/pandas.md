@@ -4,9 +4,9 @@ title: Pandas for Machine Learning
 description: Data manipulation using the Pandas library.
 keywords: pandas, exploratory data analysis, eda, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
+repository: https://github.com/GokuMohandas/madewithml
+notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/04_Pandas.ipynb
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/04_Pandas.ipynb){:target="_blank"}
 
 ## Set up
 

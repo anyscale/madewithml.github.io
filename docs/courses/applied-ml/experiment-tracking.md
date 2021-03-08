@@ -4,9 +4,9 @@ title: Experiment Tracking
 description: Managing and tracking ML experiments and runs.
 keywords: experiment tracking, mlflow, weights and biases, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
+notebook: https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
 ## Intuition
 So far, we've been training and evaluating our different baselines but haven't really been tracking these experiments. We'll fix this but defining a proper process for experiment tracking which we'll use for all future experiments (including hyperparameter optimization). Experiment tracking is the processing of managing all the different experiments and their components, such as parameters, metrics, models and other artifacts and it enables us to:
@@ -56,7 +56,7 @@ EXPERIMENTS_DIR = Path("experiments")
 Path(EXPERIMENTS_DIR).mkdir(exist_ok=True) # create experiments dir
 mlflow.set_tracking_uri("file://" + str(EXPERIMENTS_DIR.absolute()))
 ```
-```bash
+```bash linenums="1"
 !ls
 ```
 <pre class="output">
@@ -197,7 +197,7 @@ class Trainer(object):
     ```
 
 And to make things simple, we'll encapsulate all the components for training into one function called `train_cnn` which returns all the artifacts we want to be able to track from our experiment.
-```python
+```python linenums="1"
 def train_cnn(args, df):
     """Train a CNN using specific arguments."""
     ...

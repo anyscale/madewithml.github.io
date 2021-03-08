@@ -4,9 +4,9 @@ title: Optimizing Hyperparameters
 description: Optimizing a subset of hyperparameters to achieve an objective.
 keywords: optimization, hyperparameters, optuna, ray, hyperopt, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
+notebook: https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
 ## Intuition
 
@@ -32,11 +32,10 @@ There are many factors to consider when performing hyperparameter optimization a
 !!! note
     There are many more options (multiple objectives, storage options, etc.) to explore but this basic set up will allow us to optimize quite well.
 
-```python
+```python linenums="1"
 from argparse import Namespace
 from numpyencoder import NumpyEncoder
-```
-```python
+
 # Specify arguments
 args = Namespace(
     char_level=True,
@@ -53,7 +52,7 @@ args = Namespace(
 ```
 
 We're going to modify our `Trainer` object to be able to prune unpromising trials based on the trial's validation loss.
-```python
+```python linenums="1"
 class Trainer(object):
     ...
     def train(self, ...):
@@ -185,7 +184,7 @@ class Trainer(object):
     ```
 
 We'll also modify our `train_cnn` function to include information about the trial.
-```python
+```python linenums="1"
 def train_cnn(args, df, trial=None):
     ...
     # Trainer module
@@ -301,7 +300,7 @@ def train_cnn(args, df, trial=None):
 ## Objective
 
 We need to define an `objective` function that will consume a trial and a set of arguments and produce the metric to optimize on (`f1` in our case).
-```python
+```python linenums="1"
 def objective(trial, args):
     """Objective function for optimization trials."""
 
@@ -327,14 +326,11 @@ def objective(trial, args):
 ## Study
 
 We're ready to kick off our study with our [MLFlowCallback](https://optuna.readthedocs.io/en/stable/reference/generated/optuna.integration.MLflowCallback.html){:target="_blank"} so we can track all of the different trials.
-```python
+```python linenums="1"
 from optuna.integration.mlflow import MLflowCallback
-```
-```python
-NUM_TRIALS = 50 # small sample for now
-```
-```python
+
 # Optimize
+NUM_TRIALS = 50 # small sample for now
 pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=5)
 study = optuna.create_study(study_name="optimization", direction="maximize", pruner=pruner)
 mlflow_callback = MLflowCallback(
@@ -363,7 +359,7 @@ Epoch: 26 | train_loss: 0.00028, val_loss: 0.00152, lr: 2.73E-05, _patience: 1
 Stopping early!
 Trial 49 finished with value: 0.6220047640997922 and parameters: {'embedding_dim': 485, 'num_filters': 420, 'hidden_dim': 477, 'dropout_p': 0.7984462152799114, 'lr': 0.0002619841505205434}. Best is trial 46 with value: 0.63900047716579.
 </pre>
-```python
+```python linenums="1"
 # MLFlow dashboard
 get_ipython().system_raw("mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri $PWD/experiments/ &")
 ngrok.kill()
@@ -388,7 +384,7 @@ We can then view the results through various lens (contours, parallel coordinate
     <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/applied-ml/hyperparameter_optimization/parallel_coordinates.png" width="1000" alt="pivot">
 </div>
 
-```python
+```python linenums="1"
 # All trials
 trials_df = study.trials_dataframe()
 trials_df = trials_df.sort_values(["value"], ascending=False)  # sort by metric
@@ -511,7 +507,7 @@ trials_df.head()
 </table>
 </div></div>
 
-```python
+```python linenums="1"
 # Best trial
 print (f"Best value (val loss): {study.best_trial.value}")
 print (f"Best hyperparameters: {study.best_trial.params}")
@@ -524,7 +520,7 @@ Best hyperparameters: {'embedding_dim': 335, 'num_filters': 477, 'hidden_dim': 4
 !!! note
     Don't forget to save learned parameters (ex. decision threshold) during training which you'll need later for inference.
 
-```python
+```python linenums="1"
 # Save best parameters
 params = {**args.__dict__, **study.best_trial.params}
 params["threshold"] = study.best_trial.user_attrs["threshold"]

@@ -3,7 +3,7 @@
 https://madewithml.com/
 
 ### Set up
-```bash
+```bash linenums="1"
 pyenv local 3.8.5
 python3 -m venv venv
 source venv/bin/activate

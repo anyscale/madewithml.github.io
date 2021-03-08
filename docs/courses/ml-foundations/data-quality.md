@@ -4,9 +4,9 @@ title: Data Quality for Machine Learning
 description: An illustrative look at the importance of data quality in machine learning.
 keywords: data quality, cleaning, overfitting, underfitting, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
+repository: https://github.com/GokuMohandas/madewithml
+notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/09_Data_Quality.ipynb
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/madewithml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/09_Data_Quality.ipynb){:target="_blank"}
 
 ## Overview
 In a nutshell, a machine learning model consumes input data and produces predictions. The quality of the predictions directly corresponds to the quality of data you train the model with; **garbage in, garbage out**. Check out this [article](https://venturebeat.com/2018/06/30/understanding-the-practical-applications-of-business-ai/){:target="_blank"} on where it makes sense to use AI and how to properly apply it.
@@ -367,23 +367,24 @@ from sklearn.metrics import precision_recall_fscore_support
 ```python linenums="1"
 def get_performance(y_true, y_pred, classes):
     """Per-class performance metrics."""
-    # Get metrics
-    performance = {'overall': {}, 'class': {}}
-    metrics = precision_recall_fscore_support(y_true, y_pred)
+    # Performance
+    performance = {"overall": {}, "class": {}}
 
     # Overall performance
-    performance['overall']['precision'] = np.mean(metrics[0])
-    performance['overall']['recall'] = np.mean(metrics[1])
-    performance['overall']['f1'] = np.mean(metrics[2])
-    performance['overall']['num_samples'] = np.float64(np.sum(metrics[3]))
+    metrics = precision_recall_fscore_support(y_true, y_pred, average="weighted")
+    performance["overall"]["precision"] = metrics[0]
+    performance["overall"]["recall"] = metrics[1]
+    performance["overall"]["f1"] = metrics[2]
+    performance["overall"]["num_samples"] = np.float64(len(y_true))
 
     # Per-class performance
+    metrics = precision_recall_fscore_support(y_true, y_pred, average=None)
     for i in range(len(classes)):
-        performance['class'][classes[i]] = {
+        performance["class"][classes[i]] = {
             "precision": metrics[0][i],
             "recall": metrics[1][i],
             "f1": metrics[2][i],
-            "num_samples": np.float64(metrics[3][i])
+            "num_samples": np.float64(metrics[3][i]),
         }
 
     return performance

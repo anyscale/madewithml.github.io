@@ -4,9 +4,8 @@ title: Styling and Formatting Code
 description: Style and formatting conventions to keep your code looking consistent.
 keywords: styling, formatting, pep8, black, isort, flake8, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
 
 ## Intuition
 
@@ -27,7 +26,7 @@ We will be using a very popular blend of style and formatting conventions that m
 - [`flake8`](https://flake8.pycqa.org/en/latest/index.html){:target="_blank"}: a code linter that with stylistic conventions that adhere to PEP8.
 
 We installed all of these as they were defined in out `setup.py` file under `dev_packages`.
-```bash
+```bash linenums="1"
 "black==20.8b1",
 "flake8==3.8.3",
 "isort==5.5.3",
@@ -35,7 +34,7 @@ We installed all of these as they were defined in out `setup.py` file under `dev
 
 ## Configuration
 
-Before we can properly use these tools, we'll have to configure them because they may have some discrepancies amongst them since they follow slightly different conventions that extend from PEP8. To configure Black, we could just pass in options using the [CLI method](https://black.readthedocs.io/en/stable/installation_and_usage.html#command-line-options){:target="_blank"}, but it's much more efficient (especially so others can easily find all our configurations) to do this through a file. So we'll need to create a [`pyproject.toml`](https://github.com/GokuMohandas/applied-ml/blob/main/pyproject.toml){:target="_blank"} file and place the following configurations:
+Before we can properly use these tools, we'll have to configure them because they may have some discrepancies amongst them since they follow slightly different conventions that extend from PEP8. To configure Black, we could just pass in options using the [CLI method](https://black.readthedocs.io/en/stable/installation_and_usage.html#command-line-options){:target="_blank"}, but it's much more efficient (especially so others can easily find all our configurations) to do this through a file. So we'll need to create a [pyproject.toml](https://github.com/GokuMohandas/applied-ml/blob/main/pyproject.toml){:target="_blank"} file and place the following configurations:
 
 ```toml linenums="1"
 # Black formatting
@@ -59,9 +58,9 @@ exclude = '''
 ```
 
 !!! note
-    The [`pyproject.toml`](https://www.python.org/dev/peps/pep-0518/#file-format){:target="_blank"} was created to establish a more human-readable configuration file that is meant to replace a `setup.py` or `setup.cfg` file and is increasingly widely adopted by many open-source libraries.
+    The [pyproject.toml](https://www.python.org/dev/peps/pep-0518/#file-format){:target="_blank"} was created to establish a more human-readable configuration file that is meant to replace a `setup.py` or `setup.cfg` file and is increasingly widely adopted by many open-source libraries.
 
-Here we're telling Black that our maximum line length should be 79 characters and to include and exclude certain file extensions. We're going to follow the same configuration steps in our `pyproject.toml` file for configuring isort as well. Place the following configurations right below Black's configurations:
+Here we're telling Black that our maximum line length should be 79 characters and to include and exclude certain file extensions. We're going to follow the same configuration steps in our pyproject.toml file for configuring isort as well. Place the following configurations right below Black's configurations:
 
 ```bash linenums="20"
 # iSort
@@ -93,7 +92,7 @@ Here we setting up some configurations like before but we're including an `ignor
 
 Besides defining configuration options here, which are applied globally, we can also choose specifically ignore certain conventions on a line-by-line basis. Here are a few example in our code of where we utilized this method:
 
-```python
+```python linenums="1"
 # tagifai/config.py
 import pretty_errors  # NOQA: F401 (imported but unused)
 ...
@@ -108,7 +107,7 @@ By placing the `# NOQA: <error-code>` on a line, we're telling flake8 to do NO Q
 ## Usage
 
 To use these tools that we've configured, we could run these commands individually (the `.` signifies that the configuration file for that package is in the current directory) but we can also use the `style` target command from our `Makefile`:
-```bash
+```bash linenums="1"
 black .
 flake8
 isort .

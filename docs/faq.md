@@ -21,3 +21,15 @@ title: Frequently Asked Questions (FAQ)
 
 ### Why is this free?
 While this content is for everyone, it's especially targeted towards people who don't have as much opportunity to learn. I firmly believe that creativity and intelligence are randomly distributed but opportunity is siloed. I want to enable more people to create and contribute to innovation.
+
+### Citation
+To cite this content, please use:
+
+```bash linenums="1"
+@misc{madewithml,
+    title  = "Made With ML",
+    author = "Goku Mohandas",
+    url    = "https://madewithml.com/"
+    year   = "2021",
+}
+```

@@ -110,7 +110,7 @@ theme:
   logo: static/images/logo.png
   favicon: static/images/favicon.ico
   palette:
-    primary: indigo
+    primary: black
     accent: indigo
   font:
     text: Epilogue
@@ -171,3 +171,4 @@ plugins:
         redirect_maps:
             "courses/applied-ml-in-production.md": "courses/applied-ml.md"
             "courses/putting-ml-in-production.md": "courses/applied-ml.md"
+            "subscribe": "index.md"

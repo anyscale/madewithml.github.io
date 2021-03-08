@@ -4,9 +4,8 @@ title: Logging for ML Systems
 description: Keep records of the important events in our application.
 keywords: logging, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
 
 ## Intuition
 

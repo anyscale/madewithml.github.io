@@ -4,9 +4,9 @@ title: Iteratively Improving ML Systems
 description: Improving on our solution iteratively over time.
 keywords: iteration, active learning, monitoring, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
+video: https://www.youtube.com/watch?v=Bit1IUVWrkY
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-device-camera-video-24: [Video](https://www.youtube.com/watch?v=Bit1IUVWrkY){:target="_blank"}
 
 <!-- <div class="ai-center-all mt-2">
     <iframe width="600" height="337.5" src="https://www.youtube.com/embed/Bit1IUVWrkY?rel=0" frameborder="0"

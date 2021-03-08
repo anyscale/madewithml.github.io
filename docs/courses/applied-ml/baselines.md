@@ -4,9 +4,9 @@ title: Modeling Baselines
 description: Motivating the use of baselines for iterative modeling.
 keywords: baselines, modeling, pytorch, transformers, huggingface, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
+notebook: https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"} · :octicons-book-24: [Notebook](https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb){:target="_blank"}
 
 ## Intuition
 
@@ -213,23 +213,24 @@ class Trainer(object):
 ```python linenums="1"
 def get_performance(y_true, y_pred, classes):
     """Per-class performance metrics."""
-    # Get metrics
-    performance = {'overall': {}, 'class': {}}
-    metrics = precision_recall_fscore_support(y_true, y_pred)
+    # Performance
+    performance = {"overall": {}, "class": {}}
 
     # Overall performance
-    performance['overall']['precision'] = np.mean(metrics[0])
-    performance['overall']['recall'] = np.mean(metrics[1])
-    performance['overall']['f1'] = np.mean(metrics[2])
-    performance['overall']['num_samples'] = np.float64(np.sum(metrics[3]))
+    metrics = precision_recall_fscore_support(y_true, y_pred, average="weighted")
+    performance["overall"]["precision"] = metrics[0]
+    performance["overall"]["recall"] = metrics[1]
+    performance["overall"]["f1"] = metrics[2]
+    performance["overall"]["num_samples"] = np.float64(len(y_true))
 
     # Per-class performance
+    metrics = precision_recall_fscore_support(y_true, y_pred, average=None)
     for i in range(len(classes)):
-        performance['class'][classes[i]] = {
+        performance["class"][classes[i]] = {
             "precision": metrics[0][i],
             "recall": metrics[1][i],
             "f1": metrics[2][i],
-            "num_samples": np.float64(metrics[3][i])
+            "num_samples": np.float64(metrics[3][i]),
         }
 
     return performance
@@ -237,7 +238,7 @@ def get_performance(y_true, y_pred, classes):
 
 !!! note
     Our dataset is small so we'll train using the whole dataset but for larger datasets, we should always test on a small subset  (after shuffling when necessary) so we aren't wasting time on compute. Here's how you can easily do this:
-    ```python
+    ```python linenums="1"
     # Shuffling since projects are chronologically organized
     if shuffle:
         df = df.sample(frac=1).reset_index(drop=True)
@@ -743,6 +744,7 @@ transfer learn bert self supervis learn
 
 ## Simple ML
 <u><i>motivation</i></u>:
+
 - *representation*: use term frequency-inverse document frequency [(TF-IDF)](https://en.wikipedia.org/wiki/Tf%E2%80%93idf){:target="_blank"} to capture the significance of a token to a particular input with respect to all the inputs, as opposed to treating the words in our input text as isolated tokens.
 - *architecture*: we want our model to meaningfully extract the encoded signal to predict the output labels.
 

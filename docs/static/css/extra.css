@@ -23,6 +23,16 @@
   display: flex;
 }
 
+.ai-lesson-hr {
+  margin-top: 0rem !important;
+}
+
+@media (max-width: 768px) {
+  .ai-lesson-hr {
+    margin-top: 1.5rem !important;
+  }
+}
+
 /* navigation bar active color*/
 .md-nav__item .md-nav__link--active {
   font-weight: bold !important;
@@ -37,6 +47,10 @@
 
 .md-nav__icon {
   display: none !important;
+}
+
+.md-search {
+  padding: 0.5rem 0 0 0;
 }
 
 .md-header-nav__button.md-logo img {
@@ -107,7 +121,7 @@
 }
 
 .github {
-  color: grey;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .output {
@@ -637,5 +651,33 @@ th {
 /* Literal.Number.Integer.Long */
 .highlight .nx {
   color: #008000;
+}
+
+.md-typeset .md-button--purple-gradient {
+  color: var(--md-primary-bg-color);
+  background: linear-gradient(135deg, #4b73f5, #9458df);
+  border-radius: 3px;
+  border: none;
+}
+
+.md-typeset .md-button--purple-gradient:hover {
+  color: var(--md-primary-bg-color);
+  background: linear-gradient(135deg, #597df5, #9c66df);
+  border-radius: 3px;
+  border: none;
+}
+
+.md-typeset .md-button--grey-secondary {
+  color: rgba(51, 51, 51, 0.87);
+  background: #fff;
+  border-color: rgba(51, 51, 51, 0.87);
+  border-radius: 3px;
+}
+
+.md-typeset .md-button--grey-secondary:hover {
+  color: #fff;
+  background: rgba(51, 51, 51, 0.87);
+  border-color: rgba(51, 51, 51, 0.87);
+  border-radius: 3px;
 }
 /*# sourceMappingURL=extra.css.map */

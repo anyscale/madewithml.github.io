@@ -4,9 +4,8 @@ title: Command Line Interface (CLI) Applications
 description: Using a command line interface (CLI) application to organize our application's processes.
 keywords: cli, application, applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/applied-ml
 ---
-
-:octicons-mark-github-16: [Repository](https://github.com/GokuMohandas/applied-ml){:target="_blank"}
 
 ## Intuition
 
@@ -16,7 +15,7 @@ We want to enable others to be able to interact with our application without hav
 
 The `app` that we defined inside our [`cli.py`](https://github.com/GokuMohandas/applied-ml/tree/main/app/cli.py){:target="_blank"} script is created using [Typer](https://typer.tiangolo.com/){:target="_blank"}, an open-source tool for building command line interface (CLI) applications. It starts by initializing the app and then adding the appropriate decorator to each function we wish to use as a CLI command.
 
-```python
+```python linenums="1"
 # Typer CLI app
 app = typer.Typer()
 
@@ -30,7 +29,7 @@ def predict_tags(
 
 !!! note
     We're combining console scripts (from `setup.py`) and our Typer app to create a CLI application but there are many [different ways](https://typer.tiangolo.com/typer-cli/){:target="_blank"} to use Typer as well. We're going to have other programs use our application so this approach works best.
-    ```python
+    ```python linenums="1"
     # setup.py
     setup(
         name="tagifai",
@@ -75,7 +74,7 @@ We can list all the CLI commands for our application like so:
 
 With Typer, a function's input arguments automatically get rendered as command line options. For example, our `predict_tags` function consumes `text` and an optional `run_id` as inputs which automatically become arguments for the `predict-tags` CLI command.
 
-```python
+```python linenums="1"
 @app.command()
 def predict_tags(
     text: str = "Transfer learning with BERT for self-supervised learning",

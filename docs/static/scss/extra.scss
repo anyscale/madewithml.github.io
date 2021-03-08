@@ -1,3 +1,4 @@
+// Headers
 .md-typeset h1 {
     font-weight: 500 !important;
 }
@@ -14,6 +15,12 @@
   justify-content: center;
   display: flex;
 }
+.ai-lesson-hr {
+    margin-top: 0rem !important;
+    @media (max-width: 768px) {
+        margin-top: 1.5rem !important;
+    }
+}
 
 /* navigation bar active color*/
 .md-nav__item .md-nav__link--active {
@@ -27,6 +34,9 @@
 }
 .md-nav__icon {
     display: none !important;
+}
+.md-search {
+    padding: 0.5rem 0 0 0;
 }
 
 // Header nav
@@ -90,7 +100,7 @@
   color: #4267B2;
 }
 .github {
-  color: grey;
+  color: hsla(0, 0%, 0%, 0.87);
 }
 
 // Code outputs
@@ -333,4 +343,32 @@ th {
 // Backticks
 .highlight .nx {
   color: #008000;
+}
+
+// Buttons
+.md-typeset .md-button--purple-gradient {
+    color: var(--md-primary-bg-color);
+    background: linear-gradient(135deg,rgb(75, 115, 245), rgb(148, 88, 223));
+    border-radius: 3px;
+    border: none;
+}
+.md-typeset .md-button--purple-gradient:hover {
+    color: var(--md-primary-bg-color);
+    background: linear-gradient(135deg,rgb(89, 125, 245),rgb(156, 102, 223));
+    border-radius: 3px;
+    border: none;
+}
+
+// Buttons
+.md-typeset .md-button--grey-secondary {
+    color: hsla(0, 0%, 20%, 0.87);
+    background: #fff;
+    border-color: hsla(0, 0%, 20%, 0.87);
+    border-radius: 3px;
+}
+.md-typeset .md-button--grey-secondary:hover {
+    color: #fff;
+    background: hsla(0, 0%, 20%, 0.87);
+    border-color: hsla(0, 0%, 20%, 0.87);
+    border-radius: 3px;
 }
