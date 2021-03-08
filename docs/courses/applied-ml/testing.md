@@ -7,6 +7,8 @@ image: https://madewithml.com/static/images/applied_ml.png
 repository: https://github.com/GokuMohandas/applied-ml
 ---
 
+{% include "styles/lesson.md" %}
+
 <br>
 :octicons-calendar-24: This lesson will be released tomorrow! Be sure to <a href="https://newsletter.madewithml.com" target="_blank">subscribe</a> and follow us on [:fontawesome-brands-twitter: Twitter](https://twitter.com/GokuMohandas){:target="_blank"} and [:fontawesome-brands-linkedin: LinkedIn](https://www.linkedin.com/in/goku){:target="_blank"} for updates and tips.
 

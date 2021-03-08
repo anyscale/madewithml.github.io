@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/madewithml
 notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/09_Data_Quality.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Overview
 In a nutshell, a machine learning model consumes input data and produces predictions. The quality of the predictions directly corresponds to the quality of data you train the model with; **garbage in, garbage out**. Check out this [article](https://venturebeat.com/2018/06/30/understanding-the-practical-applications-of-business-ai/){:target="_blank"} on where it makes sense to use AI and how to properly apply it.
 

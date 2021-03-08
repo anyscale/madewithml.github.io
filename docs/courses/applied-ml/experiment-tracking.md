@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/applied-ml
 notebook: https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 So far, we've been training and evaluating our different baselines but haven't really been tracking these experiments. We'll fix this but defining a proper process for experiment tracking which we'll use for all future experiments (including hyperparameter optimization). Experiment tracking is the processing of managing all the different experiments and their components, such as parameters, metrics, models and other artifacts and it enables us to:
 

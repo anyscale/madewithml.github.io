@@ -14,6 +14,8 @@ video: https://www.youtube.com/watch?v=Bit1IUVWrkY
     allowfullscreen></iframe>
 </div> -->
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 We don't want to spend months of time developing a complicated solution only to learn that the entire problem has changed. The main idea here is to **close the loop**, which involves:

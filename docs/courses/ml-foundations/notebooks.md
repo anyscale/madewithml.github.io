@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/madewithml
 notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/01_Notebooks.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Set up
 1. Click on this link to open the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/01_Notebooks.ipynb){:target="_blank"} for this lesson or create a blank one on [Google Colab](https://colab.research.google.com/){:target="_blank"}.
 2. Sign into your [Google account](https://accounts.google.com/signin) to start using the notebook. If you don't want to save your work, you can skip the steps below. If you do not have access to Google, you can follow along using [Jupyter Lab](https://jupyter.org/).

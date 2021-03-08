@@ -7,6 +7,8 @@ image: https://madewithml.com/static/images/applied_ml.png
 repository: https://github.com/GokuMohandas/applied-ml
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 > Code is read more often than it is written. -- [Guido Van Rossum](https://gvanrossum.github.io/){:target="_blank"} (author of Python)

@@ -1,5 +1,3 @@
-{% extends "main.html" %}
-
 <style>
   html {
     scroll-behavior: smooth;

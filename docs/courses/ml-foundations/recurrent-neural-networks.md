@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/madewithml
 notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Overview
 So far we've processed inputs as whole (ex. applying filters across the entire input to extract features) but we can also process our inputs sequentially. For example we can think of each token in our text as an event in time (timestep). We can process each timestep, one at a time, and predict the class after the last timestep (token) has been processed. This is very powerful because the model now has a meaningful way to account for the sequential order of tokens in our sequence and predict accordingly.
 

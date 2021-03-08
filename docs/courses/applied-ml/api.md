@@ -7,6 +7,8 @@ image: https://madewithml.com/static/images/applied_ml.png
 repository: https://github.com/GokuMohandas/applied-ml
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 So far our workflows have involved directly running functions from our Python scripts and more recently, using the [CLI application](cli.md){:target="_blank"} to quickly execute commands. But not all of our users will want to work at the code level or even download the package as we would need to for the CLI app. Instead, many users will simply want to use the functionality of our model and inspect the relevant details around it. To address this, we can develop an application programming interface (API) that provides the appropriate level of abstraction that enables our users to interact with the underlying data in our application.

@@ -1,26 +1,9 @@
 ---
-template: page.html
+template: main.html
 keywords: applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
 ---
 
-<style>
-html {
-    scroll-behavior: smooth;
-}
-.md-sidebar {
-    width: 9rem !important;
-}
-
-@media (min-width: 768px) {
-    .md-nav--primary {
-        display: none !important;
-    }
-}
-
-.md-nav--secondary {
-    display: none !important;
-}
-</style>
+{% include "styles/page.md" %}
 
 <!-- Hero -->
 <div class="row flex-column-reverse flex-md-row">

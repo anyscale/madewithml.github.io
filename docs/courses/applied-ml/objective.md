@@ -14,6 +14,8 @@ video: https://www.youtube.com/watch?v=_sYrVHGRqPo
     allowfullscreen></iframe>
 </div> -->
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 Identifying the objective should always be the first step when solving any problem. It acts as the **guide** for all subsequent decision making and will prevent us from getting distracted along the way. However, identifying the objective isn't always straightforward, especially when we aren't analyzing the problem through the appropriate lens.

@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/madewithml
 notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/06_Linear_Regression.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Overview
 Our goal is to learn a linear model $\hat{y}$ that models $y$ given $X$ using weights $W$ and bias $b$:
 

@@ -7,6 +7,8 @@ image: https://madewithml.com/static/images/applied_ml.png
 repository: https://github.com/GokuMohandas/applied-ml
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 Logging the process of tracking and recording key events that occur in our applications. We want to log events so we can use them to inspect processes, fix issues, etc. They're a whole lot more powerful than `print` statements because they allow us to send specific pieces of information to specific locations, not to mention custom formatting, shared interface with other Python packages, etc. We should use logging to provide insight into the internal processes of our application to notify our users of the important events that are occurring.

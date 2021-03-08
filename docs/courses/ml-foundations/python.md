@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/madewithml
 notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/02_Python.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Variables
 Variables are containers for holding data and they're defined by a name and value.
 

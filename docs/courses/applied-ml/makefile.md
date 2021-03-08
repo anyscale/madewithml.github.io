@@ -7,6 +7,8 @@ image: https://madewithml.com/static/images/applied_ml.png
 repository: https://github.com/GokuMohandas/applied-ml
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 We have just started and there are already so many different commands to keep track of. To help with this, we're going to use a [`Makefile`](https://opensource.com/article/18/8/what-how-makefile){:target="_blank"} which is a automation tool that organizes our commands. This makes it very easy for us to organize relevant commands as well as organize it for others who may be new to our application.

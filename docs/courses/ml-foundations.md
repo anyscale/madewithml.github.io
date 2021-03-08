@@ -1,26 +1,11 @@
 ---
-template: course.html
+template: main.html
 title: ML Foundations
 description: Learn the foundations of ML through intuitive explanations, clean code and visuals.
 image: https://madewithml.com/static/images/ml_foundations.png
 ---
 
-<style>
-  .md-sidebar {
-    width: 9rem !important;
-  }
-
-  .md-nav--secondary {
-    display: none !important;
-  }
-
-  /* Desktop */
-  @media (min-width: 768px) {
-    .md-nav--primary {
-      display: none !important;
-    }
-  }
-</style>
+{% include "styles/course.md" %}
 
 <div class="admonition example">
     <p>

@@ -14,6 +14,8 @@ video: https://www.youtube.com/watch?v=Gi1VlFV8e_k
     allowfullscreen></iframe>
 </div> -->
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 Once we've identified our main objective, we can hypothesize solutions using a three-step process: visualize, understand and design.

@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/madewithml
 notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/04_Pandas.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Set up
 
 First we'll import the NumPy and Pandas libraries and set seeds for reproducability. We'll also download the dataset we'll be working with to disk.

@@ -9,6 +9,8 @@ notebook: https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/
 ---
 
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 To determine the efficacy of our models, we need to have an unbiased measuring approach. To do this, we split our dataset into `training`, `validation`, and `testing` data splits. Here is the process:

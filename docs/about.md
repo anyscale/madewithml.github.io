@@ -1,9 +1,11 @@
 ---
-template: page.html
+template: main.html
 title: Our Mission
 description: We exist to end the hype and educate how to responsibly deliver value with ML.
 keywords: applied ml, machine learning
 ---
+
+{% include "styles/page.md" %}
 
 ## 🌍 &nbsp;Deliver value
 
@@ -17,4 +19,5 @@ How come there's a lot of buzz around ML but we grossly fall short when it comes
 We will steadily address all the issues mentioned above but we're going to work backwards starting with *trust*.
 This is why we created our courses to educate the community on how to responsibly develop, deploy and maintain applications that are made with ML.
 
-:octicons-info-24: Read about our recent <a href="/pivot">pivot</a> from our dynamic platform.
+!!! info
+    Read about our <a href="/pivot">pivot</a> from our dynamic platform.

@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/madewithml
 notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/08_Neural_Networks.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Overview
 Our goal is to learn a model $\hat{y}$ that models $y$ given $X$ . You'll notice that neural networks are just extensions of the generalized linear methods we've seen so far but with non-linear activation functions since our data will be highly non-linear.
 

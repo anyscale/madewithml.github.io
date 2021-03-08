@@ -7,6 +7,8 @@ image: https://madewithml.com/static/images/applied_ml.png
 repository: https://github.com/GokuMohandas/applied-ml
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 It's integral to be able to consistently create an environment to develop in so that we can reliably reproduce the same results. To do this, we'll need to explicitly detail all the requirements (python version, packages, etc.) as well as create the environment that will load all the requirements. By doing this, we'll not only be able to consistently reproduce results but also enable others to arrive at the same results.

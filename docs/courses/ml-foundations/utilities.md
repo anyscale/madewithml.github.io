@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/madewithml
 notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/10_Utilities.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Set up
 We're having to set a lot of seeds for reproducability now, so let's wrap it all up in a function.
 

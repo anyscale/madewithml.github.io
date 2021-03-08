@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/applied-ml
 notebook: https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 Data preprocessing can be categorized into two types of processes: *preparation* and *transformation*.

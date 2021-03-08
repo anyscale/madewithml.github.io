@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/madewithml
 notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/03_NumPy.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Set up
 First we'll import the NumPy package and set seeds for reproducability so that we can receive the exact same results every time.
 

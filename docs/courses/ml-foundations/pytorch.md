@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/madewithml
 notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/05_PyTorch.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Set up
 
 We'll import PyTorch and set seeds for reproducability. Note that PyTorch also required a seed since we will be generating random tensors.

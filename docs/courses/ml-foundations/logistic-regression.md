@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/madewithml
 notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/07_Logistic_Regression.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Overview
 Logistic regression is an extension on linear regression (both are generalized linear methods). We will still learn to model a line (plane) that models $y$ given $X$. Except now we are dealing with classification problems as opposed to regression problems so we'll be predicting probability distributions as opposed to a discrete value. We'll be using the softmax operation to normalize our logits ($XW$) to derive probabilities.
 

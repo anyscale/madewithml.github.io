@@ -14,6 +14,8 @@ video: https://www.youtube.com/watch?v=AwajdDVR_C4
     allowfullscreen></iframe>
 </div> -->
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 Before we start building our solution, we need to make sure we have methods to evaluate it. We'll use our objective here to determine the evaluation criteria.

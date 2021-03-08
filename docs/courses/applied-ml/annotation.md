@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/applied-ml
 notebook: https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 Annotation is the process of identifying the inputs and outputs that are **worth** modeling (*not* just what could be modeled).

@@ -1,9 +1,11 @@
 ---
-template: course.html
+template: main.html
 title: Applied ML
 description: Learn how to apply ML to build a production grade product and deliver value.
 image: "https://madewithml.com/static/images/applied_ml.png"
 ---
+
+{% include "styles/course.md" %}
 
 <div class="admonition example">
     <p>
@@ -54,9 +56,9 @@ image: "https://madewithml.com/static/images/applied_ml.png"
     </ul>
     <b><span class="mr-1">✅</span> Testing</b>
     <ul>
-    <li>Code</li>
-    <li>Data</li>
-    <li>Models</li>
+    <li><a href="/courses/applied-ml/testing/">Code</a></li>
+    <li><a href="/courses/applied-ml/testing/#data">Data</a></li>
+    <li><a href="/courses/applied-ml/testing/#models">Models</a></li>
     </ul>
 </div>
 <div class="col-md-4">

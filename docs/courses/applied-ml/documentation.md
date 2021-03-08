@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/applied-ml
 documentation: https://gokumohandas.github.io/applied-ml/
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 
 > Code tells you *how*, comments tell you *why*. -- [Jeff Atwood](https://blog.codinghorror.com/code-tells-you-how-comments-tell-you-why/){:target="_blank"}

@@ -8,6 +8,8 @@ repository: https://github.com/GokuMohandas/applied-ml
 notebook: https://colab.research.google.com/github/GokuMohandas/applied-ml/blob/main/notebooks/tagifai.ipynb
 ---
 
+{% include "styles/lesson.md" %}
+
 ## Intuition
 Exploratory data analysis (EDA) is a vital (and fun) step in the data science process but it's often misconstrued. Here's how to think about EDA:
 

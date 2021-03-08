@@ -1,26 +1,9 @@
 ---
-template: page.html
+template: main.html
 title: Frequently Asked Questions (FAQ)
 ---
 
-<style>
-html {
-    scroll-behavior: smooth;
-}
-.md-sidebar {
-    width: 9rem !important;
-}
-
-@media (min-width: 768px) {
-    .md-nav--primary {
-        display: none !important;
-    }
-}
-
-.md-nav--secondary {
-    display: none !important;
-}
-</style>
+{% include "styles/page.md" %}
 
 ### Who is this content for?
 - ML developers who want to become end-to-end ML developers.
