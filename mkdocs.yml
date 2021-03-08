@@ -10,7 +10,7 @@ repo_name: GokuMohandas/madewithml
 edit_uri: ''  #disables edit button
 
 # Copyright
-copyright: Content by <a href="https://twitter.com/GokuMohandas" target="_blank">Goku Mohandas</a>.
+copyright: Created by <a href="https://twitter.com/GokuMohandas" target="_blank">Goku Mohandas</a>.
 
 # Google Analytics (key picked up by GitHub Actions from repo secrets)
 google_analytics:
