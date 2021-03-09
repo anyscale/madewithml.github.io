@@ -635,7 +635,7 @@ df.expect_column_list_values_to_be_unique(column="tags")
 ### Projects
 So far we've worked with the Great Expectations library at the Python script level but we can organize our expectations even more by creating a Project.
 
-1. Initialize the Project using ```#!bash great_expectations init```. This will interactively walk us through setting up data sources, naming, etc. and set up a [great_expectations](https://github.com/GokuMohandas/applied-ml/blob/great_expectations){:target="_blank"} directory with the following structure:
+1. Initialize the Project using ```#!bash great_expectations init```. This will interactively walk us through setting up data sources, naming, etc. and set up a [great_expectations](https://github.com/GokuMohandas/applied-ml/blob/main/great_expectations){:target="_blank"} directory with the following structure:
 ```bash linenums="1"
 great_expectations/
 |   ├── checkpoints/
@@ -646,7 +646,7 @@ great_expectations/
 |   ├── .gitignore
 |   └── great_expectations.yml
 ```
-2. Define our [custom module](https://github.com/GokuMohandas/applied-ml/blob/great_expectations/plugins/custom_module/custom_dataset.py){:target="_blank"} under the [plugins](https://github.com/GokuMohandas/applied-ml/blob/great_expectations/plugins){:target="_blank"} directory and use it to define our data sources in our [great_expectations.yml](https://github.com/GokuMohandas/applied-ml/blob/great_expectations/great_expectations.yml){:target="_blank"} configuration file.
+2. Define our [custom module](https://github.com/GokuMohandas/applied-ml/blob/main/great_expectations/plugins/custom_module/custom_dataset.py){:target="_blank"} under the [plugins](https://github.com/GokuMohandas/applied-ml/blob/main/great_expectations/plugins){:target="_blank"} directory and use it to define our data sources in our [great_expectations.yml](https://github.com/GokuMohandas/applied-ml/blob/main/great_expectations/great_expectations.yml){:target="_blank"} configuration file.
 ```yaml linenums="1" hl_lines="5-6"
 datasources:
   data:
@@ -660,7 +660,7 @@ datasources:
         class_name: SubdirReaderBatchKwargsGenerator
         base_directory: ../assets/data
 ```
-3. Create expectations using the profiler, which creates automatic expectations based on the data, or we can also create our own expectations. All of this is done interactively via a launched Jupyter notebook and saved under our [great_expectations/expectations](https://github.com/GokuMohandas/applied-ml/blob/great_expectations/expectations){:target="_blank"} directory.
+3. Create expectations using the profiler, which creates automatic expectations based on the data, or we can also create our own expectations. All of this is done interactively via a launched Jupyter notebook and saved under our [great_expectations/expectations](https://github.com/GokuMohandas/applied-ml/main/great_expectations/expectations){:target="_blank"} directory.
 ```bash linenums="1"
 great_expectations suite scaffold SUITE_NAME  # uses profiler
 great_expectations suite new --suite  # no profiler
