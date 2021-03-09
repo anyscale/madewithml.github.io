@@ -948,7 +948,7 @@ assert len(response.json()["data"]["predictions"]) == len(data["texts"])
 
 Besides just testing if the prediction pipelines work, we also want to ensure that they work well. Behavioral testing is the process of testing input data and expected outputs while treating the model as a black box. They don't necessarily have to be adversarial in nature but more along the types of perturbations we'll see in the real world once our model is deployed. A landmark paper on this topic is [Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://arxiv.org/abs/2005.04118){:target="_blank"} which breaks down behavioral testing into three types of tests:
 
-- `#!js invariance`: Changes should not affect outputs (ex. changing a non-influential token).
+- `#!js invariance`: Changes should not affect outputs.
 ```python linenums="1"
 # INVariance via verb injection (changes should not affect outputs)
 tokens = ["revolutionized", "disrupted"]
@@ -956,7 +956,7 @@ tags = [["transformers"], ["transformers"]]
 texts = [f"Transformers have {token} the ML field." for token in tokens]
 compare_tags(texts=texts, tags=tags, artifacts=artifacts, test_type="INV")
 ```
-- `#!js directional`: Change should affect outputs (ex. changing a highly influential token).
+- `#!js directional`: Change should affect outputs.
 ```python linenums="1"
 # DIRectional expectations (changes with known outputs)
 tokens = ["PyTorch", "Huggingface"]
@@ -1093,10 +1093,6 @@ With monitoring, there are quite a few distinct concerns that we didn't have to 
 - identifying anomalies and outliers.
 
 We'll cover all of these concepts in much more depth (and code) in our [monitoring](monitoring.md){:target="_blank"} lesson.
-
-
-@#@#@#@#@#@#@#@#@#@
-REPLACE IMAGES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ## Resources
 - [Great Expectations](https://github.com/great-expectations/great_expectations){:target="_blank"}
