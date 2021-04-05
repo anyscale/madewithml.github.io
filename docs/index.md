@@ -1,6 +1,6 @@
 ---
 template: main.html
-keywords: applied ml, mlops, machine learning, ml in production, machine learning in production, applied machine learning
+keywords: mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 ---
 
 {% include "styles/page.md" %}
@@ -11,20 +11,20 @@ keywords: applied ml, mlops, machine learning, ml in production, machine learnin
         <div class="ai-hero-text">
             <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
             <p style="margin-top: 0rem; margin-bottom: 0rem !important; color: #807e7e;">Applied ML · MLOps · Production</p>
-            <p style="font-size: 0.89rem;">Join <b>20K+ developers</b> in learning how to <a href="about">responsibly</a> deliver value with applied ML.</p>
+            <p style="font-size: 0.89rem;">Join <b>20K+ developers</b> in learning how to <a href="about">responsibly</a> deliver value with ML.</p>
             <div id="revue-embed">
                 <form action="https://www.getrevue.co/profile/madewithml/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
                     <input class="revue-form-field" placeholder="Your email address..." type="email" name="member[email]" id="member_email" style="width: 80%; border: 1px solid #b3b3b3; border-radius: 3px;">
                     <button class="md-button md-button--purple-gradient mr-2 mb-2 mb-md-0 mt-md-2 mt-2" type="submit" style="cursor: pointer !important;">
                         <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 3A1.75 1.75 0 000 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0024 18.75v-14A1.75 1.75 0 0022.25 3H1.75zM1.5 4.75a.25.25 0 01.25-.25h20.5a.25.25 0 01.25.25v.852l-10.36 7a.25.25 0 01-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"></path></svg></span> Subscribe</button>
-                        <a href="#ml-foundations"><span class="md-button md-button--grey-secondary mr-2 mb-2 mb-md-0 mt-md-2 px-3 py-1">View courses</span></a>
+                        <a href="#basics"><span class="md-button md-button--grey-secondary mr-2 mb-2 mb-md-0 mt-md-2 px-3 py-1">View courses</span></a>
                 </form>
             </div>
         </div>
     </div>
     <div class="col-md-5 ai-center-all">
         <div class="mb-md-0 mb-4">
-            <a href="#applied-ml"><img src="static/images/logos.png" style="width: 12rem; border-radius: 10px; box-shadow: 0px 0px 15px 0.1px #fff"></a>
+            <a href="#mlops"><img src="static/images/logos.png" style="width: 12rem; border-radius: 10px; box-shadow: 0px 0px 15px 0.1px #fff"></a>
         </div>
     </div>
 </div>
@@ -74,8 +74,7 @@ keywords: applied ml, mlops, machine learning, ml in production, machine learnin
 
 <hr>
 
-## ML Foundations
-<!-- ML Foundations -->
+## Basics
 > Learn the foundations of ML through intuitive explanations, clean code and visuals.
 [GokuMohandas/madewithml](https://github.com/gokumohandas/madewithml){:target="_blank"} &rarr; 🔥 Among the [top ML repos](https://github.com/topics/deep-learning){:target="blank"} on GitHub
 
@@ -83,29 +82,29 @@ keywords: applied ml, mlops, machine learning, ml in production, machine learnin
 <div class="col-md-4">
     <b><span class="mr-1">🔢</span> Basics</b>
     <ul>
-    <li><a href="/courses/ml-foundations/notebooks/">Notebooks</a></li>
-    <li><a href="/courses/ml-foundations/python/">Python</a></li>
-    <li><a href="/courses/ml-foundations/numpy/">NumPy</a></li>
-    <li><a href="/courses/ml-foundations/pandas/">Pandas</a></li>
-    <li><a href="/courses/ml-foundations/pytorch/">PyTorch</a></li>
+    <li><a href="/courses/basics/notebooks/">Notebooks</a></li>
+    <li><a href="/courses/basics/python/">Python</a></li>
+    <li><a href="/courses/basics/numpy/">NumPy</a></li>
+    <li><a href="/courses/basics/pandas/">Pandas</a></li>
+    <li><a href="/courses/basics/pytorch/">PyTorch</a></li>
     </ul>
 </div>
 <div class="col-md-4">
     <b><span class="mr-1">📈</span> Modeling</b>
     <ul>
-    <li><a href="/courses/ml-foundations/linear-regression/">Linear Regression</a></li>
-    <li><a href="/courses/ml-foundations/logistic-regression/">Logistic Regression</a></li>
-    <li><a href="/courses/ml-foundations/neural-networks/">Neural Networks</a></li>
-    <li><a href="/courses/ml-foundations/data-quality/">Data Quality</a></li>
-    <li><a href="/courses/ml-foundations/utilities/">Utilities</a></li>
+    <li><a href="/courses/basics/linear-regression/">Linear Regression</a></li>
+    <li><a href="/courses/basics/logistic-regression/">Logistic Regression</a></li>
+    <li><a href="/courses/basics/neural-networks/">Neural Networks</a></li>
+    <li><a href="/courses/basics/data-quality/">Data Quality</a></li>
+    <li><a href="/courses/basics/utilities/">Utilities</a></li>
     </ul>
 </div>
 <div class="col-md-4">
     <b><span class="mr-1">🤖</span> Deep Learning</b>
     <ul>
-    <li><a href="/courses/ml-foundations/convolutional-neural-networks/">CNNs</a></li>
-    <li><a href="/courses/ml-foundations/embeddings/">Embeddings</a></li>
-    <li><a href="/courses/ml-foundations/recurrent-neural-networks/">RNNs</a></li>
+    <li><a href="/courses/basics/convolutional-neural-networks/">CNNs</a></li>
+    <li><a href="/courses/basics/embeddings/">Embeddings</a></li>
+    <li><a href="/courses/basics/recurrent-neural-networks/">RNNs</a></li>
     <li>Attention <small>(TBD)</small></li>
     <li>Transformers <small>(TBD)</small></li>
     </ul>
@@ -114,72 +113,70 @@ keywords: applied ml, mlops, machine learning, ml in production, machine learnin
 
 <hr>
 
-## Applied ML
-<!-- Applied ML -->
+## MLOps
 > Learn how to apply ML to build a production grade product and deliver value.
-[GokuMohandas/applied-ml](https://github.com/GokuMohandas/applied-ml){:target="_blank"} &rarr; New lesson every week!
+[GokuMohandas/mlops](https://github.com/GokuMohandas/mlops){:target="_blank"} &rarr; New lessons every month!
 
 <div class="row mt-4 ai-course-list">
 <div class="col-md-4">
     <b><span class="mr-1">📦</span> Product</b>
     <ul>
-    <li><a href="/courses/applied-ml/objective/">Objective</a></li>
-    <li><a href="/courses/applied-ml/solution/">Solution</a></li>
-    <li><a href="/courses/applied-ml/evaluation/">Evaluation</a></li>
-    <li><a href="/courses/applied-ml/iteration/">Iteration</a></li>
+    <li><a href="/courses/mlops/objective/">Objective</a></li>
+    <li><a href="/courses/mlops/solution/">Solution</a></li>
+    <li><a href="/courses/mlops/evaluation/">Evaluation</a></li>
+    <li><a href="/courses/mlops/iteration/">Iteration</a></li>
     </ul>
     <b><span class="mr-1">🔢</span> Data</b>
     <ul>
-    <li><a href="/courses/applied-ml/annotation/">Annotation</a></li>
-    <li><a href="/courses/applied-ml/exploratory-data-analysis/">Exploratory data analysis</a></li>
-    <li><a href="/courses/applied-ml/splitting/">Splitting</a></li>
-    <li><a href="/courses/applied-ml/preprocessing/">Preprocessing</a></li>
+    <li><a href="/courses/mlops/annotation/">Annotation</a></li>
+    <li><a href="/courses/mlops/exploratory-data-analysis/">Exploration</a></li>
+    <li><a href="/courses/mlops/splitting/">Splitting</a></li>
+    <li><a href="/courses/mlops/preprocessing/">Preprocessing</a></li>
     </ul>
     <b><span class="mr-1">📈</span> Modeling</b>
     <ul>
-    <li><a href="/courses/applied-ml/baselines/">Baselines</a></li>
-    <li><a href="/courses/applied-ml/experiment-tracking/">Experiment tracking</a></li>
-    <li><a href="/courses/applied-ml/optimization/">Optimization</a></li>
+    <li><a href="/courses/mlops/baselines/">Baselines</a></li>
+    <li><a href="/courses/mlops/experiment-tracking/">Experiment tracking</a></li>
+    <li><a href="/courses/mlops/optimization/">Optimization</a></li>
     </ul>
 </div>
 <div class="col-md-4">
     <b><span class="mr-1">📝</span> Scripting</b>
     <ul>
-    <li><a href="/courses/applied-ml/organization/">Organization</a></li>
-    <li><a href="/courses/applied-ml/packaging/">Packaging</a></li>
-    <li><a href="/courses/applied-ml/documentation/">Documentation</a></li>
-    <li><a href="/courses/applied-ml/logging/">Logging</a></li>
-    <li><a href="/courses/applied-ml/styling/">Styling</a></li>
-    <li><a href="/courses/applied-ml/makefile/">Makefile</a></li>
+    <li><a href="/courses/mlops/organization/">Organization</a></li>
+    <li><a href="/courses/mlops/packaging/">Packaging</a></li>
+    <li><a href="/courses/mlops/documentation/">Documentation</a></li>
+    <li><a href="/courses/mlops/logging/">Logging</a></li>
+    <li><a href="/courses/mlops/styling/">Styling</a></li>
+    <li><a href="/courses/mlops/makefile/">Makefile</a></li>
     </ul>
     <b><span class="mr-1">📦</span> Application</b>
     <ul>
-    <li><a href="/courses/applied-ml/cli/">CLI</a></li>
-    <li><a href="/courses/applied-ml/api/">API</a></li>
+    <li><a href="/courses/mlops/cli/">CLI</a></li>
+    <li><a href="/courses/mlops/api/">API</a></li>
     </ul>
     <b><span class="mr-1">✅</span> Testing</b>
     <ul>
-    <li><a href="/courses/applied-ml/testing/">Code</a></li>
-    <li><a href="/courses/applied-ml/testing/#data">Data</a></li>
-    <li><a href="/courses/applied-ml/testing/#models">Models</a></li>
+    <li><a href="/courses/mlops/testing/">Code</a></li>
+    <li><a href="/courses/mlops/testing/#data">Data</a></li>
+    <li><a href="/courses/mlops/testing/#models">Models</a></li>
     </ul>
 </div>
 <div class="col-md-4">
-    <b><span class="mr-1">⏰</span> Version control</b>
+    <b><span class="mr-1">♻️</span> Reproducability</b>
     <ul>
-    <li>Git</li>
-    <li>Precommit</li>
-    <li>Versioning</li>
+    <li><a href="/courses/mlops/git/">Git</a></li>
+    <li><a href="/courses/mlops/pre-commit/">Pre-commit</a></li>
+    <li><a href="/courses/mlops/versioning/">Versioning</a></li>
+    <li><a href="/courses/mlops/docker/">Docker</a></li>
     </ul>
     <b><span class="mr-1">🚀</span> Production</b>
     <ul>
     <li>Dashboard</li>
-    <li>Docker</li>
     <li>CI/CD</li>
     <li>Monitoring</li>
     <li>Feature stores</li>
     <li>Workflows</li>
-    <li>Active learning</li>
     </ul>
 </div>
 </div>
@@ -191,8 +188,8 @@ keywords: applied ml, mlops, machine learning, ml in production, machine learnin
 
 ### Who is this content for?
 - ML developers who want to become end-to-end ML developers.
-- Software engineers who want to responsibly deliver value with applied ML.
-- Product managers who want to have a comprehensive understanding of applied ML.
+- Software engineers who want to responsibly deliver value with ML.
+- Product managers who want to have a comprehensive understanding of MLOps.
 
 ### What makes this content unique?
 - `#!js hands-on`: If you search production ML or MLOps online, you'll find great blog posts and tweets. But in order to really understand these concepts, you need to implement them. Unfortunately, you don’t see a lot of the inner workings of running production ML because of scale, proprietary content & expensive tools. However, Made With ML is free, open and live which makes it a perfect learning opportunity for the community.

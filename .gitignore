@@ -55,11 +55,8 @@ node_modules
 .idea
 
 # Data
-embeddings/
-experiments/
 logs/
-tensorboard/
-mlruns/
+tmp/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

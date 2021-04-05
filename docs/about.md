@@ -2,7 +2,7 @@
 template: main.html
 title: Our Mission
 description: We exist to end the hype and educate how to responsibly deliver value with ML.
-keywords: applied ml, machine learning
+keywords: mlops, applied ml, machine learning
 ---
 
 {% include "styles/page.md" %}

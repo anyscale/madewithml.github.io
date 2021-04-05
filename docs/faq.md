@@ -7,8 +7,8 @@ title: Frequently Asked Questions (FAQ)
 
 ### Who is this content for?
 - ML developers who want to become end-to-end ML developers.
-- Software engineers who want to responsibly deliver value with applied ML.
-- Product managers who want to have a comprehensive understanding of applied ML.
+- Software engineers who want to responsibly deliver value with ML.
+- Product managers who want to have a comprehensive understanding of MLOps.
 
 ### What makes this content unique?
 - `#!js hands-on`: If you search production ML or MLOps online, you'll find great blog posts and tweets. But in order to really understand these concepts, you need to implement them. Unfortunately, you don’t see a lot of the inner workings of running production ML because of scale, proprietary content & expensive tools. However, Made With ML is free, open and live which makes it a perfect learning opportunity for the community.
