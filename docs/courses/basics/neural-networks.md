@@ -59,7 +59,7 @@ $$ \hat{y} = softmax(z_2) $$
 
 
 ## Set up
-We'll set our seeds for reproducability.
+We'll set our seeds for reproducibility.
 ```python linenums="1"
 import numpy as np
 import random

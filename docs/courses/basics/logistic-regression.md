@@ -44,7 +44,7 @@ This function is known as the multinomial logistic regression or the softmax cla
 
 
 ## Set up
-We'll set our seeds for reproducability.
+We'll set our seeds for reproducibility.
 ```python linenums="1"
 import numpy as np
 import random

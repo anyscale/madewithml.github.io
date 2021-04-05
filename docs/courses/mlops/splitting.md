@@ -42,7 +42,7 @@ import numpy as np
 import random
 ```
 ```python linenums="1"
-# Set seeds for reproducability
+# Set seeds for reproducibility
 seed = 42
 np.random.seed(seed)
 random.seed(seed)

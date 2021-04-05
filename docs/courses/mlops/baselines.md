@@ -75,7 +75,7 @@ import torch
 ```
 ```python linenums="1"
 def set_seeds(seed=1234):
-    """Set seeds for reproducability."""
+    """Set seeds for reproducibility."""
     np.random.seed(seed)
     random.seed(seed)
     torch.manual_seed(seed)
@@ -891,7 +891,7 @@ print (json.dumps(performance, indent=2))
 
 ### Set up
 
-We'll set up the task by setting seeds for reproducability, creating our data splits abd setting the device.
+We'll set up the task by setting seeds for reproducibility, creating our data splits abd setting the device.
 ```python linenums="1"
 import math
 import torch

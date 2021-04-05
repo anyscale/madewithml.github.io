@@ -90,7 +90,7 @@ nav:
       - Code: courses/mlops/testing.md
       - Data: courses/mlops/testing.md#data
       - Models: courses/mlops/testing.md#models
-    - <b>♻️ &nbsp; Reproducability</b>:
+    - <b>♻️ &nbsp; Reproducibility</b>:
       - Git: courses/mlops/git.md
       - Pre-commit: courses/mlops/pre-commit.md
       - Versioning: courses/mlops/versioning.md

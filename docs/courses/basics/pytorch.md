@@ -12,7 +12,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/
 
 ## Set up
 
-We'll import PyTorch and set seeds for reproducability. Note that PyTorch also required a seed since we will be generating random tensors.
+We'll import PyTorch and set seeds for reproducibility. Note that PyTorch also required a seed since we will be generating random tensors.
 ```python linenums="1"
 import numpy as np
 import torch

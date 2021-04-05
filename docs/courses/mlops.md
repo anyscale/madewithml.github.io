@@ -62,7 +62,7 @@ image: "https://madewithml.com/static/images/applied_ml.png"
     </ul>
 </div>
 <div class="col-md-4">
-    <b><span class="mr-1">♻️</span> Reproducability</b>
+    <b><span class="mr-1">♻️</span> Reproducibility</b>
     <ul>
     <li><a href="/courses/mlops/git/">Git</a></li>
     <li><a href="/courses/mlops/pre-commit/">Pre-commit</a></li>

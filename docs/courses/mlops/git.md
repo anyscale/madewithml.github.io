@@ -1,7 +1,7 @@
 ---
 template: lesson.html
 title: "Git"
-description: Tracking changes in our work for reproducability and collaboration.
+description: Tracking changes in our work for reproducibility and collaboration.
 keywords: git, versioning, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/applied_ml.png
 repository: https://github.com/GokuMohandas/mlops

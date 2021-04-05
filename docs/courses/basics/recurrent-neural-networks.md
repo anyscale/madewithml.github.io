@@ -63,7 +63,7 @@ SEED = 1234
 ```
 ```python linenums="1"
 def set_seeds(seed=1234):
-    """Set seeds for reproducability."""
+    """Set seeds for reproducibility."""
     np.random.seed(seed)
     random.seed(seed)
     torch.manual_seed(seed)
@@ -71,7 +71,7 @@ def set_seeds(seed=1234):
     torch.cuda.manual_seed_all(seed) # multi-GPU
 ```
 ```python linenums="1"
-# Set seeds for reproducability
+# Set seeds for reproducibility
 set_seeds(seed=SEED)
 ```
 ```python linenums="1"

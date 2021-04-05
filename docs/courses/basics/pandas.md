@@ -12,7 +12,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/
 
 ## Set up
 
-First we'll import the NumPy and Pandas libraries and set seeds for reproducability. We'll also download the dataset we'll be working with to disk.
+First we'll import the NumPy and Pandas libraries and set seeds for reproducibility. We'll also download the dataset we'll be working with to disk.
 ```python linenums="1"
 import numpy as np
 import pandas as pd

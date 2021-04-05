@@ -16,7 +16,7 @@ In a nutshell, a machine learning model consumes input data and produces predict
 We're going to go through all the concepts with concrete code examples and some synthesized data to train our models on. The task is to determine whether a tumor will be benign (harmless) or malignant (harmful) based on leukocyte (white blood cells) count and blood pressure. This is a synthetic dataset that we created and has no clinical relevance.
 
 ## Set up
-We'll set our seeds for reproducability.
+We'll set our seeds for reproducibility.
 ```python linenums="1"
 import numpy as np
 import random

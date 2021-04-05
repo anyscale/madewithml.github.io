@@ -11,7 +11,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/
 {% include "styles/lesson.md" %}
 
 ## Set up
-We're having to set a lot of seeds for reproducability now, so let's wrap it all up in a function.
+We're having to set a lot of seeds for reproducibility now, so let's wrap it all up in a function.
 
 ```python linenums="1"
 import numpy as np
@@ -25,7 +25,7 @@ SEED = 1234
 ```
 ```python linenums="1"
 def set_seeds(seed=1234):
-    """Set seeds for reproducability."""
+    """Set seeds for reproducibility."""
     np.random.seed(seed)
     random.seed(seed)
     torch.manual_seed(seed)
@@ -33,7 +33,7 @@ def set_seeds(seed=1234):
     torch.cuda.manual_seed_all(seed) # multi-GPU
 ```
 ```python linenums="1"
-# Set seeds for reproducability
+# Set seeds for reproducibility
 set_seeds(seed=SEED)
 ```
 ```python linenums="1"
@@ -307,7 +307,7 @@ We're going to place our data into a [`Dataset`](https://pytorch.org/docs/stable
 import torch
 ```
 ```python linenums="1"
-# Seed seed for reproducability
+# Seed seed for reproducibility
 torch.manual_seed(SEED)
 ```
 ```python linenums="1"

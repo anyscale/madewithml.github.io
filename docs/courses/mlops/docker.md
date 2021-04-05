@@ -11,13 +11,13 @@ repository: https://github.com/GokuMohandas/mlops
 
 ## Intuition
 
-The last step in achieving reproducability is to deploy our versioned code and artifacts in a reproducible environment. This goes well beyond the virtual environment we configured for our Python applications because there are system-level specifications (operating system, required packages, etc.) we aren't capturing. We want to be able to encapsulate all the requirements we need so that there are no external dependencies that would prevent someone else from reproducing our exact application.
+The last step in achieving reproducibility is to deploy our versioned code and artifacts in a reproducible environment. This goes well beyond the virtual environment we configured for our Python applications because there are system-level specifications (operating system, required packages, etc.) we aren't capturing. We want to be able to encapsulate all the requirements we need so that there are no external dependencies that would prevent someone else from reproducing our exact application.
 
 ## Application
 
-There are actually quite a few solutions for system-level reproducability (VMs, container engines, etc.) but the [Docker](https://www.docker.com/){:target="_blank"} container engine is by far the most popular for several key advantages:
+There are actually quite a few solutions for system-level reproducibility (VMs, container engines, etc.) but the [Docker](https://www.docker.com/){:target="_blank"} container engine is by far the most popular for several key advantages:
 
-- **reproducability** via Dockerfile with explicit instructions to deploy our application in a specific system.
+- **reproducibility** via Dockerfile with explicit instructions to deploy our application in a specific system.
 - **isolation** via containers as to not affect other applications that may also run on the same underlying operating system.
 - and many more advantages including size (no separate OS needed for each application), speed, [Docker Hub](https://hub.docker.com/){:target="_blank"}, etc.
 

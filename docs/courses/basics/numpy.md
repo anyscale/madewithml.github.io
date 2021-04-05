@@ -11,7 +11,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/
 {% include "styles/lesson.md" %}
 
 ## Set up
-First we'll import the NumPy package and set seeds for reproducability so that we can receive the exact same results every time.
+First we'll import the NumPy package and set seeds for reproducibility so that we can receive the exact same results every time.
 
 ```python linenums="1"
 import numpy as np
