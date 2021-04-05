@@ -18,7 +18,7 @@ We learned how to version our code but there are several other very important cl
 - expose configurations and performances so we can quickly inspect for improvements and regressions.
 
 <div class="ai-center-all">
-    <img width="700" src="https://i.ibb.co/5hTBbvH/versioning.png">
+    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/versioning/versioning.png">
 </div>
 
 ## Application
