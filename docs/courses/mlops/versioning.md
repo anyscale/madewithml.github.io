@@ -14,8 +14,8 @@ repository: https://github.com/GokuMohandas/mlops
 We learned how to version our code but there are several other very important class of artifacts that we need track and version: config, data and models. It's important that we version everything so that we can reproduce the exact same application anytime. And we're going to do this by using a Git commit as a snapshot of the code, config, data used to produce a specific model. Here are the key elements we'll need to incorporate to make our application entirely reproducible:
 
 - repository should store pointers to large data and model artifacts living in blob storage.
-- use commits to store snapshots of the code, config, data and model.
-- expose configurations and performances so we can quickly inspect for improvements and regressions.
+- use commits to store snapshots of the code, config, data and model and be able to update and rollback versions.
+- expose configurations and performances so we can inspect for improvements and regressions.
 
 <div class="ai-center-all">
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/versioning/versioning.png">
