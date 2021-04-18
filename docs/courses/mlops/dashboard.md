@@ -26,12 +26,19 @@ mkdir streamlit
 touch streamlit/st_app.py
 streamlit run streamlit/st_app.py
 ```
+<pre class="output">
+Local URL: http://localhost:8501
+</pre>
 
 ### Components
 Before we create a dashboard for our specific application, we need to learn about the different Streamlit [API components](https://docs.streamlit.io/en/stable/api.html){:target="_blank"}. Instead of going through them all in this lesson, take ten minutes and go through the entire documentation page. We normally don't suggest this but it's quite short and we promised you'll be amazed at how many UI components (styled text, latex, tables, plots, etc.) you can create using just Python. We'll explore the different components in detail as they apply to creating different interactions for our specific dashboard below.
 
 ### Pages
 Our application's [dashboard](https://github.com/GokuMohandas/mlops/blob/main/streamlit/st_app.py){:target="_blank"} will feature several pages organized by the insight they will provide where the view can choose what via interactive [radio buttons](https://docs.streamlit.io/en/stable/api.html#streamlit.radio){:target="_blank"}.
+
+<div class="ai-center-all">
+    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/dashboard/pages.png">
+</div>
 
 #### Data
 
