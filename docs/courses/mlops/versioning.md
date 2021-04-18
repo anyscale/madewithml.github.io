@@ -25,7 +25,7 @@ We learned how to version our code but there are several other very important cl
 
 There are many tools available for saving and pointing to our large artifacts but we'll be using the [Data Version Control (DVC)](https://dvc.org/){:target="_blank"} library for it's simplicity, rich features and most importantly modularity. DVC has lots of other useful [features](https://dvc.org/features){:target="_blank"} (metrics, experiments, etc.) so be sure to explore those as well.
 
-We'll be using DVC to version our datasets and model weights and store them in a local directory which will act as our blob storage. We could use remote blob storage options such as S3, GCP, Google Drive, etc. but we're going to replicate the same actions locally so we can see how the data is stored.
+We'll be using DVC to version our datasets and model weights and store them in a local directory which will act as our blob storage. We could use remote blob storage options such as S3, GCP, Google Drive, [DAGsHub](https://dagshub.com/){:target="_blank"}, etc. but we're going to replicate the same actions locally so we can see how the data is stored.
 
 !!! note
     We'll be using a local directory to act as our blob storage so we can develop and analyze everything locally. We'll continue to do this for other storage components as well such as feature stores and like we have been doing with our local model registry.
@@ -50,7 +50,7 @@ Setting 'storage' as a default remote.
 </pre>
 
 !!! note
-    We can also use remote blob storage options such as S3, GCP, Google Drive, etc. if we're collaborating with other developers. For example, here's how we would set up an S3 bucket to hold our artifacts:
+    We can also use remote blob storage options such as S3, GCP, Google Drive, [DAGsHub](https://dagshub.com/){:target="_blank"}, etc. if we're collaborating with other developers. For example, here's how we would set up an S3 bucket to hold our versioned data:
     ```bash
     # Create bucket: https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html
     # Add credentials: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
@@ -60,19 +60,23 @@ Setting 'storage' as a default remote.
     ```
 
 ### Add data
-Now we're ready to *add* our artifacts which will create text pointer files for each artifact.
+Now we're ready to *add* our data which will create text pointer files for each file.
 
 ```bash
 # Add artifacts
 dvc add data/projects.json
 dvc add data/tags.json
-dvc add model/label_encoder.json
-dvc add model/tokenizer.json
-dvc add model/model.pt
 ```
 
-!!! note
-    We're not checking in all the model artifacts, such as [params.json](https://raw.githubusercontent.com/GokuMohandas/mlops/main/model/params.json){:target="_blank"} and [performance.json](https://raw.githubusercontent.com/GokuMohandas/mlops/main/model/performance.json){:target="_blank"}, because we'll be using them to compare different model versions (and they're small enough to version via Git). For very large applications, these artifacts would be stores in a metadata or evaluation store where they'll be indexed by model versions.
+```bash
+# Pointer files added
+📂 data
+  📄 .gitignore
+  📄 projects.json
+  📄 projects.json.dvc
+  📄 tags.json
+  📄 tags.json.dvc
+```
 
 Each pointer file will contain the md5 hash, size and the location w.r.t to the directory which we'll be checking into our git repository.
 
@@ -84,22 +88,26 @@ outs:
   path: projects.json
 ```
 
-The directories containing the artifacts will also have a .gitignore file that includes the actual artifacts so we don't check them into our repository.
+The data directory containing the files will also have a .gitignore file that includes the actual artifacts so we don't check them into our repository.
 
 ```yaml
 # data/.gitignore
 /projects.json
 /tags.json
 ```
-```yaml
-# model/.gitignore
-/label_encoder.json
-/tokenizer.json
-/model.pt
-```
 
 !!! note
-    If we added an entire directory at the root of our project, DVC will just append to our existing .gitignore file.
+    In terms of versioning our model artifacts, we aren't pushing anything to our blob storage because our model registry already takes care of all that. Instead we expose the run ID so we can load necessary artifacts, [params.json](https://raw.githubusercontent.com/GokuMohandas/mlops/main/model/params.json){:target="_blank"} and [performance.json](https://raw.githubusercontent.com/GokuMohandas/mlops/main/model/performance.json){:target="_blank"}, because we'll be using them to compare different model versions (and they're small enough to version via Git).
+
+    ```bash
+    # Model artifacts
+    📂 model
+      📄 run_id.txt
+      📄 params.json
+      📄 performance.json
+    ```
+
+    For very large applications, these artifacts would be stores in a metadata or evaluation store where they'll be indexed by model run IDs.
 
 ### Push
 Now we're ready to push our artifacts to our blob store with the *push* command.
@@ -121,7 +129,7 @@ If we inspect our storage (stores/blob), we'll can see that the data is efficien
 ```
 
 !!! note
-    In case we forget to add or push our artifacts, we can add it as a pre-commit hook so it happens automatically when we try to commit. If there are not changes, nothing will happen.
+    In case we forget to add or push our artifacts, we can add it as a pre-commit hook so it happens automatically when we try to commit. If there are no changes to our versioned files, nothing will happen.
 
     ```yaml hl_lines="9"
     # Makefile
@@ -129,9 +137,6 @@ If we inspect our storage (stores/blob), we'll can see that the data is efficien
     dvc:
         dvc add data/projects.json
         dvc add data/tags.json
-        dvc add model/label_encoder.json
-        dvc add model/tokenizer.json
-        dvc add model/model.pt
         dvc push
     ```
 

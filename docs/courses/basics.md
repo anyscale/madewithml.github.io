@@ -18,7 +18,7 @@ image: https://madewithml.com/static/images/ml_foundations.png
 
 <div class="row mt-4 ai-course-list">
 <div class="col-md-4">
-    <b><span class="mr-1">🔢</span> Basics</b>
+    <b><span class="mr-1">🔢</span> Foundations</b>
     <ul>
     <li><a href="/courses/basics/notebooks/">Notebooks</a></li>
     <li><a href="/courses/basics/python/">Python</a></li>

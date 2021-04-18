@@ -80,7 +80,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 <div class="row mt-4 ai-course-list">
 <div class="col-md-4">
-    <b><span class="mr-1">🔢</span> Basics</b>
+    <b><span class="mr-1">🔢</span> Foundations</b>
     <ul>
     <li><a href="/courses/basics/notebooks/">Notebooks</a></li>
     <li><a href="/courses/basics/python/">Python</a></li>
@@ -172,7 +172,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </ul>
     <b><span class="mr-1">🚀</span> Production</b>
     <ul>
-    <li>Dashboard</li>
+    <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
     <li>CI/CD</li>
     <li>Monitoring</li>
     <li>Feature stores</li>

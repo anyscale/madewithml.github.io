@@ -27,7 +27,7 @@ There are also several popular options such as a [Comet ML](https://www.comet.ml
 
 ## Application
 
-We'll start by initializing all the required arguments for our experiment and setting up an empty directory where all of our experiment will be stored.
+We'll start by initializing all the required arguments for our experiment.
 ```python linenums="1"
 from argparse import Namespace
 import mlflow
@@ -52,18 +52,16 @@ params = Namespace(
 !!! note
     When we move to Python scripts, we'll use the [Typer](https://typer.tiangolo.com/){:target="_blank"} package instead of argparse for a better CLI experience.
 
+Next, we'll set up our model registry where all the experiments and their respective runs will be stored. We'll load trained models from this registry as well using specific run IDs.
 ```python linenums="1"
-# Set tracking URI
-EXPERIMENTS_DIR = Path("experiments")
-Path(EXPERIMENTS_DIR).mkdir(exist_ok=True) # create experiments dir
-mlflow.set_tracking_uri("file://" + str(EXPERIMENTS_DIR.absolute()))
+# Model registry
+MODEL_REGISTRY = Path(STORES_DIR, "model")
+MODEL_REGISTRY.mkdir(parents=True, exist_ok=True)
+mlflow.set_tracking_uri("file://" + str(MODEL_REGISTRY.absolute()))
 ```
-```bash linenums="1"
-!ls
-```
-<pre class="output">
-experiments  ...
-</pre>
+
+!!! note
+    When we're collaborating with other team members, this model registry will live on the cloud with some added authentication. Members from our team can connect to it (like above) to save and load trained models. If you don't want to set up and maintain a model registry, this is where platforms like [Comet ML](https://www.comet.ml/site/){:target="_blank"}, [Weights and Biases](https://www.wandb.com/){:target="_blank"} and others offload a lot of technical components.
 
 ## Training
 
@@ -331,10 +329,9 @@ mlflow.set_experiment(experiment_name="baselines")
 INFO: 'baselines' does not exist. Creating a new experiment
 </pre>
 ```python linenums="1"
-def save_dict(d, filepath):
-    """Save dict to a json file."""
+def save_dict(d, filepath, cls=None, sortkeys=False):
     with open(filepath, "w") as fp:
-        json.dump(d, indent=2, sort_keys=False, fp=fp)
+        json.dump(d, indent=2, fp=fp, cls=cls, sort_keys=sortkeys)
 ```
 ```python linenums="1"
 # Tracking
@@ -349,12 +346,13 @@ with mlflow.start_run(run_name="cnn") as run:
     mlflow.log_metrics({"f1": artifacts["performance"]["overall"]["f1"]})
 
     # Log artifacts
-    with tempfile.TemporaryDirectory() as fp:
-        artifacts["tokenizer"].save(Path(fp, "tokenizer.json"))
-        artifacts["label_encoder"].save(Path(fp, "label_encoder.json"))
-        torch.save(artifacts["model"].state_dict(), Path(fp, "model.pt"))
-        save_dict(artifacts["performance"], Path(fp, "performance.json"))
-        mlflow.log_artifacts(fp)
+    with tempfile.TemporaryDirectory() as dp:
+        save_dict(vars(artifacts["params"]), Path(dp, "params.json"))
+        save_dict(performance, Path(dp, "performance.json"))
+        artifacts["tokenizer"].save(Path(dp, "tokenizer.json"))
+        artifacts["label_encoder"].save(Path(dp, "label_encoder.json"))
+        torch.save(artifacts["model"].state_dict(), Path(dp, "model.pt"))
+        mlflow.log_artifacts(dp)
 
     # Log parameters
     mlflow.log_params(vars(artifacts["params"]))
@@ -415,7 +413,7 @@ We can click on any of our experiments on the main dashboard to further explore 
     <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/experiment_tracking/plots.png" width="1000" alt="mlflow dashboard">
 </div>
 
-### Loading
+## Loading
 
 We need to be able to load our saved experiment artifacts for inference, retraining, etc.
 ```python linenums="1"
@@ -443,13 +441,25 @@ print (all_runs)
 device = torch.device("cpu")
 best_run_id = all_runs.iloc[0].run_id
 best_run = mlflow.get_run(run_id=best_run_id)
-with tempfile.TemporaryDirectory() as fp:
-    client.download_artifacts(run_id=best_run_id, path="", dst_path=fp)
-    tokenizer = Tokenizer.load(fp=Path(fp, "tokenizer.json"))
-    label_encoder = LabelEncoder.load(fp=Path(fp, "label_encoder.json"))
-    model_state = torch.load(Path(fp, "model.pt"), map_location=device)
-    performance = load_dict(filepath=Path(fp, "performance.json"))
+with tempfile.TemporaryDirectory() as dp:
+    client.download_artifacts(run_id=best_run_id, path="", dst_path=dp)
+    tokenizer = Tokenizer.load(fp=Path(dp, "tokenizer.json"))
+    label_encoder = LabelEncoder.load(fp=Path(dp, "label_encoder.json"))
+    model_state = torch.load(Path(dp, "model.pt"), map_location=device)
+    performance = load_dict(filepath=Path(dp, "performance.json"))
 ```
+
+!!! note
+    We can also load a specific run's model artifacts, by using it's run ID, directly from the model registry without having to save them to a temporary directory.
+    ```python linenums="1"
+    artifact_uri = mlflow.get_run(run_id=run_id).info.artifact_uri.split("file://")[-1]
+    params = Namespace(**utils.load_dict(filepath=Path(artifact_uri, "params.json")))
+    label_encoder = data.MultiLabelLabelEncoder.load(fp=Path(artifact_uri, "label_encoder.json"))
+    tokenizer = data.Tokenizer.load(fp=Path(artifact_uri, "tokenizer.json"))
+    model_state = torch.load(Path(artifact_uri, "model.pt"), map_location=device)
+    performance = utils.load_dict(filepath=Path(artifact_uri, "performance.json"))
+    ```
+
 ```python linenums="1"
 print (json.dumps(performance["overall"], indent=2))
 ```

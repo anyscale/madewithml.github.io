@@ -71,7 +71,7 @@ image: "https://madewithml.com/static/images/applied_ml.png"
     </ul>
     <b><span class="mr-1">🚀</span> Production</b>
     <ul>
-    <li>Dashboard</li>
+    <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
     <li>CI/CD</li>
     <li>Monitoring</li>
     <li>Feature stores</li>

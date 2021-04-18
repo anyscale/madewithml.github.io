@@ -167,3 +167,6 @@ docker run -p 5000:5000 -it tagifai /bin/bash
 <hr>
 
 Once we have our container running, we can use our application as we would on our local machine but now it's reproducible on any operating system that can run the Docker container engine. We've covered just what we need from Docker to deploy our application but there is so much more to Docker, which you can explore in the official [docs](https://docs.docker.com/){:target="_blank"}.
+
+<!-- Citation -->
+{% include "cite.md" %}

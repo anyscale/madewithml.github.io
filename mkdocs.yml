@@ -42,7 +42,7 @@ nav:
   - About: about.md
   - Basics:
     - Lessons: courses/basics.md
-    - <b>🔢 &nbsp; Basics</b>:
+    - <b>🔢 &nbsp; Foundations</b>:
       - Notebooks: courses/basics/notebooks.md
       - Python: courses/basics/python.md
       - NumPy: courses/basics/numpy.md
@@ -88,8 +88,8 @@ nav:
       - API: courses/mlops/api.md
     - <b>✅ &nbsp; Testing</b>:
       - Code: courses/mlops/testing.md
-      - Data: courses/mlops/testing.md#data
-      - Models: courses/mlops/testing.md#models
+      - Data: courses/mlops/testing#data
+      - Models: courses/mlops/testing#models
     - <b>♻️ &nbsp; Reproducibility</b>:
       - Git: courses/mlops/git.md
       - Pre-commit: courses/mlops/pre-commit.md

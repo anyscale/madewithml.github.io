@@ -545,3 +545,6 @@ git tag -a v0.1 -m "initial release"
 - Avoid using cryptic branch names.
 - Maintain your `main` branch as the "demo ready" branch that always works.
 - Protect branches with [rules](https://docs.github.com/en/github/administering-a-repository/managing-a-branch-protection-rule){:target="_blank"} (especially the `main` branch).
+
+<!-- Citation -->
+{% include "cite.md" %}

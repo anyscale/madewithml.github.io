@@ -173,3 +173,6 @@ install-dev:
 	pre-commit autoupdate
 ...
 ```
+
+<!-- Citation -->
+{% include "cite.md" %}
