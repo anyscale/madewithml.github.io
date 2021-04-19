@@ -4,7 +4,7 @@ title: "Dashboard"
 description: Creating an interactive dashboard to visually inspect our application using Streamlit.
 keywords: dashboard, visualization, streamlit, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
@@ -34,7 +34,7 @@ Local URL: http://localhost:8501
 Before we create a dashboard for our specific application, we need to learn about the different Streamlit [API components](https://docs.streamlit.io/en/stable/api.html){:target="_blank"}. Instead of going through them all in this lesson, take ten minutes and go through the entire documentation page. We normally don't suggest this but it's quite short and we promised you'll be amazed at how many UI components (styled text, latex, tables, plots, etc.) you can create using just Python. We'll explore the different components in detail as they apply to creating different interactions for our specific dashboard below.
 
 ### Pages
-Our application's [dashboard](https://github.com/GokuMohandas/mlops/blob/main/streamlit/st_app.py){:target="_blank"} will feature several pages organized by the insight they will provide where the view can choose what via interactive [radio buttons](https://docs.streamlit.io/en/stable/api.html#streamlit.radio){:target="_blank"}.
+Our application's [dashboard](https://github.com/GokuMohandas/MLOps/blob/main/streamlit/st_app.py){:target="_blank"} will feature several pages organized by the insight they will provide where the view can choose what via interactive [radio buttons](https://docs.streamlit.io/en/stable/api.html#streamlit.radio){:target="_blank"}.
 
 <div class="ai-center-all">
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/dashboard/pages.png">
@@ -148,7 +148,7 @@ st.write("Preprocessed text", preprocessed_text)
 </div>
 
 !!! bug
-    In fact, we were able to discover and fix a bug here where the NLTK package automatically lowers text when stemming which we had to override using our `Stemmer` class in our [data script](https://github.com/GokuMohandas/mlops/blob/main/tagifai/data.py){:target="_blank"}.
+    In fact, we were able to discover and fix a bug here where the NLTK package automatically lowers text when stemming which we had to override using our `Stemmer` class in our [data script](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/data.py){:target="_blank"}.
 
 #### Performance
 
@@ -235,7 +235,7 @@ We're also going to inspect the true positive (TP), false positive (FP) and fals
 
 ### Caching
 
-There are a few functions defined at the start of our [st_app.py](https://github.com/GokuMohandas/mlops/blob/main/streamlit/st_app.py){:target="_blank"} script which have a `@st.cache` decorator. This calls for Streamlit to cache the function by the combination of it's inputs which will significantly improve performance involving computation heavy functions.
+There are a few functions defined at the start of our [st_app.py](https://github.com/GokuMohandas/MLOps/blob/main/streamlit/st_app.py){:target="_blank"} script which have a `@st.cache` decorator. This calls for Streamlit to cache the function by the combination of it's inputs which will significantly improve performance involving computation heavy functions.
 
 ```python linenums="1"
 @st.cache

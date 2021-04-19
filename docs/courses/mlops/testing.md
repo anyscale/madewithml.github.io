@@ -4,7 +4,7 @@ title: "Testing ML Systems: Code, Data and Models"
 description: Testing code, data and models to ensure consistent behavior in ML systems.
 keywords: testing, pytest, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
@@ -73,7 +73,7 @@ Perfect coverage doesn't mean that our application is error free if those tests 
 
 ## Application
 
-In our [application](https://github.com/GokuMohandas/mlops){:target="_blank"}, we'll be testing the code, data and models. Be sure to look inside each of the different testing scripts after reading through the components below.
+In our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}, we'll be testing the code, data and models. Be sure to look inside each of the different testing scripts after reading through the components below.
 
 ```bash linenums="1"
 great_expectations/           # data tests
@@ -104,7 +104,7 @@ tests/                        # code tests
 We're going to be using [pytest](https://docs.pytest.org/en/stable/){:target="_blank"} as our testing framework for it's powerful builtin features such as [parametrization](#parametrize), [fixtures](#fixtures), [markers](#markers), etc.
 
 ### Configuration
-Pytest expects tests to be organized under a `tests` directory by default. However, we can also use our [pyproject.toml](https://github.com/GokuMohandas/mlops/blob/main/pyproject.toml){:target="_blank"} file to configure any other test path directories as well. Once in the directory, pytest looks for python scripts starting with `tests_*.py` but we can configure it to read any other file patterns as well.
+Pytest expects tests to be organized under a `tests` directory by default. However, we can also use our [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} file to configure any other test path directories as well. Once in the directory, pytest looks for python scripts starting with `tests_*.py` but we can configure it to read any other file patterns as well.
 
 ```toml linenums="1"
 # Pytest
@@ -326,7 +326,7 @@ pytest -m "fruits"      #  runs all tests marked with `fruits`
 pytest -m "not fruits"  #  runs all tests besides those marked with `fruits`
 ```
 
-The proper way to use markers is to explicitly list the ones we've created in our [pyproject.toml](https://github.com/GokuMohandas/mlops/blob/main/pyproject.toml){:target="_blank"} file. Here we can specify that all markers must be defined in this file with the `--strict-markers` flag and then declare our markers (with some info about them) in our `markers` list:
+The proper way to use markers is to explicitly list the ones we've created in our [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} file. Here we can specify that all markers must be defined in this file with the `--strict-markers` flag and then declare our markers (with some info about them) in our `markers` list:
 ```toml linenums="1"
 # Pytest
 [tool.pytest.ini_options]
@@ -385,7 +385,7 @@ if self.trial.should_prune():  # pragma: no cover, optuna pruning
     pass
 ```
 
-2. Excluding files by specifying them in our [pyproject.toml](https://github.com/GokuMohandas/mlops/blob/main/pyproject.toml){:target="_blank"} configuration.
+2. Excluding files by specifying them in our [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} configuration.
 ```toml linenums="1"
 # Pytest coverage
 [tool.coverage.run]
@@ -635,7 +635,7 @@ df.expect_column_list_values_to_be_unique(column="tags")
 ### Projects
 So far we've worked with the Great Expectations library at the Python script level but we can organize our expectations even more by creating a Project.
 
-1. Initialize the Project using ```#!bash great_expectations init```. This will interactively walk us through setting up data sources, naming, etc. and set up a [great_expectations](https://github.com/GokuMohandas/mlops/blob/main/great_expectations){:target="_blank"} directory with the following structure:
+1. Initialize the Project using ```#!bash great_expectations init```. This will interactively walk us through setting up data sources, naming, etc. and set up a [great_expectations](https://github.com/GokuMohandas/MLOps/blob/main/great_expectations){:target="_blank"} directory with the following structure:
 ```bash linenums="1"
 great_expectations/
 |   ├── checkpoints/
@@ -646,7 +646,7 @@ great_expectations/
 |   ├── .gitignore
 |   └── great_expectations.yml
 ```
-2. Define our [custom module](https://github.com/GokuMohandas/mlops/blob/main/great_expectations/plugins/custom_module/custom_dataset.py){:target="_blank"} under the [plugins](https://github.com/GokuMohandas/mlops/blob/main/great_expectations/plugins){:target="_blank"} directory and use it to define our data sources in our [great_expectations.yml](https://github.com/GokuMohandas/mlops/blob/main/great_expectations/great_expectations.yml){:target="_blank"} configuration file.
+2. Define our [custom module](https://github.com/GokuMohandas/MLOps/blob/main/great_expectations/plugins/custom_module/custom_dataset.py){:target="_blank"} under the [plugins](https://github.com/GokuMohandas/MLOps/blob/main/great_expectations/plugins){:target="_blank"} directory and use it to define our data sources in our [great_expectations.yml](https://github.com/GokuMohandas/MLOps/blob/main/great_expectations/great_expectations.yml){:target="_blank"} configuration file.
 ```yaml linenums="1" hl_lines="5-6"
 datasources:
   data:
@@ -660,7 +660,7 @@ datasources:
         class_name: SubdirReaderBatchKwargsGenerator
         base_directory: ../assets/data
 ```
-3. Create expectations using the profiler, which creates automatic expectations based on the data, or we can also create our own expectations. All of this is done interactively via a launched Jupyter notebook and saved under our [great_expectations/expectations](https://github.com/GokuMohandas/mlops/main/great_expectations/expectations){:target="_blank"} directory.
+3. Create expectations using the profiler, which creates automatic expectations based on the data, or we can also create our own expectations. All of this is done interactively via a launched Jupyter notebook and saved under our [great_expectations/expectations](https://github.com/GokuMohandas/MLOps/main/great_expectations/expectations){:target="_blank"} directory.
 ```bash linenums="1"
 great_expectations suite scaffold SUITE_NAME  # uses profiler
 great_expectations suite new --suite  # no profiler

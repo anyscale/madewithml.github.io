@@ -4,7 +4,7 @@ title: Outlining Objectives for ML Systems
 description: Defining the core objective of our task.
 keywords: objectives, product management, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 video: https://www.youtube.com/watch?v=_sYrVHGRqPo
 ---
 

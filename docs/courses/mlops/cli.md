@@ -4,7 +4,7 @@ title: Command Line Interface (CLI) Applications
 description: Using a command line interface (CLI) application to organize our application's processes.
 keywords: cli, application, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
@@ -15,7 +15,7 @@ We want to enable others to be able to interact with our application without hav
 
 ## Application
 
-The `app` that we defined inside our [`cli.py`](https://github.com/GokuMohandas/mlops/tree/main/app/cli.py){:target="_blank"} script is created using [Typer](https://typer.tiangolo.com/){:target="_blank"}, an open-source tool for building command line interface (CLI) applications. It starts by initializing the app and then adding the appropriate decorator to each function we wish to use as a CLI command.
+The `app` that we defined inside our [`cli.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/cli.py){:target="_blank"} script is created using [Typer](https://typer.tiangolo.com/){:target="_blank"}, an open-source tool for building command line interface (CLI) applications. It starts by initializing the app and then adding the appropriate decorator to each function we wish to use as a CLI command.
 
 ```python linenums="1"
 # Typer CLI app
@@ -47,7 +47,7 @@ def predict_tags(
 
 ## Commands
 
-In [`cli.py`](https://github.com/GokuMohandas/mlops/tree/main/app/cli.py){:target="_blank"} script we have define the following commands:
+In [`cli.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/cli.py){:target="_blank"} script we have define the following commands:
 
 - `download-data`: download data from online to local drive.
 - `optimize`: optimize a subset of hyperparameters towards an objective.
@@ -158,7 +158,7 @@ And we can easily use our CLI app to execute these commands with the appropriate
 </div>
 
 !!! note
-    You'll most likely be using the CLI application to optimize and train you models. We'll cover how to train using compute instances on the cloud from Amazon Web Services (AWS) or Google Cloud Platforms (GCP) in a later lesson. But in the meantime, if you don't have access to GPUs, check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/mlops/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Google Colab and transfer to local. We essentially run optimization, then train the best model to download and transfer it's artifacts.
+    You'll most likely be using the CLI application to optimize and train you models. We'll cover how to train using compute instances on the cloud from Amazon Web Services (AWS) or Google Cloud Platforms (GCP) in a later lesson. But in the meantime, if you don't have access to GPUs, check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Google Colab and transfer to local. We essentially run optimization, then train the best model to download and transfer it's artifacts.
 
 <!-- Citation -->
 {% include "cite.md" %}

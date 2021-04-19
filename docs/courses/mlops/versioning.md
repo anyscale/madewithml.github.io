@@ -4,7 +4,7 @@ title: "Versioning Code, Data and Models"
 description: Versioning code, data and models to ensure reproducible behavior in ML systems.
 keywords: versioning, dvc, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
@@ -31,7 +31,7 @@ We'll be using DVC to version our datasets and model weights and store them in a
     We'll be using a local directory to act as our blob storage so we can develop and analyze everything locally. We'll continue to do this for other storage components as well such as feature stores and like we have been doing with our local model registry.
 
 ### Set up
-Let's start by installing DVC and initializing it to create a [.dvc](https://github.com/GokuMohandas/mlops/tree/main/.dvc){:target="_blank"} directory.
+Let's start by installing DVC and initializing it to create a [.dvc](https://github.com/GokuMohandas/MLOps/tree/main/.dvc){:target="_blank"} directory.
 ```bash
 # Initialization
 pip install dvc
@@ -97,7 +97,7 @@ The data directory containing the files will also have a .gitignore file that in
 ```
 
 !!! note
-    In terms of versioning our model artifacts, we aren't pushing anything to our blob storage because our model registry already takes care of all that. Instead we expose the run ID so we can load necessary artifacts, [params.json](https://raw.githubusercontent.com/GokuMohandas/mlops/main/model/params.json){:target="_blank"} and [performance.json](https://raw.githubusercontent.com/GokuMohandas/mlops/main/model/performance.json){:target="_blank"}, because we'll be using them to compare different model versions (and they're small enough to version via Git).
+    In terms of versioning our model artifacts, we aren't pushing anything to our blob storage because our model registry already takes care of all that. Instead we expose the run ID so we can load necessary artifacts, [params.json](https://raw.githubusercontent.com/GokuMohandas/MLOps/main/model/params.json){:target="_blank"} and [performance.json](https://raw.githubusercontent.com/GokuMohandas/MLOps/main/model/performance.json){:target="_blank"}, because we'll be using them to compare different model versions (and they're small enough to version via Git).
 
     ```bash
     # Model artifacts

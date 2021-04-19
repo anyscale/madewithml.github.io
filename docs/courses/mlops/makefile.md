@@ -4,7 +4,7 @@ title: Makefiles
 description: An automation tool that organizes commands for our application's processes.
 keywords: makefile, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
@@ -17,7 +17,7 @@ We have just started and there are already so many different commands to keep tr
 
 ## Components
 
-Inside our [Makefile](https://github.com/GokuMohandas/mlops/tree/main/Makefile){:target="_blank"}, we can see a list of rules (help, install, etc.). These rules have a `target` which can sometimes have `prerequisites` that need to be met (can be other targets) and on the next line a ++tab++ followed by a `recipe` which specifies how to create the target.
+Inside our [Makefile](https://github.com/GokuMohandas/MLOps/tree/main/Makefile){:target="_blank"}, we can see a list of rules (help, install, etc.). These rules have a `target` which can sometimes have `prerequisites` that need to be met (can be other targets) and on the next line a ++tab++ followed by a `recipe` which specifies how to create the target.
 
 ```bash linenums="1"
 # Makefile

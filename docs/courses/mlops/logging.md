@@ -4,7 +4,7 @@ title: Logging for ML Systems
 description: Keep records of the important events in our application.
 keywords: logging, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
@@ -15,7 +15,7 @@ Logging the process of tracking and recording key events that occur in our appli
 
 ## Application
 
-Let's look at what logging looks like in our [application](https://github.com/GokuMohandas/mlops){:target="_blank"}.
+Let's look at what logging looks like in our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}.
 
 ## Components
 
@@ -56,7 +56,7 @@ These are the basic [levels](https://docs.python.org/3/library/logging.html#logg
 
 ## Configuration
 
-Now let's go ahead and create more configured loggers that will be useful for our application (our code is inside [`tagifai/config.py`](https://github.com/GokuMohandas/mlops/blob/main/tagifai/config.py){:target="_blank"}. First, we'll define a configuration dictionary object:
+Now let's go ahead and create more configured loggers that will be useful for our application (our code is inside [`tagifai/config.py`](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/config.py){:target="_blank"}. First, we'll define a configuration dictionary object:
 
 ```python linenums="1"
 # Logger

@@ -4,7 +4,7 @@ title: "Pre-commit"
 description: Using the pre-commit git hooks to ensure checks before committing.
 keywords: pre-commit, git hooks, git, versioning, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
@@ -28,7 +28,7 @@ pre-commit install
 
 ### Config
 
-We define our pre-commit hooks via a [.pre-commit-config.yaml](https://github.com/GokuMohandas/mlops/blob/main/.pre-commit-config.yaml){:target="_blank"} configuration file. We can either create our yaml configuration from scratch or use the pre-commit CLI to create a sample configuration which we can add to.
+We define our pre-commit hooks via a [.pre-commit-config.yaml](https://github.com/GokuMohandas/MLOps/blob/main/.pre-commit-config.yaml){:target="_blank"} configuration file. We can either create our yaml configuration from scratch or use the pre-commit CLI to create a sample configuration which we can add to.
 
 ```bash
 # Simple config
@@ -154,7 +154,7 @@ git commit -m <MESSAGE> --no-verify
 
 ### Update
 
-In our [.pre-commit-config.yaml](https://github.com/GokuMohandas/mlops/blob/main/.pre-commit-config.yaml){:target="_blank"} configuration files, we've had to specify the versions for each of the repositories so we can use their latest hooks. Pre-commit has an autoupdate CLI command which will update these versions as they become available.
+In our [.pre-commit-config.yaml](https://github.com/GokuMohandas/MLOps/blob/main/.pre-commit-config.yaml){:target="_blank"} configuration files, we've had to specify the versions for each of the repositories so we can use their latest hooks. Pre-commit has an autoupdate CLI command which will update these versions as they become available.
 
 ```bash
 # Autoupdate

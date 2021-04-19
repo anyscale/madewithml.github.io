@@ -4,7 +4,7 @@ title: Documenting Code
 description: Documenting code for your users and your future self.
 keywords: documentation, mkdocs, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 documentation: https://gokumohandas.github.io/mlops/
 ---
 
@@ -23,7 +23,7 @@ Another way to [organize](organization.md){:target="_blank"} our code is to docu
 
 ## Application
 
-Let's look at what documentation looks like for our [application](https://github.com/GokuMohandas/mlops){:target="_blank"} and be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/mlops/){:target="_blank"} for it as well.
+Let's look at what documentation looks like for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"} and be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/mlops/){:target="_blank"} for it as well.
 
 ## Typing
 It's important to be as explicit as possible with our code. We're already discussed choosing explicit names for variables, functions, etc. but another way we can be explicit is by defining the types for our function's inputs and outputs. We want to do this so we can quickly know what data types a function expects and how we can utilize it's outputs for downstream processes.
@@ -122,7 +122,7 @@ So we're going through all this effort to including typing and docstrings to our
 - [mkdocs-material](https://github.com/squidfunk/mkdocs-material){:target="_blank"}             (styling to beautiful render documentation)
 - [mkdocstrings](https://github.com/pawamoy/mkdocstrings){:target="_blank"}                     (fetch documentation automatically from docstrings)
 
-Here are the steps we'll follow to automatically generate our documentation and serve it. You can find all the files we're talking about in our [repository](https://github.com/GokuMohandas/mlops){:target="_blank"}.
+Here are the steps we'll follow to automatically generate our documentation and serve it. You can find all the files we're talking about in our [repository](https://github.com/GokuMohandas/MLOps){:target="_blank"}.
 
 1. Create `mkdocs.yml` in root directory.
 ```bash linenums="1"
@@ -137,8 +137,8 @@ site_description: Tag suggestions for projects on Made With ML.
 site_author: Goku Mohandas
 
 # Repository
-repo_url: https://github.com/GokuMohandas/mlops
-repo_name: GokuMohandas/mlops
+repo_url: https://github.com/GokuMohandas/MLOps
+repo_name: GokuMohandas/MLOps
 edit_uri: "" #disables edit button
 ...
 ```
@@ -189,7 +189,7 @@ nav:
 :octicons-info-24: View our rendered documentation via GitHub pages → [here](https://gokumohandas.github.io/mlops/){:target="_blank"}.
 
 !!! note
-    We can easily serve our documentation for free using [GitHub pages](https://squidfunk.github.io/mkdocs-material/publishing-your-site/){:target="_blank"} and even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"}. All we had to do was add the file [`.github/workflows/documentation.yml`](https://github.com/GokuMohandas/mlops/blob/main/.github/workflows/documentation.yml){:target="_blank"} which [GitHub Actions](https://github.com/features/actions){:target="_blank"}  will use to build and deploy our documentation every time we push to the `main` branch (we'll learn about GitHub Actions in our CI/CD lesson soon).
+    We can easily serve our documentation for free using [GitHub pages](https://squidfunk.github.io/mkdocs-material/publishing-your-site/){:target="_blank"} and even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"}. All we had to do was add the file [`.github/workflows/documentation.yml`](https://github.com/GokuMohandas/MLOps/blob/main/.github/workflows/documentation.yml){:target="_blank"} which [GitHub Actions](https://github.com/features/actions){:target="_blank"}  will use to build and deploy our documentation every time we push to the `main` branch (we'll learn about GitHub Actions in our CI/CD lesson soon).
 
 <!-- Citation -->
 {% include "cite.md" %}

@@ -4,8 +4,8 @@ title: Modeling Baselines
 description: Motivating the use of baselines for iterative modeling.
 keywords: baselines, modeling, pytorch, transformers, huggingface, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
-notebook: https://colab.research.google.com/github/GokuMohandas/mlops/blob/main/notebooks/tagifai.ipynb
+repository: https://github.com/GokuMohandas/MLOps
+notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -1921,7 +1921,7 @@ print (json.dumps(performance['overall'], indent=2))
 ### Inference
 
 !!! note
-    Detailed inspection and inference in the [notebook](https://colab.research.google.com/github/GokuMohandas/mlops/blob/main/notebooks/tagifai.ipynb){:target="_blank"}.
+    Detailed inspection and inference in the [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb){:target="_blank"}.
 
 <u><i>limitations</i></u>: since we're using character embeddings our encoded sequences are quite long (>100), the RNNs may potentially be suffering from memory issues. We also can't process our tokens in parallel because we're restricted by sequential processing.
 
@@ -2334,7 +2334,7 @@ print (json.dumps(performance['overall'], indent=2))
 ### Inference
 
 !!! note
-    Detailed inspection, inference and visualization of attention heads in the [notebook](https://colab.research.google.com/github/GokuMohandas/mlops/blob/main/notebooks/tagifai.ipynb){:target="_blank"}.
+    Detailed inspection, inference and visualization of attention heads in the [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb){:target="_blank"}.
 
 <u><i>limitations</i></u>: transformers can be quite large and we'll have to weigh tradeoffs before deciding on a model.
 

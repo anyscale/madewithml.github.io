@@ -4,8 +4,8 @@ title: Splitting a Dataset for Multilabel Classification
 description: Appropriately splitting our dataset (multi-label) for training, validation and testing.
 keywords: splitting, multilabel, skmultilearn, data splits, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
-notebook: https://colab.research.google.com/github/GokuMohandas/mlops/blob/main/notebooks/tagifai.ipynb
+repository: https://github.com/GokuMohandas/MLOps
+notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb
 ---
 
 

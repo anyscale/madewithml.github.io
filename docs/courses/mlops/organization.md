@@ -4,7 +4,7 @@ title: Organizing a Code Repository
 description: Organizing our code when moving from notebooks to Python scripts.
 keywords: organization, repository, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
@@ -15,7 +15,7 @@ To have organized code is to have readable, reproducible, scalable and efficient
 
 ## Application
 
-Let's look at what organizing a code base looks like for our [application](https://github.com/GokuMohandas/mlops){:target="_blank"}.
+Let's look at what organizing a code base looks like for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}.
 
 ## Organizing
 There are several ways to organize our code from the notebooks but they're all based on utility. For example, we're organizing our code based on the part of the pipeline (data, training, prediction, etc.):

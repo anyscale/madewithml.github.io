@@ -4,7 +4,7 @@ title: Styling and Formatting Code
 description: Style and formatting conventions to keep your code looking consistent.
 keywords: styling, formatting, pep8, black, isort, flake8, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
@@ -36,7 +36,7 @@ We installed all of these as they were defined in out `setup.py` file under `dev
 
 ## Configuration
 
-Before we can properly use these tools, we'll have to configure them because they may have some discrepancies amongst them since they follow slightly different conventions that extend from PEP8. To configure Black, we could just pass in options using the [CLI method](https://black.readthedocs.io/en/stable/installation_and_usage.html#command-line-options){:target="_blank"}, but it's much more efficient (especially so others can easily find all our configurations) to do this through a file. So we'll need to create a [pyproject.toml](https://github.com/GokuMohandas/mlops/blob/main/pyproject.toml){:target="_blank"} file and place the following configurations:
+Before we can properly use these tools, we'll have to configure them because they may have some discrepancies amongst them since they follow slightly different conventions that extend from PEP8. To configure Black, we could just pass in options using the [CLI method](https://black.readthedocs.io/en/stable/installation_and_usage.html#command-line-options){:target="_blank"}, but it's much more efficient (especially so others can easily find all our configurations) to do this through a file. So we'll need to create a [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} file and place the following configurations:
 
 ```toml linenums="1"
 # Black formatting

@@ -4,7 +4,7 @@ title: "Git"
 description: Tracking changes in our work for reproducibility and collaboration.
 keywords: git, versioning, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
@@ -82,7 +82,7 @@ git status
 We can see that we have our do_not_push.txt file as an untracked file in our working directory, as well as some other clutter (mac .DS_Store file). We can create a .gitignore file to make sure we aren't checking in these files.
 
 !!! note
-    Check out our tagifai's [.gitignore](https://github.com/GokuMohandas/mlops/blob/main/.gitignore){:target="_blank"} for an more complete example or [generate](https://www.toptal.com/developers/gitignore){:target="_blank"} our own based on the tools we're using.
+    Check out our tagifai's [.gitignore](https://github.com/GokuMohandas/MLOps/blob/main/.gitignore){:target="_blank"} for an more complete example or [generate](https://www.toptal.com/developers/gitignore){:target="_blank"} our own based on the tools we're using.
 
 ```bash
 # Inside .gitignore

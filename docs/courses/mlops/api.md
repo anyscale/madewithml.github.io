@@ -4,7 +4,7 @@ title: APIs for Machine Learning
 description: Using first principles to designing and implement a API to wrap ML functionality.
 keywords: api, fastapi, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
@@ -245,10 +245,10 @@ When designing our API, there are some best practices to follow:
 
 ## Application
 
-We're going to organize our API under the [app](https://github.com/GokuMohandas/mlops/tree/main/app){:target="_blank"} directory because in the future we may have additional packages like `tagifai` so we don't want our app to be attached to any one package. Our API will be defined in the following scripts:
+We're going to organize our API under the [app](https://github.com/GokuMohandas/MLOps/tree/main/app){:target="_blank"} directory because in the future we may have additional packages like `tagifai` so we don't want our app to be attached to any one package. Our API will be defined in the following scripts:
 
-- [`api.py`](https://github.com/GokuMohandas/mlops/tree/main/app/api.py){:target="_blank"}: the main script that will include our API initialization and endpoints.
-- [`schemas.py`](https://github.com/GokuMohandas/mlops/tree/main/app/schemas.py){:target="_blank"}: definitions for the different objects we'll use in our resource endpoints.
+- [`api.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/api.py){:target="_blank"}: the main script that will include our API initialization and endpoints.
+- [`schemas.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/schemas.py){:target="_blank"}: definitions for the different objects we'll use in our resource endpoints.
 
 We'll step through the components in these scripts to show how we'll design our API.
 
@@ -269,7 +269,7 @@ To show how intuitive and powerful FastAPI is, we could laboriously go through t
 
 ## Initialization
 
-The first step is to initialize our API in our [app/api.py](https://github.com/GokuMohandas/mlops/tree/main/app/api.py){:target="_blank"} file by defining metadata like the title, description and version.
+The first step is to initialize our API in our [app/api.py](https://github.com/GokuMohandas/MLOps/tree/main/app/api.py){:target="_blank"} file by defining metadata like the title, description and version.
 ```python linenums="1"
 from fastapi import FastAPI
 
@@ -299,7 +299,7 @@ def _index():
 We let our application know that the endpoint is at `/` through the path operation decorator in line 3 and we simply return a JSON response with the `200 OK` HTTP status code. Let's go ahead and start our application and see what this response looks like!
 
 !!! note
-    In our actual [`api.py`](https://github.com/GokuMohandas/mlops/tree/main/app/api.py){:target="_blank"} script, you'll notice that even our index function looks different. Don't worry, we're slowly adding components to our endpoints and justifying them along the way.
+    In our actual [`api.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/api.py){:target="_blank"} script, you'll notice that even our index function looks different. Don't worry, we're slowly adding components to our endpoints and justifying them along the way.
 
 
 ## Launching
@@ -318,7 +318,7 @@ uvicorn app.api:app \       # location of app (`app` directory > `api.py` script
 We're using [Uvicorn](https://www.uvicorn.org/){:target="_blank"}, a fast ASGI server (it can run asynchronous code in a single process) to launch our application. Notice that we only reload on changes to specific directories, as this is to avoid reloading on files that won't impact our application such as log files, etc.
 
 !!! note
-    If we want to manage multiple uvicorn workers to enable parallelism in our application, we can use [Gunicorn](https://gunicorn.org/){:target="_blank"} in conjunction with Uvicorn. This will usually be done in a production environment where we'll be dealing with meaningful traffic. I've included a [`config/gunicorn.py`](https://github.com/GokuMohandas/mlops/tree/main/config/gunicorn.py){:target="_blank"} script with the customizable configuration and we can launch all the workers with the follow command (or `make app-prod`):
+    If we want to manage multiple uvicorn workers to enable parallelism in our application, we can use [Gunicorn](https://gunicorn.org/){:target="_blank"} in conjunction with Uvicorn. This will usually be done in a production environment where we'll be dealing with meaningful traffic. I've included a [`config/gunicorn.py`](https://github.com/GokuMohandas/MLOps/tree/main/config/gunicorn.py){:target="_blank"} script with the customizable configuration and we can launch all the workers with the follow command (or `make app-prod`):
     ```bash linenums="1"
     gunicorn -c config/gunicorn.py -k uvicorn.workers.UvicornWorker app.api:app
     ```
@@ -557,7 +557,7 @@ def _predict(request: Request, payload: PredictPayload) -> Dict:
     return response
 ```
 
-We receive a payload from the request's body which contains information as to what to predict on. The definition of this `PredictionPayload` is defined in our [app/schemas.py](https://github.com/GokuMohandas/mlops/tree/main/app/schemas.py){:target="_blank"} script:
+We receive a payload from the request's body which contains information as to what to predict on. The definition of this `PredictionPayload` is defined in our [app/schemas.py](https://github.com/GokuMohandas/MLOps/tree/main/app/schemas.py){:target="_blank"} script:
 ```python linenums="1"
 from typing import List
 

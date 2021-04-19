@@ -4,8 +4,8 @@ title: Annotation
 description: Annotating and labeling our data for exploration.
 keywords: annotation, labeling, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
-repository: https://github.com/GokuMohandas/mlops
-notebook: https://colab.research.google.com/github/GokuMohandas/mlops/blob/main/notebooks/tagifai.ipynb
+repository: https://github.com/GokuMohandas/MLOps
+notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -142,7 +142,7 @@ The reason we want to iteratively add more features is because it introduces mor
 
 ## Auxiliary data
 
-We're also going to be using an [auxiliary dataset](https://github.com/GokuMohandas/mlops/blob/main/datasets/tags.json) which contains a collection of all the tags with their aliases and parent/child relationships.
+We're also going to be using an [auxiliary dataset](https://github.com/GokuMohandas/MLOps/blob/main/datasets/tags.json) which contains a collection of all the tags with their aliases and parent/child relationships.
 ```python linenums="1"
 # Load tags
 url = "https://raw.githubusercontent.com/GokuMohandas/madewithml/main/datasets/tags.json"
