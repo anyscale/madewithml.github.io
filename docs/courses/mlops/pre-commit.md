@@ -122,13 +122,13 @@ We can also create our own local hooks without configuring a separate .pre-commi
 Our pre-commit hooks will automatically execute when we try to make a commit. We'll be able to see if each hook passed or failed and make any changes. If any of the hooks failed, we have to fix the corresponding file or in many instances, reformatting will occur automatically.
 
 <div class="ai-center-all">
-    <img width="650" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/pre-commit/reformat.png" style="border-radius: 7px;">
+    <img width="650" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pre-commit/reformat.png" style="border-radius: 7px;">
 </div>
 
 Once we've made or approved the changes, we can commit again to ensure that all hooks are passed.
 
 <div class="ai-center-all">
-    <img width="650" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/pre-commit/commit.png" style="border-radius: 7px;">
+    <img width="650" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pre-commit/commit.png" style="border-radius: 7px;">
 </div>
 
 ### Run

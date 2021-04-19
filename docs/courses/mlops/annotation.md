@@ -39,8 +39,8 @@ And it isn't just about identifying and labeling our initial dataset but also in
 ## Application
 
 ## Datasets
-- [projects.json](https://raw.githubusercontent.com/GokuMohandas/madewithml/main/datasets/projects.json){:target="_blank"}: projects with title, description and tags (cleaned by mods).
-- [tags.json](https://raw.githubusercontent.com/GokuMohandas/madewithml/main/datasets/tags.json){:target="_blank"}: tags used in dropdown to aid autocompletion.
+- [projects.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json){:target="_blank"}: projects with title, description and tags (cleaned by mods).
+- [tags.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json){:target="_blank"}: tags used in dropdown to aid autocompletion.
 
 !!! note
     We'll have a small GitHub Action that runs on a schedule (cron) to constantly update these datasets over time. We'll learn about how these work when we get to the CI/CD lesson.
@@ -60,7 +60,7 @@ from urllib.request import urlopen
 ```
 ```python linenums="1"
 # Load projects
-url = "https://raw.githubusercontent.com/GokuMohandas/madewithml/main/datasets/projects.json"
+url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json"
 projects = json.loads(urlopen(url).read())
 print (json.dumps(projects[-305], indent=2))
 ```
@@ -145,7 +145,7 @@ The reason we want to iteratively add more features is because it introduces mor
 We're also going to be using an [auxiliary dataset](https://github.com/GokuMohandas/MLOps/blob/main/datasets/tags.json) which contains a collection of all the tags with their aliases and parent/child relationships.
 ```python linenums="1"
 # Load tags
-url = "https://raw.githubusercontent.com/GokuMohandas/madewithml/main/datasets/tags.json"
+url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json"
 tags = json.loads(urlopen(url).read())
 tags_dict = {}
 for item in tags:

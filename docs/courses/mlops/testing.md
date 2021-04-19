@@ -24,7 +24,7 @@ There are many four majors types of tests which are utilized at different points
 5. `#!js Regression tests`: testing errors we've seen before to ensure new changes don't reintroduce them.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/testing/tests.png">
+    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/tests.png">
 </div>
 
 !!! note
@@ -363,13 +363,13 @@ pytest --cov tagifai --cov app --cov-report html
 ```
 
 <div class="ai-center-all">
-    <img width="650" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/testing/pytest.png" style="border-radius: 7px;">
+    <img width="650" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/pytest.png" style="border-radius: 7px;">
 </div>
 
 Here we're asking for coverage for all the code in our tagifai and app directories and to generate the report in HTML format. When we run this, we'll see the tests from our tests directory executing while the coverage plugin is keeping tracking of which lines in our application are being executed. Once our tests are complete, we can view the generated report (default is `htmlcov/index.html`) and click on individual files to see which parts were not covered by any tests. This is especially useful when we forget to test for certain conditions, exceptions, etc.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/testing/coverage.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/coverage.png">
 </div>
 
 !!! warning
@@ -676,7 +676,7 @@ great_expectations checkpoint run CHECKPOINT_NAME
 5. Run checkpoints on new batches of incoming data by adding to our testing pipeline via Makefile, or workflow orchestrator like [Airflow](https://airflow.apache.org/){:target="_blank"}, etc. We can also use the [Great Expectations GitHub Action](https://github.com/great-expectations/great_expectations_action){:target="_blank"} to automate validating our data pipeline code when we push a change. More on using these Checkpoints with pipelines in our [workflows](workflows.md){:target="_blank"} lesson.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/testing/ge.png" style="border-radius: 7px;">
+    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/ge.png" style="border-radius: 7px;">
 </div>
 
 
@@ -684,7 +684,7 @@ great_expectations checkpoint run CHECKPOINT_NAME
 When we create expectations using the CLI application, Great Expectations automatically generates documentation for our tests. It also stores information about validation runs and their results. We can launch the generate data documentation with the following command: ```#!bash great_expectations docs build```
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/testing/docs.png">
+    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/docs.png">
 </div>
 
 ### Best practices
@@ -695,7 +695,7 @@ We've applied expectations on our source dataset but there are many other key ar
     Currently, these data processing steps are tied with our application code but in future lessons, we'll separate these into individual pipelines and use Great Expectation Checkpoints in between to apply all these expectations in an orchestrated fashion.
 
     <div class="ai-center-all">
-        <img width="650" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/testing/pipelines.png">
+        <img width="650" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/pipelines.png">
     </div>
     <div class="ai-center-all">
         <a href="https://docs.greatexpectations.io/en/latest/_images/ge_tutorials_pipeline.png" target="_blank">Pipelines with Great Expectations Checkpoints</a>
@@ -897,7 +897,7 @@ We can add these slice performance metrics to our larger performance report to a
 We've explored user generated slices but there is currently quite a bit of research on automatically generated slices and overall model robustness. A notable toolkit is the [Robustness Gym](https://arxiv.org/abs/2101.04840){:target="_blank"} which programmatically builds slices, performs adversarial attacks, rule-based data augmentation, benchmarking, reporting and much more.
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/testing/gym.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/gym.png">
 </div>
 <div class="ai-center-all mt-2">
     <a href="https://arxiv.org/abs/2101.04840" target="_blank">Robustness Gym slice builders</a>
@@ -906,7 +906,7 @@ We've explored user generated slices but there is currently quite a bit of resea
 Instead of passively observing slice performance, we could try and improve them. Usually, a slice may exhibit poor performance when there are too few samples and so a natural approach is to oversample. However, these methods change the underlying data distribution and can cause issues with overall / other slices. It's also not scalable to train a separate model for each unique slice and combine them via [Mixture of Experts (MoE)](https://www.cs.toronto.edu/~hinton/csc321/notes/lec15.pdf){:target="_blank"}. To combat all of these technical challenges and more, the Snorkel team introduced the [Slice Residual Attention Modules (SRAMs)](https://arxiv.org/abs/1909.06349){:target="_blank"}, which can sit on any backbone architecture (ie. our CNN feature extractor) and learn slice-aware representations for the class predictions.
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/testing/sram.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/sram.png">
 </div>
 <div class="ai-center-all mt-3">
     <a href="https://arxiv.org/abs/1909.06349" target="_blank">Slice Residual Attention Modules (SRAMs)</a>
@@ -980,7 +980,7 @@ compare_tags(texts=texts, tags=tags, artifacts=artifacts, test_type="MFT")
     Be sure to explore the [NLP Checklist](https://github.com/marcotcr/checklist){:target="_blank"} package which simplifies and augments the creation of these behavioral tests via functions, templates, pretrained models and interactive GUIs in Jupyter notebooks.
 
     <div class="ai-center-all">
-        <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/testing/checklist.gif">
+        <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/checklist.gif">
     </div>
     <div class="ai-center-all mt-2">
         <a href="https://github.com/marcotcr/checklist" target="_blank">NLP Checklist</a>

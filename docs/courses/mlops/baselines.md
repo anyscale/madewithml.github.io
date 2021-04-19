@@ -65,7 +65,7 @@ Each application's baseline trajectory varies based on the task and motivations.
 We'll motivate the need for slowly adding complexity from both the *representation* (ex. embeddings) and *architecture* (ex. CNNs) views, as well as address the limitation at each step of the way.
 
 !!! note
-    If you're unfamiliar with of the concepts here, be sure to check out the [GokuMohandas/madewithml](https://github.com/GokuMohandas/madewithml){:target="_blank"} (🔥 Among [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub).
+    If you're unfamiliar with of the concepts here, be sure to check out the [GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} (🔥 Among [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub).
 
 
 We'll first set up some functions that we'll be using across the different baseline experiments.
@@ -928,7 +928,7 @@ cuda
 We're going to tokenize our input text as character tokens so we can be robust to spelling errors and learn to generalize across tags. (ex. learning that RoBERTa, or any other future BERT based archiecture, warrants same tag as BERT).
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/basics/cnn/inputs.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/cnn/inputs.png">
 </div>
 
 ```python linenums="1"
@@ -1173,7 +1173,7 @@ Sample batch:
 We'll be using a convolutional neural network on top of our embedded tokens to extract meaningful spatial signal. This time, we'll be using many filter widths to act as n-gram feature extractors. If you're not familiar with CNNs be sure to check out the [CNN lesson](https://madewithml.com/courses/basics/convolutional-neural-networks/){:target="_blank"} where we walkthrough every component of the architecture.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/basics/cnn/convolution.gif">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/cnn/convolution.gif">
 </div>
 
 Let's visualize the model's forward pass.
@@ -1186,7 +1186,7 @@ Let's visualize the model's forward pass.
 6. We use one more FC layer with softmax to derive class probabilities.
 
 <div class="ai-center-all">
-    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/basics/embeddings/model.png">
+    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/embeddings/model.png">
 </div>
 
 ```python linenums="1"
@@ -1261,7 +1261,7 @@ class CNN(nn.Module):
 - **SAME**: adds padding evenly to the right (preferred) and left sides of the input so that all values in the input are processed.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/basics/cnn/padding.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/cnn/padding.png">
 </div>
 
 We're add `SAME` padding so that the convolutional outputs are the same shape as our inputs. The amount of padding for the SAME padding can be determined using the same equation. We want out output to have the same width as our input, so we solve for P:
@@ -1734,7 +1734,7 @@ Sample batch:
 We'll be using a recurrent neural network to process our embedded tokens one at a time (sequentially). If you're not familiar with RNNs be sure to check out the [RNN lesson](../basics/recurrent-neural-networks.md){:target="_blank"} *where* we walkthrough every component of the architecture.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/basics/rnn/vanilla.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/rnn/vanilla.png">
 </div>
 
 $$ \text{RNN forward pass for a single time step } X_t $$:

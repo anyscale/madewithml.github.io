@@ -4,8 +4,8 @@ title: Embeddings
 description: Explore and motivate the need for representation via embeddings.
 keywords: embeddings, word2vec, skipgram, glove, fasttext, CNN, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
-repository: https://github.com/GokuMohandas/madewithml
-notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/12_Embeddings.ipynb
+repository: https://github.com/GokuMohandas/MadeWithML
+notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/12_Embeddings.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -52,7 +52,7 @@ np.random.seed(SEED)
 ```python linenums="1"
 # Split text into sentences
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
-book = urllib.request.urlopen(url="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/datasets/harrypotter.txt")
+book = urllib.request.urlopen(url="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/harrypotter.txt")
 sentences = tokenizer.tokenize(str(book.read()))
 print (f"{len(sentences)} sentences")
 ```
@@ -96,7 +96,7 @@ But how do we learn the embeddings the first place? The intuition behind embeddi
 All of these approaches involve create data to train our model on. Every word in a sentence becomes the target word and the context words are determines by a window. In the image below (skip-gram), the window size is 2 (2 words to the left and right of the target word). We repeat this for every sentence in our corpus and this results in our training data for the unsupervised task. This in an unsupervised learning technique since we don't have official labels for contexts. The idea is that similar target words will appear with similar contexts and we can learn this relationship by repeatedly training our mode with (context, target) pairs.
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/basics/embeddings/skipgram.png">
+    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/embeddings/skipgram.png">
 </div>
 
 We can learn embeddings using any of these approaches above and some work better than others. You can inspect the learned embeddings but the best way to choose an approach is to empirically validate the performance on a supervised task.
@@ -392,7 +392,7 @@ cuda
 We will download the [AG News dataset](http://www.di.unipi.it/~gulli/AG_corpus_of_news_articles.html){:target="_blank"}, which consists of 120K text samples from 4 unique classes (`Business`, `Sci/Tech`, `Sports`, `World`)
 ```python linenums="1"
 # Load data
-url = "https://raw.githubusercontent.com/GokuMohandas/madewithml/main/datasets/news.csv"
+url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/news.csv"
 df = pd.read_csv(url, header=0) # load
 df = df.sample(frac=1).reset_index(drop=True) # shuffle
 df.head()
@@ -907,7 +907,7 @@ Let's visualize the model's forward pass.
 6. We use one more FC layer with softmax to derive class probabilities.
 
 <div class="ai-center-all">
-    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/basics/embeddings/model.png">
+    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/embeddings/model.png">
 </div>
 
 ```python linenums="1"

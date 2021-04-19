@@ -4,8 +4,8 @@ title: Logistic Regression
 description: Implement logistic regression from scratch using NumPy and then using PyTorch.
 keywords: logistic regression, regression, numpy, pytorch, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
-repository: https://github.com/GokuMohandas/madewithml
-notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/07_Logistic_Regression.ipynb
+repository: https://github.com/GokuMohandas/MadeWithML
+notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/07_Logistic_Regression.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -76,7 +76,7 @@ np.random.seed(SEED)
 ```
 ```python linenums="1"
 # Read from CSV to Pandas DataFrame
-url = "https://raw.githubusercontent.com/GokuMohandas/madewithml/main/datasets/tumors.csv"
+url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tumors.csv"
 df = pd.read_csv(url, header=0) # load
 df = df.sample(frac=1).reset_index(drop=True) # shuffle
 df.head()

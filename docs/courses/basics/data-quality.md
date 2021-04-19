@@ -4,8 +4,8 @@ title: Data Quality for Machine Learning
 description: An illustrative look at the importance of data quality in machine learning.
 keywords: data quality, cleaning, overfitting, underfitting, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
-repository: https://github.com/GokuMohandas/madewithml
-notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/09_Data_Quality.ipynb
+repository: https://github.com/GokuMohandas/MadeWithML
+notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/09_Data_Quality.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -43,7 +43,7 @@ from pandas.plotting import scatter_matrix
 ```
 ```python linenums="1"
 # Load data
-url = "https://raw.githubusercontent.com/GokuMohandas/madewithml/main/datasets/tumors.csv"
+url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tumors.csv"
 df = pd.read_csv(url, header=0) # load
 df = df.sample(frac=1).reset_index(drop=True) # shuffle
 df.head()
@@ -480,7 +480,7 @@ Let's remove some training data near the decision boundary and see how robust th
 
 ```python linenums="1"
 # Raw reduced data
-url = "https://raw.githubusercontent.com/GokuMohandas/madewithml/main/datasets/tumors_reduced.csv"
+url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tumors_reduced.csv"
 df_reduced = pd.read_csv(url, header=0) # load
 df_reduced = df_reduced.sample(frac=1).reset_index(drop=True) # shuffle
 df_reduced.head()

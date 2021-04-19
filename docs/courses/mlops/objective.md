@@ -24,7 +24,7 @@ Identifying the objective should always be the first step when solving any probl
     A proven way to identify the key objective is to think about the problem from the **user's perspective** so that we're positioned to think about the underlying issue as opposed to technological shortcomings.
 
 ## Application
-In our application, we have a set of [projects](https://raw.githubusercontent.com/GokuMohandas/madewithml/main/datasets/projects.json){:target="_blank"} (with tags) that users search for (using tags).
+In our application, we have a set of [projects](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json){:target="_blank"} (with tags) that users search for (using tags).
 
 ```json linenums="1"
 {

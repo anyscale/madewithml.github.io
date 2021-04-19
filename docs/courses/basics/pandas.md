@@ -4,8 +4,8 @@ title: Pandas for Machine Learning
 description: Data manipulation using the Pandas library.
 keywords: pandas, exploratory data analysis, eda, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/ml_foundations.png
-repository: https://github.com/GokuMohandas/madewithml
-notebook: https://colab.research.google.com/github/GokuMohandas/madewithml/blob/main/notebooks/04_Pandas.ipynb
+repository: https://github.com/GokuMohandas/MadeWithML
+notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/04_Pandas.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -30,7 +30,7 @@ Let's load the data from the CSV file into a Pandas dataframe. The `header=0` si
 
 ```python linenums="1"
 # Read from CSV to Pandas DataFrame
-url = "https://raw.githubusercontent.com/GokuMohandas/madewithml/main/datasets/titanic.csv"
+url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/titanic.csv"
 df = pd.read_csv(url, header=0)
 ```
 ```python linenums="1"

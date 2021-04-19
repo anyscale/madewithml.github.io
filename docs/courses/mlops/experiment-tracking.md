@@ -394,23 +394,23 @@ MLflow Tracking UI: https://476803694c2e.ngrok.io
 
 MLFlow creates a main dashboard with all your experiments and their respective runs. You can sort runs by clicking on the column headers.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/experiment_tracking/dashboard.png" style="width: 100rem;" alt="mlflow dashboard">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/experiment_tracking/dashboard.png" style="width: 100rem;" alt="mlflow dashboard">
 </div>
 We can click on any of our experiments on the main dashboard to further explore it:
 <div class="row">
   <div class="col-6">
     <div class="ai-center-all">
-      <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/experiment_tracking/parameters.png" width="400" alt="mlflow dashboard">
+      <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/experiment_tracking/parameters.png" width="400" alt="mlflow dashboard">
     </div>
   </div>
   <div class="col-6">
     <div class="ai-center-all">
-      <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/experiment_tracking/metrics.png" width="400" alt="mlflow dashboard">
+      <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/experiment_tracking/metrics.png" width="400" alt="mlflow dashboard">
     </div>
   </div>
 </div>
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/madewithml/main/images/mlops/experiment_tracking/plots.png" width="1000" alt="mlflow dashboard">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/experiment_tracking/plots.png" width="1000" alt="mlflow dashboard">
 </div>
 
 ## Loading
