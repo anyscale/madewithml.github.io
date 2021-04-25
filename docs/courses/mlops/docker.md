@@ -153,7 +153,7 @@ docker rm $(docker ps -a -q)    # remove all containers
 ```
 
 !!! note
-    If our application required multiple containers for different services (API, database, etc.) then we can bring them all up at once using the [docker compose](https://docs.docker.com/compose/){:target="_blank"} functionality and scale and manage them using a container orchestration system like [Kubernetes](https://kubernetes.io/){:target="_blank"}.
+    If our application required multiple containers for different services (API, database, etc.) then we can bring them all up at once using the [docker compose](https://docs.docker.com/compose/){:target="_blank"} functionality and scale and manage them using a container orchestration system like [Kubernetes](https://kubernetes.io/){:target="_blank"}. If we're specifically deploying ML workflows, we can use a toolkit like [KubeFlow](https://www.kubeflow.org/){:target="_blank"} to help us manage and scale.
 
 ### Debug
 

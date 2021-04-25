@@ -98,9 +98,10 @@ nav:
     - <b>🚀 &nbsp; Production</b>:
       - Dashboard: courses/mlops/dashboard.md
       - CI/CD: courses/mlops/cicd.md
-      - Monitoring: courses/mlops/monitoring.md
+      - Pipelines: courses/mlops/pipelines.md
       - Feature stores: courses/mlops/feature-stores.md
-      - Workflows: courses/mlops/workflows.md
+      - Deployment: courses/mlops/deployment.md
+      - Monitoring: courses/mlops/monitoring.md
   - FAQ: faq.md
 
 # Configuration

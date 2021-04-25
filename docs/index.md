@@ -173,10 +173,11 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <b><span class="mr-1">🚀</span> Production</b>
     <ul>
     <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
-    <li>CI/CD</li>
-    <li>Monitoring</li>
+    <li><a href="/courses/mlops/cicd/">CI/CD</a></li>
+    <li>Pipelines</li>
     <li>Feature stores</li>
-    <li>Workflows</li>
+    <li>Deployment</li>
+    <li>Monitoring</li>
     </ul>
 </div>
 </div>
@@ -199,7 +200,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 ### Who is the author?
 - I've deployed large scale ML systems at Apple as well as smaller systems with constraints at startups and want to share the common principles I've learned.
-- I created the ([old](https://twitter.com/madewithml/status/1284503478685978625)) Made With ML so that the community can explore, learn and build ML and I learned how to build it into an end-to-end product that was used by over 20K monthly active users (5K DAU).
+- I created the ([old](https://twitter.com/madewithml/status/1284503478685978625){:target="_blank"}) Made With ML so that the community can explore, learn and build ML and I learned how to build it into an end-to-end product that was used by over 20K monthly active users (5K DAU).
 - Connect with me on [:fontawesome-brands-twitter: Twitter](https://twitter.com/GokuMohandas){:target="_blank"} and [:fontawesome-brands-linkedin: LinkedIn](https://www.linkedin.com/in/goku){:target="_blank"} for updates and tips.
 
 ### Why is this free?

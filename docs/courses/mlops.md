@@ -72,10 +72,11 @@ image: "https://madewithml.com/static/images/applied_ml.png"
     <b><span class="mr-1">🚀</span> Production</b>
     <ul>
     <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
-    <li>CI/CD</li>
-    <li>Monitoring</li>
+    <li><a href="/courses/mlops/cicd/">CI/CD</a></li>
+    <li>Pipelines</li>
     <li>Feature stores</li>
-    <li>Workflows</li>
+    <li>Deployment</li>
+    <li>Monitoring</li>
     </ul>
 </div>
 </div>

@@ -36,10 +36,10 @@ tagifai/
 Organizing our code base this way also makes it easier for readers to understand (or modify) the code base. We could've also assumed a more granular stance for organization, such as breaking down `data.py` into `split.py`, `preprocess.py`, etc. This might make more sense if we have multiple ways of splitting, preprocessing, etc. but for our task, it's sufficient to be at a higher level.
 
 !!! note
-    Another way to supplement organized code is through documentation, which we'll cover in the next lesson.
+    Another way to supplement organized code is through [documentation](documentation.md){:target="_blank"}.
 
 ## Reading
-So what's the best way to read a code base like this? We could look at the [documentation](documentation.md){:target="_blank"} but that's usually useful if you're looking for specific functions or classes within a script. What if you want to understand the overall functionality and how it's all organized? Well, we can start with the options in `app/cli.py` and dive deeper into the specific utilities. Let's say we wanted to see how a single model is trained, then we'd go to the `train_model` function and inspect each line and build a mental model of the process. For example, when you reach the line:
+So what's the best way to read a code base like this? We could look at the [documentation](https://gokumohandas.github.io/MLOps/){:target="_blank"} but that's usually useful if you're looking for specific functions or classes within a script. What if you want to understand the overall functionality and how it's all organized? Well, we can start with the options in `app/cli.py` and dive deeper into the specific utilities. Let's say we wanted to see how a single model is trained, then we'd go to the `train_model` function and inspect each line and build a mental model of the process. For example, when you reach the line:
 ```python linenums="1"
 # Train
 artifacts = train.run(params=params)

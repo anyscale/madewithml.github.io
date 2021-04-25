@@ -5,7 +5,7 @@ description: Documenting code for your users and your future self.
 keywords: documentation, mkdocs, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/applied_ml.png
 repository: https://github.com/GokuMohandas/MLOps
-documentation: https://gokumohandas.github.io/mlops/
+documentation: https://gokumohandas.github.io/MLOps/
 ---
 
 {% include "styles/lesson.md" %}
@@ -23,7 +23,7 @@ Another way to [organize](organization.md){:target="_blank"} our code is to docu
 
 ## Application
 
-Let's look at what documentation looks like for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"} and be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/mlops/){:target="_blank"} for it as well.
+Let's look at what documentation looks like for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"} and be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for it as well.
 
 ## Typing
 It's important to be as explicit as possible with our code. We're already discussed choosing explicit names for variables, functions, etc. but another way we can be explicit is by defining the types for our function's inputs and outputs. We want to do this so we can quickly know what data types a function expects and how we can utilize it's outputs for downstream processes.
@@ -115,7 +115,7 @@ Let's unpack the different parts of this function's docstring:
 
 ## Mkdocs
 
-So we're going through all this effort to including typing and docstrings to our functions but it's all tucked away inside our scripts. But what if we can collect all this effort and **automatically** surface it as documentation? Well that's exactly what we'll do with the following open-source packages → final result [here](https://gokumohandas.github.io/mlops/){:target="_blank"}.
+So we're going through all this effort to including typing and docstrings to our functions but it's all tucked away inside our scripts. But what if we can collect all this effort and **automatically** surface it as documentation? Well that's exactly what we'll do with the following open-source packages → final result [here](https://gokumohandas.github.io/MLOps/){:target="_blank"}.
 
 - [mkdocs](https://github.com/mkdocs/mkdocs){:target="_blank"}                                  (generates project documentation)
 - [mkdocs-macros-plugin](https://github.com/fralau/mkdocs_macros_plugin){:target="_blank"}      (required plugins)
@@ -186,7 +186,7 @@ nav:
 </div>
 <script src="../../../static/js/termynal.js"></script>
 
-:octicons-info-24: View our rendered documentation via GitHub pages → [here](https://gokumohandas.github.io/mlops/){:target="_blank"}.
+:octicons-info-24: View our rendered documentation via GitHub pages → [here](https://gokumohandas.github.io/MLOps/){:target="_blank"}.
 
 !!! note
     We can easily serve our documentation for free using [GitHub pages](https://squidfunk.github.io/mkdocs-material/publishing-your-site/){:target="_blank"} and even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"}. All we had to do was add the file [`.github/workflows/documentation.yml`](https://github.com/GokuMohandas/MLOps/blob/main/.github/workflows/documentation.yml){:target="_blank"} which [GitHub Actions](https://github.com/features/actions){:target="_blank"}  will use to build and deploy our documentation every time we push to the `main` branch (we'll learn about GitHub Actions in our CI/CD lesson soon).

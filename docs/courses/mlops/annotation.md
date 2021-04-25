@@ -182,7 +182,7 @@ df['text'] = df.title + " " + df.description
 ```
 
 ## Data augmentation
-Depending on the tasks, there are many data augmentation libraries:
+Depending on the tasks, there are many data augmentation libraries which allow us to extend our training data with synthetic, yet probable, examples.
 
 - Natural language processing (NLP)
     - [NLPAug](https://github.com/makcedward/nlpaug){:target="_blank"}: data augmentation for NLP.
@@ -281,7 +281,7 @@ print (f"{len(df)} projects")
 
 ## Workflows
 
-Over time, our dataset will grow and we'll need to label new data. So far, we had a team of moderators clean the existing data but we'll need to establish proper workflow to make this process easier and reliable. Typically, we'll use collaborative UIs where annotators can fix errors, etc. and then use a tool like [Airflow](https://airflow.apache.org/){:target="_blank"} or [KubeFlow](https://www.kubeflow.org/){:target="_blank"} for worflow orchestration to know when new data is ready to be annotated and also when it's ready to be used for modeling.
+Over time, our dataset will grow and we'll need to label new data. So far, we had a team of moderators clean the existing data but we'll need to establish proper workflow to make this process easier and reliable. Typically, we'll use collaborative UIs where annotators can fix errors, etc. and then use a tool like [Airflow](https://airflow.apache.org/){:target="_blank"} or [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"} for workflow orchestration to know when new data is ready to be annotated and also when it's ready to be used for modeling.
 
 ## Labeling functions
 

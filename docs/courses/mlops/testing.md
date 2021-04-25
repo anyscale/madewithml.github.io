@@ -673,7 +673,7 @@ great_expectations suite edit SUITE_NAME  # add your own custom expectations
 great_expectations checkpoint new CHECKPOINT_NAME SUITE_NAME
 great_expectations checkpoint run CHECKPOINT_NAME
 ```
-5. Run checkpoints on new batches of incoming data by adding to our testing pipeline via Makefile, or workflow orchestrator like [Airflow](https://airflow.apache.org/){:target="_blank"}, etc. We can also use the [Great Expectations GitHub Action](https://github.com/great-expectations/great_expectations_action){:target="_blank"} to automate validating our data pipeline code when we push a change. More on using these Checkpoints with pipelines in our [workflows](workflows.md){:target="_blank"} lesson.
+5. Run checkpoints on new batches of incoming data by adding to our testing pipeline via Makefile, or workflow orchestrator like [Airflow](https://airflow.apache.org/){:target="_blank"}, [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"}, etc. We can also use the [Great Expectations GitHub Action](https://github.com/great-expectations/great_expectations_action){:target="_blank"} to automate validating our data pipeline code when we push a change. More on using these Checkpoints with pipelines in our [workflows](workflows.md){:target="_blank"} lesson.
 
 <div class="ai-center-all">
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/ge.png" style="border-radius: 7px;">
@@ -1053,7 +1053,10 @@ Once we've tested our model's ability to perform in the production environment (
     - sending production traffic to the different systems.
     - involves statistical hypothesis testing to decide which system is better.
     - need to account for different sources of bias (ex. novelty effect).
-    - multiarmed bandits might be better if optimizing on a certain metric.
+    - multi-armed bandits might be better if optimizing on a certain metric.
+- `#!js Canary tests`:
+    - push changes to a small cohort of users initially
+    - can provide early indication of issues
 - `#!js Shadow tests`:
     - sending the same production traffic to the different systems.
     - safe online evaluation as the new system's results are not served.
