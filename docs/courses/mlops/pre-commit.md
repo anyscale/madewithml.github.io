@@ -16,7 +16,7 @@ Before performing a commit to our local repository, there are a lot of items on 
 !!! note
     Though we can add these checks directly in our CI/CD pipeline (ex. via GitHub actions), it's significantly faster to validate our commits before pushing to our remote host and waiting to see what needs to be fixed before submitting yet another PR.
 
-## Application
+## Installation
 
 We'll be using the [Pre-commit](https://pre-commit.com/){:target="_blank"} framework to help us automatically perform important checks via hooks when we make a commit.
 
@@ -26,7 +26,7 @@ pip install pre-commit
 pre-commit install
 ```
 
-### Config
+## Config
 
 We define our pre-commit hooks via a [.pre-commit-config.yaml](https://github.com/GokuMohandas/MLOps/blob/main/.pre-commit-config.yaml){:target="_blank"} configuration file. We can either create our yaml configuration from scratch or use the pre-commit CLI to create a sample configuration which we can add to.
 
@@ -49,7 +49,11 @@ repos:
     -   id: check-added-large-files
 ```
 
-### Built-in hooks
+## Hooks
+
+When it comes to creating and using hooks, we have several options to choose from.
+
+### Built-in
 
 Inside the sample configuration, we can see that pre-commit has added some default hooks from it's repository. It specifies the location of the repository, version as well as the specific hook ids to use. We can read about the function of these hooks and add even more by exploring pre-commit's [built-in hooks](https://github.com/pre-commit/pre-commit-hooks){:target="_blank"}. Many of them accept arguments such as `maxkb` (max kilobytes) for the `check-added-large-files` hook. We can easily add argument to our configuration file like so:
 
@@ -76,7 +80,7 @@ And we can also exclude certain files from being processed by the hooks by using
 There are many other [optional keys](https://pre-commit.com/#pre-commit-configyaml---hooks){:target="_blank"} we can configure for each hook ID.
 
 
-### Custom hooks
+### Custom
 
 Besides pre-commit's built-in hooks, there are also many custom, 3rd party [popular hooks](https://pre-commit.com/hooks.html){:target="_blank"} that we can choose from. For example, if we want to apply formatting checks with Black as a hook, we can leverage Black's pre-commit hook.
 
@@ -94,7 +98,7 @@ Besides pre-commit's built-in hooks, there are also many custom, 3rd party [popu
 
 This specific hook is defined under a [.pre-commit-hooks.yaml](https://github.com/psf/black/blob/master/.pre-commit-hooks.yaml){:target="_blank"} inside Black's repository, as are other custom hooks under their respective package repositories.
 
-### Local hooks
+### Local
 
 We can also create our own local hooks without configuring a separate .pre-commit-hooks.yaml. Here we're defining two pre-commit hooks, `test-non-training` and `clean`, to run some commands that we've defined in our Makefile. Similarly, we can run any entry command with arguments to create hooks very quickly.
 
@@ -117,7 +121,7 @@ We can also create our own local hooks without configuring a separate .pre-commi
       pass_filenames: false
 ```
 
-### Commit
+## Commit
 
 Our pre-commit hooks will automatically execute when we try to make a commit. We'll be able to see if each hook passed or failed and make any changes. If any of the hooks failed, we have to fix the corresponding file or in many instances, reformatting will occur automatically.
 
@@ -131,7 +135,7 @@ Once we've made or approved the changes, we can commit again to ensure that all 
     <img width="650" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pre-commit/commit.png" style="border-radius: 7px;">
 </div>
 
-### Run
+## Run
 
 Though pre-commit hooks are meant to run before (pre) a commit, we can manually trigger all or individual hooks on all or a set of files.
 
@@ -143,7 +147,7 @@ pre-commit run --files <PATH_TO_FILE>  # run all hooks on a file
 pre-commit run <HOOK_ID> --files <PATH_TO_FILE> # run one hook on a file
 ```
 
-### Skip
+## Skip
 
 It is highly not recommended to skip running any of the pre-commit hooks because they are there for a reason. But for some highly urgent, world saving commits, we can use the no-verify flag.
 
@@ -152,7 +156,7 @@ It is highly not recommended to skip running any of the pre-commit hooks because
 git commit -m <MESSAGE> --no-verify
 ```
 
-### Update
+## Update
 
 In our [.pre-commit-config.yaml](https://github.com/GokuMohandas/MLOps/blob/main/.pre-commit-config.yaml){:target="_blank"} configuration files, we've had to specify the versions for each of the repositories so we can use their latest hooks. Pre-commit has an autoupdate CLI command which will update these versions as they become available.
 

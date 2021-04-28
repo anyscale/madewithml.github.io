@@ -30,7 +30,7 @@ We'll be using DVC to version our datasets and model weights and store them in a
 !!! note
     We'll be using a local directory to act as our blob storage so we can develop and analyze everything locally. We'll continue to do this for other storage components as well such as feature stores and like we have been doing with our local model registry.
 
-### Set up
+## Set up
 Let's start by installing DVC and initializing it to create a [.dvc](https://github.com/GokuMohandas/MLOps/tree/main/.dvc){:target="_blank"} directory.
 ```bash
 # Initialization
@@ -39,7 +39,7 @@ pip uninstall dataclasses (Python < 3.8)
 dvc init
 ```
 
-### Remote storage
+## Remote storage
 After initializing DVC, we can establish where our remote storage will be. We be using the `stores/blob` directory which won't be checked into our remote repository.
 ```bash
 # Add remote storage
@@ -59,7 +59,7 @@ Setting 'storage' as a default remote.
     dvc remote add -d storage s3://<BUCKET_NAME>
     ```
 
-### Add data
+## Add data
 Now we're ready to *add* our data which will create text pointer files for each file.
 
 ```bash
@@ -109,7 +109,7 @@ The data directory containing the files will also have a .gitignore file that in
 
     For very large applications, these artifacts would be stores in a metadata or evaluation store where they'll be indexed by model run IDs.
 
-### Push
+## Push
 Now we're ready to push our artifacts to our blob store with the *push* command.
 ```bash
 # Push to remote storage
@@ -152,7 +152,7 @@ If we inspect our storage (stores/blob), we'll can see that the data is efficien
           pass_filenames: false
     ```
 
-### Pull
+## Pull
 
 When someone else wants to pull updated artifacts or vice verse, we can use the *pull* command to fetch from our remote storage to our local artifact directories. All we need is to first ensure that we have the latest pointer text files (via git pull).
 
@@ -161,7 +161,7 @@ When someone else wants to pull updated artifacts or vice verse, we can use the 
 dvc pull
 ```
 
-### Tag
+## Tag
 Not every commit is going to involve a new set of data and model artifacts so we can leverage git [tags](https://git-scm.com/book/en/v2/Git-Basics-Tagging){:target="_blank"} to mark our release commits. We can create tags either through the terminal or the online remote interface and this can be done to previous commits as well (in case we forgot).
 
 ```bash

@@ -13,8 +13,6 @@ repository: https://github.com/GokuMohandas/MLOps
 
 We have just started and there are already so many different commands to keep track of. To help with this, we're going to use a [`Makefile`](https://opensource.com/article/18/8/what-how-makefile){:target="_blank"} which is a automation tool that organizes our commands. This makes it very easy for us to organize relevant commands as well as organize it for others who may be new to our application.
 
-## Application
-
 ## Components
 
 Inside our [Makefile](https://github.com/GokuMohandas/MLOps/tree/main/Makefile){:target="_blank"}, we can see a list of rules (help, install, etc.). These rules have a `target` which can sometimes have `prerequisites` that need to be met (can be other targets) and on the next line a ++tab++ followed by a `recipe` which specifies how to create the target.

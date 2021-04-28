@@ -1,0 +1,242 @@
+---
+template: lesson.html
+title: Data Labeling
+description: Labeling our data with intention before using it to construct our ML systems.
+keywords: labeling, annotation, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
+image: https://madewithml.com/static/images/applied_ml.png
+repository: https://github.com/GokuMohandas/MLOps
+notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb
+---
+
+{% include "styles/lesson.md" %}
+
+## Intuition
+
+Labeling (or annotation) is the process of identifying the inputs and outputs that are **worth** modeling (*not* just what could be modeled).
+
+- use objective as a guide to determine the necessary signals
+- explore creating new signals (via combining data, collecting new data, etc.)
+- iteratively add more features to control complexity and effort
+
+!!! warning
+    Be careful not to include features in the dataset that will not be available during inference time, causing *data leakage*.
+
+It's also the phase where we can use our deep understanding of the problem, processes, constraints and domain expertise to:
+
+- augment the training data split
+- enhance using auxiliary data
+- simplify using constraints
+
+And it isn't just about identifying and labeling our initial dataset but also involves thinking about how to make the labeling process more efficient as our dataset grows.
+
+- who will labeling new (streaming) data
+- what tools will be used to accelerate the labeling process (ie. labeling functions)
+- what workflows will be established to track the labeling process
+
+!!! note
+    You should have overlaps where different annotators are working on the same samples. A meaningful *inter-labeler discrepancy* (>2%) indicates that the labeling task is subjective and requires more explicit labeling criteria.
+
+## Datasets
+- [projects.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json){:target="_blank"}: projects with title, description and tags (cleaned by mods).
+- [tags.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json){:target="_blank"}: tags used in dropdown to aid autocompletion.
+
+!!! note
+    We'll have a small GitHub Action that runs on a schedule (cron) to constantly update these datasets over time. We'll learn about how these work when we get to the CI/CD lesson.
+
+Recall that our objective was to augment authors to add the appropriate tags for their project so the community can discover them. So we want to use the metadata provided in each project to determine what the relevant tags are. We'll want to start with the highly influential features and iteratively experiment with additional features.
+
+## Load data
+We'll first load our dataset from the JSON file.
+
+```python linenums="1"
+from collections import Counter, OrderedDict
+import ipywidgets as widgets
+import itertools
+import json
+import pandas as pd
+from urllib.request import urlopen
+```
+```python linenums="1"
+# Load projects
+url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json"
+projects = json.loads(urlopen(url).read())
+print (json.dumps(projects[-305], indent=2))
+```
+<pre class="output">
+{
+  "id": 324,
+  "title": "AdverTorch",
+  "description": "A Toolbox for Adversarial Robustness Research",
+  "tags": [
+    "code",
+    "library",
+    "security",
+    "adversarial-learning",
+    "adversarial-attacks",
+    "adversarial-perturbations"
+  ]
+}
+</pre>
+Now we can load our data into a Pandas DataFrame.
+```python linenums="1"
+# Create dataframe
+df = pd.DataFrame(projects)
+print (f"{len(df)} projects")
+df.head(5)
+```
+<div class="output_subarea output_html rendered_html"><div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>title</th>
+      <th>description</th>
+      <th>tags</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2438</td>
+      <td>How to Deal with Files in Google Colab: What Y...</td>
+      <td>How to supercharge your Google Colab experienc...</td>
+      <td>[article, google-colab, colab, file-system]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2437</td>
+      <td>Rasoee</td>
+      <td>A powerful web and mobile application that ide...</td>
+      <td>[api, article, code, dataset, paper, research,...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2436</td>
+      <td>Machine Learning Methods Explained (+ Examples)</td>
+      <td>Most common techniques used in data science pr...</td>
+      <td>[article, deep-learning, machine-learning, dim...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2435</td>
+      <td>Top “Applied Data Science” Papers from ECML-PK...</td>
+      <td>Explore the innovative world of Machine Learni...</td>
+      <td>[article, deep-learning, machine-learning, adv...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2434</td>
+      <td>OpenMMLab Computer Vision</td>
+      <td>MMCV is a python library for CV research and s...</td>
+      <td>[article, code, pytorch, library, 3d, computer...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+The reason we want to iteratively add more features is because it introduces more complexity and effort. For example, extracting the relevant HTML from the URLs is not trivial but recall that we want to *close the loop* with a simple solution first. We're going to use just the title and description because we hypothesize that the project's core concepts will be there whereas the details may have many other keywords.
+
+!!! note
+    Over time, our dataset will grow and we'll need to label new data. So far, we had a team of moderators clean the existing data but we'll need to establish proper workflow to make this process easier and reliable. Typically, we'll use collaborative UIs where annotators can fix errors, etc. and then use a tool like [Airflow](https://airflow.apache.org/){:target="_blank"} or [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"} for workflow / pipeline orchestration to know when new data is ready to be labeled and also when it's ready to be used for modeling.
+
+## Auxiliary data
+
+We're also going to be using an [auxiliary dataset](https://github.com/GokuMohandas/MLOps/blob/main/datasets/tags.json) which contains a collection of all the tags with their aliases and parent/child relationships. This auxiliary dataset was used by our application to automatically add the relevant parent tags when the child tags were present.
+
+```python linenums="1"
+# Load tags
+url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json"
+tags = json.loads(urlopen(url).read())
+tags_dict = {}
+for item in tags:
+    key = item.pop("tag")
+    tags_dict[key] = item
+print (f"{len(tags_dict)} tags")
+```
+<pre class="output">
+400
+</pre>
+```python linenums="1"
+@widgets.interact(tag=list(tags_dict.keys()))
+def display_tag_details(tag='question-answering'):
+    print (json.dumps(tags_dict[tag], indent=2))
+```
+<pre class="output">
+"question-answering": {
+    "aliases": [
+      "qa"
+    ],
+    "parents": [
+      "natural-language-processing"
+    ]
+  }
+</pre>
+
+
+## Labeling tools
+
+We could have used the user provided tags as our labels but what if the user added a wrong tag or forgot to add a relevant one. To remove this dependency on the user to provide the gold standard labels, we can leverage labeling tools and platforms. These tools allow for quick and organized labeling of the dataset to ensure its quality. And instead of starting from scratch and asking our labeler to provide all the relevant tags for a given project, we can provide the author's original tags and ask the labeler to add / remove as necessary. The specific labeling tool may be something that needs to be custom built or leverages something from the ecosystem.
+
+### General
+- [Label Studio](https://github.com/heartexlabs/label-studio): a multi-type data labeling and annotation tool with standardized output format.
+- [Universal Data Tool](https://github.com/UniversalDataTool/universal-data-tool): collaborate and label any type of data, images, text, or documents in an easy web interface or desktop app.
+- [Prodigy](https://github.com/explosion/prodigy-recipes): recipes for the Prodigy, our fully scriptable annotation tool.
+- [Superintendent](https://github.com/janfreyberg/superintendent): an ipywidget-based interactive labelling tool for your data to enable active learning.
+### Natural language processing
+- [Doccano](https://github.com/doccano/doccano): an open source text annotation tool for text classification, sequence labeling and sequence to sequence tasks.
+- [BRAT](https://github.com/nlplab/brat): a rapid annotation tool for all your textual annotation needs.
+### Computer vision
+- [LabelImg](https://github.com/tzutalin/labelImg): a graphical image annotation tool and label object bounding boxes in images.
+- [CVAT](https://github.com/openvinotoolkit/cvat): a free, online, interactive video and image annotation tool for computer vision.
+- [VoTT](https://github.com/Microsoft/VoTT): an electron app for building end-to-end object detection models from images and videos.
+- [makesense.ai](https://github.com/SkalskiP/make-sense): a free to use online tool for labelling photos.
+- [remo](https://github.com/rediscovery-io/remo-python): an app for annotations and images management in computer vision.
+- [Labelai](https://github.com/aralroca/labelai): an online tool designed to label images, useful for training AI models.
+### Audio
+- [Audino](https://github.com/midas-research/audino): an open source audio annotation tool for voice activity detection (VAD), diarization, speaker identification, automated speech recognition, emotion recognition tasks, etc.
+- [audio-annotator](https://github.com/CrowdCurio/audio-annotator): a JavaScript interface for annotating and labeling audio files.
+- [EchoML](https://github.com/ritazh/EchoML): a web app to play, visualize, and annotate your audio files for machine learning.
+### Miscellaneous
+- [MedCAT](https://github.com/CogStack/MedCAT): a medical concept annotation tool that can extract information from Electronic Health Records (EHRs) and link it to biomedical ontologies like SNOMED-CT and UMLS.
+
+
+## Active learning
+
+Even with a powerful labeling tool and established workflows, it's easy to see how involved and expensive labeling can be. Therefore, many teams employ active learning to iteratively label the dataset and evaluate the model.
+
+In active learning, you first provide a small number of labelled examples. The model is trained on this "seed" dataset. Then, the model "asks questions" by selecting the unlabeled data points it is unsure about, so the human can "answer" the questions by providing labels for those points. The model updates again and the process is repeated until the performance is good enough. By having the human iteratively teach the model, it's possible to make a better model, in less time, with much less labelled data.
+
+1. Label a small, initial dataset to train a model.
+2. Ask the trained model to predict on some unlabeled data.
+3. Determine which new data points to label from the unlabeled data based on:
+    - entropy over the predicted class probabilities
+    - samples with lowest predicted, [calibrated](https://arxiv.org/abs/1706.04599){:target="_blank"}, confidence
+    - discrepancy in predictions from an ensemble of trained models
+4. Repeat until the desired performance is achieved
+
+### Libraries
+- [modAL](https://github.com/modAL-python/modAL){:target="_blank"}: a modular active learning framework for Python.
+- [libact](https://github.com/ntucllab/libact){:target="_blank"}: pool-based active learning in Python.
+- [ALiPy](https://github.com/NUAA-AL/ALiPy){:target="_blank"}: active learning python toolbox, which allows users to conveniently evaluate, compare and analyze the performance of active learning methods.
+
+
+## Labeling functions
+
+We could utilize weak supervision via [labeling functions](https://www.snorkel.org/use-cases/01-spam-tutorial){:target="_blank"} to label our existing and new data. We can create constructs based on keywords, pattern expressions, knowledge bases and generalized models to create these labeling functions to label our data. We can add to the labeling functions over time and even mitigate conflicts amongst the different ones.
+
+```python
+from snorkel.labeling import labeling_function
+
+@labeling_function()
+def contains_tensorflow(text):
+    condition = any(tag in text.lower() for tag in ("tensorflow", "tf"))
+    return "tensorflow" if condition else None
+```
+
+## Resources
+- [Human in the Loop: Deep Learning without Wasteful Labelling](https://oatml.cs.ox.ac.uk/blog/2019/06/24/batchbald.html){:target="_blank"}
+- [Harnessing Organizational Knowledge for Machine Learning](https://ai.googleblog.com/2019/03/harnessing-organizational-knowledge-for.html){:target="_blank"}
+
+<!-- Citation -->
+{% include "cite.md" %}

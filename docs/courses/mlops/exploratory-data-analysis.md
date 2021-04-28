@@ -20,6 +20,8 @@ Exploratory data analysis (EDA) is a vital (and fun) step in the data science pr
 
 ## Application
 
+Let's answer a few key questions for our application using EDA.
+
 ```python linenums="1"
 import matplotlib.pyplot as plt
 import seaborn as sns

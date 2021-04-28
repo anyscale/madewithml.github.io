@@ -1,6 +1,6 @@
 ---
 template: lesson.html
-title: "CI/CD"
+title: "CI/CD Workflows"
 description: Using workflows to establish continuous integration and delivery pipelines to reliably iterate on our application.
 keywords: ci/cd, github actions, devops, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/applied_ml.png
@@ -13,7 +13,7 @@ repository: https://github.com/GokuMohandas/MLOps
 
 Continuous integration (CI) allows our team to develop, test and integrate code in a structured fashion. This allows the team to more confidently and frequently develop since their work will be properly integrated. Continuous delivery (CD) is responsible for delivering our integrated code to a variety of applications that are dependent on it. With CI/CD pipelines, we can develop and deploy knowing that our systems can quickly adapt and work as intended.
 
-## Application
+## GitHub Actions
 
 There are many tooling options for when it comes to creating our CI/CD pipelines, such as [Jenkins](https://www.jenkins.io/){:target="_blank"}, [TeamCity](https://www.jetbrains.com/teamcity/){:target="_blank"}, [CircleCI](https://circleci.com/){:target="_blank"} and many others. However, we're going to use [GitHub Actions](https://docs.github.com/en/actions){:target="_blank"} to create automatic workflows to setup our CI/CD pipelines.
 
@@ -23,7 +23,7 @@ There are many tooling options for when it comes to creating our CI/CD pipelines
 
 GitHub Actions has the added advantage of integrating really well with GitHub and since all of our work is versioned there, we can easily create workflows based on GitHub events (push, PR, release, etc.). GitHub Actions also has a rich marketplace full of workflows that we can use for our own project. And, best of all, GitHub Actions is [free](https://docs.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-actions){:target="_blank"} for public repositories and actions using self-hosted runners (running workflows on your own hardware or on the cloud).
 
-### Components
+## Components
 
 We'll learn about GitHub Actions by understanding the components that compose an Action. These components abide by a specific [workflow syntax](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions){:target="_blank"} which can be extended with the appropriate [context and expression syntax](https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions){:target="_blank"}.
 
@@ -31,12 +31,16 @@ We'll learn about GitHub Actions by understanding the components that compose an
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/cicd/actions.png">
 </div>
 
+### Workflows
+
 With GitHub Actions, we are creating automatic **workflows** to do something for us. For example, this [testing workflow](https://github.com/GokuMohandas/MLOps/blob/main/.github/workflows/testing.yml){:target="_blank"} is responsible for conducting tests on our code base. We can specify the name of our workflow at the top of our YAML file.
 
 ```yaml
 # .github/workflows/testing.yml
 name: testing
 ```
+
+### Events
 
 Workflows are triggered by an **event**, which can be something that occurs on a schedule ([cron](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html){:target="_blank"}), webhook or manually. In our application, we'll be using the [push](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#push){:target="_blank"} and [pull request](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request){:target="_blank"} webhook events to run the testing workflow when someone directly pushes or submits a PR to the main branch.
 
@@ -54,6 +58,8 @@ on:
 !!! note
     Be sure to check out the [complete list](https://docs.github.com/en/actions/reference/events-that-trigger-workflows){:target="_blank"} of the different events that can trigger a workflow.
 
+### Jobs
+
 Once the event is triggered, a set of **jobs** run on a [**runner**](https://github.com/actions/runner){:target="_blank"}, which is the application that runs the job using a specific operating system. Our first (and only) job is `test-code` which runs on the latest version of ubuntu.
 
 ```yaml
@@ -65,6 +71,8 @@ jobs:
 
 !!! note
     Jobs run in parallel but if you need to create dependent jobs, where if a particular job fails all it's dependent jobs will be skipped, then be sure to use the [needs](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idneeds){:target="_blank"} key. One a similar note, we can also [share](https://docs.github.com/en/actions/learn-github-actions/essential-features-of-github-actions#sharing-data-between-jobs){:target="_blank"} data between jobs.
+
+### Steps
 
 Each job contains a series of **steps** which are executed in order. Each step has a name, as well as actions to use from the GitHub Action marketplace or commands we want to run. For the `test-code` job, the steps are to checkout the repo, install the necessary dependencies and run tests.
 
@@ -98,7 +106,7 @@ jobs:
         <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/cicd/cache.png">
     </div>
 
-### Runs
+## Runs
 
 Recall that workflows will be triggered when certain events occur. For example, our testing workflow will initiate on a push or PR to the main branch. We can see the workflow's runs (current and previous) on the *Actions* tab on our repository page. And if we click on a specific run, we can view the all the steps and their outputs as well.
 
@@ -145,7 +153,7 @@ act -j test-code  # specific job
 !!! note
     While act is able to very closely replicate GitHub's runners there are still a few inconsistencies. For example [caching](https://github.com/nektos/act/issues/329){:target="_blank"} still needs to be figured out with a small HTTP server when the local container is spun up. So if we have a lot of requirements, it might be faster just to experience using GitHub's runners and squashing the commits once we get the workflow to run.
 
-### Marketplace
+## Marketplace
 
 So what exactly are these actions that we're using from the marketplace? For example, our first step in the `test-code` job above is to checkout the repo using the [actions/checkout@v2](https://github.com/marketplace/actions/checkout){:target="_blank"} GitHub Action. The Action's link contains information about how to use it, scenarios, etc.
 

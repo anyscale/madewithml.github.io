@@ -17,8 +17,6 @@ When we write a piece of code, it's almost never the last time we see it or the 
 
 There are many options when it comes to Python style conventions to adhere to, but most are based on [PEP8](https://www.python.org/dev/peps/pep-0008/) (link walks through the different components (blank lines, imports, etc.) that conventions were written for). You'll notice that different teams will default to different conventions and that's ok. The most important aspects are that everybody is consistently following the same convection and that there are pipelines in place to ensure that consistency. Let's see what this looks like in our application.
 
-## Application
-
 ## Tools
 
 We will be using a very popular blend of style and formatting conventions that makes some very opinionated decisions on our behalf (with configurable options).

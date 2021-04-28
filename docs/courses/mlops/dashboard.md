@@ -13,11 +13,11 @@ repository: https://github.com/GokuMohandas/MLOps
 
 When developing an application, we may know the nuances (preprocessing, performance, etc.) quite well but how can we effectively communicate this to other developers and business stakeholders? One option is a Jupyter notebook but it's often cluttered with code and isn't very easy for non-technical team members to access and run. We need to create a dashboard that can be accessed without any technical prerequisites and effectively communicates key findings. It would be even more useful if our dashboard was interactive such that even technical developers would find use from exploring it prior to the next iteration.
 
-## Application
+## Streamlit
 
 There are some great tooling options, such as [Dash](https://plotly.com/dash/){:target="_blank"}, [Gradio](https://gradio.app/){:target="_blank"}, [Streamlit](https://streamlit.io/){:target="_blank"}, etc. for creating dashboards to deliver data oriented insights. Traditionally, interactive dashboards we exclusively created using front-end programming languages such as HTML Javascript, CSS, etc. However, given that many developers working in machine learning are using Python, the tooling landscape has evolved to bridge this gap. These tools now allow ML developers to create interactive dashboards and visualizations in Python while offering full customization via HTML, JS, CSS for the more niche creations. We'll be using Streamlit to create our dashboards because of it's intuitive API, sharing capabilities and increasing community adoption.
 
-### Set up
+## Set up
 With Streamlit, we can quickly create an empty application and as we develop, the UI will update as well.
 ```bash
 # Setup
@@ -30,17 +30,17 @@ streamlit run streamlit/st_app.py
 Local URL: http://localhost:8501
 </pre>
 
-### Components
+## Components
 Before we create a dashboard for our specific application, we need to learn about the different Streamlit [API components](https://docs.streamlit.io/en/stable/api.html){:target="_blank"}. Instead of going through them all in this lesson, take ten minutes and go through the entire documentation page. We normally don't suggest this but it's quite short and we promised you'll be amazed at how many UI components (styled text, latex, tables, plots, etc.) you can create using just Python. We'll explore the different components in detail as they apply to creating different interactions for our specific dashboard below.
 
-### Pages
+## Pages
 Our application's [dashboard](https://github.com/GokuMohandas/MLOps/blob/main/streamlit/st_app.py){:target="_blank"} will feature several pages organized by the insight they will provide where the view can choose what via interactive [radio buttons](https://docs.streamlit.io/en/stable/api.html#streamlit.radio){:target="_blank"}.
 
 <div class="ai-center-all">
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/pages.png">
 </div>
 
-#### Data
+### Data
 
 The data page contains findings from data [annotation](annotation.md){:target="_blank"}, [exploratory data analysis](exploratory-data-analysis.md){:target="_blank"} and [preprocessing](preprocessing.md){:target="_blank"} but with interactive components.
 
@@ -150,7 +150,7 @@ st.write("Preprocessed text", preprocessed_text)
 !!! bug
     In fact, we were able to discover and fix a bug here where the NLTK package automatically lowers text when stemming which we had to override using our `Stemmer` class in our [data script](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/data.py){:target="_blank"}.
 
-#### Performance
+### Performance
 
 This page allows us to quickly compare the improvements and regression of current and previous deployments. Since our application deployments are [organized via tags](versioning.md#tags){:target="_blank"}, we need to be able to compare the model's across different tags, as well as what's available on current workspace.
 
@@ -200,7 +200,7 @@ We also want to enable a closer analysis of the overall, class and slices perfor
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/performance.png">
 </div>
 
-#### Inference
+### Inference
 
 With the inference page, we want to be able to test our model using various inputs to receive predictions, as well as intermediate outputs (ex. preprocessed text). This is a great way for our team members to quickly play with the latest deployed model.
 
@@ -208,7 +208,7 @@ With the inference page, we want to be able to test our model using various inpu
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/inference.png">
 </div>
 
-#### Inspection
+### Inspection
 
 Our last page will enable a closer inspection on the test split's predictions to identify areas to improve, collect more data, etc. First we offer a quick view of each tag's performance and we could also do the same for specific slices of the data we may care about (high priority, minority, etc.)
 
@@ -225,7 +225,7 @@ We're also going to inspect the true positive (TP), false positive (FP) and fals
 !!! warning
     Be careful not to make decisions based on predicted probabilities before [calibrating](https://arxiv.org/abs/1706.04599){:target="_blank"} them to reliably use as measures of confidence.
 
-##### Extensions
+#### Extensions
 
 - Use false positives to identify potentially mislabeled data.
 - Connect inspection pipelines with annotation systems so that changes to the data can be reviewed and incorporated.
@@ -233,7 +233,7 @@ We're also going to inspect the true positive (TP), false positive (FP) and fals
 - Inspect the trained model's behavior under various conditions using the [WhatIf](https://pair-code.github.io/what-if-tool/){:target="_blank"} tool.
 
 
-### Caching
+## Caching
 
 There are a few functions defined at the start of our [st_app.py](https://github.com/GokuMohandas/MLOps/blob/main/streamlit/st_app.py){:target="_blank"} script which have a `@st.cache` decorator. This calls for Streamlit to cache the function by the combination of it's inputs which will significantly improve performance involving computation heavy functions.
 
@@ -244,7 +244,7 @@ def get_diff(author, repo, tag_a, tag_b):
     return diff
 ```
 
-### Deploy
+## Deploy
 
 We have several different options for deploying and managing our Streamlit dashboard. We could use Streamlit's [sharing feature](https://blog.streamlit.io/introducing-streamlit-sharing/){:target="_blank"} (beta) which allows us to seamlessly deploy dashboards straight from GitHub. Our dashboard will continue to stay updated as we commit changes to our repository. Another option is to deploy the Streamlit dashboard along with our API service. We can use docker-compose to spin up a separate container or simply add it to the API service's Dockerfile's [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint){:target="_blank"} with the appropriate ports exposed. The later might be ideal, especially if your dashboard isn't meant to be public and it you want added security, performance, etc.
 

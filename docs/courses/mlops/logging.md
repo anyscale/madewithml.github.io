@@ -13,10 +13,6 @@ repository: https://github.com/GokuMohandas/MLOps
 
 Logging the process of tracking and recording key events that occur in our applications. We want to log events so we can use them to inspect processes, fix issues, etc. They're a whole lot more powerful than `print` statements because they allow us to send specific pieces of information to specific locations, not to mention custom formatting, shared interface with other Python packages, etc. We should use logging to provide insight into the internal processes of our application to notify our users of the important events that are occurring.
 
-## Application
-
-Let's look at what logging looks like in our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}.
-
 ## Components
 
 There are a few overarching concepts to be aware of first before we can create and use our loggers.

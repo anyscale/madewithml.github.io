@@ -32,8 +32,6 @@ We need to ensure that our data is properly split so we can trust our evaluation
 !!! note
     You need to [clean](preprocessing.md) your data first before splitting, at least for the features that splitting depends on. So the process is more like: preprocessing (global, cleaning) → splitting → preprocessing (local, transformations).
 
-## Application
-
 ## Label encoding
 Before we split our dataset, we're going to encode our output labels where we'll be assigning each tag a unique index.
 

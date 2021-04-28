@@ -13,8 +13,6 @@ repository: https://github.com/GokuMohandas/MLOps
 
 It's integral to be able to consistently create an environment to develop in so that we can reliably reproduce the same results. To do this, we'll need to explicitly detail all the requirements (python version, packages, etc.) as well as create the environment that will load all the requirements. By doing this, we'll not only be able to consistently reproduce results but also enable others to arrive at the same results.
 
-## Application
-
 ## Virtual environment
 
 When we used our [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb){:target="_blank"}, we had a preloaded set of packages (run `!pip list` inside the notebook to see all of them). But now we want to define our environment so we can reproduce it for our Python scripts. There are [many recommended options](https://packaging.python.org/guides/tool-recommendations/){:target="_blank"} when it comes to packaging in Python and we'll be using the traditional and recommended [Pip](https://pip.pypa.io/en/stable/){:target="_blank"}.

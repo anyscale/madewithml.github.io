@@ -13,7 +13,7 @@ repository: https://github.com/GokuMohandas/MLOps
 
 The last step in achieving reproducibility is to deploy our versioned code and artifacts in a reproducible environment. This goes well beyond the virtual environment we configured for our Python applications because there are system-level specifications (operating system, required packages, etc.) we aren't capturing. We want to be able to encapsulate all the requirements we need so that there are no external dependencies that would prevent someone else from reproducing our exact application.
 
-## Application
+## Docker
 
 There are actually quite a few solutions for system-level reproducibility (VMs, container engines, etc.) but the [Docker](https://www.docker.com/){:target="_blank"} container engine is by far the most popular for several key advantages:
 
@@ -23,7 +23,7 @@ There are actually quite a few solutions for system-level reproducibility (VMs, 
 
 We're going to use Docker to deploy our application locally in an isolated, reproducible and scalable fashion. Once we do this, any machine with the Docker engine installed can reproduce our work. However, there is so much more to Docker, which you can explore in the [docs](https://docs.docker.com/){:target="_blank"}, that goes beyond what we'll need.
 
-### Architecture
+## Architecture
 
 Before we install Docker, let's take a look at how the container engine works on top our operating system, which can be our local hardware or something managed on the cloud.
 
@@ -33,14 +33,14 @@ Before we install Docker, let's take a look at how the container engine works on
 
 The Docker container engine is responsible for spinning up configured containers, which *contains* our application and it's dependencies (binaries, libraries, etc.). The container engine is very efficient in that it doesn't need to create a separate operating system for each containerized application. This also means that our containers can share the system's resources via the Docker engine.
 
-### Set up
+## Set up
 
 Now we're ready to [install](https://docs.docker.com/get-docker/){:target="_blank"} Docker based on our operating system. Once installed, we can start the Docker Desktop which will allow us to create and deploy our containerized applications.
 
-### Images
+## Images
 The first step is to build a docker image which has the application and all it's specified dependencies. We can create this image using a Dockerfile which outlines a set of instructions. These instructions essentially build read-only image layers on top of each other to construct our entire image. Let's take a look at our application's [Dockerfile](https://github.com/GokuMohandas/MLOps/blob/main/Dockerfile){:target="_blank"} and the image layers it creates.
 
-### Dockerfile
+## Dockerfile
 
 The first line specifies the base image we want to pull [FROM](https://docs.docker.com/engine/reference/builder/#from){:target="_blank"}. Here we want to use the [base image](https://hub.docker.com/_/python){:target="_blank"} for running Python based applications and specifically for Python 3.7 with the slim variant. Since we're only deploying a Python application, this slim variant with minimal packages satisfies our requirements while keeping the size of the image layer low.
 
@@ -96,7 +96,7 @@ ENTRYPOINT ["gunicorn", "-c", "config/gunicorn.py", "-k", "uvicorn.workers.Uvico
 !!! note
     There are many more commands available for us to use in the Dockerfile, such as using environment variables ([ENV](https://docs.docker.com/engine/reference/builder/#env){:target="_blank"}) and arguments ([ARG](https://docs.docker.com/engine/reference/builder/#arg){:target="_blank"}), command arguments ([CMD](https://docs.docker.com/engine/reference/builder/#cmd){:target="_blank"}), specifying volumes ([VOLUME](https://docs.docker.com/engine/reference/builder/#volume){:target="_blank"}), setting the working directory ([WORKDIR](https://docs.docker.com/engine/reference/builder/#workdir){:target="_blank"}) and many more, all of which you can explore through the [official docs](https://docs.docker.com/engine/reference/builder/){:target="_blank"}.
 
-### Build images
+## Build images
 Once we're done composing the Dockerfile, we're ready to build our image using the [*build*](https://docs.docker.com/engine/reference/commandline/build/){:target="_blank"} command which allows us to add a tag and specify the location of the Dockerfile to use.
 
 ```bash
@@ -122,7 +122,7 @@ docker rmi <IMAGE_ID>              # remove an image
 docker rmi $(docker images -a -q)  # remove all images
 ```
 
-### Run containers
+## Run containers
 
 Once we've built our image, we're ready to run a container using that image with the [*run*](https://docs.docker.com/engine/reference/run/){:target="_blank"} command which allows us to specify the image, port forwarding, etc.
 
@@ -155,7 +155,7 @@ docker rm $(docker ps -a -q)    # remove all containers
 !!! note
     If our application required multiple containers for different services (API, database, etc.) then we can bring them all up at once using the [docker compose](https://docs.docker.com/compose/){:target="_blank"} functionality and scale and manage them using a container orchestration system like [Kubernetes](https://kubernetes.io/){:target="_blank"}. If we're specifically deploying ML workflows, we can use a toolkit like [KubeFlow](https://www.kubeflow.org/){:target="_blank"} to help us manage and scale.
 
-### Debug
+## Debug
 
 In the event that we run into errors while building our image layers, a very easy way to debug the issue is to run the container with the image layers that have been build so far. We can do this by only including the commands that have executed so far (and all COPY statements) and then run the container.
 

@@ -13,10 +13,6 @@ repository: https://github.com/GokuMohandas/MLOps
 
 To have organized code is to have readable, reproducible, scalable and efficient code. We'll cover all of these concepts throughout the scripting lessons.
 
-## Application
-
-Let's look at what organizing a code base looks like for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}.
-
 ## Organizing
 There are several ways to organize our code from the notebooks but they're all based on utility. For example, we're organizing our code based on the part of the pipeline (data, training, prediction, etc.):
 

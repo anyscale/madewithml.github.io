@@ -135,7 +135,7 @@ def predict_tags(
     ```
 </div>
 
-## Executing
+## Usage
 
 And we can easily use our CLI app to execute these commands with the appropriate options:
 <div class="animated-code">

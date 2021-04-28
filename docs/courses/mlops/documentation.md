@@ -21,9 +21,8 @@ Another way to [organize](organization.md){:target="_blank"} our code is to docu
 - `#!js docstrings`: Meaningful descriptions for functions and classes that describe overall utility as wel as arguments, returns, etc.
 - `#!js documentation`: A rendered webpage that summarizes all the functions, classes, API calls, workflows, examples, etc. so we can view and traverse through the code base without actually having to look at the code just yet.
 
-## Application
-
-Let's look at what documentation looks like for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"} and be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for it as well.
+!!! note
+    Be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}.
 
 ## Typing
 It's important to be as explicit as possible with our code. We're already discussed choosing explicit names for variables, functions, etc. but another way we can be explicit is by defining the types for our function's inputs and outputs. We want to do this so we can quickly know what data types a function expects and how we can utilize it's outputs for downstream processes.

@@ -18,7 +18,7 @@ Whether we're working individually or with a team, it's important that we have a
 
 ## Application
 
-Instead of creating an overwhelming list of Git commands (you know how I feel about [list dumps](../../pivot.md){:target="_blank"}), let's learn about the important concepts and commands with quick chronological case studies that we'll absolutely need to know to real collaborative project with a team.
+Instead of creating an [overwhelming](../../pivot.md){:target="_blank"} list of Git commands, let's learn about the important concepts and commands with quick chronological case studies that we'll absolutely need to know to real collaborative project with a team.
 
 ### Getting started
 

@@ -27,10 +27,10 @@ image: "https://madewithml.com/static/images/applied_ml.png"
     </ul>
     <b><span class="mr-1">🔢</span> Data</b>
     <ul>
-    <li><a href="/courses/mlops/annotation/">Annotation</a></li>
+    <li><a href="/courses/mlops/labeling/">Labeling</a></li>
+    <li><a href="/courses/mlops/preprocessing/">Preprocessing</a></li>
     <li><a href="/courses/mlops/exploratory-data-analysis/">Exploration</a></li>
     <li><a href="/courses/mlops/splitting/">Splitting</a></li>
-    <li><a href="/courses/mlops/preprocessing/">Preprocessing</a></li>
     </ul>
     <b><span class="mr-1">📈</span> Modeling</b>
     <ul>
@@ -72,8 +72,7 @@ image: "https://madewithml.com/static/images/applied_ml.png"
     <b><span class="mr-1">🚀</span> Production</b>
     <ul>
     <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
-    <li><a href="/courses/mlops/cicd/">CI/CD</a></li>
-    <li>Pipelines</li>
+    <li><a href="/courses/mlops/cicd/">CI/CD workflows</a></li>
     <li>Feature stores</li>
     <li>Deployment</li>
     <li>Monitoring</li>

@@ -68,10 +68,10 @@ nav:
       - Evaluation: courses/mlops/evaluation.md
       - Iteration: courses/mlops/iteration.md
     - <b>🔢 &nbsp; Data</b>:
-      - Annotation: courses/mlops/annotation.md
+      - Labeling: courses/mlops/labeling.md
+      - Preprocessing: courses/mlops/preprocessing.md
       - Exploration: courses/mlops/exploratory-data-analysis.md
       - Splitting: courses/mlops/splitting.md
-      - Preprocessing: courses/mlops/preprocessing.md
     - <b>📈 &nbsp; Modeling</b>:
       - Baselines: courses/mlops/baselines.md
       - Experiment tracking: courses/mlops/experiment-tracking.md
@@ -98,7 +98,6 @@ nav:
     - <b>🚀 &nbsp; Production</b>:
       - Dashboard: courses/mlops/dashboard.md
       - CI/CD: courses/mlops/cicd.md
-      - Pipelines: courses/mlops/pipelines.md
       - Feature stores: courses/mlops/feature-stores.md
       - Deployment: courses/mlops/deployment.md
       - Monitoring: courses/mlops/monitoring.md
@@ -222,3 +221,4 @@ plugins:
             "courses/applied-ml/monitoring.md": "courses/mlops/monitoring.md"
             "courses/applied-ml/feature-stores.md": "courses/mlops/feature-stores.md"
             "courses/applied-ml/workflows.md": "courses/mlops/workflows.md"
+            "courses/mlops/annotation.md": "courses/mlops/labeling.md"
