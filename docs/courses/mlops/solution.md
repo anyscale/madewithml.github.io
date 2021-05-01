@@ -46,7 +46,7 @@ Design from our ideal solution while factoring in **constraints**.
 - privacy, personalization, property
 - dictate the components of our solution
 
-### Tech constraints
+### Technical constraints
 
 - data, time, performance, cost, interpretability, latency
 - dictate the complexity of our solutions
@@ -56,13 +56,29 @@ Design from our ideal solution while factoring in **constraints**.
 
 <center>
 
-| ❌ Model fitter    | ✅ Problem solver                          |
+| ❌&nbsp;&nbsp; Model fitter    | ✅&nbsp;&nbsp; Problem solver                          |
 | :---------- | :----------------------------------- |
 | *naively maps* a set of inputs to outputs         | knows which set of inputs and outputs are *worth mapping*             |
 | obsesses on *methods* (models, SOTA, single metric, etc.)  | focuses on *product* (objective, constraints, evaluation, etc.)   |
 | fitting methods are *ephemeral*        | foundational mental models are *enduring*        |
 
 </center>
+
+## Evaluation
+
+Before we start building our solution, we need to make sure we have methods to evaluate it. We'll use our objective here to determine the evaluation criteria.
+
+- be clear about what metrics you are prioritizing
+- be careful not to over optimize on any one metric
+
+!!! note
+    We should also apply our metrics across various [slices](evaluation.md#slices){:target="_blank"} of data (timestamps, classes, features, etc.) because the overall performance can be very different from granular performance. This is especially important if certain slices of data are more important or if daily performance is more meaningful than overall (rolling) performance. We'll take a closer look at this in our [testing](testing.md){:target="_blank"} and [monitoring](monitoring.md){:target="_blank"} lessons.
+
+
+Evaluation doesn't just involve measuring how well we're doing but we also need to think about what happens when our solution is incorrect.
+
+- what are the fallbacks?
+- what feedback are we collecting?
 
 ## Application
 
@@ -87,6 +103,37 @@ Our main objective is to allow users to discover the precise resource.
 
 !!! note
     For the purpose of this course, we're going to develop a solution that involves applied machine learning in production. However, we would also do A/B testing with other approaches such as simply altering the process where users add tags to projects. Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags. This is a simple solution that needs to be tested against other approaches for effectiveness.
+
+As for evaluating our solution, we want to be able to suggest highly relevant tags (precision) so we don't fatigue the user with noise. But *recall* that the whole point of this task is to suggest tags that the author will miss (recall) so we can allow our users to find the best resource! So we'll need to tradeoff between precision and recall.
+
+$$ \text{accuracy} = \frac{TP+TN}{TP+TN+FP+FN} $$
+
+$$ \text{recall} = \frac{TP}{TP+FN} $$
+
+$$ \text{precision} = \frac{TP}{TP+FP} $$
+
+$$ F_1 = 2 * \frac{\text{precision }  *  \text{ recall}}{\text{precision } + \text{ recall}} $$
+
+<center>
+
+| Variable    | Description                          |
+| :---------- | :----------------------------------- |
+| $TP$         | # of samples truly predicted to be positive and were positive         |
+| $TN$         | # of samples truly predicted to be negative and were negative         |
+| $FP$         | # of samples falsely predicted to be positive but were negative       |
+| $FN$         | # of samples falsely predicted to be negative but were positive       |
+
+</center>
+
+Normally, the goto option would be the F1 score (weighted precision and recall) but we shouldn't be afraid to craft our own evaluation metrics that best represents our needs. For example, we may want to account for both precision and recall but give more weight to recall. We may also want to evaluate performance at various levels such as for specific classes or [slices](evaluation.md#slices){:target="_blank"} of data.
+
+We may also want to consider separating our test set before shuffling and evaluating daily (or any window of time) metrics as opposed to an overall (rolling) basis. This might give us insight into how our model may actually perform on a daily basis once deployed and catch degradations earlier. We'll cover these concepts in our [monitoring](monitoring.md){:target="_blank"} lesson.
+
+Fortunately in our application, when we make a mistake, it's not catastrophic. The author will simply ignore it but we'll capture the error based on the tags that the author does add. We'll use this feedback (in addition to an annotation workflow) to improve on our solution over time.
+
+!!! note
+    If we want to be very deliberate, we can provide the authors an option to report erroneous tags. Not everyone may act on this but it could reveal underlying issues we may not be aware of.
+
 
 ## Resources
 - [Guidelines for Human-AI Interaction](https://www.microsoft.com/en-us/research/uploads/prod/2019/01/AI-Guidelines-poster_nogradient_final.pdf){:target="_blank"}

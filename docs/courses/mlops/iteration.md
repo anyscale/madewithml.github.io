@@ -42,8 +42,9 @@ Deploying solutions is actually quite easy (from an engineering POV) but maintai
 - collect signals from UI/UX to best approximate how your deployed model is performing
 - determine window / rolling performances on overall and key slices of data
 - monitor (performance, concept drift, etc.) to know when to update
+- identify subsets of data that are worth labeling / oversampling
+- address iteration bottlenecks (ex. data quality checks)
 - constantly reassess your objective
-- iteration bottlenecks (ex. data quality checks)
 
 ## Application
 For our solution, we'll have an initial set of baselines where we'll start with a rule-based approach and then slowly add complexity (regression &rarr; CNN &rarr; Transformers).

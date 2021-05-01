@@ -22,7 +22,6 @@ image: "https://madewithml.com/static/images/applied_ml.png"
     <ul>
     <li><a href="/courses/mlops/objective/">Objective</a></li>
     <li><a href="/courses/mlops/solution/">Solution</a></li>
-    <li><a href="/courses/mlops/evaluation/">Evaluation</a></li>
     <li><a href="/courses/mlops/iteration/">Iteration</a></li>
     </ul>
     <b><span class="mr-1">🔢</span> Data</b>
@@ -31,10 +30,12 @@ image: "https://madewithml.com/static/images/applied_ml.png"
     <li><a href="/courses/mlops/preprocessing/">Preprocessing</a></li>
     <li><a href="/courses/mlops/exploratory-data-analysis/">Exploration</a></li>
     <li><a href="/courses/mlops/splitting/">Splitting</a></li>
+    <li><a href="/courses/mlops/augmentation/">Augmentation</a></li>
     </ul>
     <b><span class="mr-1">📈</span> Modeling</b>
     <ul>
     <li><a href="/courses/mlops/baselines/">Baselines</a></li>
+    <li><a href="/courses/mlops/evaluation/">Evaluation</a></li>
     <li><a href="/courses/mlops/experiment-tracking/">Experiment tracking</a></li>
     <li><a href="/courses/mlops/optimization/">Optimization</a></li>
     </ul>
@@ -49,10 +50,10 @@ image: "https://madewithml.com/static/images/applied_ml.png"
     <li><a href="/courses/mlops/styling/">Styling</a></li>
     <li><a href="/courses/mlops/makefile/">Makefile</a></li>
     </ul>
-    <b><span class="mr-1">📦</span> Application</b>
+    <b><span class="mr-1">📦</span> Interfaces</b>
     <ul>
-    <li><a href="/courses/mlops/cli/">CLI</a></li>
-    <li><a href="/courses/mlops/api/">API</a></li>
+    <li><a href="/courses/mlops/cli/">Command-line</a></li>
+    <li><a href="/courses/mlops/api/">RESTful API</a></li>
     </ul>
     <b><span class="mr-1">✅</span> Testing</b>
     <ul>

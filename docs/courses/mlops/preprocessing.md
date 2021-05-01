@@ -289,36 +289,6 @@ Transforming the data involves feature encoding and engineering.
     Often, teams will want to reuse the same features for different tasks so how can we avoid duplication of efforts? A solution is [feature stores](https://www.tecton.ai/blog/what-is-a-feature-store/){:target="_blank"} which will enable sharing of features and the workflows around feature pipelines. We'll cover feature stores during *Production*.
 
 
-## Data augmentation
-We'll often want to increase the size and diversity of our training data split through data augmentation. It involves using the existing samples to generate synthetic, yet realistic, examples.
-
-1. **Split the dataset**. We want to split our dataset first because many augmentation techniques will cause a form of data leak if we allow the generated samples to be placed across different data splits. For example, support augmentation involves generating synonyms for certain key tokens in a sentence. If we allow the generated sentences from the same origin sentence to go into different splits, we could be potentially leaking samples with nearly identical embedding representations across our different splits.
-
-2. **Augment the training split only**. We want to apply data augmentation on only the training set because our validation and testing splits should be used to provide an accurate estimate on actual data points.
-
-Depending on the feature types and tasks, there are many data augmentation libraries which allow us to extend our training data.
-
-### Natural language processing (NLP)
-- [NLPAug](https://github.com/makcedward/nlpaug){:target="_blank"}: data augmentation for NLP.
-- [TextAttack](https://github.com/QData/TextAttack){:target="_blank"}: a framework for adversarial attacks, data augmentation, and model training in NLP.
-- [TextAugment](https://github.com/dsfsi/textaugment){:target="_blank"}: text augmentation library.
-
-### Computer vision (CV)
-- [Imgaug](https://github.com/aleju/imgaug){:target="_blank"}: image augmentation for machine learning experiments.
-- [Albumentations](https://github.com/albumentations-team/albumentations){:target="_blank"}: fast image augmentation library.
-- [Augmentor](https://github.com/mdbloice/Augmentor){:target="_blank"}: image augmentation library in Python for machine learning.
-- [Kornia.augmentation](https://github.com/kornia/kornia){:target="_blank"}: a module to perform data augmentation in the GPU.
-- [SOLT](https://github.com/MIPT-Oulu/solt){:target="_blank"}: data augmentation library for Deep Learning, which supports images, segmentation masks, labels and key points.
-
-### Other
-- [Snorkel](https://github.com/snorkel-team/snorkel){:target="_blank"}: system for generating training data with weak supervision.
-- [DeltaPy⁠⁠](https://github.com/firmai/deltapy){:target="_blank"}: tabular data augmentation and feature engineering.
-- [Audiomentations](https://github.com/iver56/audiomentations){:target="_blank"}: a Python library for audio data augmentation.
-- [Tsaug](https://github.com/arundo/tsaug){:target="_blank"}: a Python package for time series augmentation.
-
-Regardless of what tool we use, it's important to validate that we're not just augmenting for the sake of augmentation. For example, in many NLP data augmentation scenarios, the adjectives are replaced with other adjectives. We need to ensure that this generalized change doesn't affect key aspects of our dataset. For more fine-grained data augmentation, we can use concepts like [transformation functions](https://www.snorkel.org/use-cases/02-spam-data-augmentation-tutorial){:target="_blank"} to apply specific types of augmentation to a subset of our dataset.
-
-
 ## Application
 
 For our application, we'll be implementing a few of these preprocessing steps that are relevant for our dataset.
@@ -454,7 +424,8 @@ albumentations fast image augmentation library easy use wrapper around libraries
 </pre>
 
 ## Transformations
-Many of the *transformations* we're going to do are model specific. For example, for our simple baselines we may do `label encoding` → `tf-idf` while for the more involved architectures we may do `label encoding` → `one-hot encoding` → `embeddings`. So we'll cover these in the next suite of lessons as we implement each [baseline](baselines.md){:target="_blank"}.
+
+Many of the *transformations* we're going to do are model specific. For example, for our simple baselines we may do `label encoding` → `tf-idf` while for the more involved architectures we may do `label encoding` → `one-hot encoding` → `embeddings`. So we'll cover these in the next suite of lessons as we implement each of the [baselines](baselines.md){:target="_blank"}.
 
 
 ## Pipelines

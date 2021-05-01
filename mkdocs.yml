@@ -65,15 +65,16 @@ nav:
     - <b>📦 &nbsp; Product</b>:
       - Objective: courses/mlops/objective.md
       - Solution: courses/mlops/solution.md
-      - Evaluation: courses/mlops/evaluation.md
       - Iteration: courses/mlops/iteration.md
     - <b>🔢 &nbsp; Data</b>:
       - Labeling: courses/mlops/labeling.md
       - Preprocessing: courses/mlops/preprocessing.md
       - Exploration: courses/mlops/exploratory-data-analysis.md
       - Splitting: courses/mlops/splitting.md
+      - Augmentation: courses/mlops/augmentation.md
     - <b>📈 &nbsp; Modeling</b>:
       - Baselines: courses/mlops/baselines.md
+      - Evaluation: courses/mlops/evaluation.md
       - Experiment tracking: courses/mlops/experiment-tracking.md
       - Optimization: courses/mlops/optimization.md
     - <b>📝 &nbsp; Scripting</b>:
@@ -84,8 +85,8 @@ nav:
       - Styling: courses/mlops/styling.md
       - Makefile: courses/mlops/makefile.md
     - <b>📦 &nbsp; Application</b>:
-      - CLI: courses/mlops/cli.md
-      - API: courses/mlops/api.md
+      - Command-line: courses/mlops/cli.md
+      - RESTful API: courses/mlops/api.md
     - <b>✅ &nbsp; Testing</b>:
       - Code: courses/mlops/testing.md
       - Data: courses/mlops/testing#data
@@ -97,7 +98,7 @@ nav:
       - Docker: courses/mlops/docker.md
     - <b>🚀 &nbsp; Production</b>:
       - Dashboard: courses/mlops/dashboard.md
-      - CI/CD: courses/mlops/cicd.md
+      - CI/CD workflows: courses/mlops/cicd.md
       - Feature stores: courses/mlops/feature-stores.md
       - Deployment: courses/mlops/deployment.md
       - Monitoring: courses/mlops/monitoring.md

@@ -751,8 +751,9 @@ When it comes to testing how well our model performs, we need to first have our 
 - What tradeoffs are we willing to make?
 - Are there certain subsets (slices) of data that are important?
 
-#### Overall
+#### Metrics
 
+##### Overall
 We want to ensure that our key metrics on the overall dataset improves with each iteration of our model. Overall metrics include accuracy, precision, recall, f1, etc. and we should define what counts as a performance regression. For example, is a higher precision at the expensive of recall an improvement or a regression? Usually, a team of developers and domain experts will establish what the key metric(s) are while also specifying the lowest regression tolerance for other metrics.
 
 ```python linenums="1"
@@ -760,193 +761,25 @@ assert precision > prev_precision  # most important, cannot regress
 assert recall >= best_prev_recall - 0.03  # recall cannot regress > 3%
 ```
 
-#### Slicing
+##### Per-class
 
-Just inspecting the overall metrics isn't enough to deploy our new version to production. There may be key slices of our dataset that we expect to do really well on (ie. minority groups, large customers, etc.) and we need to ensure that their metrics are also improving. An easy way to create and evaluate slices is to define slicing functions.
-
-```python linenums="1"
-# tagifai/eval.py
-from snorkel.slicing import slicing_function
-
-@slicing_function()
-def cv_transformers(x):
-    """Projects with the `computer-vision` and `transformers` tags."""
-    return all(tag in x.tags for tag in ["computer-vision", "transformers"])
-```
-
-Here we're using Snorkel's [`slicing_function`](https://snorkel.readthedocs.io/en/v0.9.3/packages/_autosummary/slicing/snorkel.slicing.slicing_function.html){:target="blank"} to create our different slices. We can visualize our slices by applying this slicing function to a relevant DataFrame using [`slice_dataframe`](https://snorkel.readthedocs.io/en/v0.9.3/packages/_autosummary/slicing/snorkel.slicing.slice_dataframe.html){:target="_blank"}.
+We can perform similar assertions for class specific metrics as well.
 
 ```python linenums="1"
-from snorkel.slicing import slice_dataframe
-
-test_df = pd.DataFrame({"text": X_test, "tags": label_encoder.decode(y_test)})
-cv_transformers_df = slice_dataframe(test_df, cv_transformers)
-cv_transformers_df[["text", "tags"]].head()
+assert metrics["class"]["data_augmentation"]["f1"] > prev_data_augmentation_f1  # priority class
 ```
-<pre class="output">
-<div class="output_subarea output_html rendered_html"><div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>text</th>
-      <th>tags</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>10</td>
-      <td>vedastr vedastr open source scene text recogni...</td>
-      <td>[computer-vision, natural-language-processing,...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>15</td>
-      <td>hugging captions generate realistic instagram ...</td>
-      <td>[computer-vision, huggingface, language-modeli...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>49</td>
-      <td>transformer ocr rectification free ocr using s...</td>
-      <td>[attention, computer-vision, natural-language-...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</pre>
 
-We can define even more slicing functions and create a slices record array using the [`PandasSFApplier`](https://snorkel.readthedocs.io/en/v0.9.6/packages/_autosummary/slicing/snorkel.slicing.PandasSFApplier.html){:target="_blank"}. The slices array has N (# of data points) items and each item has S (# of slicing functions) items, indicating whether that data point is part of that slice. Think of this record array as a masking layer for each slicing function on our data.
+##### Slices
+
+In the same vain, we can create assertions for certain key [slices](evaluation.md#slices){:target="_blank"} of our data as well. This can be very simple test to ensure that our high priority slices of data continue to improve in performance.
 
 ```python linenums="1"
-# tagifai/eval.py | get_metrics()
-from snorkel.slicing import PandasSFApplier
-
-slicing_functions = [cv_transformers, short_text]
-applier = PandasSFApplier(slicing_functions)
-slices = applier.apply(df)
-print (slices)
-```
-<pre class="output">
-[(0, 0) (0, 1) (0, 0) (1, 0) (0, 0) (0, 0) (0, 0) (0, 0) (0, 0) (0, 0)
- (1, 0) (0, 0) (0, 1) (0, 0) (0, 0) (1, 0) (0, 0) (0, 0) (0, 1) (0, 0)
- ...
- (0, 0) (1, 0) (0, 0) (0, 0) (0, 0) (0, 0) (0, 0) (0, 0) (0, 0) (0, 0)
- (0, 0) (0, 0) (1, 0) (0, 0) (0, 0) (0, 0) (1, 0)]
-</pre>
-
-One we have our slices record array, we can compute the performance metrics for each slice.
-
-```python linenums="1"
-# tagifai/eval.py | get_metrics()
-for slice_name in slices.dtype.names:
-    mask = slices[slice_name].astype(bool)
-    metrics = precision_recall_fscore_support(y_true[mask], y_pred[mask], average="micro")
-```
-
-!!! note
-    Snorkel comes with a builtin [slice scorer](https://snorkel.readthedocs.io/en/v0.9.1/packages/_autosummary/analysis/snorkel.analysis.Scorer.html){:target="_blank"} but we had to implemented a naive version since our task involves multi-label classification.
-
-We can add these slice performance metrics to our larger performance report to analyze downstream when choosing which model to deploy.
-
-```json linenums="1" hl_lines="23"
-{
-  "overall": {
-    "precision": 0.8050380552475824,
-    "recall": 0.603411513859275,
-    "f1": 0.6674448998627966,
-    "num_samples": 207.0
-  },
-  "class": {
-    "attention": {
-      "precision": 0.6923076923076923,
-      "recall": 0.5,
-      "f1": 0.5806451612903226,
-      "num_samples": 18.0
-    },
-    ...
-    "unsupervised-learning": {
-      "precision": 0.8,
-      "recall": 0.5,
-      "f1": 0.6153846153846154,
-      "num_samples": 8.0
-    }
-  },
-  "slices": {
-    "f1": 0.7395604395604396,
-    "cv_transformers": {
-      "precision": 1.0,
-      "recall": 0.5384615384615384,
-      "f1": 0.7000000000000001,
-      "num_samples": 3
-    },
-    "short_text": {
-      "precision": 0.8333333333333334,
-      "recall": 0.7142857142857143,
-      "f1": 0.7692307692307692,
-      "num_samples": 4
-    }
-  }
-}
-```
-
-#### Extensions
-
-We've explored user generated slices but there is currently quite a bit of research on automatically generated slices and overall model robustness. A notable toolkit is the [Robustness Gym](https://arxiv.org/abs/2101.04840){:target="_blank"} which programmatically builds slices, performs adversarial attacks, rule-based data augmentation, benchmarking, reporting and much more.
-
-<div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/gym.png">
-</div>
-<div class="ai-center-all mt-2">
-    <a href="https://arxiv.org/abs/2101.04840" target="_blank">Robustness Gym slice builders</a>
-</div>
-
-Instead of passively observing slice performance, we could try and improve them. Usually, a slice may exhibit poor performance when there are too few samples and so a natural approach is to oversample. However, these methods change the underlying data distribution and can cause issues with overall / other slices. It's also not scalable to train a separate model for each unique slice and combine them via [Mixture of Experts (MoE)](https://www.cs.toronto.edu/~hinton/csc321/notes/lec15.pdf){:target="_blank"}. To combat all of these technical challenges and more, the Snorkel team introduced the [Slice Residual Attention Modules (SRAMs)](https://arxiv.org/abs/1909.06349){:target="_blank"}, which can sit on any backbone architecture (ie. our CNN feature extractor) and learn slice-aware representations for the class predictions.
-
-<div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/sram.png">
-</div>
-<div class="ai-center-all mt-3">
-    <a href="https://arxiv.org/abs/1909.06349" target="_blank">Slice Residual Attention Modules (SRAMs)</a>
-</div>
-
-
-### Inference
-
-When our model is deployed, most users will be using it for inference (directly / indirectly), so it's very important that we test all aspects of it.
-
-#### Loading artifacts
-This is the first time we're not loading our components from in-memory so we want to ensure that the required artifacts (model weights, encoders, config, etc.) are all able to be loaded.
-
-```python linenums="1"
-artifacts = main.load_artifacts(run_id=run_id, device=torch.device("cpu"))
-assert isinstance(artifacts["model"], nn.Module)
-...
-```
-
-#### Prediction
-Once we have our artifacts loaded, we're readying to test our prediction pipelines. We should test samples with just one input, as well as a batch of inputs (ex. padding can have unintended consequences sometimes).
-```python linenums="1"
-# tests/app/test_api.py | test_best_predict()
-data = {
-    "run_id": "",
-    "texts": [
-        {"text": "Transfer learning with transformers for self-supervised learning."},
-        {"text": "Generative adversarial networks in both PyTorch and TensorFlow."},
-    ],
-}
-response = client.post("/predict", json=data)
-assert response.status_code == HTTPStatus.OK
-assert response.request.method == "POST"
-assert len(response.json()["data"]["predictions"]) == len(data["texts"])
-...
+assert metrics["slices"]["class"]["cv_transformers"]["f1"] > prev_cv_transformers_f1  # priority slice
 ```
 
 #### Behavioral testing
 
-Besides just testing if the prediction pipelines work, we also want to ensure that they work well. Behavioral testing is the process of testing input data and expected outputs while treating the model as a black box. They don't necessarily have to be adversarial in nature but more along the types of perturbations we'll see in the real world once our model is deployed. A landmark paper on this topic is [Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://arxiv.org/abs/2005.04118){:target="_blank"} which breaks down behavioral testing into three types of tests:
+Besides just looking at metrics, we also want to conduct some behavior sanity tests. Behavioral testing is the process of testing input data and expected outputs while treating the model as a black box. They don't necessarily have to be adversarial in nature but more along the types of perturbations we'll see in the real world once our model is deployed. A landmark paper on this topic is [Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://arxiv.org/abs/2005.04118){:target="_blank"} which breaks down behavioral testing into three types of tests:
 
 - `#!js invariance`: Changes should not affect outputs.
 ```python linenums="1"
@@ -1040,6 +873,37 @@ We combine all of these behavioral tests to create a behavioral report (`tagifai
     tagifai behavioral-reevaluation
     ```
 
+### Inference
+
+When our model is deployed, most users will be using it for inference (directly / indirectly), so it's very important that we test all aspects of it.
+
+#### Loading artifacts
+This is the first time we're not loading our components from in-memory so we want to ensure that the required artifacts (model weights, encoders, config, etc.) are all able to be loaded.
+
+```python linenums="1"
+artifacts = main.load_artifacts(run_id=run_id, device=torch.device("cpu"))
+assert isinstance(artifacts["model"], nn.Module)
+...
+```
+
+#### Prediction
+Once we have our artifacts loaded, we're readying to test our prediction pipelines. We should test samples with just one input, as well as a batch of inputs (ex. padding can have unintended consequences sometimes).
+```python linenums="1"
+# tests/app/test_api.py | test_best_predict()
+data = {
+    "run_id": "",
+    "texts": [
+        {"text": "Transfer learning with transformers for self-supervised learning."},
+        {"text": "Generative adversarial networks in both PyTorch and TensorFlow."},
+    ],
+}
+response = client.post("/predict", json=data)
+assert response.status_code == HTTPStatus.OK
+assert response.request.method == "POST"
+assert len(response.json()["data"]["predictions"]) == len(data["texts"])
+...
+```
+
 ### Deployment
 
 There are also a whole class of model tests that are beyond metrics or behavioral testing and focus on the system as a whole. Many of them involve testing and benchmarking the [tradeoffs](baselines.md#tradeoffs){:target="_blank"} (ex. latency, compute, etc.) we discussed from the [baselines](baselines.md){:target="_blank"} lesson. These tests also need to performed across the different systems (ex. devices) that our model may be on. For example, development may happen on a CPU but the deployed model may be loaded on a GPU and there may be incompatible components (ex. reparametrization) that may cause errors. As a rule of thumb, we should test with the system specifications that our production environment utilizes.
@@ -1081,8 +945,6 @@ We'll cover all of these concepts in much more depth (and code) in our [monitori
 - [Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://arxiv.org/abs/2005.04118){:target="_blank"}
 - [A Recipe for Training Neural Networks](http://karpathy.github.io/2019/04/25/recipe/){:target="_blank"}
 - [Effective testing for machine learning systems](https://www.jeremyjordan.me/testing-ml/){:target="_blank"}
-- [Slice-based Learning: A Programming Model for Residual Learning in Critical Data Slices](https://papers.nips.cc/paper/2019/file/351869bde8b9d6ad1e3090bd173f600d-Paper.pdf){:target="_blank"}
-- [Robustness Gym: Unifying the NLP Evaluation Landscape](https://arxiv.org/abs/2101.04840){:target="_blank"}
 
 <!-- Citation -->
 {% include "cite.md" %}

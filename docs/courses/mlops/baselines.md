@@ -212,31 +212,6 @@ class Trainer(object):
             )
         return best_model
 ```
-```python linenums="1"
-def get_metrics(y_true, y_pred, classes):
-    """Per-class performance metrics."""
-    # Performance
-    performance = {"overall": {}, "class": {}}
-
-    # Overall performance
-    metrics = precision_recall_fscore_support(y_true, y_pred, average="weighted")
-    performance["overall"]["precision"] = metrics[0]
-    performance["overall"]["recall"] = metrics[1]
-    performance["overall"]["f1"] = metrics[2]
-    performance["overall"]["num_samples"] = np.float64(len(y_true))
-
-    # Per-class performance
-    metrics = precision_recall_fscore_support(y_true, y_pred, average=None)
-    for i in range(len(classes)):
-        performance["class"][classes[i]] = {
-            "precision": metrics[0][i],
-            "recall": metrics[1][i],
-            "f1": metrics[2][i],
-            "num_samples": np.float64(metrics[3][i]),
-        }
-
-    return performance
-```
 
 !!! note
     Our dataset is small so we'll train using the whole dataset but for larger datasets, we should always test on a small subset  (after shuffling when necessary) so we aren't wasting time on compute. Here's how you can easily do this:
@@ -298,16 +273,15 @@ print (y_pred[0:5])
 </pre>
 ```python linenums="1"
 # Evaluate
-performance = get_metrics(
-    y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
+performance = {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
+print (json.dumps(performance, indent=2))
 ```
 <pre class="output">
 {
-  "precision": 0.0662941602216066,
-  "recall": 0.5065299488415251,
-  "f1": 0.10819194263879019,
-  "num_samples": 480.0
+  "precision": 0.12590604458654545,
+  "recall": 0.5203426124197003,
+  "f1": 0.18469743862395557
 }
 </pre>
 
@@ -336,16 +310,15 @@ np.sum(np.sum(y_pred)) / (len(y_pred) * len(label_encoder.classes))
 </pre>
 ```python linenums="1"
 # Evaluate
-performance = get_metrics(
-    y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
+performance = {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
+print (json.dumps(performance, indent=2))
 ```
 <pre class="output">
 {
-  "precision": 0.060484184552507536,
-  "recall": 0.053727634571230636,
-  "f1": 0.048704498064854516,
-  "num_samples": 480.0
+  "precision": 0.1121905967477629,
+  "recall": 0.047109207708779445,
+  "f1": 0.05309836327850377
 }
 </pre>
 
@@ -384,7 +357,7 @@ print (len(tags_dict))
 aliases = {}
 for tag, values in tags_dict.items():
     aliases[preprocess(tag)] = tag
-    for alias in values['aliases']:
+    for alias in values["aliases"]:
         aliases[preprocess(alias)] = tag
 aliases
 ```
@@ -437,8 +410,9 @@ y_pred = label_encoder.encode(y_pred)
 ```
 ```python linenums="1"
 # Evaluate
-performance = get_metrics(y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=4))
+metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
+performance = {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
+print (json.dumps(performance, indent=2))
 ```
 <pre class="output">
 {
@@ -455,16 +429,15 @@ print (json.dumps(performance["class"][tag], indent=2))
 ```
 <pre class="output">
 {
-  "precision": 1.0,
-  "recall": 0.32,
-  "f1": 0.48484848484848486,
-  "num_samples": 25.0
+  "precision": 0.886542414851697,
+  "recall": 0.430406852248394,
+  "f1": 0.556927275918014
 }
 </pre>
 
 ### Stemmed
 
-Before we do a more involved analysis, let's see if we can do better. We're looking for exact matches with the aliases which isn't always perfect, for example:
+We're looking for exact matches with the aliases which isn't always perfect, for example:
 ```python linenums="1"
 print (aliases[preprocess('gan')])
 # print (aliases[preprocess('gans')]) # this won't find any match
@@ -524,7 +497,7 @@ generative-adversarial-networks
 generative-adversarial-networks
 generative-adversarial-networks
 </pre>
-> We'll write proper tests for all of these functions when we move our code to Python scripts.
+> We'll write [proper tests](testing.md){:target="_blank"} for all of these functions when we move our code to Python scripts.
 ```python linenums="1"
 # Sample
 text = "This project extends gans for data augmentation specifically for object detection tasks."
@@ -556,156 +529,17 @@ We can look at overall and per-class performance on our test set.
 
 ```python linenums="1"
 # Evaluate
-performance = get_metrics(y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=4))
+metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
+performance = {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
+print (json.dumps(performance, indent=2))
 ```
 <pre class="output">
 {
-    "precision": 0.8405837971552256,
-    "recall": 0.48656350456551384,
-    "f1": 0.5794244643481148,
-    "num_samples": 473.0
+  "precision": 0.907266867724384,
+  "recall": 0.485838779956427,
+  "f1": 0.6120705676738784
 }
 </pre>
-```python linenums="1"
-# Inspection
-tag = "transformers"
-print (json.dumps(performance["class"][tag], indent=2))
-```
-<pre class="output">
-{
-  "precision": 0.9285714285714286,
-  "recall": 0.48148148148148145,
-  "f1": 0.6341463414634146,
-  "num_samples": 27.0
-}
-</pre>
-```python linenums="1"
-# TP, FP, FN samples
-index = label_encoder.class_to_index[tag]
-tp, fp, fn = [], [], []
-for i in range(len(y_test)):
-    true = y_test[i][index]
-    pred = y_pred[i][index]
-    if true and pred:
-        tp.append(i)
-    elif not true and pred:
-        fp.append(i)
-    elif true and not pred:
-        fn.append(i)
-```
-```python linenums="1"
-print (tp)
-print (fp)
-print (fn)
-```
-<pre class="output">
-[1, 14, 15, 28, 46, 54, 94, 160, 165, 169, 190, 194, 199]
-[49]
-[4, 18, 61, 63, 72, 75, 89, 99, 137, 141, 142, 163, 174, 206]
-</pre>
-```python linenums="1"
-index = tp[0]
-print (X_test[index])
-print (f"true: {label_encoder.decode([y_test[index]])[0]}")
-print (f"pred: {label_encoder.decode([y_pred[index]])[0]}\n")
-```
-<pre class="output">
-insight project insight design creat nlp servic code base front end gui streamlit backend server fastapi usag transform
-true: ['attention', 'huggingface', 'natural-language-processing', 'pytorch', 'transfer-learning', 'transformers']
-pred: ['natural-language-processing', 'transformers']
-</pre>
-```python linenums="1"
-# Sorted tags
-sorted_tags_by_f1 = OrderedDict(sorted(
-        performance['class'].items(), key=lambda tag: tag[1]['f1'], reverse=True))
-```
-```python linenums="1"
-@widgets.interact(tag=list(sorted_tags_by_f1.keys()))
-def display_tag_analysis(tag='transformers'):
-    # Performance
-    print (json.dumps(performance["class"][tag], indent=2))
-
-    # TP, FP, FN samples
-    index = label_encoder.class_to_index[tag]
-    tp, fp, fn = [], [], []
-    for i in range(len(y_test)):
-        true = y_test[i][index]
-        pred = y_pred[i][index]
-        if true and pred:
-            tp.append(i)
-        elif not true and pred:
-            fp.append(i)
-        elif true and not pred:
-            fn.append(i)
-
-    # Samples
-    num_samples = 3
-    if len(tp):
-        print ("\n=== True positives ===\n")
-        for i in tp[:num_samples]:
-            print (f"  {X_test[i]}")
-            print (f"    true: {label_encoder.decode([y_test[i]])[0]}")
-            print (f"    pred: {label_encoder.decode([y_pred[i]])[0]}\n")
-    if len(fp):
-        print ("=== False positives ===\n")
-        for i in fp[:num_samples]:
-            print (f"  {X_test[i]}")
-            print (f"    true: {label_encoder.decode([y_test[i]])[0]}")
-            print (f"    pred: {label_encoder.decode([y_pred[i]])[0]}\n")
-    if len(fn):
-        print ("=== False negatives ===\n")
-        for i in fn[:num_samples]:
-            print (f"  {X_test[i]}")
-            print (f"    true: {label_encoder.decode([y_test[i]])[0]}")
-            print (f"    pred: {label_encoder.decode([y_pred[i]])[0]}\n")
-```
-This is the output for the `transformers` tag:
-<pre class="output">
-{
-  "precision": 0.9285714285714286,
-  "recall": 0.48148148148148145,
-  "f1": 0.6341463414634146,
-  "num_samples": 27.0
-}
-
-=== True positives ===
-
-  insight project insight design creat nlp servic code base front end gui streamlit backend server fastapi usag transform
-    true: ['attention', 'huggingface', 'natural-language-processing', 'pytorch', 'transfer-learning', 'transformers']
-    pred: ['natural-language-processing', 'transformers']
-
-  hyperparamet optim transform guid basic grid search optim fact hyperparamet choos signific impact final model perform
-    true: ['natural-language-processing', 'transformers']
-    pred: ['natural-language-processing', 'transformers']
-
-  transform neural network architectur explain time explain transform work look easi explan exactli right
-    true: ['attention', 'natural-language-processing', 'transformers']
-    pred: ['natural-language-processing', 'transformers']
-
-=== False positives ===
-
-  multi target albument mani imag mani mask bound box key point transform sync
-    true: ['computer-vision', 'data-augmentation']
-    pred: ['natural-language-processing', 'transformers']
-
-=== False negatives ===
-
-  size fill blank multi mask fill roberta size fill blank condit text fill idea fill miss word sentenc probabl choic word
-    true: ['attention', 'huggingface', 'language-modeling', 'natural-language-processing', 'transformers']
-    pred: []
-
-  gpt3 work visual anim compil thread explain gpt3
-    true: ['natural-language-processing', 'transformers']
-    pred: []
-
-  tinybert tinybert 7 5x smaller 9 4x faster infer bert base achiev competit perform task natur languag understand
-    true: ['attention', 'natural-language-processing', 'transformers']
-    pred: []
-</pre>
-
-!!! note
-    You can use false positives/negatives to discover potential errors in annotation. This can be especially useful when analyzing FP/FNs from rule-based approaches.
 
 Though we achieved decent precision, the recall is quite low. This is because rule-based approaches can yield labels with high certainty when there is an absolute condition match but it fails to generalize or learn implicit patterns.
 
@@ -735,7 +569,6 @@ get_classes(text=preprocess(text, stem=True), aliases=aliases, tags_dict=tags_di
 transfer learn bert self supervis learn
 ['self-supervised-learning', 'transfer-learning']
 </pre>
-
 
 <u><i>limitations</i></u>: we failed to generalize or learn any implicit patterns to predict the labels because we treat the tokens in our input as isolated entities.
 
@@ -819,56 +652,50 @@ def fit_and_evaluate(model):
     """Fit and evaluate each model."""
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
-    performance = get_metrics(
-        y_true=y_test, y_pred=y_pred, classes=list(label_encoder.classes))
-    return performance['overall']
+    metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
+    return {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
 ```
 ```python linenums="1"
 # Models
 performance = {}
-performance['logistic-regression'] = fit_and_evaluate(OneVsRestClassifier(
+performance["logistic-regression"] = fit_and_evaluate(OneVsRestClassifier(
     LogisticRegression(), n_jobs=1))
-performance['k-nearest-neighbors'] = fit_and_evaluate(
+performance["k-nearest-neighbors"] = fit_and_evaluate(
     KNeighborsClassifier())
-performance['random-forest'] = fit_and_evaluate(
+performance["random-forest"] = fit_and_evaluate(
     RandomForestClassifier(n_jobs=-1))
-performance['gradient-boosting-machine'] = fit_and_evaluate(OneVsRestClassifier(
+performance["gradient-boosting-machine"] = fit_and_evaluate(OneVsRestClassifier(
     GradientBoostingClassifier()))
-performance['support-vector-machine'] = fit_and_evaluate(OneVsRestClassifier(
+performance["support-vector-machine"] = fit_and_evaluate(OneVsRestClassifier(
     LinearSVC(), n_jobs=-1))
 print (json.dumps(performance, indent=2))
 ```
 <pre class="output">
 {
   "logistic-regression": {
-    "precision": 0.3563624338624338,
-    "recall": 0.0858365150175495,
-    "f1": 0.13067443826527078,
-    "num_samples": 480.0
+    "precision": 0.633369022127052,
+    "recall": 0.21841541755888652,
+    "f1": 0.3064204603390899
   },
   "k-nearest-neighbors": {
-    "precision": 0.6172562358276645,
-    "recall": 0.3213868500136974,
-    "f1": 0.400741288236766,
-    "num_samples": 480.0
+    "precision": 0.7410281119097024,
+    "recall": 0.47109207708779444,
+    "f1": 0.5559182508714337
   },
   "random-forest": {
-    "precision": 0.5851306333244963,
-    "recall": 0.21548369514995133,
-    "f1": 0.29582560665419344,
-    "num_samples": 480.0
+    "precision": 0.7722866712160075,
+    "recall": 0.38329764453961457,
+    "f1": 0.4852512297132596
   },
   "gradient-boosting-machine": {
-    "precision": 0.7104917071723794,
-    "recall": 0.5106819976684509,
-    "f1": 0.575225354377256,
-    "num_samples": 480.0
+    "precision": 0.8503271303309295,
+    "recall": 0.6167023554603854,
+    "f1": 0.7045318461336975
   },
   "support-vector-machine": {
-    "precision": 0.8059313061625735,
-    "recall": 0.40445445906037036,
-    "f1": 0.5164548230244397,
-    "num_samples": 480.0
+    "precision": 0.8938397993500261,
+    "recall": 0.5460385438972163,
+    "f1": 0.6527334570244009
   }
 }
 </pre>
@@ -910,13 +737,19 @@ X_train, X_val, X_test, y_train, y_val, y_test, label_encoder = get_data_splits(
 X_test_raw = X_test
 ```
 ```python linenums="1"
+# Split DataFrames
+train_df = pd.DataFrame({"text": X_train, "tags": label_encoder.decode(y_train)})
+val_df = pd.DataFrame({"text": X_val, "tags": label_encoder.decode(y_val)})
+test_df = pd.DataFrame({"text": X_test, "tags": label_encoder.decode(y_test)})
+```
+```python linenums="1"
 # Set device
 cuda = True
-device = torch.device('cuda' if (
-    torch.cuda.is_available() and cuda) else 'cpu')
-torch.set_default_tensor_type('torch.FloatTensor')
-if device.type == 'cuda':
-    torch.set_default_tensor_type('torch.cuda.FloatTensor')
+device = torch.device("cuda" if (
+    torch.cuda.is_available() and cuda) else "cpu")
+torch.set_default_tensor_type("torch.FloatTensor")
+if device.type == "cuda":
+    torch.set_default_tensor_type("torch.cuda.FloatTensor")
 print (device)
 ```
 <pre class="output">
@@ -934,7 +767,7 @@ We're going to tokenize our input text as character tokens so we can be robust t
 ```python linenums="1"
 class Tokenizer(object):
     def __init__(self, char_level, num_tokens=None,
-                 pad_token='<PAD>', oov_token='<UNK>',
+                 pad_token="<PAD>", oov_token="<UNK>",
                  token_to_index=None):
         self.char_level = char_level
         self.separator = '' if self.char_level else ' '
@@ -987,17 +820,17 @@ class Tokenizer(object):
         return texts
 
     def save(self, fp):
-        with open(fp, 'w') as fp:
+        with open(fp, "w") as fp:
             contents = {
-                'char_level': self.char_level,
-                'oov_token': self.oov_token,
-                'token_to_index': self.token_to_index
+                "char_level": self.char_level,
+                "oov_token": self.oov_token,
+                "token_to_index": self.token_to_index
             }
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
     def load(cls, fp):
-        with open(fp, 'r') as fp:
+        with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
@@ -1320,7 +1153,7 @@ loss = nn.BCEWithLogitsLoss(weight=class_weights_tensor)
 # Define optimizer & scheduler
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode='min', factor=0.1, patience=5)
+    optimizer, mode="min", factor=0.1, patience=5)
 ```
 ```python linenums="1"
 # Trainer module
@@ -1389,16 +1222,15 @@ y_pred = np.array([np.where(prob >= threshold, 1, 0) for prob in y_prob])
 ```
 ```python linenums="1"
 # Evaluate
-performance = get_metrics(
-    y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
+performance = {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
+print (json.dumps(performance, indent=2))
 ```
 <pre class="output">
 {
-  "precision": 0.8134201912838206,
-  "recall": 0.5244273766053323,
-  "f1": 0.6134741297877828,
-  "num_samples": 480.0
+  "precision": 0.7839452388425872,
+  "recall": 0.6081370449678801,
+  "f1": 0.6677329148413014
 }
 </pre>
 
@@ -1457,10 +1289,10 @@ We can do the same type of inspection as with the rule-based baseline. This is t
 # Save artifacts
 dir = Path("cnn")
 dir.mkdir(parents=True, exist_ok=True)
-tokenizer.save(fp=Path(dir, 'tokenzier.json'))
-label_encoder.save(fp=Path(dir, 'label_encoder.json'))
-torch.save(best_model.state_dict(), Path(dir, 'model.pt'))
-with open(Path(dir, 'performance.json'), "w") as fp:
+tokenizer.save(fp=Path(dir, "tokenzier.json"))
+label_encoder.save(fp=Path(dir, "label_encoder.json"))
+torch.save(best_model.state_dict(), Path(dir, "model.pt"))
+with open(Path(dir, "performance.json"), "w") as fp:
     json.dump(performance, indent=2, sort_keys=False, fp=fp)
 ```
 
@@ -1469,14 +1301,14 @@ with open(Path(dir, 'performance.json'), "w") as fp:
 ```python linenums="1"
 # Load artifacts
 device = torch.device("cpu")
-tokenizer = Tokenizer.load(fp=Path(dir, 'tokenzier.json'))
-label_encoder = LabelEncoder.load(fp=Path(dir, 'label_encoder.json'))
+tokenizer = Tokenizer.load(fp=Path(dir, "tokenzier.json"))
+label_encoder = LabelEncoder.load(fp=Path(dir, "label_encoder.json"))
 model = CNN(
     embedding_dim=embedding_dim, vocab_size=vocab_size,
     num_filters=num_filters, filter_sizes=filter_sizes,
     hidden_dim=hidden_dim, dropout_p=dropout_p,
     num_classes=num_classes)
-model.load_state_dict(torch.load(Path(dir, 'model.pt'), map_location=device))
+model.load_state_dict(torch.load(Path(dir, "model.pt"), map_location=device))
 model.to(device)
 ```
 <pre class="output">
@@ -1520,8 +1352,7 @@ y_pred = np.array([np.where(prob >= threshold, 1, 0) for prob in y_prob])
 label_encoder.decode(y_pred)
 ```
 <pre class="output">
-[['attention',
-  'natural-language-processing',
+[['natural-language-processing',
   'self-supervised-learning',
   'transfer-learning',
   'transformers']]
@@ -1554,13 +1385,19 @@ X_train, X_val, X_test, y_train, y_val, y_test, label_encoder = get_data_splits(
 X_test_raw = X_test
 ```
 ```python linenums="1"
+# Split DataFrames
+train_df = pd.DataFrame({"text": X_train, "tags": label_encoder.decode(y_train)})
+val_df = pd.DataFrame({"text": X_val, "tags": label_encoder.decode(y_val)})
+test_df = pd.DataFrame({"text": X_test, "tags": label_encoder.decode(y_test)})
+```
+```python linenums="1"
 # Set device
 cuda = True
-device = torch.device('cuda' if (
-    torch.cuda.is_available() and cuda) else 'cpu')
-torch.set_default_tensor_type('torch.FloatTensor')
-if device.type == 'cuda':
-    torch.set_default_tensor_type('torch.cuda.FloatTensor')
+device = torch.device("cuda" if (
+    torch.cuda.is_available() and cuda) else "cpu")
+torch.set_default_tensor_type("torch.FloatTensor")
+if device.type == "cuda":
+    torch.set_default_tensor_type("torch.cuda.FloatTensor")
 print (device)
 ```
 
@@ -1848,7 +1685,7 @@ loss = nn.BCEWithLogitsLoss(weight=class_weights_tensor)
 # Define optimizer & scheduler
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode='min', factor=0.1, patience=5)
+    optimizer, mode="min", factor=0.1, patience=5)
 ```
 ```python linenums="1"
 # Trainer module
@@ -1905,23 +1742,17 @@ y_pred = np.array([np.where(prob >= threshold, 1, 0) for prob in y_prob])
 ```
 ```python linenums="1"
 # Evaluate
-performance = get_metrics(
-    y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
+performance = {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
+print (json.dumps(performance, indent=2))
 ```
 <pre class="output">
 {
-  "precision": 0.3170755112080674,
-  "recall": 0.20761471963996597,
-  "f1": 0.22826804744644114,
-  "num_samples": 480.0
+  "precision": 0.2004498464795256,
+  "recall": 0.4068522483940043,
+  "f1": 0.22600151322505954
 }
 </pre>
-
-### Inference
-
-!!! note
-    Detailed inspection and inference in the [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb){:target="_blank"}.
 
 <u><i>limitations</i></u>: since we're using character embeddings our encoded sequences are quite long (>100), the RNNs may potentially be suffering from memory issues. We also can't process our tokens in parallel because we're restricted by sequential processing.
 
@@ -1958,13 +1789,19 @@ X_train, X_val, X_test, y_train, y_val, y_test, label_encoder = get_data_splits(
 X_test_raw = X_test
 ```
 ```python linenums="1"
+# Split DataFrames
+train_df = pd.DataFrame({"text": X_train, "tags": label_encoder.decode(y_train)})
+val_df = pd.DataFrame({"text": X_val, "tags": label_encoder.decode(y_val)})
+test_df = pd.DataFrame({"text": X_test, "tags": label_encoder.decode(y_test)})
+```
+```python linenums="1"
 # Set device
 cuda = True
-device = torch.device('cuda' if (
-    torch.cuda.is_available() and cuda) else 'cpu')
-torch.set_default_tensor_type('torch.FloatTensor')
-if device.type == 'cuda':
-    torch.set_default_tensor_type('torch.cuda.FloatTensor')
+device = torch.device("cuda" if (
+    torch.cuda.is_available() and cuda) else "cpu")
+torch.set_default_tensor_type("torch.FloatTensor")
+if device.type == "cuda":
+    torch.set_default_tensor_type("torch.cuda.FloatTensor")
 print (device)
 ```
 
@@ -1978,7 +1815,7 @@ from transformers import BertTokenizer
 ```python linenums="1"
 # Load tokenizer and model
 # tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
-tokenizer = BertTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')
+tokenizer = BertTokenizer.from_pretrained("allenai/scibert_scivocab_uncased")
 vocab_size = len(tokenizer)
 print (vocab_size)
 ```
@@ -1990,17 +1827,17 @@ Downloading: 100%
 </pre>
 ```python linenums="1"
 # Tokenize inputs
-encoded_input = tokenizer(X_train.tolist(), return_tensors='pt', padding=True)
-X_train_ids = encoded_input['input_ids']
-X_train_masks = encoded_input['attention_mask']
+encoded_input = tokenizer(X_train.tolist(), return_tensors="pt", padding=True)
+X_train_ids = encoded_input["input_ids"]
+X_train_masks = encoded_input["attention_mask"]
 print (X_train_ids.shape, X_train_masks.shape)
-encoded_input = tokenizer(X_val.tolist(), return_tensors='pt', padding=True)
-X_val_ids = encoded_input['input_ids']
-X_val_masks = encoded_input['attention_mask']
+encoded_input = tokenizer(X_val.tolist(), return_tensors="pt", padding=True)
+X_val_ids = encoded_input["input_ids"]
+X_val_masks = encoded_input["attention_mask"]
 print (X_val_ids.shape, X_val_masks.shape)
-encoded_input = tokenizer(X_test.tolist(), return_tensors='pt', padding=True)
-X_test_ids = encoded_input['input_ids']
-X_test_masks = encoded_input['attention_mask']
+encoded_input = tokenizer(X_test.tolist(), return_tensors="pt", padding=True)
+X_test_ids = encoded_input["input_ids"]
+X_test_masks = encoded_input["attention_mask"]
 print (X_test_ids.shape, X_test_masks.shape)
 ```
 <pre class="output">
@@ -2261,7 +2098,7 @@ loss = nn.BCEWithLogitsLoss(weight=class_weights_tensor)
 # Define optimizer & scheduler
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode='min', factor=0.1, patience=5)
+    optimizer, mode="min", factor=0.1, patience=5)
 ```
 ```python linenums="1"
 # Trainer module
@@ -2318,23 +2155,17 @@ y_pred = np.array([np.where(prob >= threshold, 1, 0) for prob in y_prob])
 ```
 ```python linenums="1"
 # Evaluate
-performance = get_metrics(
-    y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
+performance = {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
+print (json.dumps(performance, indent=2))
 ```
 <pre class="output">
 {
-  "precision": 0.7524809959244634,
-  "recall": 0.5251264830544388,
-  "f1": 0.5904032248915119,
-  "num_samples": 480.0
+  "precision": 0.7348397345183624,
+  "recall": 0.6595289079229122,
+  "f1": 0.682945515558344
 }
 </pre>
-
-### Inference
-
-!!! note
-    Detailed inspection, inference and visualization of attention heads in the [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb){:target="_blank"}.
 
 <u><i>limitations</i></u>: transformers can be quite large and we'll have to weigh tradeoffs before deciding on a model.
 
@@ -2353,8 +2184,8 @@ print (f'CNN: f1 = {cnn_performance["overall"]["f1"]}')
 print (f'Transformer: f1 = {transformers_performance["overall"]["f1"]}')
 ```
 <pre class="output">
-CNN: f1 = 0.6119912020434568
-Transformer: f1 = 0.5904032248915119
+CNN: f1 = 0.6677329148413014
+Transformer: f1 = 0.682945515558344
 </pre>
 
 This was just one run on one split so you'll want to experiment with k-fold cross validation to properly reach any conclusions about performance. Also make sure you take the time to tune these baselines since their training periods are quite fast (we can achieve f1 of 0.7 with just a bit of tuning for both CNN / Transformers). We'll cover hyperparameter tuning in a few lessons so you can replicate the process here on your own time. We should also benchmark on other important metrics as we iterate, not just precision and recall.
@@ -2369,7 +2200,7 @@ CNN: 4.3 MB
 Transformer: 439.9 MB
 </pre>
 
-We'll consider other tradeoffs such as maintenance overhead, bias test passes, etc. as we develop.
+We'll consider other tradeoffs such as maintenance overhead, behavioral test performances, etc. as we develop.
 
 !!! note
     Interpretability was not one of requirements but note that we could've tweaked model outputs to deliver it. For example, since we used SAME padding for our CNN, we can use the activation scores to extract influential n-grams. Similarly, we could have used self-attention weights from our Transformer encoder to find influential sub-tokens.

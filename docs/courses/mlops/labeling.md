@@ -174,7 +174,7 @@ def display_tag_details(tag='question-answering'):
 </pre>
 
 
-## Labeling tools
+## Libraries
 
 We could have used the user provided tags as our labels but what if the user added a wrong tag or forgot to add a relevant one. To remove this dependency on the user to provide the gold standard labels, we can leverage labeling tools and platforms. These tools allow for quick and organized labeling of the dataset to ensure its quality. And instead of starting from scratch and asking our labeler to provide all the relevant tags for a given project, we can provide the author's original tags and ask the labeler to add / remove as necessary. The specific labeling tool may be something that needs to be custom built or leverages something from the ecosystem.
 
@@ -225,7 +225,7 @@ In active learning, you first provide a small number of labelled examples. The m
 
 We could utilize weak supervision via [labeling functions](https://www.snorkel.org/use-cases/01-spam-tutorial){:target="_blank"} to label our existing and new data. We can create constructs based on keywords, pattern expressions, knowledge bases and generalized models to create these labeling functions to label our data. We can add to the labeling functions over time and even mitigate conflicts amongst the different ones.
 
-```python
+```python linenums="1"
 from snorkel.labeling import labeling_function
 
 @labeling_function()

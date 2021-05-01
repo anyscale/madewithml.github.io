@@ -95,13 +95,13 @@ class LabelEncoder(object):
         return classes
 
     def save(self, fp):
-        with open(fp, 'w') as fp:
-            contents = {'class_to_index': self.class_to_index}
+        with open(fp, "w") as fp:
+            contents = {"class_to_index": self.class_to_index}
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
     def load(cls, fp):
-        with open(fp, 'r') as fp:
+        with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
@@ -189,19 +189,19 @@ test: 217 (0.15)
 ```python linenums="1"
 # Get counts for each class
 counts = {}
-counts['train_counts'] = Counter(str(combination) for row in get_combination_wise_output_matrix(
+counts["train_counts"] = Counter(str(combination) for row in get_combination_wise_output_matrix(
     y_train, order=1) for combination in row)
-counts['val_counts'] = Counter(str(combination) for row in get_combination_wise_output_matrix(
+counts["val_counts"] = Counter(str(combination) for row in get_combination_wise_output_matrix(
     y_val, order=1) for combination in row)
-counts['test_counts'] = Counter(str(combination) for row in get_combination_wise_output_matrix(
+counts["test_counts"] = Counter(str(combination) for row in get_combination_wise_output_matrix(
     y_test, order=1) for combination in row)
 ```
 ```python linenums="1"
 # View distributions
 pd.DataFrame({
-    'train': counts['train_counts'],
-    'val': counts['val_counts'],
-    'test': counts['test_counts']
+    "train": counts["train_counts"],
+    "val": counts["val_counts"],
+    "test": counts["test_counts"]
 }).T.fillna(0)
 ```
 <div class="output_subarea output_html rendered_html"><div>
@@ -371,23 +371,7 @@ $$ \alpha * N_{test} = N_{train} $$
 
 $$ \alpha = \frac{N_{train}}{N_{test}} $$
 
-```python linenums="1"
-# Adjust counts across splits
-for k in counts['val_counts'].keys():
-    counts['val_counts'][k] = int(counts['val_counts'][k] * \
-        (train_size/val_size))
-for k in counts['test_counts'].keys():
-    counts['test_counts'][k] = int(counts['test_counts'][k] * \
-        (train_size/test_size))
-```
-```python linenums="1"
-dist_df = pd.DataFrame({
-    'train': counts['train_counts'],
-    'val': counts['val_counts'],
-    'test': counts['test_counts']
-}).T.fillna(0)
-dist_df
-```
+
 <div class="output_subarea output_html rendered_html"><div>
 <table border="1" class="dataframe">
   <thead>
@@ -617,28 +601,28 @@ Let's see what the adjusted counts look like for these stratified data splits.
 ```python linenums="1"
 # Get counts for each class
 counts = {}
-counts['train_counts'] = Counter(str(combination) for row in get_combination_wise_output_matrix(
+counts["train_counts"] = Counter(str(combination) for row in get_combination_wise_output_matrix(
     y_train, order=1) for combination in row)
-counts['val_counts'] = Counter(str(combination) for row in get_combination_wise_output_matrix(
+counts["val_counts"] = Counter(str(combination) for row in get_combination_wise_output_matrix(
     y_val, order=1) for combination in row)
-counts['test_counts'] = Counter(str(combination) for row in get_combination_wise_output_matrix(
+counts["test_counts"] = Counter(str(combination) for row in get_combination_wise_output_matrix(
     y_test, order=1) for combination in row)
 ```
 ```python linenums="1"
 # Adjust counts across splits
-for k in counts['val_counts'].keys():
-    counts['val_counts'][k] = int(counts['val_counts'][k] * \
+for k in counts["val_counts"].keys():
+    counts["val_counts"][k] = int(counts["val_counts"][k] * \
         (train_size/val_size))
-for k in counts['test_counts'].keys():
-    counts['test_counts'][k] = int(counts['test_counts'][k] * \
+for k in counts["test_counts"].keys():
+    counts["test_counts"][k] = int(counts["test_counts"][k] * \
         (train_size/test_size))
 ```
 ```python linenums="1"
 # View distributions
 pd.DataFrame({
-    'train': counts['train_counts'],
-    'val': counts['val_counts'],
-    'test': counts['test_counts']
+    "train": counts["train_counts"],
+    "val": counts["val_counts"],
+    "test": counts["test_counts"]
 }).T.fillna(0)
 ```
 <div class="output_subarea output_html rendered_html"><div>
@@ -803,9 +787,9 @@ pd.DataFrame({
 </div></div>
 ```python linenums="1"
 dist_df = pd.DataFrame({
-    'train': counts['train_counts'],
-    'val': counts['val_counts'],
-    'test': counts['test_counts']
+    "train": counts["train_counts"],
+    "val": counts["val_counts"],
+    "test": counts["test_counts"]
 }).T.fillna(0)
 ```
 ```python linenums="1"
