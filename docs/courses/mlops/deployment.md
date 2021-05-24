@@ -1,7 +1,7 @@
 ---
 template: lesson.html
 title: Deployment
-description: A closer look at the types of deployment and methods to optimize, orchestrate and scale them.
+description: A closer look at the types of deployment and methods to test, optimize, orchestrate and scale them.
 keywords: deployment, serving, online learning, stream processing, batch prediction, real-time prediction, model compression, pruning, quantization, distillation, kubernetes, seldon, kubeflow, kfserving, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
