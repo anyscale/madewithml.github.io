@@ -22,7 +22,7 @@ The first decision to make it to whether serve predictions via batches or real-t
 We can make batch predictions on a finite set of inputs which are then written to a database for low latency inference. When a user or downstream process makes an inference request in real-time, cached results from the database are returned.
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/batch-serving.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/batch_serving.png">
 </div>
 
 - ✅&nbsp; generate and cache predictions for very fast inference for users.
@@ -40,7 +40,7 @@ We can make batch predictions on a finite set of inputs which are then written t
 We can also serve live predictions, typically through an HTTPS call with the appropriate input data. This will involve spinning up our ML application as a microservice since users or downstream processes will interact directly with the model.
 
 <div class="ai-center-all">
-    <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/real-time-serving.png">
+    <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/real_time_serving.png">
 </div>
 
 - ✅&nbsp; can yield more up-to-date predictions which may can yield a more meaningful user experience, etc.
@@ -63,7 +63,7 @@ However, not all entities in ML applications work this way. Using our Netflix co
 Batch process features for a given entity at a previous point in time, which are later used for generating real-time predictions.
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/batch-processing.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/batch_processing.png">
 </div>
 
 - ✅&nbsp; can perform heavy feature computations offline and have it ready for fast inference.
@@ -77,7 +77,7 @@ Batch process features for a given entity at a previous point in time, which are
 Perform inference on a given set of inputs with near real-time, streaming, features for a given entity.
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/stream-processing.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/stream_processing.png">
 </div>
 
 - ✅&nbsp; we can generate better predictions by providing real-time, streaming, features to the model.
@@ -97,7 +97,7 @@ While we have the option to use batch / streaming features and serve batch / rea
 The traditional approach is to train our models offline and then deploy them to inference. We may periodically retrain them offline as new data becomes labeled, validated, etc. and deploy them after evaluation. We may also retrain them if we discover an issue during monitoring such as drift.
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/offline-learning.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/offline_learning.png">
 </div>
 
 - ✅&nbsp; don't need to worry about provisioning resources for compute since it happens offline.
@@ -112,7 +112,7 @@ The traditional approach is to train our models offline and then deploy them to 
 In order to truly serve the most informed predictions, we should have a model trained on the most recent data.
 
 <div class="ai-center-all">
-    <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/online-learning.png">
+    <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/online_learning.png">
 </div>
 
 - ✅&nbsp; model is aware of recent data distributions, trends, etc. which can provide highly informed predictions.
