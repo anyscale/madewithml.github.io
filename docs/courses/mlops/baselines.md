@@ -3,7 +3,7 @@ template: lesson.html
 title: Modeling Baselines
 description: Motivating the use of baselines for iterative modeling.
 keywords: baselines, modeling, pytorch, transformers, huggingface, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb
 ---
@@ -705,6 +705,16 @@ print (json.dumps(performance, indent=2))
 - *representation*: TF-IDF representations don't encapsulate much signal beyond frequency but we require more fine-grained token representations.
 - *architecture*: we want to develop models that can use better represented encodings in a more contextual manner.
 
+## Distributed training
+
+All the training we need to do for our application happens on one worker with one accelerator (GPU), however, we'll want to consider distributed training for very large models or when dealing with large datasets. Distributed training can involve:
+
+- **data parallelism**: workers received different slices of the larger dataset.
+    - *synchronous training* uses [AllReduce](https://tech.preferred.jp/en/blog/technologies-behind-distributed-deep-learning-allreduce/#:~:text=AllReduce%20is%20an%20operation%20that,of%20length%20N%20called%20A_p.){:target="_blank"} to aggregate gradients and update all the workers weights at the end of each batch (synchronous).
+    - *asynchronous training* uses a universal parameter server to update weights as each worker trains on its slice of data (asynchronous).
+- **model parallelism**: all workers use the same dataset but the model is split amongst them (more difficult to implement compared to data parallelism).
+
+There are lots of options for applying distributed training such as with PyTorch's [distributed package](https://pytorch.org/tutorials/beginner/dist_overview.html){:target="_blank"}, [Ray](https://ray.io/){:target="_blank"}, [Horovd](https://horovod.ai/){:target="_blank"}, etc.
 
 <hr>
 

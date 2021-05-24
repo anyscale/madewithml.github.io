@@ -3,7 +3,7 @@ template: lesson.html
 title: APIs for Machine Learning
 description: Using first principles to designing and implement a API to wrap ML functionality.
 keywords: api, fastapi, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 ---
 
@@ -690,9 +690,12 @@ If you are building a product, then I highly recommending forking this [generati
 
 However, for the majority of ML developers, thanks to the wide adoption of microservices, we don't need to do all of this. A well designed API service that can seamlessly communicate with all other services (framework agnostic) will fit into any process and add value to the overall product. Our main focus should be to ensure that our service is working as it should and constantly improve, which is exactly what the next cluster of lessons will focus on ([testing](testing.md){:target="_blank"} and [monitoring](monitoring.md){:target="_blank"})
 
-
 !!! note
-    We've only covered the foundations of using FastAPI but there's so much more we can do. Be sure to check out their [advanced documentation](https://fastapi.tiangolo.com/advanced/){:target="_blank"} to see everything we can leverage.
+    Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers, such as [MLFlow](https://mlflow.org/){:target="_blank"} or [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"}, provide a common interface to interact with models for inspection, inference, etc. In fact, modules like RedisAI can even offer added benefits such as data locality for super fast inference.
+
+## Resources
+
+- [FastAPI advanced documentation](https://fastapi.tiangolo.com/advanced/){:target="_blank"}
 
 <!-- Citation -->
 {% include "cite.md" %}

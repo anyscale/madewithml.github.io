@@ -3,7 +3,7 @@ template: lesson.html
 title: Working in Notebooks
 description: Learn how to use interactive notebooks for developing in Python.
 keywords: notebooks, jupyter, ipython, jupyterlab, python, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/ml_foundations.png
+image: https://madewithml.com/static/images/basics.png
 repository: https://github.com/GokuMohandas/MadeWithML
 notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/01_Notebooks.ipynb
 ---

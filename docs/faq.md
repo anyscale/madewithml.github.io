@@ -22,4 +22,4 @@ title: Frequently Asked Questions (FAQ)
 - Connect with me on [:fontawesome-brands-twitter: Twitter](https://twitter.com/GokuMohandas){:target="_blank"} and [:fontawesome-brands-linkedin: LinkedIn](https://www.linkedin.com/in/goku){:target="_blank"} for updates and tips.
 
 ### Why is this free?
-While this content is for everyone, it's especially targeted towards people who don't have as much opportunity to learn. I firmly believe that creativity and intelligence are randomly distributed but opportunity is siloed. I want to enable more people to create and contribute to innovation.
+While this content is for everyone, it's especially targeted towards people who don't have as much opportunity to learn. I believe that creativity and intelligence are randomly distributed while opportunities are siloed. I want to enable more people to create and contribute to innovation.

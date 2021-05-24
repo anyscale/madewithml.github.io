@@ -3,7 +3,7 @@ template: lesson.html
 title: Data Augmentation
 description: Assessing data augmentation on our training data split to increase the number of quality training samples.
 keywords: data augmentation, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb
 ---

@@ -115,7 +115,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 ## MLOps
 > Learn how to apply ML to build a production grade product and deliver value.
-[GokuMohandas/MLOps](https://github.com/GokuMohandas/MLOps){:target="_blank"} &rarr; New lessons every month!
+[GokuMohandas/MLOps](https://github.com/GokuMohandas/MLOps){:target="_blank"} &rarr; 🔥 Among the [top MLOps repos](https://github.com/topics/mlops){:target="blank"} on GitHub
 
 <div class="row mt-4 ai-course-list">
 <div class="col-md-4">
@@ -175,9 +175,10 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <ul>
     <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
     <li><a href="/courses/mlops/cicd/">CI/CD workflows</a></li>
-    <li>Feature stores</li>
-    <li>Deployment</li>
+    <li><a href="/courses/mlops/deployment/">Deployment</a></li>
     <li>Monitoring</li>
+    <li>Feature stores</li>
+    <li>Pipelines</li>
     </ul>
 </div>
 </div>

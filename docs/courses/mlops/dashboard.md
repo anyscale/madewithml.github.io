@@ -1,9 +1,9 @@
 ---
 template: lesson.html
-title: "Dashboard"
+title: Dashboard
 description: Creating an interactive dashboard to visually inspect our application using Streamlit.
 keywords: dashboard, visualization, streamlit, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 ---
 
@@ -42,7 +42,7 @@ Our application's [dashboard](https://github.com/GokuMohandas/MLOps/blob/main/st
 
 ### Data
 
-The data page contains findings from data [annotation](annotation.md){:target="_blank"}, [exploratory data analysis](exploratory-data-analysis.md){:target="_blank"} and [preprocessing](preprocessing.md){:target="_blank"} but with interactive components.
+The data page contains findings from data [labeling](labeling.md){:target="_blank"}, [exploratory data analysis](exploratory-data-analysis.md){:target="_blank"} and [preprocessing](preprocessing.md){:target="_blank"} but with interactive components.
 
 We start by showing a sample of our different data sources because, for many people, this may be the first time they see the data so it's a great for them to understand all the different features, formats, etc. For displaying the tags, we don't want to just dump all of them on the dashboard but instead we can use a [selectbox](https://docs.streamlit.io/en/stable/api.html#streamlit.selectbox){:target="_blank"} to allow the user to view them one at a time.
 

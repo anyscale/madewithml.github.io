@@ -3,7 +3,7 @@ template: lesson.html
 title: "Versioning Code, Data and Models"
 description: Versioning code, data and models to ensure reproducible behavior in ML systems.
 keywords: versioning, dvc, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 ---
 
@@ -23,7 +23,7 @@ We learned how to version our code but there are several other very important cl
 
 ## Application
 
-There are many tools available for saving and pointing to our large artifacts but we'll be using the [Data Version Control (DVC)](https://dvc.org/){:target="_blank"} library for it's simplicity, rich features and most importantly modularity. DVC has lots of other useful [features](https://dvc.org/features){:target="_blank"} (metrics, experiments, etc.) so be sure to explore those as well.
+There are many tools available for versioning our artifacts ([GitLFS](https://git-lfs.github.com/){:target="_blank"}, [Dolt](https://github.com/dolthub/dolt){:target="_blank"}, [Pachyderm](https://www.pachyderm.com/){:target="_blank"}, etc.) but we'll be using the [Data Version Control (DVC)](https://dvc.org/){:target="_blank"} library for it's simplicity, rich features and most importantly modularity. DVC has lots of other useful [features](https://dvc.org/features){:target="_blank"} (metrics, experiments, etc.) so be sure to explore those as well.
 
 We'll be using DVC to version our datasets and model weights and store them in a local directory which will act as our blob storage. We could use remote blob storage options such as S3, GCP, Google Drive, [DAGsHub](https://dagshub.com/){:target="_blank"}, etc. but we're going to replicate the same actions locally so we can see how the data is stored.
 

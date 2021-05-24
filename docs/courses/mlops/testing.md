@@ -3,7 +3,7 @@ template: lesson.html
 title: "Testing ML Systems: Code, Data and Models"
 description: Testing code, data and models to ensure consistent behavior in ML systems.
 keywords: testing, pytest, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 ---
 
@@ -421,6 +421,9 @@ There are many dimensions to what our data is expected to look like. We'll brief
 
 To implement these expectations, we could compose assert statements or we could leverage the open-source library called [Great Expectations](https://github.com/great-expectations/great_expectations){:target="_blank"}. It's a fantastic library that already has many of these expectations builtin (map, aggregate, multi-column, distributional, etc.) and allows us to create custom expectations as well. It also provides modules to seamlessly connect with backend data sources such as local file systems, S3, databases and even DAG runners. Let's explore the library by implementing the expectations we'll need for our application.
 
+!!! note
+    Though Great Expectations has all the data validation functionality we need, there are several other production-grade data validation options available as well, such as [TFX](https://www.tensorflow.org/tfx/data_validation/get_started){:target="_blank"}, [AWS Deequ](https://github.com/awslabs/deequ){:target="_blank"}, etc.
+
 First we'll load the data we'd like to apply our expectations on. We can load our data from a variety of [sources](https://docs.greatexpectations.io/en/latest/guides/how_to_guides/configuring_datasources.html){:target="_blank"} (filesystem, S3, DB, etc.) which we can then wrap around a [Dataset module](https://docs.greatexpectations.io/en/latest/autoapi/great_expectations/dataset/index.html){:target="_blank"} (Pandas / Spark DataFrame, SQLAlchemy).
 
 ```python linenums="1"
@@ -441,6 +444,7 @@ df = ge.dataset.PandasDataset(projects_dict)
     <tr style="text-align: right;">
       <th></th>
       <th>id</th>
+      <th>created_on</th>
       <th>title</th>
       <th>description</th>
       <th>tags</th>
@@ -449,38 +453,43 @@ df = ge.dataset.PandasDataset(projects_dict)
   <tbody>
     <tr>
       <th>0</th>
-      <td>2438</td>
-      <td>How to Deal with Files in Google Colab: What Y...</td>
-      <td>How to supercharge your Google Colab experienc...</td>
-      <td>[article, google-colab, colab, file-system]</td>
+      <td>1</td>
+      <td>2020-02-17 06:30:41</td>
+      <td>Machine Learning Basics</td>
+      <td>A practical set of notebooks on machine learni...</td>
+      <td>[code, tutorial, keras, pytorch, tensorflow, d...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2437</td>
-      <td>Rasoee</td>
-      <td>A powerful web and mobile application that ide...</td>
-      <td>[api, article, code, dataset, paper, research,...</td>
+      <td>2</td>
+      <td>2020-02-17 06:41:45</td>
+      <td>Deep Learning with Electronic Health Record (E...</td>
+      <td>A comprehensive look at recent machine learnin...</td>
+      <td>[article, tutorial, deep-learning, health, ehr]</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2436</td>
-      <td>Machine Learning Methods Explained (+ Examples)</td>
-      <td>Most common techniques used in data science pr...</td>
-      <td>[article, deep-learning, machine-learning, dim...</td>
+      <td>3</td>
+      <td>2020-02-20 06:07:59</td>
+      <td>Automatic Parking Management using computer vi...</td>
+      <td>Detecting empty and parked spaces in car parki...</td>
+      <td>[code, tutorial, video, python, machine-learni...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2435</td>
-      <td>Top “Applied Data Science” Papers from ECML-PK...</td>
-      <td>Explore the innovative world of Machine Learni...</td>
-      <td>[article, deep-learning, machine-learning, adv...</td>
+      <td>4</td>
+      <td>2020-02-20 06:21:57</td>
+      <td>Easy street parking using region proposal netw...</td>
+      <td>Get a text on your phone whenever a nearby par...</td>
+      <td>[code, tutorial, python, pytorch, machine-lear...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>2434</td>
-      <td>OpenMMLab Computer Vision</td>
-      <td>MMCV is a python library for CV research and s...</td>
-      <td>[article, code, pytorch, library, 3d, computer...</td>
+      <td>5</td>
+      <td>2020-02-20 06:29:18</td>
+      <td>Deep Learning based parking management system ...</td>
+      <td>Fastai provides easy to use wrappers to quickl...</td>
+      <td>[code, tutorial, fastai, deep-learning, parkin...</td>
     </tr>
   </tbody>
 </table>
@@ -501,6 +510,7 @@ df.expect_table_columns_to_match_ordered_list(column_list=expected_columns)
 df.expect_column_values_to_be_unique(column="id")
 
 # No null values
+df.expect_column_values_to_not_be_null(column="created_on")
 df.expect_column_values_to_not_be_null(column="title")
 df.expect_column_values_to_not_be_null(column="description")
 df.expect_column_values_to_not_be_null(column="tags")
@@ -509,6 +519,10 @@ df.expect_column_values_to_not_be_null(column="tags")
 df.expect_column_values_to_be_of_type(column="title", type_="str")
 df.expect_column_values_to_be_of_type(column="description", type_="str")
 df.expect_column_values_to_be_of_type(column="tags", type_="list")
+
+# Format
+batch.expect_column_values_to_match_strftime_format(
+    column="created_on", strftime_format="%Y-%m-%d %H:%M:%S")
 
 # Data leaks
 df.expect_compound_columns_to_be_unique(column_list=["title", "description"])
@@ -673,7 +687,7 @@ great_expectations suite edit SUITE_NAME  # add your own custom expectations
 great_expectations checkpoint new CHECKPOINT_NAME SUITE_NAME
 great_expectations checkpoint run CHECKPOINT_NAME
 ```
-5. Run checkpoints on new batches of incoming data by adding to our testing pipeline via Makefile, or workflow orchestrator like [Airflow](https://airflow.apache.org/){:target="_blank"}, [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"}, etc. We can also use the [Great Expectations GitHub Action](https://github.com/great-expectations/great_expectations_action){:target="_blank"} to automate validating our data pipeline code when we push a change. More on using these Checkpoints with pipelines in our [workflows](workflows.md){:target="_blank"} lesson.
+5. Run checkpoints on new batches of incoming data by adding to our testing pipeline via Makefile, or workflow orchestrator like [Airflow](https://airflow.apache.org/){:target="_blank"}, [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"}, etc. We can also use the [Great Expectations GitHub Action](https://github.com/great-expectations/great_expectations_action){:target="_blank"} to automate validating our data pipeline code when we push a change. More on using these Checkpoints with pipelines in our [Pipelines](pipelines.md){:target="_blank"} lesson.
 
 <div class="ai-center-all">
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/ge.png" style="border-radius: 7px;">
@@ -909,22 +923,30 @@ assert len(response.json()["data"]["predictions"]) == len(data["texts"])
 There are also a whole class of model tests that are beyond metrics or behavioral testing and focus on the system as a whole. Many of them involve testing and benchmarking the [tradeoffs](baselines.md#tradeoffs){:target="_blank"} (ex. latency, compute, etc.) we discussed from the [baselines](baselines.md){:target="_blank"} lesson. These tests also need to performed across the different systems (ex. devices) that our model may be on. For example, development may happen on a CPU but the deployed model may be loaded on a GPU and there may be incompatible components (ex. reparametrization) that may cause errors. As a rule of thumb, we should test with the system specifications that our production environment utilizes.
 
 !!! note
-    We'll automate tests on different devices in our [CI/CD lesson](cicd.cd){:target="_blank"} where we'll use GitHub Actions to spin up our application with Docker Machine on cloud compute instances (we'll also use this for training).
+    We'll automate tests on different devices in our [CI/CD lesson](cicd.md){:target="_blank"} where we'll use GitHub Actions to spin up our application with Docker Machine on cloud compute instances (we'll also use this for training).
 
 Once we've tested our model's ability to perform in the production environment (**offline tests**), we can run several types of **online tests** to determine the quality of that performance.
 
-- `#!js AB tests`:
-    - sending production traffic to the different systems.
-    - involves statistical hypothesis testing to decide which system is better.
-    - need to account for different sources of bias (ex. novelty effect).
-    - multi-armed bandits might be better if optimizing on a certain metric.
-- `#!js Canary tests`:
-    - push changes to a small cohort of users initially
-    - can provide early indication of issues
-- `#!js Shadow tests`:
-    - sending the same production traffic to the different systems.
-    - safe online evaluation as the new system's results are not served.
-    - easy to monitor, validate operational consistency, etc.
+#### AB tests
+AB tests involve sending production traffic to the different systems that we're evaluating and then using statistical hypothesis testing to decide which system is better. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination. In many cases, if we're simply trying to compare the different versions for a certain metric, multi-armed bandits will be a better approach.
+
+<div class="ai-center-all">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/ab.png">
+</div>
+
+#### Canary tests
+Canary tests involve sending most of the production traffic to the currently deployed system but sending traffic from a small cohort of users to the new system we're trying to evaluate. Again we need to make sure that the same users continue to interact with the same system as we gradually roll out the new system.
+
+<div class="ai-center-all">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/canary.png">
+</div>
+
+#### Shadow tests
+Shadow testing involves sending the same production traffic to the different systems. We don't have to worry about system contamination and it's very safe compared to the previous approaches since the new system's results are not served. However, we do need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. But overall, shadow testing is easy to monitor, validate operational consistency, etc.
+
+<div class="ai-center-all">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/shadow.png">
+</div>
 
 ## Testing vs. monitoring
 

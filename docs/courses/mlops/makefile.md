@@ -3,7 +3,7 @@ template: lesson.html
 title: Makefiles
 description: An automation tool that organizes commands for our application's processes.
 keywords: makefile, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 ---
 

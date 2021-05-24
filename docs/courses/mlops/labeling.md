@@ -3,7 +3,7 @@ template: lesson.html
 title: Data Labeling
 description: Labeling our data with intention before using it to construct our ML systems.
 keywords: labeling, annotation, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb
 ---
@@ -84,12 +84,14 @@ df = pd.DataFrame(projects)
 print (f"{len(df)} projects")
 df.head(5)
 ```
-<div class="output_subarea output_html rendered_html"><div>
+<pre class="output">
+<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
       <th>id</th>
+      <th>created_on</th>
       <th>title</th>
       <th>description</th>
       <th>tags</th>
@@ -98,42 +100,48 @@ df.head(5)
   <tbody>
     <tr>
       <th>0</th>
-      <td>2438</td>
-      <td>How to Deal with Files in Google Colab: What Y...</td>
-      <td>How to supercharge your Google Colab experienc...</td>
-      <td>[article, google-colab, colab, file-system]</td>
+      <td>1</td>
+      <td>2020-02-17 06:30:41</td>
+      <td>Machine Learning Basics</td>
+      <td>A practical set of notebooks on machine learni...</td>
+      <td>[code, tutorial, keras, pytorch, tensorflow, d...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2437</td>
-      <td>Rasoee</td>
-      <td>A powerful web and mobile application that ide...</td>
-      <td>[api, article, code, dataset, paper, research,...</td>
+      <td>2</td>
+      <td>2020-02-17 06:41:45</td>
+      <td>Deep Learning with Electronic Health Record (E...</td>
+      <td>A comprehensive look at recent machine learnin...</td>
+      <td>[article, tutorial, deep-learning, health, ehr]</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2436</td>
-      <td>Machine Learning Methods Explained (+ Examples)</td>
-      <td>Most common techniques used in data science pr...</td>
-      <td>[article, deep-learning, machine-learning, dim...</td>
+      <td>3</td>
+      <td>2020-02-20 06:07:59</td>
+      <td>Automatic Parking Management using computer vi...</td>
+      <td>Detecting empty and parked spaces in car parki...</td>
+      <td>[code, tutorial, video, python, machine-learni...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>2435</td>
-      <td>Top “Applied Data Science” Papers from ECML-PK...</td>
-      <td>Explore the innovative world of Machine Learni...</td>
-      <td>[article, deep-learning, machine-learning, adv...</td>
+      <td>4</td>
+      <td>2020-02-20 06:21:57</td>
+      <td>Easy street parking using region proposal netw...</td>
+      <td>Get a text on your phone whenever a nearby par...</td>
+      <td>[code, tutorial, python, pytorch, machine-lear...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>2434</td>
-      <td>OpenMMLab Computer Vision</td>
-      <td>MMCV is a python library for CV research and s...</td>
-      <td>[article, code, pytorch, library, 3d, computer...</td>
+      <td>5</td>
+      <td>2020-02-20 06:29:18</td>
+      <td>Deep Learning based parking management system ...</td>
+      <td>Fastai provides easy to use wrappers to quickl...</td>
+      <td>[code, tutorial, fastai, deep-learning, parkin...</td>
     </tr>
   </tbody>
 </table>
 </div></div>
+</pre>
 
 The reason we want to iteratively add more features is because it introduces more complexity and effort. For example, extracting the relevant HTML from the URLs is not trivial but recall that we want to *close the loop* with a simple solution first. We're going to use just the title and description because we hypothesize that the project's core concepts will be there whereas the details may have many other keywords.
 

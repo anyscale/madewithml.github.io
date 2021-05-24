@@ -3,7 +3,7 @@ template: lesson.html
 title: Iteratively Improving ML Systems
 description: Improving on our solution iteratively over time.
 keywords: iteration, active learning, monitoring, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 video: https://www.youtube.com/watch?v=Bit1IUVWrkY
 ---

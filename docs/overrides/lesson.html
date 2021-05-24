@@ -9,14 +9,28 @@
   {% if not "\x3ch1" in page.content %}
     <div class="row">
       <div class="col-md-8">
-        <h1 style="margin-bottom: 0.75em;">{{ page.meta.title | d(config.site_name, true)}}</h1>
+        <h1 style="margin-bottom: 0.5rem;">{{ page.meta.title | d(config.site_name, true)}}</h1>
+      </div>
+      <div class="col-md-4 ai-center-all">
+        <a href="/courses/{{ (page.meta.image.split('/') | last).split('.') | first }}" class="mb-2">
+          <span class="twemoji">
+            {% include ".icons/octicons/arrow-left-16.svg" %}
+          </span> View all lessons</a>
+      </div>
+    </div>
+    <hr class="ai-lesson-hr">
+    <div class="row">
+      <div class="col-md-8">
+        {% if page and page.meta.description %}
+          <span>{{ page.meta.description }}</span>
+        {% endif %}
       </div>
       <div class="col-md-4">
         <div class="row">
           <div class="col-md-3 col-2 ai-center-all" style="padding-right: 10px;">
-            <img src="/static/images/goku_circle.png" style="width: 3rem;">
+            <img src="/static/images/goku_circle.png" style="width: 3rem; max-width: 120%;">
           </div>
-          <div class="col-md-9 col-10" style="padding-left: 0rem;">
+          <div class="col-md-9 col-10" style="padding-left: 5px;">
             <div>Goku Mohandas</div>
             <div>
               <a href="https://twitter.com/GokuMohandas" target="_blank">
@@ -36,10 +50,6 @@
         </div>
       </div>
     </div>
-    <hr class="ai-lesson-hr">
-    {% if page and page.meta.description %}
-      <span>{{ page.meta.description }}</span>
-    {% endif %}
 
     <!-- Links -->
     <div class="mt-1"></div>

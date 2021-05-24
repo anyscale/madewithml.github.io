@@ -3,7 +3,7 @@ template: lesson.html
 title: Data Quality for Machine Learning
 description: An illustrative look at the importance of data quality in machine learning.
 keywords: data quality, cleaning, overfitting, underfitting, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/ml_foundations.png
+image: https://madewithml.com/static/images/basics.png
 repository: https://github.com/GokuMohandas/MadeWithML
 notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/09_Data_Quality.ipynb
 ---

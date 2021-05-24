@@ -3,7 +3,7 @@ template: lesson.html
 title: PyTorch Fundamentals
 description: Learn how to use the PyTorch machine learning framework.
 keywords: pytorch, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/ml_foundations.png
+image: https://madewithml.com/static/images/basics.png
 repository: https://github.com/GokuMohandas/MadeWithML
 notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/05_PyTorch.ipynb
 ---

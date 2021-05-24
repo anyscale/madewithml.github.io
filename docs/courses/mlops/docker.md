@@ -3,7 +3,7 @@ template: lesson.html
 title: "Docker"
 description: Packaging our application into reproducible and scalable containers.
 keywords: docker, containers, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 ---
 

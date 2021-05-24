@@ -33,75 +33,10 @@ extra:
 
 # Page tree
 nav:
-  - Home:
-    - Made With ML: index.md
-    - About: about.md
-    - Basics: courses/basics.md
-    - MLOps: courses/mlops.md
-    - FAQ: faq.md
+  - Home: index.md
   - About: about.md
-  - Basics:
-    - Lessons: courses/basics.md
-    - <b>🔢 &nbsp; Foundations</b>:
-      - Notebooks: courses/basics/notebooks.md
-      - Python: courses/basics/python.md
-      - NumPy: courses/basics/numpy.md
-      - Pandas: courses/basics/pandas.md
-      - PyTorch: courses/basics/pytorch.md
-    - <b>📈 &nbsp; Modeling</b>:
-      - Linear regression: courses/basics/linear-regression.md
-      - Logistic regression: courses/basics/logistic-regression.md
-      - Neural networks: courses/basics/neural-networks.md
-      - Data quality: courses/basics/data-quality.md
-      - Utilities: courses/basics/utilities.md
-    - <b>🤖 &nbsp; Deep Learning</b>:
-      - CNNs: courses/basics/convolutional-neural-networks.md
-      - Embeddings: courses/basics/embeddings.md
-      - RNNs: courses/basics/recurrent-neural-networks.md
-      - Attention: courses/basics/attention.md
-      - Transformers: courses/basics/transformers.md
-  - MLOps:
-    - Lessons: courses/mlops.md
-    - <b>📦 &nbsp; Product</b>:
-      - Objective: courses/mlops/objective.md
-      - Solution: courses/mlops/solution.md
-      - Iteration: courses/mlops/iteration.md
-    - <b>🔢 &nbsp; Data</b>:
-      - Labeling: courses/mlops/labeling.md
-      - Preprocessing: courses/mlops/preprocessing.md
-      - Exploration: courses/mlops/exploratory-data-analysis.md
-      - Splitting: courses/mlops/splitting.md
-      - Augmentation: courses/mlops/augmentation.md
-    - <b>📈 &nbsp; Modeling</b>:
-      - Baselines: courses/mlops/baselines.md
-      - Evaluation: courses/mlops/evaluation.md
-      - Experiment tracking: courses/mlops/experiment-tracking.md
-      - Optimization: courses/mlops/optimization.md
-    - <b>📝 &nbsp; Scripting</b>:
-      - Organization: courses/mlops/organization.md
-      - Packaging: courses/mlops/packaging.md
-      - Documentation: courses/mlops/documentation.md
-      - Logging: courses/mlops/logging.md
-      - Styling: courses/mlops/styling.md
-      - Makefile: courses/mlops/makefile.md
-    - <b>📦 &nbsp; Application</b>:
-      - Command-line: courses/mlops/cli.md
-      - RESTful API: courses/mlops/api.md
-    - <b>✅ &nbsp; Testing</b>:
-      - Code: courses/mlops/testing.md
-      - Data: courses/mlops/testing#data
-      - Models: courses/mlops/testing#models
-    - <b>♻️ &nbsp; Reproducibility</b>:
-      - Git: courses/mlops/git.md
-      - Pre-commit: courses/mlops/pre-commit.md
-      - Versioning: courses/mlops/versioning.md
-      - Docker: courses/mlops/docker.md
-    - <b>🚀 &nbsp; Production</b>:
-      - Dashboard: courses/mlops/dashboard.md
-      - CI/CD workflows: courses/mlops/cicd.md
-      - Feature stores: courses/mlops/feature-stores.md
-      - Deployment: courses/mlops/deployment.md
-      - Monitoring: courses/mlops/monitoring.md
+  - Basics: courses/basics.md
+  - MLOps: courses/mlops.md
   - FAQ: faq.md
 
 # Configuration
@@ -148,7 +83,7 @@ markdown_extensions:
   - pymdownx.highlight:
       use_pygments: true
   - toc:
-      toc_depth: 4
+      toc_depth: 3  # md-sidebar__scrollwrap is set to hidden in scss/extra.scss
 
 # Extra CSS
 extra_css:
@@ -195,7 +130,7 @@ plugins:
             "courses/applied-ml/solution.md": "courses/mlops/solution.md"
             "courses/applied-ml/evaluation.md": "courses/mlops/evaluation.md"
             "courses/applied-ml/iteration.md": "courses/mlops/iteration.md"
-            "courses/applied-ml/annotation.md": "courses/mlops/annotation.md"
+            "courses/applied-ml/annotation.md": "courses/mlops/labeling.md"
             "courses/applied-ml/exploratory-data-analysis.md": "courses/mlops/exploratory-data-analysis.md"
             "courses/applied-ml/splitting.md": "courses/mlops/splitting.md"
             "courses/applied-ml/preprocessing.md": "courses/mlops/preprocessing.md"
@@ -221,5 +156,5 @@ plugins:
             "courses/applied-ml/cicd.md": courses/mlops/cicd.md"
             "courses/applied-ml/monitoring.md": "courses/mlops/monitoring.md"
             "courses/applied-ml/feature-stores.md": "courses/mlops/feature-stores.md"
-            "courses/applied-ml/workflows.md": "courses/mlops/workflows.md"
+            "courses/applied-ml/pipelines.md": "courses/mlops/pipelines.md"
             "courses/mlops/annotation.md": "courses/mlops/labeling.md"

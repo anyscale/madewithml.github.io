@@ -3,7 +3,7 @@ template: lesson.html
 title: Documenting Code
 description: Documenting code for your users and your future self.
 keywords: documentation, mkdocs, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 documentation: https://gokumohandas.github.io/MLOps/
 ---

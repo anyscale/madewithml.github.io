@@ -3,7 +3,7 @@ template: lesson.html
 title: Convolutional Neural Networks (CNN)
 description: Convolutional Neural Networks (CNNs) applied to text for natural language processing (NLP) tasks.
 keywords: convolutional neural networks, CNN, computer vision, image classification, image recognition, batchnorm, batch normalization, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/ml_foundations.png
+image: https://madewithml.com/static/images/basics.png
 repository: https://github.com/GokuMohandas/MadeWithML
 notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/11_Convolutional_Neural_Networks.ipynb
 ---

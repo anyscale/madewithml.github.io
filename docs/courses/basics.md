@@ -2,7 +2,7 @@
 template: main.html
 title: Basics
 description: Learn the foundations of ML through intuitive explanations, clean code and visuals.
-image: https://madewithml.com/static/images/ml_foundations.png
+image: https://madewithml.com/static/images/basics.png
 ---
 
 {% include "styles/course.md" %}

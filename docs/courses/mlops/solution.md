@@ -3,7 +3,7 @@ template: lesson.html
 title: Designing Solutions for ML Systems
 description: Designing a solution with constraints.
 keywords: solutions, design, systems, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 video: https://www.youtube.com/watch?v=Gi1VlFV8e_k
 ---

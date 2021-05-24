@@ -3,7 +3,7 @@ template: lesson.html
 title: "CI/CD Workflows"
 description: Using workflows to establish continuous integration and delivery pipelines to reliably iterate on our application.
 keywords: ci/cd, github actions, devops, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 ---
 
@@ -153,11 +153,21 @@ act -j test-code  # specific job
 !!! note
     While act is able to very closely replicate GitHub's runners there are still a few inconsistencies. For example [caching](https://github.com/nektos/act/issues/329){:target="_blank"} still needs to be figured out with a small HTTP server when the local container is spun up. So if we have a lot of requirements, it might be faster just to experience using GitHub's runners and squashing the commits once we get the workflow to run.
 
+## Deployment
+
+There are a wide variety of GitHub actions available for deploying our ML applications after all the integration tests have passed. Most of them will require that we have a Dockerfile defined that will load and launch our service with the appropriate artifacts. Read more about ML deployment in our [lesson](deployment.md){:target="_blank"}.
+
+- [AWS EC2](https://github.com/aws-actions), [Google Compute Engine](https://github.com/google-github-actions), [Azure VM](https://github.com/Azure/actions), etc.
+- container orchestration services such as [AWS ECS](https://github.com/aws-actions/amazon-ecs-deploy-task-definition)  or [Google Kubernetes Engine](https://github.com/google-github-actions/setup-gcloud/tree/master/example-workflows/gke)
+- serverless options such as [AWS Lambda](https://github.com/marketplace/actions/aws-lambda-deploy) or [Google Cloud Functions](https://github.com/google-github-actions/deploy-cloud-functions).
+
+The specific deployment method we use it entirely up dependent on the application, team, existing infrastructure, etc. The key component is that we are able to update our application when all the integration tests pass without having to manually intervene for deployment.
+
 ## Marketplace
 
 So what exactly are these actions that we're using from the marketplace? For example, our first step in the `test-code` job above is to checkout the repo using the [actions/checkout@v2](https://github.com/marketplace/actions/checkout){:target="_blank"} GitHub Action. The Action's link contains information about how to use it, scenarios, etc.
 
-The Marketplace has actions for a variety of needs, ranging from continuous deployment for various cloud providers, code quality checks, etc. Below are a few ML focused GitHub Actions that we highly recommend.
+The Marketplace has actions for a variety of needs, ranging from continuous deployment for various cloud providers, code quality checks, etc. Below are a few GitHub Actions that we highly recommend.
 
 - [Great Expectations](https://github.com/marketplace/actions/great-expectations-data){:target="_blank"}: ensure that our GE checkpoints pass when any changes are made that could affect the data engineering pipelines. This action also creates a free GE dashboard with [Netlify](https://www.netlify.com/){:target="_blank"} that has the updated data docs.
 - [Continuous ML](https://github.com/iterative/cml){:target="_blank"}: train, evaluate and monitor your ML models and generate a report summarizing the findings. I personally use this GitHub Action for automatic training jobs on cloud infrastructure (AWS/GCP) or [self hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners?learn=hosting_your_own_runners){:target="_blank"} when a change triggers the training pipeline, as opposed to working with [Terraform](https://www.terraform.io/){:target="_blank"}.

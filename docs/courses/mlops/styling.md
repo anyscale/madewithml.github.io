@@ -3,7 +3,7 @@ template: lesson.html
 title: Styling and Formatting Code
 description: Style and formatting conventions to keep your code looking consistent.
 keywords: styling, formatting, pep8, black, isort, flake8, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 ---
 
@@ -13,7 +13,7 @@ repository: https://github.com/GokuMohandas/MLOps
 
 > Code is read more often than it is written. -- [Guido Van Rossum](https://gvanrossum.github.io/){:target="_blank"} (author of Python)
 
-When we write a piece of code, it's almost never the last time we see it or the last time it's edited. So we need to both explain what's going on ([documentation](documentaiton.md) but also make it easy to read. One of the easiest ways to make code more readable is to follow consistent style and formatting conventions.
+When we write a piece of code, it's almost never the last time we see it or the last time it's edited. So we need to both explain what's going on ([documentation](documentation.md) but also make it easy to read. One of the easiest ways to make code more readable is to follow consistent style and formatting conventions.
 
 There are many options when it comes to Python style conventions to adhere to, but most are based on [PEP8](https://www.python.org/dev/peps/pep-0008/) (link walks through the different components (blank lines, imports, etc.) that conventions were written for). You'll notice that different teams will default to different conventions and that's ok. The most important aspects are that everybody is consistently following the same convection and that there are pipelines in place to ensure that consistency. Let's see what this looks like in our application.
 

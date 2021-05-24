@@ -3,7 +3,7 @@ template: lesson.html
 title: Data Preprocessing
 description: Preprocessing our dataset, via through preparations and transformations, to use for training.
 keywords: preprocessing, preparation, cleaning, feature engineering, filtering, transformations, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb
 ---
@@ -426,15 +426,6 @@ albumentations fast image augmentation library easy use wrapper around libraries
 ## Transformations
 
 Many of the *transformations* we're going to do are model specific. For example, for our simple baselines we may do `label encoding` → `tf-idf` while for the more involved architectures we may do `label encoding` → `one-hot encoding` → `embeddings`. So we'll cover these in the next suite of lessons as we implement each of the [baselines](baselines.md){:target="_blank"}.
-
-
-## Pipelines
-
-In a production setting, each of these preprocessing steps can be individual workflows. For example, if we use [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"} (KFP) to manage our workflows (I recommend using [k3d](https://k3d.io/){:target="_blank"} to play with KFP [locally](https://www.kubeflow.org/docs/components/pipelines/installation/standalone-deployment/){:target="_blank"}), each of them would execute in a [Docker](docker.md){:target="_blank"} container that can be individually scaled, inspected and modified.
-
-<div class="ai-center-all">
-    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/preprocessing/kfp.png">
-</div>
 
 !!! note
     In the next section we'll be performing exploratory data analysis (EDA) on our preprocessed dataset. However, the order of the steps can be reversed depending on how well the problem is defined. If we're unsure about how to prepare the data, we can use EDA to figure it out. In fact in our [dashboard](dashboard.md){:target="_blank"} lesson, we can interactively apply data processing and EDA back and forth until we have finalized on constraints.

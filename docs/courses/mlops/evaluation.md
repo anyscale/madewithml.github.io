@@ -3,7 +3,7 @@ template: lesson.html
 title: Evaluating ML Models
 description: Evaluating ML models by assessing overall, per-class and slice performances.
 keywords: evaluation, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 video: https://www.youtube.com/watch?v=AwajdDVR_C4
 ---

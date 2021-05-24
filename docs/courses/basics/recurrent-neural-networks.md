@@ -3,7 +3,7 @@ template: lesson.html
 title: Recurrent Neural Networks (RNN)
 description: Explore and motivate the need for representation via embeddings.
 keywords: recurrent neural networks, numpy, pytorch, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/ml_foundations.png
+image: https://madewithml.com/static/images/basics.png
 repository: https://github.com/GokuMohandas/MadeWithML
 notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb
 ---

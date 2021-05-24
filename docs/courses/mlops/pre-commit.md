@@ -3,7 +3,7 @@ template: lesson.html
 title: "Pre-commit"
 description: Using the pre-commit git hooks to ensure checks before committing.
 keywords: pre-commit, git hooks, git, versioning, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
-image: https://madewithml.com/static/images/applied_ml.png
+image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
 ---
 
