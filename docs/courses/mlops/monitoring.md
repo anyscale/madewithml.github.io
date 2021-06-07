@@ -430,7 +430,7 @@ preprocess_fn = partial(preprocess_drift, model=reducer, batch_size=params.batch
 
 The different dimensionality reduction techniques applied on multivariate data yield either 1D or multidimensional data and so different **statistical tests** are used to calculate drift:
 
-- [Maximum Mean Discrepancy (MMD)](https://jmlr.csail.mit.edu/papers/v13/gretton12a.html){:target="_blank"}: a kernel-based approach that determines the distance between two distributions by computing the distance between the mean embeddings of the features from both distributions.
+- [**Maximum Mean Discrepancy (MMD)**](https://jmlr.csail.mit.edu/papers/v13/gretton12a.html){:target="_blank"}: a kernel-based approach that determines the distance between two distributions by computing the distance between the mean embeddings of the features from both distributions.
 
 ```python linenums="1"
 from alibi_detect.cd import MMDDrift
@@ -499,7 +499,7 @@ embeddings_mmd_drift_detector.predict(drift)
 
 <hr>
 
-- [Kolmogorov-Smirnov (KS) Test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test){:target="_blank"} + [Bonferroni Correction](https://en.wikipedia.org/wiki/Bonferroni_correction){:target="_blank"}: determines the maximum distance between two distribution's cumulative density functions. We can apply this on each dimension of the multidimensional data and then use the Bonferroni correction (conservative) or the [False discovery rate](https://en.wikipedia.org/wiki/False_discovery_rate){:target="_blank"} (FDR) correction to mitigate issues stemming from multiple comparisons.
+- [**Kolmogorov-Smirnov (KS) Test**](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test){:target="_blank"} + [Bonferroni Correction](https://en.wikipedia.org/wiki/Bonferroni_correction){:target="_blank"}: determines the maximum distance between two distribution's cumulative density functions. We can apply this on each dimension of the multidimensional data and then use the Bonferroni correction (conservative) or the [False discovery rate](https://en.wikipedia.org/wiki/False_discovery_rate){:target="_blank"} (FDR) correction to mitigate issues stemming from multiple comparisons.
 
 ```python linenums="1"
 from alibi_detect.cd import KSDrift
