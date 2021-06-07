@@ -521,7 +521,7 @@ df.expect_column_values_to_be_of_type(column="description", type_="str")
 df.expect_column_values_to_be_of_type(column="tags", type_="list")
 
 # Format
-batch.expect_column_values_to_match_strftime_format(
+df.expect_column_values_to_match_strftime_format(
     column="created_on", strftime_format="%Y-%m-%d %H:%M:%S")
 
 # Data leaks
@@ -950,9 +950,9 @@ Shadow testing involves sending the same production traffic to the different sys
 
 ## Testing vs. monitoring
 
-We'll conclude by talking about the similarities and distinctions between testing and monitoring. They're both integral parts of the ML development pipeline and depend on each other for iteration. Testing is assuring that our system (code, data and models) behaves the way we intend at the current time $t_0$. Whereas, monitoring is ensuring that the conditions (ie. distributions) during development are maintained and also that the tests that passed at $t_0$ continue to hold true post deployment through $t_n$. When this is no longer true, we need to inspect more closely (retraining may not always fix our root problem).
+We'll conclude by talking about the similarities and distinctions between testing and [monitoring](monitoring.md){:target="_blank"}. They're both integral parts of the ML development pipeline and depend on each other for iteration. Testing is assuring that our system (code, data and models) passes the expectations that we've established at $t_0$. Whereas, monitoring involves that these expectations continue to pass on live production data while also ensuring that their data distributions are [comparable](monitoring.md#measuring-drift){:target="_blank"} to the reference window (typically subset of training data) through $t_n$. When these conditions no longer hold true, we need to inspect more closely (retraining may not always fix our root problem).
 
-With monitoring, there are quite a few distinct concerns that we didn't have to consider during testing since it involves (live) data we have yet to see.
+With [monitoring](monitoring.md){:target="_blank"}, there are quite a few distinct concerns that we didn't have to consider during testing since it involves (live) data we have yet to see.
 
 - features and prediction distributions (drift), typing, schema mismatches, etc.
 - determining model performance (rolling and window metrics on overall and slices of data) using indirect signals (since labels may not be readily available).

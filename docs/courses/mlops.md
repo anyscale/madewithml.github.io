@@ -75,7 +75,7 @@ image: "https://madewithml.com/static/images/mlops.png"
     <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
     <li><a href="/courses/mlops/cicd/">CI/CD workflows</a></li>
     <li><a href="/courses/mlops/deployment/">Deployment</a></li>
-    <li>Monitoring</li>
+    <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
     <li>Feature stores</li>
     <li>Pipelines</li>
     </ul>

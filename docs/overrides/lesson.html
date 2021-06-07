@@ -11,22 +11,22 @@
       <div class="col-md-8">
         <h1 style="margin-bottom: 0.5rem;">{{ page.meta.title | d(config.site_name, true)}}</h1>
       </div>
-      <div class="col-md-4 ai-center-all">
+      <div class="col-md-4 ai-center-all order-first order-md-last mb-2 mb-md-0 mb-lg-0">
         <a href="/courses/{{ (page.meta.image.split('/') | last).split('.') | first }}" class="mb-2">
           <span class="twemoji">
             {% include ".icons/octicons/arrow-left-16.svg" %}
           </span> View all lessons</a>
       </div>
     </div>
-    <hr class="ai-lesson-hr">
+    <hr class="mt-0 mt-md-2 mt-lg-2">
     <div class="row">
       <div class="col-md-8">
         {% if page and page.meta.description %}
           <span>{{ page.meta.description }}</span>
         {% endif %}
       </div>
-      <div class="col-md-4">
-        <div class="row">
+      <div class="col-md-4 order-first order-md-last">
+        <div class="row mb-4 mb-md-0 mb-lg-0">
           <div class="col-md-3 col-2 ai-center-all" style="padding-right: 10px;">
             <img src="/static/images/goku_circle.png" style="width: 3rem; max-width: 120%;">
           </div>

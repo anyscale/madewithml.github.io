@@ -23,16 +23,6 @@
   display: flex;
 }
 
-.ai-lesson-hr {
-  margin-top: 0rem !important;
-}
-
-@media (max-width: 768px) {
-  .ai-lesson-hr {
-    margin-top: 1.5rem !important;
-  }
-}
-
 /* navigation bar active color*/
 .md-nav__item .md-nav__link--active {
   font-weight: bold !important;

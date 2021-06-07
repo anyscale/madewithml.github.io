@@ -20,9 +20,9 @@ Whether we're working individually or with a team, it's important that we have a
 
 Instead of creating an [overwhelming](../../pivot.md){:target="_blank"} list of Git commands, let's learn about the important concepts and commands with quick chronological case studies that we'll absolutely need to know to real collaborative project with a team.
 
-### Getting started
+## Getting started
 
-#### Set up
+### Set up
 
 To follow along, we need to create a [GitHub](https://github.com/){:target="_blank"} (or any other remote host) account first and set our credentials globally on our local machine.
 ```bash
@@ -37,7 +37,7 @@ git config --global user.name
 git config --global user.email
 ```
 
-#### Create
+### Create
 
 Create a project in a *working directory*.
 ```bash
@@ -58,7 +58,7 @@ This is a decent tutorial on Git.
 
 ```
 
-#### Initialize git
+### Initialize git
 
 <div class="ai-center-all">
     <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/environments.png">
@@ -102,7 +102,7 @@ git status  # note that do_not_push.txt is not here
 </div>
 
 
-#### Add to stage
+### Add to stage
 
 *Add* our work from the *working directory* to the *staging area*.
 
@@ -123,7 +123,7 @@ Now running `git status` will show us all the staged files:
     <img width="450" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/status3.png" style="border-radius: 7px;">
 </div>
 
-#### Commit to repo
+### Commit to repo
 
 *Commit* the files in the *staging area* to the *local repository*. The default branch will be called `main` as it will be the main branch all future work will eventually merge with.
 
@@ -139,7 +139,7 @@ The commit requires a message indicating what changes took place. We can use `gi
     <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/status4.png" style="border-radius: 7px;">
 </div>
 
-#### Push to remote
+### Push to remote
 
 *Push* our commit to a *remote repository* (GitHub). We only need to add the remote origin address once and then we can push our local repository to the remote with a simple *push* command.
 ```bash
@@ -150,7 +150,7 @@ git push -u origin main  # pushing the contents of our main branch to the remote
 ```
 We first need to create a new remote repository to push our commit to by filling out this GitHub [form](https://github.com/new){:target="_blank"} (make sure we're logged into GitHub first). Let's call the repository `git-tutorial` and don't add any of the default files since we already have them. Once we're done, we'll see a HTTPS link like above which we can use to establish the connection between our local and the remote repositories. Now if we go our GitHub repository link, we'll see the files that we pushed.
 
-### Developing
+## Developing
 
 Now we're ready to start adding to our project and committing the changes.
 
@@ -161,7 +161,7 @@ Now we're ready to start adding to our project and committing the changes.
     git clone https://github.com/GokuMohandas/git-tutorial <PATH_TO_PROJECT_DIR>
     ```
 
-#### Create a branch
+### Create a branch
 
 When we want to add or change something, such as adding a feature, fixing a bug, etc., it's always best practice to create a separate branch before developing. This is especially crucial when working with a team so we can cleanly merge our work with the main branch after discussion and review.
 
@@ -200,7 +200,7 @@ git push origin good
 Note that we are pushing this branch to our remote repository, which doesn't yet exist there, so GitHub will create it accordingly.
 
 
-#### Pull request (PR)
+### Pull request (PR)
 
 When we push our new branch to the remote repository, we'll need to create a pull request (PR) to merge with another branch (ex. our main branch in this case).
 
@@ -227,7 +227,7 @@ When merging our work with another branch (ex. main), it's called a pull request
     git push origin main
     ```
 
-#### Pull
+### Pull
 
 Once we accepted the pull request, our main branch is now updated with our changes. However, the update only happened on the remote repository so we should pull those changes to our local main branch as well.
 
@@ -237,7 +237,7 @@ git checkout main
 git pull origin main
 ```
 
-#### Delete branches
+### Delete branches
 
 Once we're done working with a branch, we can delete it to prevent our repository from cluttering up. We can easily delete both the local and remote versions of the branch with the following commands:
 ```bash
@@ -250,11 +250,11 @@ git push origin --delete <BRANCH_NAME>  # remote
     <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/delete_branch.png" style="border-radius: 7px;">
 </div>
 
-### Collaborating
+## Collaborating
 
 So far, the workflows for integrating our iterative development has been very smooth but in a collaborative setting, we may need to resolve conflicts.
 
-#### Merge conflicts
+### Merge conflicts
 
 Let's say there are two branches (`great` and `fantastic`) that were created from the `main` branch. Here's what we're going to try and simulate:
 
@@ -319,7 +319,7 @@ git pull origin main
 !!! note
     We only have a conflict because both branches were forked from a previous version of the `main` branch and they both happened to alter the same content. Had we created one branch first and then updated main before creating the second branch, we wouldn't have any conflicts. But in a collaborative setting, different developers may fork off the same version of the branch anytime.
 
-#### Stash
+### Stash
 
 Alternatively, instead of resolving the conflict after submitting the PR for the `fantastic` branch, we could've done so before the PR follow this workflow:
 
@@ -351,7 +351,7 @@ git stash
     <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/stash.png" style="border-radius: 7px;">
 </div>
 
-#### Rebase
+### Rebase
 
 This makes the `fantastic` branch the same as the previous `main` branch it was forked from so we can now rebase to make `fantastic` catch up to the latest version of the `main` branch.
 
@@ -398,24 +398,24 @@ git stash drop 0  # remove the applied stash (optional)
 
 The stashing and rebasing resolution process is similar as the GitHub interface in that we need to choose which content to keep between the two branch conflicts but it is a nice way to keep our branch updated with the latest releases as we develop.
 
-#### Squash
+### Squash
 
 Rebase is also useful for squashing commits if we have many of them lined up before pushing to our remote host.
 ```bash
 # Squash commits
 git rebase -i origin/main
 ```
-This will open up an interactive text editor where we can choosing which commits to squash (replace `pick` with `squash`) and after saving another text editor will appear to allow us to create a summarizing commit message. We can also do this on the online Git interface before merging the pull request.
+This will open up an interactive text editor where we can choosing which commits to squash (replace `pick` with `squash` (or `s`)) and after saving another text editor will appear to allow us to create a summarizing commit message. We can also do this on the online Git interface before merging the pull request.
 
 <div class="ai-center-all">
     <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/squash.png">
 </div>
 
-### Inspection
+## Inspection
 
 Git allows us to inspect the current and previous states of our work at many different levels. Let's explore the most commonly used commands.
 
-#### Status
+### Status
 
 We've used the status command quite a bit already as it's very useful to quickly see the status of our working tree.
 
@@ -425,7 +425,7 @@ git status
 git status -s  # short format
 ```
 
-#### Log
+### Log
 
 If we want to see the log of all our commits, we can do so using the log command. We can also do the same by inspecting specific branch histories on the Git online interface.
 
@@ -441,7 +441,7 @@ git log --oneline  # short version
 !!! note
     Commit IDs are 40 characters long but we can represent them with the first few (seven digits is the default for a Git SHA). If there is ambiguity, Git will notify us and we can simply add more of the commit ID.
 
-#### Diff
+### Diff
 
 If we want to know the difference between two commits, we can use the diff command.
 
@@ -456,7 +456,7 @@ git diff <COMMIT_A>:<PATH_TO_FILE> <COMMIT_B>:<PATH_TO_FILE>  # file diff b/w tw
     <img width="350" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/diff.png" style="border-radius: 7px;">
 </div>
 
-#### Blame
+### Blame
 
 One of the most useful inspection commands is blame, which allows us to see what commit was responsible for every single line in a file.
 ```bash
@@ -470,11 +470,11 @@ git blame -L 1,3 <PATH_TO_FILE>  # blame for lines 1 and 3
 </div>
 
 
-### Time travel
+## Time travel
 
 Sometimes we may have done something we wish we could change. It's not always possible to do this in life, but in the world of Git, it is!
 
-#### Restore
+### Restore
 
 Sometimes we may just want to undo adding or staging a file, which we can easily do with the *restore* command.
 ```bash
@@ -483,7 +483,7 @@ git restore -- <PATH_TO_FILE> <PATH_TO_FILE> # will undo any changes
 git restore --stage <PATH_TO_FILE>  # will remove from stage (won't undo changes)
 ```
 
-#### Reset
+### Reset
 
 Now if we already made the commit but haven't pushed to remote yet, we can reset to the previous commit by moving the branch pointer to that commit. Note that this will undo all changes made since the previous commit.
 ```bash
@@ -498,7 +498,7 @@ git reset <PREVIOUS_COMMIT_ID>  # or HEAD^
 !!! note
     `HEAD` is a quick way to refer to the previous commit. Both `HEAD` and any previous commit ID can be accompanied with a `^` or `~` symbol which acts as a relative reference. <COMMIT_ID>`^`n refers to the nth parent of the commit while <COMMIT_ID>`~`n refers to the nth grandparent. Of course we can always just explicitly use commit IDs but these short hands can come in handy for quick checks without doing `git log` to retrieve commit IDs.
 
-#### Revert
+### Revert
 
 But instead of moving the branch pointer to a previous commit, we can continue to move forward by adding a new commit to revert certain previous commits.
 
@@ -512,7 +512,7 @@ git revert <COMMIT_TO_ROLLBACK_TO>..<COMMIT_TO_ROLLBACK_FROM>  # range
     <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/revert.png">
 </div>
 
-#### Checkout
+### Checkout
 
 Sometimes we may want to temporarily switch back to a previous commit just to explore or commit some changes. It's best practice to do this in a separate branch and if we want to save our changes, we need to create a separate PR. Note that if you do checkout a previous commit and submit a PR, you may override the commits in between.
 ```bash
@@ -525,13 +525,13 @@ git checkout -b <BRANCH_NAME> <COMMIT_ID>
 </div>
 
 
-### Best practices
+## Best practices
 There so many different works to work with git and sometimes it can became quickly unruly when fellow developers follow different practices. Here are a few, widely accepted, best practices when it comes to working with commits and branches.
 
-#### Commits
+### Commits
 - Commit often such that each commit has a clear associated change which you can approve / rollback.
 - Try and [squash](#squash) commits if you have multiple before pushing to the remote host.
-- Avoid monolithic commits (even if you regularly stash and rebase) because it can cause many thigns to break and creates a code review nightmare.
+- Avoid monolithic commits (even if you regularly stash and rebase) because it can cause many components to break and creates a code review nightmare.
 - Attach meaningful messages to commits so developers know exactly what the PR entails.
 - Use tags to represent meaningful and stable releases of your application.
 ```bash
@@ -540,7 +540,7 @@ git tag -a v0.1 -m "initial release"
 ```
 - Don't delete commit history (reset), instead use [revert](#revert) to rollback and provide reasoning.
 
-#### Branches
+### Branches
 - Create branches when working on a feature, bug, etc. because it makes adding and reverting to the `main` branch very easy.
 - Avoid using cryptic branch names.
 - Maintain your `main` branch as the "demo ready" branch that always works.
