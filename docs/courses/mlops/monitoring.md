@@ -20,7 +20,7 @@ Even though we've trained and thoroughly evaluated our model, the real work begi
 The first step to insure that our model is performing well is to ensure that the actual system is up and running as it should. This can include metrics specific to service requests such as latency, throughput, error rates, etc. as well as infrastructure utilization such as CPU/GPU utilization, memory, etc.
 
 <div class="ai-center-all">
-    <a href="https://miro.medium.com/max/2400/1*DQdiQupXSSd3fldg9eAQjA.jpeg" target="_blank"><img width="600" src="https://i.ibb.co/SKcRSC3/datadog.png"></a>
+    <a href="https://miro.medium.com/max/2400/1*DQdiQupXSSd3fldg9eAQjA.jpeg" target="_blank"><img width="600" src="https://miro.medium.com/max/2400/1*DQdiQupXSSd3fldg9eAQjA.jpeg"></a>
 </div>
 
 Fortunately, most cloud providers and even orchestration layers will provide this insight into our system's health for free through a dashboard. In the event we don't, we can easily use [Grafana](https://grafana.com/){:target="_blank"}, [Datadog](https://www.datadoghq.com/){:target="_blank"}, etc. to ingest system performance metrics from logs to create a customized dashboard and set alerts.
@@ -72,7 +72,7 @@ plt.legend()
 ```
 
 <div class="ai-center-all">
-    <img width="500" src="https://i.ibb.co/HTD40wy/performance-drift.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/performance_drift.png">
 </div>
 
 !!! note
@@ -107,7 +107,7 @@ Data drift, also known as feature drift or covariate shift, occurs when the dist
     It's important that our training data is as similar as possible to the data we can expect in production to avoid training-serving skew.
 
 <div class="ai-center-all">
-    <img width="700" src="https://i.ibb.co/wCC9v65/data_drift.png">
+    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/data_drift.png">
 </div>
 <div class="ai-center-all">
     <small>Data drift can occur in either continuous or categorical features.</small>
@@ -125,7 +125,7 @@ Besides just the input data changing, as with data drift, we can also experience
 Besides the input and output data drifting, we can have the actual relationship between them drift as well. This concept drift renders our model ineffective because the patterns it learned to map between the original inputs and outputs are no longer relevant. Concept drift can be something that occurs in [various patterns](https://link.springer.com/article/10.1007/s11227-018-2674-1){:target="_blank"}:
 
 <div class="ai-center-all">
-    <img width="500" src="https://i.ibb.co/bbz0kNP/concept_drift.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/concept_drift.png">
 </div>
 
 - gradually over a period of time
@@ -243,7 +243,7 @@ plt.show()
 </pre>
 
 <div class="ai-center-all">
-    <img width="500" src="https://i.ibb.co/GtpgW9X/ks_no_drift.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/ks_no_drift.png">
 </div>
 
 ```python linenums="1"
@@ -265,7 +265,7 @@ plt.show()
 </pre>
 
 <div class="ai-center-all">
-    <img width="500" src="https://i.ibb.co/5smFtcr/ks_drift.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/ks_drift.png">
 </div>
 
 #### Chi-squared test
@@ -307,7 +307,7 @@ target_drift_detector.predict(no_drift, return_p_val=True, return_distance=True)
 </pre>
 
 <div class="ai-center-all">
-    <img width="500" src="https://i.ibb.co/s1B3PNT/chi_no_drift.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/chi_no_drift.png">
 </div>
 
 ```python linenums="1"
@@ -330,7 +330,7 @@ target_drift_detector.predict(drift, return_p_val=True, return_distance=True)
 </pre>
 
 <div class="ai-center-all">
-    <img width="500" src="https://i.ibb.co/CP7Zzbx/chi_drift.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/chi_drift.png">
 </div>
 
 ### Multivariate
@@ -338,7 +338,7 @@ target_drift_detector.predict(drift, return_p_val=True, return_distance=True)
 As we can see, measuring drift is fairly straightforward for univariate data but difficult for multivariate data. We'll summarize the reduce and measure approach outlined in the following paper: [Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift](https://arxiv.org/abs/1810.11953){:target="_blank"}.
 
 <div class="ai-center-all">
-    <img width="700" src="https://i.ibb.co/V3w4hJ4/failing_loudly.png">
+    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/failing_loudly.png">
 </div>
 <div class="ai-center-all mt-2">
     <small>Detecting drift as outlined in <a href="https://arxiv.org/abs/1810.11953" target="_blank">Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift</a></small>
@@ -574,7 +574,7 @@ With drift, we're comparing a window of production data with reference data as o
     When we identify outliers, we may want to let the end user know that the model's response may not be reliable. Additionally, we may want to remove the outliers from the next training set or further inspect them and upsample them in case they're early signs of what future distributions of incoming features will look like.
 
 <div class="ai-center-all">
-    <img width="600" src="https://i.ibb.co/rt124WK/outliers.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/outliers.png">
 </div>
 
 Unfortunately, it's not very easy to detect outliers because it's hard to constitute the criteria for an outlier. Therefore the outlier detection task is typically unsupervised and requires a stochastic streaming algorithm to identify potential outliers. Luckily, there are several powerful libraries such as [PyOD](https://pyod.readthedocs.io/en/latest/){:target="_blank"}, [Alibi Detect](https://docs.seldon.io/projects/alibi-detect/en/latest/){:target="_blank"}, [WhyLogs](https://whylogs.readthedocs.io/en/latest/){:target="_blank"} (uses [Apache DataSketches](https://datasketches.apache.org/){:target="_blank"}), etc. that offer a suite of outlier detection functionality (largely for tabular and image data for now). We can use these packages with our [pipelines](pipelines.md){:target="_blank"} or even [Kafka](https://kafka.apache.org/){:target="_blank"} data streams to continuously monitor for outliers.
@@ -666,7 +666,7 @@ There are many different ways we can act to drift based on the situation. An ini
 Since detecting drift and outliers can involve compute intensive operations, we need a solution that can execute serverless workloads on top of our event data streams (ex. [Kafka](https://kafka.apache.org/){:target="_blank"}). Typically these solutions will ingest payloads (ex. model's inputs and outputs) and can trigger monitoring workloads. This allows us to segregate the resources for monitoring from our actual ML application and scale them as needed.
 
 <div class="ai-center-all">
-    <img width="600" src="https://i.ibb.co/Pxkn6d2/serverless.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/serverless.png">
 </div>
 
 When it actually comes to implementing a monitoring system, we have several options, ranging from fully managed to from-scratch. Several popular managed solutions are [Fiddler](https://www.fiddler.ai/ml-monitoring){:target="_blank"}, [Arize](https://arize.com/){:target="_blank"}, [Arthur](https://www.arthur.ai/){:target="_blank"}, [Mona](https://www.monalabs.io/){:target="_blank"}, etc., all of which allow us to create custom monitoring views, trigger alerts, etc. There are even several great open-source solutions such as [Gantry](https://gantry.io/){:target="_blank"}, [TorchDrift](https://torchdrift.org/){:target="_blank"}, [WhyLabs](https://whylabs.ai/){:target="_blank"}, [EvidentlyAI](https://evidentlyai.com/){:target="_blank"}, etc.

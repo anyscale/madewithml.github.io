@@ -1157,7 +1157,7 @@ patience = 10
 ```python linenums="1"
 # Define loss
 class_weights_tensor = torch.Tensor(np.array(list(class_weights.values())))
-loss = nn.BCEWithLogitsLoss(weight=class_weights_tensor)
+loss_fn = nn.BCEWithLogitsLoss(weight=class_weights_tensor)
 ```
 ```python linenums="1"
 # Define optimizer & scheduler
@@ -1689,7 +1689,7 @@ patience = 10
 ```python linenums="1"
 # Define loss
 class_weights_tensor = torch.Tensor(np.array(list(class_weights.values())))
-loss = nn.BCEWithLogitsLoss(weight=class_weights_tensor)
+loss_fn = nn.BCEWithLogitsLoss(weight=class_weights_tensor)
 ```
 ```python linenums="1"
 # Define optimizer & scheduler
@@ -2102,7 +2102,7 @@ patience = 10
 ```python linenums="1"
 # Define loss
 class_weights_tensor = torch.Tensor(np.array(list(class_weights.values())))
-loss = nn.BCEWithLogitsLoss(weight=class_weights_tensor)
+loss_fn = nn.BCEWithLogitsLoss(weight=class_weights_tensor)
 ```
 ```python linenums="1"
 # Define optimizer & scheduler
