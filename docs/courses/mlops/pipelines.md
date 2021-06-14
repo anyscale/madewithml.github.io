@@ -127,7 +127,7 @@ As our scheduler reads from the metadata database, the executor determines what 
 Workflows are defined by directed acyclic graphs (DAGs), whose nodes represent tasks and edges represent the relationship between the tasks. Direct and acyclic implies that workflows can only execute in one direction and a previous, upstream task cannot run again once a downstream task has started.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/basic-dag.png" width="250" alt="pivot">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/basic_dag.png" width="250" alt="pivot">
 </div>
 
 DAGs can be defined inside Python workflow scripts inside the `airflow/dags` directory and they'll automatically appear (and continuously be updated) on the webserver. Inside each workflow script, we can define some default arguments that will apply to all DAGs within that workflow.
