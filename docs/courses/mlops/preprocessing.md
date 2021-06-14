@@ -72,7 +72,8 @@ df.A = df.A.replace({"0": np.nan, 0: np.nan})
 # Ex. Feature value must be within 2 standard deviations
 df[np.abs(df.A - df.A.mean()) <= (2 * df.A.std())]
 ```
-- be careful about removing important outliers (ex. fraud)
+- be careful not to remove important outliers (ex. fraud)
+- values may not be outliers when we apply a transformation (ex. power law)
 - anomalies can be global (point), contextual (conditional) or collective (individual points are not anomalous and the collective group is an outlier)
 
 ### Feature engineering
@@ -111,9 +112,6 @@ text = text.lower()
 
 ## Transformations
 Transforming the data involves feature encoding and engineering.
-
-!!! warning
-    Before transformation, be sure to detect (and potentially remove) outliers using distributions and/or domain expertise because they can severely skew transformations. We should regularly revisit these explicit decisions because they may change over time and you don’t want to be including or removing data we shouldn’t be.
 
 ### Scaling
 - required for models where the scale of the input affects the processes
