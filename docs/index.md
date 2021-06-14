@@ -204,11 +204,15 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <p>
     Now, I want to share that knowledge with the rest of the world so we can accelerate progress in this space. ML is <b>not a separate industry</b>, instead, it's going to be a <b>way of thinking</b> for anything that involves data (ie. everything), so let's make sure we have a solid foundation before we start changing the world. Made With ML is our medium to catalyze this goal and though we're off to great start, we still have a long way to go.
 </p>
-<ul>
-    <li>Among the <a href="https://github.com/topics/mlops" target="_blank">top MLOps repositories</a> on GitHub.</li>
-    <li><a href="https://newsletter.madewithml.com/" target="_blank">30K+ community members</a> and growing.</li>
-    <li><a href="https://youtu.be/VSC7WBFMuZo?t=1000" target="_blank">Highly recommended</a> resources used by many companies.</li>
-</ul>
+<div class="row">
+    <div class="offset-md-2 col-md-8">
+        <ul>
+            <li>🏆 Among the <a href="https://github.com/topics/mlops" target="_blank">top MLOps repositories</a> on GitHub.</li>
+            <li>❤️ <a href="https://newsletter.madewithml.com/" target="_blank">30K+ community members</a> and growing.</li>
+            <li>🛠️ <a href="https://youtu.be/VSC7WBFMuZo?t=1000" target="_blank">Highly recommended</a> resources used by industry.</li>
+        </ul>
+    </div>
+</div>
 
 <hr style="margin-top: 2rem;">
 
