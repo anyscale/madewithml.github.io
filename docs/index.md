@@ -209,7 +209,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
         <ul>
             <li>🏆 Among the <a href="https://github.com/topics/mlops" target="_blank">top MLOps repositories</a> on GitHub.</li>
             <li>❤️ <a href="https://newsletter.madewithml.com/" target="_blank">30K+ community members</a> and growing.</li>
-            <li>🛠️ <a href="https://youtu.be/VSC7WBFMuZo?t=1000" target="_blank">Highly recommended</a> resources used by industry.</li>
+            <li>🛠️ A <a href="https://youtu.be/VSC7WBFMuZo?t=1000" target="_blank">highly recommended</a> resource used by industry.</li>
         </ul>
     </div>
 </div>
