@@ -70,7 +70,7 @@ Batch process features for a given entity at a previous point in time, which are
 - ❌&nbsp; features can become stale since they were predetermined a while ago. This can be a huge disadvantage when your prediction depends on very recent events. (ex. catching fraudulent transactions as quickly as possible).
 
 !!! note
-    We'll discuss how these features are stored for training and inference in the [feature stores lesson](feature_stores.md){:target="_blank"}.
+    We'll discuss how these features are stored for training and inference in the [feature stores lesson](feature-store.md){:target="_blank"}.
 
 ### Stream processing
 

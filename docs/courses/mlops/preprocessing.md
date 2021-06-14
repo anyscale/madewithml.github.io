@@ -83,14 +83,14 @@ df.C = df.A + df.B
 ```
 
 !!! note
-    This is also when we would save these features to a central [feature store](feature_stores.md){:target="_blank"} for the benefits of:
+    This is also when we would save these features to a central [feature store](feature-store.md){:target="_blank"} for the benefits of:
 
     - reduce duplication of effort when engineering features.
     - remove training and serving skew for creating and using features.
     - avoid data leaks with point-in-time validation (es. during SQL joins).
     - data validation and monitoring on features distributions.
 
-    Learn more about feature stores and implementing them with [Feast](https://github.com/feast-dev/feast){:target="_blank"} in our [Feature Stores lesson](feature_stores.md){:target="_blank"}.
+    Learn more about feature stores and implementing them with [Feast](https://github.com/feast-dev/feast){:target="_blank"} in our [Feature Stores lesson](feature-store.md){:target="_blank"}.
 
 ### Cleaning
 - use domain expertise and EDA

@@ -1,7 +1,7 @@
 ---
 template: main.html
 title: Our Mission
-description: We exist to end the hype and educate how to responsibly deliver value with ML.
+description: We exist to end the hype and educate the community on how to responsibly deliver value with ML.
 keywords: mlops, applied ml, machine learning
 ---
 

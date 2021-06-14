@@ -35,9 +35,9 @@ extra:
 nav:
   - Home: index.md
   - About: about.md
-  - Basics: courses/basics.md
-  - MLOps: courses/mlops.md
-  - FAQ: faq.md
+  - Basics: /#basics
+  - MLOps: /#mlops
+  - FAQ: /#frequently-asked-questions-faq
 
 # Configuration
 theme:
@@ -107,54 +107,6 @@ plugins:
         redirect_maps:
             "subscribe": "index.md"
             "topics": "pivot.md"
-            "courses/ml-foundations.md": "courses/basics.md"
-            "courses/applied-ml.md": "courses/mlops.md"
-            "courses/applied-ml-in-production.md": "courses/mlops.md"
-            "courses/putting-ml-in-production.md": "courses/mlops.md"
-            "courses/ml-foundations/notebooks.md": "courses/basics/notebooks.md"
-            "courses/ml-foundations/python.md": "courses/basics/python.md"
-            "courses/ml-foundations/numpy.md": "courses/basics/numpy.md"
-            "courses/ml-foundations/pandas.md": "courses/basics/pandas.md"
-            "courses/ml-foundations/pytorch.md": "courses/basics/pytorch.md"
-            "courses/ml-foundations/linear-regression.md": "courses/basics/linear-regression.md"
-            "courses/ml-foundations/logistic-regression.md": "courses/basics/logistic-regression.md"
-            "courses/ml-foundations/neural-networks.md": "courses/basics/neural-networks.md"
-            "courses/ml-foundations/data-quality.md": "courses/basics/data-quality.md"
-            "courses/ml-foundations/utilities.md": "courses/basics/utilities.md"
-            "courses/ml-foundations/convolutional-neural-networks.md": "courses/basics/convolutional-neural-networks.md"
-            "courses/ml-foundations/embeddings.md": "courses/basics/embeddings.md"
-            "courses/ml-foundations/recurrent-neural-networks.md": "courses/basics/recurrent-neural-networks.md"
-            "courses/ml-foundations/attention.md": "courses/basics/attention.md"
-            "courses/ml-foundations/transformers.md": "courses/basics/transformers.md"
-            "courses/applied-ml/objective.md": "courses/mlops/objective.md"
-            "courses/applied-ml/solution.md": "courses/mlops/solution.md"
-            "courses/applied-ml/evaluation.md": "courses/mlops/evaluation.md"
-            "courses/applied-ml/iteration.md": "courses/mlops/iteration.md"
-            "courses/applied-ml/annotation.md": "courses/mlops/labeling.md"
-            "courses/applied-ml/exploratory-data-analysis.md": "courses/mlops/exploratory-data-analysis.md"
-            "courses/applied-ml/splitting.md": "courses/mlops/splitting.md"
-            "courses/applied-ml/preprocessing.md": "courses/mlops/preprocessing.md"
-            "courses/applied-ml/baselines.md": "courses/mlops/baselines.md"
-            "courses/applied-ml/experiment-tracking.md": "courses/mlops/experiment-tracking.md"
-            "courses/applied-ml/optimization.md": "courses/mlops/optimization.md"
-            "courses/applied-ml/organization.md": "courses/mlops/organization.md"
-            "courses/applied-ml/packaging.md": "courses/mlops/packaging.md"
-            "courses/applied-ml/documentation.md": "courses/mlops/documentation.md"
-            "courses/applied-ml/logging.md": "courses/mlops/logging.md"
-            "courses/applied-ml/styling.md": "courses/mlops/styling.md"
-            "courses/applied-ml/makefile.md": "courses/mlops/makefile.md"
-            "courses/applied-ml/cli.md": "courses/mlops/cli.md"
-            "courses/applied-ml/api.md": "courses/mlops/api.md"
-            "courses/applied-ml/testing.md": "courses/mlops/testing.md"
-            "courses/applied-ml/testing.md#data": "courses/mlops/testing.md#data"
-            "courses/applied-ml/testing.md#models": "courses/mlops/testing.md#models"
-            "courses/applied-ml/git.md": "courses/mlops/git.md"
-            "courses/applied-ml/pre-commit.md": "courses/mlops/pre-commit.md"
-            "courses/applied-ml/versioning.md": "courses/mlops/versioning.md"
-            "courses/applied-ml/docker.md": "courses/mlops/docker.md"
-            "courses/applied-ml/dashboard.md": "courses/mlops/dashboard.md"
-            "courses/applied-ml/cicd.md": courses/mlops/cicd.md"
-            "courses/applied-ml/monitoring.md": "courses/mlops/monitoring.md"
-            "courses/applied-ml/feature-stores.md": "courses/mlops/feature-stores.md"
-            "courses/applied-ml/pipelines.md": "courses/mlops/pipelines.md"
-            "courses/mlops/annotation.md": "courses/mlops/labeling.md"
+            "courses/basics.md": "https://madewithml.com/#basics"
+            "courses/mlops.md": "https://madewithml.com/#mlops"
+            "faq": "https://madewithml.com/#frequently-asked-questions-faq"
