@@ -23,7 +23,7 @@ Hope you're doing well. I was recently accepted into [Made With ML's MLOps cours
 
 A 4-week project based course to learn the fundamentals of MLOps. It focuses on helping me develop an intuition as opposed to being a rigid course that uses a very specific set of tools. At the same time, it's <u>extremely hands-on</u> where I'll learn proper software engineering practices and implement all the MLOps concepts I learn. It's tool, stack and cloud provider agnostic, so I'll easily be able to extend what I learn to our systems.
 
-This course brings all of the MLOps best practices into one place, allowing for me to quickly (and properly) learn it. And best of all, the classes are during the weekend so I <u>won't be missing any work</u>.
+This course brings all of the MLOps best practices into one place, allowing me to quickly (and properly) learn it. And best of all, the classes are during the weekend so I <u>won't be missing any work</u>.
 
 Here's a quick look at the curriculum:
 <img width="1000" src="/static/images/mlops.png">
