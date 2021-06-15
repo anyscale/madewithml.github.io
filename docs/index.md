@@ -225,8 +225,17 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 - `#!js College graduates` looking to learn the practical skills they'll need for the industry.
 - `#!js Product Managers` who want to develop a technical foundation for ML applications.
 
-### Why is this free?
+### Why is this content free?
 While this content is for everyone, it's especially targeted towards people who don't have as much opportunity to learn. I firmly believe that creativity and intelligence are randomly distributed but opportunity is siloed. I want to enable more people to create and contribute to innovation.
+
+<div class="row mb-0">
+    <div class="offset-md-1 col-md-10">
+        <div class="admonition question">
+            <p class="admonition-title">More questions?</p> <p>Feel free to send us an <a href="mailto:hello@madewithml.com" target="_blank">email</a> with all your additional questions and we'll get back to you very soon.</p>
+        </div>
+    </div>
+</div>
+
 
 <hr>
 

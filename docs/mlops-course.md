@@ -16,19 +16,22 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
-<hr>
+<hr style="margin-bottom: 2rem;">
 
 <!-- Course header -->
 <h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
 <h2 class="ai-center-all mt-0 mb-0" style="font-size: 1.5rem;">MLOps Course</h2>
 <div class="ai-center-all">
-    <p class="mt-3" style="font-size: 0.89rem;">A 4-week project-based course on MLOps fundamentals with a focus on intuition and application. All the lessons below are <b>100% free</b> whereas the paid course is about the <a href="#features">experience and community</a> to set yourself up for continued success.</p>
+    <p class="mt-3" style="font-size: 0.89rem;">A 4-week project-based course on MLOps fundamentals with a focus on intuition and application. All the lessons below are <b>100% free</b>, whereas the paid course is about the <a href="#features">experience and community</a> to set yourself up for continued success.</p>
 </div>
 <div class="ai-center-all">
     <p class="mt-0 mb-0" style="font-size: 0.9rem;">$2,000 USD</p>
 </div>
 <div class="ai-center-all">
-    <a href="" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-0 mt-md-1 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Apply</a>
+    <small>(reimbursement details <a href="#reimbursement">below</a>)</small>
+</div>
+<div class="ai-center-all">
+    <a href="https://forms.gle/YeX6oXoSbKNEjXD88" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-0 mt-md-1 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Apply</a>
 </div>
 <div class="ai-center-all">
     <div class="p-3 mt-3" style="width: 15rem; background-color: #f2f8fd;">
@@ -41,10 +44,17 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
-<hr style="margin-top: 2rem;">
+<hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
 <!-- Features -->
-## Features
+<div class="row mt-0">
+    <div class="col-md-8">
+        <h2 id="features" class="mt-0">Features</h2>
+    </div>
+    <div class="col-md-4 text-right">
+        <small><span style="color: rgb(75, 115, 245);">▓</span> = cohort course features</small>
+    </div>
+</div>
 <div class="row ai-features">
     <div class="col-md-6 ai-feature">
         <div class="ai-feature-header">
@@ -75,7 +85,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
     <div class="col-md-6 ai-feature">
         <div class="ai-feature-header">
-            <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span>
+            <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.513 11.5h4.745c.1-3.037 1.1-5.49 2.093-7.204.39-.672.78-1.233 1.119-1.673C6.11 3.329 2.746 7 2.513 11.5zm4.77 1.5H2.552a9.505 9.505 0 007.918 8.377 15.698 15.698 0 01-1.119-1.673C8.413 18.085 7.47 15.807 7.283 13zm1.504 0h6.426c-.183 2.48-1.02 4.5-1.862 5.951-.476.82-.95 1.455-1.304 1.88L12 20.89l-.047-.057a13.888 13.888 0 01-1.304-1.88C9.807 17.5 8.969 15.478 8.787 13zm6.454-1.5H8.759c.1-2.708.992-4.904 1.89-6.451.476-.82.95-1.455 1.304-1.88L12 3.11l.047.057c.353.426.828 1.06 1.304 1.88.898 1.548 1.79 3.744 1.89 6.452zm1.476 1.5c-.186 2.807-1.13 5.085-2.068 6.704-.39.672-.78 1.233-1.118 1.673A9.505 9.505 0 0021.447 13h-4.731zm4.77-1.5h-4.745c-.1-3.037-1.1-5.49-2.093-7.204-.39-.672-.78-1.233-1.119-1.673 4.36.706 7.724 4.377 7.957 8.877z"></path></svg></span>
             Comprehensive
         </div>
         <div class="ai-feature-text">
@@ -88,7 +98,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
             Interactive
         </div>
         <div class="ai-feature-text">
-            Interactive lectures and assignments along the way to solidify what we're learning.
+            Lectures, assignments and discussions along the way to solidify what we're learning.
         </div>
     </div>
     <div class="col-md-6 ai-feature">
@@ -97,7 +107,25 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
             Community
         </div>
         <div class="ai-feature-text">
-            A community experience with weekly readings, discussions, brainstorming and accountability.
+            An alumni community with weekly readings, discussions, brainstorming, etc.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature">
+        <div class="ai-feature-header" style="color: rgb(75, 115, 245);">
+            <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6.736 4C4.657 4 2.5 5.88 2.5 8.514c0 3.107 2.324 5.96 4.861 8.12a29.66 29.66 0 004.566 3.175l.073.041.073-.04c.271-.153.661-.38 1.13-.674.94-.588 2.19-1.441 3.436-2.502 2.537-2.16 4.861-5.013 4.861-8.12C21.5 5.88 19.343 4 17.264 4c-2.106 0-3.801 1.389-4.553 3.643a.75.75 0 01-1.422 0C10.537 5.389 8.841 4 6.736 4zM12 20.703l.343.667a.75.75 0 01-.686 0l.343-.667zM1 8.513C1 5.053 3.829 2.5 6.736 2.5 9.03 2.5 10.881 3.726 12 5.605 13.12 3.726 14.97 2.5 17.264 2.5 20.17 2.5 23 5.052 23 8.514c0 3.818-2.801 7.06-5.389 9.262a31.146 31.146 0 01-5.233 3.576l-.025.013-.007.003-.002.001-.344-.666-.343.667-.003-.002-.007-.003-.025-.013A29.308 29.308 0 0110 20.408a31.147 31.147 0 01-3.611-2.632C3.8 15.573 1 12.332 1 8.514z"></path></svg></span>
+            Accountability
+        </div>
+        <div class="ai-feature-text">
+            Regular check-ins with your fellow peers and the instructor to make sure we're on track.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature">
+        <div class="ai-feature-header" style="color: rgb(75, 115, 245);">
+            <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span>
+            Career guidance
+        </div>
+        <div class="ai-feature-text">
+            1-on-1 career planning session with the <a href="#instructor">instructor</a> at the end of the course.
         </div>
     </div>
 </div>
@@ -214,7 +242,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
-<h2 class="ai-center-all mt-0 mb-2 md-typeset">Meet your instructor</h2>
+<h2 id="instructor" class="ai-center-all mt-0 mb-2 md-typeset">Meet your instructor</h2>
 
 <div class="ai-center-all mt-4">
     <img class="ai-header-image" src="/static/images/goku_circle.png">
@@ -244,54 +272,88 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
-
-<!-- Course header -->
-<h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
-<h2 class="ai-center-all mt-0 mb-2" style="font-size: 1.5rem;">MLOps Course</h2>
-<div class="ai-center-all">
-    <p class="mt-0 mb-0" style="font-size: 0.9rem;">$2,000 USD</p>
-</div>
-<div class="ai-center-all">
-    <a href="" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-0 mt-md-1 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Apply</a>
-</div>
-<div class="ai-center-all">
-    <div class="p-3 mt-3" style="width: 15rem; background-color: #f2f8fd;">
-        <div class="ai-center-all">
-            <small><b>Application deadline:</b> July 20th, 2021</small>
-        </div>
-        <div class="ai-center-all">
-            <small><b>Course start date:</b> August 1st, 2021</small>
+<div style="background-color: #F5F5F5; padding: 2rem; margin-top: 1rem;">
+    <!-- Course header -->
+    <h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
+    <h2 class="ai-center-all mt-0 mb-2" style="font-size: 1.5rem;">MLOps Course</h2>
+    <div class="ai-center-all">
+        <p class="mt-0 mb-0" style="font-size: 0.9rem;">$2,000 USD</p>
+    </div>
+    <div class="ai-center-all">
+        <small>(reimbursement details <a href="#reimbursement">below</a>)</small>
+    </div>
+    <div class="ai-center-all">
+        <a href="https://forms.gle/YeX6oXoSbKNEjXD88" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-0 mt-md-1 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Apply</a>
+    </div>
+    <div class="ai-center-all">
+        <div class="p-3 mt-3" style="width: 15rem; background-color: #f2f8fd;">
+            <div class="ai-center-all">
+                <small><b>Application deadline:</b> July 20th, 2021</small>
+            </div>
+            <div class="ai-center-all">
+                <small><b>Course start date:</b> August 1st, 2021</small>
+            </div>
         </div>
     </div>
 </div>
 
-<hr style="margin-top: 2rem;">
+## Reimbursement
+
+Our alumni have had a lot of success getting 100% of the course reimbursed by their employers since all of this directly falls under career development and, in many cases, highly necessary for their work. After you apply and are accepted for a cohort, check out this [**email template**](reimbursement.md) that we've put together that you can send to your manager to get this course reimbursed.
+
+<hr>
 
 <!-- FAQ -->
 ## Frequently Asked Questions (FAQ)
 
-### Why pay for a course when all the content is free?
-All the content is free so you can successfully learn everything yourself. The course is about the experience and the community to set yourself up for continued success.
+### Who is this course for?
 
-Project-based course on MLOps foundations with a focus on intuition and application.
-Easily extends to all algorithms, data (text, image, tabular), tools, tech stacks, cloud providers, etc.
-
-### What are the logistics of the course?
-7 hours/week for 4 weeks, part-time and virtual.
-
-### Who is this content for?
 - `#!js Software engineers` looking to learn ML and become even better software engineers.
 - `#!js Data scientists / ML engineers` who want to learn how to responsibly deliver value with ML.
 - `#!js College graduates` looking to learn the practical skills they'll need for the industry.
 - `#!js Product Managers` who want to develop a technical foundation for ML applications.
 
-### Who is this course not for?
+### What can I get out of this course?
+
+It's extremely difficult to learn most things on our own, let alone a complicated and fast-paced topic like MLOps. This is why I made all of the [content](#basics) completely free so we can see the quality of what we'll learn. The paid course is all about going through this content in just a few weeks with a small, highly motivated cohort. We'll have interactive lectures, assignments, readings, discussions and of course, it's all 100% project based so we actually learn how to apply everything we learn.
+
+> Learning this content will set us up for where ML is headed and because we focus on the foundations, the intuition we'll develop is everlasting and we'll be equipped to adapt to this ever-changing space.
+
+### What is the time commitment for the course?
+
+6 hours/week for 4 weeks, part-time and virtual. The lectures and discussions will take place Saturdays and Sunday from 8-11 am PST. We highly recommend you attend all of them because they're highly interactive. But they will be recorded in the event you miss one or two days. We will also have small assignments and readings which must be done on your own time so we can discuss them during the live sessions.
+
+> We will also have impromptu help sessions, discussions, etc. during the week as the cohort needs it but these will be optional.
 
 ### What are there prerequisites?
+
+During the first week of the course, we're going to cover all of the [Basics](#basics) lessons. We'll be doing this fairly quickly so we can focus on the [MLOps](#mlops) content shortly after. While we will cover the basics of Python and deep learning, it's highly recommended to be familiar with the following:
+
+- Python (variables, lists, dictionaries, functions, classes)
+- Scientific computing (NumPy, Pandas)
+- PyTorch (nn.module, training/inference loops)
+- ML/DL (basics of regression, neural networks, CNN, etc.)
+
+> While the focus of the MLOps content is algorithm agnostic, we will be using some simple baseline models in our work so it's important to understand how they work. If you feel you aren't ready, spend a few weeks to go through the [Basics](#basics) lessons and then join the next cohort.
+
 ### Can I do the course while working full-time or going to school?
-### Can I be reimbursed for the course?
-### What if I have more questions?
+
+Absolutely, this course is meant for busy people who are building things. That's why the mandatory sessions are during the weekend and they'll be recorded in case you miss a few of them. During the week, you'll have to do some small readings and assignments.
+
+### Why is this content free?
+
+We're the [top MLOps repository](https://github.com/topics/mlops){:target="_blank"} on GitHub (25K+ stars), a quickly [growing community](https://newsletter.madewithml.com/){:target="_blank"} (30K+) and a [highly recommended](https://youtu.be/VSC7WBFMuZo?t=1000){:target="_blank"} resource used by industry. But we wanted to show everyone exactly what we'll learn in the course because the paid course is all about the [experience](#features).
+
+> The free content is especially targeted towards people who don't have as much opportunity to learn. I firmly believe that creativity and intelligence are randomly distributed but opportunity is siloed. I want to enable more people to create and contribute to innovation.
+
+
+<div class="row mb-0">
+    <div class="offset-md-1 col-md-10">
+        <div class="admonition question">
+            <p class="admonition-title">More questions?</p> <p>Feel free to send us an <a href="mailto:hello@madewithml.com" target="_blank">email</a> with all your additional questions and we'll get back to you very soon.</p>
+        </div>
+    </div>
+</div>
 
 <hr>
 
