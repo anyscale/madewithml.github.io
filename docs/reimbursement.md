@@ -32,7 +32,7 @@ Here's a quick look at the curriculum:
 
 The course is from Made With ML, who has the [top MLOps repository](https://github.com/topics/mlops){:target="_blank"} on GitHub (25K+ stars), a quickly [growing community](https://newsletter.madewithml.com/){:target="_blank"} (30K+) and is a [highly recommended](https://youtu.be/VSC7WBFMuZo?t=1000){:target="_blank"} resource used by industry. Their content not only covers MLOPs concepts but they go deep into actually implementing all of them as well.
 
-### How will this will help me?
+### How will this help me?
 
 I'll be learning the foundation I need to responsibly create ML systems. This includes developing clean, production-grade code, testing my work, understanding MLOps components (experiment management, feature store, workflows, etc.) and, most importantly, being able to iterate and improve our systems.
 
