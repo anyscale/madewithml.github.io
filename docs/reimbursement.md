@@ -26,7 +26,10 @@ A 4-week project based course to learn the fundamentals of MLOps. It focuses on 
 This course brings all of the MLOps best practices into one place, allowing me to quickly (and properly) learn it. And best of all, the classes are during the weekend so I <u>won't be missing any work</u>.
 
 Here's a quick look at the curriculum:
-<img width="1000" src="/static/images/mlops.png">
+
+<div class="ai-center-all">
+    <img width="700" src="/static/images/mlops.png">
+</div>
 
 ### Who's teaching the course?
 
