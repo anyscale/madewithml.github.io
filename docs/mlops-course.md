@@ -6,18 +6,6 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 {% include "styles/page.md" %}
 
-<div class="row mb-0">
-    <div class="offset-md-1 col-md-10">
-        <div class="admonition question mb-0">
-            <p>
-                <span class="twemoji" style="color: #64dd17;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm16.28-2.72a.75.75 0 00-1.06-1.06l-5.97 5.97-2.47-2.47a.75.75 0 00-1.06 1.06l3 3a.75.75 0 001.06 0l6.5-6.5z"></path></svg></span> You've been invited to a private beta version of the course. We may eventually open it up to the public but for now, this opportunity is reserved <b>just for you</b>.
-            </p>
-        </div>
-    </div>
-</div>
-
-<hr style="margin-bottom: 2rem;">
-
 <!-- Course header -->
 <h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
 <h2 class="ai-center-all mt-0 mb-0" style="font-size: 1.5rem;">MLOps Course</h2>
