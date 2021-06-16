@@ -15,7 +15,7 @@ keywords: mlops, applied ml, machine learning
 
 Hi,
 
-Hope you're doing well. I was recently accepted into [Made With ML's MLOps course](https://madewithml.com/mlops-course){:target="_blank"}, which is a 4-week project-based course on MLOps fundamentals. The course costs $2,000 but the value I'll gain for myself and our team/company will pay for the course almost immediately. I added some key information about the course below and would love to get this career development opportunity reimbursed.
+Hope you're doing well. I was recently accepted into [Made With ML's MLOps course](https://madewithml.com/mlops-course){:target="_blank"}, which is a 4-week project-based course on MLOps fundamentals. The course costs $850 but the value I'll gain for myself and our team/company will pay for the course almost immediately. I added some key information about the course below and would love to get this career development opportunity reimbursed.
 
 <u>Course page</u>: [https://madewithml.com/mlops-course](https://madewithml.com/mlops-course){:target="_blank"}
 

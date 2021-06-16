@@ -25,7 +25,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <p class="mt-3" style="font-size: 0.89rem;">A 4-week project-based course on MLOps fundamentals with a focus on intuition and application. All the lessons below are <b>100% free</b>, whereas the paid course is about the <a href="#features">experience and community</a> to set yourself up for continued success.</p>
 </div>
 <div class="ai-center-all">
-    <p class="mt-0 mb-0" style="font-size: 0.9rem;">$2,000 USD</p>
+    <p class="mt-0 mb-0" style="font-size: 0.9rem;">$850 USD</p>
 </div>
 <div class="ai-center-all">
     <small>(reimbursement details <a href="#reimbursement">below</a>)</small>
@@ -277,7 +277,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
     <h2 class="ai-center-all mt-0 mb-2" style="font-size: 1.5rem;">MLOps Course</h2>
     <div class="ai-center-all">
-        <p class="mt-0 mb-0" style="font-size: 0.9rem;">$2,000 USD</p>
+        <p class="mt-0 mb-0" style="font-size: 0.9rem;">$850 USD</p>
     </div>
     <div class="ai-center-all">
         <small>(reimbursement details <a href="#reimbursement">below</a>)</small>
