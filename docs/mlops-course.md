@@ -118,8 +118,14 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
-!!! warning "This is not a MOOC"
-    Passive courses on popular online education platforms typically have a [2-3% completion rate](https://www.insidehighered.com/digital-learning/article/2019/01/16/study-offers-data-show-moocs-didnt-achieve-their-goals){:target="_blank"} because they don't offer the cohort-based community experience. This course is interactive and offers accountability to make sure you learn this content well enough to apply it in your own work.
+<div class="row mb-0">
+    <div class="offset-md-1 col-md-10">
+        <div class="admonition warning">
+            <p class="admonition-title">This is not a MOOC</p>
+            <p>Passive courses on popular online education platforms typically have a <a href="https://www.insidehighered.com/digital-learning/article/2019/01/16/study-offers-data-show-moocs-didnt-achieve-their-goals" target="_blank">2-3% completion rate</a> because they don't offer the cohort-based community experience. This course is interactive and offers accountability to make sure you learn this content well enough to apply it in your own work.</p>
+        </div>
+    </div>
+</div>
 
 <hr>
 
