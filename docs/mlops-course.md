@@ -48,10 +48,10 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 <!-- Features -->
 <div class="row mt-0">
-    <div class="col-md-8">
+    <div class="col-4 col-md-8">
         <h2 id="features" class="mt-0">Features</h2>
     </div>
-    <div class="col-md-4 text-right">
+    <div class="col-8 col-md-4 text-right">
         <small><span style="color: rgb(75, 115, 245);">▓</span> = cohort course features</small>
     </div>
 </div>
@@ -129,6 +129,9 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
         </div>
     </div>
 </div>
+
+!!! warning "This is not a MOOC"
+    Passive courses on popular online education platforms typically have a [2-3% completion rate](https://www.insidehighered.com/digital-learning/article/2019/01/16/study-offers-data-show-moocs-didnt-achieve-their-goals){:target="_blank"} because they don't offer the cohort-based community experience. This course is interactive and offers accountability to make sure you learn this content well enough to apply it in your own work.
 
 <hr>
 
@@ -272,7 +275,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
-<div style="background-color: #F5F5F5; padding: 2rem; margin-top: 1rem;">
+<div style="background-color: #F5F5F5; padding-top: 2rem; padding-bottom: 2rem; padding-left: 1rem; padding-right: 1rem; margin-top: 1rem;">
     <!-- Course header -->
     <h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
     <h2 class="ai-center-all mt-0 mb-2" style="font-size: 1.5rem;">MLOps Course</h2>
