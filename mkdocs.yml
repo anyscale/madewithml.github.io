@@ -110,3 +110,5 @@ plugins:
             "courses/basics.md": "https://madewithml.com/#basics"
             "courses/mlops.md": "https://madewithml.com/#mlops"
             "faq": "https://madewithml.com/#frequently-asked-questions-faq"
+            "courses/putting-ml-in-production.md": "index.md"
+            "courses/applied-ml.md": "index.md"

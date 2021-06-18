@@ -237,7 +237,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 </div>
 </div>
 
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
+<hr style="margin-bottom: 2rem;">
 
 <h2 id="instructor" class="ai-center-all mt-0 mb-2 md-typeset">Meet your instructor</h2>
 
@@ -269,6 +269,8 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
+<hr style="margin-bottom: 2rem;">
+
 <div style="background-color: #F5F5F5; padding-top: 2rem; padding-bottom: 2rem; padding-left: 1rem; padding-right: 1rem; margin-top: 1rem;">
     <!-- Course header -->
     <h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
@@ -294,6 +296,8 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
+<hr style="margin-top: 2rem;">
+
 ## Reimbursement
 
 Our alumni have had a lot of success getting 100% of the course reimbursed by their employers since all of this directly falls under career development and, in many cases, highly necessary for their work. After you apply and are accepted for a cohort, check out this [**email template**](reimbursement.md) that we've put together that you can send to your manager to get this course reimbursed.
@@ -318,7 +322,7 @@ It's extremely difficult to learn most things on our own, let alone a complicate
 
 ### What is the time commitment for the course?
 
-6 hours/week for 4 weeks, part-time and virtual. The lectures and discussions will take place Saturdays and Sunday from 8-11 am PST. We highly recommend you attend all of them because they're highly interactive. But they will be recorded in the event you miss one or two days. We will also have small assignments and readings which must be done on your own time so we can discuss them during the live sessions.
+6 hours/week for 4 weeks, part-time and virtual. The lectures and discussions will take place <u>Saturdays and Sunday from 8-11 am PST</u>. We highly recommend you attend all of them because they're highly interactive. But they will be recorded in the event you miss one or two days. We will also have small assignments and readings which must be done on your own time so we can discuss them during the live sessions.
 
 > We will also have impromptu help sessions, discussions, etc. during the week as the cohort needs it but these will be optional.
 
