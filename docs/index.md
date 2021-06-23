@@ -75,7 +75,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <hr>
 
 ## Basics
-> Learn the foundations of ML through intuitive explanations, clean code and visualizations.
+> Learn the fundamentals of ML through intuitive explanations, clean code and visualizations.
 [GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🔥 Among the [top ML repos](https://github.com/topics/deep-learning){:target="blank"} on GitHub
 
 <div class="row mt-4 ai-course-list">

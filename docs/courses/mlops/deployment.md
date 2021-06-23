@@ -194,5 +194,10 @@ For our application, we'll need the following components to best serve our users
 - **stream processing** since our predictions are on entities (projects) that have never been seen before. We'll want to have the latest (and only) features for each project so we can predict the most appropriate tags. However, our use case doesn't necessarily involve entity features changing over time so it might makes sense to just have one processing pipeline and not have to worry about separate batch and stream pipelines.
 - **offline learning** will work just fine for our application since the vocabulary and tag spaces are fairly constrained for a given period of time. However, we will use [monitoring](monitoring.md){:target="_blank"} to ensure that our input and output spaces are as expected and initiate retraining periodically.
 
+## Resources
+
+- [Batch is a special case of streaming](https://www.ververica.com/blog/batch-is-a-special-case-of-streaming){:target="_blank"}
+- [Machine learning is going real-time](https://huyenchip.com/2020/12/27/real-time-machine-learning.html){:target="_blank"}
+
 <!-- Citation -->
 {% include "cite.md" %}

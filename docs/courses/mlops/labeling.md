@@ -187,26 +187,27 @@ def display_tag_details(tag='question-answering'):
 We could have used the user provided tags as our labels but what if the user added a wrong tag or forgot to add a relevant one. To remove this dependency on the user to provide the gold standard labels, we can leverage labeling tools and platforms. These tools allow for quick and organized labeling of the dataset to ensure its quality. And instead of starting from scratch and asking our labeler to provide all the relevant tags for a given project, we can provide the author's original tags and ask the labeler to add / remove as necessary. The specific labeling tool may be something that needs to be custom built or leverages something from the ecosystem.
 
 ### General
-- [Label Studio](https://github.com/heartexlabs/label-studio): a multi-type data labeling and annotation tool with standardized output format.
-- [Universal Data Tool](https://github.com/UniversalDataTool/universal-data-tool): collaborate and label any type of data, images, text, or documents in an easy web interface or desktop app.
-- [Prodigy](https://github.com/explosion/prodigy-recipes): recipes for the Prodigy, our fully scriptable annotation tool.
-- [Superintendent](https://github.com/janfreyberg/superintendent): an ipywidget-based interactive labelling tool for your data to enable active learning.
+- [Scale AI](https://scale.com/){:target="_blank"}: the data platform for high quality training and validation data for AI applications.
+- [Label Studio](https://github.com/heartexlabs/label-studio){:target="_blank"}: a multi-type data labeling and annotation tool with standardized output format.
+- [Universal Data Tool](https://github.com/UniversalDataTool/universal-data-tool){:target="_blank"}: collaborate and label any type of data, images, text, or documents in an easy web interface or desktop app.
+- [Prodigy](https://github.com/explosion/prodigy-recipes){:target="_blank"}: recipes for the Prodigy, our fully scriptable annotation tool.
+- [Superintendent](https://github.com/janfreyberg/superintendent){:target="_blank"}: an ipywidget-based interactive labelling tool for your data to enable active learning.
 ### Natural language processing
-- [Doccano](https://github.com/doccano/doccano): an open source text annotation tool for text classification, sequence labeling and sequence to sequence tasks.
-- [BRAT](https://github.com/nlplab/brat): a rapid annotation tool for all your textual annotation needs.
+- [Doccano](https://github.com/doccano/doccano){:target="_blank"}: an open source text annotation tool for text classification, sequence labeling and sequence to sequence tasks.
+- [BRAT](https://github.com/nlplab/brat){:target="_blank"}: a rapid annotation tool for all your textual annotation needs.
 ### Computer vision
-- [LabelImg](https://github.com/tzutalin/labelImg): a graphical image annotation tool and label object bounding boxes in images.
-- [CVAT](https://github.com/openvinotoolkit/cvat): a free, online, interactive video and image annotation tool for computer vision.
-- [VoTT](https://github.com/Microsoft/VoTT): an electron app for building end-to-end object detection models from images and videos.
-- [makesense.ai](https://github.com/SkalskiP/make-sense): a free to use online tool for labelling photos.
-- [remo](https://github.com/rediscovery-io/remo-python): an app for annotations and images management in computer vision.
-- [Labelai](https://github.com/aralroca/labelai): an online tool designed to label images, useful for training AI models.
+- [LabelImg](https://github.com/tzutalin/labelImg){:target="_blank"}: a graphical image annotation tool and label object bounding boxes in images.
+- [CVAT](https://github.com/openvinotoolkit/cvat){:target="_blank"}: a free, online, interactive video and image annotation tool for computer vision.
+- [VoTT](https://github.com/Microsoft/VoTT){:target="_blank"}: an electron app for building end-to-end object detection models from images and videos.
+- [makesense.ai](https://github.com/SkalskiP/make-sense){:target="_blank"}: a free to use online tool for labelling photos.
+- [remo](https://github.com/rediscovery-io/remo-python){:target="_blank"}: an app for annotations and images management in computer vision.
+- [Labelai](https://github.com/aralroca/labelai){:target="_blank"}: an online tool designed to label images, useful for training AI models.
 ### Audio
-- [Audino](https://github.com/midas-research/audino): an open source audio annotation tool for voice activity detection (VAD), diarization, speaker identification, automated speech recognition, emotion recognition tasks, etc.
-- [audio-annotator](https://github.com/CrowdCurio/audio-annotator): a JavaScript interface for annotating and labeling audio files.
-- [EchoML](https://github.com/ritazh/EchoML): a web app to play, visualize, and annotate your audio files for machine learning.
+- [Audino](https://github.com/midas-research/audino){:target="_blank"}: an open source audio annotation tool for voice activity detection (VAD), diarization, speaker identification, automated speech recognition, emotion recognition tasks, etc.
+- [audio-annotator](https://github.com/CrowdCurio/audio-annotator){:target="_blank"}: a JavaScript interface for annotating and labeling audio files.
+- [EchoML](https://github.com/ritazh/EchoML){:target="_blank"}: a web app to play, visualize, and annotate your audio files for machine learning.
 ### Miscellaneous
-- [MedCAT](https://github.com/CogStack/MedCAT): a medical concept annotation tool that can extract information from Electronic Health Records (EHRs) and link it to biomedical ontologies like SNOMED-CT and UMLS.
+- [MedCAT](https://github.com/CogStack/MedCAT){:target="_blank"}: a medical concept annotation tool that can extract information from Electronic Health Records (EHRs) and link it to biomedical ontologies like SNOMED-CT and UMLS.
 
 
 ## Active learning

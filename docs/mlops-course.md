@@ -130,7 +130,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <hr>
 
 ## Basics
-> Learn the foundations of ML through intuitive explanations, clean code and visualizations.
+> Learn the fundamentals of ML through intuitive explanations, clean code and visualizations.
 [GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🔥 Among the [top ML repos](https://github.com/topics/deep-learning){:target="blank"} on GitHub
 
 <div class="row mt-4 ai-course-list">
@@ -335,7 +335,7 @@ During the first week of the course, we're going to cover all of the [Basics](#b
 - PyTorch (nn.module, training/inference loops)
 - ML/DL (basics of regression, neural networks, CNN, etc.)
 
-> While the focus of the MLOps content is algorithm agnostic, we will be using some simple baseline models in our work so it's important to understand how they work. If you feel you aren't ready, spend a few weeks to go through the [Basics](#basics) lessons and then join the next cohort.
+> If you think we should offer a separate, more detailed, course on machine learning fundamentals, [let us know](mailto:hello@madewithml.com){:target="_blank"}!
 
 ### Can I do the course while working full-time or going to school?
 
