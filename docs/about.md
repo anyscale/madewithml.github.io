@@ -1,7 +1,7 @@
 ---
 template: main.html
 title: Our Mission
-description: We exist to end the hype and educate the community on how to responsibly develop, iterate and deliver value with ML.
+description: We exist to end the hype and educate the community on how to responsibly deliver value with ML.
 keywords: mlops, applied ml, machine learning
 ---
 
@@ -17,7 +17,7 @@ How come there's a lot of buzz around ML but we grossly fall short when it comes
 - `#!js trust`: ML needs to be engineered reliably and robustly.
 
 We will steadily address all the issues mentioned above but we're going to work backwards starting with *trust*.
-This is why we created our courses to educate the community on how to responsibly develop, deploy, and iterate on applications that are made with ML.
+This is why we created our courses to educate the community on how to responsibly develop, iterate and deliver value via applications that are made with ML.
 
 !!! info
     Read about our <a href="/pivot">pivot</a> from our dynamic platform.

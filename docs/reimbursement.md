@@ -37,7 +37,7 @@ The course is from Made With ML, who has the [top MLOps repository](https://gith
 
 ### How will this help me?
 
-I'll be learning the foundation I need to responsibly develop, iterate and deliver value with ML systems. This includes producing clean, production-grade code, testing my work, understanding MLOps components (experiment management, feature store, workflows, etc.) and, most importantly, being able to iterate and improve our systems.
+I'll be learning the foundation I need to responsibly deliver value with ML systems. This includes producing clean, production-grade code, testing my work, understanding MLOps components (experiment management, feature store, workflows, etc.) and, most importantly, being able to iterate and improve our systems.
 
 ### How will this help our company?
 
