@@ -1,7 +1,7 @@
 ---
 template: main.html
 title: Pivot from Hype and Overwhelm
-description: Read about our pivot to end the perpetuation of hype and realigning to create original content to help people responsibly deliver value with ML.
+description: Read about our pivot to end the perpetuation of hype and realigning to create original content to help people responsibly develop, iterate and deliver value with ML.
 keywords: madewithml, producthunt
 ---
 
@@ -34,4 +34,4 @@ Luckily, we *don't* depend on ads or traffic so we decided to make the changes n
 - [x] sound software engineering
 - [x] delivering (actual) value with ML
 
-Made With ML very quickly gained a lot of traction and we are guilty of creating overwhelm. We **apologize** and now we're focused on helping people learn how to responsibly deliver value with ML.
+Made With ML very quickly gained a lot of traction and we are guilty of creating overwhelm. We **apologize** and now we're focused on helping people learn how to responsibly develop, iterate and deliver value with ML.

@@ -254,7 +254,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 </div>
 
 <p>
-    Over the past 7 years, I've worked on ML and product at a large company (<a href="https://www.apple.com/" target="_blank">Apple</a>), a startup in the oncology space (<a href="https://www.ciitizen.com/" target="_blank">Ciitizen</a>) and even ran my own startup in the rideshare space (HotSpot). Throughout my journey, I've worked with brilliant developers and product managers and learned how to responsibly build, lauch and iterate on ML systems across various industries.
+    Over the past 7 years, I've worked on ML and product at a large company (<a href="https://www.apple.com/" target="_blank">Apple</a>), a startup in the oncology space (<a href="https://www.ciitizen.com/" target="_blank">Ciitizen</a>) and even ran my own startup in the rideshare space (HotSpot). Throughout my journey, I've worked with brilliant developers and product managers and learned how to responsibly develop, deploy and iterate on ML systems across various industries.
 </p>
 <p>
     Now, I want to share that knowledge with the rest of the world so we can accelerate progress in this space. ML is <b>not a separate industry</b>, instead, it's going to be a <b>way of thinking</b> for anything that involves data (ie. everything), so let's make sure we have a solid foundation before we start changing the world. Made With ML is our medium to catalyze this goal and though we're off to great start, we still have a long way to go.

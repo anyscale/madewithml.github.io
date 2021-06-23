@@ -11,7 +11,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
         <div class="ai-hero-text">
             <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
             <p style="margin-top: 0rem; margin-bottom: 0rem !important; color: #807e7e;">Applied ML · MLOps · Production</p>
-            <p style="font-size: 0.89rem;">Join <b>30K+ developers</b> in learning how to <a href="about">responsibly</a> deliver value with ML.</p>
+            <p style="font-size: 0.89rem;">Join <b>30K+ developers</b> in learning how to responsibly deliver value with ML.</p>
             <div id="revue-embed">
                 <form action="https://www.getrevue.co/profile/madewithml/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
                     <input class="revue-form-field" placeholder="Your email address..." type="email" name="member[email]" id="member_email" style="width: 80%; border: 1px solid #b3b3b3; border-radius: 3px;">
@@ -199,7 +199,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 </div>
 
 <p>
-    Over the past 7 years, I've worked on ML and product at a large company (<a href="https://www.apple.com/" target="_blank">Apple</a>), a startup in the oncology space (<a href="https://www.ciitizen.com/" target="_blank">Ciitizen</a>) and even ran my own startup in the rideshare space (HotSpot). Throughout my journey, I've worked with brilliant developers and product managers and learned how to responsibly build, lauch and iterate on ML systems across various industries.
+    Over the past 7 years, I've worked on ML and product at a large company (<a href="https://www.apple.com/" target="_blank">Apple</a>), a startup in the oncology space (<a href="https://www.ciitizen.com/" target="_blank">Ciitizen</a>) and even ran my own startup in the rideshare space (HotSpot). Throughout my journey, I've worked with brilliant developers and product managers and learned how to responsibly develop, deploy and iterate on ML systems across various industries.
 </p>
 <p>
     Now, I want to share that knowledge with the rest of the world so we can accelerate progress in this space. ML is <b>not a separate industry</b>, instead, it's going to be a <b>way of thinking</b> for anything that involves data (ie. everything), so let's make sure we have a solid foundation before we start changing the world. Made With ML is our medium to catalyze this goal and though we're off to great start, we still have a long way to go.
