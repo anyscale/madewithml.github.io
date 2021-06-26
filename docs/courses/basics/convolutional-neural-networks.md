@@ -667,6 +667,7 @@ Now let's return to our actual inputs `x`, which is of shape (8, 10) [`max_seq_l
 So far we've used a `stride` of 1 and `VALID` padding (no padding) but let's look at an example with a higher stride and difference between different padding approaches.
 
 Padding types:
+
 * `VALID`: no padding, the filters only use the "valid" values in the input. If the filter cannot reach all the input values (filters go left to right), the extra values on the right are dropped.
 * `SAME`: adds padding evenly to the right (preferred) and left sides of the input so that all values in the input are processed.
 

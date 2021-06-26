@@ -674,8 +674,7 @@ Lastly, we have a [`schema_extra`](https://fastapi.tiangolo.com/tutorial/schema-
 </div>
 
 
-
-## Projects
+## Product
 
 To make our API a standalone product, we'll need to create and manage a database for our users and resources. These users will have credentials which they will use for authentication and use their privileges to be able to communicate with our service. And of course, we can display a rendered frontend to make all of this seamless with HTML forms, buttons, etc. This is exactly how the [old MWML platform](https://twitter.com/madewithml/status/1284503478685978625){:target="_blank"} was built and we leveraged FastAPI to deliver high performance for 500K+ daily service requests.
 

@@ -103,24 +103,25 @@ df.head(3)
 </div></div>
 
 These are the different features:
-* `class`: class of travel
-* `name`: full name of the passenger
-* `sex`: gender
-* `age`: numerical age
-* `sibsp`: # of siblings/spouse aboard
-* `parch`: number of parents/child aboard
-* `ticket`: ticket number
-* `fare`: cost of the ticket
-* `cabin`: location of room
-* `emarked`: port that the passenger embarked at (C - Cherbourg, S - Southampton, Q - Queenstown)
-* `survived`: survial metric (0 - died, 1 - survived)
+
+- `class`: class of travel
+- `name`: full name of the passenger
+- `sex`: gender
+- `age`: numerical age
+- `sibsp`: # of siblings/spouse aboard
+- `parch`: number of parents/child aboard
+- `ticket`: ticket number
+- `fare`: cost of the ticket
+- `cabin`: location of room
+- `emarked`: port that the passenger embarked at (C - Cherbourg, S - Southampton, Q - Queenstown)
+- `survived`: survial metric (0 - died, 1 - survived)
 
 
 ## Exploratory data analysis (EDA)
 Now that we loaded our data, we're ready to start exploring it to find interesting information.
 
 !!! note
-    Be sure to check out our entire lesson focused on [EDA]](https://madewithml.com/courses/mlops/exploratory-data-analysis/){:target="_blank"} in our [mlops](https://madewithml.com/courses/mlops/){:target="_blank"} course.
+    Be sure to check out our entire lesson focused on [EDA](https://madewithml.com/courses/mlops/exploratory-data-analysis/){:target="_blank"} in our [mlops](https://madewithml.com/courses/mlops/){:target="_blank"} course.
 
 ```python linenums="1"
 import matplotlib.pyplot as plt

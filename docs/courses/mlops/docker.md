@@ -153,7 +153,7 @@ docker rm $(docker ps -a -q)    # remove all containers
 ```
 
 !!! note
-    If our application required multiple containers for different services (API, database, etc.) then we can bring them all up at once using the [docker compose](https://docs.docker.com/compose/){:target="_blank"} functionality and scale and manage them using a container orchestration system like [Kubernetes](https://kubernetes.io/){:target="_blank"}. If we're specifically deploying ML workflows, we can use a toolkit like [KubeFlow](https://www.kubeflow.org/){:target="_blank"} to help us manage and scale.
+    If our application required multiple containers for different services (API, database, etc.) then we can bring them all up at once using the [docker compose](https://docs.docker.com/compose/){:target="_blank"} functionality and scale and manage them using a container orchestration system like [Kubernetes (K8s)](https://kubernetes.io/){:target="_blank"}. If we're specifically deploying ML workflows, we can use a toolkit like [KubeFlow](https://www.kubeflow.org/){:target="_blank"} to help us manage and scale.
 
 ## Debug
 
@@ -163,8 +163,6 @@ In the event that we run into errors while building our image layers, a very eas
 # Run container
 docker run -p 5000:5000 -it tagifai /bin/bash
 ```
-
-<hr>
 
 Once we have our container running, we can use our application as we would on our local machine but now it's reproducible on any operating system that can run the Docker container engine. We've covered just what we need from Docker to deploy our application but there is so much more to Docker, which you can explore in the official [docs](https://docs.docker.com/){:target="_blank"}.
 

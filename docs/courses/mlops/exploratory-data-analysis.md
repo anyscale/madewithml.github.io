@@ -14,7 +14,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/
 Exploratory data analysis (EDA) is a vital (and fun) step in the data science process but it's often misconstrued. Here's how to think about EDA:
 
 - not just to visualize a prescribed set of plots (correlation matrix, etc.).
-- goal is to *convince* yourself that the data you currently have is sufficient for the task.
+- goal is to *convince* yourself that the data you have is sufficient for the task.
 - use EDA to answer important questions and to make it easier to extract insight
 - not a one time process; as your data grows, you want to revisit EDA to catch distribution shifts, anomalies, etc.
 

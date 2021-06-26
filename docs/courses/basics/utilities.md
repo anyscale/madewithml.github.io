@@ -855,7 +855,7 @@ There are lots of other utilities to cover, such as:
 - Hyperparameter optimization to tune our parameters (layers, learning rate, etc.)
 - and many more!
 
-We'll explore these as we require them in future lessons including some in our [Applied ML](https://madewithml.com/courses/mlops/) course!
+We'll explore these as we require them in future lessons including some in our [MLOps](https://madewithml.com/courses/mlops/) course!
 
 
 <!-- Citation -->

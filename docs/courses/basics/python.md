@@ -714,7 +714,7 @@ operations.__name__, operations.__doc__
 Awesome! We were able to decorate our main function `operation()` to achieve the customization we wanted without actually altering the function. We can reuse our decorator for other functions that may need the same customization!
 
 !!! note
-    This was a dummy example to show how decorators work but we'll be using them heavily during our [applied ML](https://madewithml.com/courses/mlops/) lessons. A simple scenario would be using decorators to create uniform JSON responses from each API endpoint without including the bulky code in each endpoint.
+    This was a dummy example to show how decorators work but we'll be using them heavily during our [MLOps](https://madewithml.com/courses/mlops/) lessons. A simple scenario would be using decorators to create uniform JSON responses from each API endpoint without including the bulky code in each endpoint.
 
 
 ### Callbacks

@@ -1032,6 +1032,7 @@ print (f"<Embeddings(words={embedding_matrix.shape[0]}, dim={embedding_matrix.sh
 
 ## Experiments
 We have first have to decice whether to use pretrained embeddings randomly initialized ones. Then, we can choose to freeze our embeddings or continue to train them using the supervised data (this could lead to overfitting). Here are the three experiments we're going to conduct:
+
 * randomly initialized embeddings (fine-tuned)
 * GloVe embeddings (frozen)
 * GloVe embeddings (fine-tuned)

@@ -37,6 +37,7 @@ print (json.dumps(performance, indent=2))
 
 !!! note
     The [precision_recall_fscore_support()](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_fscore_support.html){:target="_blank"} function from scikit-learn has an input parameter called `average` which has the following options below. We'll be using the different averaging methods for different metric granularities.
+
     - `None`: metrics are calculated for each unique class.
     - `binary`: used for binary classification tasks where the `pos_label` is specified.
     - `micro`: metrics are calculated using global TP, FP, and FN.

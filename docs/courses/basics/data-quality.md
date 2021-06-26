@@ -730,6 +730,7 @@ plt.show()
 </div>
 
 This is a very fragile but highly realistic scenario. Based on our reduced synthetic dataset, we have achieved a model that generalized really well on the test data. But when we ask for the prediction for the same point tested earlier (which we known is malignant), the prediction is now a benign tumor. We would have completely missed the tumor. To mitigate this, we can:
+
 1. Get more data around the space we are concerned about
 2. Consume predictions with caution when they are close to the decision boundary
 
