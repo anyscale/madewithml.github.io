@@ -41,6 +41,9 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <div class="ai-center-all">
     <a href="#apply" class="md-button md-button--green-gradient mb-2 mb-md-0 mt-md-0 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Apply</a>
 </div>
+<div class="ai-center-all mt-1">
+    <small>Enterprise workshops available</small>
+</div>
 <div class="ai-center-all">
     <div class="p-3 mt-3" style="width: 15rem; background-color: #f2f8fd;">
         <div class="ai-center-all">
@@ -320,7 +323,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <div class="row mt-4">
     <div class="col-md-6">
         <div class="card mb-3" style="max-width: 18rem;">
-            <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Essential</h3></div>
+            <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Individual</h3></div>
             <div class="card-body">
                 <ul class="task-list">
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live sessions and coding workshops</li>
@@ -328,7 +331,6 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live Q&A sessions</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;"How to navigate X" series</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Career guidance sessions</li>
-                    <span class="twemoji" style="color: #d63939;"><svg class="position: absolute; top: .15em; left: -1.5em; width: 1.25em; height: 1.25em;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12zm8.036-4.024a.75.75 0 00-1.06 1.06L10.939 12l-2.963 2.963a.75.75 0 101.06 1.06L12 13.06l2.963 2.964a.75.75 0 001.061-1.06L13.061 12l2.963-2.964a.75.75 0 10-1.06-1.06L12 10.939 9.036 7.976z"></path></svg></span></label>  &nbsp;<i>Lifetime access</i> to all future iterations of the course
                 </ul>
             </div>
             <div class="card-footer bg-transparent">
@@ -343,15 +345,14 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
     <div class="col-md-6">
         <div class="card mb-3" style="max-width: 18rem;">
-            <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Premium</h3></div>
+            <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Enterprise Teams</h3></div>
             <div class="card-body">
                 <ul class="task-list">
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live sessions and coding workshops</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;2-3 day accelerated live sessions & coding workshops</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Private online community</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live Q&A sessions</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;"How to navigate X" series</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Career guidance sessions</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;<b><i>Lifetime access</i> to all future iterations of the course</b></li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;ML project guidance sessions</li>
                 </ul>
             </div>
             <div class="card-footer bg-transparent">
@@ -359,15 +360,12 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                     <p class="mt-0 mb-1" style="font-size: 0.9rem;">$1500 USD</p>
                 </div>
                 <div class="ai-center-all">
-                    <a href="https://forms.gle/PCwHPRTJBdLT7WFF9" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
+                    <a href="https://forms.gle/8L8ga4fTnmwss9by8" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-**ENTERPRISE** We also offer a 2-3 day accelerated workshop for companies interested in providing their entire team with an MLOps foundation. Complete this <a href="https://forms.gle/8L8ga4fTnmwss9by8" target="_blank">form</a> if you're interested and we'll be in touch with you soon.
 
 <div class="my-2"></div>
 
