@@ -36,13 +36,13 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
 <h2 class="ai-center-all mt-0 mb-0" style="font-size: 1.5rem;">MLOps Course</h2>
 <div class="ai-center-all">
-    <p class="mt-3" style="font-size: 0.89rem;">A 4-week paid project-based course on MLOps fundamentals with a focus on intuition and application. All the lessons below are <b>100% free</b>, whereas the <b>paid course</b> is about the experience and community to set yourself up for continued success.</p>
+    <p class="mt-3" style="font-size: 0.89rem;">A 4-week paid project-based course on MLOps fundamentals with a focus on intuition and application. All the lessons below are <b>100% free</b> so you can assess the content quality yourself, whereas the <b>paid course</b> is about the <a href="#features">experience and community</a> to make sure you learn this content well enough to apply it to your own work.</p>
 </div>
 <div class="ai-center-all">
     <a href="#apply" class="md-button md-button--green-gradient mb-2 mb-md-0 mt-md-0 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Apply</a>
 </div>
 <div class="ai-center-all mt-1">
-    <small>Enterprise workshops available</small>
+    <small>* Enterprise workshops available</small>
 </div>
 <div class="ai-center-all">
     <div class="p-3 mt-3" style="width: 15rem; background-color: #f2f8fd;">
@@ -104,7 +104,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
             <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.3 8.24a.75.75 0 01-.04 1.06L7.352 12l2.908 2.7a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 011.06.04zm3.44 1.06a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.908-2.7-2.908-2.7z"></path><path fill-rule="evenodd" d="M2 3.75C2 2.784 2.784 2 3.75 2h16.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0120.25 22H3.75A1.75 1.75 0 012 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25v16.5c0 .138.112.25.25.25h16.5a.25.25 0 00.25-.25V3.75a.25.25 0 00-.25-.25H3.75z"></path></svg></span>Interactive
         </div>
         <div class="ai-feature-text">
-            Lectures, assignments and discussions along the way to solidify what we're learning.
+            Live lectures, coding workshops and assigments along the way to solidify what we're learning.
         </div>
     </div>
     <div class="col-md-6 ai-feature">
@@ -137,7 +137,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <div class="offset-md-1 col-md-10">
         <div class="admonition warning">
             <p class="admonition-title">This is not a MOOC</p>
-            <p>Passive courses on popular online education platforms typically have a <a href="https://www.insidehighered.com/digital-learning/article/2019/01/16/study-offers-data-show-moocs-didnt-achieve-their-goals" target="_blank">2-3% completion rate</a> because they don't offer the cohort-based community experience. This course is interactive and offers accountability to make sure you learn this content well enough to apply it in your own work.</p>
+            <p>Passive courses on popular online education platforms typically have a <a href="https://www.insidehighered.com/digital-learning/article/2019/01/16/study-offers-data-show-moocs-didnt-achieve-their-goals" target="_blank">2-3% completion rate</a> because they don't offer the cohort-based community experience. Our paid course is interactive and offers accountability to make sure you learn this content well enough to apply it to your own work.</p>
         </div>
     </div>
 </div>
@@ -345,10 +345,10 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
     <div class="col-md-6">
         <div class="card mb-3" style="max-width: 18rem;">
-            <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Enterprise Teams</h3></div>
+            <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Enterprise</h3></div>
             <div class="card-body">
                 <ul class="task-list">
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;2-3 day accelerated live sessions & coding workshops</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;<i>Accelerated</i> live sessions & coding workshops</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Private online community</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live Q&A sessions</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;"How to navigate X" series</li>
@@ -357,10 +357,10 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
             </div>
             <div class="card-footer bg-transparent">
                 <div class="ai-center-all">
-                    <p class="mt-0 mb-1" style="font-size: 0.9rem;">$1500 USD</p>
+                    <p class="mt-0 mb-1" style="font-size: 0.8rem;">virtual or in-person</p>
                 </div>
                 <div class="ai-center-all">
-                    <a href="https://forms.gle/8L8ga4fTnmwss9by8" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
+                    <a href="https://forms.gle/8L8ga4fTnmwss9by8" target="_blank" class="md-button md-button--grey-secondary mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Contact us</a>
                 </div>
             </div>
         </div>
