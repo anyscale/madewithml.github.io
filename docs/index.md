@@ -29,6 +29,21 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
+<div class="ai-center-all" style="margin-top: 1.5rem;">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="px-md-3 py-md-3 px-5 py-3" style="background-color: #f5f9fd; border-radius: 10px;">🏆 &nbsp;Among the <a href="https://github.com/topics/mlops" target="_blank">top MLOps repositories</a> on GitHub.</div>
+        </div>
+        <div class="col-md-4 mt-2 mt-md-0">
+            <div class="px-md-3 py-md-3 px-5 py-3" style="background-color: #f5f9fd; border-radius: 10px;">❤️ &nbsp;<a href="https://newsletter.madewithml.com/" target="_blank">30K+ community members</a> and growing.</div>
+        </div>
+        <div class="col-md-4 mt-2 mt-md-0">
+            <div class="px-md-3 py-md-3 px-5 py-3" style="background-color: #f5f9fd; border-radius: 10px;">🛠️  &nbsp;<a href="https://youtu.be/VSC7WBFMuZo?t=1000" target="_blank">Highly recommended</a> industry resource.</div>
+        </div>
+    </div>
+</div>
+
+
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
 <!-- Features -->
@@ -72,7 +87,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 ## Basics
 > Learn the fundamentals of ML through intuitive explanations, clean code and visualizations.
-[GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🔥 &nbsp;Among the [top ML repos](https://github.com/topics/deep-learning){:target="blank"} on GitHub
+[GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top ML repos](https://github.com/topics/deep-learning){:target="blank"} on GitHub
 
 <div class="row mt-4 ai-course-list">
 <div class="col-md-4">
@@ -110,7 +125,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 ## MLOps
 > Learn how to apply ML to build a production grade product and deliver value.
-[GokuMohandas/MLOps](https://github.com/GokuMohandas/MLOps){:target="_blank"} &rarr; 🔥 &nbsp;Among the [top MLOps repos](https://github.com/topics/mlops){:target="blank"} on GitHub
+[GokuMohandas/MLOps](https://github.com/GokuMohandas/MLOps){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top MLOps repos](https://github.com/topics/mlops){:target="blank"} on GitHub
 
 <div class="row mt-4 ai-course-list">
 <div class="col-md-4">
@@ -203,17 +218,8 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <p>
     ML is <b>not a separate industry</b>, instead, it's a powerful <b>way of thinking</b> about data, so let's make sure we have a solid foundation before we start changing the world. Made With ML is our medium to catalyze this goal and though we're off to great start, we still have a long way to go.
 </p>
-<div class="row">
-    <div class="offset-md-2 col-md-8">
-        <ul>
-            <li>🏆 &nbsp;Among the <a href="https://github.com/topics/mlops" target="_blank">top MLOps repositories</a> on GitHub.</li>
-            <li>❤️ &nbsp;<a href="https://newsletter.madewithml.com/" target="_blank">30K+ community members</a> and growing.</li>
-            <li>🛠️  &nbsp;A <a href="https://youtu.be/VSC7WBFMuZo?t=1000" target="_blank">highly recommended</a> resource used by industry.</li>
-        </ul>
-    </div>
-</div>
 
-<hr style="margin-top: 1rem; margin-bottom: 2rem;">
+<hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
 <!-- FAQ -->
 ## Frequently Asked Questions (FAQ)

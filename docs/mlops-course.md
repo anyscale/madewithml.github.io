@@ -30,11 +30,27 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
+<div class="ai-center-all" style="margin-top: 1.5rem;">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="px-md-3 py-md-3 px-5 py-3" style="background-color: #f5f9fd; border-radius: 10px;">🏆 &nbsp;Among the <a href="https://github.com/topics/mlops" target="_blank">top MLOps repositories</a> on GitHub.</div>
+        </div>
+        <div class="col-md-4 mt-2 mt-md-0">
+            <div class="px-md-3 py-md-3 px-5 py-3" style="background-color: #f5f9fd; border-radius: 10px;">❤️ &nbsp;<a href="https://newsletter.madewithml.com/" target="_blank">30K+ community members</a> and growing.</div>
+        </div>
+        <div class="col-md-4 mt-2 mt-md-0">
+            <div class="px-md-3 py-md-3 px-5 py-3" style="background-color: #f5f9fd; border-radius: 10px;">🛠️  &nbsp;<a href="https://youtu.be/VSC7WBFMuZo?t=1000" target="_blank">Highly recommended</a> industry resource.</div>
+        </div>
+    </div>
+</div>
+
+
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
 <!-- Course header -->
 <h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
 <h2 class="ai-center-all mt-0 mb-0" style="font-size: 1.5rem;">MLOps Course</h2>
+
 <div class="ai-center-all">
     <p class="mt-3" style="font-size: 0.89rem;">A project-based course on MLOps fundamentals with a focus on intuition and application. All the lessons below are <b>100% free</b> so you can assess the content quality yourself, whereas the 4-week <b>paid course</b> is about the <a href="#features">experience and community</a> to make sure you learn this content well enough to apply it to your own work.</p>
 </div>
@@ -45,25 +61,25 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <small>* Enterprise workshops available</small>
 </div>
 <div class="ai-center-all">
-    <div class="p-3 mt-3" style="width: 15rem; background-color: #f2f8fd;">
+    <div class="p-3" style="width: 15rem;">
         <div class="ai-center-all">
-            <small><b>Application deadline:</b> July 20th, 2021</small>
+            <small><b>Application deadline:</b> July 14th, 2021</small>
         </div>
         <div class="ai-center-all">
-            <small><b>Course start date:</b> July 31st, 2021</small>
+            <small><b>Course start date:</b> July 17th, 2021</small>
         </div>
     </div>
 </div>
 
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
+<hr style="margin-top: 1rem; margin-bottom: 2rem;">
 
 <!-- Features -->
 <div class="row mt-0">
     <div class="col-4 col-md-8">
         <h2 id="features" class="mt-0">Features</h2>
     </div>
-    <div class="col-8 col-md-4 text-right">
-        <small><span style="color: rgb(75, 115, 245);">▓</span> = paid course features</small>
+    <div class="col-8 col-md-4 text-right" style="font-size: 0.9rem;">
+        <small><span style="color: rgb(75, 115, 245);">▓</span> <b>=</b> <span style="color: rgb(75, 115, 245);"><b>paid course features</b></span></small>
     </div>
 </div>
 <div class="row ai-features">
@@ -146,7 +162,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 ## Basics
 > Learn the fundamentals of ML through intuitive explanations, clean code and visualizations.
-[GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🔥 &nbsp;Among the [top ML repos](https://github.com/topics/deep-learning){:target="blank"} on GitHub
+[GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top ML repos](https://github.com/topics/deep-learning){:target="blank"} on GitHub
 
 <div class="row mt-4 ai-course-list">
 <div class="col-md-4">
@@ -184,7 +200,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 ## MLOps
 > Learn how to apply ML to build a production grade product and deliver value.
-[GokuMohandas/MLOps](https://github.com/GokuMohandas/MLOps){:target="_blank"} &rarr; 🔥 &nbsp;Among the [top MLOps repos](https://github.com/topics/mlops){:target="blank"} on GitHub
+[GokuMohandas/MLOps](https://github.com/GokuMohandas/MLOps){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top MLOps repos](https://github.com/topics/mlops){:target="blank"} on GitHub
 
 <div class="row mt-4 ai-course-list">
 <div class="col-md-4">
@@ -277,17 +293,8 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <p>
     ML is <b>not a separate industry</b>, instead, it's a powerful <b>way of thinking</b> about data, so let's make sure we have a solid foundation before we start changing the world. Made With ML is our medium to catalyze this goal and though we're off to great start, we still have a long way to go.
 </p>
-<div class="row">
-    <div class="offset-md-2 col-md-8">
-        <ul>
-            <li>🏆 &nbsp;Among the <a href="https://github.com/topics/mlops" target="_blank">top MLOps repositories</a> on GitHub.</li>
-            <li>❤️ &nbsp;<a href="https://newsletter.madewithml.com/" target="_blank">30K+ community members</a> and growing.</li>
-            <li>🛠️  &nbsp;A <a href="https://youtu.be/VSC7WBFMuZo?t=1000" target="_blank">highly recommended</a> resource used by industry.</li>
-        </ul>
-    </div>
-</div>
 
-<hr style="margin-top: 1rem; margin-bottom: 2rem;">
+<hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
 ## Schedule
 
@@ -319,6 +326,16 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
 <p id="apply" class="ai-center-all mt-4" style="font-size: 1rem;">Learn how to responsibly deliver value with ML.</p>
+<div class="ai-center-all">
+    <div class="p-1" style="width: 15rem;">
+        <div class="ai-center-all">
+            <small><b>Application deadline:</b> July 14th, 2021</small>
+        </div>
+        <div class="ai-center-all">
+            <small><b>Course start date:</b> July 17th, 2021</small>
+        </div>
+    </div>
+</div>
 
 <div class="row mt-4">
     <div class="col-md-6">
@@ -415,7 +432,7 @@ This course covers the fundamentals of MLOps that will easily extend to any type
 
 Absolutely, this course is meant for busy people who are building things, which is why the mandatory sessions are during the weekend.
 
-### Why is the lesson material already free?
+### Why are the lessons already free?
 
 We're the [top MLOps repository](https://github.com/topics/mlops){:target="_blank"} on GitHub (26K+ stars), a quickly [growing community](https://newsletter.madewithml.com/){:target="_blank"} (30K+) and a [highly recommended](https://youtu.be/VSC7WBFMuZo?t=1000){:target="_blank"} resource used by industry. But we wanted to show everyone exactly what we'll learn in the course because the paid course is all about the [experience](#features).
 
