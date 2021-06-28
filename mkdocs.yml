@@ -112,3 +112,4 @@ plugins:
             "faq": "https://madewithml.com/#frequently-asked-questions-faq"
             "courses/putting-ml-in-production.md": "index.md"
             "courses/applied-ml.md": "index.md"
+            "courses/mlops/deployment.md": "courses/mlops/infrastructure.md"

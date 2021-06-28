@@ -1,7 +1,7 @@
 ---
 template: lesson.html
 title: Deployment
-description: A closer look at the types of deployment and methods to test, optimize, orchestrate and scale them.
+description: A closer look at the infrastructure needed for deployment and serving of ML applications.
 keywords: deployment, serving, online learning, stream processing, batch prediction, real-time prediction, model compression, pruning, quantization, distillation, kubernetes, seldon, kubeflow, kfserving, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
@@ -11,7 +11,7 @@ repository: https://github.com/GokuMohandas/MLOps
 
 ## Intuition
 
-We’ve already covered the methods of deployment via our API, Docker, and CI/CD lessons where the ML system is its own application, as opposed to being tied to a monolithic general application. This way we’re able to scale our ML workflows as needed and use it to deliver value across any other applications that maybe interested in using it’s outputs. So in this lesson, we’ll instead talk about the types of deployment and how optimize, orchestrate and scale them. We’ll first start by discussing the different ways we can serve predictions, process features and train models. All of these will ultimately dictate how we deploy our application.
+We’ve already covered the methods of deployment via our API, Docker, and CI/CD lessons where the ML system is its own application, as opposed to being tied to a monolithic general application. This way we’re able to scale our ML workflows as needed and use it to deliver value across any other applications that maybe interested in using it’s outputs. So in this lesson, we’ll instead talk about the types of deployment/serving and how optimize, orchestrate and scale them. We highly recommend using a framework such as [Metaflow](https://metaflow.org/){:target="_blank"} to set up all this infrastructure that we'll be discussing.
 
 ## Serving
 
