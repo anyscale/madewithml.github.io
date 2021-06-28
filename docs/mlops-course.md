@@ -260,7 +260,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <ul>
     <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
     <li><a href="/courses/mlops/cicd/">CI/CD workflows</a></li>
-    <li><a href="/courses/mlops/deployment/">Deployment</a></li>
+    <li><a href="/courses/mlops/infrastructure/">Infrastructure</a></li>
     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
     <li><a href="/courses/mlops/pipelines/">Pipelines</a></li>
     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>

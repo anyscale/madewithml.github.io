@@ -1,6 +1,6 @@
 ---
 template: lesson.html
-title: Deployment
+title: Infrastructure
 description: A closer look at the infrastructure needed for deployment and serving of ML applications.
 keywords: deployment, serving, online learning, stream processing, batch prediction, real-time prediction, model compression, pruning, quantization, distillation, kubernetes, seldon, kubeflow, kfserving, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
@@ -22,7 +22,7 @@ The first decision to make it to whether serve predictions via batches or real-t
 We can make batch predictions on a finite set of inputs which are then written to a database for low latency inference. When a user or downstream process makes an inference request in real-time, cached results from the database are returned.
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/batch_serving.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/batch_serving.png">
 </div>
 
 - ✅&nbsp; generate and cache predictions for very fast inference for users.
@@ -40,7 +40,7 @@ We can make batch predictions on a finite set of inputs which are then written t
 We can also serve live predictions, typically through an HTTPS call with the appropriate input data. This will involve spinning up our ML application as a microservice since users or downstream processes will interact directly with the model.
 
 <div class="ai-center-all">
-    <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/real_time_serving.png">
+    <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/real_time_serving.png">
 </div>
 
 - ✅&nbsp; can yield more up-to-date predictions which may can yield a more meaningful user experience, etc.
@@ -63,7 +63,7 @@ However, not all entities in ML applications work this way. Using our Netflix co
 Batch process features for a given entity at a previous point in time, which are later used for generating real-time predictions.
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/batch_processing.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/batch_processing.png">
 </div>
 
 - ✅&nbsp; can perform heavy feature computations offline and have it ready for fast inference.
@@ -77,7 +77,7 @@ Batch process features for a given entity at a previous point in time, which are
 Perform inference on a given set of inputs with near real-time, streaming, features for a given entity.
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/stream_processing.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/stream_processing.png">
 </div>
 
 - ✅&nbsp; we can generate better predictions by providing real-time, streaming, features to the model.
@@ -97,7 +97,7 @@ While we have the option to use batch / streaming features and serve batch / rea
 The traditional approach is to train our models offline and then deploy them to inference. We may periodically retrain them offline as new data becomes labeled, validated, etc. and deploy them after evaluation. We may also retrain them if we discover an issue during monitoring such as drift.
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/offline_learning.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/offline_learning.png">
 </div>
 
 - ✅&nbsp; don't need to worry about provisioning resources for compute since it happens offline.
@@ -112,7 +112,7 @@ The traditional approach is to train our models offline and then deploy them to 
 In order to truly serve the most informed predictions, we should have a model trained on the most recent data.
 
 <div class="ai-center-all">
-    <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/online_learning.png">
+    <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/online_learning.png">
 </div>
 
 - ✅&nbsp; model is aware of recent data distributions, trends, etc. which can provide highly informed predictions.
@@ -128,21 +128,21 @@ Once our application is deployed after our [offline tests](testing.md#evaluation
 AB tests involve sending production traffic to the different systems that we're evaluating and then using statistical hypothesis testing to decide which system is better. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination. In many cases, if we're simply trying to compare the different versions for a certain metric, multi-armed bandits will be a better approach.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/ab.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/ab.png">
 </div>
 
 ### Canary tests
 Canary tests involve sending most of the production traffic to the currently deployed system but sending traffic from a small cohort of users to the new system we're trying to evaluate. Again we need to make sure that the same users continue to interact with the same system as we gradually roll out the new system.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/canary.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/canary.png">
 </div>
 
 ### Shadow tests
 Shadow testing involves sending the same production traffic to the different systems. We don't have to worry about system contamination and it's very safe compared to the previous approaches since the new system's results are not served. However, we do need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. But overall, shadow testing is easy to monitor, validate operational consistency, etc.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/shadow.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/shadow.png">
 </div>
 
 ## Optimization
@@ -170,7 +170,7 @@ Compute engines such as AWS EC2, Google Compute, Azure VM, on-prem, etc. that ca
 Container orchestration via [Kubernetes](https://kubernetes.io/){:target="_blank"} (K8s) for managed deployment, scaling, etc. There are several ML specific platforms to help us **self-manage** K8s via control planes such as [Seldon](https://www.seldon.io/tech/){:target="_blank"}, [KFServing](https://www.kubeflow.org/docs/components/kfserving/kfserving/){:target="_blank"}, etc. However, there are also **fully-managed** solutions, such as [SageMaker](https://aws.amazon.com/sagemaker/){:target="_blank"}, [Cortex](https://www.cortex.dev/){:target="_blank"}, [BentoML](https://www.bentoml.ai/){:target="_blank"}, etc. Many of these tools also come with additional features such as experiment tracking, monitoring, etc.
 
 <div class="ai-center-all">
-    <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/deployment/managed.png">
+    <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/managed.png">
 </div>
 
 - **Pros**: very easy to scale our services since it's all managers with the proper components (load balancers, control planes, etc.)

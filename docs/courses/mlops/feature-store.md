@@ -96,7 +96,7 @@ We're going to start creating the components of the feature store, one at a time
 
 The first step is to establish connections with our data sources (databases, data warehouse, etc.). Feast requires it's [data sources](https://github.com/feast-dev/feast/blob/master/sdk/python/feast/data_source.py){:target="_blank"} to either come from a file ([Parquet](https://databricks.com/glossary/what-is-parquet){:target="_blank"}), data warehouse ([BigQuery](https://cloud.google.com/bigquery){:target="_blank"}) or data stream ([Kafka](https://kafka.apache.org/){:target="_blank"} / [Kinesis](https://aws.amazon.com/kinesis/){:target="_blank"}). We'll convert our generated features file from the DataOps pipeline (`features.json`) into a Parquet file.
 
-> Read more about these data sources in our [pipelines](https://madewithml.com/courses/mlops/pipelines/#data){:target="_blank"} and [deployment](../deployment/#batch-processing){:target="_blank"} lessons.
+> Read more about these data sources in our [pipelines](https://madewithml.com/courses/mlops/pipelines/#data){:target="_blank"} and [infrastructure](../infrastructure/#batch-processing){:target="_blank"} lessons.
 
 ```python linenums="1"
 import pandas as pd
@@ -332,7 +332,7 @@ feature_vector
 
 ### Batch processing
 
-The feature store we implemented above assumes that our task requires [batch processing](../deployment/#batch-processing){:target="_blank"}. This means that inference requests on specific entity instances can use features that have been materialized from the offline store. Note that they may not be the most recent feature values for that entity.
+The feature store we implemented above assumes that our task requires [batch processing](../infrastructure/#batch-processing){:target="_blank"}. This means that inference requests on specific entity instances can use features that have been materialized from the offline store. Note that they may not be the most recent feature values for that entity.
 
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/feature_store/batch.png" width="1000" alt="batch processing">
@@ -349,7 +349,7 @@ The feature store we implemented above assumes that our task requires [batch pro
 
 ### Stream processing
 
-Some applications may require [stream processing](../deployment/#stream-processing){:target="_blank"} where we require near real-time feature values to deliver up-to-date predictions at low latency. While we'll still utilize an offline store for retrieving historical data, our application's real-time event data will go directly through our data streams to an online store for serving.
+Some applications may require [stream processing](../infrastructure/#stream-processing){:target="_blank"} where we require near real-time feature values to deliver up-to-date predictions at low latency. While we'll still utilize an offline store for retrieving historical data, our application's real-time event data will go directly through our data streams to an online store for serving.
 
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/feature_store/stream.png" width="1000" alt="stream processing">
