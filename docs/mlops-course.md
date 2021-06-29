@@ -338,8 +338,8 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 </div>
 
 <div class="row mt-4">
-    <div class="col-md-4">
-        <div class="card mb-3 h-100" style="max-width: 18rem;">
+    <div class="col-md-4 mb-md-0 mb-4">
+        <div class="card h-100" style="max-width: 18rem;">
             <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Essential</h3></div>
             <div class="card-body">
                 <ul class="task-list">
@@ -359,8 +359,8 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card mb-3 h-100" style="max-width: 18rem;">
+    <div class="col-md-4 mb-md-0 mb-4">
+        <div class="card h-100" style="max-width: 18rem;">
             <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Premium</h3></div>
             <div class="card-body">
                 <ul class="task-list">
@@ -379,8 +379,8 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card mb-3 h-100" style="max-width: 18rem;">
+    <div class="col-md-4 mb-md-0 mb-4">
+        <div class="card h-100" style="max-width: 18rem;">
             <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Enterprise</h3></div>
             <div class="card-body">
                 <ul class="task-list">
