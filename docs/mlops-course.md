@@ -364,7 +364,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
             <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Premium</h3></div>
             <div class="card-body">
                 <ul class="task-list">
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Everything included in the <i>Essential</i> plan</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Everything in the <i>Essential</i> plan</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;60 min. 1-on-1 career guidance <div><small>(resume & portfolio)</small></div></li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;60 min. 1-on-1 <div>mock interview</div> <div><small>(technical & behavioral)</small></div></li>
                 </ul>
