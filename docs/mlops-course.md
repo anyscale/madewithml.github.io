@@ -311,7 +311,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
         <div>Tuesdays</div>
         <small><div>5 pm - 6 pm PST</div></small>
         </b>
-        <div class="mt-2"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 1A1.75 1.75 0 000 2.75v9.5C0 13.216.784 14 1.75 14H3v1.543a1.457 1.457 0 002.487 1.03L8.061 14h6.189A1.75 1.75 0 0016 12.25v-9.5A1.75 1.75 0 0014.25 1H1.75zM1.5 2.75a.25.25 0 01.25-.25h12.5a.25.25 0 01.25.25v9.5a.25.25 0 01-.25.25h-6.5a.75.75 0 00-.53.22L4.5 15.44v-2.19a.75.75 0 00-.75-.75h-2a.25.25 0 01-.25-.25v-9.5z"></path><path d="M22.5 8.75a.25.25 0 00-.25-.25h-3.5a.75.75 0 010-1.5h3.5c.966 0 1.75.784 1.75 1.75v9.5A1.75 1.75 0 0122.25 20H21v1.543a1.457 1.457 0 01-2.487 1.03L15.939 20H10.75A1.75 1.75 0 019 18.25v-1.465a.75.75 0 011.5 0v1.465c0 .138.112.25.25.25h5.5a.75.75 0 01.53.22l2.72 2.72v-2.19a.75.75 0 01.75-.75h2a.25.25 0 00.25-.25v-9.5z"></path></svg></span> Live Q&A and discussion sessions</div>
+        <div class="mt-2"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 1A1.75 1.75 0 000 2.75v9.5C0 13.216.784 14 1.75 14H3v1.543a1.457 1.457 0 002.487 1.03L8.061 14h6.189A1.75 1.75 0 0016 12.25v-9.5A1.75 1.75 0 0014.25 1H1.75zM1.5 2.75a.25.25 0 01.25-.25h12.5a.25.25 0 01.25.25v9.5a.25.25 0 01-.25.25h-6.5a.75.75 0 00-.53.22L4.5 15.44v-2.19a.75.75 0 00-.75-.75h-2a.25.25 0 01-.25-.25v-9.5z"></path><path d="M22.5 8.75a.25.25 0 00-.25-.25h-3.5a.75.75 0 010-1.5h3.5c.966 0 1.75.784 1.75 1.75v9.5A1.75 1.75 0 0122.25 20H21v1.543a1.457 1.457 0 01-2.487 1.03L15.939 20H10.75A1.75 1.75 0 019 18.25v-1.465a.75.75 0 011.5 0v1.465c0 .138.112.25.25.25h5.5a.75.75 0 01.53.22l2.72 2.72v-2.19a.75.75 0 01.75-.75h2a.25.25 0 00.25-.25v-9.5z"></path></svg></span> Live Q&A office hours</div>
     </div>
     <div class="col-md-4 mt-md-0 mt-2">
         <b>
@@ -319,7 +319,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
         <small><div>5 pm - 6 pm PST</div></small>
         </b>
         <div class="mt-2"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> How to navigate X series</div>
-        <small>X = (research, Python library, career)</small>
+        <small>X = research, libraries, career</small>
     </div>
 </div>
 
@@ -338,16 +338,15 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 </div>
 
 <div class="row mt-4">
-    <div class="col-md-6">
-        <div class="card mb-3" style="max-width: 18rem;">
-            <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Individual</h3></div>
+    <div class="col-md-4">
+        <div class="card mb-3 h-100" style="max-width: 18rem;">
+            <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Essential</h3></div>
             <div class="card-body">
                 <ul class="task-list">
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live sessions and coding workshops</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Private online community</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live Q&A sessions</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;"How to navigate X" series</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Career guidance sessions</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live Q&A office hours</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;"How to navigate X" series <small>(ML research, Python libraries, career)</small></li>
                 </ul>
             </div>
             <div class="card-footer bg-transparent">
@@ -360,16 +359,35 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card mb-3" style="max-width: 18rem;">
+    <div class="col-md-4">
+        <div class="card mb-3 h-100" style="max-width: 18rem;">
+            <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Premium</h3></div>
+            <div class="card-body">
+                <ul class="task-list">
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;<i>&larr; Everything included in the Essential plan</i></li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;60 min. 1-on-1 career guidance <div><small>(resume & portfolio)</small></div></li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;60 min. 1-on-1 <div>mock interview</div> <div><small>(technical & behavioral)</small></div></li>
+                </ul>
+            </div>
+            <div class="card-footer bg-transparent">
+                <div class="ai-center-all">
+                    <p class="mt-0 mb-1" style="font-size: 0.9rem;">$1250 USD</p>
+                </div>
+                <div class="ai-center-all">
+                    <a href="https://forms.gle/Cz7omhnToUTpupD98" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-3 h-100" style="max-width: 18rem;">
             <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Enterprise</h3></div>
             <div class="card-body">
                 <ul class="task-list">
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;<i>Accelerated</i> live sessions & coding workshops</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;<i>Accelerated</i> live sessions</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Private online community</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live Q&A sessions</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;"How to navigate X" series</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;ML project guidance sessions</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live Q&A office hours</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;"How to navigate X" series <small>(ML research, Python libraries, career)</small></li>
                 </ul>
             </div>
             <div class="card-footer bg-transparent">
@@ -384,7 +402,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
-<div class="my-2"></div>
+<div class="my-3"></div>
 
 <div class="row mb-0">
     <div class="offset-md-1 col-md-10">
