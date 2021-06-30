@@ -155,7 +155,7 @@ act -j test-code  # specific job
 
 ## Deployment
 
-There are a wide variety of GitHub actions available for deploying our ML applications after all the integration tests have passed. Most of them will require that we have a Dockerfile defined that will load and launch our service with the appropriate artifacts. Read more about ML deployment in our [lesson](deployment.md){:target="_blank"}.
+There are a wide variety of GitHub actions available for deploying our ML applications after all the integration tests have passed. Most of them will require that we have a Dockerfile defined that will load and launch our service with the appropriate artifacts. Read more about ML deployment infrastructure in our [lesson](infrastructure.md){:target="_blank"}.
 
 - [AWS EC2](https://github.com/aws-actions), [Google Compute Engine](https://github.com/google-github-actions), [Azure VM](https://github.com/Azure/actions), etc.
 - container orchestration services such as [AWS ECS](https://github.com/aws-actions/amazon-ecs-deploy-task-definition)  or [Google Kubernetes Engine](https://github.com/google-github-actions/setup-gcloud/tree/master/example-workflows/gke)

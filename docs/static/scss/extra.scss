@@ -409,3 +409,15 @@ th {
     border: 3px solid #e6e6e6;
     box-shadow: 0 40px 25px -25px #999;
 }
+
+.modal-dialog,
+.modal-content {
+    /* 80% of window height */
+    height: 80%;
+}
+
+.modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+    max-height: calc(100% - 120px);
+    overflow-y: scroll;
+}
