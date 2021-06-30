@@ -115,3 +115,5 @@ plugins:
             "courses/putting-ml-in-production.md": "index.md"
             "courses/applied-ml.md": "index.md"
             "courses/mlops/deployment.md": "courses/mlops/infrastructure.md"
+            "mlops-course.md": "index.md"
+            "reimbursement.md": "index.md"
