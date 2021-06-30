@@ -9,7 +9,7 @@ keywords: mlops, applied ml, machine learning
 ##
 
 !!! abstract "Instructions"
-    After you've [applied](https://forms.gle/YeX6oXoSbKNEjXD88){:target="_blank"} and been accepted to the next cohort, use the email template below to send to your manager for reimbursement for the course. Feel free to add any additional details as you see fit.
+    After you've [applied](https://madewithml.com/mlops-course/#apply){:target="_blank"} and been accepted to the next cohort, use the email template below to send to your manager for reimbursement for the course. Feel free to add any additional details as you see fit.
 
 **Subject**: Reimbursement for Made With ML's MLOps Course
 
