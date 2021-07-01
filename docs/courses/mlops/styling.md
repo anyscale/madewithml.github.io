@@ -21,7 +21,7 @@ There are many options when it comes to Python style conventions to adhere to, b
 
 We will be using a very popular blend of style and formatting conventions that makes some very opinionated decisions on our behalf (with configurable options).
 
-- [`Black`](https://black.readthedocs.io/en/stable/){:target="_blank"}: an in-place reformatter that [adheres](https://black.readthedocs.io/en/stable/the_black_code_style.html){:target="_blank"} to PEP8. We can explore examples of the formatting adjustments that Black makes in this [demo](https://black.now.sh/){:target="_blank"}.
+- [`Black`](https://black.readthedocs.io/en/stable/){:target="_blank"}: an in-place reformatter that [adheres](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html){:target="_blank"} to PEP8. We can explore examples of the formatting adjustments that Black makes in this [demo](https://black.now.sh/){:target="_blank"}.
 - [`isort`](https://pycqa.github.io/isort/){:target="_blank"}: sorts and formats import statements inside Python scripts.
 - [`flake8`](https://flake8.pycqa.org/en/latest/index.html){:target="_blank"}: a code linter that with stylistic conventions that adhere to PEP8.
 
@@ -34,7 +34,7 @@ We installed all of these as they were defined in out `setup.py` file under `dev
 
 ## Configuration
 
-Before we can properly use these tools, we'll have to configure them because they may have some discrepancies amongst them since they follow slightly different conventions that extend from PEP8. To configure Black, we could just pass in options using the [CLI method](https://black.readthedocs.io/en/stable/installation_and_usage.html#command-line-options){:target="_blank"}, but it's much more efficient (especially so others can easily find all our configurations) to do this through a file. So we'll need to create a [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} file and place the following configurations:
+Before we can properly use these tools, we'll have to configure them because they may have some discrepancies amongst them since they follow slightly different conventions that extend from PEP8. To configure Black, we could just pass in options using the [CLI method](https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#command-line-options){:target="_blank"}, but it's much more efficient (especially so others can easily find all our configurations) to do this through a file. So we'll need to create a [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} file and place the following configurations:
 
 ```toml linenums="1"
 # Black formatting
@@ -73,7 +73,7 @@ skip_gitignore = true
 virtual_env = "venv"
 ```
 
-Though there is a [complete list](https://pycqa.github.io/isort/docs/configuration/options/){:target="_blank"} of configuration options for isort, we've decided to set these explicitly so it works well with Black.
+Though there is a [complete list](https://pycqa.github.io/isort/docs/configuration/options){:target="_blank"} of configuration options for isort, we've decided to set these explicitly so it works well with Black.
 
 Lastly, we'll set up flake8 but this time we need to create a separate `.flake8` file and place the following configurations:
 

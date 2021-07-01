@@ -150,7 +150,7 @@ The reason we want to iteratively add more features is because it introduces mor
 
 ## Auxiliary data
 
-We're also going to be using an [auxiliary dataset](https://github.com/GokuMohandas/MLOps/blob/main/datasets/tags.json) which contains a collection of all the tags with their aliases and parent/child relationships. This auxiliary dataset was used by our application to automatically add the relevant parent tags when the child tags were present.
+We're also going to be using an [auxiliary dataset](https://github.com/GokuMohandas/MadeWithML/blob/main/datasets/tags.json){:target="_blank"} which contains a collection of all the tags with their aliases and parent/child relationships. This auxiliary dataset was used by our application to automatically add the relevant parent tags when the child tags were present.
 
 ```python linenums="1"
 # Load tags
