@@ -53,7 +53,7 @@ nav:
       - CNNs: courses/basics/convolutional-neural-networks.md
       - Embeddings: courses/basics/embeddings.md
       - RNNs: courses/basics/recurrent-neural-networks.md
-      - Transformers: courses/mlops/baselines.md#transformers-w-contextual-embeddings
+      - Transformers: courses/mlops/baselines/#transformers-w-contextual-embeddings
   - MLOps:
     - Lessons: /#mlops
     - 📦 &nbsp; Product:
@@ -83,8 +83,8 @@ nav:
       - RESTful API: courses/mlops/api.md
     - ✅ &nbsp; Testing:
       - Code: courses/mlops/testing.md
-      - Data: courses/mlops/testing.md#data
-      - Models: courses/mlops/testing.md#models
+      - Data: courses/mlops/testing/#data
+      - Models: courses/mlops/testing/#models
     - ♻️ &nbsp; Reproducibility:
       - Git: courses/mlops/git.md
       - Pre-commit: courses/mlops/pre-commit.md
