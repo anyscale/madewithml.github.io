@@ -99,15 +99,6 @@ nav:
       - Feature store: courses/mlops/feature-store.md
   - FAQ: /#frequently-asked-questions-faq
 
-pages:
-  - Home: index.md
-  - About: about.md
-  - Basics:
-    - Notebooks: courses/basics/notebooks.md
-  - MLOps:
-    - Product: courses/mlops/product.md
-  - Pivot: pivot.md
-
 # Configuration
 theme:
   name: material
