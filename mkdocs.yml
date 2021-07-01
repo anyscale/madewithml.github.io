@@ -35,16 +35,85 @@ extra:
 nav:
   - Home: index.md
   - About: about.md
-  - Basics: /#basics
-  - MLOps: /#mlops
+  - Basics:
+    - Lessons: /#basics
+    - 🔢 &nbsp; Foundations:
+      - Notebooks: courses/basics/notebooks.md
+      - Python: courses/basics/python.md
+      - NumPy: courses/basics/numpy.md
+      - Pandas: courses/basics/pandas.md
+      - PyTorch: courses/basics/pytorch.md
+    - 📈 &nbsp; Modeling:
+      - Linear regression: courses/basics/linear-regression.md
+      - Logistic regression: courses/basics/logistic-regression.md
+      - Neural networks: courses/basics/neural-networks.md
+      - Data quality: courses/basics/data-quality.md
+      - Utilities: courses/basics/utilities.md
+    - 🤖 &nbsp; Deep Learning:
+      - CNNs: courses/basics/convolutional-neural-networks.md
+      - Embeddings: courses/basics/embeddings.md
+      - RNNs: courses/basics/recurrent-neural-networks.md
+      - Transformers: courses/mlops/baselines.md#transformers-w-contextual-embeddings
+  - MLOps:
+    - Lessons: /#mlops
+    - 📦 &nbsp; Product:
+      - Objective: courses/mlops/objective.md
+      - Solution: courses/mlops/solution.md
+      - Iteration: courses/mlops/iteration.md
+    - 🔢 &nbsp; Data:
+      - Labeling: courses/mlops/labeling.md
+      - Preprocessing: courses/mlops/preprocessing.md
+      - Exploration: courses/mlops/exploratory-data-analysis.md
+      - Splitting: courses/mlops/splitting.md
+      - Augmentation: courses/mlops/augmentation.md
+    - 📈 &nbsp; Modeling:
+      - Baselines: courses/mlops/baselines.md
+      - Evaluation: courses/mlops/evaluation.md
+      - Experiment tracking: courses/mlops/experiment-tracking.md
+      - Optimization: courses/mlops/optimization.md
+    - 📝 &nbsp; Scripting:
+      - Organization: courses/mlops/organization.md
+      - Packaging: courses/mlops/packaging.md
+      - Documentation: courses/mlops/documentation.md
+      - Logging: courses/mlops/logging.md
+      - Styling: courses/mlops/styling.md
+      - Makefile: courses/mlops/makefile.md
+    - 📦 &nbsp; Interfaces:
+      - Command line: courses/mlops/cli.md
+      - RESTful API: courses/mlops/api.md
+    - ✅ &nbsp; Testing:
+      - Code: courses/mlops/testing.md
+      - Data: courses/mlops/testing.md#data
+      - Models: courses/mlops/testing.md#models
+    - ♻️ &nbsp; Reproducibility:
+      - Git: courses/mlops/git.md
+      - Pre-commit: courses/mlops/pre-commit.md
+      - Versioning: courses/mlops/versioning.md
+      - Docker: courses/mlops/docker.md
+    - 🚀 &nbsp; Production:
+      - Dashboard: courses/mlops/dashboard.md
+      - CI/CD workflows: courses/mlops/cicd.md
+      - Infrastructure: courses/mlops/infrastructure.md
+      - Monitoring: courses/mlops/monitoring.md
+      - Pipelines: courses/mlops/pipelines.md
+      - Feature store: courses/mlops/feature-store.md
   - FAQ: /#frequently-asked-questions-faq
+
+pages:
+  - Home: index.md
+  - About: about.md
+  - Basics:
+    - Notebooks: courses/basics/notebooks.md
+  - MLOps:
+    - Product: courses/mlops/product.md
+  - Pivot: pivot.md
 
 # Configuration
 theme:
   name: material
   custom_dir: docs/overrides
   logo: static/images/logo.png
-  favicon: static/images/favicon.ico
+  favicon: favicon.ico
   palette:
     primary: black
     accent: indigo
@@ -54,7 +123,7 @@ theme:
   features:
     # - navigation.instant # causes mathjax issues
     - navigation.tabs
-    - navigation.expand
+    # - navigation.expand
   icon:
     repo: fontawesome/brands/github
 
@@ -117,3 +186,4 @@ plugins:
             "courses/mlops/deployment.md": "courses/mlops/infrastructure.md"
             "mlops-course.md": "index.md"
             "reimbursement.md": "index.md"
+
