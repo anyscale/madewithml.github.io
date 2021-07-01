@@ -159,7 +159,7 @@ project = Entity(
 )
 ```
 
-Finally, we're ready to create a [FeatureView](https://docs.feast.dev/concepts/feature-views){:target="_blank"} that loads specific features (`features`), of various [value types](https://api.docs.feast.dev/python/feast.html?highlight=valuetype#feast.value_type.ValueType){:target="_blank"}, from a data source (`input`) for a specific period of time (`ttl`).
+Finally, we're ready to create a [FeatureView](https://docs.feast.dev/concepts/feature-view){:target="_blank"} that loads specific features (`features`), of various [value types](https://api.docs.feast.dev/python/feast.html?highlight=valuetype#feast.value_type.ValueType){:target="_blank"}, from a data source (`input`) for a specific period of time (`ttl`).
 
 ```python linenums="1" hl_lines="5 8 13"
 # Define a Feature View for each project
@@ -302,7 +302,7 @@ project_details from 2020-02-17 13:14:53-08:00 to 2021-06-07 13:14:52-07:00:
 100%|████████████████████████████████████████████████████████| 2030/2030 [00:00<00:00, 14949.12it/s]
 </pre>
 
-This has moved the features for all of our projects into the online store since this was first time materializing to the online store. When we subsequently run the [`materialize-incremental`](https://docs.feast.dev/how-to-guides/load-data-into-the-online-store#2-b-materialize-incremental-alternative){:target="_blank"} command, Feast keeps track of previous materializations and so we'll only materialize the new data since the last attempt.
+This has moved the features for all of our projects into the online store since this was first time materializing to the online store. When we subsequently run the [`materialize-incremental`](https://docs.feast.dev/getting-started/load-data-into-the-online-store#2-b-materialize-incremental-alternative){:target="_blank"} command, Feast keeps track of previous materializations and so we'll only materialize the new data since the last attempt.
 
 ```python linenums="1"
 # Get online features

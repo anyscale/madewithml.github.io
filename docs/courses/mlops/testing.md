@@ -674,7 +674,7 @@ datasources:
         class_name: SubdirReaderBatchKwargsGenerator
         base_directory: ../assets/data
 ```
-3. Create expectations using the profiler, which creates automatic expectations based on the data, or we can also create our own expectations. All of this is done interactively via a launched Jupyter notebook and saved under our [great_expectations/expectations](https://github.com/GokuMohandas/MLOps/main/great_expectations/expectations){:target="_blank"} directory.
+3. Create expectations using the profiler, which creates automatic expectations based on the data, or we can also create our own expectations. All of this is done interactively via a launched Jupyter notebook and saved under our [great_expectations/expectations](https://github.com/GokuMohandas/MLOps/tree/main/great_expectations/expectations){:target="_blank"} directory.
 ```bash linenums="1"
 great_expectations suite scaffold SUITE_NAME  # uses profiler
 great_expectations suite new --suite  # no profiler

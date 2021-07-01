@@ -604,7 +604,7 @@ In line 12, we're defining the `PredictPayload` object as a list of `Text` objec
 
 #### Built-in
 
-We're using pydantic's [`BaseModel`](pydantic BaseModel: https://pydantic-docs.helpmanual.io/usage/models/){:target="_blank"} object here because it offers built-in validation for all of our schemas. In our case, if a `Text` instance is less than 1 character, then our service will return the appropriate error message and code.
+We're using pydantic's [`BaseModel`](https://pydantic-docs.helpmanual.io/usage/models/){:target="_blank"} object here because it offers built-in validation for all of our schemas. In our case, if a `Text` instance is less than 1 character, then our service will return the appropriate error message and code.
 
 ```bash linenums="1"
 curl -X POST "http://localhost:5000/predict" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"texts\":[{\"text\":\"\"}]}"
