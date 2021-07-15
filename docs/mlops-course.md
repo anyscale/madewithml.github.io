@@ -8,7 +8,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 <!-- Hero -->
 <div class="row flex-column-reverse flex-md-row">
-    <div class="col-md-7">
+    <div class="col-md-7" data-aos="fade-right">
         <div class="ai-hero-text">
             <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
             <p style="margin-top: 0rem; margin-bottom: 0rem !important; color: #807e7e;">Applied ML · MLOps · Production</p>
@@ -23,23 +23,23 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
             </div>
         </div>
     </div>
-    <div class="col-md-5 ai-center-all">
+    <div class="col-md-5 ai-center-all" data-aos="fade-left">
         <div class="mb-md-0 mb-4">
             <img src="/static/images/logos.png" style="width: 12rem; border-radius: 10px; box-shadow: 0px 0px 15px 0.1px #fff">
         </div>
     </div>
 </div>
 
-<div class="ai-center-all" style="margin-top: 1.5rem;">
+<div class="ai-center-all" style="margin-top: 2rem;">
     <div class="row">
-        <div class="col-md-4">
-            <div class="px-md-3 py-md-3 px-5 py-3" style="background-color: #f5f9fd; border-radius: 10px;">🏆 &nbsp;Among the <a href="https://github.com/topics/mlops" target="_blank">top MLOps repositories</a> on GitHub.</div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="1000" data-aos-delay="0">
+            <div class="px-md-3 py-md-3 px-5 py-3 ai-header-card">🏆 &nbsp;Among the <a href="https://github.com/topics/mlops" target="_blank">top MLOps repositories</a> on GitHub.</div>
         </div>
-        <div class="col-md-4 mt-2 mt-md-0">
-            <div class="px-md-3 py-md-3 px-5 py-3" style="background-color: #f5f9fd; border-radius: 10px;">❤️ &nbsp;<a href="https://newsletter.madewithml.com/" target="_blank">30K+ community members</a> and growing.</div>
+        <div class="col-md-4 mt-4 mt-md-0" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="1000" data-aos-delay="500">
+            <div class="px-md-3 py-md-3 px-5 py-3 ai-header-card">❤️ &nbsp;<a href="https://newsletter.madewithml.com/" target="_blank">30K+ community members</a> and growing.</div>
         </div>
-        <div class="col-md-4 mt-2 mt-md-0">
-            <div class="px-md-3 py-md-3 px-5 py-3" style="background-color: #f5f9fd; border-radius: 10px;">🛠️  &nbsp;<a href="https://youtu.be/VSC7WBFMuZo?t=1000" target="_blank">Highly recommended</a> industry resource.</div>
+        <div class="col-md-4 mt-4 mt-md-0" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="1000" data-aos-delay="1000">
+            <div class="px-md-3 py-md-3 px-5 py-3 ai-header-card">🛠️  &nbsp;<a href="https://youtu.be/VSC7WBFMuZo?t=1000" target="_blank">Highly recommended</a> industry resource.</div>
         </div>
     </div>
 </div>
@@ -48,114 +48,422 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
 <!-- Course header -->
-<h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
-<h2 class="ai-center-all mt-0 mb-0" style="font-size: 1.5rem;">MLOps Course</h2>
-
-<div class="ai-center-all">
-    <p class="mt-3" style="font-size: 0.89rem;">A project-based course on MLOps fundamentals with a focus on intuition and application. All the lessons below are <b>100% free</b> so you can assess the content quality yourself, whereas the 4-week <b>paid course</b> is about the <a href="#features">experience and community</a> to make sure you learn this content well enough to apply it to your own work.</p>
-</div>
-<div class="ai-center-all">
-    <a href="#apply" class="md-button md-button--green-gradient mb-2 mb-md-0 mt-md-0 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Apply</a>
-</div>
-<div class="ai-center-all mt-1">
-    <small>* Enterprise workshops available</small>
-</div>
-<div class="ai-center-all">
-    <div class="p-3" style="width: 15rem;">
-        <div class="ai-center-all">
-            <small><b>Application deadline:</b> July 14th, 2021</small>
-        </div>
-        <div class="ai-center-all">
-            <small><b>Course start date:</b> July 17th, 2021</small>
+<section data-aos="zoom-in" data-aos-delay="1500">
+    <h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
+    <h2 class="ai-center-all mt-0 mb-0" style="font-size: 1.5rem;">MLOps Course</h2>
+    <div class="ai-center-all">
+        <p class="mt-3" style="font-size: 0.89rem;">A project-based course on MLOps fundamentals with a focus on intuition and application that teaches you how to apply ML in industry. All the lessons below are <b>100% free</b> but we also offer a highly interactive <a href="#features">4-week course</a> where you'll learn how to master MLOps.</p>
+    </div>
+    <div class="ai-center-all">
+        <a href="#apply" class="md-button md-button--green-gradient mb-2 mb-md-0 mt-md-0 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Apply</a>
+    </div>
+    <div class="ai-center-all mt-1">
+        <small>* Enterprise workshops available</small>
+    </div>
+    <div class="ai-center-all">
+        <div class="p-3" style="width: 15rem;">
+            <div class="ai-center-all">
+                <small><b><a href="" target="_blank">Free info session</a>:</b> August 14th, 2021</small>
+            </div>
+            <div class="ai-center-all">
+                <small><b>Application deadline:</b> Sept 14th, 2021</small>
+            </div>
+            <div class="ai-center-all">
+                <small><b>Course start date:</b> Sept 18th, 2021</small>
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 <hr style="margin-top: 1rem; margin-bottom: 2rem;">
 
-<!-- Features -->
-<div class="row mt-0">
-    <div class="col-4 col-md-8">
-        <h2 id="features" class="mt-0">Features</h2>
+<div id="testimonials" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active px-4">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/ritchie_ng.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Ritchie Ng</b>
+                                            <a href="https://www.youtube.com/watch?v=VSC7WBFMuZo&t=1000s" target="_blank">
+                                                <span class="twemoji youtube ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">PyTorch Keynote Speaker</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"For production ML, I cannot possibly think of a better resource out there ... this resource is the gold standard."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/sergey_karayev.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Sergey Karayev</b>
+                                            <a href="https://twitter.com/sergeykarayev/status/1409929002744041472" target="_blank">
+                                                <span class="twemoji twitter ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Fullstack Deep Learning</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"Can't speak highly enough of <a href="https://twitter.com/GokuMohandas" target="_blank">@GokuMohandas</a> and what he built at <a href="https://twitter.com/MadeWithML" target="_blank">@madewithml</a>!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item px-4">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/daniel_bourke.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Daniel Bourke</b>
+                                            <a href="https://twitter.com/mrdbourke/status/1409737996455141388" target="_blank">
+                                                <span class="twemoji twitter ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Mrdbourke Studios</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"Built some machine learning models? Want to take them to the next level? I do. And I’m using <a href="https://twitter.com/MadeWithML" target="_blank">@madewithml</a> to learn how. Outstanding MLOps lessons!"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/arghyadeep_das.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Arghyadeep Das</b>
+                                            <a href="https://www.linkedin.com/posts/arghyadeep-das_made-with-ml-activity-6815267985788342272-yJ8e" target="_blank">
+                                                <span class="twemoji linkedin ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Barclays</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"Ideal place for grad students and software engineers to learn about practical ML. Couldn't have a better resource collection than this!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item px-4">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/peter_ku.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Peter Ku</b>
+                                            <a href="https://twitter.com/peterkuai/status/1409503953172140034" target="_blank">
+                                                <span class="twemoji twitter ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Amazon Alexa</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"Covers the broad MLOps landscape in great detail, extremely high quality tested code and not just talking about concepts on a high level, open-sourced."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/abinaya_mahendiran.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Abinaya Mahendiran</b>
+                                            <a href="https://www.linkedin.com/posts/abinayamahendiran_made-with-ml-activity-6815497954481328128-5ENz" target="_blank">
+                                                <span class="twemoji linkedin ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Mphasis</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"For anyone interested in seeing MLOps in action, this is the best practical resource out there! Thank you for this wonderful course. Highly recommended!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item px-4">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/jeremy_jordan.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Jeremy Jordan</b>
+                                            <a href="https://twitter.com/jeremyjordan/status/1316052661133815809" target="_blank">
+                                                <span class="twemoji twitter ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Duo Security</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"This will be a great journey for those interested in deploying machine learning models which lead to a positive impact on the product."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/karthik_bhaskar.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Karthik Bhaskar</b>
+                                            <a href="https://twitter.com/kbhaskar_95/status/1401879875955265543" target="_blank">
+                                                <span class="twemoji twitter ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Vector Institute</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"Best available practical course on MLOps. Thanks <a href="https://twitter.com/GokuMohandas" target="_blank">@GokuMohandas</a> for creating such awesome content and sharing it!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item px-4">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/dmitry_petrov.png">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Dmitry Petrov</b>
+                                            <a href="https://twitter.com/FullStackML/status/1316077799652749313" target="_blank">
+                                                <span class="twemoji twitter ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">DVC</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"This is not a usual ML class, it covers productionalization part of ML projects - the most important part from a business point of view."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/lawrence_okegbemi.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Lawrence Okegbemi</b>
+                                            <a href="https://www.linkedin.com/feed/update/urn:li:activity:6815254111030792192?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A6815254111030792192%2C6815256765584678912%29" target="_blank">
+                                                <span class="twemoji linkedin ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Enterscale</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"Following all through, it's really amazing to see how you demonstrated best practices in building an ML driven application."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item px-4">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/ask_katnoria.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Ash Katnoria</b>
+                                            <a href="https://twitter.com/katnoria1/status/1409782295968448514" target="_blank">
+                                                <span class="twemoji twitter ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Katnoria</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"Easily one of the most comprehensive series. I am amazed by how much ground it covers starting with data collection,  all the way up to k8s + model monitoring."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/josh_tobin.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Josh Tobin</b>
+                                            <a href="https://twitter.com/josh_tobin_/status/1316028117333405696" target="_blank">
+                                                <span class="twemoji twitter ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Fullstack Deep Learning</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"This looks like a comprehensive overview / case study of putting an ML model in production -- worth checking out!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item px-4">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/laxman_tomar.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Laxman Tomar</b>
+                                            <a href="https://twitter.com/LaxmanSTomar/status/1409522738880860174" target="_blank">
+                                                <span class="twemoji twitter ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Robofied</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"The best MLOps resource that I've come across on the web. Goes over whys, hows, tradeoffs, tools & their alternatives via high-quality explanations and code."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/satyabrata_pal.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Satyabrata Pal</b>
+                                            <a href="https://twitter.com/TheCodingProjec/status/1381259115901558784" target="_blank">
+                                                <span class="twemoji twitter ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Julia Community</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"Completely sold out on the clean code and detailed writeup. This is one of the few ML courses which doesn't stop on just training a model but goes beyond that."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-8 col-md-4 text-right" style="font-size: 0.9rem;">
-        <small><span style="color: rgb(75, 115, 245);">▓</span> <b>=</b> <span style="color: rgb(75, 115, 245);"><b>paid course features</b></span></small>
-    </div>
-</div>
-<div class="row ai-features">
-    <div class="col-md-6 ai-feature">
-        <div class="ai-feature-header">
-            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2.5c-3.81 0-6.5 2.743-6.5 6.119 0 1.536.632 2.572 1.425 3.56.172.215.347.422.527.635l.096.112c.21.25.427.508.63.774.404.531.783 1.128.995 1.834a.75.75 0 01-1.436.432c-.138-.46-.397-.89-.753-1.357a18.354 18.354 0 00-.582-.714l-.092-.11c-.18-.212-.37-.436-.555-.667C4.87 12.016 4 10.651 4 8.618 4 4.363 7.415 1 12 1s8 3.362 8 7.619c0 2.032-.87 3.397-1.755 4.5-.185.23-.375.454-.555.667l-.092.109c-.21.248-.405.481-.582.714-.356.467-.615.898-.753 1.357a.75.75 0 01-1.437-.432c.213-.706.592-1.303.997-1.834.202-.266.419-.524.63-.774l.095-.112c.18-.213.355-.42.527-.634.793-.99 1.425-2.025 1.425-3.561C18.5 5.243 15.81 2.5 12 2.5zM9.5 21.75a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75zM8.75 18a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z"></path></svg></span>Intuition-first
-        </div>
-        <div class="ai-feature-text">
-            We'll never jump straight to code, instead we'll develop an intuition for the concepts first.
-        </div>
-    </div>
-    <div class="col-md-6 ai-feature">
-        <div class="ai-feature-header">
-            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8 8.807V3.5h-.563a.75.75 0 010-1.5h9.125a.75.75 0 010 1.5H16v5.307l5.125 9.301c.964 1.75-.302 3.892-2.299 3.892H5.174c-1.998 0-3.263-2.142-2.3-3.892L8 8.807zM14.5 3.5h-5V9a.75.75 0 01-.093.362L7.127 13.5h9.746l-2.28-4.138A.75.75 0 0114.5 9V3.5zM4.189 18.832L6.3 15h11.4l2.111 3.832a1.125 1.125 0 01-.985 1.668H5.174a1.125 1.125 0 01-.985-1.668z"></path></svg></span>Hands-on
-        </div>
-        <div class="ai-feature-text">
-            Instead of just discussing MLOps concepts, we code everything (project-based).
-        </div>
-    </div>
-    <div class="col-md-6 ai-feature">
-        <div class="ai-feature-header">
-            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M5.75 21a1.75 1.75 0 110-3.5 1.75 1.75 0 010 3.5zM2.5 19.25a3.25 3.25 0 106.5 0 3.25 3.25 0 00-6.5 0zM5.75 6.5a1.75 1.75 0 110-3.5 1.75 1.75 0 010 3.5zM2.5 4.75a3.25 3.25 0 106.5 0 3.25 3.25 0 00-6.5 0zM18.25 6.5a1.75 1.75 0 110-3.5 1.75 1.75 0 010 3.5zM15 4.75a3.25 3.25 0 106.5 0 3.25 3.25 0 00-6.5 0z"></path><path fill-rule="evenodd" d="M5.75 16.75A.75.75 0 006.5 16V8A.75.75 0 005 8v8c0 .414.336.75.75.75z"></path><path fill-rule="evenodd" d="M17.5 8.75v-1H19v1a3.75 3.75 0 01-3.75 3.75h-7a1.75 1.75 0 00-1.75 1.75H5A3.25 3.25 0 018.25 11h7a2.25 2.25 0 002.25-2.25z"></path></svg></span>Engineering
-        </div>
-        <div class="ai-feature-text">
-            It's not just about ML, it's also about software engineering best practices.
-        </div>
-    </div>
-    <div class="col-md-6 ai-feature">
-        <div class="ai-feature-header">
-            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.513 11.5h4.745c.1-3.037 1.1-5.49 2.093-7.204.39-.672.78-1.233 1.119-1.673C6.11 3.329 2.746 7 2.513 11.5zm4.77 1.5H2.552a9.505 9.505 0 007.918 8.377 15.698 15.698 0 01-1.119-1.673C8.413 18.085 7.47 15.807 7.283 13zm1.504 0h6.426c-.183 2.48-1.02 4.5-1.862 5.951-.476.82-.95 1.455-1.304 1.88L12 20.89l-.047-.057a13.888 13.888 0 01-1.304-1.88C9.807 17.5 8.969 15.478 8.787 13zm6.454-1.5H8.759c.1-2.708.992-4.904 1.89-6.451.476-.82.95-1.455 1.304-1.88L12 3.11l.047.057c.353.426.828 1.06 1.304 1.88.898 1.548 1.79 3.744 1.89 6.452zm1.476 1.5c-.186 2.807-1.13 5.085-2.068 6.704-.39.672-.78 1.233-1.118 1.673A9.505 9.505 0 0021.447 13h-4.731zm4.77-1.5h-4.745c-.1-3.037-1.1-5.49-2.093-7.204-.39-.672-.78-1.233-1.119-1.673 4.36.706 7.724 4.377 7.957 8.877z"></path></svg></span>Comprehensive
-        </div>
-        <div class="ai-feature-text">
-            Easily extends to all algorithms, data (text, image, tabular), tools, cloud providers, etc.
-        </div>
-    </div>
-    <div class="col-md-6 ai-feature">
-        <div class="ai-feature-header" style="color: rgb(75, 115, 245);">
-            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.3 8.24a.75.75 0 01-.04 1.06L7.352 12l2.908 2.7a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 011.06.04zm3.44 1.06a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.908-2.7-2.908-2.7z"></path><path fill-rule="evenodd" d="M2 3.75C2 2.784 2.784 2 3.75 2h16.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0120.25 22H3.75A1.75 1.75 0 012 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25v16.5c0 .138.112.25.25.25h16.5a.25.25 0 00.25-.25V3.75a.25.25 0 00-.25-.25H3.75z"></path></svg></span>Interactive
-        </div>
-        <div class="ai-feature-text">
-            Live lectures, coding sessions & assigments along the way to solidify what we're learning.
-        </div>
-    </div>
-    <div class="col-md-6 ai-feature">
-        <div class="ai-feature-header" style="color: rgb(75, 115, 245);">
-            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M3.5 8a5.5 5.5 0 118.596 4.547 9.005 9.005 0 015.9 8.18.75.75 0 01-1.5.045 7.5 7.5 0 00-14.993 0 .75.75 0 01-1.499-.044 9.005 9.005 0 015.9-8.181A5.494 5.494 0 013.5 8zM9 4a4 4 0 100 8 4 4 0 000-8z"></path><path d="M17.29 8c-.148 0-.292.01-.434.03a.75.75 0 11-.212-1.484 4.53 4.53 0 013.38 8.097 6.69 6.69 0 013.956 6.107.75.75 0 01-1.5 0 5.193 5.193 0 00-3.696-4.972l-.534-.16v-1.676l.41-.209A3.03 3.03 0 0017.29 8z"></path></svg></span>Community
-        </div>
-        <div class="ai-feature-text">
-            An alumni community with weekly readings, discussions, brainstorming, etc.
-        </div>
-    </div>
-    <div class="col-md-6 ai-feature">
-        <div class="ai-feature-header" style="color: rgb(75, 115, 245);">
-            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M6.736 4C4.657 4 2.5 5.88 2.5 8.514c0 3.107 2.324 5.96 4.861 8.12a29.66 29.66 0 004.566 3.175l.073.041.073-.04c.271-.153.661-.38 1.13-.674.94-.588 2.19-1.441 3.436-2.502 2.537-2.16 4.861-5.013 4.861-8.12C21.5 5.88 19.343 4 17.264 4c-2.106 0-3.801 1.389-4.553 3.643a.75.75 0 01-1.422 0C10.537 5.389 8.841 4 6.736 4zM12 20.703l.343.667a.75.75 0 01-.686 0l.343-.667zM1 8.513C1 5.053 3.829 2.5 6.736 2.5 9.03 2.5 10.881 3.726 12 5.605 13.12 3.726 14.97 2.5 17.264 2.5 20.17 2.5 23 5.052 23 8.514c0 3.818-2.801 7.06-5.389 9.262a31.146 31.146 0 01-5.233 3.576l-.025.013-.007.003-.002.001-.344-.666-.343.667-.003-.002-.007-.003-.025-.013A29.308 29.308 0 0110 20.408a31.147 31.147 0 01-3.611-2.632C3.8 15.573 1 12.332 1 8.514z"></path></svg></span>Accountability
-        </div>
-        <div class="ai-feature-text">
-            Regular check-ins with your fellow peers and the instructor to make sure we're on track.
-        </div>
-    </div>
-    <div class="col-md-6 ai-feature">
-        <div class="ai-feature-header" style="color: rgb(75, 115, 245);">
-            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span>Guidance
-        </div>
-        <div class="ai-feature-text">
-            Guidance sessions on how to navigate research papers, libraries and careers.
-        </div>
-    </div>
-</div>
-
-<div class="row mb-0">
-    <div class="offset-md-1 col-md-10">
-        <div class="admonition warning">
-            <p class="admonition-title">This is not a MOOC</p>
-            <p>Passive courses on popular online education platforms typically have a <a href="https://www.insidehighered.com/digital-learning/article/2019/01/16/study-offers-data-show-moocs-didnt-achieve-their-goals" target="_blank">2-3% completion rate</a> because they don't offer the cohort-based community experience. Our paid course is interactive and offers accountability to make sure you learn this content well enough to apply it to your own work.</p>
-        </div>
-    </div>
+    <a class="carousel-control-prev" style="width: 0%;" href="#testimonials" role="button" data-slide="prev">
+        <span style="font-size: 2.5rem; font-weight: 700;">&lsaquo;</span>
+    </a>
+    <a class="carousel-control-next" style="width: 0%;" href="#testimonials" role="button" data-slide="next">
+        <span style="font-size: 2.5rem; font-weight: 700;">&rsaquo;</span>
+    </a>
 </div>
 
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
@@ -164,7 +472,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 > Learn the fundamentals of ML through intuitive explanations, clean code and visualizations.
 [GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top ML repos](https://github.com/topics/deep-learning){:target="blank"} on GitHub
 
-<div class="row mt-4 ai-course-list">
+<div class="row mt-4 ai-course-list" data-aos="fade-down">
 <div class="col-md-4">
     <b><span class="mr-1">🔢</span> Foundations</b>
     <ul>
@@ -176,7 +484,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </ul>
 </div>
 <div class="col-md-4">
-    <b><span class="mr-1">📈</span> Modeling</b>
+    <b><span class="mr-1">🔥</span> Machine Learning</b>
     <ul>
     <li><a href="/courses/basics/linear-regression/">Linear Regression</a></li>
     <li><a href="/courses/basics/logistic-regression/">Logistic Regression</a></li>
@@ -202,7 +510,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 > Learn how to apply ML to build a production grade product and deliver value.
 [GokuMohandas/MLOps](https://github.com/GokuMohandas/MLOps){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top MLOps repos](https://github.com/topics/mlops){:target="blank"} on GitHub
 
-<div class="row mt-4 ai-course-list">
+<div class="row mt-4 ai-course-list" data-aos="fade-down">
 <div class="col-md-4">
     <b><span class="mr-1">📦</span> Product</b>
     <ul>
@@ -268,11 +576,125 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 </div>
 </div>
 
-<hr style="margin-top: 1rem; margin-bottom: 2rem;">
+<hr id="features" style="margin-top: 2rem; margin-bottom: 2rem;">
 
-<h2 id="instructor" class="ai-center-all mt-0 mb-2 md-typeset">Meet your instructor</h2>
+<h2 class="ai-center-all mt-0 mb-2 md-typeset">Wait! All the lessons are 100% free?</h2>
 
-<div class="ai-center-all mt-4">
+Yes. The lessons above are 100% free and you can learn all the fundamentals of MLOps by going through them. **So what exactly is the paid course for?** It's extremely difficult to learn things on your own without the proper structure and experience, especially complicated topics such as MLOps. So we're offering the exact structure and experience you need to master the MLOps fundamentals in just 4 weeks. <a href="#four-weeks">Yes 4 weeks is more than enough</a>.
+
+<div class="row ai-features">
+    <div class="col-md-6 ai-feature" data-aos="fade-right">
+        <div class="ai-feature-header">
+            <span class="mr-1">⚡️</span> Live lectures
+        </div>
+        <div class="ai-feature-text">
+            Interactive sessions to deep dive into concepts from a top-down approach using visualizations.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature" data-aos="fade-left">
+        <div class="ai-feature-header">
+            <span class="mr-1">💻</span> Coding workshops
+        </div>
+        <div class="ai-feature-text">
+            Applying MLOps concepts by learning how to produce high quality, production-grade code in our project.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature" data-aos="fade-right">
+        <div class="ai-feature-header">
+            <span class="mr-1">❓</span> Q&A
+        </div>
+        <div class="ai-feature-text">
+            Opportunities to ask questions and have discussions after every single module before we progress.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature" data-aos="fade-left">
+        <div class="ai-feature-header">
+            <span class="mr-1">🧭</span> Navigation series
+        </div>
+        <div class="ai-feature-text">
+            Guiding sessions on how to approach ML research papers, Python libraries and your career.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature" data-aos="fade-right">
+        <div class="ai-feature-header">
+            <span class="mr-1">🌎</span> Community
+        </div>
+        <div class="ai-feature-text">
+            Alumni community to ask questions, share your work and get feedback and continue your learning journey in this ever-changing field.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature" data-aos="fade-left">
+        <div class="ai-feature-header">
+            <span class="mr-1">🚀</span> Career assistance
+        </div>
+        <div class="ai-feature-text">
+            Resume and portfolio reviews and mock interview practice to ensure you land your dream job (premium plan).
+        </div>
+    </div>
+</div>
+
+<hr style="margin-top: 2rem; margin-bottom: 2rem;">
+<h2 class="ai-center-all mt-0 mb-2 md-typeset">Who is this course for?</h2>
+
+<p class="ai-center-all" style="font-size: 0.9rem;">Machine learning is not a separate industry, instead, it's a powerful way of thinking about data that's not reserved for any one type of person.</p>
+
+<div class="row ai-features">
+    <div class="col-md-6 ai-feature" data-aos="fade-right">
+        <div class="ai-feature-header">
+            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M10.3 8.24a.75.75 0 01-.04 1.06L7.352 12l2.908 2.7a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 011.06.04zm3.44 1.06a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.908-2.7-2.908-2.7z"></path><path fill-rule="evenodd" d="M2 3.75C2 2.784 2.784 2 3.75 2h16.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0120.25 22H3.75A1.75 1.75 0 012 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25v16.5c0 .138.112.25.25.25h16.5a.25.25 0 00.25-.25V3.75a.25.25 0 00-.25-.25H3.75z"></path></svg></span>Software engineers
+        </div>
+        <div class="ai-feature-text">
+            looking to learn ML and become even better software engineers. ML is integrated into increasingly more products so it's important to know how ML systems operate.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature" data-aos="fade-left">
+        <div class="ai-feature-header">
+            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M8.114 2.094a.75.75 0 01.386.656V9h1.252a.75.75 0 110 1.5H5.75a.75.75 0 010-1.5H7V4.103l-.853.533a.75.75 0 01-.795-1.272l2-1.25a.75.75 0 01.762-.02zm4.889 5.66a.75.75 0 01.75-.75h5.232a.75.75 0 01.53 1.28l-2.776 2.777c.55.097 1.057.253 1.492.483.905.477 1.504 1.284 1.504 2.418 0 .966-.471 1.75-1.172 2.27-.687.511-1.587.77-2.521.77-1.367 0-2.274-.528-2.667-.756a.75.75 0 01.755-1.297c.331.193.953.553 1.912.553.673 0 1.243-.188 1.627-.473.37-.275.566-.635.566-1.067 0-.5-.219-.836-.703-1.091-.538-.284-1.375-.443-2.471-.443a.75.75 0 01-.53-1.28l2.643-2.644h-3.421a.75.75 0 01-.75-.75zM7.88 15.215a1.4 1.4 0 00-1.446.83.75.75 0 01-1.37-.61 2.9 2.9 0 012.986-1.71 2.565 2.565 0 011.557.743c.434.446.685 1.058.685 1.778 0 1.641-1.254 2.437-2.12 2.986-.538.341-1.18.694-1.495 1.273H9.75a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75c0-1.799 1.337-2.63 2.243-3.21 1.032-.659 1.55-1.031 1.55-1.8 0-.355-.116-.584-.26-.732a1.068 1.068 0 00-.652-.298z"></path></svg></span>Data scientists
+        </div>
+        <div class="ai-feature-text">
+            who want to want to go way beyond developing models in a notebook to wrapping them around robust workflows that enable ML systems to improve over time.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature" data-aos="fade-right">
+        <div class="ai-feature-header">
+            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12.292 2.06a.75.75 0 00-.584 0L.458 6.81a.75.75 0 000 1.38L4.25 9.793v3.803a2.901 2.901 0 00-1.327.757c-.579.58-.923 1.41-.923 2.43v4.5c0 .248.128.486.335.624.06.04.117.073.22.124.124.062.297.138.52.213.448.149 1.09.288 1.925.288s1.477-.14 1.925-.288c.223-.075.396-.15.52-.213a2.11 2.11 0 00.21-.117A.762.762 0 008 21.28v-4.5c0-1.018-.344-1.85-.923-2.428a2.9 2.9 0 00-1.327-.758v-3.17l5.958 2.516a.75.75 0 00.584 0l5.208-2.2v4.003a2.552 2.552 0 01-.079.085 4.057 4.057 0 01-.849.65c-.826.488-2.255 1.021-4.572 1.021-.612 0-1.162-.037-1.654-.1a.75.75 0 00-.192 1.487c.56.072 1.173.113 1.846.113 2.558 0 4.254-.592 5.334-1.23.538-.316.914-.64 1.163-.896a2.84 2.84 0 00.392-.482h.001A.75.75 0 0019 15v-4.892l4.542-1.917a.75.75 0 000-1.382l-11.25-4.75zM5 15c-.377 0-.745.141-1.017.413-.265.265-.483.7-.483 1.368v4.022c.299.105.797.228 1.5.228s1.201-.123 1.5-.228V16.78c0-.669-.218-1.103-.483-1.368A1.431 1.431 0 005 15zm7-3.564L2.678 7.5 12 3.564 21.322 7.5 12 11.436z"></path></svg></span>College graduates
+        </div>
+        <div class="ai-feature-text">
+            looking to learn the practical skills they'll need for the industry and bridge gap between their university curricilum and what industry expects them to know about ML systems.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature" data-aos="fade-left">
+        <div class="ai-feature-header">
+            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12 2.5c-3.81 0-6.5 2.743-6.5 6.119 0 1.536.632 2.572 1.425 3.56.172.215.347.422.527.635l.096.112c.21.25.427.508.63.774.404.531.783 1.128.995 1.834a.75.75 0 01-1.436.432c-.138-.46-.397-.89-.753-1.357a18.354 18.354 0 00-.582-.714l-.092-.11c-.18-.212-.37-.436-.555-.667C4.87 12.016 4 10.651 4 8.618 4 4.363 7.415 1 12 1s8 3.362 8 7.619c0 2.032-.87 3.397-1.755 4.5-.185.23-.375.454-.555.667l-.092.109c-.21.248-.405.481-.582.714-.356.467-.615.898-.753 1.357a.75.75 0 01-1.437-.432c.213-.706.592-1.303.997-1.834.202-.266.419-.524.63-.774l.095-.112c.18-.213.355-.42.527-.634.793-.99 1.425-2.025 1.425-3.561C18.5 5.243 15.81 2.5 12 2.5zM9.5 21.75a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75zM8.75 18a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z"></path></svg></span>Product managers
+        </div>
+        <div class="ai-feature-text">
+            who want to develop a technical foundation in MLOps so they can effectively communicate with their technical team and help develop and iterate on applications.
+        </div>
+    </div>
+</div>
+
+<hr style="margin-top: 2rem; margin-bottom: 2rem;">
+<h2 class="ai-center-all mt-0 mb-2 md-typeset">Your new superpowers</h2>
+
+<p class="ai-center-all" style="font-size: 0.9rem;">With live lectures, coding workshops, interactive Q&A and discussions, you'll attain a:</p>
+<div class="row">
+    <div class="col-md-4 ai-feature" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="1000" data-aos-delay="0">
+        <span class="mr-1">🧠</span> <b>Foundational MLOps expertise</b> to <code class="highlight"><span class="nx">architect</span></code> an ML system using best practices, <code class="highlight"><span class="nx">articulate</span></code> your knowledge and easily <code class="highlight"><span class="nx">adapt</span></code> to this constantly evolving space.
+    </div>
+    <div class="col-md-4 ai-feature" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="1000" data-aos-delay="500">
+        <span class="mr-1">💻</span> <b>Ability to compose high quality code</b> to create robust ML systems that <code class="highlight"><span class="nx">you</span></code>, <code class="highlight"><span class="nx">your future self</span></code> and <code class="highlight"><span class="nx">fellow developers</span></code> will come to greatly value as you develop.
+    </div>
+    <div class="col-md-4 ai-feature" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="1000" data-aos-delay="1000">
+        <span class="mr-1">🌎</span> <b>Community to continue the journey</b> and <code class="highlight"><span class="nx">grow</span></code> via discussions on new tools and best/bespoke practices, <code class="highlight"><span class="nx">collaborate</span></code> on projects and <code class="highlight"><span class="nx">share</span></code> your progress.
+    </div>
+</div>
+
+
+<hr id="instructor" style="margin-top: 2rem; margin-bottom: 2rem;">
+
+<h2 class="ai-center-all mt-0 mb-2 md-typeset">Meet your instructor</h2>
+
+<div class="ai-center-all mt-4" data-aos="zoom-in">
     <img class="ai-header-image" src="/static/images/goku_circle.png">
 </div>
 <div class="ai-center-all">
@@ -296,98 +718,285 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
-## Schedule
+<h2 id="schedule" class="ai-center-all mt-0 mb-2 md-typeset">Schedule</h2>
 
-<div class="row">
-    <div class="col-md-4 mt-md-0 mt-2">
-        <b>
-        <div>Saturdays & Sundays</div>
-        <small><div>8 am - 11 am PST</div></small>
-        </b>
-        <div class="mt-2"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M8.954 17H2.75A1.75 1.75 0 011 15.25V3.75C1 2.784 1.784 2 2.75 2h18.5c.966 0 1.75.784 1.75 1.75v11.5A1.75 1.75 0 0121.25 17h-6.204c.171 1.375.805 2.652 1.769 3.757A.75.75 0 0116.25 22h-8.5a.75.75 0 01-.565-1.243c.964-1.105 1.598-2.382 1.769-3.757zM21.5 3.75v11.5a.25.25 0 01-.25.25H2.75a.25.25 0 01-.25-.25V3.75a.25.25 0 01.25-.25h18.5a.25.25 0 01.25.25zM13.537 17c.125 1.266.564 2.445 1.223 3.5H9.24c.659-1.055 1.097-2.234 1.223-3.5h3.074z"></path></svg></span> Live classes and coding workshops</div>
+<p>Join us for a <a href="" target="_blank">free info session</a> on August 14th, 2021 at 9 am PT where we'll cover an overview of the course and answer all of your questions that are not covered in our <a href="#faq">FAQ section</a>. Feel free to also reach out to us via <a href="mailto:hello@madewithml.com" target="_blank">email</a> and we'll get back to you very soon.</p>
+
+<div class="row mt-2">
+    <div class="col-6" data-aos="fade-right">
+        <u><h4 class="mb-1">Week 01</h4></u>
+        <div class="row">
+            <div class="col-md-6 mt-md-0 mt-2">
+                <div class="mb-2">
+                <div>Saturday</div>
+                <small><div>September 18th, 2021</div></small>
+                <small><div>7 am - 12 pm PT</div></small>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseFoundations" aria-expanded="false" aria-controls="collapseFoundations"><span class="mr-1">🔢</span> Foundations</a></div>
+                <div class="collapse multi-collapse" id="collapseFoundations">
+                    <ul class="ai-course-list">
+                    <li><a href="/courses/basics/notebooks/">Notebooks</a></li>
+                    <li><a href="/courses/basics/python/">Python</a></li>
+                    <li><a href="/courses/basics/numpy/">NumPy</a></li>
+                    <li><a href="/courses/basics/pandas/">Pandas</a></li>
+                    <li><a href="/courses/basics/pytorch/">PyTorch</a></li>
+                    </ul>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseMachineLearning" aria-expanded="false" aria-controls="collapseMachineLearning"><span class="mr-1">🔥</span> Machine Learning</a></div>
+                <div class="collapse multi-collapse" id="collapseMachineLearning">
+                    <ul class="ai-course-list">
+                    <li><a href="/courses/basics/linear-regression/">Linear Regression</a></li>
+                    <li><a href="/courses/basics/logistic-regression/">Logistic Regression</a></li>
+                    <li><a href="/courses/basics/neural-networks/">Neural Networks</a></li>
+                    <li><a href="/courses/basics/data-quality/">Data Quality</a></li>
+                    <li><a href="/courses/basics/utilities/">Utilities</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-2">
+                <div class="mb-2">
+                <div>Sunday</div>
+                <small><div>September 19th, 2021</div></small>
+                <small><div>7 am - 12 pm PT</div></small>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseDeepLearning" aria-expanded="false" aria-controls="collapseDeepLearning"><span class="mr-1">🤖</span> Deep Learning</a></div>
+                <div class="collapse multi-collapse" id="collapseDeepLearning">
+                    <ul class="ai-course-list">
+                    <li><a href="/courses/basics/convolutional-neural-networks/">CNNs</a></li>
+                    <li><a href="/courses/basics/embeddings/">Embeddings</a></li>
+                    <li><a href="/courses/basics/recurrent-neural-networks/">RNNs</a></li>
+                    <li><a href="/courses/mlops/baselines/#transformers-w-contextual-embeddings">Transformers</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4 mt-md-0 mt-2">
-        <b>
-        <div>Tuesdays</div>
-        <small><div>5 pm - 6 pm PST</div></small>
-        </b>
-        <div class="mt-2"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 1A1.75 1.75 0 000 2.75v9.5C0 13.216.784 14 1.75 14H3v1.543a1.457 1.457 0 002.487 1.03L8.061 14h6.189A1.75 1.75 0 0016 12.25v-9.5A1.75 1.75 0 0014.25 1H1.75zM1.5 2.75a.25.25 0 01.25-.25h12.5a.25.25 0 01.25.25v9.5a.25.25 0 01-.25.25h-6.5a.75.75 0 00-.53.22L4.5 15.44v-2.19a.75.75 0 00-.75-.75h-2a.25.25 0 01-.25-.25v-9.5z"></path><path d="M22.5 8.75a.25.25 0 00-.25-.25h-3.5a.75.75 0 010-1.5h3.5c.966 0 1.75.784 1.75 1.75v9.5A1.75 1.75 0 0122.25 20H21v1.543a1.457 1.457 0 01-2.487 1.03L15.939 20H10.75A1.75 1.75 0 019 18.25v-1.465a.75.75 0 011.5 0v1.465c0 .138.112.25.25.25h5.5a.75.75 0 01.53.22l2.72 2.72v-2.19a.75.75 0 01.75-.75h2a.25.25 0 00.25-.25v-9.5z"></path></svg></span> Live Q&A office hours</div>
-    </div>
-    <div class="col-md-4 mt-md-0 mt-2">
-        <b>
-        <div>Thursdays</div>
-        <small><div>5 pm - 6 pm PST</div></small>
-        </b>
-        <div class="mt-2"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> How to navigate X series</div>
-        <small>X = research, libraries, career</small>
+    <div class="col-6" data-aos="fade-left">
+        <u><h4 class="mb-1">Week 02</h4></u>
+        <div class="row">
+            <div class="col-md-6 mt-md-0 mt-2">
+                <div class="mb-2">
+                <div>Saturday</div>
+                <small><div>September 25th, 2021</div></small>
+                <small><div>7 am - 12 pm PT</div></small>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseProduct" aria-expanded="false" aria-controls="collapseProduct"><span class="mr-1">📦</span> Product</a></div>
+                <div class="collapse multi-collapse" id="collapseProduct">
+                    <ul class="ai-course-list">
+                    <li><a href="/courses/mlops/objective/">Objective</a></li>
+                    <li><a href="/courses/mlops/solution/">Solution</a></li>
+                    <li><a href="/courses/mlops/iteration/">Iteration</a></li>
+                    </ul>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseData" aria-expanded="false" aria-controls="collapseData"><span class="mr-1">🔢</span> Data</a></div>
+                <div class="collapse multi-collapse" id="collapseData">
+                    <ul class="ai-course-list">
+                    <li><a href="/courses/mlops/labeling/">Labeling</a></li>
+                    <li><a href="/courses/mlops/preprocessing/">Preprocessing</a></li>
+                    <li><a href="/courses/mlops/exploratory-data-analysis/">Exploration</a></li>
+                    <li><a href="/courses/mlops/splitting/">Splitting</a></li>
+                    <li><a href="/courses/mlops/augmentation/">Augmentation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-2">
+                <div class="mb-2">
+                <div>Sunday</div>
+                <small><div>September 26th, 2021</div></small>
+                <small><div>7 am - 12 pm PT</div></small>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseModeling" aria-expanded="false" aria-controls="collapseModeling"><span class="mr-1">📈</span> Modeling</a></div>
+                <div class="collapse multi-collapse" id="collapseModeling">
+                    <ul class="ai-course-list">
+                    <li><a href="/courses/mlops/baselines/">Baselines</a></li>
+                    <li><a href="/courses/mlops/evaluation/">Evaluation</a></li>
+                    <li><a href="/courses/mlops/experiment-tracking/">Experiment tracking</a></li>
+                    <li><a href="/courses/mlops/optimization/">Optimization</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
+<div class="row mt-4" style="margin-bottom: 2.5rem;">
+    <div class="col-6" data-aos="fade-right">
+        <u><h4 class="mb-1">Week 03</h4></u>
+        <div class="row">
+            <div class="col-md-6 mt-md-0 mt-2">
+                <div class="mb-2">
+                <div>Saturday</div>
+                <small><div>October 2nd, 2021</div></small>
+                <small><div>7 am - 12 pm PT</div></small>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseScripting" aria-expanded="false" aria-controls="collapseScripting"><span class="mr-1">📝</span> Scripting</a></div>
+                <div class="collapse multi-collapse" id="collapseScripting">
+                    <ul class="ai-course-list">
+                    <li><a href="/courses/mlops/organization/">Organization</a></li>
+                    <li><a href="/courses/mlops/packaging/">Packaging</a></li>
+                    <li><a href="/courses/mlops/documentation/">Documentation</a></li>
+                    <li><a href="/courses/mlops/logging/">Logging</a></li>
+                    <li><a href="/courses/mlops/styling/">Styling</a></li>
+                    <li><a href="/courses/mlops/makefile/">Makefile</a></li>
+                    </ul>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseInterfaces" aria-expanded="false" aria-controls="collapseInterfaces"><span class="mr-1">📦</span> Interfaces</a></div>
+                <div class="collapse multi-collapse" id="collapseInterfaces">
+                    <ul class="ai-course-list">
+                    <li><a href="/courses/mlops/cli/">Command-line</a></li>
+                    <li><a href="/courses/mlops/api/">RESTful API</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-2">
+                <div class="mb-2">
+                <div>Sunday</div>
+                <small><div>October 3rd, 2021</div></small>
+                <small><div>7 am - 12 pm PT</div></small>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseTesting" aria-expanded="false" aria-controls="collapseTesting"><span class="mr-1">✅</span> Testing</a></div>
+                <div class="collapse multi-collapse" id="collapseTesting">
+                    <ul class="ai-course-list">
+                    <li><a href="/courses/mlops/testing/">Code</a></li>
+                    <li><a href="/courses/mlops/testing/#data">Data</a></li>
+                    <li><a href="/courses/mlops/testing/#models">Models</a></li>
+                    </ul>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseReproducibility" aria-expanded="false" aria-controls="collapseReproducibility"><span class="mr-1">♻️</span> Reproducibility</a></div>
+                <div class="collapse multi-collapse" id="collapseReproducibility">
+                    <ul class="ai-course-list">
+                    <li><a href="/courses/mlops/git/">Git</a></li>
+                    <li><a href="/courses/mlops/pre-commit/">Pre-commit</a></li>
+                    <li><a href="/courses/mlops/versioning/">Versioning</a></li>
+                    <li><a href="/courses/mlops/docker/">Docker</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6" data-aos="fade-left">
+        <u><h4 class="mb-1">Week 04</h4></u>
+        <div class="row">
+            <div class="col-md-6 mt-md-0 mt-2">
+                <div class="mb-2">
+                <div>Saturday</div>
+                <small><div>October 9th, 2021</div></small>
+                <small><div>7 am - 12 pm PT</div></small>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseProduction" aria-expanded="false" aria-controls="collapseProduction"><span class="mr-1">🚀</span> Production</a></div>
+                <div class="collapse multi-collapse" id="collapseProduction">
+                    <ul class="ai-course-list">
+                    <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
+                    <li><a href="/courses/mlops/cicd/">CI/CD workflows</a></li>
+                    <li><a href="/courses/mlops/infrastructure/">Infrastructure</a></li>
+                    <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
+                    <li><a href="/courses/mlops/pipelines/">Pipelines</a></li>
+                    <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-2">
+                <div class="mb-2">
+                <div>Sunday</div>
+                <small><div>October 10th, 2021</div></small>
+                <small><div>7 am - 12 pm PT</div></small>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseNavigationSeries" aria-expanded="false" aria-controls="collapseNavigationSeries"><span class="mr-1">🧭</span> "How to navigate X" series</a></div>
+                <div class="collapse multi-collapse" id="collapseNavigationSeries">
+                    <ul class="ai-course-list">
+                    <li>ML research</li>
+                    <li>Python libraries</li>
+                    <li>Your career</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p id="apply" class="ai-center-all mt-4" style="font-size: 1rem;">Learn how to responsibly deliver value with ML.</p>
+!!! Interactivity
+    Q&A sessions, exercises, discussions, etc. will be interweaved in between the live lectures and coding workshops to make sure you <b>master</b> this material well enough to apply it to your own projects. In addition to Q&A during the live lectures, we will also have optional **Q&A office hours** throughout the week for various timezones.
+
+<hr style="margin-top: 3rem; margin-bottom: 2rem;">
+
+<p id="apply" class="ai-center-all mt-4" style="font-size: 1.1rem;">Learn how to responsibly deliver value with ML.</p>
 <div class="ai-center-all">
     <div class="p-1" style="width: 15rem;">
         <div class="ai-center-all">
-            <small><b>Application deadline:</b> July 14th, 2021</small>
+            <small><b><a href="" target="_blank">Free info session</a>:</b> August 14th, 2021</small>
         </div>
         <div class="ai-center-all">
-            <small><b>Course start date:</b> July 17th, 2021</small>
+            <small><b>Application deadline:</b> Sept 14th, 2021</small>
+        </div>
+        <div class="ai-center-all">
+            <small><b>Course start date:</b> Sept 18th, 2021</small>
         </div>
     </div>
 </div>
 
-<div class="row mt-4">
-    <div class="col-md-4 mb-md-0 mb-4">
+<div class="row mt-4" style="margin-bottom: 2.5rem;">
+    <div class="col-md-4 mb-md-0 mb-4" data-aos="flip-left" data-aos-delay="0">
         <div class="card h-100" style="max-width: 18rem;">
             <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Essential</h3></div>
             <div class="card-body">
                 <ul class="task-list">
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live sessions and coding workshops</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Private online community</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live Q&A office hours</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;"How to navigate X" series <small>(ML research, Python libraries, career)</small></li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Alumni community</li>
                 </ul>
             </div>
             <div class="card-footer bg-transparent">
                 <div class="ai-center-all">
-                    <p class="mt-0 mb-1" style="font-size: 0.9rem;">$850 USD</p>
+                    <p class="mt-0 mb-0" style="font-size: 0.9rem;">$450 USD</p>
+                </div>
+                <div class="ai-center-all">
+                    <small class="mb-2" style="font-size: 0.7rem;">(20% off for students)</small>
                 </div>
                 <div class="ai-center-all">
                     <a href="https://forms.gle/6mHLoMzEPx11ZRsK6" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
                 </div>
+                <div class="ai-center-all">
+                    <small class="mt-1" style="font-size: 0.7rem;">&#60;25 seats remaining</small>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-md-0 mb-4">
+    <div class="col-md-4 mb-md-0 mb-4" data-aos="flip-left" data-aos-delay="500">
         <div class="card h-100" style="max-width: 18rem;">
             <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Premium</h3></div>
             <div class="card-body">
                 <ul class="task-list">
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Everything in the <i>Essential</i> plan</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;60 min. 1-on-1 career guidance <div><small>(resume & portfolio)</small></div></li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;60 min. 1-on-1 <div>mock interview</div> <div><small>(technical & behavioral)</small></div></li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;1-on-1 career guidance <div><small>(resume & portfolio)</small></div></li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;1-on-1 <div>mock interview</div> <div><small>(technical & behavioral)</small></div></li>
                 </ul>
             </div>
             <div class="card-footer bg-transparent">
                 <div class="ai-center-all">
-                    <p class="mt-0 mb-1" style="font-size: 0.9rem;">$1250 USD</p>
+                    <p class="mt-0 mb-0" style="font-size: 0.9rem;">$850 USD</p>
+                </div>
+                <div class="ai-center-all">
+                    <small class="mb-2" style="font-size: 0.75rem;">(20% off for students)</small>
                 </div>
                 <div class="ai-center-all">
                     <a href="https://forms.gle/Cz7omhnToUTpupD98" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
                 </div>
+                <div class="ai-center-all">
+                    <small class="mt-1" style="font-size: 0.7rem;">&#60;15 seats remaining</small>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-md-0 mb-4">
+    <div class="col-md-4 mb-md-0 mb-4" data-aos="flip-left" data-aos-delay="1000">
         <div class="card h-100" style="max-width: 18rem;">
             <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Enterprise</h3></div>
             <div class="card-body">
                 <ul class="task-list">
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;<i>Accelerated</i> live sessions</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Private online community</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live Q&A office hours</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;<i>Accelerated</i> 2-3 day live workshops</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Team project-based guidance <small>(tooling, infrastructure)</small></li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;"How to navigate X" series <small>(ML research, Python libraries, career)</small></li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Alumni community</li>
                 </ul>
             </div>
             <div class="card-footer bg-transparent">
@@ -402,13 +1011,14 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
-<div class="my-3"></div>
 
-<div class="row mb-0">
-    <div class="offset-md-1 col-md-10">
+> We offer merit-based full scholsarships to select students every cohort. If you are not able to financially afford the course, please <a href="mailto:hello@madewithml.com" target="_blank">email</a> us with your resume/portfolio and why you should be considered for the scholarship.
+
+<div class="row mt-3 mb-0">
+    <div class="col-md-12">
         <div class="admonition info">
             <p class="admonition-title">Reimbursement</p>
-            <p>Our alumni have had a lot of success getting 100% of the course reimbursed by their employers since all of this directly falls under career development and, in many cases, highly necessary for their work. After you apply and are accepted for a cohort, check out this <b><a href="https://madewithml.com/reimbursement" target="_blank">email template</a></b> that we've put together that you can send to your manager to get this course reimbursed.</p>
+            <p>Our alumni have had a lot of success getting 100% of the course reimbursed by their employers since all of this directly falls under career development and, in many cases, highly necessary for their work. After you apply and are accepted for a cohort, check out this <b><a href="reimbursement" target="_blank">email template</a></b> that we've put together that you can send to your manager to get this course reimbursed.</p>
         </div>
     </div>
 </div>
@@ -416,56 +1026,174 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
 <!-- FAQ -->
-## Frequently Asked Questions (FAQ)
+<h2 id="faq" class="ai-center-all mt-0 mb-2 md-typeset">Frequently Asked Questions (FAQ)</h2>
 
-### Who is this course for?
+<div class="faq-accordion mt-4" id="faq-accordion">
+<div class="row">
+    <div class="col-md-6" data-aos="fade-right">
+        <div class="card">
+    <div class="card-header collapsed" id="heading1" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      <h5 class="my-0" style="display: inline-block;">Who is this course for?</h5>
+      <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
+    </div>
+    <div id="collapseOne" class="collapse" aria-labelledby="heading1" data-parent="#faq-accordion">
+      <div class="card-body">
+        <ul>
+            <li><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M10.3 8.24a.75.75 0 01-.04 1.06L7.352 12l2.908 2.7a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 011.06.04zm3.44 1.06a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.908-2.7-2.908-2.7z"></path><path fill-rule="evenodd" d="M2 3.75C2 2.784 2.784 2 3.75 2h16.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0120.25 22H3.75A1.75 1.75 0 012 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25v16.5c0 .138.112.25.25.25h16.5a.25.25 0 00.25-.25V3.75a.25.25 0 00-.25-.25H3.75z"></path></svg></span><b>Software engineers</b> looking to learn ML and become even better software engineers. ML is integrated into increasingly more products so it's important to know how ML systems operate.</li>
+            <li><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M8.114 2.094a.75.75 0 01.386.656V9h1.252a.75.75 0 110 1.5H5.75a.75.75 0 010-1.5H7V4.103l-.853.533a.75.75 0 01-.795-1.272l2-1.25a.75.75 0 01.762-.02zm4.889 5.66a.75.75 0 01.75-.75h5.232a.75.75 0 01.53 1.28l-2.776 2.777c.55.097 1.057.253 1.492.483.905.477 1.504 1.284 1.504 2.418 0 .966-.471 1.75-1.172 2.27-.687.511-1.587.77-2.521.77-1.367 0-2.274-.528-2.667-.756a.75.75 0 01.755-1.297c.331.193.953.553 1.912.553.673 0 1.243-.188 1.627-.473.37-.275.566-.635.566-1.067 0-.5-.219-.836-.703-1.091-.538-.284-1.375-.443-2.471-.443a.75.75 0 01-.53-1.28l2.643-2.644h-3.421a.75.75 0 01-.75-.75zM7.88 15.215a1.4 1.4 0 00-1.446.83.75.75 0 01-1.37-.61 2.9 2.9 0 012.986-1.71 2.565 2.565 0 011.557.743c.434.446.685 1.058.685 1.778 0 1.641-1.254 2.437-2.12 2.986-.538.341-1.18.694-1.495 1.273H9.75a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75c0-1.799 1.337-2.63 2.243-3.21 1.032-.659 1.55-1.031 1.55-1.8 0-.355-.116-.584-.26-.732a1.068 1.068 0 00-.652-.298z"></path></svg></span><b>Data scientists</b> who want to want to go way beyond developing models in a notebook to wrapping them around robust workflows that enable ML systems to improve over time.</li>
+            <li><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12.292 2.06a.75.75 0 00-.584 0L.458 6.81a.75.75 0 000 1.38L4.25 9.793v3.803a2.901 2.901 0 00-1.327.757c-.579.58-.923 1.41-.923 2.43v4.5c0 .248.128.486.335.624.06.04.117.073.22.124.124.062.297.138.52.213.448.149 1.09.288 1.925.288s1.477-.14 1.925-.288c.223-.075.396-.15.52-.213a2.11 2.11 0 00.21-.117A.762.762 0 008 21.28v-4.5c0-1.018-.344-1.85-.923-2.428a2.9 2.9 0 00-1.327-.758v-3.17l5.958 2.516a.75.75 0 00.584 0l5.208-2.2v4.003a2.552 2.552 0 01-.079.085 4.057 4.057 0 01-.849.65c-.826.488-2.255 1.021-4.572 1.021-.612 0-1.162-.037-1.654-.1a.75.75 0 00-.192 1.487c.56.072 1.173.113 1.846.113 2.558 0 4.254-.592 5.334-1.23.538-.316.914-.64 1.163-.896a2.84 2.84 0 00.392-.482h.001A.75.75 0 0019 15v-4.892l4.542-1.917a.75.75 0 000-1.382l-11.25-4.75zM5 15c-.377 0-.745.141-1.017.413-.265.265-.483.7-.483 1.368v4.022c.299.105.797.228 1.5.228s1.201-.123 1.5-.228V16.78c0-.669-.218-1.103-.483-1.368A1.431 1.431 0 005 15zm7-3.564L2.678 7.5 12 3.564 21.322 7.5 12 11.436z"></path></svg></span><b>College graduates</b> looking to learn ML and become even better software engineers. ML is integrated into increasingly more products so it's important to know how ML systems operate.</li>
+            <li><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12 2.5c-3.81 0-6.5 2.743-6.5 6.119 0 1.536.632 2.572 1.425 3.56.172.215.347.422.527.635l.096.112c.21.25.427.508.63.774.404.531.783 1.128.995 1.834a.75.75 0 01-1.436.432c-.138-.46-.397-.89-.753-1.357a18.354 18.354 0 00-.582-.714l-.092-.11c-.18-.212-.37-.436-.555-.667C4.87 12.016 4 10.651 4 8.618 4 4.363 7.415 1 12 1s8 3.362 8 7.619c0 2.032-.87 3.397-1.755 4.5-.185.23-.375.454-.555.667l-.092.109c-.21.248-.405.481-.582.714-.356.467-.615.898-.753 1.357a.75.75 0 01-1.437-.432c.213-.706.592-1.303.997-1.834.202-.266.419-.524.63-.774l.095-.112c.18-.213.355-.42.527-.634.793-.99 1.425-2.025 1.425-3.561C18.5 5.243 15.81 2.5 12 2.5zM9.5 21.75a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75zM8.75 18a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z"></path></svg></span><b>Product managers</b> who want to develop a technical foundation in MLOps so they can effectively communicate with their technical team and help develop and iterate on applications.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header collapsed" id="heading-get-out-of-this-course" data-toggle="collapse" data-target="#collapse-get-out-of-this-course" aria-expanded="true" aria-controls="collapse-get-out-of-this-course">
+      <h5 class="my-0" style="display: inline-block;">What will I get out of this course?</h5>
+      <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
+    </div>
+    <div id="collapse-get-out-of-this-course" class="collapse" aria-labelledby="heading-get-out-of-this-course" data-parent="#faq-accordion">
+      <div class="card-body">
+        After the live lectures, coding workshops, interactive Q&A and discussions, you'll attain a:
+        <ul>
+            <li><span class="mr-1">🧠</span> <b>Foundational MLOps expertise</b> to <code class="highlight"><span class="nx">architect</span></code> an ML system using best practices, <code class="highlight"><span class="nx">articulate</span></code> your knowledge and easily <code class="highlight"><span class="nx">adapt</span></code> to this constantly evolving space.</li>
+            <li><span class="mr-1">💻</span> <b>Ability to compose high quality code</b> to create robust ML systems that <code class="highlight"><span class="nx">you</span></code>, <code class="highlight"><span class="nx">your future self</span></code> and <code class="highlight"><span class="nx">fellow developers</span></code> will come to greatly value as you develop.</li>
+            <li><span class="mr-1">🌎</span> <b>Community to continue the journey</b> and <code class="highlight"><span class="nx">grow</span></code> via discussions on new tools and best/bespoke practices, <code class="highlight"><span class="nx">collaborate</span></code> on projects and <code class="highlight"><span class="nx">share</span></code> your progress.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header collapsed" id="heading3" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+      <h5 class="my-0" style="display: inline-block;">What are there prerequisites?</h5>
+      <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
+    </div>
+    <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#faq-accordion">
+      <div class="card-body">
+        <p>During the first weekend of the course, we're going to cover all of the <a href="#basics">Basics</a> lessons. We'll be doing this fairly quickly so we can focus on the <a href="#mlops">MLOps</a> content shortly after. While we will cover the basics of Python and deep learning, it's highly recommended to be familiar with the following:</p>
+        <ul>
+            <li>Python (variables, lists, dictionaries, functions, classes)</li>
+            <li>Scientific computing (NumPy, Pandas)</li>
+            <li>PyTorch (nn.module, training/inference loops)</li>
+            <li>ML/DL (basics of regression, neural networks, CNN, etc.)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card" id="four-weeks">
+    <div class="card-header collapsed" id="heading4" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
+      <h5 class="my-0" style="display: inline-block;">Are four weeks really enough?</h5>
+      <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
+    </div>
+    <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#faq-accordion">
+      <div class="card-body">
+        Depends on who you're learning it from. It's important to learn this content from people who've <a href="#instructor"><i>actually</i> deployed ML to production</a> because they'll help you develop the framework to approach difficult concepts now and beyond the course. We'll be walking you through all the concepts from a foundational perspective, then stepping into code so we can actually apply it and extend it to our own work. We've delivered this course as an accelerated workshop to many corporate teams who were able to use the experience to immediately build/improve their ML workflows.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header collapsed" id="heading2" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+      <h5 class="my-0" style="display: inline-block;">Why should I take this course now?</h5>
+      <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
+    </div>
+    <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#faq-accordion">
+      <div class="card-body">
+        Machine learning is increasingly incorporated into many products and so companies are looking for people with increasingly deeper knowledge on not only modeling, but how to operationalize it (MLOps). It's a major advantage to understand the fundamentals of this field at this nascent stage so you can responsibly deliver value with ML as a foundational developer in your industry.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header collapsed" id="heading5" data-toggle="collapse" data-target="#collapse5" aria-expanded="true" aria-controls="collapse5">
+      <h5 class="my-0" style="display: inline-block;">Can I do the course part-time?</h5>
+      <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
+    </div>
+    <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#faq-accordion">
+      <div class="card-body">
+        Absolutely, this course is meant for busy people who are building things, which is why all the sessions are during the weekend.
+      </div>
+    </div>
+  </div>
+    </div>
+    <div class="col-md-6" data-aos="fade-left">
+    <div class="card">
+    <div class="card-header collapsed" id="heading6" data-toggle="collapse" data-target="#collapse6" aria-expanded="true" aria-controls="collapse6">
+      <h5 class="my-0" style="display: inline-block;">What if I miss any live sessions?</h5>
+      <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
+    </div>
+    <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#faq-accordion">
+      <div class="card-body">
+        It's highly recommended that you attend the live sessions because the interactive components is what makes learning all this content ingrained and fun. However, sometimes things happen that are our of your control, so we will provide recorded sessions that you can watch on your own time and then use the community to ask questions so you can catch up.
+      </div>
+    </div>
+  </div>
+    <div class="card">
+    <div class="card-header collapsed" id="heading7" data-toggle="collapse" data-target="#collapse7" aria-expanded="true" aria-controls="collapse7">
+      <h5 class="my-0" style="display: inline-block;">What is the time commitment?</h5>
+      <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
+    </div>
+    <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#faq-accordion">
+      <div class="card-body">
+        During the week, you should practice the content that we covered over the weekend. This involves re-implementing the code, digging into the additional resources and engaging in discussions with the community.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header collapsed" id="heading8" data-toggle="collapse" data-target="#collapse8" aria-expanded="true" aria-controls="collapse8">
+      <h5 class="my-0" style="display: inline-block;">What happens after the course?</h5>
+      <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
+    </div>
+    <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#faq-accordion">
+      <div class="card-body">
+        After the course, you'll have all the MLOps fundamentals you'll need to build a robust ML application. You can work solo or work with peers you've met during the course to work on portfolio projects or even build your own product. Many other students also continue to engage with the community to have weekly discussions about what's new in the field, interview preparations, etc.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header collapsed" id="heading9" data-toggle="collapse" data-target="#collapse9" aria-expanded="true" aria-controls="collapse9">
+      <h5 class="my-0" style="display: inline-block;">K8s, KubeFlow, AWS, GCP, etc.?</h5>
+      <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
+    </div>
+    <div id="collapse9" class="collapse" aria-labelledby="heading9" data-parent="#faq-accordion">
+      <div class="card-body">
+        This course covers the fundamentals of MLOps that will easily extend to any type of container-orchestration system, cloud provider, etc. We don’t explicitly use any of these because different situations call for different tools, even within the same company. So it’s important that we have the foundation to adapt to any stack very quickly, as opposed to be being too strongly tied to any one technical stack.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header collapsed" id="heading10" data-toggle="collapse" data-target="#collapse10" aria-expanded="true" aria-controls="collapse10">
+      <h5 class="my-0" style="display: inline-block;">Is this course fully remote?</h5>
+      <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
+    </div>
+    <div id="collapse10" class="collapse" aria-labelledby="heading10" data-parent="#faq-accordion">
+      <div class="card-body">
+        Yes, this course is 100% remote which means no travel but you'll meet fellow students from around the world and learn from each other.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header collapsed" id="heading11" data-toggle="collapse" data-target="#collapse11" aria-expanded="true" aria-controls="collapse11">
+      <h5 class="my-0" style="display: inline-block;">What is the refund policy?</h5>
+      <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
+    </div>
+    <div id="collapse11" class="collapse" aria-labelledby="heading11" data-parent="#faq-accordion">
+      <div class="card-body">
+        If you're not 100% satisfied by the end of the first weekend, we'll refund 100% of your payment.
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+</div>
 
-- `#!js Software engineers` looking to learn ML and become even better software engineers.
-- `#!js Data scientists` who want to learn how to responsibly deliver value with ML.
-- `#!js College graduates` looking to learn the practical skills they'll need for the industry.
-- `#!js Product Managers` who want to develop a technical foundation for ML applications.
-
-### What can I get out of this course?
-
-It's extremely difficult to learn most things on our own, let alone a complicated and fast-paced topic like MLOps. This is why I made all of the [content](#basics) completely free so we can see the quality of what we'll learn. The paid course is all about going through this content in just a few weeks with a small, highly motivated cohort. We'll have interactive lectures, assignments, readings, discussions and of course, it's all 100% project based so we actually learn how to apply everything we learn.
-
-> Learning this content will set us up for where ML is headed and because we focus on the foundations, the intuition we'll develop is everlasting and we'll be equipped to adapt to this ever-changing space.
-
-### What are there prerequisites?
-
-During the first week of the course, we're going to cover all of the [Basics](#basics) lessons. We'll be doing this fairly quickly so we can focus on the [MLOps](#mlops) content shortly after. While we will cover the basics of Python and deep learning, it's highly recommended to be familiar with the following:
-
-- Python (variables, lists, dictionaries, functions, classes)
-- Scientific computing (NumPy, Pandas)
-- PyTorch (nn.module, training/inference loops)
-- ML/DL (basics of regression, neural networks, CNN, etc.)
-
-> If you think we should offer a separate, more detailed, course on machine learning fundamentals, [let us know](mailto:hello@madewithml.com){:target="_blank"}!
-
-### Kubernetes (K8s), KubeFlow, AWS, GCP, etc.?
-
-This course covers the fundamentals of MLOps that will easily extend to any type of container-orchestration system, cloud provider, etc. We don’t explicitly use any of these because different situations call for different tools, even within the same company. So it’s important that we have the foundation to adapt to any stack very quickly. We will cover these topics in detail in future iterations of this course as they become more widely adopted.
-
-### Can I do the course while working full-time or going to school?
-
-Absolutely, this course is meant for busy people who are building things, which is why the mandatory sessions are during the weekend.
-
-### Why are the lessons already free?
-
-We're the [top MLOps repository](https://github.com/topics/mlops){:target="_blank"} on GitHub (26K+ stars), a quickly [growing community](https://newsletter.madewithml.com/){:target="_blank"} (30K+) and a [highly recommended](https://youtu.be/VSC7WBFMuZo?t=1000){:target="_blank"} resource used by industry. But we wanted to show everyone exactly what we'll learn in the course because the paid course is all about the [experience](#features).
-
-> The free content is especially targeted towards people who don't have as much opportunity to learn. I firmly believe that creativity and intelligence are randomly distributed but opportunity is siloed. I want to enable more people to create and contribute to innovation.
-
-
-<div class="row mb-0">
-    <div class="offset-md-1 col-md-10">
+<div class="row mt-3 mb-0">
+    <div class="col-md-12">
         <div class="admonition question">
             <p class="admonition-title">More questions?</p> <p>Feel free to send us an <a href="mailto:hello@madewithml.com" target="_blank">email</a> with all your additional questions and we'll get back to you very soon.</p>
         </div>
     </div>
 </div>
 
-<hr style="margin-top: 1rem; margin-bottom: 2rem;">
+<hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
 <!-- Citation -->
 To cite this content, please use:

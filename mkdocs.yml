@@ -97,7 +97,7 @@ nav:
       - Monitoring: courses/mlops/monitoring.md
       - Pipelines: courses/mlops/pipelines.md
       - Feature store: courses/mlops/feature-store.md
-  - FAQ: /#frequently-asked-questions-faq
+  - FAQ: /#faq
 
 # Configuration
 theme:
@@ -150,6 +150,7 @@ extra_css:
   - static/css/extra.css
   - static/css/bs.css
   - static/css/termynal.css
+  - https://unpkg.com/aos@2.3.1/dist/aos.css
 
 # Extra JS
 extra_javascript:
@@ -158,6 +159,7 @@ extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://unpkg.com/aos@2.3.1/dist/aos.js
   - static/js/custom.js
   - static/js/termynal.js
 
@@ -175,6 +177,7 @@ plugins:
             "courses/putting-ml-in-production.md": "index.md"
             "courses/applied-ml.md": "index.md"
             "courses/mlops/deployment.md": "courses/mlops/infrastructure.md"
-            "mlops-course.md": "index.md"
-            "reimbursement.md": "index.md"
+            "courses/applied-ml-in-production.md": "index.md"
+            "mlops-course": "index.md"
+            "reimbursement": "index.md"
 

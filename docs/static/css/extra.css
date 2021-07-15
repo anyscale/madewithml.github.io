@@ -55,6 +55,16 @@
   padding-right: 0rem;
 }
 
+.ai-header-card {
+  background-color: #f5f9fd;
+  border-radius: 10px;
+  border-color: #e0ecf9;
+  border-width: 0.05rem !important;
+  border-style: solid;
+  -webkit-box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.26);
+          box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.26);
+}
+
 .md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
   background-color: #ebebeb !important;
 }
@@ -112,6 +122,10 @@
 
 .github {
   color: rgba(0, 0, 0, 0.87);
+}
+
+.youtube {
+  color: #d63939;
 }
 
 .output {
@@ -731,5 +745,53 @@ th {
   /* 100% = dialog height, 120px = header + footer */
   max-height: calc(100% - 120px);
   overflow-y: scroll;
+}
+
+.ai-testimonial-card {
+  height: 10.2rem;
+}
+
+@media (max-width: 480px) {
+  .ai-testimonial-card {
+    height: 12.5rem;
+  }
+}
+
+.ai-testimonial-card .card-subtitle {
+  font-size: 0.7rem;
+}
+
+.ai-testimonial-profile-image {
+  width: 100%;
+  border-radius: 10rem;
+}
+
+.ai-testimonial-org {
+  color: #9a9a9a;
+  font-size: 0.75rem !important;
+}
+
+.faq-accordion .card {
+  border-radius: 0rem;
+  -webkit-box-shadow: None;
+          box-shadow: None;
+  border: None;
+}
+
+.faq-accordion .card-header {
+  cursor: pointer;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.125);
+}
+
+[data-toggle="collapse"] .faq-toggle:after {
+  content: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0zM12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zm6.25 11.75a.75.75 0 000-1.5H5.75a.75.75 0 000 1.5h12.5z"></path></svg>');
+  display: inline-block;
+  color: #4b73f5;
+}
+
+[data-toggle="collapse"].collapsed .faq-toggle:after {
+  content: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12.75 7.75a.75.75 0 00-1.5 0v3.5h-3.5a.75.75 0 000 1.5h3.5v3.5a.75.75 0 001.5 0v-3.5h3.5a.75.75 0 000-1.5h-3.5v-3.5z"></path><path fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z"></path></svg>');
+  display: inline-block;
+  color: #4b73f5;
 }
 /*# sourceMappingURL=extra.css.map */
