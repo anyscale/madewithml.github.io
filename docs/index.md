@@ -1101,6 +1101,8 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
     </div>
 </div>
 
+> After you apply, we will review your application and you'll receive an invitation to the free info session. You don't pay for anything until after the info session so you know exactly what the course experience will be like. If this current cohort is already filled, still apply and join the info session so you can sign up early for the next cohort.
+
 <div class="row mt-3 mb-0">
     <div class="col-md-12">
         <div class="admonition info">
