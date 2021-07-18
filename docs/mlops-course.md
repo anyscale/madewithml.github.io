@@ -1,5 +1,5 @@
 ---
-template: course.html
+template: main.html
 title: MLOps Course
 keywords: mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 ---

@@ -1,5 +1,5 @@
 ---
-template: course.html
+template: main.html
 title: MLOps Course
 keywords: mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 ---
@@ -18,7 +18,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                     <input class="revue-form-field" placeholder="Your email address..." type="email" name="member[email]" id="member_email" style="width: 80%; border: 1px solid #b3b3b3; border-radius: 3px;">
                     <button class="md-button md-button--purple-gradient mr-2 mb-2 mb-md-0 mt-md-2 mt-2" type="submit" style="cursor: pointer !important;">
                         <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 3A1.75 1.75 0 000 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0024 18.75v-14A1.75 1.75 0 0022.25 3H1.75zM1.5 4.75a.25.25 0 01.25-.25h20.5a.25.25 0 01.25.25v.852l-10.36 7a.25.25 0 01-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"></path></svg></span> Subscribe</button>
-                        <a href="#basics"><span class="md-button md-button--grey-secondary mr-2 mb-2 mb-md-0 mt-md-2 px-3 py-1">View lessons</span></a>
+                        <a href="#lessons"><span class="md-button md-button--grey-secondary mr-2 mb-2 mb-md-0 mt-md-2 px-3 py-1">View lessons</span></a>
                 </form>
             </div>
         </div>
@@ -482,7 +482,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </a>
 </div>
 
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
+<hr id="lessons" style="margin-top: 2rem; margin-bottom: 2rem;">
 
 ## Basics
 > Learn the fundamentals of ML through intuitive explanations, clean code and visualizations.
@@ -1052,6 +1052,9 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                 <div class="ai-center-all">
                     <a href="https://forms.gle/6mHLoMzEPx11ZRsK6" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
                 </div>
+                <div class="ai-center-all">
+                    <small class="mt-2" style="font-size: 0.7rem;">&#60;15 seats remaining</small>
+                </div>
             </div>
         </div>
     </div>
@@ -1074,6 +1077,9 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                 </div>
                 <div class="ai-center-all">
                     <a href="https://forms.gle/Cz7omhnToUTpupD98" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
+                </div>
+                <div class="ai-center-all">
+                    <small class="mt-2" style="font-size: 0.7rem;">&#60;10 seats remaining</small>
                 </div>
             </div>
         </div>
