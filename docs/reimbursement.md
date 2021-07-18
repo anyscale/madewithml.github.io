@@ -9,13 +9,13 @@ keywords: mlops, applied ml, machine learning
 ##
 
 !!! abstract "Instructions"
-    After you've [applied](https://madewithml.com/#apply){:target="_blank"} and been accepted to the next cohort, use the email template below to send to your manager for reimbursement for the course. Feel free to add any additional details as you see fit.
+    After you've [applied](../#apply){:target="_blank"} and been accepted to the next cohort, use the email template below to send to your manager for reimbursement for the course. Feel free to add any additional details as you see fit.
 
 **Subject**: Reimbursement for Made With ML's MLOps Course
 
 Hi,
 
-Hope you're doing well. I was recently accepted into [Made With ML's MLOps course](https://madewithml.com/){:target="_blank"}, which is a 4-week project-based course on MLOps fundamentals. The course costs $450 but the value I'll gain for myself and our team/company will pay for the course almost immediately. I added some key information about the course below and would love to get this career development opportunity reimbursed.
+Hope you're doing well. I was recently accepted into [Made With ML's MLOps course](https://madewithml.com/){:target="_blank"}, which is a 4-week project-based course on MLOps fundamentals. The course costs $550 but the value I'll gain for myself and our team/company will pay for the course almost immediately. I added some key information about the course below and would love to get this career development opportunity reimbursed.
 
 <u>Course page</u>: [https://madewithml.com/](https://madewithml.com/){:target="_blank"}
 

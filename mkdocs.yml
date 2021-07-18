@@ -179,5 +179,4 @@ plugins:
             "courses/mlops/deployment.md": "courses/mlops/infrastructure.md"
             "courses/applied-ml-in-production.md": "index.md"
             "mlops-course": "index.md"
-            "reimbursement": "index.md"
 
