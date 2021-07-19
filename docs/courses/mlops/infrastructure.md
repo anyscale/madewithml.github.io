@@ -48,7 +48,7 @@ We can also serve live predictions, typically through an HTTPS call with the app
 - ❌&nbsp; requires real-time monitoring since input space in unbounded, which could yield erroneous predictions.
 
 !!! note
-    Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers, such as [MLFlow](https://mlflow.org/){:target="_blank"} or [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"}, provide a common interface to interact with models for inspection, inference, etc. In fact, modules like RedisAI can even offer added benefits such as data locality for super fast inference.
+    Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers, such as [MLFlow](https://mlflow.org/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"}, provide a common interface to interact with models for inspection, inference, etc. In fact, modules like RedisAI can even offer added benefits such as data locality for super fast inference.
 
 ## Processing
 
