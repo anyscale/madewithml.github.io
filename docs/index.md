@@ -668,5 +668,5 @@ To cite this content, please use:
 
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
 <blockquote>
-<p><small>If you're looking for something that's not here anymore, it's because our waitlist was full but it'll be back this October.</small></p>
+<p><small>If you're looking for something that's not here anymore, feel free to <a href="mailto:hello@madewithml.com" target="_blank">reach out</a> to us.</small></p>
 </blockquote>
