@@ -178,5 +178,5 @@ plugins:
             "courses/applied-ml.md": "index.md"
             "courses/mlops/deployment.md": "courses/mlops/infrastructure.md"
             "courses/applied-ml-in-production.md": "index.md"
-            "mlops-course": "index.md"
+            # "mlops-course": "index.md"
 
