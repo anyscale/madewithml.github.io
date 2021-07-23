@@ -1044,13 +1044,10 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             </div>
             <div class="card-footer bg-transparent">
                 <div class="ai-center-all">
-                    <p class="mt-0 mb-0" style="font-size: 0.9rem;">$550 USD</p>
+                    <p class="mt-0 mb-2" style="font-size: 0.9rem;">$550 USD</p>
                 </div>
                 <div class="ai-center-all">
                     <a href="https://forms.gle/6mHLoMzEPx11ZRsK6" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
-                </div>
-                <div class="ai-center-all">
-                    <small class="mt-2" style="font-size: 0.7rem;">&#60;15 seats remaining</small>
                 </div>
             </div>
         </div>
@@ -1067,13 +1064,10 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             </div>
             <div class="card-footer bg-transparent">
                 <div class="ai-center-all">
-                    <p class="mt-0 mb-0" style="font-size: 0.9rem;">$850 USD</p>
+                    <p class="mt-0 mb-2" style="font-size: 0.9rem;">$850 USD</p>
                 </div>
                 <div class="ai-center-all">
                     <a href="https://forms.gle/Cz7omhnToUTpupD98" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
-                </div>
-                <div class="ai-center-all">
-                    <small class="mt-2" style="font-size: 0.7rem;">&#60;10 seats remaining</small>
                 </div>
             </div>
         </div>
@@ -1091,7 +1085,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             </div>
             <div class="card-footer bg-transparent">
                 <div class="ai-center-all">
-                    <p class="mt-0 mb-1" style="font-size: 0.8rem;">virtual or in-person</p>
+                    <p class="mt-0 mb-2" style="font-size: 0.8rem;">virtual or in-person</p>
                 </div>
                 <div class="ai-center-all">
                     <a href="https://forms.gle/8L8ga4fTnmwss9by8" target="_blank" class="md-button md-button--grey-secondary mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Contact us</a>
