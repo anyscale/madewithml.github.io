@@ -108,7 +108,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
                                             <b>Ritchie Ng</b>
-                                            <a href="https://www.youtube.com/watch?v=VSC7WBFMuZo&t=1000s" target="_blank">
+                                            <a href="https://youtu.be/CjU_6OaYKpw?t=1009" target="_blank">
                                                 <span class="twemoji youtube ml-1">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg>
                                                 </span>
@@ -1047,9 +1047,6 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                     <p class="mt-0 mb-0" style="font-size: 0.9rem;">$550 USD</p>
                 </div>
                 <div class="ai-center-all">
-                    <small class="mb-2" style="font-size: 0.7rem;">(20% off for students)</small>
-                </div>
-                <div class="ai-center-all">
                     <a href="https://forms.gle/6mHLoMzEPx11ZRsK6" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
                 </div>
                 <div class="ai-center-all">
@@ -1071,9 +1068,6 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="card-footer bg-transparent">
                 <div class="ai-center-all">
                     <p class="mt-0 mb-0" style="font-size: 0.9rem;">$850 USD</p>
-                </div>
-                <div class="ai-center-all">
-                    <small class="mb-2" style="font-size: 0.75rem;">(20% off for students)</small>
                 </div>
                 <div class="ai-center-all">
                     <a href="https://forms.gle/Cz7omhnToUTpupD98" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
