@@ -354,7 +354,7 @@ from airflow.utils.dates import days_ago
 We could also specify a [cron](https://crontab.guru/){:target="_blank"} expression for our `schedule_interval` parameter or even use [cron presets](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html#cron-presets){:target="_blank"}.
 
 
-!!! warning
+!!! note
     Airflow's Scheduler will run our workflows one `schedule_interval` from the `start_date`. For example, if we want our workflow to start on `01-01-1983` and run `@daily`, then the first run will be immediately after `01-01-1983T11:59`.
 
 ### Sensors
@@ -375,7 +375,7 @@ Now that we've reviewed Airflow's major concepts, we're ready to create the Data
 
 ```python linenums="1"
 # Task relationships
-extract_data >> [validate_projects, validate_tags] >> compute_features >> cache_to_feature_store
+extract_data >> [validate_projects, validate_tags] >> compute_features >> cache
 ```
 
 To keep things simple, we'll continue to keep our data as a local file:
@@ -390,19 +390,22 @@ extract_data = BashOperator(
 
 ... but in a real production setting, our data can come from a wide variety of sources. For example, we have a dataset prepared for the purposes of this course but where does this data originate from and where does it end up before we're ready to use it for machine learning?
 
-### Data
+### Extraction
 
 When we talk about data that we want to process on in our DataOps pipelines, we need to think about both it's origin and where it lives.
 
-- **Origin**: most applications (including the [old Made With ML](https://madewithml.com/pivot/){:target="_blank"} that our dataset comes from) have a database to store and read information from. Typical choices are [PostgreSQL](https://www.postgresql.org/){:target="_blank"}, [MySQL](https://www.mysql.com/){:target="_blank"}, [MongoDB](https://www.mongodb.com/){:target="_blank"}, [Cassandra](https://cassandra.apache.org/){:target="_blank"}, etc. The specific choice depends on the schemas, data scale, etc. We can also have auxilliary data coming from other services around our main application such as user analytics (ex. [Google Analytics](https://analytics.google.com/analytics/web/){:target="_blank"}), financial transactions (ex. [Stripe](https://stripe.com/){:target="_blank"}), etc.
+- **Database**: most applications (including the [old Made With ML](https://madewithml.com/pivot/){:target="_blank"} that our dataset comes from) have a database to store and read information from. Typical choices are [PostgreSQL](https://www.postgresql.org/){:target="_blank"}, [MySQL](https://www.mysql.com/){:target="_blank"}, [MongoDB](https://www.mongodb.com/){:target="_blank"}, [Cassandra](https://cassandra.apache.org/){:target="_blank"}, etc. The specific choice depends on the schemas, data scale, etc. We can also have auxiliary data coming from other services around our main application such as user analytics (ex. [Google Analytics](https://analytics.google.com/analytics/web/){:target="_blank"} or [Segment](https://segment.com/){:target="_blank"}), financial transactions (ex. [Stripe](https://stripe.com/){:target="_blank"}), CRM services (ex. [SalesForce](https://www.salesforce.com/){:target="_blank"}), etc. Data can also be taken from the origin database and moved to another specialized database after it goes through labeling/annotation and QA pipelines.
 
 - **Warehouse**: data is often moved from the database to a data warehouse (DWH) for the added benefits of a powerful analytics engine, front-end clients, etc. to make it very easy for downstream developers to efficiently use the data at scale. Typical choices are [Google BigQuery](https://cloud.google.com/bigquery){:target="_blank"}, [Amazon RedShift](https://aws.amazon.com/redshift/){:target="_blank"}, [SnowFlake](https://www.snowflake.com/){:target="_blank"}, [Hive](https://hive.apache.org/){:target="_blank"}, etc.
+
+!!! note
+    While both databases and data warehouses hold data, they're different kinds of processing systems. A database is an [online transaction processing (OLTP)](https://en.wikipedia.org/wiki/Online_transaction_processing){:target="_blank"} system because it's typically used for day-to-day CRUD (create, read, update, delete) operations connected to the main application. Whereas, a data warehouse is an [online analytical processing (OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing){:target="_blank"} system because it's used ad-hoc querying on aggregate views of the data. Data moves from a database to a warehouse through ETL (extract, transform, load) pipelines, which the warehouse will use to drive business insights, which can drive change back to the database (schemas, values, etc.).
 
 Typically we'll use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/){:target="_blank"} to trigger workflows when a condition is met or trigger them directly from the external source via API calls, etc. Our workflows can communicate with the different platforms by establishing a [connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html){:target="_blank"} and then using [hooks](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/hooks/index.html){:target="_blank"} to interface with the database, data warehouse, etc.
 
 ### Validation
 
-The specific process of where and how we extract our data can be bespoke but what's important is that we have a continuous integration to execute our workflows. A key aspect to trusting this continuous integration is validation at every step of the way. We'll once again use [Great Expectations](https://greatexpectations.io/){:target="_blank"}, as we did in our [testing lesson](../testing/#data){:target="_blank"}, to validate our incoming data before processing it.
+The specific process of where and how we extract our data can be bespoke but what's important is that we have a continuous integration to execute our workflows. A key aspect to trusting this continuous integration is validation at every step of the way. We'll once again use [Great Expectations](https://greatexpectations.io/){:target="_blank"}, as we did in our [testing lesson](testing.md#data){:target="_blank"}, to [validate](testing.md#expectations){:target="_blank"} our incoming data before processing it.
 
 With the Airflow concepts we've learned so far, there are many ways to use our data validation library to validate our data. Regardless of what data validation tool we use (ex. [Great Expectations](https://greatexpectations.io/){:target="_blank"}, [TFX](https://www.tensorflow.org/tfx/data_validation/get_started){:target="_blank"}, [AWS Deequ](https://github.com/awslabs/deequ){:target="_blank"}, etc.) we could use the BashOperator, PythonOperator, etc. to run our tests. Luckily, Great Expectations has a [recommended](https://docs.greatexpectations.io/en/stable/guides/workflows_patterns/deployment_airflow.html){:target="_blank"} [Airflow Provider package](https://github.com/great-expectations/airflow-provider-great-expectations){:target="_blank"}. This package contains a `GreatExpectationsOperator` which we can use to execute specific checkpoints as tasks.
 
@@ -446,7 +449,7 @@ And we want both tasks to pass so we set the `fail_task_on_validation_failure` p
 
 ### Compute
 
-Once we have validated our data, we're ready to compute features. We have a wide variety of Operators to choose from depending on the tools we're using for compute (ex. [Python](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.PythonOperator){target="_blank"}, [Spark](https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/operators.html){:target="_blank"}, [DBT](https://github.com/gocardless/airflow-dbt){:target="_blank"}, etc.). And of course we can easily scale all of this by running on a managed cluster platform (AWS' [EMR](https://aws.amazon.com/emr/){:target="_blank"}, Google Cloud's [Dataproc](https://cloud.google.com/dataproc){:target="_blank"}, on-prem hardware, etc.). For our task, we'll just need a PythonOperator to execute our feature engineering CLI command:
+Once we have validated our data, we're ready to compute features. We have a wide variety of Operators to choose from depending on the tools we're using for compute (ex. [Python](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.PythonOperator){target="_blank"}, [Spark](https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/operators.html){:target="_blank"}, [DBT](https://github.com/gocardless/airflow-dbt){:target="_blank"}, etc.). And of course we can easily scale all of this by running on a managed cluster platform (AWS [EMR](https://aws.amazon.com/emr/){:target="_blank"}, Google Cloud's [Dataproc](https://cloud.google.com/dataproc){:target="_blank"}, on-prem hardware, etc.). For our task, we'll just need a PythonOperator to execute our feature engineering CLI command:
 
 ```python linenums="1"
 # Compute features
@@ -459,12 +462,12 @@ compute_features = PythonOperator(
 
 ### Cache
 
-When we establish our DataOps pipeline, it's not something that's specific to any one application. Instead it's its own repository that's responsible for extracting, transforming and loading (ETL) data for downstream pipelines who are dependent on it for their own unique applications. This is one of the most important benefits of not doing an end-to-end ML application because it allows for true continued collaboration. And so we need to cache our computed features to a central [feature store](feature-store.md){:target="_blank"}. This way, downstream developers can easily access features and use them to build applications without having to worry about doing much heavy lifting with data processing.
+When we establish our DataOps pipeline, it's not something that's specific to any one application. Instead it's its own repository that's responsible for extracting, transforming and loading (ETL) data for downstream pipelines who are dependent on it for their own unique applications. This is one of the most important benefits of **not doing an end-to-end ML application** because it allows for true continued collaboration. And so we need to cache our computed features to a central [feature store](feature-store.md){:target="_blank"}, database or data warehouse (depending on whether ML task involves entity features that change over time). This way, downstream developers can easily access features and use them to build applications without having to worry about doing much heavy lifting with data processing.
 
 ```python linenums="1"
 # Feature store
-cache_to_feature_store = BashOperator(
-    task_id="cache_to_feature_store",
+cache = BashOperator(
+    task_id="cache",
     bash_command=f"cd {config.BASE_DIR}/features && feast materialize-incremental {END_TS}",
 )
 ```
@@ -473,12 +476,12 @@ cache_to_feature_store = BashOperator(
     Learn all about what features stores are, why we need them and how to implement them in our [feature stores lesson](feature-store.md){:target="_blank"}.
 
 
-## MLOps
+## MLOps (model)
 
-Once we have our features in our feature store, we can use them for MLOps tasks such as optimization, training, validation, serving, etc.
+Once we have our features in our feature store, we can use them for MLOps tasks responsible for model creating such as optimization, training, validation, serving, etc.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/mlops.png" width="1000" alt="pivot">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/model.png" width="1000" alt="pivot">
 </div>
 
 ```python linenums="1"
@@ -488,9 +491,9 @@ improved >> [set_monitoring_references, deploy_model, notify_teams]
 regressed >> [notify_teams, file_report]
 ```
 
-### Extract features
+### Extract data
 
-The first step is to extract the relevant historical features from our feature store that our DataOps workflow ended with. We'd normally need to provide a set of entities and the timestamp to extract point-in-time features for each of them.
+The first step is to extract the relevant historical features from our feature store/DB/DWH that our DataOps workflow cached to. We'd normally need to provide a set of entities and the timestamp to extract point-in-time features for each of them.
 
 ```python linenums="1"
 # Extract features
@@ -519,9 +522,12 @@ train_model = BashOperator(
 )
 ```
 
+!!! note
+    An interesting trend in continual learning involves algorithmic advancements where models build on their knowledge without retraining from scratch and suffering from catastrophic forgetting. Check out this survey (rev. 04/2021) for a review of methods: [A continual learning survey: Defying forgetting in classification tasks](https://arxiv.org/abs/1909.08383){:target="_blank"}.
+
 ### Evaluation
 
-When we're ready to evaluate our trained models, we want to execute a chain of tasks depending on whether the model improved or regressed. To do this, we're using a [BranchPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html?highlight=branch#branching){:target="_blank"} for the evaluation task so it can return the appropriate task id.
+It's imperative that we evaluate our trained models so we can be confident in it's ability. We've extensively covered [model evaluation](testing.md#evaluation){:target="_blank"} in our [testing lesson](testing.md){:target="_blank"} so here we'll talk about what happens after evaluation. We want to execute a chain of tasks depending on whether the model improved or regressed. To do this, we're using a [BranchPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html?highlight=branch#branching){:target="_blank"} for the evaluation task so it can return the appropriate task id.
 
 ```python linenums="1"
 from airflow.operators.python import BranchPythonOperator
@@ -543,8 +549,6 @@ def _evaluate_model():
         return "regressed"  # regressed is a task id
 ```
 
-The actual task ids that the callable python function returns don't necessarily have to have any functions.
-
 ```python linenums="1"
 # Improved or regressed
 improved = BashOperator(
@@ -557,17 +561,102 @@ regressed = BashOperator(
 )
 ```
 
-Instead they're simply used to direct the workflow towards a certain set of tasks based on upstream results. In our case, we want to notify teams regardless of improvement or regression but we have some unique tasks for each scenario as well (deploying the improved model, resetting distribution references, filing a regression report, etc.).
+The returning task ids can correspond to tasks that are simply used to direct the workflow towards a certain set of tasks based on upstream results. In our case, we want to log a report in the event of a regression.
 
 ```python linenums="1"
 # Task relationships
-extract_features >> optimization >> train_model >> evaluate_model >> [improved, regressed]
-improved >> [set_monitoring_references, deploy_model, notify_teams]
-regressed >> [notify_teams, file_report]
+extract_data >> optimization >> train >> evaluate >> [improved, regressed]
+improved >> serve
+regressed >> report
 ```
 
+### Serving
+
+If our model passed our evaluation criteria then we can deploy and serve our model. Again, there are many different options here such as using our CI/CD Git workflows to deploy the model wrapped as a scalable microservice or for more streamlined deployments, we can use a purpose-build model server such as as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server. These servers have a registry with an API layer to seamlessly inspect, update, serve, rollback, etc. multiple versions of models. Typically a model artifact will be loaded to an inference app which directly interfaces to fulfill any requests from the user-facing application.
+
+```python linenums="1"
+# Serve
+serve_model = BashOperator(
+    task_id="serve_model",  # push to GitHub to kick off serving workflows
+    bash_command="echo served model",  # or to a purpose-built model server, etc.
+)
+```
+
+## MLOps (update)
+
+Once we've validated and served our model, how do we know *when* and *how* it needs to be updated? We'll need to compose a set of workflows that reflect the update policies we want to set in place.
+
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/update.png" width="1000" alt="pivot">
+</div>
+
+```python linenums="1"
+# Task relationships
+monitoring >> update_policy_engine >> [_continue, inspect, improve, rollback]
+improve >> compose_retraining_dataset >> retrain
+```
+
+### Monitoring
+Our inference application will receive requests from our user-facing application and we'll use our versioned model artifact to return inference responses. All of these inputs, predictions and other values will also be sent (batch/real-time) to a monitoring workflow that ensures the health of our system. We have already covered the foundations of monitoring in our [monitoring lesson](monitoring.md){:target="_blank"} but here we'll look at how triggered alerts fit with the overall operational workflow.
+
+### Policies
+Based on the metrics we're monitoring using various thresholds, window sizes, frequencies, etc., we'll be able to trigger events based on our update policy engine.
+
+- `#!js continue`: with the currently deployed model without any updates. However, an alert was raised so it should analyzed later to reduce false positive alerts.
+- `#!js improve`: by retraining the model to avoid performance degradation causes by meaningful drift (data, target, concept, etc.).
+- `#!js inspect`: to make a decision. Typically expectations are reassessed, schemas are reevaluated for changes, etc.
+- `#!js rollback`: to a previous version of the model because of an issue with the current deployment. Typically these can be avoided using robust deployment strategies (ex. dark canary).
+
+### Retraining
+If we need to improve on the existing version of the model, it's not just the matter of fact of rerunning the model creation workflow on the new dataset. We need to carefully compose the training data in order to avoid issues such as catastrophic forgetting (forget previously learned patterns when presented with new data).
+
+- `#!js labeling`: new incoming data may need to be properly labeled before being used (we cannot just depend on proxy labels).
+- `#!js active learning`: we may not be able to explicitly label every single new data point so we have to leverage [active learning](labeling.md#active-learning){:target="_blank"} workflows to complete the labeling process.
+- `#!js QA`: quality assurance workflows to ensure that labeling is accurate, especially for known false positives/negatives and historically poorly performing slices of data.
+- `#!js augmentation`: increasing our training set with [augmented data](augmentation.md){:target="_blank"} that's representative of the original dataset.
+- `#!js sampling`: upsampling and downsampling to address imbalanced data slices.
+- `#!js evaluation`:  creation of an evaluation dataset that's representative of what the model will encounter once deployed.
+
+Once we have the proper dataset for retraining, we can kickoff the featurization and model training workflows where a new model will be trained and evaluated before being deployed and receiving new inference requests.
+
+## Continual learning
+
+We'll conclude by looking at how these different workflows all connect to create an ML system that's continually learning. We use the word `continual` (repeat with breaks) instead of `continuous` (repeat without interruption / intervention) because we're **not** trying to create a system that will automatically update with new incoming data without human intervention.
+
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/connect.png" width="1000" alt="pivot">
+</div>
+<div class="ai-center-all">
+  <small>A simplified view to illustrate how workflows connect. Not depicting <a href="versioning.md" target="_blank">version control</a>, <a href="cicd.md" target="_blank">CI/CD</a> across multiple environments, <a href="cicd.md#deployment" target="_blank">deployment</a>/<a href="infrastructure.md#testing" target="_blank">testing</a> strategies, etc.</small>
+</div>
+
+A continual learning system like this will guide us with when to update, what exactly to update and how to update it (easily). The goal is not always to build a continuous system that automatically updates but rather a continual system that iteratively updates and gains our trust over time. However, though we’ve closed the iteration loop for our continual system, there are many decisions involved that prevent the iteration from occurring continuously.
+
 !!! note
-    Using these workflows for continuous iteration *doesn't* have to mean that it's all fully automated without human intervention. Instead it's a system that can iterate and improve with proper validation along the way and complete transparency and traceability.
+    Continual learning not only applies to MLOps workflow architecture but on the [algorithmic front](https://arxiv.org/abs/1909.08383){:target="_blank"} as well, where models learn to adapt to new data without having to retrain or suffer from catastrophic forgetting (forget previously learned patterns when presented with new data).
+
+### Monitoring
+
+Starting backwards from our update workflow, there are so many moving pieces involved with monitoring. What values to monitor for drift (data, target, concept), how to measure drift (chi^2, KS, MMD, etc.), window sizes/frequencies, thresholds for triggering alerts and more. Once an alert is actually triggered, what events take place? These policies evolve based on experience from previous iterations, domain expertise, etc. And how do we avoid alerting fatigue and actually identify the root cause (we need smart slicing & aggregation).
+
+### Retraining
+
+If the appropriate action is to retrain, it’s not just the matter of fact of retraining on the old data + new data (if only it was that easy)! There’s an entire workflow (often human-in-the-loop) that is responsible for composing the retraining dataset. We use the word “compose” because it really is an art. Labeling, active learning, views for domain experts, quality assurance, augmentation, up/down sampling, evaluation dataset with appropriate slice representations, etc.
+
+### Evaluation
+
+There are decisions in the DataOps workflows that need to be reevaluated as well such as adding to the set of expectations that our features and models need to pass or accounting for regulatory requirements, etc. These evaluation criteria are added a result of our system interacting with the real world. Usually, With the exception of large concept drift, these expectations should remain valid and should require fewer updates after the first several iterations.
+
+### Impact
+
+These are just a few of the dynamic levers that need to be evaluated and adjusted after nearly every iteration. So the brunt of the work comes after shipping the first model and when trying to keep our system relevant to the changing world (developing user preferences, social trends, pandemics, etc.). So, all this work better be worth it, such that even incremental improvements translate to meaningful impact! But the good news is that we’ve created a highly transparent system that can adapt to any change with fewer and fewer technical interventions, thanks to both the increased data to learn from and the learned evaluation, monitoring and update policy criteria in place.
+
+!!! warning
+    While it's important to iterate and optimize the internals of our workflows, it's even more important to ensure that our ML system are actually making an impact. We need to constantly engage with stakeholders (management, users) to iterate on **why** our ML system exists.
+
+### Tooling
+Tooling is improving ([monitoring](monitoring.md){:target="_blank"}, [evaluation](testing.md){:target="_blank"}, [feature store](feature-store.md){:target="_blank"}, etc.) & control planes (ex. [Metaflow](https://metaflow.org/){:target="_blank"}) are emerging to connect them. Even tooling to allow domain experts to interact with the ML system beyond just labeling (dataset curation, segmented monitoring investigations, explainability). A lot of companies are also building centralized ML platforms (ex. Uber's [Michelangelo](https://eng.uber.com/michelangelo-machine-learning-platform/){:target="_blank"} or LinkedIn's [ProML](https://engineering.linkedin.com/blog/2019/01/scaling-machine-learning-productivity-at-linkedin){:target="_blank"}) to allow their developers to move faster and not create redundant workflows (shared feature stores, health assurance monitoring pipelines, etc.)
+
 
 ## References
 - [Airflow official documentation](https://airflow.apache.org/docs/apache-airflow/stable/index.html){:target="_blank"}

@@ -95,8 +95,8 @@ nav:
       - CI/CD workflows: courses/mlops/cicd.md
       - Infrastructure: courses/mlops/infrastructure.md
       - Monitoring: courses/mlops/monitoring.md
-      - Pipelines: courses/mlops/pipelines.md
       - Feature store: courses/mlops/feature-store.md
+      - Pipelines: courses/mlops/pipelines.md
   - FAQ: /#faq
 
 # Configuration

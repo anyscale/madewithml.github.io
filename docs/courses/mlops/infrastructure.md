@@ -11,7 +11,11 @@ repository: https://github.com/GokuMohandas/MLOps
 
 ## Intuition
 
-We’ve already covered the methods of deployment via our API, Docker, and CI/CD lessons where the ML system is its own application, as opposed to being tied to a monolithic general application. This way we’re able to scale our ML workflows as needed and use it to deliver value across any other applications that maybe interested in using it’s outputs. So in this lesson, we’ll instead talk about the types of deployment/serving and how optimize, orchestrate and scale them. We highly recommend using a framework such as [Metaflow](https://metaflow.org/){:target="_blank"} to set up all this infrastructure that we'll be discussing.
+We’ve already covered the methods of deployment via our API, Docker, and CI/CD lessons where the ML system is its own application, as opposed to being tied to a monolithic general application. This way we’re able to scale our ML workflows as needed and use it to deliver value across any other applications that maybe interested in using it’s outputs. So in this lesson, we’ll instead talk about the types of tasks, serving and how optimize, orchestrate and scale them. We highly recommend using a framework such as [Metaflow](https://metaflow.org/){:target="_blank"} to set up all this infrastructure that we'll be discussing.
+
+## Tasks
+
+Before we talk about the infrastructure needed for ML tasks, we need to talk about the fundamental types of ML tasks. A task can involve features that don't change over time. For example if an API classifies uploaded images, all the input features come from the image the user just uploaded. If that same image is uploaded later and the same model is used, the prediction will remain unchanged. However, a task can also involve features that change over time. For example, if you want to predict whether a user would enjoy a movie, you'll want to retrieve the latest available data for that user's behavior. Using the exact same model, your prediction can change as the user's features change over time. This subtle difference can drive key architectural choices when it comes how to store, process and retrieve your data (feature stores, data streams, etc.).
 
 ## Serving
 
@@ -48,15 +52,13 @@ We can also serve live predictions, typically through an HTTPS call with the app
 - ❌&nbsp; requires real-time monitoring since input space in unbounded, which could yield erroneous predictions.
 
 !!! note
-    Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers, such as [MLFlow](https://mlflow.org/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"}, provide a common interface to interact with models for inspection, inference, etc. In fact, modules like RedisAI can even offer added benefits such as data locality for super fast inference.
+    Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers, such as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server, provide a common interface to interact with models for inspection, inference, etc. In fact, modules like RedisAI can even offer added benefits such as data locality for super fast inference.
 
 ## Processing
 
 We also have control over the features that we use to generate our real-time predictions.
 
-In our application, the entity that we're concerned about is a project, since we use a project's text and description (features) to generate tags (output). The features need to be near real-time (stream) because the features were just created moments before the inference request. However, our use case doesn't necessarily involve entity features changing over time so it might makes sense to just have one processing pipeline.
-
-However, not all entities in ML applications work this way. Using our Netflix content recommendation example, a given user can have certain features that are updated over time, such as top genres, click rate, etc. As we'll see below, we have the option to batch process features for users at a previous time or we could process features continuously as they become available to make live predictions.
+Our use case doesn't necessarily involve entity features changing over time so it makes sense to just have one processing pipeline. However, not all entities in ML applications work this way. Using our Netflix content recommendation example, a given user can have certain features that are updated over time, such as top genres, click rate, etc. As we'll see below, we have the option to batch process features for users at a previous time or we could process features in a stream as they become available to make live predictions.
 
 ### Batch processing
 
@@ -117,7 +119,7 @@ In order to truly serve the most informed predictions, we should have a model tr
 
 - ✅&nbsp; model is aware of recent data distributions, trends, etc. which can provide highly informed predictions.
 - ❌&nbsp; compute requirements can quickly surge depending on the retraining schedule.
-- ❌&nbsp; need to have quickly pipelines to deliver labeled and validated data which can become a bottleneck it it involves human intervention.
+- ❌&nbsp; need to have quick pipelines to deliver labeled and validated data which can become a bottleneck it it involves human intervention.
 - ❌&nbsp; might not be able to do more involved model validation, such as AB or shadow testing, with such limited time in between models.
 
 ## Testing
@@ -184,7 +186,7 @@ Serverless options such as [AWS Lambda](https://aws.amazon.com/lambda/){:target=
 - **Cons**: size limits on function storage, payload, etc. based on provider and usually no accelerators (GPU, TPU, etc.)
 
 !!! note
-    Be sure to explore the [CI/CD workflows](cicd.md#deployment){:target="_blank"} that accompany many of these deployment options so you can have a continuous training, validation and serving process.
+    Be sure to explore the [CI/CD workflows](cicd.md#serving){:target="_blank"} that accompany many of these deployment and serving options so you can have a continuous training, validation and serving process.
 
 ## Application
 

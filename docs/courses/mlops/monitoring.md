@@ -649,7 +649,7 @@ Once we receive an alert, we need to inspect it before acting on it. An alert ne
 }
 ```
 
-With these piece of information, we can work backwards from the alert towards identifying the cause of the issue. This is such an important step because it dictates how we act on the alert.
+With these pieces of information, we can work backwards from the alert towards identifying the root cause of the issue. **Root cause analysis (RCA)** is an important first step when it comes to monitoring because we want to prevent the same issue from impacting our system again. Often times, many alerts are triggered but they maybe all actually be caused by the same underlying issue. In this case, we'd want to intelligently trigger just one alert that pinpoints the core issue. For example, let's say we receive an alert that our overall user satisfaction ratings are reducing but we also receive another alert that our North American users also have low satisfaction ratings. Here's the system would automatically assess for drift in user satisfaction ratings across many different slices and aggregations to discover that only users in a specific area are experiencing the issue but because it's a popular user base, it ends up triggering all aggregate downstream alerts as well!
 
 ### Act
 
@@ -672,6 +672,9 @@ Since detecting drift and outliers can involve compute intensive operations, we 
 When it actually comes to implementing a monitoring system, we have several options, ranging from fully managed to from-scratch. Several popular managed solutions are [Fiddler](https://www.fiddler.ai/ml-monitoring){:target="_blank"}, [Arize](https://arize.com/){:target="_blank"}, [Arthur](https://www.arthur.ai/){:target="_blank"}, [Mona](https://www.monalabs.io/){:target="_blank"}, etc., all of which allow us to create custom monitoring views, trigger alerts, etc. There are even several great open-source solutions such as [Gantry](https://gantry.io/){:target="_blank"}, [TorchDrift](https://torchdrift.org/){:target="_blank"}, [WhyLabs](https://whylabs.ai/){:target="_blank"}, [EvidentlyAI](https://evidentlyai.com/){:target="_blank"}, etc.
 
 We'll often notice that monitoring solutions are offered as part of the larger deployment option such as [TensorFlow Extended (TFX)](https://www.tensorflow.org/tfx){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [Sagemaker](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html){:target="_blank"}, etc. And if we're already working with Kubernetes, we could use [KNative](https://knative.dev/){:target="_blank"} or [Kubeless](https://kubeless.io/){:target="_blank"} for serverless workload management. But we could also use a higher level framework such as [KFServing](https://www.kubeflow.org/docs/components/kfserving/){:target="_blank"} or [Seldon core](https://docs.seldon.io/projects/seldon-core/en/v0.4.0/#){:target="_blank"} that natively use a serverless framework like KNative.
+
+!!! note
+    Learn about how the monitoring workflows connect to the our overall ML systems in our [pipeline lesson](pipelines.md#monitoring). Monitoring offers a stream of signals that our update policy engine consumes to decide what to do next (continue, warrant an inspection, retrain the model on new data, rollback to a previous model version, etc.).
 
 ## References
 - [An overview of unsupervised drift detection methods](https://onlinelibrary.wiley.com/doi/full/10.1002/widm.1381){:target="_blank"}
