@@ -3,7 +3,7 @@ template: lesson.html
 title: Convolutional Neural Networks (CNN)
 description: Convolutional Neural Networks (CNNs) applied to text for natural language processing (NLP) tasks.
 keywords: convolutional neural networks, CNN, computer vision, image classification, image recognition, batchnorm, batch normalization, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/basics.png
+image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/MadeWithML
 notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/11_Convolutional_Neural_Networks.ipynb
 ---
@@ -14,7 +14,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/
 At the core of CNNs are filters (aka weights, kernels, etc.) which convolve (slide) across our input to extract relevant features. The filters are initialized randomly but learn to act as feature extractors via parameter sharing.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/cnn/convolution.gif">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/cnn/convolution.gif">
 </div>
 
 - `Objective`:
@@ -640,7 +640,7 @@ X: torch.Size([64, 10, 8])
 </pre>
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/cnn/inputs.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/cnn/inputs.png">
 </div>
 <div class="ai-center-all">
   <small>This diagram above is for char-level tokens but extends to any level of tokenization.</small>
@@ -652,13 +652,13 @@ At the core of CNNs are filters (aka weights, kernels, etc.) which convolve (sli
 We can see convolution in the diagram below where we simplified the filters and inputs to be 2D for ease of visualization. Also note that the values are 0/1s but in reality they can be any floating point value.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/cnn/convolution.gif">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/cnn/convolution.gif">
 </div>
 
 Now let's return to our actual inputs `x`, which is of shape (8, 10) [`max_seq_len`, `vocab_size`] and we want to convolve on this input using filters. We will use 50 filters that are of size (1, 3) and has the same depth as the number of channels (`num_channels` = `vocab_size` = `one_hot_size` = 10). This gives our filter a shape of (3, 10, 50) [`kernel_size`, `vocab_size`, `num_filters`]
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/cnn/filters.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/cnn/filters.png">
 </div>
 
 * `stride`: amount the filters move from one convolution operation to the next.
@@ -672,7 +672,7 @@ Padding types:
 * `SAME`: adds padding evenly to the right (preferred) and left sides of the input so that all values in the input are processed.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/cnn/padding.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/cnn/padding.png">
 </div>
 
 We're going to use the [Conv1d](https://pytorch.org/docs/stable/generated/torch.nn.Conv1d.html#torch.nn.Conv1d){:target="_blank"} layer to process our inputs.
@@ -701,7 +701,7 @@ print (f"z: {z.shape}")
 z: torch.Size([64, 50, 6])
 </pre>
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/cnn/conv.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/cnn/conv.png">
 </div>
 
 When we apply these filter on our inputs, we receive an output of shape (N, 6, 50). We get 50 for the output channel dim because we used 50 filters and 6 for the conv outputs because:
@@ -770,7 +770,7 @@ z: torch.Size([64, 50, 8])
 ### Pooling
 The result of convolving filters on an input is a feature map. Due to the nature of convolution and overlaps, our feature map will have lots of redundant information. Pooling is a way to summarize a high-dimensional feature map into a lower dimensional one for simplified downstream computation. The pooling operation can be the max value, average, etc. in a certain receptive field. Below is an example of pooling where the outputs from a conv layer are `4X4` and we're going to apply max pool filters of size `2X2`.
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/cnn/pooling.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/cnn/pooling.png">
 </div>
 
 $$ W_2 = \frac{W_1 - F}{S} + 1 = \frac{4 - 2}{2} + 1 = 2 $$
@@ -842,7 +842,7 @@ Let's visualize the model's forward pass.
 6. We use one more FC layer with softmax to derive class probabilities.
 
 <div class="ai-center-all">
-    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/cnn/model.png">
+    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/cnn/model.png">
 </div>
 
 ```python linenums="1"

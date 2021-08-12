@@ -95,7 +95,7 @@ Our main objective is to allow users to discover the precise resource.
     - `#!js Tech constraints`: we will need to maintain low latency (>100ms) when providing our generated tags since authors complete the entire process within a minute.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/solution/suggested_tags.png" width="550" alt="pivot">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/solution/suggested_tags.png" width="550" alt="suggested tags">
 </div>
 <div class="ai-center-all">
   <small>UX of our hypothetical solution</small>

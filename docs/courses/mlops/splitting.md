@@ -107,7 +107,7 @@ class LabelEncoder(object):
 ```
 
 !!! note
-    If you're not familiar with the `@classmethod` decorator, learn more about it from our [Python lesson](../basics/python.md#methods){:target="_blank"}.
+    If you're not familiar with the `@classmethod` decorator, learn more about it from our [Python lesson](../foundations/python.md#methods){:target="_blank"}.
 
 ```python linenums="1"
 # Encode

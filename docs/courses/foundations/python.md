@@ -1,9 +1,9 @@
 ---
 template: lesson.html
-title: Python Basics for Machine Learning
-description: The basics of Python programming for machine learning.
+title: Python fundamentals for Machine Learning
+description: The fundamentals of Python programming for machine learning.
 keywords: python, decorators, functions, classes, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/basics.png
+image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/MadeWithML
 notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/02_Python.ipynb
 ---
@@ -14,7 +14,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/
 Variables are containers for holding data and they're defined by a name and value.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/python/variables.png" width="250">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/variables.png" width="250">
 </div>
 
 ```python linenums="1"
@@ -159,7 +159,7 @@ print (z)
 ## Indexing
 Indexing and slicing from lists allow us to retrieve specific values within lists. Note that indices can be positive (starting from 0) or negative (-1 and lower, where -1 is the last item in the list).
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/python/indexing.png" width="300">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/indexing.png" width="300">
 </div>
 
 ```python linenums="1"
@@ -225,7 +225,7 @@ TypeError: 'tuple' object does not support item assignment
 ## Dictionaries
 Dictionaries are an unordered, mutable and indexed collection of key-value pairs. You can retrieve values based on the key and a dictionary cannot have two of the same keys.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/python/dictionaries.png" width="350">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/dictionaries.png" width="350">
 </div>
 
 ```python linenums="1"
@@ -359,7 +359,7 @@ while x > 0:
 ## Functions
 Functions are a way to modularize reusable pieces of code. They're defined by the keyword `def` which stands for definition and they can have the following components.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/python/functions.png" width="350">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/functions.png" width="350">
 </div>
 
 ```python linenums="1"
@@ -372,7 +372,7 @@ def add_two(x):
 
 Here are the components that may be required when we want to use the function. we need to ensure that the function name and the input parameters match with how we defined the function above.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/python/calling_functions.png" width="400">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/calling_functions.png" width="400">
 </div>
 
 ```python linenums="1"

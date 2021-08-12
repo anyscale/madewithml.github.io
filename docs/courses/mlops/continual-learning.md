@@ -11,10 +11,10 @@ repository: https://github.com/GokuMohandas/MLOps
 
 ## Continual learning
 
-In the pipelines lesson, we covered the [Dataops](pipelines.md/#dataops){:target="_blank"}, MLOps ([model](pipelines.md/#dataops){:target="_blank"} and [update](pipelines.md/#dataops){:target="_blank"}) workflows needed to train and update our model. In this lesson, we'll conclude by looking at how these different workflows all connect to create an ML system that's continually learning. We use the word `continual` (repeat with breaks) instead of `continuous` (repeat without interruption / intervention) because we're **not** trying to create a system that will automatically update with new incoming data without human intervention.
+In the pipelines lesson, we covered the [Dataops](pipelines.md#dataops){:target="_blank"}, MLOps ([model](pipelines.md#mlops-model){:target="_blank"} and [update](pipelines.md#mlops-update){:target="_blank"}) workflows needed to train and update our model. In this lesson, we'll conclude by looking at how these different workflows all connect to create an ML system that's continually learning. We use the word `continual` (repeat with breaks) instead of `continuous` (repeat without interruption / intervention) because we're **not** trying to create a system that will automatically update with new incoming data without human intervention.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/continual_learning/connect.png" width="1000" alt="pivot">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/continual_learning/connect.png" width="1000" alt="continual learning system">
 </div>
 <div class="ai-center-all">
   <small>A simplified view to illustrate how workflows connect. Not depicting <a href="versioning.md" target="_blank">version control</a>, <a href="cicd.md" target="_blank">CI/CD</a> across multiple environments, <a href="cicd.md#deployment" target="_blank">deployment</a>/<a href="infrastructure.md#testing" target="_blank">testing</a> strategies, etc.</small>

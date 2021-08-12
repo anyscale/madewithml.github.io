@@ -3,7 +3,7 @@ template: lesson.html
 title: Linear Regression
 description: Implement linear regression from scratch using NumPy and then using PyTorch.
 keywords: linear regression, regression, numpy, pytorch, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/basics.png
+image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/MadeWithML
 notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/06_Linear_Regression.ipynb
 ---

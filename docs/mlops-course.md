@@ -534,29 +534,29 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <div class="col-md-4">
     <b><span class="mr-1">🛠</span> Toolkit</b>
     <ul>
-    <li><a href="/courses/basics/notebooks/">Notebooks</a></li>
-    <li><a href="/courses/basics/python/">Python</a></li>
-    <li><a href="/courses/basics/numpy/">NumPy</a></li>
-    <li><a href="/courses/basics/pandas/">Pandas</a></li>
-    <li><a href="/courses/basics/pytorch/">PyTorch</a></li>
+    <li><a href="/courses/foundations/notebooks/">Notebooks</a></li>
+    <li><a href="/courses/foundations/python/">Python</a></li>
+    <li><a href="/courses/foundations/numpy/">NumPy</a></li>
+    <li><a href="/courses/foundations/pandas/">Pandas</a></li>
+    <li><a href="/courses/foundations/pytorch/">PyTorch</a></li>
     </ul>
 </div>
 <div class="col-md-4">
     <b><span class="mr-1">🔥</span> Machine Learning</b>
     <ul>
-    <li><a href="/courses/basics/linear-regression/">Linear Regression</a></li>
-    <li><a href="/courses/basics/logistic-regression/">Logistic Regression</a></li>
-    <li><a href="/courses/basics/neural-networks/">Neural Networks</a></li>
-    <li><a href="/courses/basics/data-quality/">Data Quality</a></li>
-    <li><a href="/courses/basics/utilities/">Utilities</a></li>
+    <li><a href="/courses/foundations/linear-regression/">Linear Regression</a></li>
+    <li><a href="/courses/foundations/logistic-regression/">Logistic Regression</a></li>
+    <li><a href="/courses/foundations/neural-networks/">Neural Networks</a></li>
+    <li><a href="/courses/foundations/data-quality/">Data Quality</a></li>
+    <li><a href="/courses/foundations/utilities/">Utilities</a></li>
     </ul>
 </div>
 <div class="col-md-4">
     <b><span class="mr-1">🤖</span> Deep Learning</b>
     <ul>
-    <li><a href="/courses/basics/convolutional-neural-networks/">CNNs</a></li>
-    <li><a href="/courses/basics/embeddings/">Embeddings</a></li>
-    <li><a href="/courses/basics/recurrent-neural-networks/">RNNs</a></li>
+    <li><a href="/courses/foundations/convolutional-neural-networks/">CNNs</a></li>
+    <li><a href="/courses/foundations/embeddings/">Embeddings</a></li>
+    <li><a href="/courses/foundations/recurrent-neural-networks/">RNNs</a></li>
     <li><a href="/courses/mlops/baselines/#transformers-w-contextual-embeddings">Transformers</a></li>
     </ul>
 </div>
@@ -785,21 +785,21 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                 <div><a data-toggle="collapse" href="#collapseFoundations" aria-expanded="false" aria-controls="collapseFoundations">Foundations</a></div>
                 <div class="collapse multi-collapse" id="collapseFoundations">
                     <ul class="ai-course-list">
-                    <li><a href="/courses/basics/notebooks/">Notebooks</a></li>
-                    <li><a href="/courses/basics/python/">Python</a></li>
-                    <li><a href="/courses/basics/numpy/">NumPy</a></li>
-                    <li><a href="/courses/basics/pandas/">Pandas</a></li>
-                    <li><a href="/courses/basics/pytorch/">PyTorch</a></li>
+                    <li><a href="/courses/foundations/notebooks/">Notebooks</a></li>
+                    <li><a href="/courses/foundations/python/">Python</a></li>
+                    <li><a href="/courses/foundations/numpy/">NumPy</a></li>
+                    <li><a href="/courses/foundations/pandas/">Pandas</a></li>
+                    <li><a href="/courses/foundations/pytorch/">PyTorch</a></li>
                     </ul>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseMachineLearning" aria-expanded="false" aria-controls="collapseMachineLearning">Machine Learning</a></div>
                 <div class="collapse multi-collapse" id="collapseMachineLearning">
                     <ul class="ai-course-list">
-                    <li><a href="/courses/basics/linear-regression/">Linear Regression</a></li>
-                    <li><a href="/courses/basics/logistic-regression/">Logistic Regression</a></li>
-                    <li><a href="/courses/basics/neural-networks/">Neural Networks</a></li>
-                    <li><a href="/courses/basics/data-quality/">Data Quality</a></li>
-                    <li><a href="/courses/basics/utilities/">Utilities</a></li>
+                    <li><a href="/courses/foundations/linear-regression/">Linear Regression</a></li>
+                    <li><a href="/courses/foundations/logistic-regression/">Logistic Regression</a></li>
+                    <li><a href="/courses/foundations/neural-networks/">Neural Networks</a></li>
+                    <li><a href="/courses/foundations/data-quality/">Data Quality</a></li>
+                    <li><a href="/courses/foundations/utilities/">Utilities</a></li>
                     </ul>
                 </div>
             </div>
@@ -812,9 +812,9 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                 <div><a data-toggle="collapse" href="#collapseDeepLearning" aria-expanded="false" aria-controls="collapseDeepLearning">Deep Learning</a></div>
                 <div class="collapse multi-collapse" id="collapseDeepLearning">
                     <ul class="ai-course-list">
-                    <li><a href="/courses/basics/convolutional-neural-networks/">CNNs</a></li>
-                    <li><a href="/courses/basics/embeddings/">Embeddings</a></li>
-                    <li><a href="/courses/basics/recurrent-neural-networks/">RNNs</a></li>
+                    <li><a href="/courses/foundations/convolutional-neural-networks/">CNNs</a></li>
+                    <li><a href="/courses/foundations/embeddings/">Embeddings</a></li>
+                    <li><a href="/courses/foundations/recurrent-neural-networks/">RNNs</a></li>
                     <li><a href="/courses/mlops/baselines/#transformers-w-contextual-embeddings">Transformers</a></li>
                     </ul>
                 </div>
@@ -1156,7 +1156,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
     </div>
     <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#faq-accordion">
       <div class="card-body">
-        <p>During the first weekend of the course, we're going to cover all of the <a href="#basics">Basics</a> lessons. We'll be doing this fairly quickly so we can focus on the <a href="#mlops">MLOps</a> content shortly after. While we will cover the basics of Python and deep learning, it's highly recommended to be familiar with the following:</p>
+        <p>During the first weekend of the course, we're going to cover all of the <a href="#foundations">Foundations</a> lessons. We'll be doing this fairly quickly so we can focus on the <a href="#mlops">MLOps</a> content shortly after. While we will cover the foundations of Python and deep learning, it's highly recommended to be familiar with the following:</p>
         <ul>
             <li>Python (variables, lists, dictionaries, functions, classes)</li>
             <li>Scientific computing (NumPy, Pandas)</li>

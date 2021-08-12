@@ -18,7 +18,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                     <input class="revue-form-field" placeholder="Your email address..." type="email" name="member[email]" id="member_email" style="width: 80%; border: 1px solid #b3b3b3; border-radius: 3px;">
                     <button class="md-button md-button--purple-gradient mr-2 mb-2 mb-md-0 mt-md-2 mt-2" type="submit" style="cursor: pointer !important;">
                         <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 3A1.75 1.75 0 000 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0024 18.75v-14A1.75 1.75 0 0022.25 3H1.75zM1.5 4.75a.25.25 0 01.25-.25h20.5a.25.25 0 01.25.25v.852l-10.36 7a.25.25 0 01-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"></path></svg></span> Subscribe</button>
-                        <a href="#basics"><span class="md-button md-button--grey-secondary mr-2 mb-2 mb-md-0 mt-md-2 px-3 py-1">View lessons</span></a>
+                        <a href="#foundations"><span class="md-button md-button--grey-secondary mr-2 mb-2 mb-md-0 mt-md-2 px-3 py-1">View lessons</span></a>
                 </form>
             </div>
         </div>
@@ -484,29 +484,29 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <div class="col-md-4">
     <b><span class="mr-1">🛠</span> Toolkit</b>
     <ul>
-    <li><a href="/courses/basics/notebooks/">Notebooks</a></li>
-    <li><a href="/courses/basics/python/">Python</a></li>
-    <li><a href="/courses/basics/numpy/">NumPy</a></li>
-    <li><a href="/courses/basics/pandas/">Pandas</a></li>
-    <li><a href="/courses/basics/pytorch/">PyTorch</a></li>
+    <li><a href="/courses/foundations/notebooks/">Notebooks</a></li>
+    <li><a href="/courses/foundations/python/">Python</a></li>
+    <li><a href="/courses/foundations/numpy/">NumPy</a></li>
+    <li><a href="/courses/foundations/pandas/">Pandas</a></li>
+    <li><a href="/courses/foundations/pytorch/">PyTorch</a></li>
     </ul>
 </div>
 <div class="col-md-4">
     <b><span class="mr-1">🔥</span> Machine Learning</b>
     <ul>
-    <li><a href="/courses/basics/linear-regression/">Linear Regression</a></li>
-    <li><a href="/courses/basics/logistic-regression/">Logistic Regression</a></li>
-    <li><a href="/courses/basics/neural-networks/">Neural Networks</a></li>
-    <li><a href="/courses/basics/data-quality/">Data Quality</a></li>
-    <li><a href="/courses/basics/utilities/">Utilities</a></li>
+    <li><a href="/courses/foundations/linear-regression/">Linear Regression</a></li>
+    <li><a href="/courses/foundations/logistic-regression/">Logistic Regression</a></li>
+    <li><a href="/courses/foundations/neural-networks/">Neural Networks</a></li>
+    <li><a href="/courses/foundations/data-quality/">Data Quality</a></li>
+    <li><a href="/courses/foundations/utilities/">Utilities</a></li>
     </ul>
 </div>
 <div class="col-md-4">
     <b><span class="mr-1">🤖</span> Deep Learning</b>
     <ul>
-    <li><a href="/courses/basics/convolutional-neural-networks/">CNNs</a></li>
-    <li><a href="/courses/basics/embeddings/">Embeddings</a></li>
-    <li><a href="/courses/basics/recurrent-neural-networks/">RNNs</a></li>
+    <li><a href="/courses/foundations/convolutional-neural-networks/">CNNs</a></li>
+    <li><a href="/courses/foundations/embeddings/">Embeddings</a></li>
+    <li><a href="/courses/foundations/recurrent-neural-networks/">RNNs</a></li>
     <li><a href="/courses/mlops/baselines/#transformers-w-contextual-embeddings">Transformers</a></li>
     </ul>
 </div>
@@ -666,8 +666,3 @@ To cite this content, please use:
     year         = {2021}
 }
 ```
-
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
-<blockquote>
-<p><small>If you're looking for something that's not here anymore, feel free to <a href="mailto:hello@madewithml.com" target="_blank">reach out</a> to us.</small></p>
-</blockquote>

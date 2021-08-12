@@ -26,6 +26,7 @@ It's also the phase where we can use our deep understanding of the problem, proc
 - augment the training data split
 - enhance using auxiliary data
 - simplify using constraints
+- remove noisy samples
 
 And it isn't just about identifying and labeling our initial dataset but also involves thinking about how to make the labeling process more efficient as our dataset grows.
 
@@ -34,7 +35,7 @@ And it isn't just about identifying and labeling our initial dataset but also in
 - what workflows will be established to track the labeling process
 
 !!! note
-    You should have overlaps where different annotators are working on the same samples. A meaningful *inter-labeler discrepancy* (>2%) indicates that the labeling task is subjective and requires more explicit labeling criteria.
+    We should always have  multiple labelers working on an overlap amongst the samples so we can easy discover labeling inconsistencies. A meaningful *inter-labeler discrepancy* (>2%) indicates that the labeling task is subjective and requires more explicit labeling criteria / instructions.
 
 ## Datasets
 - [projects.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json){:target="_blank"}: projects with title, description and tags (cleaned by mods).
@@ -261,6 +262,10 @@ def contains_tensorflow(text):
 
 !!! note
     An easy way to validate our labels (before modeling) is to use our auxillary datasets to create labeling functions for the different classes. Then we can look for false positives and negatives to identify potentially mislabeled samples. We'll actually implement a similar kind of inspection approach, but using a trained model as a heuristic, in our [dashboards lesson](dashboard.md#inspection){:target="_blank"}.
+
+## Iteration
+
+Labeling isn't just a one time event or something we repeat identically. As new data is available, we'll want to strategically label the appropriate samples and improve [slices](testing.md#evaluation){:target="_blank"} of our data that are lacking in [quality](../foundations/data-quality.md){:target="_blank"}. In fact, there's an entire workflow related to labeling that is initiated when we want to iterate. We'll learn more about this iterative labeling process in our [continual learning lesson](continual-learning.md){:target="_blank"}.
 
 ## Resources
 - [Human in the Loop: Deep Learning without Wasteful Labelling](https://oatml.cs.ox.ac.uk/blog/2019/06/24/batchbald.html){:target="_blank"}

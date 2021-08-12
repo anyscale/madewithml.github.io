@@ -354,7 +354,7 @@ For all of these, we'll see the exact same response from our API:
 
 
 ## Decorators
-We're going to use [decorators](../basics/python.md#decorators){:target="_blank"} to wrap some of our endpoints so we can customize our function's inputs and outputs. In our `GET \` request's response above, there was not a whole lot of information about the actual request, so we should append details such as URL, timestamp, etc. But we don't want to do this individually for each endpoint so let's use a decorator to append the request information for every response.
+We're going to use [decorators](../foundations/python.md#decorators){:target="_blank"} to wrap some of our endpoints so we can customize our function's inputs and outputs. In our `GET \` request's response above, there was not a whole lot of information about the actual request, so we should append details such as URL, timestamp, etc. But we don't want to do this individually for each endpoint so let's use a decorator to append the request information for every response.
 
 ```python linenums="1" hl_lines="6"
 def construct_response(f):

@@ -37,21 +37,21 @@ nav:
   - Foundations:
     - Lessons: /#foundations
     - 🛠 &nbsp; Toolkit:
-      - Notebooks: courses/basics/notebooks.md
-      - Python: courses/basics/python.md
-      - NumPy: courses/basics/numpy.md
-      - Pandas: courses/basics/pandas.md
-      - PyTorch: courses/basics/pytorch.md
+      - Notebooks: courses/foundations/notebooks.md
+      - Python: courses/foundations/python.md
+      - NumPy: courses/foundations/numpy.md
+      - Pandas: courses/foundations/pandas.md
+      - PyTorch: courses/foundations/pytorch.md
     - 🔥 &nbsp; Machine Learning:
-      - Linear regression: courses/basics/linear-regression.md
-      - Logistic regression: courses/basics/logistic-regression.md
-      - Neural networks: courses/basics/neural-networks.md
-      - Data quality: courses/basics/data-quality.md
-      - Utilities: courses/basics/utilities.md
+      - Linear regression: courses/foundations/linear-regression.md
+      - Logistic regression: courses/foundations/logistic-regression.md
+      - Neural networks: courses/foundations/neural-networks.md
+      - Data quality: courses/foundations/data-quality.md
+      - Utilities: courses/foundations/utilities.md
     - 🤖 &nbsp; Deep Learning:
-      - CNNs: courses/basics/convolutional-neural-networks.md
-      - Embeddings: courses/basics/embeddings.md
-      - RNNs: courses/basics/recurrent-neural-networks.md
+      - CNNs: courses/foundations/convolutional-neural-networks.md
+      - Embeddings: courses/foundations/embeddings.md
+      - RNNs: courses/foundations/recurrent-neural-networks.md
       - Transformers: courses/mlops/baselines/#transformers-w-contextual-embeddings
   - MLOps:
     - Lessons: /#mlops

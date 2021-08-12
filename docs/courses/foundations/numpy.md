@@ -3,7 +3,7 @@ template: lesson.html
 title: NumPy for Machine Learning
 description: Numerical analysis with the NumPy computing package.
 keywords: numpy, python, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/basics.png
+image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/MadeWithML
 notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/03_NumPy.ipynb
 ---
@@ -24,7 +24,7 @@ np.random.seed(seed=1234)
 
 ## Basics
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/numpy/tensors.png" width="600">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/tensors.png" width="600">
 </div>
 
 ```python linenums="1"
@@ -127,7 +127,7 @@ We can extract specific values from our tensors using indexing.
 !!! note
     Keep in mind that when indexing the row and column, indices start at `0`. And like indexing with lists, we can use negative indices as well (where `-1` is the last item).
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/numpy/indexing.png" width="300">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/indexing.png" width="300">
 </div>
 
 ```python linenums="1"
@@ -223,7 +223,7 @@ x * y:
 ## Dot product
 One of the most common NumPy operations we’ll use in machine learning is matrix multiplication using the dot product. We take the rows of our first matrix (2) and the columns of our second matrix (2) to determine the dot product, giving us an output of `[2 X 2]`. The only requirement is that the inside dimensions match, in this case the first matrix has 3 columns and the second matrix has 3 rows.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/numpy/dot.gif" width="450">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/dot.gif" width="450">
 </div>
 
 ```python linenums="1"
@@ -243,7 +243,7 @@ print (c)
 ## Axis operations
 We can also do operations across a specific axis.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/numpy/axis.gif" width="450">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/axis.gif" width="450">
 </div>
 
 ```python linenums="1"
@@ -279,7 +279,7 @@ min axis=1:  [1 4]
 ## Broadcast
 Here, we’re adding a vector with a scalar. Their dimensions aren’t compatible as is but how does NumPy still gives us the right result? This is where broadcasting comes in. The scalar is *broadcast* across the vector so that they have compatible shapes.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/numpy/broadcast.png" width="300">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/broadcast.png" width="300">
 </div>
 
 ```python linenums="1"
@@ -299,7 +299,7 @@ z:
 We often need to change the dimensions of our tensors for operations like the dot product. If we need to switch two dimensions, we can transpose
 the tensor.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/numpy/transpose.png" width="400">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/transpose.png" width="400">
 </div>
 
 ```python linenums="1"
@@ -329,7 +329,7 @@ Sometimes, we'll need to alter the dimensions of the matrix. Reshaping allows us
 
 The way reshape works is by looking at each dimension of the new tensor and separating our original tensor into that many units. So here the dimension at index 0 of the new tensor is 2 so we divide our original tensor into 2 units, and each of those has 3 values.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/numpy/reshape.png" width="450">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/reshape.png" width="450">
 </div>
 
 ```python linenums="1"
@@ -403,7 +403,7 @@ x.shape:  (2, 3, 4)
 
 When we naively do a reshape, we get the right shape but the values are not what we're looking for.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/numpy/reshape_wrong.png" width="600">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/reshape_wrong.png" width="600">
 </div>
 
 ```python linenums="1"
@@ -426,7 +426,7 @@ Instead, if we transpose the tensor and then do a reshape, we get our desired te
     Always create a dummy example like this when you’re unsure about reshaping. Blindly going by the tensor shape can lead to lots of issues downstream.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/numpy/reshape_right.png" width="600">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/reshape_right.png" width="600">
 </div>
 
 ```python linenums="1"

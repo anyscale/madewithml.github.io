@@ -3,7 +3,7 @@ template: lesson.html
 title: Utilities for Machine Learning
 description: Explore utilities to extend and simplify preprocessing and training.
 keywords: utilities, random seed, data loader, training, pytorch, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/basics.png
+image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/MadeWithML
 notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/10_Utilities.ipynb
 ---

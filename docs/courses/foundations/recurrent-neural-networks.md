@@ -3,7 +3,7 @@ template: lesson.html
 title: Recurrent Neural Networks (RNN)
 description: Explore and motivate the need for representation via embeddings.
 keywords: recurrent neural networks, numpy, pytorch, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/basics.png
+image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/MadeWithML
 notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb
 ---
@@ -14,7 +14,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/
 So far we've processed inputs as whole (ex. applying filters across the entire input to extract features) but we can also process our inputs sequentially. For example we can think of each token in our text as an event in time (timestep). We can process each timestep, one at a time, and predict the class after the last timestep (token) has been processed. This is very powerful because the model now has a meaningful way to account for the sequential order of tokens in our sequence and predict accordingly.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/rnn/vanilla.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/rnn/vanilla.png">
 </div>
 
 $$ \text{RNN forward pass for a single time step } X_t $$:
@@ -700,7 +700,7 @@ torch.Size([64, 8, 100])
 torch.Size([1, 64])
 </pre>
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/rnn/vanilla.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/rnn/vanilla.png">
 </div>
 
 $$ \text{RNN forward pass for a single time step } X_t $$:
@@ -824,7 +824,7 @@ torch.Size([64, 128])
 
 There are many different ways to use RNNs. So far we've processed our inputs one timestep at a time and we could either use the RNN's output at each time step or just use the final input timestep's RNN output. Let's look at a few other possibilities.
 <div class="ai-center-all">
-    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/rnn/architectures.png">
+    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/rnn/architectures.png">
 </div>
 
 ### Model
@@ -992,7 +992,7 @@ There are two popular types of gated RNNs: Long Short-term Memory (LSTMs) units 
     When deciding between LSTMs and GRUs, empirical performance is the best factor but in general GRUs offer similar performance with less complexity (less weights).
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/rnn/gated.png">
+    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/rnn/gated.png">
 </div>
 <div class="ai-center-all">
   <small><a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank">Understanding LSTM Networks</a> - Chris Olah</small>

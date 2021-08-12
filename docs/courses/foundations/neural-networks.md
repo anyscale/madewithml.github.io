@@ -3,7 +3,7 @@ template: lesson.html
 title: Neural Networks
 description: Implement basic neural networks from scratch using NumPy and then using PyTorch.
 keywords: neural networks, MLP, numpy, pytorch, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/basics.png
+image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/MadeWithML
 notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/08_Neural_Networks.ipynb
 ---
@@ -14,7 +14,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/
 Our goal is to learn a model $\hat{y}$ that models $y$ given $X$ . You'll notice that neural networks are just extensions of the generalized linear methods we've seen so far but with non-linear activation functions since our data will be highly non-linear.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/neural-networks/mlp.png">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/neural-networks/mlp.png">
 </div>
 
 $$ z_1 = XW_1 $$
@@ -1292,7 +1292,7 @@ plt.show()
 It's important that we experiment, starting with simple models that underfit (high bias) and improve it towards a good fit. Starting with simple models (linear/logistic regression) let's us catch errors without the added complexity of more sophisticated models (neural networks).
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/basics/neural-networks/fit.png">
+    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/neural-networks/fit.png">
 </div>
 
 
