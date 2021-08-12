@@ -1,5 +1,5 @@
 ---
-title: Made With ML
+title: Home
 template: main.html
 keywords: mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 ---
@@ -12,7 +12,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
         <div class="ai-hero-text">
             <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
             <p style="margin-top: 0rem; margin-bottom: 0rem !important; color: #807e7e;">Applied ML · MLOps · Production</p>
-            <p style="font-size: 0.89rem;">Join <b>30K+ developers</b> in learning how to responsibly <a href="about">deliver value</a> with ML.</p>
+            <p style="font-size: 0.89rem;">Join <b>30K+ developers</b> in learning how to responsibly deliver value with ML.</p>
             <div id="revue-embed">
                 <form action="https://www.getrevue.co/profile/madewithml/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
                     <input class="revue-form-field" placeholder="Your email address..." type="email" name="member[email]" id="member_email" style="width: 80%; border: 1px solid #b3b3b3; border-radius: 3px;">
@@ -25,7 +25,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
     <div class="col-md-5 ai-center-all" data-aos="fade-left">
         <div class="mb-md-0 mb-4">
-            <img src="/static/images/logos.png" style="width: 12rem; border-radius: 10px; box-shadow: 0px 0px 15px 0.1px #fff">
+            <img src="/static/images/logos.png" style="width: 12rem; border-radius: 10px;">
         </div>
     </div>
 </div>
@@ -476,13 +476,13 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
-## Basics
-> Learn the fundamentals of ML through intuitive explanations, clean code and visualizations.
+## Foundations
+> Learn the foundations of machine learning through intuitive explanations, clean code and visualizations.
 [GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top ML repos](https://github.com/topics/deep-learning){:target="blank"} on GitHub
 
 <div class="row mt-4 ai-course-list" data-aos="fade-down">
 <div class="col-md-4">
-    <b><span class="mr-1">🔢</span> Foundations</b>
+    <b><span class="mr-1">🛠</span> Toolkit</b>
     <ul>
     <li><a href="/courses/basics/notebooks/">Notebooks</a></li>
     <li><a href="/courses/basics/python/">Python</a></li>
@@ -516,7 +516,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 ## MLOps
 > Learn how to apply ML to build a production grade product and deliver value.
-[GokuMohandas/MLOps](https://github.com/GokuMohandas/MLOps){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top MLOps repos](https://github.com/topics/mlops){:target="blank"} on GitHub
+[GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top MLOps repos](https://github.com/topics/mlops){:target="blank"} on GitHub
 
 <div class="row mt-4 ai-course-list" data-aos="fade-down">
 <div class="col-md-4">
@@ -580,6 +580,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
     <li><a href="/courses/mlops/pipelines/">Pipelines</a></li>
+    <li><a href="/courses/mlops/continual-learning/">Continual learning</a></li>
     </ul>
 </div>
 </div>

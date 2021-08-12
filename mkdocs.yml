@@ -10,7 +10,7 @@ repo_name: GokuMohandas/MadeWithML
 edit_uri: ''  #disables edit button
 
 # Copyright
-copyright: Content by <a href="https://twitter.com/GokuMohandas" target="_blank">Goku Mohandas</a>.
+copyright: Created by <a href="https://twitter.com/GokuMohandas" target="_blank">Goku Mohandas</a>.
 
 # Google Analytics (key picked up by GitHub Actions from repo secrets)
 google_analytics:
@@ -34,16 +34,15 @@ extra:
 # Page tree
 nav:
   - Home: index.md
-  - About: about.md
-  - Basics:
-    - Lessons: /#basics
-    - 🔢 &nbsp; Foundations:
+  - Foundations:
+    - Lessons: /#foundations
+    - 🛠 &nbsp; Toolkit:
       - Notebooks: courses/basics/notebooks.md
       - Python: courses/basics/python.md
       - NumPy: courses/basics/numpy.md
       - Pandas: courses/basics/pandas.md
       - PyTorch: courses/basics/pytorch.md
-    - 📈 &nbsp; Modeling:
+    - 🔥 &nbsp; Machine Learning:
       - Linear regression: courses/basics/linear-regression.md
       - Logistic regression: courses/basics/logistic-regression.md
       - Neural networks: courses/basics/neural-networks.md
@@ -97,7 +96,11 @@ nav:
       - Monitoring: courses/mlops/monitoring.md
       - Feature store: courses/mlops/feature-store.md
       - Pipelines: courses/mlops/pipelines.md
-  - FAQ: /#faq
+      - Continual learning: courses/mlops/continual-learning.md
+  # - Blog: coming-soon.md
+  # - Community: https://community.madewithml.com/
+  - Subscribe: https://newsletter.madewithml.com/
+
 
 # Configuration
 theme:
@@ -171,7 +174,8 @@ plugins:
         redirect_maps:
             "subscribe": "index.md"
             "topics": "pivot.md"
-            "courses/basics.md": "https://madewithml.com/#basics"
+            "courses/basics.md": "https://madewithml.com/#foundations"
+            "courses/foundations.md": "https://madewithml.com/#foundations"
             "courses/mlops.md": "https://madewithml.com/#mlops"
             "faq": "https://madewithml.com/#frequently-asked-questions-faq"
             "courses/putting-ml-in-production.md": "index.md"

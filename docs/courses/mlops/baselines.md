@@ -892,7 +892,7 @@ Text to indices:
 
 ### Data imbalance
 
-We'll factor class weights in our objective function ([binary cross entropy with logits](https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html){:target="_blank"}) to help with class imbalance. There are many other techniques such as over sampling from underrepresented classes, undersampling, etc. but we'll cover these in a separate unit lesson on data imbalance.
+We'll factor class weights in our objective function ([binary cross entropy with logits](https://pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html){:target="_blank"}) to help with [class imbalance](labeling.md#data-imbalance){:target="_blank"}. There are many other techniques such as over sampling from underrepresented classes, undersampling, etc. but we'll cover these in a separate unit lesson on data imbalance.
 
 ```python linenums="1"
 # Class weights

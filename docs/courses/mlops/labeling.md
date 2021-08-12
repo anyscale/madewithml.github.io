@@ -182,6 +182,15 @@ def display_tag_details(tag='question-answering'):
 </pre>
 
 
+## Data imbalance
+
+With our datasets, we may often notice a data imbalance problem where a range of continuous values (regression) or certain classes (classification) may have insufficient amounts of data to learn from. This becomes a major issue when training because the model will learn to generalize to the data available and perform poorly on regions where the data is sparse. There are several techniques to mitigate data imbalance, including [resampling](https://github.com/scikit-learn-contrib/imbalanced-learn){:target="_blank"} (oversampling from minority classes / undersampling from majority classes), account for the [data distributions via the loss function](baselines.md#data-imbalance){:target="_blank"} (since that drives the learning process), etc.
+
+!!! note
+    While these data imbalance mitigation techniques will allow our model to perform, the best long term approach is to directly address the imbalance issue. Identify which areas of the data need more samples and go collect them! This becomes a more more robust approach compared to focusing the model to learn from repeated samples or ignoring samples.
+
+
+
 ## Libraries
 
 We could have used the user provided tags as our labels but what if the user added a wrong tag or forgot to add a relevant one. To remove this dependency on the user to provide the gold standard labels, we can leverage labeling tools and platforms. These tools allow for quick and organized labeling of the dataset to ensure its quality. And instead of starting from scratch and asking our labeler to provide all the relevant tags for a given project, we can provide the author's original tags and ask the labeler to add / remove as necessary. The specific labeling tool may be something that needs to be custom built or leverages something from the ecosystem.
@@ -220,9 +229,16 @@ In active learning, you first provide a small number of labelled examples. The m
 2. Ask the trained model to predict on some unlabeled data.
 3. Determine which new data points to label from the unlabeled data based on:
     - entropy over the predicted class probabilities
-    - samples with lowest predicted, [calibrated](https://arxiv.org/abs/1706.04599){:target="_blank"}, confidence
+    - samples with lowest predicted, [calibrated](https://arxiv.org/abs/1706.04599){:target="_blank"}, confidence (uncertainty sampling)
     - discrepancy in predictions from an ensemble of trained models
-4. Repeat until the desired performance is achieved
+4. Repeat until the desired performance is achieved.
+
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/labeling/active_learning.png" width="700" alt="active learning">
+</div>
+<div class="ai-center-all mb-3">
+  <small><a href="http://burrsettles.com/pub/settles.activelearning.pdf" target="_blank">Active Learning Literature Survey</a></small>
+</div>
 
 ### Libraries
 - [modAL](https://github.com/modAL-python/modAL){:target="_blank"}: a modular active learning framework for Python.
@@ -230,9 +246,9 @@ In active learning, you first provide a small number of labelled examples. The m
 - [ALiPy](https://github.com/NUAA-AL/ALiPy){:target="_blank"}: active learning python toolbox, which allows users to conveniently evaluate, compare and analyze the performance of active learning methods.
 
 
-## Labeling functions
+## Weak supervision
 
-We could utilize weak supervision via [labeling functions](https://www.snorkel.org/use-cases/01-spam-tutorial){:target="_blank"} to label our existing and new data. We can create constructs based on keywords, pattern expressions, knowledge bases and generalized models to create these labeling functions to label our data. We can add to the labeling functions over time and even mitigate conflicts amongst the different ones.
+If we had samples that needed labeling or if we simply wanted to validate existing labels, we can use weak supervision to generate labels as opposed to hand labeling all of them. We could utilize weak supervision via [labeling functions](https://www.snorkel.org/use-cases/01-spam-tutorial){:target="_blank"} to label our existing and new data. We can create constructs based on keywords, pattern expressions, knowledge bases and generalized models to create these labeling functions to label our data. And we can add to the labeling functions over time and even mitigate conflicts amongst the different labeling functions.
 
 ```python linenums="1"
 from snorkel.labeling import labeling_function
@@ -242,6 +258,9 @@ def contains_tensorflow(text):
     condition = any(tag in text.lower() for tag in ("tensorflow", "tf"))
     return "tensorflow" if condition else None
 ```
+
+!!! note
+    An easy way to validate our labels (before modeling) is to use our auxillary datasets to create labeling functions for the different classes. Then we can look for false positives and negatives to identify potentially mislabeled samples. We'll actually implement a similar kind of inspection approach, but using a trained model as a heuristic, in our [dashboards lesson](dashboard.md#inspection){:target="_blank"}.
 
 ## Resources
 - [Human in the Loop: Deep Learning without Wasteful Labelling](https://oatml.cs.ox.ac.uk/blog/2019/06/24/batchbald.html){:target="_blank"}

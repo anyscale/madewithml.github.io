@@ -12,7 +12,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
         <div class="ai-hero-text">
             <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
             <p style="margin-top: 0rem; margin-bottom: 0rem !important; color: #807e7e;">Applied ML · MLOps · Production</p>
-            <p style="font-size: 0.89rem;">Join <b>30K+ developers</b> in learning how to responsibly <a href="about">deliver value</a> with ML.</p>
+            <p style="font-size: 0.89rem;">Join <b>30K+ developers</b> in learning how to responsibly deliver value with ML.</p>
             <div id="revue-embed">
                 <form action="https://www.getrevue.co/profile/madewithml/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
                     <input class="revue-form-field" placeholder="Your email address..." type="email" name="member[email]" id="member_email" style="width: 80%; border: 1px solid #b3b3b3; border-radius: 3px;">
@@ -25,7 +25,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
     <div class="col-md-5 ai-center-all" data-aos="fade-left">
         <div class="mb-md-0 mb-4">
-            <img src="/static/images/logos.png" style="width: 12rem; border-radius: 10px; box-shadow: 0px 0px 15px 0.1px #fff">
+            <img src="/static/images/logos.png" style="width: 12rem;">
         </div>
     </div>
 </div>
@@ -44,15 +44,13 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
-
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
-
 <!-- Course header -->
-<section data-aos="zoom-in" data-aos-delay="1500">
+<!-- <hr style="margin-top: 2rem; margin-bottom: 2rem;">
+<section data-aos="zoom-in" data-aos-delay="1500" class="p-4" style="background: rgb(245,249,253); background: linear-gradient(180deg, rgba(245,249,253,1) 0%, rgba(255,255,255,1) 100%); border-radius: 10px;">
     <h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
     <h2 class="ai-center-all mt-0 mb-0" style="font-size: 1.5rem;">MLOps Course</h2>
     <div class="ai-center-all">
-        <p class="mt-3" style="font-size: 0.89rem;">A project-based course on MLOps fundamentals with a focus on intuition and application that teaches you how to apply ML in industry. All the lessons below are <b>100% free</b> but we also offer a highly interactive <a href="#features">4-week course</a> where you'll learn how to master MLOps.</p>
+        <p class="mt-3" style="font-size: 0.83rem;">A project-based course on MLOps fundamentals with a focus on intuition & application that teaches you how to apply ML in industry. All the lessons below are <b>100% free</b> but we also offer a highly interactive <a href="#features">4-week course</a> where you'll learn how to master MLOps.</p>
     </div>
     <div class="ai-center-all">
         <a href="#apply" class="md-button md-button--green-gradient mb-2 mb-md-0 mt-md-0 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Apply</a>
@@ -70,10 +68,10 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- Info session modal -->
-<div class="modal fade" id="infoSession" tabindex="-1" role="dialog" aria-labelledby="infoSession" aria-hidden="true">
+<!-- <div class="modal fade" id="infoSession" tabindex="-1" role="dialog" aria-labelledby="infoSession" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -90,9 +88,10 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
-<hr style="margin-top: 1rem; margin-bottom: 2rem;">
+<!-- Testimonials -->
+<!-- <hr style="margin-top: 1rem; margin-bottom: 2rem;">
 <div id="testimonials" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active px-4">
@@ -480,17 +479,60 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <a class="carousel-control-next" style="width: 0%;" href="#testimonials" role="button" data-slide="next">
         <span style="font-size: 2.5rem; font-weight: 700;">&rsaquo;</span>
     </a>
+</div> -->
+
+
+
+<hr style="margin-top: 2rem; margin-bottom: 2rem;">
+<h2 class="ai-center-all mt-0 mb-2 md-typeset">Who is this course for?</h2>
+<p class="ai-center-all" style="font-size: 0.9rem;">Machine learning is not a separate industry, instead, it's a powerful way of thinking about data that's not reserved for any one type of person.</p>
+
+<div class="row ai-features">
+    <div class="col-md-6 ai-feature" data-aos="fade-right">
+        <div class="ai-feature-header">
+            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M10.3 8.24a.75.75 0 01-.04 1.06L7.352 12l2.908 2.7a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 011.06.04zm3.44 1.06a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.908-2.7-2.908-2.7z"></path><path fill-rule="evenodd" d="M2 3.75C2 2.784 2.784 2 3.75 2h16.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0120.25 22H3.75A1.75 1.75 0 012 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25v16.5c0 .138.112.25.25.25h16.5a.25.25 0 00.25-.25V3.75a.25.25 0 00-.25-.25H3.75z"></path></svg></span> Software engineers
+        </div>
+        <div class="ai-feature-text">
+            looking to learn ML and become even better software engineers. ML is integrated into increasingly more products so it's important to know how ML systems operate.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature" data-aos="fade-left">
+        <div class="ai-feature-header">
+            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M8.114 2.094a.75.75 0 01.386.656V9h1.252a.75.75 0 110 1.5H5.75a.75.75 0 010-1.5H7V4.103l-.853.533a.75.75 0 01-.795-1.272l2-1.25a.75.75 0 01.762-.02zm4.889 5.66a.75.75 0 01.75-.75h5.232a.75.75 0 01.53 1.28l-2.776 2.777c.55.097 1.057.253 1.492.483.905.477 1.504 1.284 1.504 2.418 0 .966-.471 1.75-1.172 2.27-.687.511-1.587.77-2.521.77-1.367 0-2.274-.528-2.667-.756a.75.75 0 01.755-1.297c.331.193.953.553 1.912.553.673 0 1.243-.188 1.627-.473.37-.275.566-.635.566-1.067 0-.5-.219-.836-.703-1.091-.538-.284-1.375-.443-2.471-.443a.75.75 0 01-.53-1.28l2.643-2.644h-3.421a.75.75 0 01-.75-.75zM7.88 15.215a1.4 1.4 0 00-1.446.83.75.75 0 01-1.37-.61 2.9 2.9 0 012.986-1.71 2.565 2.565 0 011.557.743c.434.446.685 1.058.685 1.778 0 1.641-1.254 2.437-2.12 2.986-.538.341-1.18.694-1.495 1.273H9.75a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75c0-1.799 1.337-2.63 2.243-3.21 1.032-.659 1.55-1.031 1.55-1.8 0-.355-.116-.584-.26-.732a1.068 1.068 0 00-.652-.298z"></path></svg></span> Data scientists
+        </div>
+        <div class="ai-feature-text">
+            who want to want to go way beyond developing models in a notebook to wrapping them around robust workflows that enable ML systems to improve over time.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature" data-aos="fade-right">
+        <div class="ai-feature-header">
+            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12.292 2.06a.75.75 0 00-.584 0L.458 6.81a.75.75 0 000 1.38L4.25 9.793v3.803a2.901 2.901 0 00-1.327.757c-.579.58-.923 1.41-.923 2.43v4.5c0 .248.128.486.335.624.06.04.117.073.22.124.124.062.297.138.52.213.448.149 1.09.288 1.925.288s1.477-.14 1.925-.288c.223-.075.396-.15.52-.213a2.11 2.11 0 00.21-.117A.762.762 0 008 21.28v-4.5c0-1.018-.344-1.85-.923-2.428a2.9 2.9 0 00-1.327-.758v-3.17l5.958 2.516a.75.75 0 00.584 0l5.208-2.2v4.003a2.552 2.552 0 01-.079.085 4.057 4.057 0 01-.849.65c-.826.488-2.255 1.021-4.572 1.021-.612 0-1.162-.037-1.654-.1a.75.75 0 00-.192 1.487c.56.072 1.173.113 1.846.113 2.558 0 4.254-.592 5.334-1.23.538-.316.914-.64 1.163-.896a2.84 2.84 0 00.392-.482h.001A.75.75 0 0019 15v-4.892l4.542-1.917a.75.75 0 000-1.382l-11.25-4.75zM5 15c-.377 0-.745.141-1.017.413-.265.265-.483.7-.483 1.368v4.022c.299.105.797.228 1.5.228s1.201-.123 1.5-.228V16.78c0-.669-.218-1.103-.483-1.368A1.431 1.431 0 005 15zm7-3.564L2.678 7.5 12 3.564 21.322 7.5 12 11.436z"></path></svg></span> College graduates
+        </div>
+        <div class="ai-feature-text">
+            looking to learn the practical skills they'll need for the industry and bridge gap between their university curriculum and what industry expects them to know about ML systems.
+        </div>
+    </div>
+    <div class="col-md-6 ai-feature" data-aos="fade-left">
+        <div class="ai-feature-header">
+            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12 2.5c-3.81 0-6.5 2.743-6.5 6.119 0 1.536.632 2.572 1.425 3.56.172.215.347.422.527.635l.096.112c.21.25.427.508.63.774.404.531.783 1.128.995 1.834a.75.75 0 01-1.436.432c-.138-.46-.397-.89-.753-1.357a18.354 18.354 0 00-.582-.714l-.092-.11c-.18-.212-.37-.436-.555-.667C4.87 12.016 4 10.651 4 8.618 4 4.363 7.415 1 12 1s8 3.362 8 7.619c0 2.032-.87 3.397-1.755 4.5-.185.23-.375.454-.555.667l-.092.109c-.21.248-.405.481-.582.714-.356.467-.615.898-.753 1.357a.75.75 0 01-1.437-.432c.213-.706.592-1.303.997-1.834.202-.266.419-.524.63-.774l.095-.112c.18-.213.355-.42.527-.634.793-.99 1.425-2.025 1.425-3.561C18.5 5.243 15.81 2.5 12 2.5zM9.5 21.75a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75zM8.75 18a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z"></path></svg></span> Product managers
+        </div>
+        <div class="ai-feature-text">
+            who want to develop a technical foundation in MLOps so they can effectively communicate with their technical team and help develop and iterate on applications.
+        </div>
+    </div>
 </div>
+
+
 
 <hr id="lessons" style="margin-top: 2rem; margin-bottom: 2rem;">
 
-## Basics
-> Learn the fundamentals of ML through intuitive explanations, clean code and visualizations.
+## Foundations
+> Learn the foundations of machine learning through intuitive explanations, clean code and visualizations.
 [GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top ML repos](https://github.com/topics/deep-learning){:target="blank"} on GitHub
 
 <div class="row mt-4 ai-course-list" data-aos="fade-down">
 <div class="col-md-4">
-    <b><span class="mr-1">🔢</span> Foundations</b>
+    <b><span class="mr-1">🛠</span> Toolkit</b>
     <ul>
     <li><a href="/courses/basics/notebooks/">Notebooks</a></li>
     <li><a href="/courses/basics/python/">Python</a></li>
@@ -524,7 +566,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 ## MLOps
 > Learn how to apply ML to build a production grade product and deliver value.
-[GokuMohandas/MLOps](https://github.com/GokuMohandas/MLOps){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top MLOps repos](https://github.com/topics/mlops){:target="blank"} on GitHub
+[GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top MLOps repos](https://github.com/topics/mlops){:target="blank"} on GitHub
 
 <div class="row mt-4 ai-course-list" data-aos="fade-down">
 <div class="col-md-4">
@@ -588,6 +630,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
     <li><a href="/courses/mlops/pipelines/">Pipelines</a></li>
+    <li><a href="/courses/mlops/continual-learning/">Continual learning</a></li>
     </ul>
 </div>
 </div>
@@ -678,45 +721,6 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
     </div>
 </div>
 </section>
-
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
-<h2 class="ai-center-all mt-0 mb-2 md-typeset">Who is this course for?</h2>
-<p class="ai-center-all" style="font-size: 0.9rem;">Machine learning is not a separate industry, instead, it's a powerful way of thinking about data that's not reserved for any one type of person.</p>
-
-<div class="row ai-features">
-    <div class="col-md-6 ai-feature" data-aos="fade-right">
-        <div class="ai-feature-header">
-            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M10.3 8.24a.75.75 0 01-.04 1.06L7.352 12l2.908 2.7a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 011.06.04zm3.44 1.06a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.908-2.7-2.908-2.7z"></path><path fill-rule="evenodd" d="M2 3.75C2 2.784 2.784 2 3.75 2h16.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0120.25 22H3.75A1.75 1.75 0 012 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25v16.5c0 .138.112.25.25.25h16.5a.25.25 0 00.25-.25V3.75a.25.25 0 00-.25-.25H3.75z"></path></svg></span> Software engineers
-        </div>
-        <div class="ai-feature-text">
-            looking to learn ML and become even better software engineers. ML is integrated into increasingly more products so it's important to know how ML systems operate.
-        </div>
-    </div>
-    <div class="col-md-6 ai-feature" data-aos="fade-left">
-        <div class="ai-feature-header">
-            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M8.114 2.094a.75.75 0 01.386.656V9h1.252a.75.75 0 110 1.5H5.75a.75.75 0 010-1.5H7V4.103l-.853.533a.75.75 0 01-.795-1.272l2-1.25a.75.75 0 01.762-.02zm4.889 5.66a.75.75 0 01.75-.75h5.232a.75.75 0 01.53 1.28l-2.776 2.777c.55.097 1.057.253 1.492.483.905.477 1.504 1.284 1.504 2.418 0 .966-.471 1.75-1.172 2.27-.687.511-1.587.77-2.521.77-1.367 0-2.274-.528-2.667-.756a.75.75 0 01.755-1.297c.331.193.953.553 1.912.553.673 0 1.243-.188 1.627-.473.37-.275.566-.635.566-1.067 0-.5-.219-.836-.703-1.091-.538-.284-1.375-.443-2.471-.443a.75.75 0 01-.53-1.28l2.643-2.644h-3.421a.75.75 0 01-.75-.75zM7.88 15.215a1.4 1.4 0 00-1.446.83.75.75 0 01-1.37-.61 2.9 2.9 0 012.986-1.71 2.565 2.565 0 011.557.743c.434.446.685 1.058.685 1.778 0 1.641-1.254 2.437-2.12 2.986-.538.341-1.18.694-1.495 1.273H9.75a.75.75 0 010 1.5h-4a.75.75 0 01-.75-.75c0-1.799 1.337-2.63 2.243-3.21 1.032-.659 1.55-1.031 1.55-1.8 0-.355-.116-.584-.26-.732a1.068 1.068 0 00-.652-.298z"></path></svg></span> Data scientists
-        </div>
-        <div class="ai-feature-text">
-            who want to want to go way beyond developing models in a notebook to wrapping them around robust workflows that enable ML systems to improve over time.
-        </div>
-    </div>
-    <div class="col-md-6 ai-feature" data-aos="fade-right">
-        <div class="ai-feature-header">
-            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12.292 2.06a.75.75 0 00-.584 0L.458 6.81a.75.75 0 000 1.38L4.25 9.793v3.803a2.901 2.901 0 00-1.327.757c-.579.58-.923 1.41-.923 2.43v4.5c0 .248.128.486.335.624.06.04.117.073.22.124.124.062.297.138.52.213.448.149 1.09.288 1.925.288s1.477-.14 1.925-.288c.223-.075.396-.15.52-.213a2.11 2.11 0 00.21-.117A.762.762 0 008 21.28v-4.5c0-1.018-.344-1.85-.923-2.428a2.9 2.9 0 00-1.327-.758v-3.17l5.958 2.516a.75.75 0 00.584 0l5.208-2.2v4.003a2.552 2.552 0 01-.079.085 4.057 4.057 0 01-.849.65c-.826.488-2.255 1.021-4.572 1.021-.612 0-1.162-.037-1.654-.1a.75.75 0 00-.192 1.487c.56.072 1.173.113 1.846.113 2.558 0 4.254-.592 5.334-1.23.538-.316.914-.64 1.163-.896a2.84 2.84 0 00.392-.482h.001A.75.75 0 0019 15v-4.892l4.542-1.917a.75.75 0 000-1.382l-11.25-4.75zM5 15c-.377 0-.745.141-1.017.413-.265.265-.483.7-.483 1.368v4.022c.299.105.797.228 1.5.228s1.201-.123 1.5-.228V16.78c0-.669-.218-1.103-.483-1.368A1.431 1.431 0 005 15zm7-3.564L2.678 7.5 12 3.564 21.322 7.5 12 11.436z"></path></svg></span> College graduates
-        </div>
-        <div class="ai-feature-text">
-            looking to learn the practical skills they'll need for the industry and bridge gap between their university curriculum and what industry expects them to know about ML systems.
-        </div>
-    </div>
-    <div class="col-md-6 ai-feature" data-aos="fade-left">
-        <div class="ai-feature-header">
-            <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12 2.5c-3.81 0-6.5 2.743-6.5 6.119 0 1.536.632 2.572 1.425 3.56.172.215.347.422.527.635l.096.112c.21.25.427.508.63.774.404.531.783 1.128.995 1.834a.75.75 0 01-1.436.432c-.138-.46-.397-.89-.753-1.357a18.354 18.354 0 00-.582-.714l-.092-.11c-.18-.212-.37-.436-.555-.667C4.87 12.016 4 10.651 4 8.618 4 4.363 7.415 1 12 1s8 3.362 8 7.619c0 2.032-.87 3.397-1.755 4.5-.185.23-.375.454-.555.667l-.092.109c-.21.248-.405.481-.582.714-.356.467-.615.898-.753 1.357a.75.75 0 01-1.437-.432c.213-.706.592-1.303.997-1.834.202-.266.419-.524.63-.774l.095-.112c.18-.213.355-.42.527-.634.793-.99 1.425-2.025 1.425-3.561C18.5 5.243 15.81 2.5 12 2.5zM9.5 21.75a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75zM8.75 18a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z"></path></svg></span> Product managers
-        </div>
-        <div class="ai-feature-text">
-            who want to develop a technical foundation in MLOps so they can effectively communicate with their technical team and help develop and iterate on applications.
-        </div>
-    </div>
-</div>
 
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
 <section class="p-4" style="background-color: #f5f9fd;">
@@ -938,6 +942,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
                     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
                     <li><a href="/courses/mlops/pipelines/">Pipelines</a></li>
+                    <li><a href="/courses/mlops/continual-learning/">Continual learning</a></li>
                     </ul>
                 </div>
             </div>

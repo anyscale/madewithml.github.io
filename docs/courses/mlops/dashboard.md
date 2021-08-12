@@ -232,6 +232,9 @@ We're also going to inspect the true positive (TP), false positive (FP) and fals
 - Inspect FP / FN samples by [estimating training data influences (TracIn)](https://arxiv.org/abs/2002.08484){:target="_blank"} on their predictions.
 - Inspect the trained model's behavior under various conditions using the [WhatIf](https://pair-code.github.io/what-if-tool/){:target="_blank"} tool.
 
+!!! note
+    Our dashboard can have many other pages as well, especially critical views for [iteration](pipelines.md#continual-learning){:target="_blank"}, such as [active learning](labeling.md#active-learning){:target="_blank"}, [composing retraining datasets](continual-learning.md#retraining){:target="_blank"}, etc.
+
 
 ## Caching
 
