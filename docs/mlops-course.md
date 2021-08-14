@@ -64,7 +64,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                 <small><b><a data-toggle="modal" data-target="#infoSession" style="cursor: pointer;">Free info session</a>:</b> August 14th, 2021</small>
             </div>
             <div class="ai-center-all">
-                <small><b>Course start date:</b> Sept 11th, 2021</small>
+                <small><b>Course start date:</b> Sept 18th, 2021</small>
             </div>
         </div>
     </div>
@@ -778,7 +778,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Saturday</div>
-                <small><div>September 11th, 2021</div></small>
+                <small><div>Sept 18th, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseFoundations" aria-expanded="false" aria-controls="collapseFoundations">Foundations</a></div>
@@ -805,7 +805,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Sunday</div>
-                <small><div>September 12th, 2021</div></small>
+                <small><div>Sept 19th, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseDeepLearning" aria-expanded="false" aria-controls="collapseDeepLearning">Deep Learning</a></div>
@@ -826,7 +826,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Saturday</div>
-                <small><div>September 18th, 2021</div></small>
+                <small><div>Sept 25th, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseProduct" aria-expanded="false" aria-controls="collapseProduct">Product</a></div>
@@ -851,7 +851,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Sunday</div>
-                <small><div>September 19th, 2021</div></small>
+                <small><div>Sept 26th, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseModeling" aria-expanded="false" aria-controls="collapseModeling">Modeling</a></div>
@@ -875,7 +875,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Saturday</div>
-                <small><div>September 25th, 2021</div></small>
+                <small><div>Oct 2nd, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseScripting" aria-expanded="false" aria-controls="collapseScripting">Scripting</a></div>
@@ -893,7 +893,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Sunday</div>
-                <small><div>September 26th, 2021</div></small>
+                <small><div>Oct 3rd, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseInterfaces" aria-expanded="false" aria-controls="collapseInterfaces">Interfaces</a></div>
@@ -912,7 +912,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Saturday</div>
-                <small><div>October 2nd, 2021</div></small>
+                <small><div>Oct 9th, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseTesting" aria-expanded="false" aria-controls="collapseTesting">Testing</a></div>
@@ -927,7 +927,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Sunday</div>
-                <small><div>October 3rd, 2021</div></small>
+                <small><div>Oct 10th, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseReproducibility" aria-expanded="false" aria-controls="collapseReproducibility">Reproducibility</a></div>
@@ -951,7 +951,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Saturday</div>
-                <small><div>October 9th, 2021</div></small>
+                <small><div>Oct 16th, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseProduction" aria-expanded="false" aria-controls="collapseProduction">Production I</a></div>
@@ -966,7 +966,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Sunday</div>
-                <small><div>October 10th, 2021</div></small>
+                <small><div>Oct 17th, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseProduction" aria-expanded="false" aria-controls="collapseProduction">Production II</a></div>
@@ -987,7 +987,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Saturday</div>
-                <small><div>October 2nd, 2021</div></small>
+                <small><div>Oct 23rd, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseNavigationSeries" aria-expanded="false" aria-controls="collapseNavigationSeries">"How to navigate X" series</a></div>
@@ -1002,7 +1002,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Sunday</div>
-                <small><div>October 3rd, 2021</div></small>
+                <small><div>Oct 24th, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseNavigationSeries" aria-expanded="false" aria-controls="collapseNavigationSeries">Reflection and next steps</a></div>
@@ -1084,7 +1084,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <small><b><a data-toggle="modal" data-target="#infoSession" style="cursor: pointer;">Free info session</a>:</b> August 14th, 2021</small>
         </div>
         <div class="ai-center-all">
-            <small><b>Course start date:</b> Sept 11th, 2021</small>
+            <small><b>Course start date:</b> Sept 18th, 2021</small>
         </div>
     </div>
 </div>
