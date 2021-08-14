@@ -954,8 +954,8 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                 <small><div>Oct 16th, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
-                <div><a data-toggle="collapse" href="#collapseProduction" aria-expanded="false" aria-controls="collapseProduction">Production I</a></div>
-                <div class="collapse multi-collapse" id="collapseProduction">
+                <div><a data-toggle="collapse" href="#collapseProductionI" aria-expanded="false" aria-controls="collapseProductionI">Production I</a></div>
+                <div class="collapse multi-collapse" id="collapseProductionI">
                     <ul class="ai-course-list">
                     <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
                     <li><a href="/courses/mlops/cicd/">CI/CD workflows</a></li>
@@ -969,8 +969,8 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                 <small><div>Oct 17th, 2021</div></small>
                 <small><div>7 am - 10 pm PT</div></small>
                 </div>
-                <div><a data-toggle="collapse" href="#collapseProduction" aria-expanded="false" aria-controls="collapseProduction">Production II</a></div>
-                <div class="collapse multi-collapse" id="collapseProduction">
+                <div><a data-toggle="collapse" href="#collapseProductionII" aria-expanded="false" aria-controls="collapseProductionII">Production II</a></div>
+                <div class="collapse multi-collapse" id="collapseProductionII">
                     <ul class="ai-course-list">
                     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
                     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
