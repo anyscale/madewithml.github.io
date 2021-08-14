@@ -45,12 +45,12 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 </div>
 
 <!-- Course header -->
-<!-- <hr style="margin-top: 2rem; margin-bottom: 2rem;">
+<hr style="margin-top: 2rem; margin-bottom: 2rem;">
 <section data-aos="zoom-in" data-aos-delay="1500" class="p-4" style="background: rgb(245,249,253); background: linear-gradient(180deg, rgba(245,249,253,1) 0%, rgba(255,255,255,1) 100%); border-radius: 10px;">
     <h1 class="ai-center-all mb-0" style="color: rgb(75, 115, 245); font-size: 1rem;">Made With ML</h1>
     <h2 class="ai-center-all mt-0 mb-0" style="font-size: 1.5rem;">MLOps Course</h2>
     <div class="ai-center-all">
-        <p class="mt-3" style="font-size: 0.83rem;">A project-based course on MLOps fundamentals with a focus on intuition & application that teaches you how to apply ML in industry. All the lessons below are <b>100% free</b> but we also offer a highly interactive <a href="#features">4-week course</a> where you'll learn how to master MLOps.</p>
+        <p class="mt-3" style="font-size: 0.83rem;">A project-based course on MLOps fundamentals with a focus on intuition & application that teaches you how to apply ML in industry. All the lessons below are <b>100% free</b> but we also offer a highly interactive <a href="#features">6-week course</a> where you'll learn how to master MLOps.</p>
     </div>
     <div class="ai-center-all">
         <a href="#apply" class="md-button md-button--green-gradient mb-2 mb-md-0 mt-md-0 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Apply</a>
@@ -68,10 +68,10 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
             </div>
         </div>
     </div>
-</section> -->
+</section>
 
 <!-- Info session modal -->
-<!-- <div class="modal fade" id="infoSession" tabindex="-1" role="dialog" aria-labelledby="infoSession" aria-hidden="true">
+<div class="modal fade" id="infoSession" tabindex="-1" role="dialog" aria-labelledby="infoSession" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -88,10 +88,10 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 <!-- Testimonials -->
-<!-- <hr style="margin-top: 1rem; margin-bottom: 2rem;">
+<hr style="margin-top: 1rem; margin-bottom: 2rem;">
 <div id="testimonials" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active px-4">
@@ -479,8 +479,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <a class="carousel-control-next" style="width: 0%;" href="#testimonials" role="button" data-slide="next">
         <span style="font-size: 2.5rem; font-weight: 700;">&rsaquo;</span>
     </a>
-</div> -->
-
+</div>
 
 
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
@@ -639,7 +638,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 <h2 class="ai-center-all mt-0 mb-2 md-typeset">Wait! All the lessons are 100% free?</h2>
 
-Yes. The lessons above are 100% free and you can learn all the fundamentals of MLOps by going through them. **So what exactly is the paid course for?** It's extremely difficult to learn things on your own without the proper structure and experience, especially complicated topics such as MLOps. So we're offering the exact structure and experience you need to master the MLOps fundamentals in just 4 weeks. <a href="#four-weeks">Yes 4 weeks is more than enough</a>.
+Yes. The lessons above are 100% free and you can learn all the fundamentals of MLOps by going through them. **So what exactly is the paid course for?** It's extremely difficult to learn things on your own without the proper structure and experience, especially complicated topics such as MLOps. So we're offering the exact structure and experience you need to master the MLOps fundamentals in just 6 weeks. <a href="#six-weeks">Yes 6 weeks is more than enough</a>.
 
 <div class="row ai-features">
     <div class="col-md-6 ai-feature" data-aos="fade-right">
@@ -713,7 +712,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
     <div class="col-md-6" data-aos="fade-left">
         <p class="ai-center-all"><u>This is</u>:</p>
         <ul>
-            <li><span class="mr-1">✅</span> a highly interactive, 4-week course with accountability & community.</li>
+            <li><span class="mr-1">✅</span> a highly interactive, 6-week course with accountability & community.</li>
             <li><span class="mr-1">✅</span> a 100% live, highly interactive course you take alongside motivated peers.</li>
             <li><span class="mr-1">✅</span> a foundation for MLOps expertise that will speak for itself in your work.</li>
             <li><span class="mr-1">✅</span> an alumni community to continue your learning journey.</li>
@@ -780,7 +779,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                 <div class="mb-2">
                 <div>Saturday</div>
                 <small><div>September 11th, 2021</div></small>
-                <small><div>7 am - 12 pm PT</div></small>
+                <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseFoundations" aria-expanded="false" aria-controls="collapseFoundations">Foundations</a></div>
                 <div class="collapse multi-collapse" id="collapseFoundations">
@@ -807,7 +806,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                 <div class="mb-2">
                 <div>Sunday</div>
                 <small><div>September 12th, 2021</div></small>
-                <small><div>7 am - 12 pm PT</div></small>
+                <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseDeepLearning" aria-expanded="false" aria-controls="collapseDeepLearning">Deep Learning</a></div>
                 <div class="collapse multi-collapse" id="collapseDeepLearning">
@@ -828,7 +827,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                 <div class="mb-2">
                 <div>Saturday</div>
                 <small><div>September 18th, 2021</div></small>
-                <small><div>7 am - 12 pm PT</div></small>
+                <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseProduct" aria-expanded="false" aria-controls="collapseProduct">Product</a></div>
                 <div class="collapse multi-collapse" id="collapseProduct">
@@ -853,7 +852,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                 <div class="mb-2">
                 <div>Sunday</div>
                 <small><div>September 19th, 2021</div></small>
-                <small><div>7 am - 12 pm PT</div></small>
+                <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseModeling" aria-expanded="false" aria-controls="collapseModeling">Modeling</a></div>
                 <div class="collapse multi-collapse" id="collapseModeling">
@@ -877,7 +876,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                 <div class="mb-2">
                 <div>Saturday</div>
                 <small><div>September 25th, 2021</div></small>
-                <small><div>7 am - 12 pm PT</div></small>
+                <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseScripting" aria-expanded="false" aria-controls="collapseScripting">Scripting</a></div>
                 <div class="collapse multi-collapse" id="collapseScripting">
@@ -890,6 +889,13 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                     <li><a href="/courses/mlops/makefile/">Makefile</a></li>
                     </ul>
                 </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-2">
+                <div class="mb-2">
+                <div>Sunday</div>
+                <small><div>September 26th, 2021</div></small>
+                <small><div>7 am - 10 pm PT</div></small>
+                </div>
                 <div><a data-toggle="collapse" href="#collapseInterfaces" aria-expanded="false" aria-controls="collapseInterfaces">Interfaces</a></div>
                 <div class="collapse multi-collapse" id="collapseInterfaces">
                     <ul class="ai-course-list">
@@ -898,11 +904,16 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                     </ul>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="col-6" data-aos="fade-left">
+        <h4 class="mb-1">Week <span class="ml-1">4️⃣</span></h4>
+        <div class="row">
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
-                <div>Sunday</div>
-                <small><div>September 26th, 2021</div></small>
-                <small><div>7 am - 12 pm PT</div></small>
+                <div>Saturday</div>
+                <small><div>October 2nd, 2021</div></small>
+                <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseTesting" aria-expanded="false" aria-controls="collapseTesting">Testing</a></div>
                 <div class="collapse multi-collapse" id="collapseTesting">
@@ -911,6 +922,13 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                     <li><a href="/courses/mlops/testing/#data">Data</a></li>
                     <li><a href="/courses/mlops/testing/#models">Models</a></li>
                     </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-2">
+                <div class="mb-2">
+                <div>Sunday</div>
+                <small><div>October 3rd, 2021</div></small>
+                <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseReproducibility" aria-expanded="false" aria-controls="collapseReproducibility">Reproducibility</a></div>
                 <div class="collapse multi-collapse" id="collapseReproducibility">
@@ -924,21 +942,36 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             </div>
         </div>
     </div>
-    <div class="col-6" data-aos="fade-left">
-        <h4 class="mb-1">Week <span class="ml-1">4️⃣</span></h4>
+</div>
+
+<div class="row mt-2">
+    <div class="col-6" data-aos="fade-right">
+        <h4 class="mb-1">Week <span class="ml-1">5️⃣</span></h4>
         <div class="row">
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Saturday</div>
-                <small><div>October 2nd, 2021</div></small>
-                <small><div>7 am - 12 pm PT</div></small>
+                <small><div>October 9th, 2021</div></small>
+                <small><div>7 am - 10 pm PT</div></small>
                 </div>
-                <div><a data-toggle="collapse" href="#collapseProduction" aria-expanded="false" aria-controls="collapseProduction">Production</a></div>
+                <div><a data-toggle="collapse" href="#collapseProduction" aria-expanded="false" aria-controls="collapseProduction">Production I</a></div>
                 <div class="collapse multi-collapse" id="collapseProduction">
                     <ul class="ai-course-list">
                     <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
                     <li><a href="/courses/mlops/cicd/">CI/CD workflows</a></li>
                     <li><a href="/courses/mlops/infrastructure/">Infrastructure</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 mt-md-0 mt-2">
+                <div class="mb-2">
+                <div>Sunday</div>
+                <small><div>October 10th, 2021</div></small>
+                <small><div>7 am - 10 pm PT</div></small>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseProduction" aria-expanded="false" aria-controls="collapseProduction">Production II</a></div>
+                <div class="collapse multi-collapse" id="collapseProduction">
+                    <ul class="ai-course-list">
                     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
                     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
                     <li><a href="/courses/mlops/pipelines/">Pipelines</a></li>
@@ -946,11 +979,16 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                     </ul>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="col-6" data-aos="fade-left">
+        <h4 class="mb-1">Week <span class="ml-1">6️⃣</span></h4>
+        <div class="row">
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
-                <div>Sunday</div>
-                <small><div>October 3rd, 2021</div></small>
-                <small><div>7 am - 12 pm PT</div></small>
+                <div>Saturday</div>
+                <small><div>October 2nd, 2021</div></small>
+                <small><div>7 am - 10 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseNavigationSeries" aria-expanded="false" aria-controls="collapseNavigationSeries">"How to navigate X" series</a></div>
                 <div class="collapse multi-collapse" id="collapseNavigationSeries">
@@ -961,9 +999,25 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                     </ul>
                 </div>
             </div>
+            <div class="col-md-6 mt-md-0 mt-2">
+                <div class="mb-2">
+                <div>Sunday</div>
+                <small><div>October 3rd, 2021</div></small>
+                <small><div>7 am - 10 pm PT</div></small>
+                </div>
+                <div><a data-toggle="collapse" href="#collapseNavigationSeries" aria-expanded="false" aria-controls="collapseNavigationSeries">Reflection and next steps</a></div>
+                <div class="collapse multi-collapse" id="collapseNavigationSeries">
+                    <ul class="ai-course-list">
+                    <li>How to continue the learning journey</li>
+                    <li>How to continue building personal brand</li>
+                    <li>How to participate in future cohorts</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 
 <div class="row mt-2" style="margin-bottom: 2.5rem;">
     <div class="col-6" data-aos="fade-right">
@@ -971,7 +1025,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
         <div class="row">
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
-                <div>Tuesday</div>
+                <div>Tuesdays</div>
                 <small><div>9 am - 10 am PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseQA1" aria-expanded="false" aria-controls="collapseQA1">Q&A office hours</a> <small>(optional)</small></div>
@@ -986,8 +1040,8 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             </div>
             <div class="col-md-6 mt-md-0 mt-2">
                 <div class="mb-2">
-                <div>Thursday</div>
-                <small><div>5 pm - 6 pm PT</div></small>
+                <div>Thursdays</div>
+                <small><div>4 pm - 5 pm PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseQA2" aria-expanded="false" aria-controls="collapseQA2">Q&A office hours</a> <small>(optional)</small></div>
                 <div class="collapse multi-collapse" id="collapseQA2">
@@ -1030,7 +1084,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <small><b><a data-toggle="modal" data-target="#infoSession" style="cursor: pointer;">Free info session</a>:</b> August 14th, 2021</small>
         </div>
         <div class="ai-center-all">
-            <small><b>Course start date:</b> Sept 18th, 2021</small>
+            <small><b>Course start date:</b> Sept 11th, 2021</small>
         </div>
     </div>
 </div>
@@ -1038,9 +1092,30 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
 <div class="row mt-4" style="margin-bottom: 2.5rem;">
     <div class="col-md-4 mb-md-0 mb-4" data-aos="flip-left" data-aos-delay="0">
         <div class="card h-100" style="max-width: 18rem;">
+            <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Free</h3></div>
+            <div class="card-body">
+                <ul class="task-list">
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Self-paced detailed lesson blog posts</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Production grade code in every lesson</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Visualizations to illustrate every concept</li>
+                </ul>
+            </div>
+            <div class="card-footer bg-transparent">
+                <div class="ai-center-all">
+                    <p class="mt-0 mb-2" style="font-size: 0.9rem;">$0 USD</p>
+                </div>
+                <div class="ai-center-all">
+                    <a href="#foundations" class="md-button md-button--grey-secondary mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Get started</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-md-0 mb-4" data-aos="flip-left" data-aos-delay="0">
+        <div class="card h-100" style="max-width: 18rem;">
             <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Essential</h3></div>
             <div class="card-body">
                 <ul class="task-list">
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Master MLOps in 6 weeks</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live sessions and coding workshops</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Live Q&A office hours</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;"How to navigate X" series <small>(ML research, Python libraries, career)</small></li>
@@ -1077,36 +1152,15 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-md-0 mb-4" data-aos="flip-left" data-aos-delay="1000">
-        <div class="card h-100" style="max-width: 18rem;">
-            <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Enterprise</h3></div>
-            <div class="card-body">
-                <ul class="task-list">
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;<i>Accelerated</i> 2-3 day live workshops</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Team project-based guidance <small>(tooling, infrastructure)</small></li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;"How to navigate X" series <small>(ML research, Python libraries, career)</small></li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Alumni community</li>
-                </ul>
-            </div>
-            <div class="card-footer bg-transparent">
-                <div class="ai-center-all">
-                    <p class="mt-0 mb-2" style="font-size: 0.8rem;">virtual or in-person</p>
-                </div>
-                <div class="ai-center-all">
-                    <a href="https://forms.gle/8L8ga4fTnmwss9by8" target="_blank" class="md-button md-button--grey-secondary mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Contact us</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
-> After you apply, we will review your application and you'll receive an invitation to the free info session. You don't pay for anything until after the info session so you know exactly what the course experience will be like. If this current cohort is already filled, still apply and join the info session so you can sign up early for the next cohort.
+> **ENTERPRISE** We also offer an accelerated 2-3 day live workshops with team project-based guidance (tooling, infrastructure) for enterprise customers which we've delivered across teams at Apple, Google and many other Fortune 500 companies, as well as early-stage startups to ensure they're aligning themselves for success. [Reach out](https://forms.gle/8L8ga4fTnmwss9by8){:target="_blank"} to us if your team is interested.
 
 <div class="row mt-3 mb-0">
     <div class="col-md-12">
         <div class="admonition info">
             <p class="admonition-title">Reimbursement</p>
-            <p>Our alumni have had a lot of success getting 100% of the course reimbursed by their employers since all of this directly falls under career development and, in many cases, immediately necessary for their work. After you apply and are accepted for a cohort, check out this <b><a href="reimbursement" target="_blank">email template</a></b> that we've put together that you can send to your manager to get this course reimbursed.</p>
+            <p>Our alumni have had a lot of success getting 100% of the course reimbursed by their employers since all of this directly falls under career development and, in many cases, immediately necessary for their work. After you apply and are accepted for a cohort, check out this <b><a href="reimbursement.md" target="_blank">email template</a></b> that we've put together that you can send to your manager to get this course reimbursed.</p>
         </div>
     </div>
 </div>
@@ -1167,9 +1221,9 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
       </div>
     </div>
   </div>
-  <div class="card" id="four-weeks">
+  <div class="card" id="six-weeks">
     <div class="card-header collapsed" id="heading4" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
-      <h5 class="my-0" style="display: inline-block;">Are four weeks really enough?</h5>
+      <h5 class="my-0" style="display: inline-block;">Are six weeks really enough?</h5>
       <span class="faq-toggle" aria-hidden="true" style="float:right;"></span>
     </div>
     <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#faq-accordion">
