@@ -1069,7 +1069,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
     </div>
 </div>
 
-<div class="admonition success">
+<div class="admonition danger">
 <p class="admonition-title">Interactivity</p>
 <p>The live lectures and coding workshops will be filled with Q&A sessions, breakout room discussions, small exercises, etc. to make sure you <b>master</b> this material well enough to apply it to your own projects. In addition to Q&A during the live lectures, we will also have optional <strong>Q&A office hours</strong> throughout the week for various timezones.</p>
 </div>
