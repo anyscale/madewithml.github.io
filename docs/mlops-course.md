@@ -1110,7 +1110,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-md-0 mb-4" data-aos="flip-left" data-aos-delay="0">
+    <div class="col-md-4 mb-md-0 mb-4" data-aos="flip-left" data-aos-delay="500">
         <div class="card h-100" style="max-width: 18rem;">
             <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Essential</h3></div>
             <div class="card-body">
@@ -1132,7 +1132,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-md-0 mb-4" data-aos="flip-left" data-aos-delay="500">
+    <div class="col-md-4 mb-md-0 mb-4" data-aos="flip-left" data-aos-delay="1000">
         <div class="card h-100" style="max-width: 18rem;">
             <div class="card-header bg-transparent ai-center-all"><h3 class="mt-0 mb-0">Premium</h3></div>
             <div class="card-body">
