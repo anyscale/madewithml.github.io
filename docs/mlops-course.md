@@ -1109,6 +1109,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Everything in the <i>Essential</i> plan</li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;1:1 career guidance <div><small>(resume & portfolio)</small></div></li>
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;1:1 interview prep <div><small>(technical & behavioral)</small></div></li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;1:1 project guidance <div><small>(personal & professional)</small></div></li>
                 </ul>
             </div>
             <div class="card-footer bg-transparent">
