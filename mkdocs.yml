@@ -182,5 +182,7 @@ plugins:
             "courses/applied-ml.md": "index.md"
             "courses/mlops/deployment.md": "courses/mlops/infrastructure.md"
             "courses/applied-ml-in-production.md": "index.md"
+            "courses/basics/convolutional-neural-networks/" : "courses/foundations/convolutional-neural-networks/"
+            "courses/basics/recurrent-neural-networks/" : "courses/foundations/recurrent-neural-networks/"
             # "mlops-course": "index.md"
 
