@@ -769,7 +769,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
 <section id="schedule" class="p-4" style="background-color: #f5f9fd;">
 <h2 class="ai-center-all mt-0 mb-2 md-typeset"><span class="mr-2">📅</span> Schedule</h2>
 
-<p>Join us for a <a data-toggle="modal" data-target="#infoSession" style="cursor: pointer;">free info session</a> on August 14th, 2021 at 9 am PT where we'll cover an overview of the course and answer all of your questions that are not covered in our <a href="#faq">FAQ section</a>. Feel free to also reach out to us via <a href="mailto:hello@madewithml.com" target="_blank">email</a> and we'll get back to you very soon.</p>
+<p>This course runs from Saturday, September 18th 2021 to Sunday, October 24th 2021. However, the fundamental skills you develop and the community will be yours forever.</p>
 
 <div class="row mt-2">
     <div class="col-6" data-aos="fade-right">
