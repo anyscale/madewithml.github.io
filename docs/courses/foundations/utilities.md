@@ -595,7 +595,7 @@ PATIENCE = 3
 ```python linenums="1"
 # Define Loss
 class_weights_tensor = torch.Tensor(list(class_weights.values())).to(device)
-loss = nn.CrossEntropyLoss(weight=class_weights_tensor)
+loss_fn = nn.CrossEntropyLoss(weight=class_weights_tensor)
 ```
 ```python linenums="1"
 # Define optimizer & scheduler

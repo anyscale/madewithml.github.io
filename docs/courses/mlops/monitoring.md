@@ -29,7 +29,7 @@ Fortunately, most cloud providers and even orchestration layers will provide thi
 
 Unfortunately, just monitoring the system's health won't be enough to capture the underlying issues with our model. So, naturally, the next layer of metrics to monitor involves the model's performance. These could be quantitative evaluation metrics that we used during model evaluation (accuracy, precision, f1, etc.) but also key business metrics that the model influences (ROI, click rate, etc.).
 
-It's usually never enough to just analyze the overall (rolling) performance metrics across the entire span of time since the model has been deployed. Instead, we should inspect performance across a period of time that's significant for our application (ex. daily). These granular metrics might be more indicative of our system's health and we might be able to identify issues faster by not undermining them with historical data.
+It's usually never enough to just analyze the coarse-grained (rolling) performance metrics across the entire span of time since the model has been deployed. Instead, we should inspect performance across a period of time that's significant for our application (ex. daily). These fine-grained metrics might be more indicative of our system's health and we might be able to identify issues faster by not undermining them with historical data.
 
 > All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/monitoring.ipynb){:target="_blank"}.
 
@@ -83,7 +83,7 @@ However, there are two main obstacles with this approach:
 - **Delayed outcomes**: we may not always have the ground-truth outcomes available to determine the model's performance on production inputs. This is especially true if there is significant lag or annotation is required on the real-world data. To mitigate this, we could
     - devise a **proxy signal** that can help us *estimate* the model's performance. For example, in our tag prediction task, we could use the actual tags that an author attributes to a project as the intermediary labels until we have verified labels from an annotation pipeline.
     - use the statistical features of our inputs and predicted outputs as a indirect [measure](#measuring-drfit).
-- **Too late**: if we wait to catch the model decay based on the performance, it may have already cause significant damage to downstream business pipelines that are dependent on it. We need to employ more granular monitoring to identify the *sources* of model drift prior to actual performance degradation.
+- **Too late**: if we wait to catch the model decay based on the performance, it may have already cause significant damage to downstream business pipelines that are dependent on it. We need to employ more fine-grained monitoring to identify the *sources* of model drift prior to actual performance degradation.
 
 ## Drift
 
@@ -104,7 +104,7 @@ We need to first understand the different types of issues that can cause our mod
 Data drift, also known as feature drift or covariate shift, occurs when the distribution of the *production* data is different from the *training* data. The model is not equipped to deal with this drift in the feature space and so, it's predictions may not be reliable. The actual cause of drift can be attributed to natural changes in the real-world but also to systemic issues such as missing data, pipeline errors, schemas changes, etc. It's important to inspect the drifted data and trace it back along it's pipeline to identify when and where the drift was introduced.
 
 !!! warning
-    It's important that our training data is as similar as possible to the data we can expect in production to avoid training-serving skew.
+    Besides just looking at the distribution of our input data, we also want to ensure that the workflows to retrieve and process our input data is the same during training and serving to avoid training-serving skew. However, we can skip this step if we retrieve our features from the same source location for both training and serving, ie. from a [feature store](feature-store.md){:target="_blank"}.
 
 <div class="ai-center-all">
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/data_drift.png">
@@ -630,6 +630,7 @@ Once we have our carefully crafted alerting workflows in place, we can notify st
 Once we receive an alert, we need to inspect it before acting on it. An alert needs several components in order for us to completely inspect it:
 
 - specific alert that was triggered
+- relevant metadata (time, inputs, outputs, etc.)
 - thresholds / expectations that failed
 - drift detection tests that were conducted
 - data from reference and target windows

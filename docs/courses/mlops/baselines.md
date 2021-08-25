@@ -41,7 +41,7 @@ Here is the high level approach to establishing baselines:
 
 When choosing what model architecture(s) to proceed with, there are a few important aspects to consider:
 
-- `#!js performance`: consider overall and fine-grained (ex. per-class) performance.
+- `#!js performance`: consider coarse-grained and fine-grained (ex. per-class) performance.
 - `#!js latency`: how quickly does your model respond for inference.
 - `#!js size`: how large is your model and can you support it's storage.
 - `#!js compute`: how much will it cost ($, carbon footprint, etc.) to train your model?

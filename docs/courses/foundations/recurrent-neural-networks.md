@@ -903,7 +903,7 @@ NUM_EPOCHS = 50
 ```python linenums="1"
 # Define Loss
 class_weights_tensor = torch.Tensor(list(class_weights.values())).to(device)
-loss = nn.CrossEntropyLoss(weight=class_weights_tensor)
+loss_fn = nn.CrossEntropyLoss(weight=class_weights_tensor)
 ```
 ```python linenums="1"
 # Define optimizer & scheduler
@@ -1104,7 +1104,7 @@ bound method Module.named_parameters of GRU(
 ```python linenums="1"
 # Define Loss
 class_weights_tensor = torch.Tensor(list(class_weights.values())).to(device)
-loss = nn.CrossEntropyLoss(weight=class_weights_tensor)
+loss_fn = nn.CrossEntropyLoss(weight=class_weights_tensor)
 ```
 ```python linenums="1"
 # Define optimizer & scheduler
@@ -1240,7 +1240,7 @@ print (json.dumps(prob_dist, indent=2))
 </pre>
 
 !!! note
-    We will learn how to get a little bit of interpretability with RNNs in the next lesson on attentional interfaces.
+    We will learn how to create more context-aware representations and a little bit of interpretability with RNNs in the next lesson on [attention](attention.md){:target="_blank"}.
 
 
 <!-- Citation -->
