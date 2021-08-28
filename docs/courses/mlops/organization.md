@@ -20,9 +20,9 @@ There are several ways to organize our code from the notebooks but they're all b
 app/
 ├── api.py        - FastAPI app
 └── cli.py        - CLI app
+├── config.py     - configuration setup
 ├── schemas.py    - API model schemas
 tagifai/
-├── config.py     - configuration setup
 ├── data.py       - data processing utilities
 ├── eval.py       - evaluation components
 ├── main.py       - training/optimization pipelines

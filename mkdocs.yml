@@ -52,7 +52,7 @@ nav:
       - CNNs: courses/foundations/convolutional-neural-networks.md
       - Embeddings: courses/foundations/embeddings.md
       - RNNs: courses/foundations/recurrent-neural-networks.md
-      - Transformers: courses/mlops/baselines/#transformers-w-contextual-embeddings
+      - Attention: courses/foundations/attention.md
   - MLOps:
     - Lessons: /#mlops
     - 📦 &nbsp; Product:
@@ -194,5 +194,13 @@ plugins:
             "courses/basics/utilities.md" : "courses/foundations/utilities.md"
             "courses/basics/convolutional-neural-networks.md" : "courses/foundations/convolutional-neural-networks.md"
             "courses/basics/recurrent-neural-networks.md" : "courses/foundations/recurrent-neural-networks.md"
+            "courses/applied-ml-in-production/exploratory-data-analysis.md": "courses/mlops/exploratory-data-analysis.md"
+            "courses/applied-ml-in-production/splitting.md": "courses/mlops/splitting.md"
+            "courses/applied-ml-in-production/preprocessing.md": "courses/mlops/preprocessing.md"
+            "courses/applied-ml/baselines.md": "courses/mlops/baselines.md"
+            "courses/applied-ml/organization.md": "courses/mlops/organization.md"
+            "courses/applied-ml/documentation.md": "courses/mlops/documentation.md"
+            "courses/applied-ml/api.md": "courses/mlops/api.md"
+            "courses/applied-ml/testing.md": "courses/mlops/testing.md"
             # "mlops-course": "index.md"
 

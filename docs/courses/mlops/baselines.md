@@ -62,7 +62,7 @@ Each application's baseline trajectory varies based on the task and motivations.
 5. [RNN w/ embeddings](#rnn)
 6. [Transformers w/ contextual embeddings](#transformers)
 
-We'll motivate the need for slowly adding complexity from both the *representation* (ex. embeddings) and *architecture* (ex. CNNs) views, as well as address the limitation at each step of the way.
+We'll motivate the need for slowly adding complexity from both the **representation** (ex. embeddings) and **architecture** (ex. CNNs) views, as well as address the limitation at each step of the way.
 
 !!! note
     If you're unfamiliar with of the concepts here, be sure to check out the [GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} (🔥 Among [top ML repos](https://github.com/topics/deep-learning){:target="_blank"} on GitHub).
@@ -580,8 +580,8 @@ transfer learn bert self supervis learn
 ## Simple ML
 <u><i>motivation</i></u>:
 
-- *representation*: use term frequency-inverse document frequency [(TF-IDF)](https://en.wikipedia.org/wiki/Tf%E2%80%93idf){:target="_blank"} to capture the significance of a token to a particular input with respect to all the inputs, as opposed to treating the words in our input text as isolated tokens.
-- *architecture*: we want our model to meaningfully extract the encoded signal to predict the output labels.
+- **representation**: use term frequency-inverse document frequency [(TF-IDF)](https://en.wikipedia.org/wiki/Tf%E2%80%93idf){:target="_blank"} to capture the significance of a token to a particular input with respect to all the inputs, as opposed to treating the words in our input text as isolated tokens.
+- **architecture**: we want our model to meaningfully extract the encoded signal to predict the output labels.
 
 So far we've treated the words in our input text as isolated tokens and we haven't really captured any meaning between tokens. Let's use term frequency–inverse document frequency (**TF-IDF**) to capture the significance of a token to a particular input with respect to all the inputs.
 
@@ -702,8 +702,8 @@ print (json.dumps(performance, indent=2))
 
 <u><i>limitations</i></u>:
 
-- *representation*: TF-IDF representations don't encapsulate much signal beyond frequency but we require more fine-grained token representations.
-- *architecture*: we want to develop models that can use better represented encodings in a more contextual manner.
+- **representation**: TF-IDF representations don't encapsulate much signal beyond frequency but we require more fine-grained token representations.
+- **architecture**: we want to develop models that can use better represented encodings in a more contextual manner.
 
 ## Distributed training
 
@@ -722,8 +722,8 @@ There are lots of options for applying distributed training such as with PyTorch
 
 <u><i>motivation</i></u>:
 
-- *representation*: we want to have more robust (split tokens to characters) and meaningful [embeddings](../foundations/embeddings.md){:target="_blank"} representations for our input tokens.
-- *architecture*: we want to process our encoded inputs using [convolution (CNN)](../foundations/convolutional-neural-networks.md){:target="_blank"} filters that can learn to analyze windows of embedded tokens to extract meaningful signal.
+- **representation**: we want to have more robust (split tokens to characters) and meaningful [embeddings](../foundations/embeddings.md){:target="_blank"} representations for our input tokens.
+- **architecture**: we want to process our encoded inputs using [convolution (CNN)](../foundations/convolutional-neural-networks.md){:target="_blank"} filters that can learn to analyze windows of embedded tokens to extract meaningful signal.
 
 
 ### Set up
@@ -1370,8 +1370,8 @@ label_encoder.decode(y_pred)
 
 <u><i>limitations</i></u>:
 
-- *representation*: embeddings are not contextual.
-- *architecture*: extracting signal from encoded inputs is limited by filter widths.
+- **representation**: embeddings are not contextual.
+- **architecture**: extracting signal from encoded inputs is limited by filter widths.
 
 !!! note
     Since we're dealing with simple architectures and fast training times, it's a good opportunity to explore tuning and experiment with k-fold cross validation to properly reach any conclusions about performance.
@@ -1775,8 +1775,8 @@ print (json.dumps(performance, indent=2))
 
 <u><i>motivation</i></u>:
 
-- *representation*: we want better representation for our input tokens via contextual embeddings where the token representation is based on the specific neighboring tokens. We can also use sub-word tokens, as opposed to character or word tokens, since they can hold more meaningful representations for many of our keywords, prefixes, suffixes, etc. without having to use filters with specific widths.
-- *architecture*: we want to use [Transformers](https://www.youtube.com/watch?v=LwV7LKunDbs){:target="_blank"} to attend (in parallel) to all the tokens in our input, as opposed to being limited by filter spans (CNNs) or memory issues from sequential processing (RNNs).
+- **representation**: we want better representation for our input tokens via contextual embeddings where the token representation is based on the specific neighboring tokens. We can also use sub-word tokens, as opposed to character or word tokens, since they can hold more meaningful representations for many of our keywords, prefixes, suffixes, etc. without having to use filters with specific widths.
+- **architecture**: we want to use [Transformers](https://www.youtube.com/watch?v=LwV7LKunDbs){:target="_blank"} to attend (in parallel) to all the tokens in our input, as opposed to being limited by filter spans (CNNs) or memory issues from sequential processing (RNNs).
 
 <div class="ai-center-all">
     <img width="450" src="https://miro.medium.com/max/2880/1*BHzGVskWGS_3jEcYYi6miQ.png">
