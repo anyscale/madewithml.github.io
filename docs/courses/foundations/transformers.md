@@ -5,7 +5,7 @@ description: Implementing the Transformer architecture to extract contextual emb
 keywords: transformers, bert, self-attention, positional encoding, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/MadeWithML
-notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/14_Attention.ipynb
+notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/15_Transformers.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -313,7 +313,7 @@ y_train[0]: [1 0 0 0]
 decode([y_train[0]]): ['Business']
 </pre>
 
-## Tokenizer
+### Tokenizer
 
 We'll be using the [BertTokenizer](https://huggingface.co/transformers/model_doc/bert.html#berttokenizer){:target="_blank"} to tokenize our input text in to sub-word tokens.
 
@@ -579,6 +579,8 @@ class Trainer(object):
 ```
 
 ## Transformer
+
+We'll first learn about the unique components within the Transformer architecture and then implement one for our text classification task.
 
 ### Scaled dot-product attention
 
