@@ -745,7 +745,7 @@ set_seeds()
 preprocessed_df = df.copy()
 preprocessed_df.text = preprocessed_df.text.apply(preprocess, lower=True)
 X_train, X_val, X_test, y_train, y_val, y_test, label_encoder = get_data_splits(preprocessed_df)
-X_test_raw = X_test
+X_test_raw = X_test  # use for later
 ```
 ```python linenums="1"
 # Split DataFrames
@@ -874,9 +874,9 @@ tokenizer.token_to_index
 </pre>
 ```python linenums="1"
 # Convert texts to sequences of indices
-X_train_ids = np.array(tokenizer.texts_to_sequences(X_train))
-X_val_ids = np.array(tokenizer.texts_to_sequences(X_val))
-X_test_ids = np.array(tokenizer.texts_to_sequences(X_test))
+X_train = np.array(tokenizer.texts_to_sequences(X_train))
+X_val = np.array(tokenizer.texts_to_sequences(X_val))
+X_test = np.array(tokenizer.texts_to_sequences(X_test))
 preprocessed_text = tokenizer.sequences_to_texts([X_train[0]])[0]
 print ("Text to indices:\n"
     f"  (preprocessed) → {preprocessed_text}\n"
@@ -884,11 +884,11 @@ print ("Text to indices:\n"
 ```
 <pre class="output">
 Text to indices:
-  (preprocessed) → albumentations fast image augmentation library easy use wrapper around libraries
-  (tokenized) → [ 7 11 20 17 16  3  5  6  7  6  4 10  5  9  2 19  7  9  6  2  4 16  7 14
-  3  2  7 17 14 16  3  5  6  7  6  4 10  5  2 11  4 20  8  7  8 21  2  3
-  7  9 21  2 17  9  3  2 23  8  7 13 13  3  8  2  7  8 10 17  5 15  2 11
-  4 20  8  7  8  4  3  9]
+  (preprocessed) → hugging face achieved 2x performance boost qa question answering distilbert node js
+  (tokenized) → [18 17 15 15  4  5 15  2 19  7 12  3  2  7 12 18  4  3 22  3 14  2 26 25
+  2 13  3  8 19 10  8 16  7  5 12  3  2 20 10 10  9  6  2 30  7  2 30 17
+  3  9  6  4 10  5  2  7  5  9 23  3  8  4  5 15  2 14  4  9  6  4 11 20
+  3  8  6  2  5 10 14  3  2 28  9]
 </pre>
 
 ### Data imbalance
@@ -967,11 +967,11 @@ class CNNTextDataset(torch.utils.data.Dataset):
 # Create datasets
 filter_sizes = list(range(1, 11))
 train_dataset = CNNTextDataset(
-    X=X_train_ids, y=y_train, max_filter_size=max(filter_sizes))
+    X=X_train, y=y_train, max_filter_size=max(filter_sizes))
 val_dataset = CNNTextDataset(
-    X=X_val_ids, y=y_val, max_filter_size=max(filter_sizes))
+    X=X_val, y=y_val, max_filter_size=max(filter_sizes))
 test_dataset = CNNTextDataset(
-    X=X_test_ids, y=y_test, max_filter_size=max(filter_sizes))
+    X=X_test, y=y_test, max_filter_size=max(filter_sizes))
 print ("Data splits:\n"
     f"  Train dataset:{train_dataset.__str__()}\n"
     f"  Val dataset: {val_dataset.__str__()}\n"

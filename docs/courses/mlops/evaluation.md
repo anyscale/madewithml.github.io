@@ -163,7 +163,7 @@ print (fn)
 
 ```python linenums="1"
 index = tp[0]
-print (X_test[index])
+print (X_test_raw[index])
 print (f"true: {label_encoder.decode([y_test[index]])[0]}")
 print (f"pred: {label_encoder.decode([y_pred[index]])[0]}\n")
 ```
@@ -184,19 +184,19 @@ num_samples = 3
 if len(tp):
     print ("\n=== True positives ===")
     for i in tp[:num_samples]:
-        print (f"  {X_test[i]}")
+        print (f"  {X_test_raw[i]}")
         print (f"    true: {label_encoder.decode([y_test[i]])[0]}")
         print (f"    pred: {label_encoder.decode([y_pred[i]])[0]}\n")
 if len(fp):
     print ("=== False positives === ")
     for i in fp[:num_samples]:
-        print (f"  {X_test[i]}")
+        print (f"  {X_test_raw[i]}")
         print (f"    true: {label_encoder.decode([y_test[i]])[0]}")
         print (f"    pred: {label_encoder.decode([y_pred[i]])[0]}\n")
 if len(fn):
     print ("=== False negatives ===")
     for i in fn[:num_samples]:
-        print (f"  {X_test[i]}")
+        print (f"  {X_test_raw[i]}")
         print (f"    true: {label_encoder.decode([y_test[i]])[0]}")
         print (f"    pred: {label_encoder.decode([y_pred[i]])[0]}\n")
 ```
