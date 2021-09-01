@@ -46,15 +46,15 @@ $$ \hat{y} = softmax(z_2) $$
 !!! note
     We'll exclude the bias $b$ from our notations to avoid crowding the backpropagation calculation.
 
-- `Objective`:
+- **Objective**:
     - Predict the probability of class $y$ given the inputs $X$. Non-linearity is introduced to model the complex, non-linear data.
-- `Advantages`:
+- **Advantages**:
     - Can model non-linear patterns in the data really well.
-- `Disadvantages`:
+- **Disadvantages**:
     - Overfits easily.
     - Computationally intensive as network increases in size.
     - Not easily interpretable.
-- `Miscellaneous`:
+- **Miscellaneous**:
     - Future neural network architectures that we'll see use the MLP as a modular unit for feed forward operations (affine transformation (XW) followed by a non-linear operation).
 
 

@@ -17,14 +17,14 @@ While one-hot encoding allows us to preserve the structural information, it does
 
 In this notebook, we're going to motivate the need for embeddings and how they address all the shortcomings of one-hot encoding. The main idea of embeddings is to have fixed length representations for the tokens in a text regardless of the number of tokens in the vocabulary. With one-hot encoding, each token is represented by an array of size `vocab_size`, but with embeddings, each token now has the shape `embed_dim`. The values in the representation will are not fixed binary values but rather, changing floating points allowing for fine-grained learned representations.
 
-* `Objective:`
+* **Objectives**:
     - Represent tokens in text that capture the intrinsic semantic relationships.
-* `Advantages:`
+* **Advantages**:
     - Low-dimensionality while capturing relationships.
     - Interpretable token representations
-* `Disadvantages:`
+* **Disadvantages**:
     - Can be computationally intensive to precompute.
-* `Miscellaneous:`
+* **Miscellaneous**:
     - There are lot's of pretrained embeddings to choose from but you can also train your own from scratch.
 
 
@@ -956,7 +956,7 @@ class CNN(nn.Module):
         self.fc1 = nn.Linear(num_filters*len(filter_sizes), hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, inputs, channel_first=False, apply_softmax=False):
+    def forward(self, inputs, channel_first=False):
 
         # Embed
         x_in, = inputs
@@ -985,11 +985,8 @@ class CNN(nn.Module):
         # FC layers
         z = self.fc1(z)
         z = self.dropout(z)
-        y_pred = self.fc2(z)
-
-        if apply_softmax:
-            y_pred = F.softmax(y_pred, dim=1)
-        return y_pred
+        z = self.fc2(z)
+        return z
 ```
 
 ## Using GloVe
@@ -1103,7 +1100,7 @@ class Trainer(object):
                 loss += (J - loss) / (i + 1)
 
                 # Store outputs
-                y_prob = torch.sigmoid(z).cpu().numpy()
+                y_prob = F.softmax(z).cpu().numpy()
                 y_probs.extend(y_prob)
                 y_trues.extend(y_true.cpu().numpy())
 
@@ -1121,9 +1118,10 @@ class Trainer(object):
 
                 # Forward pass w/ inputs
                 inputs, targets = batch[:-1], batch[-1]
-                y_prob = self.model(inputs, apply_softmax=True)
+                z = self.model(inputs)
 
                 # Store outputs
+                y_prob = F.softmax(z).cpu().numpy()
                 y_probs.extend(y_prob)
 
         return np.vstack(y_probs)
@@ -1546,7 +1544,7 @@ class InterpretableCNN(nn.Module):
         self.fc1 = nn.Linear(num_filters*len(filter_sizes), hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, inputs, channel_first=False, apply_softmax=False):
+    def forward(self, inputs, channel_first=False):
 
         # Embed
         x_in, = inputs

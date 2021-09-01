@@ -331,7 +331,7 @@ class Dataset(torch.utils.data.Dataset):
         """Processing on a batch."""
         # Get inputs
         batch = np.array(batch, dtype=object)
-        X = batch[:, 0]
+        X = np.stack(batch[:, 0], axis=0)
         y = np.stack(batch[:, 1], axis=0)
 
         # Cast
@@ -433,14 +433,12 @@ class MLP(nn.Module):
         self.dropout = nn.Dropout(dropout_p)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, inputs, apply_softmax=False):
+    def forward(self, inputs):
         x_in, = inputs
         z = F.relu(self.fc1(x_in))
         z = self.dropout(z)
-        y_pred = self.fc2(z)
-        if apply_softmax:
-            y_pred = F.softmax(y_pred, dim=1)
-        return y_pred
+        z = self.fc2(z)
+        return z
 ```
 ```python linenums="1"
 # Initialize model
@@ -518,7 +516,7 @@ def eval_step(self, dataloader):
             loss += (J - loss) / (i + 1)
 
             # Store outputs
-            y_prob = torch.sigmoid(z).cpu().numpy()
+            y_prob = F.softmax(z).cpu().numpy()
             y_probs.extend(y_prob)
             y_trues.extend(y_true.cpu().numpy())
 
@@ -540,9 +538,10 @@ def predict_step(self, dataloader):
 
             # Forward pass w/ inputs
             inputs, targets = batch[:-1], batch[-1]
-            y_prob = self.model(inputs, apply_softmax=True)
+            z = self.model(inputs)
 
             # Store outputs
+            z = F.softmax(z).cpu().numpy()
             y_probs.extend(y_prob)
 
     return np.vstack(y_probs)
@@ -658,7 +657,7 @@ class Trainer(object):
                 loss += (J - loss) / (i + 1)
 
                 # Store outputs
-                y_prob = torch.sigmoid(z).cpu().numpy()
+                y_prob = F.softmax(z).cpu().numpy()
                 y_probs.extend(y_prob)
                 y_trues.extend(y_true.cpu().numpy())
 
@@ -676,9 +675,10 @@ class Trainer(object):
 
                 # Forward pass w/ inputs
                 inputs, targets = batch[:-1], batch[-1]
-                y_prob = self.model(inputs, apply_softmax=True)
+                z = self.model(inputs)
 
                 # Store outputs
+                y_prob = F.softmax(z).cpu().numpy()
                 y_probs.extend(y_prob)
 
         return np.vstack(y_probs)

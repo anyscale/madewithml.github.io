@@ -53,6 +53,7 @@ nav:
       - Embeddings: courses/foundations/embeddings.md
       - RNNs: courses/foundations/recurrent-neural-networks.md
       - Attention: courses/foundations/attention.md
+      - Transformers: courses/foundations/transformers.md
   - MLOps:
     - Lessons: /#mlops
     - 📦 &nbsp; Product:

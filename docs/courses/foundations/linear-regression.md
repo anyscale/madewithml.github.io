@@ -27,16 +27,16 @@ $$ \hat{y} = XW + b $$
 
 </center>
 
-- `Objective`:
+- **Objective**:
     - Use inputs $X$ to predict the output $\hat{y}$ using a linear model. The model will be a line of best fit that minimizes the distance between the predicted (model's output) and target (ground truth) values. Training data $(X, y)$ is used to train the model and learn the weights $W$ using gradient descent.
-- `Advantages`:
+- **Advantages**:
     - Computationally simple.
     - Highly interpretable.
     - Can account for continuous and categorical features.
-- `Disadvantages`:
+- **Disadvantages**:
     - The model will perform well only when the data is linearly separable (for classification).
     - Usually not used for classification and only for regression.
-- `Miscellaneous`:
+- **Miscellaneous**:
     - You can also use linear regression for binary classification tasks where if the predicted continuous value is above a threshold, it belongs to a certain class. But we will cover better techniques for classification in future lessons and will focus on linear regression for continuous regression tasks only.
 
 

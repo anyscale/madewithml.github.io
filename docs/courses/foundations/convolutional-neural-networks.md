@@ -17,17 +17,17 @@ At the core of CNNs are filters (aka weights, kernels, etc.) which convolve (sli
     <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/cnn/convolution.gif">
 </div>
 
-- `Objective`:
+- **Objective**:
     - Extract meaningful spatial substructure from encoded data.
-- `Advantages`:
+- **Advantages**:
     - Small number of weights (shared)
     - Parallelizable
     - Detects spatial substrcutures (feature extractors)
     - [Interpretability](https://arxiv.org/abs/1312.6034){:target="_blank"} via filters
     - Can be used for processing in images, text, time-series, etc.
-- `Disadvantages`:
+- **Disadvantages**:
     - Many hyperparameters (kernel size, strides, etc.) to tune.
-- `Miscellaneous`:
+- **Miscellaneous**:
     - Lot's of deep CNN architectures constantly updated for SOTA performance.
     - Very popular feature extractor that's usually prepended onto other architectures.
 
@@ -868,7 +868,7 @@ class CNN(nn.Module):
         self.dropout = nn.Dropout(dropout_p)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, inputs, channel_first=False, apply_softmax=False):
+    def forward(self, inputs, channel_first=False,):
 
         # Rearrange input so num_channels is in dim 1 (N, C, L)
         x_in, = inputs
@@ -887,11 +887,8 @@ class CNN(nn.Module):
         # FC layer
         z = self.fc1(z)
         z = self.dropout(z)
-        y_pred = self.fc2(z)
-
-        if apply_softmax:
-            y_pred = F.softmax(y_pred, dim=1)
-        return y_pred
+        z = self.fc2(z)
+        return z
 ```
 ```python linenums="1"
 # Initialize model
@@ -987,7 +984,7 @@ class Trainer(object):
                 loss += (J - loss) / (i + 1)
 
                 # Store outputs
-                y_prob = torch.sigmoid(z).cpu().numpy()
+                y_prob = F.softmax(z).cpu().numpy()
                 y_probs.extend(y_prob)
                 y_trues.extend(y_true.cpu().numpy())
 
@@ -1005,9 +1002,10 @@ class Trainer(object):
 
                 # Forward pass w/ inputs
                 inputs, targets = batch[:-1], batch[-1]
-                y_prob = self.model(inputs, apply_softmax=True)
+                z = self.model(inputs)
 
                 # Store outputs
+                y_prob = F.softmax(z).cpu().numpy()
                 y_probs.extend(y_prob)
 
         return np.vstack(y_probs)
@@ -1233,7 +1231,7 @@ class InterpretableCNN(nn.Module):
         self.dropout = nn.Dropout(dropout_p)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, inputs, channel_first=False, apply_softmax=False):
+    def forward(self, inputs, channel_first=False):
 
         # Rearrange input so num_channels is in dim 1 (N, C, L)
         x_in, = inputs
@@ -1247,7 +1245,6 @@ class InterpretableCNN(nn.Module):
 
         # Conv outputs
         z = self.conv(F.pad(x_in, (padding_left, padding_right)))
-
         return z
 ```
 ```python linenums="1"

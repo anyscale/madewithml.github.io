@@ -33,13 +33,13 @@ $$ \hat{y} = \frac{e^{XW_y}}{\sum_j e^{XW}} $$
 
 This function is known as the multinomial logistic regression or the softmax classifier. The softmax classifier will use the linear equation ($z=XW$) and normalize it (using the softmax function) to produce the probability for class y given the inputs.
 
-- `Objective:`
+- **Objectives**:
     - Predict the probability of class $y$ given the inputs $X$. The softmax classifier normalizes the linear outputs to determine class probabilities.
-- `Advantages:`
+- **Advantages**:
     - Can predict class probabilities given a set on inputs.
-- `Disadvantages:`
+- **Disadvantages**:
     - Sensitive to outliers since objective is to minimize cross entropy loss. Support vector machines (SVMs) are a good alternative to counter outliers.
-- `Miscellaneous:`
+- **Miscellaneous**:
     - Softmax classifier is going to used widely in neural network architectures as the last layer since it produces class probabilities.
 
 

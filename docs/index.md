@@ -508,6 +508,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <li><a href="/courses/foundations/embeddings/">Embeddings</a></li>
     <li><a href="/courses/foundations/recurrent-neural-networks/">RNNs</a></li>
     <li><a href="/courses/foundations/attention/">Attention</a></li>
+    <li><a href="/courses/foundations/transformers/">Transformers</a></li>
     </ul>
 </div>
 </div>

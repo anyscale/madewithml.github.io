@@ -36,18 +36,17 @@ $$ c_t = \sum_{i=1}^{n} \alpha_{t,i}h_i $$
 
 </center>
 
-- `Objective`:
+- **Objective**:
     - At it's core, attention is about learning how to weigh a group of encoded representations to produce a context-aware representation to use for downstream tasks. This is done by learning a set of attention weights and then using softmax to create attention values that sum to 1.
-- `Advantages`:
+- **Advantages**:
     - Learn how to account for the appropriate encoded representations regardless of position.
-- `Disadvantages`:
+- **Disadvantages**:
     - Another compute step that involves learning weights.
-- `Miscellaneous`:
+- **Miscellaneous**:
     - Several state-of-the-art approaches extend on basic attention to deliver highly context-aware representations (ex. self-attention).
 
 ## Set up
 
-## Set up
 Let's set our seed and device for our main task.
 ```python linenums="1"
 import numpy as np
@@ -873,13 +872,13 @@ best_model = trainer.train(
     NUM_EPOCHS, PATIENCE, train_dataloader, val_dataloader)
 ```
 <pre class="output">
-Epoch: 1 | train_loss: 1.22600, val_loss: 1.08924, lr: 1.00E-04, _patience: 10
-Epoch: 2 | train_loss: 1.01283, val_loss: 0.93986, lr: 1.00E-04, _patience: 10
-Epoch: 3 | train_loss: 0.88110, val_loss: 0.83812, lr: 1.00E-04, _patience: 10
+Epoch: 1 | train_loss: 1.21680, val_loss: 1.08622, lr: 1.00E-04, _patience: 10
+Epoch: 2 | train_loss: 1.00379, val_loss: 0.93546, lr: 1.00E-04, _patience: 10
+Epoch: 3 | train_loss: 0.87091, val_loss: 0.83399, lr: 1.00E-04, _patience: 10
 ...
-Epoch: 30 | train_loss: 0.34505, val_loss: 0.54407, lr: 1.00E-06, _patience: 3
-Epoch: 31 | train_loss: 0.34477, val_loss: 0.54422, lr: 1.00E-07, _patience: 2
-Epoch: 32 | train_loss: 0.34430, val_loss: 0.54394, lr: 1.00E-07, _patience: 1
+Epoch: 48 | train_loss: 0.35045, val_loss: 0.54718, lr: 1.00E-08, _patience: 10
+Epoch: 49 | train_loss: 0.35055, val_loss: 0.54718, lr: 1.00E-08, _patience: 10
+Epoch: 50 | train_loss: 0.35086, val_loss: 0.54717, lr: 1.00E-08, _patience: 10
 Stopping early!
 </pre>
 
@@ -926,9 +925,9 @@ print (json.dumps(performance['overall'], indent=2))
 ```
 <pre class="output">
 {
-  "precision": 0.8187010197413059,
-  "recall": 0.8189444444444445,
-  "f1": 0.8187055904309233,
+  "precision": 0.8133385428975775,
+  "recall": 0.8137222222222222,
+  "f1": 0.8133454847232977,
   "num_samples": 18000.0
 }
 </pre>
@@ -1003,10 +1002,10 @@ print (json.dumps(prob_dist, indent=2))
 ```
 <pre class="output">
 {
-  "Sports": 0.9116348028182983,
-  "World": 0.08557619899511337,
-  "Sci/Tech": 0.0019216578220948577,
-  "Business": 0.0008673836709931493
+  "Sports": 0.9651875495910645,
+  "World": 0.03468644618988037,
+  "Sci/Tech": 8.490968320984393e-05,
+  "Business": 4.112234091735445e-05
 }
 </pre>
 
@@ -1096,8 +1095,7 @@ sns.heatmap(attn_vals, xticklabels=tokens)
 ```
 
 <div class="ai-center-all">
-    <img width="700" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAiAAAABYCAYAAADMZ0yZAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjIsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+WH4yJAAATCUlEQVR4nO3de1BU5f8H8PfuCmriKvoDRSVRihUvCI4BDjGEY4mIreikpmZF6ZSjGN5YMEGsL7qaWkRIOgZSmXSZdMSc0SbLW+hUJn7FTP2BXIJFIURzd4Xd5/eHP48iiivCWdner5md2bPn9nke97hvnnP2rEIIIUBEREQkI6W9CyAiIqJ/HwYQIiIikh0DCBEREcmOAYSIiIhkxwBCREREsmMAISIiItl1kHVnzn3l3F27ZfzroL1LaBfUnuH2LqFdCOr5pL1LaDc0HVztXUK7cNhYau8S2o3/GvJl3V/9pf+Vnjv9z0Cb1ysqKoJOp0NtbS26d+8OvV4PLy+vRst8+OGH2LZtG9zd3QEAI0aMQHJyMgDAaDQiISEBp06dgkqlQnx8PMLDm/8/WtYAQkRERG1HmP5p0XrJycmYPn06tFotdu7ciaSkJOTk5DRZbuLEiYiPj2/y+pYtW+Di4oJ9+/ahuLgYM2bMwN69e9GlS5d77pOnYIiIiBzFdeOth42qq6tRWFiIqKgoAEBUVBQKCwtRU1Nj8zb27NmDqVOnAgC8vLwwdOhQHDhwoNl1OAJCRETkIIT51ghIXV0d6urqmiyjVquhVqul6YqKCvTq1QsqlQoAoFKp4O7ujoqKCvTo0aPRurt378ahQ4fg5uaG+fPnIyAgAADw119/oW/fW5dZeHh4oLKystlaGUCIiIgcxO0BZOvWrUhPT2+yzLx58zB//vwH3va0adPwxhtvwMnJCYcPH8bcuXPx3XffwdW1ZddOMYAQERE5ittOvbz88suIjo5ussjtox/AjdEKg8EAi8UClUoFi8WCqqoqeHh4NFrOzc1Neh4SEgIPDw+cPXsWgYGB6NOnD8rLy6URk4qKCgQFBTVbKq8BISIichDC9I/0UKvV6NevX5PHnQGkZ8+e8PX1RV5eHgAgLy8Pvr6+TU6/GAwG6fnp06dRXl6OAQMGAAAiIiKQm5sLACguLsbJkycRGhrabK0cASEiInIUpmstWm3FihXQ6XTIyMiAWq2GXq8HAMyePRuxsbEYNmwY1q9fj1OnTkGpVMLJyQlr1qyRRkVee+016HQ6PPvss1AqlVi5ciVcXFya3adCCCFaVG0L8D4gtuF9QGzD+4DYhvcBsR3vA2Ib3gfEdnLfB8SYt1563jlqoaz7flAcASEiInIULRwBsQcGECIiIkdhsv3+H/bGAEJEROQoGECIiIhIbsJ83d4l2IwBhIiIyFEYTfauwGYMIERERA5CmBhAiIiISG48BUNERERyE0azvUuwGQMIERGRgxDXOAJCREREMrMa6+1dgs0YQIiIiByEMFnsXYLNGECIiIgchPWa1d4l2IwBhIiIyEFY2s9PwTCAEBEROQqLWWHvEmzGAEJEROQg6o0qe5dgMwYQIiIiB1FvcrAA8vfff6OyshIA0Lt3b7i6urZpUURERPTgrpvbz7hCs5WWlJRg+fLlKCwshLu7OwCgqqoKgwcPRkpKCry8vOSokYiIiGxQX+8gIyBLly7F9OnTkZWVBaVSCQCwWq3YtWsX4uPjkZubK0uRREREdH9mRwkgtbW1eP755xu9plQqodVqsXHjxjYtjIiIiB6MuaFlp2CKioqg0+lQW1uL7t27Q6/XNznL8dFHH+G7776DUqmEk5MT4uLiEBoaCgDQ6XQ4cuSIdIlGREQE3nzzzWb32Wyl3bt3R15eHsaPHw+F4sZXe4QQ2LVrF9RqdYsaSURERG3DLJQtWi85ORnTp0+HVqvFzp07kZSUhJycnEbL+Pn5ISYmBp07d8Yff/yBmTNn4tChQ+jUqRMAYM6cOZg5c6bN+2w2gKxevRrJyclYuXIlevXqBQAwGAwYNGgQVq9e/aDtIyIiojZkwq0AUldXh7q6uibLqNXqRoMI1dXVKCwsRFZWFgAgKioK77zzDmpqatCjRw9puZujHQCg0WgghEBtbS169+7dolqbDSBeXl7YunUrampqUFFRAQDw8PBoVBARERE9GkyKWwFk69atSE9Pb7LMvHnzMH/+fGm6oqICvXr1gkp14/oRlUoFd3d3VFRU3PPzfseOHXj88ccbhY+srCzk5ubC09MTixYtgre3d7O12nSyqEePHgwdREREjziz8tadUF9++WVER0c3WeZhL6E4duwYPvjgA3zyySfSa3FxcXBzc4NSqcSOHTvw+uuv4/vvv5dCzd20ny8MExERUbNMilsB5M5TLffi4eEBg8EAi8UClUoFi8WCqqoqeHh4NFn2+PHjWLJkCTIyMjBw4EDp9ZuXaQDAxIkTsWrVKlRWVqJv37733G/LrlYhIiKiR45Reethq549e8LX1xd5eXkAgLy8PPj6+jY581FQUIC4uDikpaVhyJAhjeYZDAbp+cGDB6FUKhuFkrvhCAgREZGDMLbwt+hWrFgBnU6HjIwMqNVq6PV6AMDs2bMRGxuLYcOGISUlBSaTCUlJSdJ6a9asgUajQXx8PKqrq6FQKODi4oKNGzeiQ4fmI4ZCCCFaVu6D6+B876EYusX410F7l9AuqD3D7V1CuxDU80l7l9BuaDrwZyZscdhYau8S2o3/GvJl3d+q/re+Bptw4TNZ9/2gOAJCRETkIIwK2cYUHhoDCBERkYMwwWrvEmzGAEJEROQgzOAICBEREcnMBIu9S7AZAwgREZGD4CkYIiIikp1JcASEiIiIZHadAYSIiIjkZhIN9i7BZgwgREREDoIBhIiIiGTHUzBEREQkO7O13t4l2IwBhIiIyEGYGECIiIhIbhwBISIiItldZwAhIiIiuZktDCBEREQkM3MDAwgRERHJ7Lq1/dwHRCGEaD+/3UtEREQOQWnvAoiIiOjfhwGEiIiIZMcAQkRERLJjACEiIiLZMYAQERGR7BhAiIiISHYMIERERCQ7BhAiIiKSHQMIERERyc4hA8j333+PcePGYeLEifDz84PJZGrxtsrKyhAUFNSK1dnPhx9+iOvXr7fZ9pctW4ZffvmlzbZvq7Zu56OkrKwMubm59i6jkYet6ejRozh06FArVuT4srOzUV1dbe8yHnlHjx7FpEmT7F0G/T+HDCDbt29HbGwsduzYgYKCAnTq1MneJT0S0tPTUV/fdj9U9J///AcjR45ss+3bqrXb2dDw6P62Qnl5+SMXQB6mpoaGBhw7dgyHDx9u5aocW05ODgMItTsO92N0qamp+PXXX1FUVIRt27bh2LFj+O2339ClSxeMHj0aWq0WR44cwcWLFxETE4OZM2cCAPR6PY4dO4b6+nq4uroiNTUVffv2tXNrWk9KSgoAYNq0aVAqldi4cSM++ugjnDlzBmazGUFBQUhISIBKpcJLL72EoUOH4vfff0dVVRXGjRuHxYsXA8B958XExCA8PBy5ubnIzs6Gs7MzrFYr3n//fXh7e8vezi1btiA5ORklJSUAgNdeew0TJ04EAGg0Gum9cee0RqPBvHnz8OOPPyI0NBSVlZVwdnZGcXExKisr4e/vD71eD4VCgV27diEnJ0cKPfHx8Rg1ahQAYPTo0ZgwYQLy8/NhMBiwaNEiVFdXIy8vD5cvX0ZqaiqeeuopAMBPP/2EjRs34vr163ByckJCQgL8/f1x9OhRpKamYvjw4Th+/DgUCgU2bNgAb29vrFy5EmVlZdBqtejfvz/S0tLavI9vZzQaER8fj3PnzqFDhw4YMGAAzp0716Smex1fZWVlmDx5MiZNmoT8/HxMmjQJ27dvh9VqxZEjRzB+/HhMnjxZ6jcAGDVqFBITE2VtZ2vTaDSIi4vDvn37UFtbi6VLl2Ls2LEAgBMnTuC9997DP//8AwCIjY3FM888g4yMDBQWFiI9PR1GoxFTpkzB4sWLUVhYiKqqKsTGxqJjx45Yt24dnnjiCXs276Ft374dZ86cQXJyMgoKCvDCCy/gq6++gp+fH1asWAFfX18MGjTorv0E3PtYul1dXR3mzZuH0aNH45VXXpG5hQQAEA5o5syZ4ocffhBCCOHj4yOuXr0qhBAiPDxcrF69WgghRGlpqfD395fmVVdXS+t/+eWX4q233pKWCwwMlLP8NnN7XyQmJopvv/1WCCGExWIRcXFxIjc3Vwhxo/8WLFggLBaLqKurE4GBgaKoqMimeTf7fcSIEcJgMAghhDCbzeLatWt2aeeCBQvEhg0bhBBCGAwGERISIs6cOdNkuTunfXx8xMcffyzNi4+PF9OmTRMmk0mYzWYRGRkpDh06JIQQoqamRlitViGEEOfPnxehoaHSere/506cOCGGDx8uPvvsMyGEELt37xbTpk0TQghx4cIFMWXKFHHlyhUhhBB//vmnCAsLE0IIkZ+fLwYPHixOnTolhBAiIyNDLFy4UJoXHR3dKv3WEnv37hUxMTHSdG1t7V1rau748vHxEbt375bmp6WlSX0mhBBZWVli+fLljfbR3vn4+IhPP/1UCCHEL7/8Ip5++mkhhBCXL18WWq1WOnYMBoMIDQ0Vly9fFhaLRbz66qsiJydH6HQ6odfrpe2Fh4dL72tHUFxcLMaOHSuEECIzM1NMnTpVOh6fe+45cfLkyXv20/2OpejoaFFWViaio6PFnj175G8cSRxuBOR+IiMjAQD9+vWDWq1GZWUlvL29ceDAAWzbtg3Xrl17pIfcW8sPP/yAgoICZGVlAQBMJhN69eolzY+IiIBSqUTXrl3h7e2NkpISeHl53XfeTcHBwdDpdAgPD8czzzwDT09PuZrWyM8//wydTgcAcHd3R1hYGI4ePQofH5/7rhsdHd1oesyYMejYsSMAYPDgwSgpKUFISAhKS0uxaNEiGAwGdOjQAZcuXcLFixfh5uYG4NZ7bsiQITAajRg3bhwAYOjQodLIzMGDB1FSUoIZM2ZI+2toaMClS5cAAAMGDMDgwYMBAP7+/ti/f3+L+6Q1DRo0COfPn0dKSgoCAwOlv0Dv1Nzx1bFjR6lP7mb48OHIzs6GXq9HYGAgnn766dZsgt3cfF/4+/ujqqoKZrMZx48fR1lZGWbPni0tp1AocOHCBQwbNgxr166FVqtFnz59sG3bNnuV3ub69+8Ps9mMyspK/Pzzz4iLi0NmZiYmTJiA+vp6VFdX37OfCgoKmj2WLl68iFmzZkGv1z8Sp4z/zf51AeTmBwgAqFQqWCwWlJeXY9WqVfj666/h6emJ3377TTqt4KiEEMjIyLhnMLhbP9ky76b09HScPHkS+fn5mDVrFlasWIGwsLBWbMHDU6lUEEIAAMxmc5P5jz32WKPpe7V74cKF0Ol0GDNmDKxWK4YPH95oezfXU6lUjaaVSmWjD+PQ0FCsWbOmSR3nz5+Hs7OzNH3nevbk6emJvLw85Ofn48CBA9iwYQPefvvtRsvc7/jq3LkzFArFPfcREBCAb7/9FkeOHMHOnTuxadMmfPHFF23WJrnc+b5oaGiAEAIajQaff/75XdcpKyuDUqlEXV0dTCYTXFxcZKtXbsHBwdi/fz+qq6sRFBSEd955Bz/++COCgoKa7aeCgoJmj6Vu3bqhd+/eOHDgAAOInTnkRagP6urVq3BycoKbmxusViu2b99u75LaRJcuXXD16lUAN65N2LRpk/QhWlNTg9LS0lbZT0NDA0pLS+Hn54c5c+YgJCQEp0+fbpVt2+L2do4aNQpffvklgBt/+fz0008IDg4GADz++OM4efIkAGDXrl0t3t+VK1fQr18/AMA333zTom/ghISE4ODBgzh79qz0WkFBwX3Xc3FxkdpqD5WVlVCpVBgzZgwSEhJQU1PTpKYHPb5cXFxw5coVabq0tBQuLi4YP348EhIScOrUKVit1jZrkz0FBATgwoULyM/Pl14rKCiAEAKXL1/G4sWLsX79ekRGRmL58uXSMl26dGnUZ44gODgYmzdvRkBAAABgxIgR2Lx5M0aNGtVsP93vWHJ2dkZGRgbOnTuHd999V/ojhOT3rxsBuRuNRoOIiAhERkbC1dUVYWFhj8TXSVtbTEwMZs2ahU6dOiEzMxOZmZnQarVQKBRwcnJCYmJiq5wqsVqt0Ol0uHLlChQKBTw8PLBo0aJWaIFtbm/nli1bkJSUhAkTJgAAFi9ejCeffBIAkJCQgKSkJHTt2hUREREt3l9CQgLmzp2Lbt26ITQ0FN27d3/gbXh5eWHt2rVYtmwZTCYT6uvrMWLECPj5+TW7nkajwYABAxAVFYWBAwfKfhHqmTNnsG7dOgA3/t3nzJkDPz+/JjU9yPE1ZswY7NixA1qtFuPHj0fPnj2RnZ0NpVIJq9WKlJQUKJWO+bdTt27dkJGRgbVr1yI1NRX19fXw9PREZmYmEhMTMXnyZIwcORIBAQF45ZVX8MUXX+DFF1/ErFmzkJiYiE6dOjnERajAjQCydOlS6YLu4OBg5ObmIjg4uNl+suVYcnZ2RlpaGpYsWYLly5dj5cqVDvueepQpBOMfERERyYyRj4iIiGTHAEJERESyYwAhIiIi2TGAEBERkewYQIiIiEh2DCBEREQkOwYQIiIikh0DCBEREcnu/wA/fffLLk/sVQAAAABJRU5ErkJggg==
-">
+    <img width="700" src="data:image/png;base64,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">
 </div>
 
 The word `tennis` was attended to the most to result in the `Sports` label.
@@ -1153,84 +1151,4 @@ We can also use attention within the encoded input sequence to create a weighted
 <small><a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention Is All You Need</a></small>
 </div>
 
-## Transformers
-
-Transformers are a very popular architecture that leverage and extend the concept of self-attention to create very useful representations of our input data for a downstream task.
-
-### Scaled dot-product attention
-
-The most popular type of self-attention is scaled dot-product attention from the widely-cited [Attention is all you need](https://arxiv.org/abs/1706.03762){:target="_blank"} paper. This type of attention involves projecting our encoded input sequences onto three matrices, queries (Q), keys (K) and values (V), whose weights we learn.
-
-
-$$ Q = XW_q \text{where} W_q \in \mathbb{R}^{HXd_q} $$
-
-$$ K = XW_k \text{where} W_k \in \mathbb{R}^{HXd_k} $$
-
-$$ V = XW_v \text{where} W_v \in \mathbb{R}^{HXd_v} $$
-
-$$ attention (Q, K, V) = softmax( \frac{Q K^{T}}{\sqrt{d_k}} )V \in \mathbb{R}^{MXd_v} $$
-
-<center>
-
-| Variable  | Description                              |
-| :-------- | :--------------------------------------- |
-| $X$       | encoded inputs $\in \mathbb{R}^{NXMXH}$  |
-| $N$       | batch size                               |
-| $M$       | max sequence length in the batch         |
-| $H$       | hidden dim, model dim, etc.              |
-| $W_q$     | query weights $\in \mathbb{R}^{HXd_q}$   |
-| $W_k$     | key weights $\in \mathbb{R}^{HXd_k}$     |
-| $W_v$     | value weights $\in \mathbb{R}^{HXd_v}$   |
-
-</center>
-
-### Multi-head attention
-
-Instead of applying self-attention only once across the entire encoded input, we can also separate the input and apply self-attention in parallel (heads) to each input section and concatenate them. This allows the different head to learn unique representations while maintaining the complexity since we split the input into smaller subspaces.
-
-$$ MultiHead(Q, K, V) = concat({head}_1, ..., {head}_{h})W_O $$
-
-$$ {head}_i = attention(Q_i, K_i, V_i) $$
-
-<center>
-
-| Variable  | Description                                             |
-| :-------- | :------------------------------------------------------ |
-| $h$       | number of attention heads                               |
-| $W_O$     | multi-head attention weights $\in \mathbb{R}^{hd_vXH}$  |
-| $H$       | hidden dim (or dimension of the model $d_{model}$)      |
-
-</center>
-
-### Positional encoding
-
-With self-attention, we aren't able to account for the sequential position of our input tokens. To address this, we can use positional encoding to create a representation of the location of each token with respect to the entire sequence. This can either be learned (with weights) or we can use a fixed function that can better extend to create positional encoding for lengths during inference that were not observed during training.
-
-$$ PE_{(pos,2i)} = sin({pos}/{10000^{2i/H}}) $$
-
-$$ PE_{(pos,2i+1)} = cos({pos}/{10000^{2i/H}}) $$
-
-<center>
-
-| Variable  | Description                      |
-| :-------- | :------------------------------- |
-| $pos$     | position of the token $(1...M)$  |
-| $i$       | hidden dim $(1..H)$              |
-
-</center>
-
-This effectively allows us to represent each token's relative position using a fixed function for very large sequences. And because we've constrained the positional encodings to have the same dimensions as our encoded inputs, we can simply concatenate them before feeding them into the multi-head attention heads.
-
-### Architecture
-
-And here's how it all fits together! It's an end-to-end architecture that creates these contextual representations and uses an encoder-decoder architecture to predict the outcomes (one-to-one, many-to-one, many-to-many, etc.) Due to the complexity of the architecture, they require massive amounts of data for training without overfitting, however, they can be leveraged as pretrained models to finetune with smaller datasets that are similar to the larger set it was initially trained on.
-
-<div class="ai-center-all">
-<img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/attention/transformer.png" width="800">
-</div>
-<div class="ai-center-all">
-<small><a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention Is All You Need</a></small>
-</div>
-
-!!! note
-    We're not going to the implement the Transformer [from scratch](https://nlp.seas.harvard.edu/2018/04/03/attention.html){:target="_blank"} but we will use the[ Hugging Face library](https://github.com/huggingface/transformers){:target="_blank"} to do so in the [baselines](https://madewithml.com/courses/mlops/baselines/#transformers-w-contextual-embeddings){:target="_blank"} lesson!
+In the [next lesson](transformers.md), we'll implement Transformers that leverage self-attention to create contextual representations of our inputs for downstream applications.

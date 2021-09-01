@@ -37,16 +37,16 @@ $$ h_t = tanh(W_{hh}h_{t-1} + W_{xh}X_t+b_h) $$
 
 </center>
 
-* `Objective`:
+* **Objective**:
     - Process sequential data by accounting for the currend input and also what has been learned from previous inputs.
-* `Advantages`:
+* **Advantages**:
     - Account for order and previous inputs in a meaningful way.
     - Conditioned generation for generating sequences.
-* `Disadvantages`:
+* **Disadvantages**:
     - Each time step's prediction depends on the previous prediction so it's difficult to parallelize RNN operations.
     - Processing long sequences can yield memory and computation issues.
     - Interpretability is difficult but there are few [techniques](https://arxiv.org/abs/1506.02078){:target="_blank"} that use the activations from RNNs to see what parts of the inputs are processed.
-* `Miscellaneous`:
+* **Miscellaneous**:
     - Architectural tweaks to make RNNs faster and interpretable is an ongoing area of research.
 
 ## Set up
@@ -618,7 +618,7 @@ class Trainer(object):
                 loss += (J - loss) / (i + 1)
 
                 # Store outputs
-                y_prob = torch.sigmoid(z).cpu().numpy()
+                y_prob = F.softmax(z).cpu().numpy()
                 y_probs.extend(y_prob)
                 y_trues.extend(y_true.cpu().numpy())
 
@@ -636,9 +636,10 @@ class Trainer(object):
 
                 # Forward pass w/ inputs
                 inputs, targets = batch[:-1], batch[-1]
-                y_prob = self.model(inputs, apply_softmax=True)
+                z = self.model(inputs)
 
                 # Store outputs
+                y_prob = F.softmax(z).cpu().numpy()
                 y_probs.extend(y_prob)
 
         return np.vstack(y_probs)
@@ -849,7 +850,7 @@ class RNN(nn.Module):
         self.fc1 = nn.Linear(rnn_hidden_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, inputs, apply_softmax=False):
+    def forward(self, inputs):
         # Embed
         x_in, seq_lens = inputs
         x_in = self.embeddings(x_in)
@@ -861,11 +862,8 @@ class RNN(nn.Module):
         # FC layers
         z = self.fc1(z)
         z = self.dropout(z)
-        y_pred = self.fc2(z)
-
-        if apply_softmax:
-            y_pred = F.softmax(y_pred, dim=1)
-        return y_pred
+        z = self.fc2(z)
+        return z
 ```
 ```python linenums="1"
 # Simple RNN cell
@@ -1059,7 +1057,7 @@ class GRU(nn.Module):
         self.fc1 = nn.Linear(rnn_hidden_dim*2, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, inputs, apply_softmax=False):
+    def forward(self, inputs:
         # Embed
         x_in, seq_lens = inputs
         x_in = self.embeddings(x_in)
@@ -1071,11 +1069,8 @@ class GRU(nn.Module):
         # FC layers
         z = self.fc1(z)
         z = self.dropout(z)
-        y_pred = self.fc2(z)
-
-        if apply_softmax:
-            y_pred = F.softmax(y_pred, dim=1)
-        return y_pred
+        z = self.fc2(z)
+        return z
 ```
 ```python linenums="1"
 # Simple RNN cell

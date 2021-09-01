@@ -76,14 +76,14 @@ class Trainer(object):
             {"train_loss": train_loss, "val_loss": val_loss}, step=epoch
         )
         ...
+        return best_model, best_val_loss
 ```
 
 ??? quote "Code for complete `Trainer` class"
     ```python linenums="1" hl_lines="100-103"
-    # Trainer (modified for experiment tracking)
+    # Modified for experiment tracking
     class Trainer(object):
-        def __init__(self, model, device, loss_fn=None,
-                    optimizer=None, scheduler=None):
+        def __init__(self, model, device, loss_fn=None, optimizer=None, scheduler=None):
 
             # Set params
             self.model = model
@@ -100,8 +100,9 @@ class Trainer(object):
 
             # Iterate over train batches
             for i, batch in enumerate(dataloader):
+
                 # Step
-                batch = [item.to(self.device) for item in batch]
+                batch = [item.to(self.device) for item in batch]  # Set device
                 inputs, targets = batch[:-1], batch[-1]
                 self.optimizer.zero_grad()  # Reset gradients
                 z = self.model(inputs)  # Forward pass
@@ -153,14 +154,16 @@ class Trainer(object):
 
                     # Forward pass w/ inputs
                     inputs, targets = batch[:-1], batch[-1]
-                    y_prob = self.model(inputs)
+                    z = self.model(inputs)
 
                     # Store outputs
+                    y_prob = torch.sigmoid(z).cpu().numpy()
                     y_probs.extend(y_prob)
 
             return np.vstack(y_probs)
 
-        def train(self, num_epochs, patience, train_dataloader, val_dataloader):
+        def train(self, num_epochs, patience, train_dataloader, val_dataloader,
+                tolerance=1e-5):
             best_val_loss = np.inf
             for epoch in range(num_epochs):
                 # Steps
@@ -169,7 +172,7 @@ class Trainer(object):
                 self.scheduler.step(val_loss)
 
                 # Early stopping
-                if val_loss < best_val_loss:
+                if val_loss < best_val_loss - tolerance:
                     best_val_loss = val_loss
                     best_model = self.model
                     _patience = patience  # reset _patience
@@ -192,11 +195,11 @@ class Trainer(object):
                     f"lr: {self.optimizer.param_groups[0]['lr']:.2E}, "
                     f"_patience: {_patience}"
                 )
-
             return best_model, best_val_loss
     ```
 
-And to make things simple, we'll encapsulate all the components for training into one function called `train_cnn` which returns all the artifacts we want to be able to track from our experiment.
+And to make things simple, we'll encapsulate all the components for training into one function which returns all the artifacts we want to be able to track from our experiment. The input argument `args`contains all the parameters needed and it's nice to have it all organized under one variable so we can easily log it and tweak it for different experiments (we'll see this when we do [hyperparameter optimization](optimization.md)).
+
 ```python linenums="1"
 def train_cnn(params, df):
     """Train a CNN using specific arguments."""
@@ -338,35 +341,32 @@ def save_dict(d, filepath, cls=None, sortkeys=False):
 with mlflow.start_run(run_name="cnn") as run:
 
     # Train & evaluate
-    artifacts = train_cnn(params=params, df=df)
+    artifacts = train_cnn(args=args, df=df)
 
     # Log key metrics
-    mlflow.log_metrics({"precision": artifacts["performance"]["overall"]["precision"]})
-    mlflow.log_metrics({"recall": artifacts["performance"]["overall"]["recall"]})
-    mlflow.log_metrics({"f1": artifacts["performance"]["overall"]["f1"]})
+    mlflow.log_metrics({"precision": artifacts["performance"]["precision"]})
+    mlflow.log_metrics({"recall": artifacts["performance"]["recall"]})
+    mlflow.log_metrics({"f1": artifacts["performance"]["f1"]})
 
     # Log artifacts
     with tempfile.TemporaryDirectory() as dp:
-        save_dict(vars(artifacts["params"]), Path(dp, "params.json"))
-        save_dict(performance, Path(dp, "performance.json"))
         artifacts["tokenizer"].save(Path(dp, "tokenizer.json"))
         artifacts["label_encoder"].save(Path(dp, "label_encoder.json"))
         torch.save(artifacts["model"].state_dict(), Path(dp, "model.pt"))
+        save_dict(artifacts["performance"], Path(dp, "performance.json"))
         mlflow.log_artifacts(dp)
 
     # Log parameters
-    mlflow.log_params(vars(artifacts["params"]))
+    mlflow.log_params(vars(artifacts["args"]))
 ```
 <pre class="output">
-Epoch: 1 | train_loss: 0.00539, val_loss: 0.00301, lr: 2.00E-04, _patience: 10
-Epoch: 2 | train_loss: 0.00393, val_loss: 0.00281, lr: 2.00E-04, _patience: 10
-Epoch: 3 | train_loss: 0.00345, val_loss: 0.00264, lr: 2.00E-04, _patience: 10
-Epoch: 4 | train_loss: 0.00324, val_loss: 0.00259, lr: 2.00E-04, _patience: 10
+Epoch: 1 | train_loss: 0.00606, val_loss: 0.00291, lr: 2.00E-04, _patience: 10
+Epoch: 2 | train_loss: 0.00407, val_loss: 0.00293, lr: 2.00E-04, _patience: 9
+Epoch: 3 | train_loss: 0.00366, val_loss: 0.00270, lr: 2.00E-04, _patience: 10
 ...
-Epoch: 41 | train_loss: 0.00076, val_loss: 0.00158, lr: 2.00E-05, _patience: 4
-Epoch: 42 | train_loss: 0.00070, val_loss: 0.00149, lr: 2.00E-05, _patience: 3
-Epoch: 43 | train_loss: 0.00068, val_loss: 0.00153, lr: 2.00E-05, _patience: 2
-Epoch: 44 | train_loss: 0.00067, val_loss: 0.00149, lr: 2.00E-05, _patience: 1
+Epoch: 50 | train_loss: 0.00068, val_loss: 0.00156, lr: 2.00E-06, _patience: 3
+Epoch: 51 | train_loss: 0.00066, val_loss: 0.00155, lr: 2.00E-06, _patience: 2
+Epoch: 52 | train_loss: 0.00066, val_loss: 0.00155, lr: 2.00E-06, _patience: 1
 Stopping early!
 </pre>
 

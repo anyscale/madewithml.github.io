@@ -142,9 +142,10 @@ class Trainer(object):
 
                     # Forward pass w/ inputs
                     inputs, targets = batch[:-1], batch[-1]
-                    y_prob = self.model(inputs)
+                    z = self.model(inputs)
 
                     # Store outputs
+                    y_prob = torch.sigmoid(z).cpu().numpy()
                     y_probs.extend(y_prob)
 
             return np.vstack(y_probs)
@@ -186,6 +187,7 @@ class Trainer(object):
     ```
 
 We'll also modify our `train_cnn` function to include information about the trial.
+
 ```python linenums="1"
 def train_cnn(params, df, trial=None):
     ...
@@ -301,7 +303,7 @@ def train_cnn(params, df, trial=None):
 
 ## Objective
 
-We need to define an `objective` function that will consume a trial and a set of arguments and produce the metric to optimize on (`f1` in our case).
+We need to define an **Objective** function that will consume a trial and a set of arguments and produce the metric to optimize on (`f1` in our case).
 ```python linenums="1"
 def objective(trial, params):
     """Objective function for optimization trials."""
@@ -317,12 +319,12 @@ def objective(trial, params):
     artifacts = train_cnn(params=params, df=df, trial=trial)
 
     # Set additional attributes
-    trial.set_user_attr("precision", artifacts["performance"]["overall"]["precision"])
-    trial.set_user_attr("recall", artifacts["performance"]["overall"]["recall"])
-    trial.set_user_attr("f1", artifacts["performance"]["overall"]["f1"])
+    trial.set_user_attr("precision", artifacts["performance"]["precision"])
+    trial.set_user_attr("recall", artifacts["performance"]["recall"])
+    trial.set_user_attr("f1", artifacts["performance"]["f1"])
     trial.set_user_attr("threshold", artifacts["threshold"])
 
-    return artifacts["performance"]["overall"]["f1"]
+    return artifacts["performance"]["f1"]
 ```
 
 ## Study
@@ -515,8 +517,8 @@ print (f"Best value (val loss): {study.best_trial.value}")
 print (f"Best hyperparameters: {study.best_trial.params}")
 ```
 <pre class="output">
-Best value (f1): 0.63900047716579
-Best hyperparameters: {'embedding_dim': 335, 'num_filters': 477, 'hidden_dim': 458, 'dropout_p': 0.6707843486583486, 'lr': 0.00029782100137454434}
+Best value (f1): 0.6953118802537894
+Best hyperparameters: {'embedding_dim': 234, 'num_filters': 383, 'hidden_dim': 265, 'dropout_p': 0.4174131267446717, 'lr': 0.0004392663090337615}
 </pre>
 
 !!! note
@@ -544,18 +546,18 @@ print (json.dumps(params, indent=2, cls=NumpyEncoder))
     10
   ],
   "batch_size": 64,
-  "embedding_dim": 335,
-  "num_filters": 477,
-  "hidden_dim": 458,
-  "dropout_p": 0.6707843486583486,
-  "lr": 0.00029782100137454434,
-  "num_epochs": 200,
+  "embedding_dim": 234,
+  "num_filters": 383,
+  "hidden_dim": 265,
+  "dropout_p": 0.4174131267446717,
+  "lr": 0.0004392663090337615,
+  "num_epochs": 100,
   "patience": 10,
-  "threshold": 0.22135180234909058
+  "threshold": 0.3115537464618683
 }
 </pre>
 
-... and now we're finally ready to move from working in Jupyter notebooks to Python scripts. We'll be revisiting everything we did so far, but this time with proper software engineering principles such as object oriented programming (OOPs), testing, styling, etc.
+... and now we're finally ready to move from working in Jupyter notebooks to Python scripts. We'll be revisiting everything we did so far, but this time with proper software engineering prinicples such as object oriented programming (OOPs), styling, testing, etc. → [https://madewithml.com/#mlops](https://madewithml.com/#mlops)
 
 <!-- Citation -->
 {% include "cite.md" %}

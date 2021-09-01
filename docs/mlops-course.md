@@ -530,6 +530,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <li><a href="/courses/foundations/embeddings/">Embeddings</a></li>
     <li><a href="/courses/foundations/recurrent-neural-networks/">RNNs</a></li>
     <li><a href="/courses/foundations/attention/">Attention</a></li>
+    <li><a href="/courses/foundations/transformers/">Transformers</a></li>
     </ul>
 </div>
 </div>
@@ -611,7 +612,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 <h2 class="ai-center-all mt-0 mb-2 md-typeset">Wait! All the lessons are 100% free?</h2>
 
-Yes. The lessons above are 100% free and you can learn all the fundamentals of MLOps by going through them. **So what exactly is the paid course for?** It's extremely difficult to learn things on your own without the proper structure and experience, especially complicated topics such as MLOps. So we're offering the exact structure and experience you need to master the MLOps fundamentals in just 6 weeks. <a href="#six-weeks">Yes 6 weeks is more than enough</a>.
+Yes. The lessons above are 100% free and you can learn all the fundamentals of MLOps by going through them. **So what exactly is the paid course for?** It's extremely difficult to learn things on your own without the proper structure and experience, especially complicated topics such as MLOps. So we're offering the exact structure and experience you need to master the MLOps fundamentals in just 6 weeks. <a href="#six-weeks">Yes, 6 weeks is more than enough</a>.
 
 <div class="row ai-features">
     <div class="col-md-6 ai-feature" data-aos="fade-right">
@@ -665,43 +666,41 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
 </div>
 
 
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
-<section class="p-4" style="background-color: #f5f9fd;">
-<h2 class="ai-center-all mt-0 mb-2 md-typeset">This is not a MOOC</h2>
+<hr style="margin-top: 2rem;" id="deliverables">
+<section class="p-4">
+<h2 class="ai-center-all mt-0 mb-2 md-typeset">Course deliverables</h2>
 
-<p style="text-align: center; font-size: 0.9rem;"><b><span style="background-color: #FFFF00;">mooc</span></b> <i>/mo͞ok/ n.</i>: <span style="font-size: 0.85rem;">a massive open online course that suffers from a <a href="https://www.insidehighered.com/digital-learning/article/2019/01/16/study-offers-data-show-moocs-didnt-achieve-their-goals" target="_blank">2-3% completion rate</a> due to an absence of motivation, interactivity and community.</span></p>
+We will be applying the concepts we learn each week to iteratively complete two deliverables. One will demonstrate your <b>technical</b> skills while the other will showcase your <b>communication</b> and <b>domain expertise</b> through a written piece.
 
-
-<div class="row">
-    <div class="col-md-6" data-aos="fade-right">
-        <p class="ai-center-all"><u>This is not</u>:</p>
-        <ul>
-            <li><span class="mr-1">❌</span> a $50/month course that you purchase and never complete.</li>
-            <li><span class="mr-1">❌</span> a set of prerecorded videos that you watch alone in your room.</li>
-            <li><span class="mr-1">❌</span> a course for a certificate that goes to the bottom of your resume.</li>
-            <li><span class="mr-1">❌</span> something you do once and completely forget about.</li>
-        </ul>
+<div class="row ai-features mt-2">
+    <div class="col-md-12 ai-feature" data-aos="fade-right">
+        <div class="ai-feature-header">
+            <span class="mr-1">💻</span> End-to-end repository
+        </div>
+        <div class="ai-feature-text">
+            It's not enough to just learn about concepts at a high-level, so as we learn each concept, we will be building onto our end-to-end ML project from modeling to CI/CD. We will be learning the concepts from a <i>first principles</i> approach and develop the mental frameworks to be able to adapt to any context (tech stack, platform, tools, etc.).
+        </div>
     </div>
-    <div class="col-md-6" data-aos="fade-left">
-        <p class="ai-center-all"><u>This is</u>:</p>
-        <ul>
-            <li><span class="mr-1">✅</span> a highly interactive, 6-week course with accountability & community.</li>
-            <li><span class="mr-1">✅</span> a 100% live, highly interactive course you take alongside motivated peers.</li>
-            <li><span class="mr-1">✅</span> a foundation for MLOps expertise that will speak for itself in your work.</li>
-            <li><span class="mr-1">✅</span> an alumni community to continue your learning journey.</li>
-        </ul>
+    <div class="col-md-12 ai-feature" data-aos="fade-left">
+        <div class="ai-feature-header">
+            <span class="mr-1">✍️</span> MLOps in "X"
+        </div>
+        <div class="ai-feature-text">
+            <i>Writing is a very important skill</i>, so as we learn each concept every week, we will be writing about how the concept applies to "X", where X is an industry (or even a specific task) that you're passionate about. By the end of the course, you'll have a well written, and reviewed, piece to share with the community that will be the start to establishing yourself as an expert in ML applied to "X".
+        </div>
     </div>
 </div>
+
 </section>
 
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
+<hr style="margin-bottom: 2rem;">
 <section class="p-4" style="background-color: #f5f9fd;">
 <h2 class="ai-center-all mt-0 mb-2 md-typeset"><span class="mr-1">⚡️</span> Your new superpowers <span class="ml-1">⚡️</span></h2>
 
 <p class="ai-center-all" style="font-size: 0.9rem;">With live lectures, coding workshops, interactive discussions, you'll attain a:</p>
 <div class="row">
     <div class="col-md-4 ai-feature" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="1000" data-aos-delay="0">
-        <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> <b>Foundational MLOps expertise</b> to <code class="highlight"><span class="nx">architect</span></code> an ML system using best practices, <code class="highlight"><span class="nx">articulate</span></code> your knowledge to others and continuously <code class="highlight"><span class="nx">adapt</span></code> to this evolving space.
+        <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> <b>Foundational ML expertise</b> to <code class="highlight"><span class="nx">architect</span></code> an ML system using best practices, <code class="highlight"><span class="nx">articulate</span></code> your knowledge to others and continuously <code class="highlight"><span class="nx">adapt</span></code> to this evolving space.
     </div>
     <div class="col-md-4 ai-feature" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="1000" data-aos-delay="500">
         <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M10.3 8.24a.75.75 0 01-.04 1.06L7.352 12l2.908 2.7a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 011.06.04zm3.44 1.06a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.908-2.7-2.908-2.7z"></path><path fill-rule="evenodd" d="M2 3.75C2 2.784 2.784 2 3.75 2h16.5c.966 0 1.75.784 1.75 1.75v16.5A1.75 1.75 0 0120.25 22H3.75A1.75 1.75 0 012 20.25V3.75zm1.75-.25a.25.25 0 00-.25.25v16.5c0 .138.112.25.25.25h16.5a.25.25 0 00.25-.25V3.75a.25.25 0 00-.25-.25H3.75z"></path></svg></span> <b>Ability to compose high quality code</b> to create robust ML systems that <code class="highlight"><span class="nx">you</span></code>, <code class="highlight"><span class="nx">your future self</span></code> and <code class="highlight"><span class="nx">fellow developers</span></code> will come to greatly value as you iterate and develop.
@@ -787,7 +786,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
                     <li><a href="/courses/foundations/convolutional-neural-networks/">CNNs</a></li>
                     <li><a href="/courses/foundations/embeddings/">Embeddings</a></li>
                     <li><a href="/courses/foundations/recurrent-neural-networks/">RNNs</a></li>
-                    <li><a href="/courses/mlops/baselines/#transformers-w-contextual-embeddings">Transformers</a></li>
+                    <li><a href="/courses/foundations/attention">Attention</a></li>
                     </ul>
                 </div>
             </div>
@@ -992,7 +991,7 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
 </div>
 
 
-<div class="row mt-2" style="margin-bottom: 2.5rem;">
+<div class="row mt-2">
     <div class="col-6" data-aos="fade-right">
         <h4 class="mb-1">Every week</h4>
         <div class="row">
@@ -1040,11 +1039,6 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             </ul>
         </div>
     </div>
-</div>
-
-<div class="admonition danger">
-<p class="admonition-title">Interactivity</p>
-<p>The live lectures and coding workshops will be filled with Q&A sessions, breakout room discussions, small exercises, etc. to make sure you <b>master</b> this material well enough to apply it to your own projects. In addition to Q&A during the live lectures, we will also have optional <strong>Q&A office hours</strong> throughout the week for various timezones.</p>
 </div>
 
 </section>
@@ -1107,9 +1101,8 @@ Yes. The lessons above are 100% free and you can learn all the fundamentals of M
             <div class="card-body">
                 <ul class="task-list">
                     <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;Everything in the <i>Essential</i> plan</li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;1:1 career guidance <div><small>(resume & portfolio)</small></div></li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;1:1 interview prep <div><small>(technical & behavioral)</small></div></li>
-                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp;1:1 project guidance <div><small>(personal & professional)</small></div></li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp; 90 min. 1-on-1 session for career and project guidance.</li>
+                    <li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked=""><span class="task-list-indicator"></span></label>  &nbsp; In-depth instructor review of <a href="#deliverables">course deliverables</a>.</li>
                 </ul>
             </div>
             <div class="card-footer bg-transparent">
