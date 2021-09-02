@@ -1068,14 +1068,14 @@ class MLP(nn.Module):
 
 
 ## Dropout
-A great technique to have our models generalize (perform well on test data) is to increase the size of your data but this isn't always an option. Fortuntely, there are methods like regularization and dropout that can help create a more robust model.
+A great technique to have our models generalize (perform well on test data) is to increase the size of your data but this isn't always an option. Fortunately, there are methods like [regularization](linear-regression.md#regularization){:target="_blank"} and dropout that can help create a more robust model.
 
 Dropout is a technique (used only during training) that allows us to zero the outputs of neurons. We do this for `dropout_p`% of the total neurons in each layer and it changes every batch. Dropout prevents units from co-adapting too much to the data and acts as a sampling strategy since we drop a different set of neurons each time.
 
 <div class="ai-center-all">
     <img width="350" src="https://miro.medium.com/max/1044/1*iWQzxhVlvadk6VAJjsgXgg.png">
 </div>
-<div class="ai-center-all">
+<div class="ai-center-all mt-1">
   <small><a href="http://jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf" target="_blank">Dropout: A Simple Way to Prevent Neural Networks from
 Overfitting</a></small>
 </div>

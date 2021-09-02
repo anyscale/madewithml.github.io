@@ -30,12 +30,51 @@ It's also the phase where we can use our deep understanding of the problem, proc
 
 And it isn't just about identifying and labeling our initial dataset but also involves thinking about how to make the labeling process more efficient as our dataset grows.
 
-- who will labeling new (streaming) data
-- what tools will be used to accelerate the labeling process (ie. labeling functions)
-- what workflows will be established to track the labeling process
-
 !!! note
     We should always have  multiple labelers working on an overlap amongst the samples so we can easy discover labeling inconsistencies. A meaningful *inter-labeler discrepancy* (>2%) indicates that the labeling task is subjective and requires more explicit labeling criteria / instructions.
+
+## Process
+
+Regardless of whether we have a custom platform or we choose a generalized library for labeling, the process to manage labeling and all it's related workflows (QA, data import/export, etc.) follow a similar approach.
+
+### Preliminary steps
+- Decide what needs to be labeled
+    - consult with domain experts to ensure you're labeling the appropriate signals
+    - ensure your labeling allow for future changes (addition/removal of labels)
+- Design the interface where labeling will be done
+    - intuitive, data modality dependent and quick (keybindings are a must!)
+    - avoid option paralysis (suggest likely labels)
+    - account for measuring and resolving inter-labeler discrepancy
+- Compose highly detailed labeling instructions for annotators
+    - examples of each labeling scenario
+    - course of action for discrepancies
+
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/labeling/ui.png" width="400" alt="labeling view">
+</div>
+<div class="ai-center-all mt-1">
+  <small>Multi-label text classification for our task using  <a href="https://prodi.gy/" target="_blank">Prodigy</a> (labeling + QA)</small>
+</div>
+
+### Workflow setup
+- Establish data import and export pipelines
+    - need to know when new data is ready for annotation
+    - need to know when annotated data is ready for QA, modeling, etc.
+- Create a quality assurance (QA) workflow
+    - separate from labeling workflow
+    - yet still communicates with labeling workflow for relabeling errors
+
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/labeling/workflow.png" width="800" alt="labeling workflow">
+</div>
+
+### Iterative setup
+- Implement strategies to reduce labeling efforts
+    - determine subsets of the data to label next using [active learning](#active-learning)
+    - auto-label entire or parts of a data point using [weak supervision](#weak-supervision)
+    - focus constrained labeling efforts on long tail of edge cases over time
+
+> Check out the [data-centric AI](data-centric-ai.md){:target="_blank"} lesson to learn more about the nuances of how labeling plays a crucial part of the data-driven development process.
 
 ## Datasets
 - [projects.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json){:target="_blank"}: projects with title, description and tags (cleaned by mods).
@@ -147,7 +186,7 @@ df.head(5)
 The reason we want to iteratively add more features is because it introduces more complexity and effort. For example, extracting the relevant HTML from the URLs is not trivial but recall that we want to *close the loop* with a simple solution first. We're going to use just the title and description because we hypothesize that the project's core concepts will be there whereas the details may have many other keywords.
 
 !!! note
-    Over time, our dataset will grow and we'll need to label new data. So far, we had a team of moderators clean the existing data but we'll need to establish proper workflow to make this process easier and reliable. Typically, we'll use collaborative UIs where annotators can fix errors, etc. and then use a tool like [Airflow](https://airflow.apache.org/){:target="_blank"} or [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"} for workflow / pipeline orchestration to know when new data is ready to be labeled and also when it's ready to be used for modeling.
+    Over time, our dataset will grow and we'll need to label new data. So far, we had a team of moderators clean the existing data but we'll need to establish proper workflow to make this process easier and reliable. Typically, we'll use collaborative UIs where annotators can fix errors, etc. and then use a tool like [Airflow](https://airflow.apache.org/){:target="_blank"} or [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"} for workflow / pipeline orchestration to know when new data is ready to be labeled and also when it's ready to be used for QA and eventually, modeling.
 
 ## Auxiliary data
 

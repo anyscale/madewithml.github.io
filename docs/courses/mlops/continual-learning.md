@@ -29,13 +29,21 @@ A continual learning system like this will guide us with when to update, what ex
 
 Starting backwards from our update workflow, there are so many moving pieces involved with monitoring. What values to monitor for drift (data, target, concept), how to measure drift (chi^2, KS, MMD, etc.), window sizes/frequencies, thresholds for triggering alerts and more. Once an alert is actually triggered, what events take place? These policies evolve based on experience from previous iterations, domain expertise, etc. And how do we avoid alerting fatigue and actually identify the root cause (we need smart slicing & aggregation).
 
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/update.png" width="1000" alt="continual learning system">
+</div>
+
 ### Retraining
 
-If the appropriate action is to retrain, it’s not just the matter of fact of retraining on the old data + new data (if only it was that easy)! There’s an entire workflow (often human-in-the-loop) that is responsible for composing the retraining dataset. We use the word “compose” because it really is an art. Labeling, active learning, views for domain experts, quality assurance, augmentation, up/down sampling, evaluation dataset with appropriate slice representations, etc.
+If the appropriate action is to retrain, it’s not just the matter of fact of retraining on the old data + new data (if only it was that easy)! There’s an entire workflow (often human-in-the-loop) that is responsible for composing the retraining dataset. We use the word “compose” because it really is an art. Labeling, active learning, views for domain experts, quality assurance, augmentation, up/down sampling, evaluation dataset with appropriate slice representations, etc. Read more about the nuances of this process in our [data-centric AI lesson](data-centric-ai.md){:target="_blank"} which focuses on data-driven development and treating data as the first class citizen.
 
 ### Evaluation
 
-There are decisions in the DataOps workflows that need to be reevaluated as well such as adding to the set of expectations that our features and models need to pass or accounting for regulatory requirements, etc. These evaluation criteria are added a result of our system interacting with the real world. Usually, With the exception of large concept drift, these expectations should remain valid and should require fewer updates after the first several iterations.
+There are decisions in the DataOps workflows that need to be reevaluated as well such as adding to the set of [expectations](testing.md#expectations){:target="_blank"} that our features and models need to pass. These evaluation criteria are added a result of our system interacting with the real world. Usually, with the exception of large concept drift, these expectations should remain valid and should require fewer updates after the first several iterations.
+
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/dataops.png" width="1000" alt="continual learning system">
+</div>
 
 ### Impact
 
