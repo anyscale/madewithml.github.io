@@ -753,8 +753,8 @@ We will be applying the concepts we learn each week to iteratively complete two 
                 <small><div>Sept 18th, 2021</div></small>
                 <small><div>7 am - 10 am PT</div></small>
                 </div>
-                <div><a data-toggle="collapse" href="#collapseFoundations" aria-expanded="false" aria-controls="collapseFoundations">Foundations</a></div>
-                <div class="collapse multi-collapse" id="collapseFoundations">
+                <div><a data-toggle="collapse" href="#collapseToolkit" aria-expanded="false" aria-controls="collapseToolkit">Toolkit</a></div>
+                <div class="collapse multi-collapse" id="collapseToolkit">
                     <ul class="ai-course-list">
                     <li><a href="/courses/foundations/notebooks/">Notebooks</a></li>
                     <li><a href="/courses/foundations/python/">Python</a></li>
@@ -786,7 +786,8 @@ We will be applying the concepts we learn each week to iteratively complete two 
                     <li><a href="/courses/foundations/convolutional-neural-networks/">CNNs</a></li>
                     <li><a href="/courses/foundations/embeddings/">Embeddings</a></li>
                     <li><a href="/courses/foundations/recurrent-neural-networks/">RNNs</a></li>
-                    <li><a href="/courses/foundations/attention">Attention</a></li>
+                    <li><a href="/courses/foundations/attention/">Attention</a></li>
+                    <li><a href="/courses/foundations/transformers/">Transformers</a></li>
                     </ul>
                 </div>
             </div>
@@ -1127,6 +1128,12 @@ We will be applying the concepts we learn each week to iteratively complete two 
         </div>
     </div>
 </div>
+
+<hr style="margin-bottom: 2rem;">
+<section class="p-4" style="background-color: #f5f9fd;">
+<h2 class="ai-center-all mt-0 mb-2 md-typeset"><span class="mr-2">💸</span> Money Back Guarantee <span class="ml-2">💸</span></h2>
+If you attend the live sessions and complete the deliverables yet still don’t find the course valuable, we’ll refund 100% of your payment within 30 days of the start of the course.
+</section>
 
 <hr id="faq" style="margin-top: 2rem; margin-bottom: 2rem;">
 <h2 class="ai-center-all mt-0 mb-2 md-typeset">Frequently Asked Questions (FAQ)</h2>

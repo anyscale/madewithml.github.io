@@ -14,10 +14,22 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/
 1. Click on this link to open the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/01_Notebooks.ipynb){:target="_blank"} for this lesson or create a blank one on [Google Colab](https://colab.research.google.com/){:target="_blank"}.
 2. Sign into your [Google account](https://accounts.google.com/signin) to start using the notebook. If you don't want to save your work, you can skip the steps below. If you do not have access to Google, you can follow along using [Jupyter Lab](https://jupyter.org/).
 3. If you do want to save your work, click the **COPY TO DRIVE** button on the toolbar. This will open a new notebook in a new tab. Rename this new notebook by removing the words Copy of from the title (change `Copy of 01_Notebooks` to `1_Notebooks`).
-<div class="ai-center-all">
+
+<div class="ai-center-all mb-4">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/notebooks/copy_to_drive.png" width="350">
     &emsp;&emsp;<img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/notebooks/rename.png" width="300">
 </div>
+
+!!! Note "Alternatives to Google Colab"
+    Alternatively, you can run these notebooks locally by using [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/index.html){:target="_blank"}. You should first set up a directory for our project, create a [virtual environment](packaging.md#virtual-environment){:target="_blank"} and install jupyterlab.
+
+    ```bash linenums="1"
+    mkdir mlops
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install jupyterlab
+    jupyter lab
+    ```
 
 ## Types of cells
 Notebooks are made up of cells. There are two types of cells:
