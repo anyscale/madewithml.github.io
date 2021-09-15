@@ -38,7 +38,7 @@ The framework to use when composing tests is the [Arrange Act Assert](http://wik
 - `#!js Act`: apply the inputs on the component we want to test.
 - `#!js Assert`: confirm that we received the expected output.
 
-!!! tip
+!!! note
     `#!js Cleaning` is an unofficial fourth step to this methodology because it's important to not leave remnants of a previous state which may affect subsequent tests. We can use packages such as [pytest-randomly](https://github.com/pytest-dev/pytest-randomly){:target="_blank"} to test against state dependency by executing tests randomly.
 
 In Python, there are many tools, such as [unittest](https://docs.python.org/3/library/unittest.html){:target="_blank"}, [pytest](https://docs.pytest.org/en/stable/){:target="_blank"}, etc., that allow us to easily implement our tests while adhering to the *Arrange Act Assert* framework above. These tools come with powerful built-in functionality such as parametrization, filters, and more, to test many conditions at scale.

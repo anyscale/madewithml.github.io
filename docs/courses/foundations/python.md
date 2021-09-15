@@ -1,6 +1,6 @@
 ---
 template: lesson.html
-title: Python fundamentals for Machine Learning
+title: Python for Machine Learning
 description: The fundamentals of Python programming for machine learning.
 keywords: python, decorators, functions, classes, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
@@ -25,10 +25,10 @@ print (type(x))
 ```
 <pre class="output">
 5
-<class 'int'>
+&lt;class 'int'&gt;
 </pre>
 
-!!! tip
+!!! note
     Here we use the variable name `x` in our examples but when you're working on a specific task, be sure to be explicit (ex. `first_name`) when creating variables (applies to functions, classes, etc. as well).
 
 We can change the value of a variable by simply assigning a new value to it.
@@ -41,7 +41,7 @@ print (type(x))
 ```
 <pre class="output">
 hello
-<class 'str'>
+&lt;class 'str'&gt;
 </pre>
 There are many different types of variables: integers, floats, strings, boolean etc.
 ```python linenums="1"
@@ -50,7 +50,7 @@ x = 5
 print (x, type(x))
 ```
 <pre class="output">
-5 <class 'int'>
+5 &lt;class 'int'&gt;
 </pre>
 ```python linenums="1"
 # float variable
@@ -58,7 +58,7 @@ x = 5.0
 print (x, type(x))
 ```
 <pre class="output">
-5.0 <class 'float'>
+5.0 &lt;class 'float'&gt;
 </pre>
 ```python linenums="1"
 # text variable
@@ -66,7 +66,7 @@ x = "5"
 print (x, type(x))
 ```
 <pre class="output">
-5 <class 'str'>
+5 &lt;class 'str'&gt;
 </pre>
 ```python linenums="1"
 # boolean variable
@@ -74,7 +74,7 @@ x = True
 print (x, type(x))
 ```
 <pre class="output">
-True <class 'bool'>
+True &lt;class 'bool'&gt;
 </pre>
 We can also do operations with variables:
 ```python linenums="1"
@@ -87,25 +87,32 @@ print (c)
 <pre class="output">
 3
 </pre>
-We should always know what types of variables we're dealing with so we can do the right operations with them. Here's a common mistake that can happen if we're using the wrong variable type.
-```python linenums="1"
-# int variables
-a = 5
-b = 3
-print (a + b)
-```
-<pre class="output">
-8
-</pre>
-```python linenums="1"
-# string variables
-a = "5"
-b = "3"
-print (a + b)
-```
-<pre class="output">
-53
-</pre>
+
+!!! question "Know your types!"
+    We should always know what types of variables we're dealing with so we can do the right operations with them. Here's a common mistake that can happen if we're using the wrong variable type.
+    ```python linenums="1"
+    # int variables
+    a = 5
+    b = 3
+    print (a + b)
+    ```
+
+    ??? quote "Show answer"
+        <pre class="output">
+        8
+        </pre>
+
+    ```python linenums="1"
+    # string variables
+    a = "5"
+    b = "3"
+    print (a + b)
+    ```
+
+    ??? quote "Show answer"
+        <pre class="output">
+        53
+        </pre>
 
 ## Lists
 Lists are an ordered, mutable (changeable) collection of values that are comma separated and enclosed by square brackets. A list can be comprised of many different types of variables. Below is a list with an integer, string and a float:
@@ -156,6 +163,51 @@ print (z)
 [3, 'bye', 1.2, 7, 2.4, 'world']
 </pre>
 
+## Tuples
+Tuples are collections that are ordered and immutable (unchangeable). We will use tuples to store values that will never be changed.
+```python linenums="1"
+# Creating a tuple
+x = (3.0, "hello") # tuples start and end with ()
+print (x)
+```
+<pre class="output">
+(3.0, 'hello')
+</pre>
+
+```python linenums="1"
+# Adding values to a tuple
+x = x + (5.6, 4)
+print (x)
+```
+<pre class="output">
+(3.0, 'hello', 5.6, 4)
+</pre>
+
+```python linenums="1"
+# Try to change (it won't work and we get an error)
+x[0] = 1.2
+```
+<pre class="output">
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+----> 1 x[0] = 1.2
+TypeError: 'tuple' object does not support item assignment
+</pre>
+
+## Sets
+Sets are collections that are unordered and mutable. However, every item in a set much be unique.
+
+```python linenums="1"
+# Sets
+text = "Learn ML with Made With ML"
+print (set(text))
+print (set(text.split(" ")))
+```
+<pre class="output">
+{'e', 'M', ' ', 'r', 'w', 'd', 'a', 'h', 't', 'i', 'L', 'n', 'W'}
+{'with', 'Learn', 'ML', 'Made', 'With'}
+</pre>
+
 ## Indexing
 Indexing and slicing from lists allow us to retrieve specific values within lists. Note that indices can be positive (starting from 0) or negative (-1 and lower, where -1 is the last item in the list).
 <div class="ai-center-all">
@@ -191,73 +243,58 @@ x[1:2]:  ['hello']
 x[:-1]:  [3, 'hello']
 </pre>
 
-## Tuples
-Tuples are collections that are ordered and immutable (unchangeable). You will use these to store values that will never be changed.
-```python linenums="1"
-# Creating a tuple
-x = (3.0, "hello") # tuples start and end with ()
-print (x)
-```
-<pre class="output">
-(3.0, 'hello')
-</pre>
+!!! question "Indexing beyond length"
 
-```python linenums="1"
-# Adding values to a tuple
-x = x + (5.6, 4)
-print (x)
-```
-<pre class="output">
-(3.0, 'hello', 5.6, 4)
-</pre>
+    What happens if we try to index beyond the length of a list?
+    ```python linenums="1"
+    x = [3, "hello", 1.2]
+    print (x[:100])
+    print (len(x[:100]))
+    ```
 
-```python linenums="1"
-# Try to change (it won't work and you'll get an error)
-x[0] = 1.2
-```
-<pre class="output">
----------------------------------------------------------------------------
-TypeError                                 Traceback (most recent call last)
-----> 1 x[0] = 1.2
-TypeError: 'tuple' object does not support item assignment
-</pre>
+    ??? quote "Show answer"
+        <pre class="output">
+        [3, 'hello', 1.2]
+        3
+        </pre>
+        Though this does produce results, we should always explicitly use the length of the list to index items from it to avoid incorrect assumptions for downstream processes.
 
 ## Dictionaries
-Dictionaries are an unordered, mutable and indexed collection of key-value pairs. You can retrieve values based on the key and a dictionary cannot have two of the same keys.
+Dictionaries are an unordered, mutable collection of key-value pairs. You can retrieve values based on the key and a dictionary cannot have two of the same keys.
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/dictionaries.png" width="350">
 </div>
 
 ```python linenums="1"
 # Creating a dictionary
-person = {'name': 'Goku',
-          'eye_color': 'brown'}
+person = {"name": "Goku",
+          "eye_color": "brown"}
 print (person)
-print (person['name'])
-print (person['eye_color'])
+print (person["name"])
+print (person["eye_color"])
 ```
 <pre class="output">
-{'name': 'Goku', 'eye_color': 'brown'}
+{"name": "Goku", "eye_color": "brown"}
 Goku
 brown
 </pre>
 
 ```python linenums="1"
 # Changing the value for a key
-person['eye_color'] = 'green'
+person["eye_color"] = "green"
 print (person)
 ```
 <pre class="output">
-{'name': 'Goku', 'eye_color': 'green'}
+{"name": "Goku", "eye_color": "green"}
 </pre>
 
 ```python linenums="1"
 # Adding new key-value pairs
-person['age'] = 24
+person["age"] = 24
 print (person)
 ```
 <pre class="output">
-{'name': 'Goku', 'eye_color': 'green', 'age': 24}
+{"name": "Goku", "eye_color": "green", "age": 24}
 </pre>
 
 ```python linenums="1"
@@ -268,6 +305,67 @@ print (len(person))
 3
 </pre>
 
+!!! question "Sort of the structures"
+
+    See if you can recall and sort out the similarities and differences of the foundational data structures we've seen so far.
+
+    |       | Mutable | Ordered | Indexable | Unique |
+    |-------|---------|---------|-----------|--------|
+    | List  | ❓       | ❓       | ❓         | ❓      |
+    | Tuple | ❓       | ❓       | ❓         | ❓      |
+    | Set   | ❓       | ❓       | ❓         | ❓      |
+    | Dictionary   | ❓       | ❓       | ❓         | ❓      |
+
+    ??? quote "Show answer"
+        |       | Mutable | Ordered | Indexable | Unique |
+        |-------|---------|---------|-----------|--------|
+        | List  | ✅       | ✅       | ✅         | ❌      |
+        | Tuple | ❌       | ✅       | ✅         | ❌      |
+        | Set   | ✅       | ❌       | ❌         | ✅      |
+        | Dictionary   | ✅        | ❌       | ❌         | ✅ &nbsp;keys<br>❌ &nbsp;values      |
+
+But of course, there is pretty much a way to do accomplish anything with Python. For example, even though native dictionaries are unordered, we can leverage the [OrderedDict](https://docs.python.org/3/library/collections.html){:target="_blank"} data structure to change that (useful if we want to iterate through keys in a certain order, etc.).
+
+```python linenums="1"
+from collections import OrderedDict
+```
+
+```python linenums="1"
+# Native dict
+d = {}
+d["a"] = 2
+d["c"] = 3
+d["b"] = 1
+print (d)
+```
+<pre class="output">
+{'a': 2, 'c': 3, 'b': 1}
+</pre>
+> After Python 3.7+, native dictionaries are insertion ordered.
+
+```python linenums="1"
+# Dictionary items
+print (d.items())
+```
+<pre class="output">
+dict_items([('a', 2), ('c', 3), ('b', 1)])
+</pre>
+```python linenums="1"
+# Order by keys
+print (OrderedDict(sorted(d.items())))
+```
+<pre class="output">
+OrderedDict([('a', 2), ('b', 1), ('c', 3)])
+</pre>
+```python linenums="1"
+# Order by values
+print (OrderedDict(sorted(d.items(), key=lambda x: x[1])))
+```
+<pre class="output">
+OrderedDict([('b', 1), ('a', 2), ('c', 3)])
+</pre>
+
+
 ## If statements
 We can use `if` statements to conditionally do something. The conditions are defined by the words `if`, `elif` (which stands for else if) and `else`. We can have as many `elif` statements as we want. The indented code below each condition is the code that will execute if the condition is `True`.
 
@@ -275,11 +373,11 @@ We can use `if` statements to conditionally do something. The conditions are def
 # If statement
 x = 4
 if x < 1:
-    score = 'low'
+    score = "low"
 elif x <= 4: # elif = else if
-    score = 'medium'
+    score = "medium"
 else:
-    score = 'high'
+    score = "high"
 print (score)
 ```
 <pre class="output">
@@ -297,8 +395,6 @@ it worked
 </pre>
 
 ## Loops
-- [For loops](#for)
-- [While loops](#while)
 
 ### For loops
 A `for` loop can iterate over a collection of values (lists, tuples, dictionaries, etc.) The indented code is executed for each item in the collection of values.
@@ -356,6 +452,64 @@ while x > 0:
 0
 </pre>
 
+## List comprehension
+
+We can combine our knowledge of lists and for loops to leverage list comprehensions to create succinct code.
+
+```python linenums="1"
+# For loop
+x = [1, 2, 3, 4, 5]
+y = []
+for item in x:
+    if item > 2:
+        y.append(item)
+print (y)
+```
+<pre class="output">
+[3, 4, 5]
+</pre>
+
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/comprehension.png" width="350">
+</div>
+
+```python linenums="1"
+# List comprehension
+y = [item for item in x if item > 2]
+print (y)
+```
+<pre class="output">
+[3, 4, 5]
+</pre>
+
+!!! question "List comprehension for nested for loops"
+    For the nested for loop below, which list comprehension is correct?
+
+    ```python linenums="1"
+    # Nested for loops
+    words = [["Am", "ate", "ATOM", "apple"], ["bE", "boy", "ball", "bloom"]]
+    small_words = []
+    for letter_list in words:
+        for word in letter_list:
+            if len(word) < 3:
+                small_words.append(word.lower())
+    print (small_words)
+    ```
+    <pre class="output">
+    ['am', 'be']
+    </pre>
+
+    - [ ] `#!python [word.lower() if len(word) < 3 for word in letter_list for letter_list in words]`
+    - [ ] `#!python [word.lower() for word in letter_list for letter_list in words if len(word) < 3]`
+    - [ ] `#!python [word.lower() for letter_list in words for word in letter_list if len(word) < 3]`
+
+    ??? quote "Show answer"
+        Python syntax is usually very straight forward, so the correct answer involves just directly copying the statements from the nested for loop from top to bottom!
+
+        - [ ] `#!python [word.lower() if len(word) < 3 for word in letter_list for letter_list in words]`
+        - [ ] `#!python [word.lower() for word in letter_list for letter_list in words if len(word) < 3]`
+        - [x] `#!python [word.lower() for letter_list in words for word in letter_list if len(word) < 3]`
+
 ## Functions
 Functions are a way to modularize reusable pieces of code. They're defined by the keyword `def` which stands for definition and they can have the following components.
 <div class="ai-center-all">
@@ -412,7 +566,7 @@ Goku Mohandas
 ```python linenums="1"
 def f(*args, **kwargs):
     x = args[0]
-    y = kwargs.get('y')
+    y = kwargs.get("y")
     print (f"x: {x}, y: {y}")
 ```
 ```python linenums="1"
@@ -547,7 +701,7 @@ print (scooby)
 Great Dane named Scooby
 </pre>
 ```python linenums="1"
-scooby.change_name('Scooby Doo')
+scooby.change_name("Scooby Doo")
 print (scooby)
 ```
 <pre class="output">
@@ -575,7 +729,7 @@ class Dog(Pet):
 
     @staticmethod
     def is_cute(breed):
-        return True  # all animaals are cute!
+        return True  # all animals are cute!
 ```
 
 A `@classmethod` allows us to create class instances by passing in the uninstantiated class itself (`cls`). This is a great way to create (or load) classes from objects (ie. dictionaries).

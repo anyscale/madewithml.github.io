@@ -503,7 +503,7 @@ def eval_step(self, dataloader):
     y_trues, y_probs = [], []
 
     # Iterate over val batches
-    with torch.no_grad():
+    with torch.inference_mode():
         for i, batch in enumerate(dataloader):
 
             # Step
@@ -533,7 +533,7 @@ def predict_step(self, dataloader):
     y_probs = []
 
     # Iterate over val batches
-    with torch.no_grad():
+    with torch.inference_mode():
         for i, batch in enumerate(dataloader):
 
             # Forward pass w/ inputs
@@ -644,7 +644,7 @@ class Trainer(object):
         y_trues, y_probs = [], []
 
         # Iterate over val batches
-        with torch.no_grad():
+        with torch.inference_mode():
             for i, batch in enumerate(dataloader):
 
                 # Step
@@ -670,7 +670,7 @@ class Trainer(object):
         y_probs = []
 
         # Iterate over val batches
-        with torch.no_grad():
+        with torch.inference_mode():
             for i, batch in enumerate(dataloader):
 
                 # Forward pass w/ inputs

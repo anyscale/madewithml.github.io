@@ -107,7 +107,7 @@ Let's unpack the different parts of this function's docstring:
 - `#!js [Lines 25-26]`: Any exceptions that may be raised in the function.
 - `#!js [Lines 28-29]`: Description of the function's output(s).
 
-!!! tip
+!!! note
     If you're using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank"} (highly recommend), you should get the free [Python Docstrings Generator](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring){:target="_blank"} extension so you can type `"""` under a function and then hit the ++shift++ key to generate a template docstring. It will autofill parts of the docstring using the typing information and even exception in your code!
 
     ![vscode docstring generation](https://github.com/NilsJPWerner/autoDocstring/raw/master/images/demo.gif)

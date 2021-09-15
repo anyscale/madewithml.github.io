@@ -509,7 +509,7 @@ class Trainer(object):
         y_trues, y_probs = [], []
 
         # Iterate over val batches
-        with torch.no_grad():
+        with torch.inference_mode():
             for i, batch in enumerate(dataloader):
 
                 # Step
@@ -535,7 +535,7 @@ class Trainer(object):
         y_probs = []
 
         # Iterate over val batches
-        with torch.no_grad():
+        with torch.inference_mode():
             for i, batch in enumerate(dataloader):
 
                 # Forward pass w/ inputs
@@ -1052,4 +1052,4 @@ head_view(attention=attn, tokens=tokens)
 <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/transformers/interpretability.png" width="375">
 </div>
 
-Now we're ready to start the [MLOps lesson](https://madewithml.com/#mlops){:target="_blank"} to learn how to put all this foundational modeling knowledge to responsibly deliver value.
+Now we're ready to start the [MLOps lessons](https://madewithml.com/#mlops){:target="_blank"} to learn how to apply all this foundational modeling knowledge to responsibly deliver value.

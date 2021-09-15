@@ -175,7 +175,7 @@ The Marketplace has actions for a variety of needs, ranging from continuous depl
 - [Great Expectations](https://github.com/marketplace/actions/great-expectations-data){:target="_blank"}: ensure that our GE checkpoints pass when any changes are made that could affect the data engineering pipelines. This action also creates a free GE dashboard with [Netlify](https://www.netlify.com/){:target="_blank"} that has the updated data docs.
 - [Continuous ML](https://github.com/iterative/cml){:target="_blank"}: train, evaluate and monitor your ML models and generate a report summarizing the findings. I personally use this GitHub Action for automatic training jobs on cloud infrastructure (AWS/GCP) or [self hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners?learn=hosting_your_own_runners){:target="_blank"} when a change triggers the training pipeline, as opposed to working with [Terraform](https://www.terraform.io/){:target="_blank"}.
 
-!!! tip
+!!! note
     Don't restrict your workflows to only what's available on the Marketplace or single command operations. We can do things like include code coverage reports, deploy an updated Streamlit dashboard and attach it's URL to the PR, deliver (CD) our application to an AWS Lambda / EC2, etc.
 
 ## Resources
