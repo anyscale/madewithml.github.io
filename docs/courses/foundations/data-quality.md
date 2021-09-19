@@ -95,8 +95,8 @@ df.head()
 
 ```python linenums="1"
 # Define X and y
-X = df[['leukocyte_count', 'blood_pressure']].values
-y = df['tumor_class'].values
+X = df[["leukocyte_count", "blood_pressure"]].values
+y = df["tumor_class"].values
 print ("X: ", np.shape(X))
 print ("y: ", np.shape(y))
 ```
@@ -106,11 +106,11 @@ y:  (1000,)
 </pre>
 ```python linenums="1"
 # Plot data
-colors = {'benign': 'red', 'malignant': 'blue'}
-plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], s=25, edgecolors='k')
+colors = {"benign": "red", "malignant": "blue"}
+plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], s=25, edgecolors="k")
 plt.xlabel('leukocyte count')
 plt.ylabel('blood pressure')
-plt.legend(['malignant ', 'benign'], loc="upper right")
+plt.legend(["malignant", "benign"], loc="upper right")
 plt.show()
 ```
 <div class="ai-center-all">
@@ -201,7 +201,7 @@ classes = list(label_encoder.classes_)
 print (f"classes: {classes}")
 ```
 <pre class="output">
-classes: ['benign', 'malignant']
+classes: ["benign", "malignant"]
 </pre>
 ```python linenums="1"
 # Convert labels to tokens
@@ -287,10 +287,10 @@ model = MLP(input_dim=INPUT_DIM, hidden_dim=HIDDEN_DIM, num_classes=NUM_CLASSES)
 print (model.named_parameters)
 ```
 <pre class="output">
-<bound method Module.named_parameters of MLP(
+&lt;bound method Module.named_parameters of MLP(
   (fc1): Linear(in_features=2, out_features=100, bias=True)
   (fc2): Linear(in_features=100, out_features=2, bias=True)
-)>
+)&gt;
 </pre>
 
 ### Training
@@ -455,16 +455,16 @@ plot_multiclass_decision_boundary(model=model, X=X_test, y=y_test)
 mean_leukocyte_count, mean_blood_pressure = X_scaler.transform(
     [[np.mean(df.leukocyte_count), np.mean(df.blood_pressure)]])[0]
 plt.scatter(mean_leukocyte_count+0.05, mean_blood_pressure-0.05, s=200,
-            c='b', edgecolor='w', linewidth=2)
+            c="b", edgecolor="w", linewidth=2)
 
 # Annotate
-plt.annotate('true: malignant,\npred: malignant',
-             color='white',
+plt.annotate("true: malignant,\npred: malignant",
+             color="white",
              xy=(mean_leukocyte_count, mean_blood_pressure),
              xytext=(0.4, 0.65),
-             textcoords='figure fraction',
+             textcoords="figure fraction",
              fontsize=16,
-             arrowprops=dict(facecolor='white', shrink=0.1))
+             arrowprops=dict(facecolor="white", shrink=0.1))
 plt.show()
 ```
 <div class="ai-center-all">
@@ -534,8 +534,8 @@ df_reduced.head()
 
 ```python linenums="1"
 # Define X and y
-X = df_reduced[['leukocyte_count', 'blood_pressure']].values
-y = df_reduced['tumor_class'].values
+X = df_reduced[["leukocyte_count", "blood_pressure"]].values
+y = df_reduced["tumor_class"].values
 print ("X: ", np.shape(X))
 print ("y: ", np.shape(y))
 ```
@@ -545,11 +545,11 @@ y:  (720,)
 </pre>
 ```python linenums="1"
 # Plot data
-colors = {'benign': 'red', 'malignant': 'blue'}
-plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], s=25, edgecolors='k')
+colors = {"benign": "red", "malignant": "blue"}
+plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], s=25, edgecolors="k")
 plt.xlabel('leukocyte count')
 plt.ylabel('blood pressure')
-plt.legend(['malignant ', 'benign'], loc="upper right")
+plt.legend(["malignant", "benign"], loc="upper right")
 plt.show()
 ```
 <div class="ai-center-all">
@@ -713,16 +713,16 @@ plot_multiclass_decision_boundary(model=model, X=X_test, y=y_test)
 
 # Sample point near the decision boundary (same point as before)
 plt.scatter(mean_leukocyte_count+0.05, mean_blood_pressure-0.05, s=200,
-            c='b', edgecolor='w', linewidth=2)
+            c="b", edgecolor="w", linewidth=2)
 
 # Annotate
 plt.annotate('true: malignant,\npred: benign',
-             color='white',
+             color="white",
              xy=(mean_leukocyte_count, mean_blood_pressure),
              xytext=(0.45, 0.60),
-             textcoords='figure fraction',
+             textcoords="figure fraction",
              fontsize=16,
-             arrowprops=dict(facecolor='white', shrink=0.1))
+             arrowprops=dict(facecolor="white", shrink=0.1))
 plt.show()
 ```
 <div class="ai-center-all">

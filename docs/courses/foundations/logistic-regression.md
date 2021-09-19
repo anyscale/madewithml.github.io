@@ -11,9 +11,9 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/
 {% include "styles/lesson.md" %}
 
 ## Overview
-Logistic regression is an extension on linear regression (both are generalized linear methods). We will still learn to model a line (plane) that models $y$ given $X$. Except now we are dealing with classification problems as opposed to regression problems so we'll be predicting probability distributions as opposed to a discrete value. We'll be using the softmax operation to normalize our logits ($XW$) to derive probabilities.
+Logistic regression is an extension on linear regression (both are generalized linear methods). We will still learn to model a line (plane) that models $y$ given $X$. Except now we are dealing with classification problems as opposed to regression problems so we'll be predicting probability distributions as opposed to discrete values. We'll be using the softmax operation to normalize our logits ($XW$) to derive probabilities.
 
-Our goal is to learn a logistic model $hat{y}$ that models $y$ given $X$.
+Our goal is to learn a logistic model $\hat{y}$ that models $y$ given $X$.
 
 $$ \hat{y} = \frac{e^{XW_y}}{\sum_j e^{XW}} $$
 
@@ -40,7 +40,7 @@ This function is known as the multinomial logistic regression or the softmax cla
 - **Disadvantages**:
     - Sensitive to outliers since objective is to minimize cross entropy loss. Support vector machines (SVMs) are a good alternative to counter outliers.
 - **Miscellaneous**:
-    - Softmax classifier is going to used widely in neural network architectures as the last layer since it produces class probabilities.
+    - Softmax classifier is widely in neural network architectures as the last layer since it produces class probabilities.
 
 
 ## Set up
@@ -128,16 +128,16 @@ df.head()
 
 ```python linenums="1"
 # Define X and y
-X = df[['leukocyte_count', 'blood_pressure']].values
-y = df['tumor_class'].values
+X = df[["leukocyte_count", "blood_pressure"]].values
+y = df["tumor_class"].values
 ```
 ```python linenums="1"
 # Plot data
-colors = {'benign': 'red', 'malignant': 'blue'}
-plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], s=25, edgecolors='k')
+colors = {"benign": "red", "malignant": "blue"}
+plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], s=25, edgecolors="k")
 plt.xlabel('leukocyte count')
 plt.ylabel('blood pressure')
-plt.legend(['malignant ', 'benign'], loc="upper right")
+plt.legend(["malignant", "benign"], loc="upper right")
 plt.show()
 ```
 <div class="ai-center-all">
@@ -183,10 +183,10 @@ Now let's see how many samples per class each data split has:
 # Overall class distribution
 class_counts = dict(collections.Counter(y))
 print (f"Classes: {class_counts}")
-print (f"m:b = {class_counts['malignant']/class_counts['benign']:.2f}")
+print (f"m:b = {class_counts["malignant"]/class_counts["benign"]:.2f}")
 ```
 <pre class="output">
-Classes: {'malignant': 611, 'benign': 389}
+Classes: {"malignant": 611, "benign": 389}
 m:b = 1.57
 </pre>
 ```python linenums="1"
@@ -194,9 +194,9 @@ m:b = 1.57
 train_class_counts = dict(collections.Counter(y_train))
 val_class_counts = dict(collections.Counter(y_val))
 test_class_counts = dict(collections.Counter(y_test))
-print (f"train m:b = {train_class_counts['malignant']/train_class_counts['benign']:.2f}")
-print (f"val m:b = {val_class_counts['malignant']/val_class_counts['benign']:.2f}")
-print (f"test m:b = {test_class_counts['malignant']/test_class_counts['benign']:.2f}")
+print (f"train m:b = {train_class_counts["malignant"]/train_class_counts["benign"]:.2f}")
+print (f"val m:b = {val_class_counts["malignant"]/val_class_counts["benign"]:.2f}")
+print (f"test m:b = {test_class_counts["malignant"]/test_class_counts["benign"]:.2f}")
 ```
 <pre class="output">
 train m:b = 1.57
@@ -246,13 +246,13 @@ class LabelEncoder(object):
         return classes
 
     def save(self, fp):
-        with open(fp, 'w') as fp:
+        with open(fp, "w") as fp:
             contents = {'class_to_index': self.class_to_index}
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
     def load(cls, fp):
-        with open(fp, 'r') as fp:
+        with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
@@ -263,7 +263,7 @@ label_encoder.fit(y_train)
 label_encoder.class_to_index
 ```
 <pre class="output">
-{'benign': 0, 'malignant': 1}
+{"benign": 0, "malignant": 1}
 </pre>
 ```python linenums="1"
 # Encoder
@@ -277,9 +277,9 @@ print (f"decoded: {label_encoder.decode([y_train[0]])}")
 <pre class="output">
 y_train[0]: malignant
 y_train[0]: 1
-decoded: ['malignant']
+decoded: ["malignant"]
 </pre>
-We also want to calculate our class weights, which are useful for weighting the loss function during training. It tells the model to focus on samples from an under-represented class. The loss section below will show how to incorporate these weights.
+We also want to calculate our class weights, which are useful for weighting the loss function during training. It tells the model to focus on samples from an under-represented class. The [loss section](#loss) below will show how to incorporate these weights.
 ```python linenums="1"
 # Class weights
 counts = np.bincount(y_train)
@@ -534,7 +534,7 @@ def plot_multiclass_decision_boundary(model, X, y, savefig_fp=None):
 
     # Plot
     if savefig_fp:
-        plt.savefig(savefig_fp, format='png')
+        plt.savefig(savefig_fp, format="png")
 ```
 ```python linenums="1"
 # Visualize the decision boundary
@@ -587,9 +587,9 @@ model = LogisticRegression(input_dim=INPUT_DIM, num_classes=NUM_CLASSES)
 print (model.named_parameters)
 ```
 <pre class="output">
-<bound method Module.named_parameters of LogisticRegression(
+&lt;bound method Module.named_parameters of LogisticRegression(
   (fc1): Linear(in_features=2, out_features=2, bias=True)
-)>
+)&gt;
 </pre>
 
 
@@ -601,7 +601,7 @@ y_pred = torch.randn(3, NUM_CLASSES, requires_grad=False)
 y_true = torch.empty(3, dtype=torch.long).random_(NUM_CLASSES)
 print (y_true)
 loss = loss_fn(y_pred, y_true)
-print(f'Loss: {loss.numpy()}')
+print(f"Loss: {loss.numpy()}")
 ```
 <pre class="output">
 tensor([0, 0, 1])
@@ -626,7 +626,7 @@ def accuracy_fn(y_pred, y_true):
 ```python linenums="1"
 y_pred = torch.Tensor([0, 0, 1])
 y_true = torch.Tensor([1, 1, 1])
-print(f'Accuracy: {accuracy_fn(y_pred, y_true):.1f}')
+print("Accuracy: {accuracy_fn(y_pred, y_true):.1f}")
 ```
 <pre class="output">
 Accuracy: 33.3
@@ -831,7 +831,7 @@ plt.show()
 ### Inference
 ```python linenums="1"
 # Inputs for inference
-X_infer = pd.DataFrame([{'leukocyte_count': 13, 'blood_pressure': 12}])
+X_infer = pd.DataFrame([{"leukocyte_count": 13, "blood_pressure": 12}])
 ```
 ```python linenums="1"
 # Standardize

@@ -39,11 +39,11 @@ set_seeds(seed=SEED)
 ```python linenums="1"
 # Set device
 cuda = True
-device = torch.device('cuda' if (
-    torch.cuda.is_available() and cuda) else 'cpu')
-torch.set_default_tensor_type('torch.FloatTensor')
-if device.type == 'cuda':
-    torch.set_default_tensor_type('torch.cuda.FloatTensor')
+device = torch.device("cuda" if (
+    torch.cuda.is_available() and cuda) else "cpu")
+torch.set_default_tensor_type("torch.FloatTensor")
+if device.type == "cuda":
+    torch.set_default_tensor_type("torch.cuda.FloatTensor")
 print (device)
 ```
 <pre class="output">
@@ -111,8 +111,8 @@ df.head()
 
 ```python linenums="1"
 # Data shapes
-X = df[['X1', 'X2']].values
-y = df['color'].values
+X = df[["X1", "X2"]].values
+y = df["color"].values
 print ("X: ", np.shape(X))
 print ("y: ", np.shape(y))
 ```
@@ -123,8 +123,8 @@ y:  (1500,)
 ```python linenums="1"
 # Visualize data
 plt.title("Generated non-linear data")
-colors = {'c1': 'red', 'c2': 'yellow', 'c3': 'blue'}
-plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], edgecolors='k', s=25)
+colors = {"c1": "red", "c2": "yellow", "c3": "blue"}
+plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], edgecolors="k", s=25)
 plt.show()
 ```
 <div class="ai-center-all">
@@ -206,13 +206,13 @@ class LabelEncoder(object):
         return classes
 
     def save(self, fp):
-        with open(fp, 'w') as fp:
+        with open(fp, "w") as fp:
             contents = {'class_to_index': self.class_to_index}
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
     def load(cls, fp):
-        with open(fp, 'r') as fp:
+        with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
@@ -223,7 +223,7 @@ label_encoder.fit(y_train)
 label_encoder.class_to_index
 ```
 <pre class="output">
-{'c1': 0, 'c2': 1, 'c3': 2}
+{"c1": 0, "c2": 1, "c3": 2}
 </pre>
 ```python linenums="1"
 # Convert labels to tokens
@@ -250,7 +250,7 @@ weights: {0: 0.002857142857142857, 1: 0.002857142857142857, 2: 0.002857142857142
 
 
 ### Standardize data
-We need to standardize our data (zero mean and unit variance) so a specific feature's magnitude doesn't affect how the model learns its weights. We're only going to standardize the inputs X because our outputs y are class values. We're going to compose our own `StandardScaler` class so we have easily save and load it later during inference.
+We need to standardize our data (zero mean and unit variance) so a specific feature's magnitude doesn't affect how the model learns its weights. We're only going to standardize the inputs X because our outputs y are class values. We're going to compose our own `StandardScaler` class so we can easily save and load it later during inference.
 ```python linenums="1"
 class StandardScaler(object):
     def __init__(self, mean=None, std=None):
@@ -268,13 +268,13 @@ class StandardScaler(object):
         return (X * self.std) + self.mean
 
     def save(self, fp):
-        with open(fp, 'w') as fp:
+        with open(fp, "w") as fp:
             contents = {'mean': self.mean.tolist(), 'std': self.std.tolist()}
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
     def load(cls, fp):
-        with open(fp, 'r') as fp:
+        with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
@@ -345,7 +345,8 @@ class Dataset(torch.utils.data.Dataset):
             dataset=self, batch_size=batch_size, collate_fn=self.collate_fn,
             shuffle=shuffle, drop_last=drop_last, pin_memory=True)
 ```
-We don't really need the `collate_fn` here but we wanted to make it transparent because we will need it when we want to do specific processing on our batch (ex. padding). We'll be using a custom collate function in the next lesson.
+We don't really need the `collate_fn` here but we wanted to make it transparent because we will need it when we want to do [specific processing](convolutional-neural-networks.md#dataset){:target="_blank"} on our batch (ex. padding).
+
 ```python linenums="1"
 # Create datasets
 train_dataset = Dataset(X=X_train, y=y_train)
@@ -361,14 +362,14 @@ print ("Datasets:\n"
 ```
 <pre class="output">
 Datasets:
-  Train dataset:<Dataset(N=1050)>
-  Val dataset: <Dataset(N=225)>
-  Test dataset: <Dataset(N=225)>
+  Train dataset: &lt;Dataset(N=1050)&gt;
+  Val dataset: &lt;Dataset(N=225)&gt;
+  Test dataset: &lt;Dataset(N=225)&gt;
 Sample point:
   X: [-1.47355106 -1.67417243]
   y: 0
 </pre>
-So far, we used batch gradient descent to update our weights. This means that we calculated the gradients using the entire training dataset. We also could've updated our weights using stochastic gradient descent (SGD) where we pass in one training example one at a time. The current standard is mini-batch gradient descent, which strikes a balance between batch and stochastic GD, where we update the weights using a mini-batch of n (`BATCH_SIZE`) samples. This is where the `DataLoader` object comes in handy.
+So far, we used batch gradient descent to update our weights. This means that we calculated the gradients using the entire training dataset. We also could've updated our weights using stochastic gradient descent (SGD) where we pass in one training example one at a time. The current standard is **mini-batch gradient descent**, which strikes a balance between batch and SGD, where we update the weights using a mini-batch of n (`BATCH_SIZE`) samples. This is where the `DataLoader` object comes in handy.
 ```python linenums="1"
 # Create dataloaders
 batch_size = 64
@@ -402,7 +403,7 @@ torch.cuda.manual_seed_all(SEED) # multi-GPU
 ```
 ```python linenums="1"
 # Device configuration
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print (device)
 ```
 <pre class="output">
@@ -449,11 +450,11 @@ model = model.to(device) # set device
 print (model.named_parameters)
 ```
 <pre class="output">
-<bound method Module.named_parameters of MLP(
+&lt;bound method Module.named_parameters of MLP(
   (fc1): Linear(in_features=2, out_features=100, bias=True)
   (dropout): Dropout(p=0.1, inplace=False)
   (fc2): Linear(in_features=100, out_features=3, bias=True)
-)>
+)&gt;
 </pre>
 
 ## Trainer
@@ -548,12 +549,12 @@ def predict_step(self, dataloader):
 ```
 
 ## LR scheduler
-As our model starts to optimize and perform better, the loss will reduce and we'll need to make smaller adjustments. If we keep using a fixed learning rate, we'll be overshooting back and forth. Therefore, we're going to add a learning rate scheduler to our optimizer to adjust our learning rate during training. There are many [schedulers](https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate){:target="_blank"} schedulers to choose from but a popular one is `ReduceLROnPlateau` which reduces the learning rate when a metric (ex. validation loss) stops improving. In the example below we'll reduce the learning rate by a factor of 0.1 (`factor=0.1`) when our metric of interest (`self.scheduler.step(val_loss)`) stops decreasing (`mode='min'`) for three (`patience=3`) straight epochs.
+As our model starts to optimize and perform better, the loss will reduce and we'll need to make smaller adjustments. If we keep using a fixed learning rate, we'll be overshooting back and forth. Therefore, we're going to add a learning rate scheduler to our optimizer to adjust our learning rate during training. There are many [schedulers](https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate){:target="_blank"} schedulers to choose from but a popular one is `ReduceLROnPlateau` which reduces the learning rate when a metric (ex. validation loss) stops improving. In the example below we'll reduce the learning rate by a factor of 0.1 (`factor=0.1`) when our metric of interest (`self.scheduler.step(val_loss)`) stops decreasing (`mode="min"`) for three (`patience=3`) straight epochs.
 
 ```python linenums="1"
 # Initialize the LR scheduler
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode='min', factor=0.1, patience=3)
+    optimizer, mode="min", factor=0.1, patience=3)
 ...
 train_loop():
     ...
@@ -600,7 +601,7 @@ loss_fn = nn.CrossEntropyLoss(weight=class_weights_tensor)
 # Define optimizer & scheduler
 optimizer = Adam(model.parameters(), lr=LEARNING_RATE)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode='min', factor=0.1, patience=3)
+    optimizer, mode="min", factor=0.1, patience=3)
 ```
 ```python linenums="1"
 class Trainer(object):
@@ -776,7 +777,7 @@ y_pred = np.argmax(y_prob, axis=1)
 # Determine performance
 performance = get_metrics(
     y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+print (json.dumps(performance["overall"], indent=2))
 ```
 <pre class="output">
 {
@@ -799,21 +800,21 @@ from pathlib import Path
 # Save artifacts
 dir = Path("mlp")
 dir.mkdir(parents=True, exist_ok=True)
-label_encoder.save(fp=Path(dir, 'label_encoder.json'))
-X_scaler.save(fp=Path(dir, 'X_scaler.json'))
-torch.save(best_model.state_dict(), Path(dir, 'model.pt'))
+label_encoder.save(fp=Path(dir, "label_encoder.json"))
+X_scaler.save(fp=Path(dir, "X_scaler.json"))
+torch.save(best_model.state_dict(), Path(dir, "model.pt"))
 with open(Path(dir, 'performance.json'), "w") as fp:
     json.dump(performance, indent=2, sort_keys=False, fp=fp)
 ```
 ```python linenums="1"
 # Load artifacts
 device = torch.device("cpu")
-label_encoder = LabelEncoder.load(fp=Path(dir, 'label_encoder.json'))
-X_scaler = StandardScaler.load(fp=Path(dir, 'X_scaler.json'))
+label_encoder = LabelEncoder.load(fp=Path(dir, "label_encoder.json"))
+X_scaler = StandardScaler.load(fp=Path(dir, "X_scaler.json"))
 model = MLP(
     input_dim=INPUT_DIM, hidden_dim=HIDDEN_DIM,
     dropout_p=DROPOUT_P, num_classes=NUM_CLASSES)
-model.load_state_dict(torch.load(Path(dir, 'model.pt'), map_location=device))
+model.load_state_dict(torch.load(Path(dir, "model.pt"), map_location=device))
 model.to(device)
 ```
 <pre class="output">
@@ -842,7 +843,7 @@ y_pred = np.argmax(y_prob, axis=1)
 label_encoder.decode(y_pred)
 ```
 <pre class="output">
-['c1']
+["c1"]
 </pre>
 
 ## Miscellaneous

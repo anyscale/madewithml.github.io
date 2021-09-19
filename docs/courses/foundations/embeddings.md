@@ -51,7 +51,7 @@ np.random.seed(SEED)
 ```
 ```python linenums="1"
 # Split text into sentences
-tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
+tokenizer = nltk.data.load("tokenizers/punkt/english.pickle")
 book = urllib.request.urlopen(url="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/harrypotter.txt")
 sentences = tokenizer.tokenize(str(book.read()))
 print (f"{len(sentences)} sentences")
@@ -167,8 +167,8 @@ w2v.wv.most_similar(positive="scar", topn=5)
 </pre>
 ```python linenums="1"
 # Saving and loading
-w2v.wv.save_word2vec_format('model.bin', binary=True)
-w2v = KeyedVectors.load_word2vec_format('model.bin', binary=True)
+w2v.wv.save_word2vec_format("model.bin", binary=True)
+w2v = KeyedVectors.load_word2vec_format("model.bin", binary=True)
 ```
 
 ### FastText
@@ -203,8 +203,8 @@ ft.wv.most_similar(positive="scarring", topn=5)
 </pre>
 ```python linenums="1"
 # Save and loading
-ft.wv.save('model.bin')
-ft = KeyedVectors.load('model.bin')
+ft.wv.save("model.bin")
+ft = KeyedVectors.load("model.bin")
 ```
 
 ## Pretrained embeddings
@@ -252,7 +252,7 @@ zipfile.extract(embeddings_file)
 </pre>
 ```python linenums="1"
 # Preview of the GloVe embeddings file
-with open(embeddings_file, 'r') as fp:
+with open(embeddings_file, "r") as fp:
     line = next(fp)
     values = line.split()
     word = values[0]
@@ -283,7 +283,7 @@ embedding dim: 100
 </pre>
 ```python linenums="1"
 # Save GloVe embeddings to local directory in word2vec format
-word2vec_output_file = '{0}.word2vec'.format(embeddings_file)
+word2vec_output_file = "{0}.word2vec".format(embeddings_file)
 glove2word2vec(embeddings_file, word2vec_output_file)
 ```
 <pre class="output">
@@ -295,7 +295,7 @@ glove = KeyedVectors.load_word2vec_format(word2vec_output_file, binary=False)
 ```
 ```python linenums="1"
 # (king - man) + woman = ?
-glove.most_similar(positive=['woman', 'king'], negative=['man'], topn=5)
+glove.most_similar(positive=["woman", "king"], negative=["man"], topn=5)
 ```
 <pre class="output">
 [('queen', 0.7698541283607483),
@@ -333,7 +333,7 @@ plot_embeddings(
 
 ```python linenums="1"
 # Bias in embeddings
-glove.most_similar(positive=['woman', 'doctor'], negative=['man'], topn=5)
+glove.most_similar(positive=["woman", "doctor"], negative=["man"], topn=5)
 ```
 <pre class="output">
 [('nurse', 0.7735227346420288),
@@ -377,11 +377,11 @@ set_seeds(seed=SEED)
 ```python linenums="1"
 # Set device
 cuda = True
-device = torch.device('cuda' if (
-    torch.cuda.is_available() and cuda) else 'cpu')
-torch.set_default_tensor_type('torch.FloatTensor')
-if device.type == 'cuda':
-    torch.set_default_tensor_type('torch.cuda.FloatTensor')
+device = torch.device("cuda" if (
+    torch.cuda.is_available() and cuda) else "cpu")
+torch.set_default_tensor_type("torch.FloatTensor")
+if device.type == "cuda":
+    torch.set_default_tensor_type("torch.cuda.FloatTensor")
 print (device)
 ```
 <pre class="output">
@@ -445,8 +445,8 @@ from nltk.stem import PorterStemmer
 import re
 ```
 ```python linenums="1"
-nltk.download('stopwords')
-STOPWORDS = stopwords.words('english')
+nltk.download("stopwords")
+STOPWORDS = stopwords.words("english")
 print (STOPWORDS[:5])
 porter = PorterStemmer()
 ```
@@ -577,13 +577,13 @@ class LabelEncoder(object):
         return classes
 
     def save(self, fp):
-        with open(fp, 'w') as fp:
+        with open(fp, "w") as fp:
             contents = {'class_to_index': self.class_to_index}
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
     def load(cls, fp):
-        with open(fp, 'r') as fp:
+        with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
@@ -684,17 +684,17 @@ class Tokenizer(object):
         return texts
 
     def save(self, fp):
-        with open(fp, 'w') as fp:
+        with open(fp, "w") as fp:
             contents = {
-                'char_level': self.char_level,
-                'oov_token': self.oov_token,
-                'token_to_index': self.token_to_index
+                "char_level": self.char_level,
+                "oov_token": self.oov_token,
+                "token_to_index": self.token_to_index
             }
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
     def load(cls, fp):
-        with open(fp, 'r') as fp:
+        with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
@@ -710,7 +710,7 @@ VOCAB_SIZE = len(tokenizer)
 print (tokenizer)
 ```
 <pre class="output">
-<Tokenizer(num_tokens=5000)>
+&lt;Tokenizer(num_tokens=5000)&gt;
 
 </pre>
 ```python linenums="1"
@@ -863,9 +863,9 @@ print ("Datasets:\n"
 ```
 <pre class="output">
 Datasets:
-  Train dataset:<Dataset(N=84000)>
-  Val dataset: <Dataset(N=18000)>
-  Test dataset: <Dataset(N=18000)>
+  Train dataset: &lt;Dataset(N=84000)&gt;
+  Val dataset: &lt;Dataset(N=18000)&gt;
+  Test dataset: &lt;Dataset(N=18000)&gt;
 Sample point:
   X: [ 299  359 3869    1 1648  734    1 2021]
   y: 2
@@ -889,7 +889,7 @@ Sample batch:
   X: [64, 9]
   y: [64]
 Sample point:
-  X: tensor([ 299,  359, 3869,    1, 1648,  734,    1, 2021,    0], device='cpu')
+  X: tensor([ 299,  359, 3869,    1, 1648,  734,    1, 2021,    0], device="cpu")
   y: 2
 </pre>
 
@@ -1197,7 +1197,7 @@ model = model.to(device) # set device
 print (model.named_parameters)
 ```
 <pre class="output">
-bound method Module.named_parameters of CNN(
+&lt;bound method Module.named_parameters of CNN(
   (embeddings): Embedding(5000, 100, padding_idx=0)
   (conv): ModuleList(
     (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,))
@@ -1207,7 +1207,7 @@ bound method Module.named_parameters of CNN(
   (dropout): Dropout(p=0.1, inplace=False)
   (fc1): Linear(in_features=150, out_features=100, bias=True)
   (fc2): Linear(in_features=100, out_features=4, bias=True)
-)
+)&gt;
 </pre>
 ```python linenums="1"
 # Define Loss
@@ -1218,7 +1218,7 @@ loss_fn = nn.CrossEntropyLoss(weight=class_weights_tensor)
 # Define optimizer & scheduler
 optimizer = Adam(model.parameters(), lr=LEARNING_RATE)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode='min', factor=0.1, patience=3)
+    optimizer, mode="min", factor=0.1, patience=3)
 ```
 ```python linenums="1"
 # Trainer module
@@ -1247,7 +1247,7 @@ y_pred = np.argmax(y_prob, axis=1)
 # Determine performance
 performance = get_metrics(
     y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+print (json.dumps(performance["overall"], indent=2))
 ```
 <pre class="output">
 {
@@ -1275,7 +1275,7 @@ model = model.to(device) # set device
 print (model.named_parameters)
 ```
 <pre class="output">
-bound method Module.named_parameters of CNN(
+&lt;bound method Module.named_parameters of CNN(
   (embeddings): Embedding(5000, 100, padding_idx=0)
   (conv): ModuleList(
     (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,))
@@ -1285,7 +1285,7 @@ bound method Module.named_parameters of CNN(
   (dropout): Dropout(p=0.1, inplace=False)
   (fc1): Linear(in_features=150, out_features=100, bias=True)
   (fc2): Linear(in_features=100, out_features=4, bias=True)
-)
+)&gt;
 </pre>
 ```python linenums="1"
 # Define Loss
@@ -1296,7 +1296,7 @@ loss_fn = nn.CrossEntropyLoss(weight=class_weights_tensor)
 # Define optimizer & scheduler
 optimizer = Adam(model.parameters(), lr=LEARNING_RATE)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode='min', factor=0.1, patience=3)
+    optimizer, mode="min", factor=0.1, patience=3)
 ```
 ```python linenums="1"
 # Trainer module
@@ -1325,7 +1325,7 @@ y_pred = np.argmax(y_prob, axis=1)
 # Determine performance
 performance = get_metrics(
     y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+print (json.dumps(performance["overall"], indent=2))
 ```
 <pre class="output">
 {
@@ -1352,7 +1352,7 @@ model = model.to(device) # set device
 print (model.named_parameters)
 ```
 <pre class="output">
-bound method Module.named_parameters of CNN(
+&lt;bound method Module.named_parameters of CNN(
   (embeddings): Embedding(5000, 100, padding_idx=0)
   (conv): ModuleList(
     (0): Conv1d(100, 50, kernel_size=(1,), stride=(1,))
@@ -1362,7 +1362,7 @@ bound method Module.named_parameters of CNN(
   (dropout): Dropout(p=0.1, inplace=False)
   (fc1): Linear(in_features=150, out_features=100, bias=True)
   (fc2): Linear(in_features=100, out_features=4, bias=True)
-)
+)&gt;
 </pre>
 ```python linenums="1"
 # Define Loss
@@ -1373,7 +1373,7 @@ loss_fn = nn.CrossEntropyLoss(weight=class_weights_tensor)
 # Define optimizer & scheduler
 optimizer = Adam(model.parameters(), lr=LEARNING_RATE)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode='min', factor=0.1, patience=3)
+    optimizer, mode="min", factor=0.1, patience=3)
 ```
 ```python linenums="1"
 # Trainer module
@@ -1402,7 +1402,7 @@ y_pred = np.argmax(y_prob, axis=1)
 # Determine performance
 performance = get_metrics(
     y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+print (json.dumps(performance["overall"], indent=2))
 ```
 <pre class="output">
 {
@@ -1417,9 +1417,9 @@ print (json.dumps(performance['overall'], indent=2))
 from pathlib import Path
 dir = Path("cnn")
 dir.mkdir(parents=True, exist_ok=True)
-label_encoder.save(fp=Path(dir, 'label_encoder.json'))
+label_encoder.save(fp=Path(dir, "label_encoder.json"))
 tokenizer.save(fp=Path(dir, 'tokenizer.json'))
-torch.save(best_model.state_dict(), Path(dir, 'model.pt'))
+torch.save(best_model.state_dict(), Path(dir, "model.pt"))
 with open(Path(dir, 'performance.json'), "w") as fp:
     json.dump(performance, indent=2, sort_keys=False, fp=fp)
 ```
@@ -1438,14 +1438,14 @@ def get_probability_distribution(y_prob, classes):
 ```python linenums="1"
 # Load artifacts
 device = torch.device("cpu")
-label_encoder = LabelEncoder.load(fp=Path(dir, 'label_encoder.json'))
+label_encoder = LabelEncoder.load(fp=Path(dir, "label_encoder.json"))
 tokenizer = Tokenizer.load(fp=Path(dir, 'tokenizer.json'))
 model = CNN(
     embedding_dim=EMBEDDING_DIM, vocab_size=VOCAB_SIZE,
     num_filters=NUM_FILTERS, filter_sizes=FILTER_SIZES,
     hidden_dim=HIDDEN_DIM, dropout_p=DROPOUT_P, num_classes=NUM_CLASSES,
     pretrained_embeddings=PRETRAINED_EMBEDDINGS, freeze_embeddings=FREEZE_EMBEDDINGS)
-model.load_state_dict(torch.load(Path(dir, 'model.pt'), map_location=device))
+model.load_state_dict(torch.load(Path(dir, "model.pt"), map_location=device))
 model.to(device)
 ```
 <pre class="output">
@@ -1579,7 +1579,7 @@ interpretable_model = InterpretableCNN(
     num_filters=NUM_FILTERS, filter_sizes=FILTER_SIZES,
     hidden_dim=HIDDEN_DIM, dropout_p=DROPOUT_P, num_classes=NUM_CLASSES,
     pretrained_embeddings=PRETRAINED_EMBEDDINGS, freeze_embeddings=FREEZE_EMBEDDINGS)
-interpretable_model.load_state_dict(torch.load(Path(dir, 'model.pt'), map_location=device))
+interpretable_model.load_state_dict(torch.load(Path(dir, "model.pt"), map_location=device))
 interpretable_model.to(device)
 ```
 <pre class="output">

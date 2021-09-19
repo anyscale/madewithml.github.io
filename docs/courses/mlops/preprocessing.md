@@ -314,7 +314,7 @@ We're going to *include* only these tags because they're the tags we care about 
 # Inclusion/exclusion criteria for tags
 include = list(tags_dict.keys())
 exclude = ['machine-learning', 'deep-learning',  'data-science',
-           'neural-networks', 'python', 'r', 'visualization']
+           'neural-networks', 'python', "r", 'visualization']
 ```
 !!! note
     Since we're *constraining* the output space here, we'll want to monitor the prevalence of new tags over time so we can capture them.

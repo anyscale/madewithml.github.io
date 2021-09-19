@@ -77,11 +77,11 @@ set_seeds(seed=SEED)
 ```python linenums="1"
 # Set device
 cuda = True
-device = torch.device('cuda' if (
-    torch.cuda.is_available() and cuda) else 'cpu')
-torch.set_default_tensor_type('torch.FloatTensor')
-if device.type == 'cuda':
-    torch.set_default_tensor_type('torch.cuda.FloatTensor')
+device = torch.device("cuda" if (
+    torch.cuda.is_available() and cuda) else "cpu")
+torch.set_default_tensor_type("torch.FloatTensor")
+if device.type == "cuda":
+    torch.set_default_tensor_type("torch.cuda.FloatTensor")
 print (device)
 ```
 <pre class="output">
@@ -145,8 +145,8 @@ from nltk.stem import PorterStemmer
 import re
 ```
 ```python linenums="1"
-nltk.download('stopwords')
-STOPWORDS = stopwords.words('english')
+nltk.download("stopwords")
+STOPWORDS = stopwords.words("english")
 print (STOPWORDS[:5])
 porter = PorterStemmer()
 ```
@@ -277,13 +277,13 @@ class LabelEncoder(object):
         return classes
 
     def save(self, fp):
-        with open(fp, 'w') as fp:
+        with open(fp, "w") as fp:
             contents = {'class_to_index': self.class_to_index}
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
     def load(cls, fp):
-        with open(fp, 'r') as fp:
+        with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
@@ -384,17 +384,17 @@ class Tokenizer(object):
         return texts
 
     def save(self, fp):
-        with open(fp, 'w') as fp:
+        with open(fp, "w") as fp:
             contents = {
-                'char_level': self.char_level,
-                'oov_token': self.oov_token,
-                'token_to_index': self.token_to_index
+                "char_level": self.char_level,
+                "oov_token": self.oov_token,
+                "token_to_index": self.token_to_index
             }
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
     def load(cls, fp):
-        with open(fp, 'r') as fp:
+        with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
@@ -410,7 +410,7 @@ VOCAB_SIZE = len(tokenizer)
 print (tokenizer)
 ```
 <pre class="output">
-<Tokenizer(num_tokens=5000)>
+&lt;Tokenizer(num_tokens=5000)&gt;
 
 </pre>
 ```python linenums="1"
@@ -521,9 +521,9 @@ print ("Datasets:\n"
 ```
 <pre class="output">
 Datasets:
-  Train dataset:<Dataset(N=84000)>
-  Val dataset: <Dataset(N=18000)>
-  Test dataset: <Dataset(N=18000)>
+  Train dataset: &lt;Dataset(N=84000)&gt;
+  Val dataset: &lt;Dataset(N=18000)&gt;
+  Test dataset: &lt;Dataset(N=18000)&gt;
 Sample point:
   X: [  16 1491  285  142  114   24]
   seq_len: 6
@@ -875,13 +875,13 @@ model = model.to(device) # set device
 print (model.named_parameters)
 ```
 <pre class="output">
-bound method Module.named_parameters of RNN(
+&lt;bound method Module.named_parameters of RNN(
   (embeddings): Embedding(5000, 100, padding_idx=0)
   (rnn): RNN(100, 128, batch_first=True)
   (dropout): Dropout(p=0.1, inplace=False)
   (fc1): Linear(in_features=128, out_features=100, bias=True)
   (fc2): Linear(in_features=100, out_features=4, bias=True)
-)
+)&gt;
 </pre>
 
 ### Training
@@ -903,7 +903,7 @@ loss_fn = nn.CrossEntropyLoss(weight=class_weights_tensor)
 # Define optimizer & scheduler
 optimizer = Adam(model.parameters(), lr=LEARNING_RATE)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode='min', factor=0.1, patience=3)
+    optimizer, mode="min", factor=0.1, patience=3)
 ```
 ```python linenums="1"
 # Trainer module
@@ -966,7 +966,7 @@ y_pred = np.argmax(y_prob, axis=1)
 # Determine performance
 performance = get_metrics(
     y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+print (json.dumps(performance["overall"], indent=2))
 ```
 <pre class="output">
 {
@@ -1082,13 +1082,13 @@ model = model.to(device) # set device
 print (model.named_parameters)
 ```
 <pre class="output">
-bound method Module.named_parameters of GRU(
+&lt;bound method Module.named_parameters of GRU(
   (embeddings): Embedding(5000, 100, padding_idx=0)
   (rnn): GRU(100, 128, batch_first=True, bidirectional=True)
   (dropout): Dropout(p=0.1, inplace=False)
   (fc1): Linear(in_features=256, out_features=100, bias=True)
   (fc2): Linear(in_features=100, out_features=4, bias=True)
-)
+)&gt;
 </pre>
 
 ### Training
@@ -1101,7 +1101,7 @@ loss_fn = nn.CrossEntropyLoss(weight=class_weights_tensor)
 # Define optimizer & scheduler
 optimizer = Adam(model.parameters(), lr=LEARNING_RATE)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode='min', factor=0.1, patience=3)
+    optimizer, mode="min", factor=0.1, patience=3)
 ```
 ```python linenums="1"
 # Trainer module
@@ -1138,7 +1138,7 @@ y_pred = np.argmax(y_prob, axis=1)
 # Determine performance
 performance = get_metrics(
     y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+print (json.dumps(performance["overall"], indent=2))
 ```
 <pre class="output">
 {
@@ -1152,9 +1152,9 @@ print (json.dumps(performance['overall'], indent=2))
 # Save artifacts
 dir = Path("gru")
 dir.mkdir(parents=True, exist_ok=True)
-label_encoder.save(fp=Path(dir, 'label_encoder.json'))
+label_encoder.save(fp=Path(dir, "label_encoder.json"))
 tokenizer.save(fp=Path(dir, 'tokenizer.json'))
-torch.save(best_model.state_dict(), Path(dir, 'model.pt'))
+torch.save(best_model.state_dict(), Path(dir, "model.pt"))
 with open(Path(dir, 'performance.json'), "w") as fp:
     json.dump(performance, indent=2, sort_keys=False, fp=fp)
 ```
@@ -1173,13 +1173,13 @@ def get_probability_distribution(y_prob, classes):
 ```python linenums="1"
 # Load artifacts
 device = torch.device("cpu")
-label_encoder = LabelEncoder.load(fp=Path(dir, 'label_encoder.json'))
+label_encoder = LabelEncoder.load(fp=Path(dir, "label_encoder.json"))
 tokenizer = Tokenizer.load(fp=Path(dir, 'tokenizer.json'))
 model = GRU(
     embedding_dim=EMBEDDING_DIM, vocab_size=VOCAB_SIZE,
     rnn_hidden_dim=RNN_HIDDEN_DIM, hidden_dim=HIDDEN_DIM,
     dropout_p=DROPOUT_P, num_classes=NUM_CLASSES)
-model.load_state_dict(torch.load(Path(dir, 'model.pt'), map_location=device))
+model.load_state_dict(torch.load(Path(dir, "model.pt"), map_location=device))
 model.to(device)
 ```
 <pre class="output">

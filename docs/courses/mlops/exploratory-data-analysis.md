@@ -81,7 +81,7 @@ def display_word_cloud(tag='pytorch'):
     cloud = WordCloud(
         stopwords=STOPWORDS, background_color='black', collocations=False,
         width=500, height=300).generate(" ".join(text))
-    plt.axis('off')
+    plt.axis("off")
     plt.imshow(cloud)
 ```
 <div class="ai-center-all">

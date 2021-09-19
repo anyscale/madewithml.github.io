@@ -204,7 +204,7 @@ print (set(text))
 print (set(text.split(" ")))
 ```
 <pre class="output">
-{'e', 'M', ' ', 'r', 'w', 'd', 'a', 'h', 't', 'i', 'L', 'n', 'W'}
+{'e', 'M', ' ', "r", "w", 'd', 'a', 'h', 't', 'i', 'L', 'n', "w"}
 {'with', 'Learn', 'ML', 'Made', 'With'}
 </pre>
 
@@ -686,30 +686,35 @@ Scrappy
 We can also build classes on top of one another using inheritance, which allows us to inherit all the properties and methods from another class (the parent).
 ```python linenums="1"
 class Dog(Pet):
-    def __init__(self, species, name, breed):
-        super().__init__("dog", name)
+    def __init__(self, name, breed):
+        super().__init__(species="dog", name=name)
         self.breed = breed
 
     def __str__(self):
-        return f"{self.breed} named {self.name}"
+        return f"A {self.breed} doggo named {self.name}"
 ```
 ```python linenums="1"
 scooby = Dog(species="dog", breed="Great Dane", name="Scooby")
 print (scooby)
 ```
 <pre class="output">
-Great Dane named Scooby
+A Great Dane doggo named Scooby
 </pre>
 ```python linenums="1"
 scooby.change_name("Scooby Doo")
 print (scooby)
 ```
 <pre class="output">
-Great Dane named Scooby Doo
+A Great Dane doggo named Scooby Doo
 </pre>
 
-Notice how we inherited the initialized variables from the parent `Pet` class like species and name. We also inherited the `change_name` function. But for the `__str__` function, we define our own version to overwrite the `Pet` `__str__` function. We can similarly overwrite any object functions as well.
+Notice how we inherited the initialized variables from the parent `Pet` class like species and name. We also inherited functions such as `change_name()`.
 
+!!! question "Which function is executed?"
+    Which function is executed if the parent and child functions have functions with the same name?
+
+    ??? quote "Show answer"
+        As you can see, both our parent class (`Pet`) and the child class (`Dog`) have different `__str__` functions defined but share the same function name. The child class inherits everything from the parent classes but when there is conflict between function names, the child class' functions take precedence and overwrite the parent class' functions.
 
 ### Methods
 There are two important decorator methods to know about when it comes to classes: `@classmethod` and `@staticmethod`. We'll learn about decorators in the next section below but these specific methods pertain to classes so we'll cover them here.
@@ -805,7 +810,7 @@ Inside the `wrapper` function, we can:
 def add(f):
     def wrapper(*args, **kwargs):
         """Wrapper function for @add."""
-        x = kwargs.pop('x') # .get() if not altering x
+        x = kwargs.pop("x") # .get() if not altering x
         x += 1 # executes before function f
         x = f(*args, **kwargs, x=x)
         x += 1 # executes after function f
@@ -845,7 +850,7 @@ def add(f):
     @wraps(f)
     def wrap(*args, **kwargs):
         """Wrapper function for @add."""
-        x = kwargs.pop('x')
+        x = kwargs.pop("x")
         x += 1
         x = f(*args, **kwargs, x=x)
         x += 1
@@ -913,6 +918,15 @@ tracker.history
 [1, 2]
 </pre>
 
+!!! question "What's the difference compared to a decorator?"
+    It seems like we've just done some operations before and after the function's main process? Isn't that what a decorator is for?
+
+    ??? quote "Show answer"
+        With callbacks, it's easier to keep track of objects since it's all defined in a separate callback class. It's also now possible to interact with our function, not jut before or after but throughout the entire process! Imagine a function with:
+
+        - multiple processes where we want to execute operations in between them
+        - execute operations repeatedly when loops are involved in functions
+
 ### Putting it all together
 decorators + callbacks = powerful customization before, during and after the main function’s execution without increasing its complexity. We will be using this duo to create powerful ML training scripts that are highly customizable in future lessons.
 
@@ -925,7 +939,7 @@ def add(f):
     @wraps(f)
     def wrap(*args, **kwargs):
         """Wrapper function for @add."""
-        x = kwargs.pop('x') # .get() if not altering x
+        x = kwargs.pop("x") # .get() if not altering x
         x += 1 # executes before function f
         x = f(*args, **kwargs, x=x)
         # can do things post function f as well

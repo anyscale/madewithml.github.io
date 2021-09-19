@@ -35,7 +35,6 @@ $$ \hat{y} = XW + b $$
     - Can account for continuous and categorical features.
 - **Disadvantages**:
     - The model will perform well only when the data is linearly separable (for classification).
-    - Usually not used for classification and only for regression.
 - **Miscellaneous**:
     - You can also use linear regression for binary classification tasks where if the predicted continuous value is above a threshold, it belongs to a certain class. But we will cover better techniques for classification in future lessons and will focus on linear regression for continuous regression tasks only.
 
@@ -60,7 +59,7 @@ np.random.seed(SEED)
 def generate_data(num_samples):
     """Generate dummy data for linear regression."""
     X = np.array(range(num_samples))
-    random_noise = np.random.uniform(-10,20,size=num_samples)
+    random_noise = np.random.uniform(-10, 20, size=num_samples)
     y = 3.5*X + random_noise # add some noise
     return X, y
 ```
@@ -79,9 +78,9 @@ print (data[:5])
 </pre>
 ```python linenums="1"
 # Load into a Pandas DataFrame
-df = pd.DataFrame(data, columns=['X', 'y'])
-X = df[['X']].values
-y = df[['y']].values
+df = pd.DataFrame(data, columns=["X", "y"])
+X = df[["X"]].values
+y = df[["y"]].values
 df.head()
 ```
 <div class="output_subarea output_html rendered_html" style="margin-left: 10rem; margin-right: 10rem;"><div>
@@ -126,7 +125,7 @@ df.head()
 ```python linenums="1"
 # Scatter plot
 plt.title("Generated data")
-plt.scatter(x=df['X'], y=df['y'])
+plt.scatter(x=df["X"], y=df["y"])
 plt.show()
 ```
 <div class="ai-center-all">
@@ -146,7 +145,7 @@ Since our task is a regression task, we will randomly split our dataset into thr
 - `test`: used to do an evaluation of our fully trained model.
 
 !!! note
-    Be sure to check out our entire lesson focused on *properly* [splitting](https://madewithml.com/courses/mlops/splitting/){:target="_blank"} data in our [mlops](https://madewithml.com/courses/mlops/){:target="_blank"} course.
+    Be sure to check out our entire lesson focused on *properly* [splitting](https://madewithml.com/courses/mlops/splitting/){:target="_blank"} data in our [MLOps](https://madewithml.com/courses/mlops/){:target="_blank"} course.
 
 ```python linenums="1"
 TRAIN_SIZE = 0.7
@@ -375,6 +374,8 @@ Epoch: 80, loss: 0.028
 Epoch: 90, loss: 0.028
 </pre>
 
+!!! note
+    To keep the code simple, we're not calculating and displaying the validation loss after each epoch here. But in [later lessons](convolutional-neural-networks.md#training){:target="_blank"}, the performance on the validation set will be crucial in influencing the learning process (learning rate, when to stop training, etc.).
 
 ### Evaluation
 Now we're ready to see how well our trained model will perform on our test (hold-out) data split. This will be our best measure on how well the model would perform on the real world, given that our dataset's distribution is close to unseen data.
@@ -400,16 +401,16 @@ plt.figure(figsize=(15,5))
 # Plot train data
 plt.subplot(1, 2, 1)
 plt.title("Train")
-plt.scatter(X_train, y_train, label='y_train')
-plt.plot(X_train, pred_train, color='red', linewidth=1, linestyle='-', label='model')
-plt.legend(loc='lower right')
+plt.scatter(X_train, y_train, label="y_train")
+plt.plot(X_train, pred_train, color="red", linewidth=1, linestyle="-", label="model")
+plt.legend(loc="lower right")
 
 # Plot test data
 plt.subplot(1, 2, 2)
 plt.title("Test")
 plt.scatter(X_test, y_test, label='y_test')
-plt.plot(X_test, pred_test, color='red', linewidth=1, linestyle='-', label='model')
-plt.legend(loc='lower right')
+plt.plot(X_test, pred_test, color="red", linewidth=1, linestyle="-", label="model")
+plt.legend(loc="lower right")
 
 # Show plots
 plt.show()
@@ -622,9 +623,9 @@ print (model.named_parameters)
 ```
 <pre class="output">
 Model:
-<bound method Module.named_parameters of LinearRegression(
+&lt;bound method Module.named_parameters of LinearRegression(
   (fc1): Linear(in_features=1, out_features=1, bias=True)
-)>
+)&gt;
 </pre>
 
 
@@ -636,7 +637,7 @@ loss_fn = nn.MSELoss()
 y_pred = torch.Tensor([0., 0., 1., 1.])
 y_true =  torch.Tensor([1., 1., 1., 0.])
 loss = loss_fn(y_pred, y_true)
-print('Loss: ', loss.numpy())
+print("Loss: ", loss.numpy())
 ```
 <pre class="output">
 Loss:  0.75
@@ -644,7 +645,7 @@ Loss:  0.75
 
 
 ### Optimizer
-When we implemented linear regression with just NumPy, we used batch gradient descent to update our weights. But there are actually many different gradient descent [optimization algorithms](https://pytorch.org/docs/stable/optim.html){:target="_blank"} to choose from and it depends on the situation. However, the [ADAM optimizer](https://pytorch.org/docs/stable/optim.html#torch.optim.Adam){:target="_blank"} has become a standard algorithm for most cases.
+When we implemented linear regression with just NumPy, we used batch gradient descent to update our weights (used entire training set). But there are actually many different gradient descent [optimization algorithms](https://pytorch.org/docs/stable/optim.html){:target="_blank"} to choose from and it depends on the situation. However, the [ADAM optimizer](https://pytorch.org/docs/stable/optim.html#torch.optim.Adam){:target="_blank"} has become a standard algorithm for most cases.
 
 ```python linenums="1"
 from torch.optim import Adam
@@ -707,8 +708,8 @@ pred_test = model(X_test)
 # Performance
 train_error = loss_fn(pred_train, y_train)
 test_error = loss_fn(pred_test, y_test)
-print(f'train_error: {train_error:.2f}')
-print(f'test_error: {test_error:.2f}')
+print(f"train_error: {train_error:.2f}")
+print(f"test_error: {test_error:.2f}")
 ```
 <pre class="output">
 train_error: 0.02
@@ -723,16 +724,16 @@ plt.figure(figsize=(15,5))
 # Plot train data
 plt.subplot(1, 2, 1)
 plt.title("Train")
-plt.scatter(X_train, y_train, label='y_train')
-plt.plot(X_train, pred_train.detach().numpy(), color='red', linewidth=1, linestyle='-', label='model')
-plt.legend(loc='lower right')
+plt.scatter(X_train, y_train, label="y_train")
+plt.plot(X_train, pred_train.detach().numpy(), color="red", linewidth=1, linestyle="-", label="model")
+plt.legend(loc="lower right")
 
 # Plot test data
 plt.subplot(1, 2, 2)
 plt.title("Test")
 plt.scatter(X_test, y_test, label='y_test')
-plt.plot(X_test, pred_test.detach().numpy(), color='red', linewidth=1, linestyle='-', label='model')
-plt.legend(loc='lower right')
+plt.plot(X_test, pred_test.detach().numpy(), color="red", linewidth=1, linestyle="-", label="model")
+plt.legend(loc="lower right")
 
 # Show plots
 plt.show()
@@ -763,7 +764,7 @@ $$ \hat{y} = \hat{y}_{scaled} * \sigma_{\hat{y}} + \mu_{\hat{y}} $$
 # Unstandardize predictions
 pred_infer = model(X_infer).detach().numpy() * np.sqrt(y_scaler.var_) + y_scaler.mean_
 for i, index in enumerate(sample_indices):
-    print (f"{df.iloc[index]['y']:.2f} (actual) → {pred_infer[i][0]:.2f} (predicted)")
+    print (f"{df.iloc[index]["y"]:.2f} (actual) → {pred_infer[i][0]:.2f} (predicted)")
 ```
 <pre class="output">
 35.73 (actual) → 42.11 (predicted)
@@ -790,7 +791,7 @@ print (f"[model] y_hat = {W_unscaled[0]:.1f}X + {b_unscaled[0]:.1f}")
 
 
 ### Regularization
-Regularization helps decrease overfitting. Below is `L2` regularization (ridge regression). There are many forms of regularization but they all work to reduce overfitting in our models. With `L2` regularization, we are penalizing the weights with large magnitudes by decaying them. Having certain weights with high magnitudes will lead to preferential bias with the inputs and we want the model to work with all the inputs and not just a select few. There are also other types of regularization like `L1` (lasso regression) which is useful for creating sparse models where some feature coefficients are zeroed out, or elastic which combines `L1` and `L2` penalties.
+Regularization helps decrease overfitting. Below is `L2` regularization (ridge regression). There are many forms of regularization but they all work to reduce overfitting in our models. With `L2` regularization, we are penalizing large weight values by decaying them because having large weights will lead to preferential bias with the respective inputs and we want the model to work with all the inputs and not just a select few. There are also other types of regularization like `L1` (lasso regression) which is useful for creating sparse models where some feature coefficients are zeroed out, or elastic which combines `L1` and `L2` penalties.
 
 !!! note
     Regularization is not just for linear regression. You can use it to regularize any model's weights including the ones we will look at in future lessons.
@@ -861,8 +862,8 @@ pred_test = model(X_test)
 # Performance
 train_error = loss_fn(pred_train, y_train)
 test_error = loss_fn(pred_test, y_test)
-print(f'train_error: {train_error:.2f}')
-print(f'test_error: {test_error:.2f}')
+print(f"train_error: {train_error:.2f}")
+print(f"test_error: {test_error:.2f}")
 ```
 <pre class="output">
 train_error: 0.02

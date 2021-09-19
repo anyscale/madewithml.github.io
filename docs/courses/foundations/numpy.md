@@ -221,7 +221,7 @@ x * y:
 </pre>
 
 ## Dot product
-One of the most common NumPy operations we’ll use in machine learning is matrix multiplication using the dot product. We take the rows of our first matrix (2) and the columns of our second matrix (2) to determine the dot product, giving us an output of `[2 X 2]`. The only requirement is that the inside dimensions match, in this case the first matrix has 3 columns and the second matrix has 3 rows.
+One of the most common NumPy operations we’ll use in machine learning is matrix multiplication using the dot product. Suppose we wanted to take the dot product of two matrices with shapes `[2 X 3]` and `[3 X 2]`. We take the rows of our first matrix (2) and the columns of our second matrix (2) to determine the dot product, giving us an output of `[2 X 2]`. The only requirement is that the inside dimensions match, in this case the first matrix has 3 columns and the second matrix has 3 rows.
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/dot.gif" width="450">
 </div>
@@ -277,7 +277,7 @@ min axis=1:  [1 4]
 </pre>
 
 ## Broadcast
-Here, we’re adding a vector with a scalar. Their dimensions aren’t compatible as is but how does NumPy still gives us the right result? This is where broadcasting comes in. The scalar is *broadcast* across the vector so that they have compatible shapes.
+What happens when we try to do operations with tensors with seemingly incompatible shapes? Their dimensions aren’t compatible as is but how does NumPy still gives us the right result? This is where broadcasting comes in. The scalar is *broadcast* across the vector so that they have compatible shapes.
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/broadcast.png" width="300">
 </div>
@@ -325,12 +325,7 @@ y.shape:  (3, 2)
 
 
 ## Reshape
-Sometimes, we'll need to alter the dimensions of the matrix. Reshaping allows us to transform a tensor into different permissible shapes -- our reshaped tensor has the same amount of values in the tensor. (`1X6` = `2X3`). We can also use `-1` on a dimension and NumPy will infer the dimension based on our input tensor.
-
-The way reshape works is by looking at each dimension of the new tensor and separating our original tensor into that many units. So here the dimension at index 0 of the new tensor is 2 so we divide our original tensor into 2 units, and each of those has 3 values.
-<div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/reshape.png" width="450">
-</div>
+Sometimes, we'll need to alter the dimensions of the matrix. Reshaping allows us to transform a tensor into different permissible shapes. Below, our reshaped tensor has the same number of values as the original tensor. (`1X6` = `2X3`). We can also use `-1` on a dimension and NumPy will infer the dimension based on our input tensor.
 
 ```python linenums="1"
 # Reshaping
@@ -357,104 +352,109 @@ z:
 z.shape:  (2, 3)
 </pre>
 
-### Unintended reshaping
-Though reshaping is very convenient to manipulate tensors, we must be careful of their pitfalls as well. Let's look at the example below. Suppose we have `x`, which has the shape `[2 X 3 X 4]`.
-<pre class="output">
-[[[ 1  1  1  1]
-  [ 2  2  2  2]
-  [ 3  3  3  3]]
- [[10 10 10 10]
-  [20 20 20 20]
-  [30 30 30 30]]]
-</pre>
-We want to reshape x so that it has shape `[3 X 8]` which we'll get by moving the dimension at index 0 to become the dimension at index 1 and then combining the last two dimensions. But when we do this, we want our output
-
-to look like:
-<pre class="output">
-[[ 1  1  1  1 10 10 10 10]
- [ 2  2  2  2 20 20 20 20]
- [ 3  3  3  3 30 30 30 30]]
-</pre>
-and not like:
-<pre class="output">
-[[ 1  1  1  1  2  2  2  2]
- [ 3  3  3  3 10 10 10 10]
- [20 20 20 20 30 30 30 30]]
-</pre>
-even though they both have the same shape `[3X8]`.
-
-```python linenums="1"
-x = np.array([[[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3]],
-              [[10, 10, 10, 10], [20, 20, 20, 20], [30, 30, 30, 30]]])
-print ("x:\n", x)
-print ("x.shape: ", x.shape)
-```
-<pre class="output">
-x:
- [[[ 1  1  1  1]
-   [ 2  2  2  2]
-   [ 3  3  3  3]]
-
- [[10 10 10 10]
-  [20 20 20 20]
-  [30 30 30 30]]]
-x.shape:  (2, 3, 4)
-</pre>
-
-When we naively do a reshape, we get the right shape but the values are not what we're looking for.
-<div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/reshape_wrong.png" width="600">
-</div>
-
-```python linenums="1"
-# Unintended reshaping
-z_incorrect = np.reshape(x, (x.shape[1], -1))
-print ("z_incorrect:\n", z_incorrect)
-print ("z_incorrect.shape: ", z_incorrect.shape)
-```
-<pre class="output">
-z_incorrect:
- [[ 1  1  1  1  2  2  2  2]
-  [ 3  3  3  3 10 10 10 10]
-  [20 20 20 20 30 30 30 30]]
-z_incorrect.shape:  (3, 8)
-</pre>
-
-Instead, if we transpose the tensor and then do a reshape, we get our desired tensor. Transpose allows us to put our two vectors that we want to combine together and then we use reshape to join them together.
-
-!!! note
-    Always create a dummy example like this when you’re unsure about reshaping. Blindly going by the tensor shape can lead to lots of issues downstream.
+ The way reshape works is by looking at each dimension of the new tensor and separating our original tensor into that many units. So here the dimension at index 0 of the new tensor is 2 so we divide our original tensor into 2 units, and each of those has 3 values.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/reshape_right.png" width="600">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/reshape.png" width="450">
 </div>
 
-```python linenums="1"
-# Intended reshaping
-y = np.transpose(x, (1,0,2))
-print ("y:\n", y)
-print ("y.shape: ", y.shape)
-z_correct = np.reshape(y, (y.shape[0], -1))
-print ("z_correct:\n", z_correct)
-print ("z_correct.shape: ", z_correct.shape)
-```
-<pre class="output">
-y:
- [[[ 1  1  1  1]
-  [10 10 10 10]]
+!!! question "Unintended reshaping"
 
- [[ 2  2  2  2]
-  [20 20 20 20]]
+    Though reshaping is very convenient to manipulate tensors, we must be careful of its pitfalls as well. Let's look at the example below. Suppose we have `x`, which has the shape `[2 X 3 X 4]`.
 
- [[ 3  3  3  3]
-  [30 30 30 30]]]
-y.shape:  (3, 2, 4)
-z_correct:
- [[ 1  1  1  1 10 10 10 10]
-  [ 2  2  2  2 20 20 20 20]
-  [ 3  3  3  3 30 30 30 30]]
-z_correct.shape:  (3, 8)
-</pre>
+    ```python linenums="1"
+    x = np.array([[[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3]],
+                [[10, 10, 10, 10], [20, 20, 20, 20], [30, 30, 30, 30]]])
+    print ("x:\n", x)
+    print ("x.shape: ", x.shape)
+    ```
+
+    <pre class="output">
+    x:
+    [[[ 1  1  1  1]
+    [ 2  2  2  2]
+    [ 3  3  3  3]]
+
+    [[10 10 10 10]
+    [20 20 20 20]
+    [30 30 30 30]]]
+    x.shape:  (2, 3, 4)
+    </pre>
+
+    We want to reshape x so that it has shape `[3 X 8]` but we want the output to look like this:
+
+    <pre class="output">
+    [[ 1  1  1  1 10 10 10 10]
+    [ 2  2  2  2 20 20 20 20]
+    [ 3  3  3  3 30 30 30 30]]
+    </pre>
+
+    and not like:
+
+    <pre class="output">
+    [[ 1  1  1  1  2  2  2  2]
+    [ 3  3  3  3 10 10 10 10]
+    [20 20 20 20 30 30 30 30]]
+    </pre>
+
+    even though they both have the same shape `[3X8]`. What is the right way to reshape this?
+
+    ??? quote "Show answer"
+
+        When we naively do a reshape, we get the right shape but the values are not what we're looking for.
+
+        <div class="ai-center-all">
+            <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/reshape_wrong.png" width="600">
+        </div>
+
+        ```python linenums="1"
+        # Unintended reshaping
+        z_incorrect = np.reshape(x, (x.shape[1], -1))
+        print ("z_incorrect:\n", z_incorrect)
+        print ("z_incorrect.shape: ", z_incorrect.shape)
+        ```
+        <pre class="output">
+        z_incorrect:
+        [[ 1  1  1  1  2  2  2  2]
+        [ 3  3  3  3 10 10 10 10]
+        [20 20 20 20 30 30 30 30]]
+        z_incorrect.shape:  (3, 8)
+        </pre>
+
+        Instead, if we transpose the tensor and then do a reshape, we get our desired tensor. Transpose allows us to put our two vectors that we want to combine together and then we use reshape to join them together. And as a general rule, we should always get our dimensions together before reshaping to combine them.
+
+        <div class="ai-center-all">
+            <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/reshape_right.png" width="600">
+        </div>
+
+        ```python linenums="1"
+        # Intended reshaping
+        y = np.transpose(x, (1,0,2))
+        print ("y:\n", y)
+        print ("y.shape: ", y.shape)
+        z_correct = np.reshape(y, (y.shape[0], -1))
+        print ("z_correct:\n", z_correct)
+        print ("z_correct.shape: ", z_correct.shape)
+        ```
+        <pre class="output">
+        y:
+        [[[ 1  1  1  1]
+        [10 10 10 10]]
+
+        [[ 2  2  2  2]
+        [20 20 20 20]]
+
+        [[ 3  3  3  3]
+        [30 30 30 30]]]
+        y.shape:  (3, 2, 4)
+        z_correct:
+        [[ 1  1  1  1 10 10 10 10]
+        [ 2  2  2  2 20 20 20 20]
+        [ 3  3  3  3 30 30 30 30]]
+        z_correct.shape:  (3, 8)
+        </pre>
+
+        > This becomes difficult when we're dealing with weight tensors with random values in many machine learning tasks. So a good idea is to always create a dummy example like this when you’re unsure about reshaping. Blindly going by the tensor shape can lead to lots of issues downstream.
 
 ## Expanding / reducing
 We can also easily add and remove dimensions to our tensors and we'll want to do this to make tensors compatible for certain operations.

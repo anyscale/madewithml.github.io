@@ -18,7 +18,7 @@ So far we've implemented the components of our DataOps (cleaning, feature engine
 - **share** these workflows so others can use their outputs?
 - **monitor** these workflows separately?
 
-We'll need to break down our end-to-end ML pipeline into in it's constituent DataOps and MLOps pipelines that be orchestrated and scaled as needed. There are several tools that can help us create these pipelines and orchestrate our workflows such as [Airflow](http://airflow.apache.org/){:target="_blank"}, [Luigi](https://luigi.readthedocs.io/en/stable/){:target="_blank"} and even some ML focused options such as [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"} and [Dagster](https://dagster.io/){:target="_blank"}. We'll be creating our pipelines using AirFlow because of it's:
+We'll need to break down our end-to-end ML pipeline into in it's constituent DataOps and MLOps pipelines that be orchestrated and scaled as needed. There are several tools that can help us create these pipelines and orchestrate our workflows such as [Airflow](http://airflow.apache.org/){:target="_blank"}, [Luigi](https://luigi.readthedocs.io/en/stable/){:target="_blank"} and even some ML focused options such as [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"}, [Vertex pipelines](https://cloud.google.com/vertex-ai/docs/pipelines/introduction){:target="_blank"}, etc.. We'll be creating our pipelines using AirFlow because of it's:
 
 - wide adoption in industry and open source
 - Python based software development kit (SDK)

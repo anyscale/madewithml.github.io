@@ -23,13 +23,13 @@ At the core of CNNs are filters (aka weights, kernels, etc.) which convolve (sli
     - Small number of weights (shared)
     - Parallelizable
     - Detects spatial substrcutures (feature extractors)
-    - [Interpretability](https://arxiv.org/abs/1312.6034){:target="_blank"} via filters
+    - [Interpretability](#interpretability) via filters
     - Can be used for processing in images, text, time-series, etc.
 - **Disadvantages**:
     - Many hyperparameters (kernel size, strides, etc.) to tune.
 - **Miscellaneous**:
     - Lot's of deep CNN architectures constantly updated for SOTA performance.
-    - Very popular feature extractor that's usually prepended onto other architectures.
+    - Very popular feature extractor that acts as a foundation for many architectures.
 
 
 ## Set up
@@ -60,11 +60,11 @@ set_seeds(seed=SEED)
 ```python linenums="1"
 # Set device
 cuda = True
-device = torch.device('cuda' if (
-    torch.cuda.is_available() and cuda) else 'cpu')
-torch.set_default_tensor_type('torch.FloatTensor')
-if device.type == 'cuda':
-    torch.set_default_tensor_type('torch.cuda.FloatTensor')
+device = torch.device("cuda" if (
+    torch.cuda.is_available() and cuda) else "cpu")
+torch.set_default_tensor_type("torch.FloatTensor")
+if device.type == "cuda":
+    torch.set_default_tensor_type("torch.cuda.FloatTensor")
 print (device)
 ```
 <pre class="output">
@@ -128,8 +128,8 @@ from nltk.stem import PorterStemmer
 import re
 ```
 ```python linenums="1"
-nltk.download('stopwords')
-STOPWORDS = stopwords.words('english')
+nltk.download("stopwords")
+STOPWORDS = stopwords.words("english")
 print (STOPWORDS[:5])
 porter = PorterStemmer()
 ```
@@ -148,12 +148,12 @@ def preprocess(text, stopwords=STOPWORDS):
     pattern = re.compile(r'\b(' + r'|'.join(stopwords) + r')\b\s*')
     text = pattern.sub('', text)
 
-    # Remove words in paranthesis
+    # Remove words in parenthesis
     text = re.sub(r'\([^)]*\)', '', text)
 
     # Spacing and filters
-    text = re.sub(r"([-;;.,!?<=>])", r" \1 ", text)
-    text = re.sub('[^A-Za-z0-9]+', ' ', text) # remove non alphanumeric chars
+    text = re.sub(r"([-;;.,!?<=>])", r" \1 ", text)  # separate punctuation tied to words
+    text = re.sub('[^A-Za-z0-9]+', ' ', text)  # remove non alphanumeric chars
     text = re.sub(' +', ' ', text)  # remove multiple spaces
     text = text.strip()
 
@@ -178,9 +178,6 @@ Sharon Accepts Plan to Reduce Gaza Army Operation, Haaretz Says
 
 sharon accepts plan reduce gaza army operation haaretz says
 </pre>
-
-!!! warning
-    If you have preprocessing steps like standardization, etc. that are calculated, you need to separate the training and test set first before applying those operations. This is because we cannot apply any knowledge gained from the test set accidentally (data leak) during preprocessing/training. However for global preprocessing steps like the function above where we aren't learning anything from the data itself, we can perform before splitting the data.
 
 ### Split data
 ```python linenums="1"
@@ -260,13 +257,13 @@ class LabelEncoder(object):
         return classes
 
     def save(self, fp):
-        with open(fp, 'w') as fp:
+        with open(fp, "w") as fp:
             contents = {'class_to_index': self.class_to_index}
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
     def load(cls, fp):
-        with open(fp, 'r') as fp:
+        with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
@@ -368,24 +365,21 @@ class Tokenizer(object):
         return texts
 
     def save(self, fp):
-        with open(fp, 'w') as fp:
+        with open(fp, "w") as fp:
             contents = {
-                'char_level': self.char_level,
-                'oov_token': self.oov_token,
-                'token_to_index': self.token_to_index
+                "char_level": self.char_level,
+                "oov_token": self.oov_token,
+                "token_to_index": self.token_to_index
             }
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
     def load(cls, fp):
-        with open(fp, 'r') as fp:
+        with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
 We're going to restrict the number of tokens in our `Tokenizer` to the top 500 most frequent tokens (stop words already removed) because the full vocabulary size (~30K) is too large to run on Google Colab notebooks.
-
-!!! warning
-    It's important that we only fit using our train data split because during inference, our model will not always know every token so it's important to replicate that scenario with our validation and test splits as well.
 
 ```python linenums="1"
 # Tokenize
@@ -421,6 +415,12 @@ Text to indices:
   (preprocessed) → china &lt;UNK&gt; north korea nuclear talks
   (tokenized) → [ 16   1 285 142 114  24]
 </pre>
+
+!!! question "Did we need to split the data first?"
+    How come we applied the preprocessing functions to the entire dataset but tokenization after splitting the dataset? Does it matter?
+
+    ??? quote "Show answer"
+        If you have preprocessing steps like standardization, etc. that are calculated, you need to separate the training and test set first before applying those operations. This is because we cannot apply any knowledge gained from the test set accidentally (data leak) during preprocessing/training. So for the tokenization process, it's important that we only fit using our train data split because during inference, our model will not always know every token so it's important to replicate that scenario with our validation and test splits as well. However for global preprocessing steps, like the preprocessing function where we aren't learning anything from the data itself, we can perform before splitting the data.
 
 ## One-hot encoding
 One-hot encoding creates a binary column for each unique value for the feature we're trying to map.  All of the values in each token's array will be 0 except at the index that this specific token is represented by.
@@ -570,9 +570,9 @@ print ("Datasets:\n"
 ```
 <pre class="output">
 Datasets:
-  Train dataset:<Dataset(N=84000)>
-  Val dataset: <Dataset(N=18000)>
-  Test dataset: <Dataset(N=18000)>
+  Train dataset: &lt;Dataset(N=84000)&gt;
+  Val dataset: &lt;Dataset(N=18000)&gt;
+  Test dataset: &lt;Dataset(N=18000)&gt;
 Sample point:
   X: [[0. 0. 0. ... 0. 0. 0.]
  [0. 1. 0. ... 0. 0. 0.]
@@ -605,7 +605,7 @@ Sample point:
         ...,
         [0., 0., 0.,  ..., 0., 0., 0.],
         [0., 0., 0.,  ..., 0., 0., 0.],
-        [0., 0., 0.,  ..., 0., 0., 0.]], device='cpu')
+        [0., 0., 0.,  ..., 0., 0., 0.]], device="cpu")
   y: 1
 </pre>
 
@@ -1048,7 +1048,7 @@ loss_fn = nn.CrossEntropyLoss(weight=class_weights_tensor)
 # Define optimizer & scheduler
 optimizer = Adam(model.parameters(), lr=LEARNING_RATE)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-    optimizer, mode='min', factor=0.1, patience=3)
+    optimizer, mode="min", factor=0.1, patience=3)
 ```
 ```python linenums="1"
 # Trainer module
@@ -1114,7 +1114,7 @@ y_pred = np.argmax(y_prob, axis=1)
 # Determine performance
 performance = get_metrics(
     y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+print (json.dumps(performance["overall"], indent=2))
 ```
 <pre class="output">
 {
@@ -1128,9 +1128,9 @@ print (json.dumps(performance['overall'], indent=2))
 # Save artifacts
 dir = Path("cnn")
 dir.mkdir(parents=True, exist_ok=True)
-label_encoder.save(fp=Path(dir, 'label_encoder.json'))
+label_encoder.save(fp=Path(dir, "label_encoder.json"))
 tokenizer.save(fp=Path(dir, 'tokenizer.json'))
-torch.save(best_model.state_dict(), Path(dir, 'model.pt'))
+torch.save(best_model.state_dict(), Path(dir, "model.pt"))
 with open(Path(dir, 'performance.json'), "w") as fp:
     json.dump(performance, indent=2, sort_keys=False, fp=fp)
 ```
@@ -1149,12 +1149,12 @@ def get_probability_distribution(y_prob, classes):
 ```python linenums="1"
 # Load artifacts
 device = torch.device("cpu")
-label_encoder = LabelEncoder.load(fp=Path(dir, 'label_encoder.json'))
+label_encoder = LabelEncoder.load(fp=Path(dir, "label_encoder.json"))
 tokenizer = Tokenizer.load(fp=Path(dir, 'tokenizer.json'))
 model = CNN(
     vocab_size=VOCAB_SIZE, num_filters=NUM_FILTERS, filter_size=FILTER_SIZE,
     hidden_dim=HIDDEN_DIM, dropout_p=DROPOUT_P, num_classes=NUM_CLASSES)
-model.load_state_dict(torch.load(Path(dir, 'model.pt'), map_location=device))
+model.load_state_dict(torch.load(Path(dir, "model.pt"), map_location=device))
 model.to(device)
 ```
 <pre class="output">
@@ -1255,7 +1255,7 @@ interpretable_model = InterpretableCNN(
 ```
 ```python linenums="1"
 # Load weights (same architecture)
-interpretable_model.load_state_dict(torch.load(Path(dir, 'model.pt'), map_location=device))
+interpretable_model.load_state_dict(torch.load(Path(dir, "model.pt"), map_location=device))
 interpretable_model.to(device)
 ```
 <pre class="output">

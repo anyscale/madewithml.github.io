@@ -255,7 +255,7 @@ print (label_encoder)
 print (label_encoder.classes)
 ```
 <pre class="output">
-<LabelEncoder(num_classes=35)>
+&lt;LabelEncoder(num_classes=35)&gt;
 ['attention', 'autoencoders', 'computer-vision', 'convolutional-neural-networks', 'data-augmentation', 'embeddings', 'flask', 'generative-adversarial-networks', 'graph-neural-networks', 'graphs', 'huggingface', 'image-classification', 'interpretability', 'keras', 'language-modeling', 'natural-language-processing', 'node-classification', 'object-detection', 'pretraining', 'production', 'pytorch', 'question-answering', 'regression', 'reinforcement-learning', 'representation-learning', 'scikit-learn', 'segmentation', 'self-supervised-learning', 'tensorflow', 'tensorflow-js', 'time-series', 'transfer-learning', 'transformers', 'unsupervised-learning', 'wandb']
 </pre>
 ```python linenums="1"
@@ -982,9 +982,9 @@ print ("Data splits:\n"
 ```
 <pre class="output">
 Data splits:
-  Train dataset:<Dataset(N=1000)>
-  Val dataset: <Dataset(N=227)>
-  Test dataset: <Dataset(N=217)>
+  Train dataset: &lt;Dataset(N=1000)&gt;
+  Val dataset: &lt;Dataset(N=227)&gt;
+  Test dataset: &lt;Dataset(N=217)&gt;
 Sample point:
   X: [ 7 11 20 17 16  3  5  6  7  6  4 10  5  9  2 19  7  9  6  2  4 16  7 14
   3  2  7 17 14 16  3  5  6  7  6  4 10  5  2 11  4 20  8  7  8 21  2  3
@@ -1127,7 +1127,7 @@ model = model.to(device)
 print (model.named_parameters)
 ```
 <pre class="output">
-bound method Module.named_parameters of CNN(
+&lt;bound method Module.named_parameters of CNN(
   (embeddings): Embedding(39, 128, padding_idx=0)
   (conv): ModuleList(
     (0): Conv1d(128, 128, kernel_size=(1,), stride=(1,))
@@ -1144,7 +1144,7 @@ bound method Module.named_parameters of CNN(
   (dropout): Dropout(p=0.5, inplace=False)
   (fc1): Linear(in_features=1280, out_features=128, bias=True)
   (fc2): Linear(in_features=128, out_features=35, bias=True)
-)
+)&gt;
 </pre>
 
 ### Training
@@ -1219,8 +1219,6 @@ def find_best_threshold(y_true, y_prob):
     return thresholds[np.argmax(f1s)]
 ```
 
-> Even better to determine per-class thresholds but this is fine for now.
-
 ```python linenums="1"
 # Best threshold for f1
 threshold = find_best_threshold(y_true.ravel(), y_prob.ravel())
@@ -1229,6 +1227,14 @@ threshold
 <pre class="output">
 0.23890994
 </pre>
+
+!!! question "How can we do better?"
+    How can we improve on our process of identifying and using the appropriate threshold?
+
+    ??? quote "Show answer"
+        - [x] Plot PR curves for all classes (not just overall) to ensure a certain global threshold doesn't deliver very poor performance for any particular class
+        - [x] Determine different thresholds for different classes and use them during inference
+
 ```python linenums="1"
 # Determine predictions using threshold
 test_loss, y_true, y_prob = trainer.eval_step(dataloader=test_dataloader)

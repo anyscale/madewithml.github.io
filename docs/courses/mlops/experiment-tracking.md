@@ -233,11 +233,11 @@ The input argument `params`contains all the parameters needed and it's nice to h
 
         # Set device
         cuda = True
-        device = torch.device('cuda' if (
-            torch.cuda.is_available() and cuda) else 'cpu')
-        torch.set_default_tensor_type('torch.FloatTensor')
-        if device.type == 'cuda':
-            torch.set_default_tensor_type('torch.cuda.FloatTensor')
+        device = torch.device("cuda" if (
+            torch.cuda.is_available() and cuda) else "cpu")
+        torch.set_default_tensor_type("torch.FloatTensor")
+        if device.type == "cuda":
+            torch.set_default_tensor_type("torch.cuda.FloatTensor")
 
         # Tokenize
         tokenizer = Tokenizer(char_level=params.char_level)
@@ -284,7 +284,7 @@ The input argument `params`contains all the parameters needed and it's nice to h
         # Define optimizer & scheduler
         optimizer = torch.optim.Adam(model.parameters(), lr=params.lr)
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer, mode='min', factor=0.1, patience=5)
+            optimizer, mode="min", factor=0.1, patience=5)
 
         # Trainer module
         trainer = Trainer(

@@ -59,11 +59,11 @@ set_seeds(seed=SEED)
 ```python linenums="1"
 # Set device
 cuda = True
-device = torch.device('cuda' if (
-    torch.cuda.is_available() and cuda) else 'cpu')
-torch.set_default_tensor_type('torch.FloatTensor')
-if device.type == 'cuda':
-    torch.set_default_tensor_type('torch.cuda.FloatTensor')
+device = torch.device("cuda" if (
+    torch.cuda.is_available() and cuda) else "cpu")
+torch.set_default_tensor_type("torch.FloatTensor")
+if device.type == "cuda":
+    torch.set_default_tensor_type("torch.cuda.FloatTensor")
 print (device)
 ```
 <pre class="output">
@@ -135,8 +135,8 @@ from nltk.stem import PorterStemmer
 import re
 ```
 ```python linenums="1"
-nltk.download('stopwords')
-STOPWORDS = stopwords.words('english')
+nltk.download("stopwords")
+STOPWORDS = stopwords.words("english")
 print (STOPWORDS[:5])
 porter = PorterStemmer()
 ```
@@ -268,13 +268,13 @@ class LabelEncoder(object):
         return classes
 
     def save(self, fp):
-        with open(fp, 'w') as fp:
+        with open(fp, "w") as fp:
             contents = {'class_to_index': self.class_to_index}
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod
     def load(cls, fp):
-        with open(fp, 'r') as fp:
+        with open(fp, "r") as fp:
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
@@ -424,16 +424,16 @@ print ("Data splits:\n"
 ```
 <pre class="output">
 Data splits:
-  Train dataset:<Dataset(N=7000)>
-  Val dataset: <Dataset(N=1500)>
-  Test dataset: <Dataset(N=1500)>
+  Train dataset: &lt;Dataset(N=7000)&gt;
+  Val dataset: &lt;Dataset(N=1500)&gt;
+  Test dataset: &lt;Dataset(N=1500)&gt;
 Sample point:
   ids: tensor([  102,  6677,  1441,  3982, 17973,   103,     0,     0,     0,     0,
             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
             0,     0,     0,     0,     0,     0,     0])
   masks: tensor([1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0])
-  targets: tensor([1., 0., 0., 0.], device='cpu')
+  targets: tensor([1., 0., 0., 0.], device="cpu")
 </pre>
 
 ```python linenums="1"
@@ -705,7 +705,7 @@ print (model.named_parameters)
 ```
 
 <pre class="output">
-bound method Module.named_parameters of Transformer(
+&lt;bound method Module.named_parameters of Transformer(
   (transformer): BertModel(
     (embeddings): BertEmbeddings(
       (word_embeddings): Embedding(31090, 768, padding_idx=0)
@@ -774,7 +774,7 @@ bound method Module.named_parameters of Transformer(
   )
   (dropout): Dropout(p=0.5, inplace=False)
   (fc1): Linear(in_features=768, out_features=35, bias=True)
-)
+)&gt;
 </pre>
 
 ### Training
@@ -860,7 +860,7 @@ y_pred = np.argmax(y_prob, axis=1)
 # Determine performance
 performance = get_performance(
     y_true=np.argmax(y_true, axis=1), y_pred=y_pred, classes=label_encoder.classes)
-print (json.dumps(performance['overall'], indent=2))
+print (json.dumps(performance["overall"], indent=2))
 ```
 
 <pre class="output">
@@ -932,16 +932,16 @@ print ("Data splits:\n"
 
 <pre class="output">
 Data splits:
-  Train dataset:<Dataset(N=7000)>
-  Val dataset: <Dataset(N=1500)>
-  Test dataset: <Dataset(N=1500)>
+  Train dataset: &lt;Dataset(N=7000)&gt;
+  Val dataset: &lt;Dataset(N=1500)&gt;
+  Test dataset: &lt;Dataset(N=1500)&gt;
 Sample point:
   ids: tensor([  102,  6677,  1441,  3982, 17973,   103,     0,     0,     0,     0,
             0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
             0,     0,     0,     0,     0,     0,     0])
   masks: tensor([1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0])
-  targets: tensor([1., 0., 0., 0.], device='cpu')
+  targets: tensor([1., 0., 0., 0.], device="cpu")
 </pre>
 
 
@@ -1007,7 +1007,7 @@ print (tokenizer.batch_decode(ids))
 
 <pre class="output">
 tensor([[  102,  2531,  3617,  8869, 23589,  4972,  8553,  2205,  4082,   103]],
-       device='cpu')
+       device="cpu")
 ['[CLS] final tennis tournament starts next week [SEP]']
 </pre>
 

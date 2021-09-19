@@ -268,7 +268,7 @@ print(f"Values: \n{chosen}")
 
 row_indices = torch.LongTensor([0, 1])
 col_indices = torch.LongTensor([0, 2])
-chosen = x[row_indices, col_indices] # values from (0, 0) & (2, 1)
+chosen = x[row_indices, col_indices] # values from (0, 0) & (1, 2)
 print(f"Values: \n{chosen}")
 ```
 <pre class="output">
@@ -302,10 +302,7 @@ tensor([[ 0.5548, -0.0845,  0.5903],
 </pre>
 
 ## Gradients
-We can determine gradients (rate of change) of our tensors with respect to their constituents using gradient bookkeeping. This will be useful when we're training our models using backpropagation where we'll use these gradients to optimize our weights with the goals of lowering our objective function (loss).
-
-!!! note
-    Don't worry if you're not familiar with these terms, we'll cover all of them in detail in the next lesson.
+We can determine gradients (rate of change) of our tensors with respect to their constituents using gradient bookkeeping. The gradient is a vector that points in the direction of greatest increase of a function. We'll be using gradients in the [next lesson](linear-regression.md#gradients){:target="_blank"} to determine how to change our weights to affect a particular objective function (ex. loss).
 
 $$ y = 3x + 2 $$
 
@@ -358,7 +355,7 @@ True
 </pre>
 ```python linenums="1"
 # Set device
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print (device)
 ```
 <pre class="output">
@@ -367,7 +364,7 @@ cuda
 ```python linenums="1"
 x = torch.rand(2,3)
 print (x.is_cuda)
-x = torch.rand(2,3).to(device) # sTensor is stored on the GPU
+x = torch.rand(2,3).to(device) # Tensor is stored on the GPU
 print (x.is_cuda)
 ```
 <pre class="output">

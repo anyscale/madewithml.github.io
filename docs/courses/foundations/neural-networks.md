@@ -133,8 +133,8 @@ df.head()
 
 ```python linenums="1"
 # Data shapes
-X = df[['X1', 'X2']].values
-y = df['color'].values
+X = df[["X1", "X2"]].values
+y = df["color"].values
 print ("X: ", np.shape(X))
 print ("y: ", np.shape(y))
 ```
@@ -145,8 +145,8 @@ y:  (1500,)
 ```python linenums="1"
 # Visualize data
 plt.title("Generated non-linear data")
-colors = {'c1': 'red', 'c2': 'yellow', 'c3': 'blue'}
-plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], edgecolors='k', s=25)
+colors = {"c1": "red", "c2": "yellow", "c3": "blue"}
+plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], edgecolors="k", s=25)
 plt.show()
 ```
 <div class="ai-center-all">
@@ -204,7 +204,7 @@ classes = list(label_encoder.classes_)
 print (f"classes: {classes}")
 ```
 <pre class="output">
-classes: ['c1', 'c2', 'c3']
+classes: ["c1", "c2", "c3"]
 </pre>
 ```python linenums="1"
 # Convert labels to tokens
@@ -299,10 +299,10 @@ print (model.named_parameters)
 ```
 <pre class="output">
 Model:
-<bound method Module.named_parameters of LinearModel(
+&lt;bound method Module.named_parameters of LinearModel(
   (fc1): Linear(in_features=2, out_features=100, bias=True)
   (fc2): Linear(in_features=100, out_features=3, bias=True)
-)>
+)&gt;
 </pre>
 
 ### Training
@@ -847,7 +847,7 @@ def plot_multiclass_decision_boundary_numpy(model, X, y, savefig_fp=None):
 
     # Plot
     if savefig_fp:
-        plt.savefig(savefig_fp, format='png')
+        plt.savefig(savefig_fp, format="png")
 ```
 ```python linenums="1"
 # Visualize the decision boundary
@@ -889,10 +889,10 @@ model = MLP(input_dim=INPUT_DIM, hidden_dim=HIDDEN_DIM, num_classes=NUM_CLASSES)
 print (model.named_parameters)
 ```
 <pre class="output">
-<bound method Module.named_parameters of MLP(
+&lt;bound method Module.named_parameters of MLP(
   (fc1): Linear(in_features=2, out_features=100, bias=True)
   (fc2): Linear(in_features=100, out_features=3, bias=True)
-)>
+)&gt;
 </pre>
 
 ### Training
@@ -1018,7 +1018,7 @@ Let's look at the inference operations when using our trained model.
 
 ```python linenums="1"
 # Inputs for inference
-X_infer = pd.DataFrame([{'X1': 0.1, 'X2': 0.1}])
+X_infer = pd.DataFrame([{"X1": 0.1, "X2": 0.1}])
 ```
 ```python linenums="1"
 # Standardize
@@ -1040,10 +1040,10 @@ The probability that you have c1 is 92%
 </pre>
 
 ## Initializing weights
-So far we have been initializing weights with small random values and this isn't optimal for convergence during training. The objective is to have weights that are able to produce outputs that follow a similar distribution across all neurons. We can do this by enforcing weights to have unit variance prior the affine and non-linear operations.
+So far we have been initializing weights with small random values and this isn't optimal for convergence during training. The objective is to have weights that are able to produce outputs that follow a similar distribution across all neurons. We can do this by enforcing weights to have unit variance prior to the affine and non-linear operations.
 
 !!! note
-    A popular method is to apply [xavier initialization](http://andyljones.tumblr.com/post/110998971763/an-explanation-of-xavier-initialization){:target="_blank"}, which essentially initializes the weights to allow the signal from the data to reach deep into the network. You may be wondering why we don't do this for every forward pass and that's a great question. We'll look at more advanced strategies that help with optimization like batch/layer normalization, etc. in future lessons. Meanwhile you can check out other initializers [here](https://pytorch.org/docs/stable/nn.init.html){:target="_blank"}.
+    A popular method is to apply [xavier initialization](http://andyljones.tumblr.com/post/110998971763/an-explanation-of-xavier-initialization){:target="_blank"}, which essentially initializes the weights to allow the signal from the data to reach deep into the network. You may be wondering why we don't do this for every forward pass and that's a great question. We'll look at more advanced strategies that help with optimization like [batch normalization](convolutional-neural-networks.md#batch-normalization){:target="_blank"}, etc. in future lessons. Meanwhile you can check out other initializers [here](https://pytorch.org/docs/stable/nn.init.html){:target="_blank"}.
 
 ```python linenums="1"
 from torch.nn import init
@@ -1056,7 +1056,7 @@ class MLP(nn.Module):
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
     def init_weights(self):
-        init.xavier_normal(self.fc1.weight, gain=init.calculate_gain('relu'))
+        init.xavier_normal(self.fc1.weight, gain=init.calculate_gain("relu"))
 
     def forward(self, x_in, apply_softmax=False):
         z = F.relu(self.fc1(x_in)) # ReLU activaton function added!
@@ -1092,7 +1092,7 @@ class MLP(nn.Module):
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
     def init_weights(self):
-        init.xavier_normal(self.fc1.weight, gain=init.calculate_gain('relu'))
+        init.xavier_normal(self.fc1.weight, gain=init.calculate_gain("relu"))
 
     def forward(self, x_in, apply_softmax=False):
         z = F.relu(self.fc1(x_in))
@@ -1109,15 +1109,15 @@ model = MLP(input_dim=INPUT_DIM, hidden_dim=HIDDEN_DIM,
 print (model.named_parameters)
 ```
 <pre class="output">
-<bound method Module.named_parameters of MLP(
+&lt;bound method Module.named_parameters of MLP(
   (fc1): Linear(in_features=2, out_features=100, bias=True)
   (dropout): Dropout(p=0.1, inplace=False)
   (fc2): Linear(in_features=100, out_features=3, bias=True)
-)>
+)&gt;
 </pre>
 
 ## Overfitting
-Though neural networks are great at capturing non-linear relationships they are highly susceptible to overfitting to the training data and failing to generalize on test data. Just take a look at the example below where we generate completely random data and are able to fit a model with [$2*N*C + D$](https://arxiv.org/abs/1611.03530){:target="_blank"} hidden units. The training performance is good (~70%) but the overfitting leads to very poor test performance. We'll be covering strategies to tackle overfitting in future lessons.
+Though neural networks are great at capturing non-linear relationships they are highly susceptible to overfitting to the training data and failing to generalize on test data. Just take a look at the example below where we generate completely random data and are able to fit a model with [$2*N*C + D$](https://arxiv.org/abs/1611.03530){:target="_blank"} (where `N` = # of samples, `C` = # of classes and `D` = input dimension) hidden units. The training performance is good (~70%) but the overfitting leads to very poor test performance. We'll be covering strategies to tackle overfitting in future lessons.
 
 ```python linenums="1"
 NUM_EPOCHS = 500
@@ -1174,11 +1174,11 @@ model = MLP(input_dim=INPUT_DIM, hidden_dim=HIDDEN_DIM,
 print (model.named_parameters)
 ```
 <pre class="output">
-<bound method Module.named_parameters of MLP(
+&lt;bound method Module.named_parameters of MLP(
   (fc1): Linear(in_features=2, out_features=302, bias=True)
   (dropout): Dropout(p=0.1, inplace=False)
   (fc2): Linear(in_features=302, out_features=3, bias=True)
-)>
+)&gt;
 </pre>
 ```python linenums="1"
 # Optimizer

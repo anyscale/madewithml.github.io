@@ -121,7 +121,7 @@ These are the different features:
 Now that we loaded our data, we're ready to start exploring it to find interesting information.
 
 !!! note
-    Be sure to check out our entire lesson focused on [EDA](https://madewithml.com/courses/mlops/exploratory-data-analysis/){:target="_blank"} in our [mlops](https://madewithml.com/courses/mlops/){:target="_blank"} course.
+    Be sure to check out our entire lesson focused on [EDA](https://madewithml.com/courses/mlops/exploratory-data-analysis/){:target="_blank"} in our [MLOps](https://madewithml.com/courses/mlops/){:target="_blank"} course.
 
 ```python linenums="1"
 import matplotlib.pyplot as plt
@@ -227,8 +227,8 @@ df.describe()
 # Correlation matrix
 plt.matshow(df.corr())
 continuous_features = df.describe().columns
-plt.xticks(range(len(continuous_features)), continuous_features, rotation='45')
-plt.yticks(range(len(continuous_features)), continuous_features, rotation='45')
+plt.xticks(range(len(continuous_features)), continuous_features, rotation="45")
+plt.yticks(range(len(continuous_features)), continuous_features, rotation="45")
 plt.colorbar()
 plt.show()
 ```
@@ -240,7 +240,7 @@ plt.show()
 We can also use `.hist()` to view the histrogram of values for each feature.
 ```python linenums="1"
 # Histograms
-df['age'].hist()
+df["age"].hist()
 ```
 <pre class="output"></pre>
 <div class="ai-center-all">
@@ -249,7 +249,7 @@ df['age'].hist()
 
 ```python linenums="1"
 # Unique values
-df['embarked'].unique()
+df["embarked"].unique()
 ```
 <pre class="output">
 array(['S', 'C', nan, 'Q'], dtype=object)
@@ -261,7 +261,7 @@ array(['S', 'C', nan, 'Q'], dtype=object)
 We can filter our data by features and even by specific values (or value ranges) within specific features.
 ```python linenums="1"
 # Selecting data by feature
-df['name'].head()
+df["name"].head()
 ```
 <pre class="output">
 0                      Allen, Miss. Elisabeth Walton
@@ -273,7 +273,7 @@ Name: name, dtype: object
 </pre>
 ```python linenums="1"
 # Filtering
-df[df['sex']=='female'].head() # only the female data appear
+df[df["sex"]=="female"].head() # only the female data appear
 ```
 
 <div class="output_subarea output_html rendered_html"><div>
@@ -375,7 +375,7 @@ df[df['sex']=='female'].head() # only the female data appear
 We can also sort our features in ascending or descending order.
 ```python linenums="1"
 # Sorting
-df.sort_values('age', ascending=False).head()
+df.sort_values("age", ascending=False).head()
 ```
 <div class="output_subarea output_html rendered_html"><div>
 <table border="1" class="dataframe">
@@ -476,7 +476,7 @@ df.sort_values('age', ascending=False).head()
 We can also get statistics across our features for certain groups. Here we wan to see the average of our continuous features based on whether the passenger survived or not.
 ```python linenums="1"
 # Grouping
-survived_group = df.groupby('survived')
+survived_group = df.groupby("survived")
 survived_group.mean()
 ```
 <div class="output_subarea output_html rendered_html"><div>
@@ -546,7 +546,7 @@ df.iloc[0, 1]
 After exploring, we can clean and preprocess our dataset.
 
 !!! note
-    Be sure to check out our entire lesson focused on [preprocessing](https://madewithml.com/courses/mlops/preprocessing/){:target="_blank"} in our [mlops](https://madewithml.com/courses/mlops/){:target="_blank"} course.
+    Be sure to check out our entire lesson focused on [preprocessing](https://madewithml.com/courses/mlops/preprocessing/){:target="_blank"} in our [MLOps](https://madewithml.com/courses/mlops/){:target="_blank"} course.
 
 ```python linenums="1"
 # Rows with at least one NaN value
@@ -752,7 +752,7 @@ df.head()
 
 ```python linenums="1"
 # Dropping multiple columns
-df = df.drop(['name', 'cabin', 'ticket'], axis=1) # we won't use text features for our initial basic models
+df = df.drop(["name", "cabin", "ticket"], axis=1) # we won't use text features for our initial basic models
 df.head()
 ```
 <div class="output_subarea output_html rendered_html"><div>
@@ -838,8 +838,8 @@ df.head()
 
 ```python linenums="1"
 # Map feature values
-df['sex'] = df['sex'].map( {'female': 0, 'male': 1} ).astype(int)
-df['embarked'] = df['embarked'].dropna().map( {'S':0, 'C':1, 'Q':2} ).astype(int)
+df["sex"] = df["sex"].map( {"female": 0, "male": 1} ).astype(int)
+df["embarked"] = df["embarked"].dropna().map( {"S":0, "C":1, "Q":2} ).astype(int)
 df.head()
 ```
 <div class="output_subarea output_html rendered_html"><div>
@@ -1027,7 +1027,7 @@ df.head()
 
 ```python linenums="1"
 # Reorganize headers
-df = df[['pclass', 'sex', 'age', 'sibsp', 'parch', 'family_size', 'fare', 'embarked', 'survived']]
+df = df[["pclass", "sex", "age", "sibsp", "parch", "family_size", "fare", '"mbarked", "survived"]]
 df.head()
 ```
 <div class="output_subarea output_html rendered_html"><div>
@@ -1117,7 +1117,7 @@ df.head()
 Finally, let's save our preprocessed data into a new CSV file to use later.
 ```python linenums="1"
 # Saving dataframe to CSV
-df.to_csv('processed_titanic.csv', index=False)
+df.to_csv("processed_titanic.csv", index=False)
 ```
 ```python linenums="1"
 # See the saved file
