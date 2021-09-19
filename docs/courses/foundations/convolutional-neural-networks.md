@@ -898,7 +898,7 @@ model = model.to(device) # set device
 print (model.named_parameters)
 ```
 <pre class="output">
-&lt;*bound method Module.named_parameters of CNN(
+&lt;bound method Module.named_parameters of CNN(
   (conv): Conv1d(500, 50, kernel_size=(1,), stride=(1,))
   (batch_norm): BatchNorm1d(50, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
   (fc1): Linear(in_features=50, out_features=100, bias=True)
@@ -916,7 +916,7 @@ $$ \frac{\text{max_seq_len } - \text{ filter_size } + 2P}{\text{stride}} + 1 = \
 
 $$ P = \frac{\text{stride}(\text{max_seq_len}-1) - \text{max_seq_len} + \text{filter_size}}{2} $$
 
-If $$P$$ is not a whole number, we round up (using `math.ceil`) and place the extra padding on the right side.
+If $P$ is not a whole number, we round up (using `math.ceil`) and place the extra padding on the right side.
 
 ### Training
 Let's create the `Trainer` class that we'll use to facilitate training for our experiments. Notice that we're now moving the `train` function inside this class.
@@ -1291,7 +1291,7 @@ sns.heatmap(conv_outputs, xticklabels=tokens)
 The filters have high values for the words `stock` and `market` which influenced the `Business` category classification.
 
 !!! warning
-    This is a crude technique (maxpool doesn't strictly behave this way on a batch) loosely based off of more elaborate [interpretability](https://arxiv.org/abs/1312.6034){:target="_blank"} methods.
+    This is a crude technique loosely based off of more elaborate [interpretability](https://arxiv.org/abs/1312.6034){:target="_blank"} methods.
 
 
 <!-- Citation -->

@@ -12,6 +12,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/
 
 ## Overview
 While one-hot encoding allows us to preserve the structural information, it does poses two major disadvantages.
+
 - linearly dependent on the number of unique tokens in our vocabulary, which is a problem if we're dealing with a large corpus.
 - representation for each token does not preserve any relationship with respect to other tokens.
 
