@@ -461,13 +461,13 @@ $$ \hat{y}_{unscaled} = W_{unscaled}x + b_{unscaled} $$
 ```python linenums="1"
 # Unscaled weights
 W_unscaled = W * (y_std/X_std)
-b_unscaled = b * y_std + y_mean - np.sum(W_unscaled*X_mean)
+b_unscaled = b * y_std + y_mean - np.sum(W*X_mean)
 print ("[actual] y = 3.5X + noise")
 print (f"[model] y_hat = {W_unscaled[0][0]:.1f}X + {b_unscaled[0]:.1f}")
 ```
 <pre class="output">
 [actual] y = 3.5X + noise
-[model] y_hat = 3.4X + 7.8
+[model] y_hat = 3.4X + 73.6
 </pre>
 
 
@@ -780,13 +780,13 @@ Linear regression offers the great advantage of being highly interpretable. Each
 W = model.fc1.weight.data.numpy()[0][0]
 b = model.fc1.bias.data.numpy()[0]
 W_unscaled = W * (y_scaler.scale_/X_scaler.scale_)
-b_unscaled = b * y_scaler.scale_ + y_scaler.mean_ - np.sum(W_unscaled*X_scaler.mean_)
+b_unscaled = b * y_scaler.scale_ + y_scaler.mean_ - np.sum(W*X_scaler.mean_)
 print ("[actual] y = 3.5X + noise")
 print (f"[model] y_hat = {W_unscaled[0]:.1f}X + {b_unscaled[0]:.1f}")
 ```
 <pre class="output">
 [actual] y = 3.5X + noise
-[model] y_hat = 3.4X + 8.0
+[model] y_hat = 3.4X + 72.4
 </pre>
 
 

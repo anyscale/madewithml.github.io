@@ -88,7 +88,7 @@ Snape nodded, but did not elaborate.
 ['snape', 'nodded', 'but', 'did', 'not', 'elaborate']
 </pre>
 
-But how do we learn the embeddings the first place? The intuition behind embeddings is that the definition of a token depends on the token itself but on its context. There are several different ways of doing this:
+But how do we learn the embeddings the first place? The intuition behind embeddings is that the definition of a token doesn't depend on the token itself but on its context. There are several different ways of doing this:
 
 1. Given the word in the context, predict the target word (CBOW - continuous bag of words).
 2. Given the target word, predict the context word (skip-gram).
@@ -103,7 +103,7 @@ All of these approaches involve create data to train our model on. Every word in
 We can learn embeddings using any of these approaches above and some work better than others. You can inspect the learned embeddings but the best way to choose an approach is to empirically validate the performance on a supervised task.
 
 ### Word2Vec
-When we have large vocabularies to learn embeddings for, things can get complex very quickly. Recall that the backpropagation with softmax updates both the correct and incorrect class weights. This becomes a massive computation for every backwas pass we do so a workaround is to use [negative sampling](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/){:target="_blank"} which only updates the correct class and a few arbitrary incorrect classes (`NEGATIVE_SAMPLING`=20). We're able to do this because of the large amount of training data where we'll see the same word as the target class multiple times.
+When we have large vocabularies to learn embeddings for, things can get complex very quickly. Recall that the backpropagation with softmax updates both the correct and incorrect class weights. This becomes a massive computation for every backwards pass we do so a workaround is to use [negative sampling](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/){:target="_blank"} which only updates the correct class and a few arbitrary incorrect classes (`NEGATIVE_SAMPLING`=20). We're able to do this because of the large amount of training data where we'll see the same word as the target class multiple times.
 
 ```python linenums="1"
 import gensim
@@ -233,7 +233,7 @@ def plot_embeddings(words, embeddings, pca_results):
 ```
 ```python linenums="1"
 # Unzip the file (may take ~3-5 minutes)
-resp = urlopen('http://nlp.stanford.edu/data/glove.6B.zip')
+resp = urlopen("http://nlp.stanford.edu/data/glove.6B.zip")
 zipfile = ZipFile(BytesIO(resp.read()))
 zipfile.namelist()
 ```
@@ -245,7 +245,7 @@ zipfile.namelist()
 </pre>
 ```python linenums="1"
 # Write embeddings to file
-embeddings_file = 'glove.6B.{0}d.txt'.format(EMBEDDING_DIM)
+embeddings_file = "glove.6B.{0}d.txt".format(EMBEDDING_DIM)
 zipfile.extract(embeddings_file)
 ```
 <pre class="output">
@@ -296,6 +296,7 @@ glove = KeyedVectors.load_word2vec_format(word2vec_output_file, binary=False)
 ```
 ```python linenums="1"
 # (king - man) + woman = ?
+# king - man = ? -  woman
 glove.most_similar(positive=["woman", "king"], negative=["man"], topn=5)
 ```
 <pre class="output">
@@ -306,7 +307,7 @@ glove.most_similar(positive=["woman", "king"], negative=["man"], topn=5)
  ('princess', 0.6520534753799438)]
 </pre>
 ```python linenums="1"
-# Get nearest neighbors (exlcusing itself)
+# Get nearest neighbors (excluding itself)
 glove.wv.most_similar(positive="goku", topn=5)
 ```
 <pre class="output">
@@ -1419,9 +1420,9 @@ from pathlib import Path
 dir = Path("cnn")
 dir.mkdir(parents=True, exist_ok=True)
 label_encoder.save(fp=Path(dir, "label_encoder.json"))
-tokenizer.save(fp=Path(dir, 'tokenizer.json'))
+tokenizer.save(fp=Path(dir, "tokenizer.json"))
 torch.save(best_model.state_dict(), Path(dir, "model.pt"))
-with open(Path(dir, 'performance.json'), "w") as fp:
+with open(Path(dir, "performance.json"), "w") as fp:
     json.dump(performance, indent=2, sort_keys=False, fp=fp)
 ```
 
@@ -1440,7 +1441,7 @@ def get_probability_distribution(y_prob, classes):
 # Load artifacts
 device = torch.device("cpu")
 label_encoder = LabelEncoder.load(fp=Path(dir, "label_encoder.json"))
-tokenizer = Tokenizer.load(fp=Path(dir, 'tokenizer.json'))
+tokenizer = Tokenizer.load(fp=Path(dir, "tokenizer.json"))
 model = CNN(
     embedding_dim=EMBEDDING_DIM, vocab_size=VOCAB_SIZE,
     num_filters=NUM_FILTERS, filter_sizes=FILTER_SIZES,
