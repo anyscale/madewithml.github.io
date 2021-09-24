@@ -34,7 +34,7 @@ We can learn embeddings by creating our models in PyTorch but first, we're going
 
 ```python linenums="1"
 import nltk
-nltk.download('punkt');
+nltk.download("punkt");
 import numpy as np
 import re
 import urllib
@@ -68,8 +68,8 @@ def preprocess(text):
 
     # Spacing and filters
     text = re.sub(r"([-;;.,!?<=>])", r" \1 ", text)
-    text = re.sub('[^A-Za-z0-9]+', ' ', text) # remove non alphanumeric chars
-    text = re.sub(' +', ' ', text)  # remove multiple spaces
+    text = re.sub("[^A-Za-z0-9]+", " ", text) # remove non alphanumeric chars
+    text = re.sub(" +", " ", text)  # remove multiple spaces
     text = text.strip()
 
     # Separate into word tokens
@@ -464,16 +464,16 @@ def preprocess(text, stopwords=STOPWORDS):
     text = text.lower()
 
     # Remove stopwords
-    pattern = re.compile(r'\b(' + r'|'.join(stopwords) + r')\b\s*')
-    text = pattern.sub('', text)
+    pattern = re.compile(r"\b(" + r"|".join(stopwords) + r")\b\s*")
+    text = pattern.sub("", text)
 
     # Remove words in paranthesis
-    text = re.sub(r'\([^)]*\)', '', text)
+    text = re.sub(r"\([^)]*\)", "", text)
 
     # Spacing and filters
     text = re.sub(r"([-;;.,!?<=>])", r" \1 ", text)
-    text = re.sub('[^A-Za-z0-9]+', ' ', text) # remove non alphanumeric chars
-    text = re.sub(' +', ' ', text)  # remove multiple spaces
+    text = re.sub("[^A-Za-z0-9]+", " ", text) # remove non alphanumeric chars
+    text = re.sub(" +", " ", text)  # remove multiple spaces
     text = text.strip()
 
     return text
@@ -633,10 +633,10 @@ from more_itertools import take
 ```python linenums="1"
 class Tokenizer(object):
     def __init__(self, char_level, num_tokens=None,
-                 pad_token='<PAD>', oov_token='<UNK>',
+                 pad_token="<PAD>", oov_token="<UNK>",
                  token_to_index=None):
         self.char_level = char_level
-        self.separator = '' if self.char_level else ' '
+        self.separator = "" if self.char_level else " "
         if num_tokens: num_tokens -= 2 # pad + unk tokens
         self.num_tokens = num_tokens
         self.pad_token = pad_token
@@ -668,7 +668,7 @@ class Tokenizer(object):
         sequences = []
         for text in texts:
             if not self.char_level:
-                text = text.split(' ')
+                text = text.split(" ")
             sequence = []
             for token in text:
                 sequence.append(self.token_to_index.get(
@@ -1611,7 +1611,7 @@ print (conv_outputs.shape) # (len(filter_sizes), num_filters, max_seq_len)
 </pre>
 ```python linenums="1"
 # Visualize a bi-gram filter's outputs
-tokens = tokenizer.sequences_to_texts(X)[0].split(' ')
+tokens = tokenizer.sequences_to_texts(X)[0].split(" ")
 sns.heatmap(conv_outputs[1], xticklabels=tokens)
 ```
 <div class="ai-center-all">

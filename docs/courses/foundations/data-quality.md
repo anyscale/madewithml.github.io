@@ -108,8 +108,8 @@ y:  (1000,)
 # Plot data
 colors = {"benign": "red", "malignant": "blue"}
 plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], s=25, edgecolors="k")
-plt.xlabel('leukocyte count')
-plt.ylabel('blood pressure')
+plt.xlabel("leukocyte count")
+plt.ylabel("blood pressure")
 plt.legend(["malignant", "benign"], loc="upper right")
 plt.show()
 ```
@@ -547,8 +547,8 @@ y:  (720,)
 # Plot data
 colors = {"benign": "red", "malignant": "blue"}
 plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], s=25, edgecolors="k")
-plt.xlabel('leukocyte count')
-plt.ylabel('blood pressure')
+plt.xlabel("leukocyte count")
+plt.ylabel("blood pressure")
 plt.legend(["malignant", "benign"], loc="upper right")
 plt.show()
 ```
@@ -716,7 +716,7 @@ plt.scatter(mean_leukocyte_count+0.05, mean_blood_pressure-0.05, s=200,
             c="b", edgecolor="w", linewidth=2)
 
 # Annotate
-plt.annotate('true: malignant,\npred: benign',
+plt.annotate("true: malignant,\npred: benign",
              color="white",
              xy=(mean_leukocyte_count, mean_blood_pressure),
              xytext=(0.45, 0.60),

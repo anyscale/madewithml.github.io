@@ -135,8 +135,8 @@ y = df["tumor_class"].values
 # Plot data
 colors = {"benign": "red", "malignant": "blue"}
 plt.scatter(X[:, 0], X[:, 1], c=[colors[_y] for _y in y], s=25, edgecolors="k")
-plt.xlabel('leukocyte count')
-plt.ylabel('blood pressure')
+plt.xlabel("leukocyte count")
+plt.ylabel("blood pressure")
 plt.legend(["malignant", "benign"], loc="upper right")
 plt.show()
 ```

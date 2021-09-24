@@ -269,7 +269,7 @@ class StandardScaler(object):
 
     def save(self, fp):
         with open(fp, "w") as fp:
-            contents = {'mean': self.mean.tolist(), 'std': self.std.tolist()}
+            contents = {"mean": self.mean.tolist(), "std": self.std.tolist()}
             json.dump(contents, fp, indent=4, sort_keys=False)
 
     @classmethod

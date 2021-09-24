@@ -456,6 +456,51 @@ z.shape:  (2, 3)
 
         > This becomes difficult when we're dealing with weight tensors with random values in many machine learning tasks. So a good idea is to always create a dummy example like this when you’re unsure about reshaping. Blindly going by the tensor shape can lead to lots of issues downstream.
 
+## Joining
+
+We can also join our tensors via [concatentation](https://numpy.org/doc/stable/reference/generated/numpy.concatenate.html){:target="_blank"} or [stacking](https://numpy.org/doc/stable/reference/generated/numpy.stack.html){:target="_blank"}.
+
+```python linenums="1"
+x = np.random.random((2, 3))
+print (x)
+print (x.shape)
+```
+<pre class="output">
+[[0.79564718 0.73023418 0.92340453]
+ [0.24929281 0.0513762  0.66149188]]
+(2, 3)
+</pre>
+
+```python linenums="1"
+# Concatenation
+y = np.concatenate([x, x], axis=0) # concat on a specified axis
+print (y)
+print (y.shape)
+```
+<pre class="output">
+[[0.79564718 0.73023418 0.92340453]
+ [0.24929281 0.0513762  0.66149188]
+ [0.79564718 0.73023418 0.92340453]
+ [0.24929281 0.0513762  0.66149188]]
+(4, 3)
+</pre>
+
+```python linenums="1"
+# Stacking
+z = np.stack([x, x], axis=0) # stack on new axis
+print (z)
+print (z.shape)
+```
+<pre class="output">
+[[[0.79564718 0.73023418 0.92340453]
+  [0.24929281 0.0513762  0.66149188]]
+
+ [[0.79564718 0.73023418 0.92340453]
+  [0.24929281 0.0513762  0.66149188]]]
+(2, 2, 3)
+</pre>
+
+
 ## Expanding / reducing
 We can also easily add and remove dimensions to our tensors and we'll want to do this to make tensors compatible for certain operations.
 

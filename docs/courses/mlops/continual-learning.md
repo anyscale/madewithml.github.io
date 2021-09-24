@@ -35,7 +35,7 @@ Starting backwards from our update workflow, there are so many moving pieces inv
 
 ### Retraining
 
-If the appropriate action is to retrain, it’s not just the matter of fact of retraining on the old data + new data (if only it was that easy)! There’s an entire workflow (often human-in-the-loop) that is responsible for composing the retraining dataset. We use the word “compose” because it really is an art. Labeling, active learning, views for domain experts, quality assurance, augmentation, up/down sampling, evaluation dataset with appropriate slice representations, etc. Read more about the nuances of this process in our [data-centric AI lesson](data-centric-ai.md){:target="_blank"} which focuses on data-driven development and treating data as the first class citizen.
+If the appropriate action is to retrain, it’s not just the matter of fact of retraining on the old data + new data (if only it was that easy)! There’s an entire workflow (often human-in-the-loop) that is responsible for composing the retraining dataset. We use the word “compose” because it really is an art. Labeling, active learning, views for domain experts, quality assurance, augmentation, up/down sampling, evaluation dataset with appropriate slice representations, etc. Read more about the nuances of this process in our [data-driven development lesson](data-driven-development.md){:target="_blank"} which focuses on data-driven development and treating data as the first class citizen.
 
 ### Evaluation
 

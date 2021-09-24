@@ -978,12 +978,11 @@ We will be applying the concepts we learn each week to iteratively complete two 
                 <small><div>Oct 24th, 2021</div></small>
                 <small><div>7 am - 10 am PT</div></small>
                 </div>
-                <div><a data-toggle="collapse" href="#collapseNavigationSeries" aria-expanded="false" aria-controls="collapseNavigationSeries">Reflection and next steps</a></div>
-                <div class="collapse multi-collapse" id="collapseNavigationSeries">
+                <div><a data-toggle="collapse" href="#collapseReflection" aria-expanded="false" aria-controls="collapseReflection">Reflection and next steps</a></div>
+                <div class="collapse multi-collapse" id="collapseReflection">
                     <ul class="ai-course-list">
                     <li>How to continue the learning journey</li>
                     <li>How to continue building personal brand</li>
-                    <li>How to participate in future cohorts</li>
                     </ul>
                 </div>
             </div>

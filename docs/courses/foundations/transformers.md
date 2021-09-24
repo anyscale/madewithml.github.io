@@ -152,16 +152,16 @@ def preprocess(text, stopwords=STOPWORDS):
     text = text.lower()
 
     # Remove stopwords
-    pattern = re.compile(r'\b(' + r'|'.join(stopwords) + r')\b\s*')
-    text = pattern.sub('', text)
+    pattern = re.compile(r"\b(" + r"|".join(stopwords) + r")\b\s*")
+    text = pattern.sub("", text)
 
     # Remove words in paranthesis
-    text = re.sub(r'\([^)]*\)', '', text)
+    text = re.sub(r"\([^)]*\)", "", text)
 
     # Spacing and filters
     text = re.sub(r"([-;;.,!?<=>])", r" \1 ", text)
-    text = re.sub('[^A-Za-z0-9]+', ' ', text) # remove non alphanumeric chars
-    text = re.sub(' +', ' ', text)  # remove multiple spaces
+    text = re.sub("[^A-Za-z0-9]+", " ", text) # remove non alphanumeric chars
+    text = re.sub(" +", " ", text)  # remove multiple spaces
     text = text.strip()
 
     return text

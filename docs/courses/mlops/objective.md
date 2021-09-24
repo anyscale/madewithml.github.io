@@ -20,8 +20,33 @@ video: https://www.youtube.com/watch?v=_sYrVHGRqPo
 
 Identifying the objective should always be the first step when solving any problem. It acts as the **guide** for all subsequent decision making and will prevent us from getting distracted along the way. However, identifying the objective isn't always straightforward, especially when we aren't analyzing the problem through the appropriate lens.
 
-!!! note
-    A proven way to identify the key objective is to think about the problem from the **user's perspective** so that we're positioned to think about the underlying issue as opposed to technological shortcomings.
+!!! question "When you're given a problem to solve..."
+
+    1. How is the problem presented to you (vague/specific, business/technical)?
+
+    2. What type of problems do you prefer?
+
+    3. What can you change if the problem isn't presented this way?
+
+        ??? quote "Show answer"
+            - Ask appropriate questions to reframe the problem.
+            - Ask to be involved in the problem formulation stage earlier on for more context.
+
+    4. How can you identify the actual objective from the problem?
+
+        ??? quote "Show answer"
+            - break down the problem
+            - understand the problem from the user's perspective
+
+    5. What are other aspects of the problem to consider?
+
+        ??? quote "Show answer"
+            - Resources (time, effort, etc.)
+            - Relevant data (signal) to work on objective?
+            - Can you push back on the problem to solve?
+            - Is your derived objective aligned with the business?
+            - Is your derived objective ethical?
+
 
 ## Application
 In our application, we have a set of [projects](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json){:target="_blank"} (with tags) that users search for (using tags).
@@ -41,19 +66,27 @@ In our application, we have a set of [projects](https://raw.githubusercontent.co
 }
 ```
 
-Our assigned task is to *improve search and discoverability*. We shouldn't prematurely jump to technological objectives such as:
+Our assigned problem is to:
+
+> **Improve search and discoverability** because users have complained that they are not able to discover the appropriate resources..
+
+Based on key words in the problems, it's easy to prematurely jump to technological objectives such as:
 
 - we need a better search algorithm
 - we need better search infrastructure
 - we need a sleeker search interface
 
-Though some of these objectives may be valid, they may not resolve the underlying issue. What we need to think about is why the *user* isn't able to discover the right resource. This becomes our core objective and we'll further refine it in the next lesson when we design our solution.
+Though some of these objectives may be valid, they may not resolve the underlying issue. What we need to think about is **why** the *user* isn't able to discover the right resource.
 
-!!! note
-    This is analogous to development in ML where you can iterate on model architectures (to gain incremental improvements) but we can gain massive improvements by improving the quality of your underlying dataset.
+- What exactly are the user complaints?
+- Is it an issue of content presence or discoverability?
+- Any specifics on how exactly management wants to improve search?
+- What past data do we have to work with? Are the issues flagged?
+
+Once we have a clear objective defined, we can start to think about potential [solutions](solution.md){:target="_blank"}.
 
 ## Resources
-- [Know Your Customers’ “Jobs to Be Done”](https://hbr.org/2016/09/know-your-customers-jobs-to-be-done){:target="_blank"}
+- [Know Your Customers’ “Jobs to Be Done”](https://hbr.org/2016/09/know-your-customers-jobs-to-be-done){:target="_blank"} by [Clayton M. Christensen](https://en.wikipedia.org/wiki/Clayton_Christensen){:target="_blank"}
 
 
 <!-- Citation -->

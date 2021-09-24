@@ -675,7 +675,7 @@ db1 = np.sum(dhidden, axis=0, keepdims=True)
 ```
 
 ### Update weights
-`Step 5`: Update the weights $W$ using a small learning rate $\alpha$. The updates will penalize the probability for the incorrect classes ($$ j $$) and encourage a higher probability for the correct class ($$ y $$).
+`Step 5`: Update the weights $W$ using a small learning rate $\alpha$. The updates will penalize the probability for the incorrect classes ($j$) and encourage a higher probability for the correct class ($y$).
 
 $$ W_i = W_i - \alpha\frac{\partial{J}}{\partial{W_i}} $$
 

@@ -36,12 +36,12 @@ def pad_sequences(sequences, max_seq_len):
 
 But we can incorporate so much more information using typing:
 ```python linenums="1"
-def pad_sequences(sequences: Sequence, max_seq_len: int = 0) -> np.ndarray:
+def pad_sequences(sequences: np.ndarray, max_seq_len: int = 0) -> np.ndarray:
     ...
     return padded_sequences
 ```
 
-Here we're defining that our input argument `sequences` is a NumPy array, `max_seq_len` is an integer with a default value of 0 and our output is also a NumPy array. There are many data types that we can work with, including but not limited to `List`, `Set`, `Dict`, `Tuple`, `Sequence` and [more](https://docs.python.org/3/library/typing.html){:target="_blank"} and of course included types such as `int`, `float`, etc. You can also use any of your own defined classes as types (ex. `nn.Module`, `LabelEncoder`).
+Here we're defining that our input argument `sequences` is a NumPy array, `max_seq_len` is an integer with a default value of 0 and our output is also a NumPy array. There are many data types that we can work with, including but not limited to `List`, `Set`, `Dict`, `Tuple`, `Sequence` and [more](https://docs.python.org/3/library/typing.html){:target="_blank"} and of course included types such as `int`, `float`, etc. You can also use any of your own defined classes as types (ex. `nn.Module`, `LabelEncoder`, etc.).
 
 !!! note
     Starting from Python 3.9+, common types are [built in](https://docs.python.org/3/whatsnew/3.9.html#type-hinting-generics-in-standard-collections){:target="_blank"} so we don't need to import them with ```from typing import List, Set, Dict, Tuple, Sequence``` anymore.

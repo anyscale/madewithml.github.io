@@ -561,7 +561,9 @@ Goku Mohandas
 </pre>
 
 !!! note
-    It's good practice to always use keyword argument when using a function so that it's very clear what input variable belongs to what function input parameter. On a related note, you will often see the terms `*args` and `**kwargs` which stand for arguments and keyword arguments. You can extract them when they are passed into a function. The significance of the `*` is that any number of arguments and keyword arguments can be passed into the function.
+    We can be even more explicit with our function definitions by specifying the [types](documentation.md#typing){:target="_blank"} of our input and output arguments. We cover this in our [documentation lesson](documentation.md){:target="_blank"} because the typing information is automatically leveraged to create very intuitive [documentation](https://gokumohandas.github.io/MLOps/){:target="_blank"}.
+
+It's good practice to always use keyword argument when using a function so that it's very clear what input variable belongs to what function input parameter. On a related note, you will often see the terms `*args` and `**kwargs` which stand for arguments and keyword arguments. You can extract them when they are passed into a function. The significance of the `*` is that any number of arguments and keyword arguments can be passed into the function.
 
 ```python linenums="1"
 def f(*args, **kwargs):

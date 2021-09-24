@@ -15,35 +15,36 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/
 Labeling (or annotation) is the process of identifying the inputs and outputs that are **worth** modeling (*not* just what could be modeled).
 
 - use objective as a guide to determine the necessary signals
-- explore creating new signals (via combining data, collecting new data, etc.)
+- explore creating new signals (via combining features, collecting new data, etc.)
 - iteratively add more features to control complexity and effort
 
 !!! warning
-    Be careful not to include features in the dataset that will not be available during inference time, causing *data leakage*.
+    Be careful not to include features in the dataset that will not be available during inference time, causing [data leakage](feature-store.md){:target="_blank"}.
 
-It's also the phase where we can use our deep understanding of the problem, processes, constraints and domain expertise to:
+!!! question "What else can we learn?"
+    It's not just about identifying and labeling our initial dataset. What else can we learn from it?
 
-- augment the training data split
-- enhance using auxiliary data
-- simplify using constraints
-- remove noisy samples
+    ??? quote "Show answer"
 
-And it isn't just about identifying and labeling our initial dataset but also involves thinking about how to make the labeling process more efficient as our dataset grows.
+        It's also the phase where we can use our deep understanding of the problem, processes, constraints and domain expertise to:
 
-!!! note
-    We should always have  multiple labelers working on an overlap amongst the samples so we can easy discover labeling inconsistencies. A meaningful *inter-labeler discrepancy* (>2%) indicates that the labeling task is subjective and requires more explicit labeling criteria / instructions.
+            - augment the training data split
+            - enhance using auxiliary data
+            - simplify using constraints
+            - remove noisy samples
+            - figure out where labeling process can be improved
 
 ## Process
 
-Regardless of whether we have a custom platform or we choose a generalized library for labeling, the process to manage labeling and all it's related workflows (QA, data import/export, etc.) follow a similar approach.
+Regardless of whether we have a custom labeling platform or we choose a generalized platform, the process to manage labeling and all it's related workflows (QA, data import/export, etc.) follow a similar approach.
 
 ### Preliminary steps
 - Decide what needs to be labeled
     - consult with domain experts to ensure you're labeling the appropriate signals
-    - ensure your labeling allow for future changes (addition/removal of labels)
+    - ensure your labeling allows for future changes (addition/removal of labels)
 - Design the interface where labeling will be done
     - intuitive, data modality dependent and quick (keybindings are a must!)
-    - avoid option paralysis (suggest likely labels)
+    - avoid option paralysis by allowing labeler to dig deeper or suggest likely labels
     - account for measuring and resolving inter-labeler discrepancy
 - Compose highly detailed labeling instructions for annotators
     - examples of each labeling scenario
@@ -74,14 +75,11 @@ Regardless of whether we have a custom platform or we choose a generalized libra
     - auto-label entire or parts of a data point using [weak supervision](#weak-supervision)
     - focus constrained labeling efforts on long tail of edge cases over time
 
-> Check out the [data-centric AI](data-centric-ai.md){:target="_blank"} lesson to learn more about the nuances of how labeling plays a crucial part of the data-driven development process.
+> Check out the [data-driven development lesson](data-driven-development.md){:target="_blank"} to learn more about the nuances of how labeling plays a crucial part of the data-driven development process.
 
 ## Datasets
 - [projects.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json){:target="_blank"}: projects with title, description and tags (cleaned by mods).
 - [tags.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json){:target="_blank"}: tags used in dropdown to aid autocompletion.
-
-!!! note
-    We'll have a small GitHub Action that runs on a schedule (cron) to constantly update these datasets over time. We'll learn about how these work when we get to the CI/CD lesson.
 
 Recall that our objective was to augment authors to add the appropriate tags for their project so the community can discover them. So we want to use the metadata provided in each project to determine what the relevant tags are. We'll want to start with the highly influential features and iteratively experiment with additional features.
 
@@ -183,8 +181,9 @@ df.head(5)
 </div></div>
 </pre>
 
-The reason we want to iteratively add more features is because it introduces more complexity and effort. For example, extracting the relevant HTML from the URLs is not trivial but recall that we want to *close the loop* with a simple solution first. We're going to use just the title and description because we hypothesize that the project's core concepts will be there whereas the details may have many other keywords.
+The reason we want to iteratively add more features is because it introduces more complexity and effort. We may have additional data about each feature such as author info, html from links in the description, etc. While these may have meaningful signal, we want to slowly introduce these after we close the loop.
 
+!!! question "What's the
 !!! note
     Over time, our dataset will grow and we'll need to label new data. So far, we had a team of moderators clean the existing data but we'll need to establish proper workflow to make this process easier and reliable. Typically, we'll use collaborative UIs where annotators can fix errors, etc. and then use a tool like [Airflow](https://airflow.apache.org/){:target="_blank"} or [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"} for workflow / pipeline orchestration to know when new data is ready to be labeled and also when it's ready to be used for QA and eventually, modeling.
 
@@ -226,10 +225,12 @@ def display_tag_details(tag='question-answering'):
 
 With our datasets, we may often notice a data imbalance problem where a range of continuous values (regression) or certain classes (classification) may have insufficient amounts of data to learn from. This becomes a major issue when training because the model will learn to generalize to the data available and perform poorly on regions where the data is sparse. There are several techniques to mitigate data imbalance, including [resampling](https://github.com/scikit-learn-contrib/imbalanced-learn){:target="_blank"} (oversampling from minority classes / undersampling from majority classes), account for the [data distributions via the loss function](baselines.md#data-imbalance){:target="_blank"} (since that drives the learning process), etc.
 
-!!! note
-    While these data imbalance mitigation techniques will allow our model to perform, the best long term approach is to directly address the imbalance issue. Identify which areas of the data need more samples and go collect them! This becomes a more more robust approach compared to focusing the model to learn from repeated samples or ignoring samples.
+!!! questions "How can we do better?"
 
+    The techniques above *indirectly* address data imbalance by manipulating parts of the data / system. What's the best solution to data imbalance?
 
+    ??? quote "Show answer"
+        While these data imbalance mitigation techniques will allow our model to perform decently, the best long term approach is to *directly* address the imbalance issue. Identify which areas of the data need more samples and go collect them! This becomes a more more robust approach compared to focusing the model to learn from repeated samples or ignoring samples.
 
 ## Libraries
 
@@ -258,12 +259,24 @@ We could have used the user provided tags as our labels but what if the user add
 ### Miscellaneous
 - [MedCAT](https://github.com/CogStack/MedCAT){:target="_blank"}: a medical concept annotation tool that can extract information from Electronic Health Records (EHRs) and link it to biomedical ontologies like SNOMED-CT and UMLS.
 
+!!! question "Generalized labeling solutions"
+
+    What criteria should we use to evaluate what labeling platform to use?
+
+    ??? quote "Show answer"
+
+        It's important to pick a generalized platform that has all the major labeling features for your data modality with the capability to easily customize the experience.
+
+        - how easy is it to connect to our data sources (DB, QA, etc.)?
+        - how easy was it to make changes (new features, labeling paradigms)?
+        - how securely is our data treated (on-prem, trust, etc.)
+
+        However, as an industry trend, this balance between generalization and specificity is difficult to strike. So many teams put in the upfront effort to create bespoke labeling platforms or used industry specific, niche,  labeling tools.
+
 
 ## Active learning
 
 Even with a powerful labeling tool and established workflows, it's easy to see how involved and expensive labeling can be. Therefore, many teams employ active learning to iteratively label the dataset and evaluate the model.
-
-In active learning, you first provide a small number of labelled examples. The model is trained on this "seed" dataset. Then, the model "asks questions" by selecting the unlabeled data points it is unsure about, so the human can "answer" the questions by providing labels for those points. The model updates again and the process is repeated until the performance is good enough. By having the human iteratively teach the model, it's possible to make a better model, in less time, with much less labelled data.
 
 1. Label a small, initial dataset to train a model.
 2. Ask the trained model to predict on some unlabeled data.
@@ -272,6 +285,8 @@ In active learning, you first provide a small number of labelled examples. The m
     - samples with lowest predicted, [calibrated](https://arxiv.org/abs/1706.04599){:target="_blank"}, confidence (uncertainty sampling)
     - discrepancy in predictions from an ensemble of trained models
 4. Repeat until the desired performance is achieved.
+
+> This can be significantly more cost-effective and faster than labeling the entire dataset.
 
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/labeling/active_learning.png" width="700" alt="active learning">

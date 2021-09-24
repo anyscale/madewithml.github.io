@@ -390,23 +390,23 @@ text = text.lower()
 2. remove stopwords (from [NLTK](https://github.com/nltk/nltk){:target="_blank"} package)
 ```python linenums="1"
 import re
-pattern = re.compile(r'\b(' + r'|'.join(stopwords) + r')\b\s*')
-text = pattern.sub('', text)
+pattern = re.compile(r"\b(" + r"|".join(stopwords) + r")\b\s*")
+text = pattern.sub("", text)
 ```
 3. spacing and filters
 ```python linenums="1"
 text = re.sub(r"([-;;.,!?<=>])", r" \1 ", text)
 text = re.sub(filters, r"", text)
-text = re.sub(' +', ' ', text)  # remove multiple spaces
+text = re.sub(" +", " ", text)  # remove multiple spaces
 text = text.strip()
 ```
 4. remove URLs using regex (discovered during EDA)
 ```python linenums="1"
-text = re.sub(r'http\S+', '', text)
+text = re.sub(r'http\S+', "", text)
 ```
 5. stemming (conditional)
 ```python linenums="1"
-text = " ".join([porter.stem(word) for word in text.split(' ')])
+text = " ".join([porter.stem(word) for word in text.split(" ")])
 ```
 
 We can apply our preprocessing steps to our text feature in the dataframe by wrapping all these processes under a function.

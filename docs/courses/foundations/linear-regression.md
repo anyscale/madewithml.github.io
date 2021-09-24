@@ -457,7 +457,6 @@ $$ \hat{y}_{unscaled} = W_{unscaled}x + b_{unscaled} $$
 
 </center>
 
-
 ```python linenums="1"
 # Unscaled weights
 W_unscaled = W * (y_std/X_std)

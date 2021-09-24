@@ -781,7 +781,7 @@ class Tokenizer(object):
                  pad_token="<PAD>", oov_token="<UNK>",
                  token_to_index=None):
         self.char_level = char_level
-        self.separator = '' if self.char_level else ' '
+        self.separator = "" if self.char_level else " "
         if num_tokens: num_tokens -= 2 # pad + unk tokens
         self.num_tokens = num_tokens
         self.pad_token = pad_token
@@ -813,7 +813,7 @@ class Tokenizer(object):
         sequences = []
         for text in texts:
             if not self.char_level:
-                text = text.split(' ')
+                text = text.split(" ")
             sequence = []
             for token in text:
                 sequence.append(self.token_to_index.get(

@@ -283,22 +283,47 @@ tensor([ 0.6486, -0.0784])
 </pre>
 
 ## Joining
+
+We can also combine our tensors via concatenation or stacking operations, which are consistent with [NumPy's joining functions'](numpy.md#joining){:target="_blank"} behaviors as well.
+
 ```python linenums="1"
-# Concatenation
 x = torch.randn(2, 3)
-print(f"Values: \n{x}")
-y = torch.cat([x, x], dim=0) # stack by rows (dim=1 to stack by columns)
-print(f"Values: \n{y}")
+print (x)
+print (x.shape)
 ```
 <pre class="output">
-Values:
-tensor([[ 0.5548, -0.0845,  0.5903],
-        [-1.0032, -1.7873,  0.0538]])
-Values:
-tensor([[ 0.5548, -0.0845,  0.5903],
-        [-1.0032, -1.7873,  0.0538],
-        [ 0.5548, -0.0845,  0.5903],
-        [-1.0032, -1.7873,  0.0538]])
+tensor([[-1.5944, -0.4218, -1.8219],
+        [ 1.7446,  1.2058, -0.7753]])
+torch.Size([2, 3])
+</pre>
+
+```python linenums="1"
+# Concatenation
+y = torch.cat([x, x], dim=0) # concat on a specified dimension
+print (y)
+print (y.shape)
+```
+<pre class="output">
+tensor([[-1.5944, -0.4218, -1.8219],
+        [ 1.7446,  1.2058, -0.7753],
+        [-1.5944, -0.4218, -1.8219],
+        [ 1.7446,  1.2058, -0.7753]])
+torch.Size([4, 3])
+</pre>
+
+```python linenums="1"
+# Stacking
+z = torch.stack([x, x], dim=0) # stack on new dimension
+print (z)
+print (z.shape)
+```
+<pre class="output">
+tensor([[[-1.5944, -0.4218, -1.8219],
+         [ 1.7446,  1.2058, -0.7753]],
+
+        [[-1.5944, -0.4218, -1.8219],
+         [ 1.7446,  1.2058, -0.7753]]])
+torch.Size([2, 2, 3])
 </pre>
 
 ## Gradients
