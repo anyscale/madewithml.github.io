@@ -84,7 +84,7 @@ df.C = df.A + df.B
 ```
 
 !!! note
-    This is also when we would save these features to a central [feature store](feature-store.md){:target="_blank"} for the benefits of:
+    Many teams save their processed features to a central [feature store](feature-store.md){:target="_blank"} for the benefits of:
 
     - reduce duplication of effort when engineering features.
     - remove training and serving skew for creating and using features.
@@ -177,13 +177,10 @@ Transforming the data involves feature encoding and engineering.
 
 - and many [more](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing){:target="_blank"}!
 
-!!! note
-    When we move our code from notebooks to Python scripts, we'll be testing all our preprocessing functions (these workflows can also be captured in feature stores and applied as features are updated).
-
 
 ### Encoding
 
-- allows for representing data efficiently (maintains signal) & effectively (learns pattern)
+- allows for representing data efficiently (maintains signal) and effectively (learns patterns, ex. one-hot vs embeddings)
 
 - [label](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html#sklearn.preprocessing.LabelEncoder){:target="_blank"}: unique index for categorical value
 
@@ -225,7 +222,6 @@ Transforming the data involves feature encoding and engineering.
     (len(X), embedding_dim)
     </pre>
 
-- [target](https://contrib.scikit-learn.org/category_encoders/targetencoder.html){:target="_blank"}: represent a categorical feature with the average of the target values that share that categorical value
 - and many [more](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing){:target="_blank"}!
 
 ### Extraction
@@ -262,9 +258,9 @@ Transforming the data involves feature encoding and engineering.
     # Counts (ngram)
     from sklearn.feature_extraction.text import CountVectorizer
     y = [
-        'acetyl acetone',
-        'acetyl chloride',
-        'chloride hydroxide',
+        "acetyl acetone",
+        "acetyl chloride",
+        "chloride hydroxide",
     ]
     vectorizer = CountVectorizer()
     y = vectorizer.fit_transform(y)
@@ -296,7 +292,7 @@ We can combine existing input features to create new meaningful signal (helping 
 
 ```python linenums="1"
 # Input
-df['text'] = df.title + " " + df.description
+df["text"] = df.title + " " + df.description
 ```
 
 ## Filtering
@@ -309,16 +305,26 @@ def filter(l, include=[], exclude=[]):
     return filtered
 ```
 
-We're going to *include* only these tags because they're the tags we care about and we've allowed authors to add any tag they want (noise). We'll also be *excluding* some general tags because they are automatically added when their children tags are present.
-```python linenums="1"
-# Inclusion/exclusion criteria for tags
-include = list(tags_dict.keys())
-exclude = ['machine-learning', 'deep-learning',  'data-science',
-           'neural-networks', 'python', "r", 'visualization']
-```
-!!! note
-    Since we're *constraining* the output space here, we'll want to monitor the prevalence of new tags over time so we can capture them.
+!!! question "Why do we need the exclude list?"
+    You may be wondering we have explicit include and exclude lists. Why can't we just use the include list?
 
+    ??? quote "Show answer"
+
+        Keep in mind that authors are allowed to add any tag they want to their projects (noisy tags). So, we want to:
+
+            - *include* all the tags in our [tags.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json){:target="_blank"}
+            - *exclude* some general tags
+
+        The exclude list is important here because my include list is being create automatically. I want the overlapping tagging to not be in the dataset.
+
+        ```python linenums="1"
+        # Inclusion/exclusion criteria for tags
+        include = list(tags_dict.keys())
+        exclude = ["machine-learning", "deep-learning",  "data-science",
+                   "neural-networks", "python", "r", "visualization"]
+        ```
+
+> Since we're *constraining* the output space here, we'll want to [monitor](monitoring.md){:target="_blank"} the prevalence of new tags over time so we can capture them.
 
 ```python linenums="1"
 # Filter tags for each project
@@ -390,19 +396,29 @@ text = text.lower()
 2. remove stopwords (from [NLTK](https://github.com/nltk/nltk){:target="_blank"} package)
 ```python linenums="1"
 import re
-pattern = re.compile(r"\b(" + r"|".join(stopwords) + r")\b\s*")
-text = pattern.sub("", text)
+# Remove stopwords
+if len(stopwords):
+    pattern = re.compile(r"\b(" + r"|".join(stopwords) + r")\b\s*")
+    text = pattern.sub("", text)
 ```
-3. spacing and filters
+3. Filters and spacing
 ```python linenums="1"
-text = re.sub(r"([-;;.,!?<=>])", r" \1 ", text)
-text = re.sub(filters, r"", text)
-text = re.sub(" +", " ", text)  # remove multiple spaces
+# Separate filters attached to tokens
+filters = r"([-;;.,!?<=>])"
+text = re.sub(filters, r" \1 ", text)
+
+# Remove non alphanumeric chars
+text = re.sub("[^A-Za-z0-9]+", " ", text)
+
+# Remove multiple spaces
+text = re.sub(" +", " ", text)
+
+# Strip white space at the ends
 text = text.strip()
 ```
 4. remove URLs using regex (discovered during EDA)
 ```python linenums="1"
-text = re.sub(r'http\S+', "", text)
+text = re.sub(r"http\S+", "", text)
 ```
 5. stemming (conditional)
 ```python linenums="1"
@@ -410,6 +426,13 @@ text = " ".join([porter.stem(word) for word in text.split(" ")])
 ```
 
 We can apply our preprocessing steps to our text feature in the dataframe by wrapping all these processes under a function.
+
+```python linenums="1"
+# Define preprocessing function
+def preprocess(text):
+    ...
+    return text
+```
 
 ```python linenums="1"
 # Apply to dataframe

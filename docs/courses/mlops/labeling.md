@@ -206,7 +206,7 @@ print (f"{len(tags_dict)} tags")
 </pre>
 ```python linenums="1"
 @widgets.interact(tag=list(tags_dict.keys()))
-def display_tag_details(tag='question-answering'):
+def display_tag_details(tag="question-answering"):
     print (json.dumps(tags_dict[tag], indent=2))
 ```
 <pre class="output">
@@ -225,7 +225,7 @@ def display_tag_details(tag='question-answering'):
 
 With our datasets, we may often notice a data imbalance problem where a range of continuous values (regression) or certain classes (classification) may have insufficient amounts of data to learn from. This becomes a major issue when training because the model will learn to generalize to the data available and perform poorly on regions where the data is sparse. There are several techniques to mitigate data imbalance, including [resampling](https://github.com/scikit-learn-contrib/imbalanced-learn){:target="_blank"} (oversampling from minority classes / undersampling from majority classes), account for the [data distributions via the loss function](baselines.md#data-imbalance){:target="_blank"} (since that drives the learning process), etc.
 
-!!! questions "How can we do better?"
+!!! question "How can we do better?"
 
     The techniques above *indirectly* address data imbalance by manipulating parts of the data / system. What's the best solution to data imbalance?
 
@@ -303,7 +303,7 @@ Even with a powerful labeling tool and established workflows, it's easy to see h
 
 ## Weak supervision
 
-If we had samples that needed labeling or if we simply wanted to validate existing labels, we can use weak supervision to generate labels as opposed to hand labeling all of them. We could utilize weak supervision via [labeling functions](https://www.snorkel.org/use-cases/01-spam-tutorial){:target="_blank"} to label our existing and new data. We can create constructs based on keywords, pattern expressions, knowledge bases and generalized models to create these labeling functions to label our data. And we can add to the labeling functions over time and even mitigate conflicts amongst the different labeling functions.
+If we had samples that needed labeling or if we simply wanted to validate existing labels, we can use weak supervision to generate labels as opposed to hand labeling all of them. We could utilize weak supervision via [labeling functions](https://www.snorkel.org/use-cases/01-spam-tutorial){:target="_blank"} to label our existing and new data, where we can create constructs based on keywords, pattern expressions, knowledge bases, etc. And we can add to the labeling functions over time and even mitigate conflicts amongst the different labeling functions. We'll use these labeling functions to create and evaluate slices of our data in the [evaluation lesson](evaluation.md#slices){:target="_blank"}.
 
 ```python linenums="1"
 from snorkel.labeling import labeling_function
@@ -315,11 +315,11 @@ def contains_tensorflow(text):
 ```
 
 !!! note
-    An easy way to validate our labels (before modeling) is to use our auxillary datasets to create labeling functions for the different classes. Then we can look for false positives and negatives to identify potentially mislabeled samples. We'll actually implement a similar kind of inspection approach, but using a trained model as a heuristic, in our [dashboards lesson](dashboard.md#inspection){:target="_blank"}.
+    An easy way to validate our labels (before modeling) is to use the aliases in our auxillary datasets to create labeling functions for the different classes. Then we can look for false positives and negatives to identify potentially mislabeled samples. We'll actually implement a similar kind of inspection approach, but using a trained model as a heuristic, in our [dashboards lesson](dashboard.md#inspection){:target="_blank"}.
 
 ## Iteration
 
-Labeling isn't just a one time event or something we repeat identically. As new data is available, we'll want to strategically label the appropriate samples and improve [slices](testing.md#evaluation){:target="_blank"} of our data that are lacking in [quality](../foundations/data-quality.md){:target="_blank"}. In fact, there's an entire workflow related to labeling that is initiated when we want to iterate. We'll learn more about this iterative labeling process in our [continual learning lesson](continual-learning.md){:target="_blank"}.
+Labeling isn't just a one time event or something we repeat identically. As new data is available, we'll want to strategically label the appropriate samples and improve [slices](testing.md#evaluation){:target="_blank"} of our data that are lacking in [quality](../foundations/data-quality.md){:target="_blank"}. In fact, there's an entire workflow related to labeling that is initiated when we want to iterate. We'll learn more about this iterative labeling process in our [continual learning](continual-learning.md){:target="_blank"} and [data-driven development](data-driven-development.md){:target="_blank"} lessons.
 
 ## Resources
 - [Human in the Loop: Deep Learning without Wasteful Labelling](https://oatml.cs.ox.ac.uk/blog/2019/06/24/batchbald.html){:target="_blank"}

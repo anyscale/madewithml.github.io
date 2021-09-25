@@ -158,7 +158,7 @@ And we can easily use our CLI app to execute these commands with the appropriate
 </div>
 
 !!! note
-    You'll most likely be using the CLI application to optimize and train you models. We'll cover how to train using compute instances on the cloud from Amazon Web Services (AWS) or Google Cloud Platforms (GCP) in a later lesson. But in the meantime, if you don't have access to GPUs, check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Google Colab and transfer to local. We essentially run optimization, then train the best model to download and transfer it's artifacts.
+    You'll most likely be using the CLI application to optimize and train your models. If you don't have access to GPUs (personal machine, AWS, GCP, etc.), check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Google Colab and transfer the entire MLFlow experiment to your local machine. We essentially run optimization, then train the best model to download and transfer it's artifacts.
 
 <!-- Citation -->
 {% include "cite.md" %}

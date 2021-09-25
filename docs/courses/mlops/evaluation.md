@@ -201,6 +201,8 @@ if len(fn):
         print (f"    pred: {label_encoder.decode([y_pred[i]])[0]}\n")
 ```
 <pre class="output">
+class = 'transformers'
+
 {
   "precision": 0.6428571428571429,
   "recall": 0.6428571428571429,
@@ -249,9 +251,11 @@ if len(fn):
 
 </pre>
 
-!!! note
-    It's a really good idea to do this kind of analysis using our rule-based approach to catch really obvious labeling errors.
+!!! question "What can we do with this?"
+    How can we leverage this type of inspection to improve on our performance?
 
+    ??? quote "Show answer"
+        We can use the FPs to find *potentially* mislabeled samples and use FNs to see what aspects of our input data we're not able to map to.
 
 ## Slices
 
@@ -379,29 +383,6 @@ print(json.dumps(metrics["slices"], indent=2))
 
 !!! note
     In our [testing lesson](https://madewithml.com/courses/mlops/testing/){:target="_blank"}, we'll cover another way to evaluate our model known as [behavioral testing](https://madewithml.com/courses/mlops/testing/#behavioral-testing){:target="_blank"}, which we'll also include as part of performance report.
-
-## Extensions
-
-We've explored user generated slices but there is currently quite a bit of research on automatically generated slices and overall model robustness. A notable toolkit is the [Robustness Gym](https://arxiv.org/abs/2101.04840){:target="_blank"} which programmatically builds slices, performs adversarial attacks, rule-based data augmentation, benchmarking, reporting and much more.
-
-<div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/gym.png">
-</div>
-<div class="ai-center-all mt-2">
-    <a href="https://arxiv.org/abs/2101.04840" target="_blank">Robustness Gym slice builders</a>
-</div>
-
-Instead of passively observing slice performance, we could try and improve them. Usually, a slice may exhibit poor performance when there are too few samples and so a natural approach is to oversample. However, these methods change the underlying data distribution and can cause issues with overall / other slices. It's also not scalable to train a separate model for each unique slice and combine them via [Mixture of Experts (MoE)](https://www.cs.toronto.edu/~hinton/csc321/notes/lec15.pdf){:target="_blank"}. To combat all of these technical challenges and more, the Snorkel team introduced the [Slice Residual Attention Modules (SRAMs)](https://arxiv.org/abs/1909.06349){:target="_blank"}, which can sit on any backbone architecture (ie. our CNN feature extractor) and learn slice-aware representations for the class predictions.
-
-<div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/sram.png">
-</div>
-<div class="ai-center-all mt-3">
-    <a href="https://arxiv.org/abs/1909.06349" target="_blank">Slice Residual Attention Modules (SRAMs)</a>
-</div>
-
-!!! note
-    In our [testing lesson](testing.md){:target="_blank"}, we'll cover another way to evaluate our model known as [behavioral testing](testing.md#behavioral-testing){:target="_blank"}, which we'll also include as part of performance report.
 
 ## Resources
 

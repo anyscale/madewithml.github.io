@@ -338,7 +338,7 @@ NUM_TRIALS = 50 # small sample for now
 pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=5)
 study = optuna.create_study(study_name="optimization", direction="maximize", pruner=pruner)
 mlflow_callback = MLflowCallback(
-    tracking_uri=mlflow.get_tracking_uri(), metric_name='f1')
+    tracking_uri=mlflow.get_tracking_uri(), metric_name="f1")
 study.optimize(lambda trial: objective(trial, params),
                n_trials=NUM_TRIALS,
                callbacks=[mlflow_callback])
@@ -558,6 +558,9 @@ print (json.dumps(params, indent=2, cls=NumpyEncoder))
 </pre>
 
 ... and now we're finally ready to move from working in Jupyter notebooks to Python scripts. We'll be revisiting everything we did so far, but this time with proper software engineering prinicples such as object oriented programming (OOPs), styling, testing, etc. → [https://madewithml.com/#mlops](https://madewithml.com/#mlops)
+
+!!! note
+    You'll most likely be using the CLI application to optimize and train your models. If you don't have access to GPUs (personal machine, AWS, GCP, etc.), check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Google Colab and transfer the entire MLFlow experiment to your local machine. We essentially run optimization, then train the best model to download and transfer it's artifacts.
 
 <!-- Citation -->
 {% include "cite.md" %}

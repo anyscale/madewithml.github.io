@@ -208,7 +208,7 @@ print (find_word("gan", "This is gandalf."))
 ```
 
 <pre class="output">
-<re.Match object; span=(10, 13), match='gan'>
+&lt;re.Match object; span=(10, 13), match='gan'&gt;
 None
 </pre>
 

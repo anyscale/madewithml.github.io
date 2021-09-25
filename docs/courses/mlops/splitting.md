@@ -13,7 +13,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/
 
 ## Intuition
 
-To determine the efficacy of our models, we need to have an unbiased measuring approach. To do this, we split our dataset into `training`, `validation`, and `testing` data splits. Here is the process:
+To determine the efficacy of our models, we need to have an unbiased measuring approach. To do this, we split our dataset into `training`, `validation`, and `testing` data splits.
 
 1. Use the training split to train the model.
   > Here the model will have access to both inputs and outputs to optimize its internal weights.
@@ -22,15 +22,18 @@ To determine the efficacy of our models, we need to have an unbiased measuring a
 3. After training stops (epoch(s)), we will use the testing split to perform a one-time assessment of the model.
   > This is our best measure of how the model may behave on new, unseen data. Note that *training stops* when the performance improvement is not significant or any other stopping criteria that we may have specified.
 
-We need to ensure that our data is properly split so we can trust our evaluations. A few criteria are:
+!!! question "Creating proper data splits"
+    What are the criteria we should focus on to ensure proper data splits?
 
-- the dataset (and each data split) should be representative of data we will encounter
-- equal distributions of output values across all splits
-- shuffle your data if it's organized in a way that prevents input variance
-- avoid random shuffles if you task can suffer from data leaks (ex. `time-series`)
+    ??? quote "Show answer"
+
+        - the dataset (and each data split) should be representative of data we will encounter
+        - equal distributions of output values across all splits
+        - shuffle your data if it's organized in a way that prevents input variance
+        - avoid random shuffles if you task can suffer from data leaks (ex. `time-series`)
 
 !!! note
-    You need to [clean](preprocessing.md) your data first before splitting, at least for the features that splitting depends on. So the process is more like: preprocessing (global, cleaning) → splitting → preprocessing (local, transformations).
+    We need to [clean](preprocessing.md) our data first before splitting, at least for the features that splitting depends on. So the process is more like: preprocessing (global, cleaning) → splitting → preprocessing (local, transformations).
 
 ## Label encoding
 Before we split our dataset, we're going to encode our output labels where we'll be assigning each tag a unique index.
@@ -371,6 +374,15 @@ $$ \alpha * N_{test} = N_{train} $$
 
 $$ \alpha = \frac{N_{train}}{N_{test}} $$
 
+```python linenums="1"
+# Adjust counts across splits
+for k in counts["val_counts"].keys():
+    counts["val_counts"][k] = int(counts["val_counts"][k] * \
+        (train_size/val_size))
+for k in counts["test_counts"].keys():
+    counts["test_counts"][k] = int(counts["test_counts"][k] * \
+        (train_size/test_size))
+```
 
 <div class="output_subarea output_html rendered_html"><div>
 <table border="1" class="dataframe">

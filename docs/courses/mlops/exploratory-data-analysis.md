@@ -73,13 +73,13 @@ plt.show()
 
 ```python linenums="1"
 @widgets.interact(tag=list(tags))
-def display_word_cloud(tag='pytorch'):
+def display_word_cloud(tag="pytorch"):
     # Plot word clouds top top tags
     plt.figure(figsize=(15, 5))
     subset = df[df.tags.apply(lambda tags: tag in tags)]
     text = subset.text.values
     cloud = WordCloud(
-        stopwords=STOPWORDS, background_color='black', collocations=False,
+        stopwords=STOPWORDS, background_color="black", collocations=False,
         width=500, height=300).generate(" ".join(text))
     plt.axis("off")
     plt.imshow(cloud)
@@ -89,7 +89,7 @@ def display_word_cloud(tag='pytorch'):
 </div>
 
 !!! note
-    All of the work we've done so far are inside IPython notebooks but in our [dashboard lesson](dashboard.md){:target="_blank"}, we'll transfer all of this into an interactive dashboard using a tool called [Streamlit](https://streamlit.io/){:target="_blank"}.
+    All of the work we've done so far are inside IPython notebooks but in our [dashboard lesson](dashboard.md){:target="_blank"}, we'll transfer all of this into an interactive dashboard using [Streamlit](https://streamlit.io/){:target="_blank"}.
 
 
 ## Resources

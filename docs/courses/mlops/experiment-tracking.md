@@ -61,7 +61,7 @@ mlflow.set_tracking_uri("file://" + str(MODEL_REGISTRY.absolute()))
 ```
 
 !!! note
-    When we're collaborating with other team members, this model registry will live on the cloud with some added authentication. Members from our team can connect to it (like above) to save and load trained models. If you don't want to set up and maintain a model registry, this is where platforms like [Comet ML](https://www.comet.ml/site/){:target="_blank"}, [Weights and Biases](https://www.wandb.com/){:target="_blank"} and others offload a lot of technical components.
+    When we're collaborating with other team members, this model registry will live on the cloud. Members from our team can connect to it (with authentication) to save and load trained models. If you don't want to set up and maintain a model registry, this is where platforms like [Comet ML](https://www.comet.ml/site/){:target="_blank"}, [Weights and Biases](https://www.wandb.com/){:target="_blank"} and others offload a lot of technical setup.
 
 ## Training
 
