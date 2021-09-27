@@ -32,13 +32,9 @@ tagifai/
 └── utils.py      - supplementary utilities
 ```
 
-!!! note
-    Don't worry about what all these different scripts do just yet! We'll be creating and going through them in the subsequent lessons.
-
 Organizing our code base this way also makes it easier for us to understand (or modify) the code base. We could've also assumed a more granular stance for organization, such as breaking down `data.py` into `split.py`, `preprocess.py`, etc. This might make more sense if we have multiple ways of splitting, preprocessing, etc. but for our task, it's sufficient to be at a higher level.
 
-!!! note
-    Another way to supplement organized code is through [documentation](documentation.md){:target="_blank"}.
+> Another way to supplement organized code is through [documentation](documentation.md){:target="_blank"}.
 
 ## Reading
 So what's the best way to read a code base like this? We could look at the [documentation](https://gokumohandas.github.io/MLOps/){:target="_blank"} but that's usually useful if you're looking for specific functions or classes within a script. What if you want to understand the overall functionality and how it's all organized? Well, we can start with the operations defined in [`tagifai/main.py`](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/main.py){:target="_blank"} and dive deeper into the specific workflows (training, optimization, etc.).

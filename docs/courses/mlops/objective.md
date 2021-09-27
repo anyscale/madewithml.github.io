@@ -20,32 +20,13 @@ video: https://www.youtube.com/watch?v=_sYrVHGRqPo
 
 Identifying the objective should always be the first step when solving any problem. It acts as the **guide** for all subsequent decision making and will prevent us from getting distracted along the way. However, identifying the objective isn't always straightforward, especially when we aren't analyzing the problem through the appropriate lens.
 
-!!! question "When you're given a problem to solve..."
+!!! question "Problem to objective"
+    What are some strategies to go from a problem to an objective?
 
-    1. How is the problem presented to you (vague/specific, business/technical)?
-
-    2. What type of problems do you prefer?
-
-    3. What can you change if the problem isn't presented this way?
-
-        ??? quote "Show answer"
-            - Ask appropriate questions to reframe the problem.
-            - Ask to be involved in the problem formulation stage earlier on for more context.
-
-    4. How can you identify the actual objective from the problem?
-
-        ??? quote "Show answer"
-            - break down the problem
-            - understand the problem from the user's perspective
-
-    5. What are other aspects of the problem to consider?
-
-        ??? quote "Show answer"
-            - Resources (time, effort, etc.)
-            - Relevant data (signal) to work on objective?
-            - Can you push back on the problem to solve?
-            - Is your derived objective aligned with the business?
-            - Is your derived objective ethical?
+    ??? quote "Show answer"
+        1. Understand various aspects of the problem space (data sources, past efforts, etc.)
+        2. Rephrase the problem from a user's perspective.
+        3. Separate correlation from causation. What is main cause of the problem?
 
 
 ## Application

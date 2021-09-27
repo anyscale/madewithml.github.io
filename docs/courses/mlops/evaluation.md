@@ -15,7 +15,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/
 Evaluation is an integral part of modeling and it's one that's often glossed over. We'll often find evaluation to involve simply computing the accuracy or other global metrics but for many real work applications, a much more nuanced evaluation process is required. However, before evaluating our model, we always want to:
 
 - be clear about what metrics we are prioritizing
-- be careful not to over optimize on any one metric
+- be careful not to over optimize on any one metric because it may mean you're compromising something else
 
 ```python linenums="1"
 # Metrics
@@ -381,8 +381,15 @@ print(json.dumps(metrics["slices"], indent=2))
 }
 </pre>
 
-!!! note
-    In our [testing lesson](https://madewithml.com/courses/mlops/testing/){:target="_blank"}, we'll cover another way to evaluate our model known as [behavioral testing](https://madewithml.com/courses/mlops/testing/#behavioral-testing){:target="_blank"}, which we'll also include as part of performance report.
+> In our [testing lesson](https://madewithml.com/courses/mlops/testing/){:target="_blank"}, we'll cover another way to evaluate our model known as [behavioral testing](https://madewithml.com/courses/mlops/testing/#behavioral-testing){:target="_blank"}, which we'll also include as part of performance report.
+
+
+!!! question "How can we choose?"
+    With all these different ways for evaluation, how can we choose "the best" option if some solutions are better for some evaluation criteria?
+
+    ??? quote "Show answer"
+        You and your team need to agree on what evaluation criteria are most important and what is the minimum performance required for each one. This will allow us to filter amongst all the different solutions by removing ones that don't satisfy al the minimum requirements and ranking amongst the remaining by which ones perform the best for the highest priority criteria.
+
 
 ## Resources
 

@@ -46,7 +46,9 @@ Creating the MVP for solutions that requires machine learning often involves goi
         - aggregate analytics
         - rule-based (feature based heuristics, regex, etc.)
 
-Deploying solutions is actually quite easy (from an engineering POV) but maintaining and iterating is the challenge.
+## Challenges
+
+Deploying solutions is actually quite easy (from an engineering standpoint) but maintaining and iterating is the challenge. This is why we need to close the loop quickly first, so we can properly experiment with a process. This allows to change one thing as a time (improve data, models, etc.), evaluate it and adapt as necessary.
 
 - collect signals from UI/UX to best [approximate performance](monitoring.md#performance){:target="_blank"}
 - determine window / [rolling](monitoring.md#performance){:target="_blank"} performances on overall and key [slices](evaluation.md#slices){:target="_blank"} of data
@@ -57,17 +59,9 @@ Deploying solutions is actually quite easy (from an engineering POV) but maintai
 
 > Read more about the maintenance and iteration challenges in our [data-driven development lesson](data-driven-development.md){:target="_blank"}.
 
-## Application
-For our solution, we'll have an initial set of baselines where we'll start with a rule-based approach and then slowly add complexity (rule-based &rarr; regression &rarr; CNN). Though you are welcome to use any stochastic model you like because all the subsequent lessons are model agnostic.
-
-!!! note
-    For the purpose of this course, even our MVP will be an ML model, however we would normally deploy the rule-based approach first as long as it satisfies a performance threshold so we can quickly close the loop.
-
-As for monitoring and iterating on our solution, we'll be looking at things like overall performance, class specific performances, # of relevant tags, etc. We'll also create workflows to look at new data for anomalies, apply active learning, ease the annotation process, etc. More on this in our [testing](testing.md){:target="_blank"} and [monitoring](monitoring.md){:target="_blank"} lessons.
-
 ## Real-world
 
-While it can be humorous and easy (yet justified) to say "don't use machine learning" as your first attempt at a solution, your leadership may not find it so funny. Most likely, you're being paid a lot of money to work on problems where even complex heuristics just don't cut it.
+While it may be easy (and justified) to say "don't use machine learning" as your first attempt at a solution, your leadership may not like that. Most likely, you're being paid to work on problems where traditional software isn't able to deliver.
 
 !!! question "Justifying simple solutions"
 
@@ -77,6 +71,17 @@ While it can be humorous and easy (yet justified) to say "don't use machine lear
         - helps us understand the problem and discover what you don't know
         - helps us quickly identify shortcomings in the data, system, etc.
         - ease of experimentation: once we set up our system, we can easily evaluate future solutions
+        - allows for conversations with domain experts for feature engineering
+        - solution allows for v1 which can start the data collection process required for more sophisticated solutions
+
+## Application
+For our solution, we'll have an initial set of baselines where we'll start with a rule-based approach and then slowly add complexity (rule-based &rarr; regression &rarr; CNN). Though you are welcome to use any stochastic model you like because all the subsequent lessons are model agnostic.
+
+!!! note
+    For the purpose of this course, even our MVP will be an ML model, however we would normally deploy the rule-based approach first as long as it satisfies a performance threshold so we can quickly close the loop.
+
+As for monitoring and iterating on our solution, we'll be looking at things like overall performance, class specific performances, # of relevant tags, etc. We'll also create workflows to look at new data for anomalies, apply active learning, ease the annotation process, etc. More on this in our [testing](testing.md){:target="_blank"} and [monitoring](monitoring.md){:target="_blank"} lessons.
+
 
 ## Resources
 - [Machine Learning Systems Design](https://github.com/chiphuyen/machine-learning-systems-design/blob/master/build/build1/consolidated.pdf){:target="_blank"}

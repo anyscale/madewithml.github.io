@@ -58,7 +58,7 @@ How will our solution be presented and what are aspects of the user experience t
 
 What are the details around the team, data and system that you need to account for?
 
-- data, time, performance, cost, interpretability, latency
+- availability of data, time, performance, cost, interpretability, latency
 - dictate the complexity of our solutions
 
 !!! question "Converting constraints to timelines"
@@ -66,7 +66,9 @@ What are the details around the team, data and system that you need to account f
 
     ??? quote "Show answer"
 
-        - set expectations with leadership because ML solutions involve a lot of trial and error
+        - create a plan outlining the problem proposed solutions and your plan for each part of the design process (each part = units in this MLOps course, ie. testing, monitoring, etc.)
+        - educate and set expectations with leadership because ML solutions involve a lot of trial and error.
+        - have frequent meetings at the start of a project so that your team can quickly pivot (very important in this non-linear path with data-driven solutions).
         - architect initial solution to be deterministic and close the loop (more in [iteration lesson](iteration.md){:target="_blank"})
         - subsequent projects can leverage well tested code and systems, so be sure to account for this.
         - your judgement improves as you develop solution in this problem space and understand its nuances ([testing](testing.md){:target="_blank"}, [monitoring](monitoring.md){:target="_blank"}, etc.)
