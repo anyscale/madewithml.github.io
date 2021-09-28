@@ -80,7 +80,7 @@ class Trainer(object):
 ```
 
 ??? quote "Code for complete `Trainer` class"
-    ```python linenums="1" hl_lines="100-103"
+    ```python linenums="1" hl_lines="102-105"
     # Modified for experiment tracking
     class Trainer(object):
         def __init__(self, model, device, loss_fn=None, optimizer=None, scheduler=None):

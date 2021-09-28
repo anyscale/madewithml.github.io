@@ -16,10 +16,10 @@ documentation: https://gokumohandas.github.io/MLOps/
 
 Another way to [organize](organization.md){:target="_blank"} our code is to document it. We want to do this so we can make it easier for others (and our future selves) to easily navigate the code base and build on it. We know our code base best the moment we finish writing it but fortunately documenting it will allow us to quickly get back to that stage time and time again. Documentation involves many different things to developers so let's define the most common (and required) components:
 
-- `#!js comments`: Terse descriptions of why a piece of code exists.
-- `#!js typing`: Specification of a function's inputs and outputs data types, providing insight into what a function consumes and produces at a quick glance.
-- `#!js docstrings`: Meaningful descriptions for functions and classes that describe overall utility as wel as arguments, returns, etc.
-- `#!js documentation`: A rendered webpage that summarizes all the functions, classes, API calls, workflows, examples, etc. so we can view and traverse through the code base without actually having to look at the code just yet.
+- `#!js comments`: short descriptions of why a piece of code exists.
+- `#!js typing`: specification of a function's inputs and outputs data types, providing insight into what a function consumes and produces at a quick glance.
+- `#!js docstrings`: meaningful descriptions for functions and classes that describe overall utility as wel as arguments, returns, etc.
+- `#!js documentation`: rendered webpage that summarizes all the functions, classes, API calls, workflows, examples, etc. so we can view and traverse through the code base without actually having to look at the code just yet.
 
 !!! note
     Be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}.
@@ -155,23 +155,24 @@ theme:
 nav:
   - Home:
       - TagIfAI: index.md
-  - Getting started:
-    - Workflow: workflows.md
+  - Getting started: getting_started.md
   - Reference:
-    - CLI: tagifai/main.md
-    - Configuration: tagifai/config.md
+    - API: app/api.md
+    - CLI: app/cli.md
+    - Config: app/config.md
     - Data: tagifai/data.md
     - Models: tagifai/models.md
     - Training: tagifai/train.md
     - Inference: tagifai/predict.md
     - Utilities: tagifai/utils.md
-  - API: api.md
 ```
 5. Fill in `mkdocstrings` plugin information inside `mkdocs.yml`.
-6. Rerun `make install-dev` to make sure you have the required packages for documentation.
-7. Add ` ::: tagifai.data ` Markdown file to populate it with the information from function and class docstrings from `tagifai/data.py`.
-    Repeat for other scripts as well. We can add our own text directly to the Markdown file as well, like we do in `tagifai/config.md`.
-8. Run `python -m mkdocs serve` to serve your docs to `http://localhost:8000/`.
+6. Add ` ::: tagifai.<SCRIPT_NAME>` to each Markdown file to populate it with the information from function and class docstrings from `tagifai/<SCRIPT_NAME>.py`. Repeat for other scripts as well. We can add our own text directly to the Markdown file as well, like we do in [`tagifai/config.md`](https://github.com/GokuMohandas/MLOps/blob/main/docs/app/config.md){:target="_blank"}.
+```bash linenums="1"
+# docs/tagifai/data.md
+::: tagifai.data
+```
+7. Run `python -m mkdocs serve` to serve your docs to `http://localhost:8000/`.
 <div class="animated-code">
 
     ```console

@@ -13,6 +13,15 @@ repository: https://github.com/GokuMohandas/MLOps
 
 We want to enable others to be able to interact with our application without having to dig into the code and execute functions one at a time. One method is to build a CLI application that allows for interaction via any shell. It should designed such that we can see all possible operations as well the appropriate assistance needed for configuring options and other arguments for each of those operations. Let's see what a CLI looks like for our application which has many different commands (training, prediction, etc.)
 
+```bash linenums="1"
+app/
+└── cli.py        - CLI app
+tagifai/
+├── data.py       - data processing utilities
+├── ...
+└── utils.py      - supplementary utilities
+```
+
 ## Application
 
 The `app` that we defined inside our [`cli.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/cli.py){:target="_blank"} script is created using [Typer](https://typer.tiangolo.com/){:target="_blank"}, an open-source tool for building command line interface (CLI) applications. It starts by initializing the app and then adding the appropriate decorator to each function we wish to use as a CLI command.

@@ -23,7 +23,7 @@ When we used our [notebook](https://colab.research.google.com/github/GokuMohanda
 First thing we'll do is set up a [virtual environment](https://docs.python.org/3/library/venv.html){:target="_blank"} so we can isolate our packages (and versions) necessary for application from our other projects which may have different dependencies. Once we create our virtual environment, we'll activate it and install our required packages.
 
 ```bash linenums="1"
-python3 -m venv venv
+python3 -m venv venv  # python>=3.7
 source venv/bin/activate
 python -m pip install --upgrade pip setuptools wheel
 pip install -e .
@@ -31,8 +31,8 @@ pip install -e .
 
 Let's unpack what's happening here:
 
-1. Creating a vitual environment named `venv`
-2. Activating our virtual environment. Type `deactivate` to exit out of the virtual environment.
+1. Creating a Python virtual environment named `venv`. We can use [pyenv](https://github.com/pyenv/pyenv){:target="_blank"} to manage different Python versions.
+2. Activate our virtual environment. Type `deactivate` to exit the virtual environment.
 3. Upgrading required packages so we download the latest package wheels.
 4. Install from `setup.py` (`-e`, `--editable` installs a project in develop mode)
 
@@ -50,12 +50,12 @@ with open(Path(BASE_DIR, "requirements.txt"), "r") as file:
 ```
 
 !!! note
-    We've been adding packages to our `requirements.txt` as we've needed them but if you haven't, you shouldn't just do `pip freeze > requirements.txt` because it dumps the dependencies of all your packages into the file. When a certain package updates, the stale dependency will still be there. To mitigate this, there are tools such as [pipreqs](https://github.com/bndr/pipreqs){:target="_blank"}, [pip-tools](https://github.com/jazzband/pip-tools){:target="_blank"}, [pipchill](https://github.com/rbanffy/pip-chill){:target="_blank"}, etc. that will only list the packages that are not dependencies. However, if you're separating packages for different environments, then these solutions are limited as well.
+    We've should add packages (with versions) to our `requirements.txt` as we've installed them but if we haven't, you can't just do `pip freeze > requirements.txt` because it dumps the dependencies of all our packages into the file (even the ones we didn't explicitly install). When a certain package updates, the stale dependency will still be there. To mitigate this, there are tools such as [pipreqs](https://github.com/bndr/pipreqs){:target="_blank"}, [pip-tools](https://github.com/jazzband/pip-tools){:target="_blank"}, [pipchill](https://github.com/rbanffy/pip-chill){:target="_blank"}, etc. that will only list the packages that are not dependencies. However, if you're separating packages for different environments, then these solutions are limited as well.
 
-The next several lines in our `setup.py` file include some packages required for testing (`test_packages`) and development (`dev_packages`). These will be situationally required when we're testing or developing. For example, a general user of our application won't need to to test or develop so they'll only need the required packages, however, a fellow developer will want both the test and dev packages to extend our code base.
+The next several lines in our `setup.py` file include some packages required for testing (`test_packages`) and development (`dev_packages`). These will be situationally required when we're testing or developing. For example, a general user of our application won't need to to test or develop so they'll only need the required packages, however, a technical developer will want both the test and dev packages to extend our code base.
 
 !!! note
-    We have test and dev packages separated because later on, we'll be using [GitHub actions](https://github.com/features/actions){:target="_blank"} that will only be testing our code so we wanted to specify a way to load only the required packages for testing.
+    We have test and dev packages separated because in our [CI/CD lesson](cicd..md){:target="_blank"}, we'll be using [GitHub actions](https://github.com/features/actions){:target="_blank"} that will only be testing our code so we wanted to specify a way to load only the required packages for testing.
 
 ### Setup
 
@@ -64,7 +64,7 @@ The heart of the `setup.py` file is the `setup` object which describes how to se
 ```python linenums="53"
 setup(
     ...
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     install_requires=[required_packages],
     extras_require={
         "test": test_packages,
@@ -76,7 +76,7 @@ setup(
 
 ### Entry points
 
-The final lines of the file define various entry points we can use to interact with the application. Here we define some console scripts (commands) we can type on our terminal to execute certain actions. For example, after we install our package, we can type the command `tagifai` to run the `app` variable inside `tagifai/cli.py`.
+The final lines of the file define various entry points we can use to interact with the application. Here we define some console scripts (commands) we can type on our terminal to execute certain actions. For example, after we install our package, we can type the command `tagifai` to run the `app` variable inside [`tagifai/cli.py`](https://github.com/GokuMohandas/MLOps/blob/main/app/cli.py){:target="_blank"}.
 
 ```python linenums="59"
 setup(
@@ -98,8 +98,7 @@ python -m pip install -e ".[dev]"     # installs required + dev packages
 python -m pip install -e ".[test]"    # installs required + test packages
 ```
 
-!!! note
-    There are many alternatives to a setup.py file such as the [`setup.cfg`](https://docs.python.org/3/distutils/configfile.html){:target="_blank"} and the more recent (and increasingly adopted) [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"}.
+> There are many alternatives to a setup.py file such as the [`setup.cfg`](https://docs.python.org/3/distutils/configfile.html){:target="_blank"} and the more recent (and increasingly adopted) [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"}.
 
 <!-- Citation -->
 {% include "cite.md" %}

@@ -247,6 +247,18 @@ When designing our API, there are some best practices to follow:
 
 We're going to organize our API under the [app](https://github.com/GokuMohandas/MLOps/tree/main/app){:target="_blank"} directory because in the future we may have additional packages like `tagifai` so we don't want our app to be attached to any one package. Our API will be defined in the following scripts:
 
+```bash linenums="1"
+app/
+├── api.py        - FastAPI app
+└── cli.py        - CLI app
+├── config.py     - configuration setup
+├── schemas.py    - API model schemas
+tagifai/
+├── data.py       - data processing utilities
+├── ...
+└── utils.py      - supplementary utilities
+```
+
 - [`api.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/api.py){:target="_blank"}: the main script that will include our API initialization and endpoints.
 - [`schemas.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/schemas.py){:target="_blank"}: definitions for the different objects we'll use in our resource endpoints.
 
