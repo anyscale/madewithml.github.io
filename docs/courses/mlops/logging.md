@@ -11,7 +11,7 @@ repository: https://github.com/GokuMohandas/MLOps
 
 ## Intuition
 
-Logging the process of tracking and recording key events that occur in our applications. We want to log events so we can use them to inspect processes, fix issues, etc. They're a whole lot more powerful than `print` statements because they allow us to send specific pieces of information to specific locations, not to mention custom formatting, shared interface with other Python packages, etc. We should use logging to provide insight into the internal processes of our application to notify our users of the important events that are occurring.
+Logging is the process of tracking and recording key events that occur in our applications. We want to log events so we can use them to inspect processes, fix issues, etc. They're a whole lot more powerful than `print` statements because they allow us to send specific pieces of information to specific locations, not to mention custom formatting, shared interface with other Python packages, etc. This makes logging a key proponent in being able to surface insightful information from the internal processes of our application.
 
 ## Components
 
@@ -48,11 +48,30 @@ ERROR:root:There's been a mistake with the process.
 CRITICAL:root:There is something terribly wrong and process may terminate.
 </pre>
 
-These are the basic [levels](https://docs.python.org/3/library/logging.html#logging-levels){:target="_blank"} of logging where `DEBUG` is the lowest priority and `CRITICAL` is the highest. We defined out logger using [`basicConfig`](https://docs.python.org/3/library/logging.html#logging.basicConfig){:target="_blank"} to emit log messages to our stdout console (we also could've written to any other stream or even a file) and to be sensitive to log messages starting from level `DEBUG`. This means that all of our logged messages will be displayed since `DEBUG` is the lowest level. Had we made the level `ERROR`, then only `ERROR` and `CRITICAL` log message would be displayed.
+These are the basic [levels](https://docs.python.org/3/library/logging.html#logging-levels){:target="_blank"} of logging, where `DEBUG` is the lowest priority and `CRITICAL` is the highest. We defined our logger using [`basicConfig`](https://docs.python.org/3/library/logging.html#logging.basicConfig){:target="_blank"} to emit log messages to our stdout console (we also could've written to any other stream or even a file) and to be sensitive to log messages starting from level `DEBUG`. This means that all of our logged messages will be displayed since `DEBUG` is the lowest level. Had we made the level `ERROR`, then only `ERROR` and `CRITICAL` log message would be displayed.
+
+```python linenums="1" hl_lines="5"
+import logging
+import sys
+
+# Create super basic logger
+logging.basicConfig(stream=sys.stdout, level=logging.ERROR)
+
+# Logging levels (from lowest to highest priority)
+logging.debug("Used for debugging your code.")
+logging.info("Informative messages from your code.")
+logging.warning("Everything works but there is something to be aware of.")
+logging.error("There's been a mistake with the process.")
+logging.critical("There is something terribly wrong and process may terminate.")
+```
+<pre class="output">
+ERROR:root:There's been a mistake with the process.
+CRITICAL:root:There is something terribly wrong and process may terminate.
+</pre>
 
 ## Configuration
 
-Now let's go ahead and create more configured loggers that will be useful for our application (our code is inside [`tagifai/config.py`](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/config.py){:target="_blank"}. First, we'll define a configuration dictionary object:
+Now let's go ahead and create well configured loggers that will be useful for our application (our logger configuration is inside [`app/config.py`](https://github.com/GokuMohandas/MLOps/blob/main/app/config.py){:target="_blank"}).
 
 ```python linenums="1"
 # Logger
@@ -230,8 +249,7 @@ logger.critical("There is something terribly wrong and process may terminate.")
 <span style="color: #1E1E1E; background-color: #DF1426;">CRITICAL</span> There is something terribly wrong and process may terminate.  <span style="color: #A2A2A2;">config.py:75</span>
 </pre>
 
-!!! note
-    We use [RichHandler](https://rich.readthedocs.io/en/stable/logging.html){:target="_blank"} for our `console` handler to get pretty formatting for the log messages.
+> We use [RichHandler](https://rich.readthedocs.io/en/stable/logging.html){:target="_blank"} for our `console` handler to get pretty formatting for the log messages.
 
 We can also check our `logs/info.log` and `logs/error.log` files to see the log messages that should go to each of those files based on the levels we set for their handlers. Because we used the `detailed` formatter, we should be seeing more informative log messages there:
 <pre>

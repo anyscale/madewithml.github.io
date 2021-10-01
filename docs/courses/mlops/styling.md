@@ -13,23 +13,28 @@ repository: https://github.com/GokuMohandas/MLOps
 
 > Code is read more often than it is written. -- [Guido Van Rossum](https://gvanrossum.github.io/){:target="_blank"} (author of Python)
 
-When we write a piece of code, it's almost never the last time we see it or the last time it's edited. So we need to both explain what's going on ([documentation](documentation.md) but also make it easy to read. One of the easiest ways to make code more readable is to follow consistent style and formatting conventions.
+When we write a piece of code, it's almost never the last time we see it or the last time it's edited. So we need to (1) explain what's going on (via [documentation](documentation.md)) but also (2) make it easy to read. One of the easiest ways to make code more readable is to follow consistent style and formatting conventions.
 
-There are many options when it comes to Python style conventions to adhere to, but most are based on [PEP8](https://www.python.org/dev/peps/pep-0008/) (link walks through the different components (blank lines, imports, etc.) that conventions were written for). You'll notice that different teams will default to different conventions and that's ok. The most important aspects are that everybody is consistently following the same convection and that there are pipelines in place to ensure that consistency. Let's see what this looks like in our application.
+There are many options when it comes to Python style conventions to adhere to, but most are based on [PEP8](https://www.python.org/dev/peps/pep-0008/) conventions. You'll notice that different teams follow different conventions and that's perfectly alright. The most important aspects are that everybody is consistently following the same convection and that there are pipelines in place to automatically and effortlessly ensure that consistency. Let's see what this looks like in our application.
 
 ## Tools
 
 We will be using a very popular blend of style and formatting conventions that makes some very opinionated decisions on our behalf (with configurable options).
 
-- [`Black`](https://black.readthedocs.io/en/stable/){:target="_blank"}: an in-place reformatter that [adheres](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html){:target="_blank"} to PEP8. We can explore examples of the formatting adjustments that Black makes in this [demo](https://black.now.sh/){:target="_blank"}.
+- [`Black`](https://black.readthedocs.io/en/stable/){:target="_blank"}: an in-place reformatter that (mostly) [adheres](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html){:target="_blank"} to PEP8.
 - [`isort`](https://pycqa.github.io/isort/){:target="_blank"}: sorts and formats import statements inside Python scripts.
-- [`flake8`](https://flake8.pycqa.org/en/latest/index.html){:target="_blank"}: a code linter that with stylistic conventions that adhere to PEP8.
+- [`flake8`](https://flake8.pycqa.org/en/latest/index.html){:target="_blank"}: a code linter with stylistic conventions that adhere to PEP8.
 
 We installed all of these as they were defined in out `setup.py` file under `dev_packages`.
-```bash linenums="1"
-"black==20.8b1",
-"flake8==3.8.3",
-"isort==5.5.3",
+```bash linenums="1" hl_lines="3-5"
+# setup.py
+dev_packages = [
+    "black==20.8b1",
+    "flake8==3.8.3",
+    "isort==5.5.3",
+    "jupyterlab==2.2.8",
+    "pre-commit==2.11.1",
+]
 ```
 
 ## Configuration
@@ -90,7 +95,7 @@ max-line-length = 79
 
 Here we setting up some configurations like before but we're including an `ignore` option to ignore certain [flake8 rules](https://www.flake8rules.com/){:target="_blank"} so everything works with our Black and isort configurations.
 
-Besides defining configuration options here, which are applied globally, we can also choose specifically ignore certain conventions on a line-by-line basis. Here are a few example in our code of where we utilized this method:
+Besides defining configuration options here, which are applied globally, we can also choose to specifically ignore certain conventions on a line-by-line basis. Here are a few example in our code of where we utilized this method:
 
 ```python linenums="1"
 # tagifai/config.py

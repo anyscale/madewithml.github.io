@@ -56,9 +56,10 @@ def predict_tags(
 
 ## Commands
 
-In [`cli.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/cli.py){:target="_blank"} script we have define the following commands:
+In [`cli.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/cli.py){:target="_blank"} script we have define the following commands. You may see other operations as well but we can skip those for now because we'll be adding those later. But at this point in the course, we're concerned with the operations to load the data, create features, optimize, train and predict.
 
 - `download-data`: download data from online to local drive.
+- `compute-features`: compute and save features for training.
 - `optimize`: optimize a subset of hyperparameters towards an objective.
 - `train-model`: train a model using the specified parameters.
 - `predict-tags`: predict tags for a give input text using a trained model.
@@ -72,10 +73,11 @@ We can list all the CLI commands for our application like so:
     $ tagifai --help
     Usage: tagifai [OPTIONS] COMMAND [ARGS]
     👉  Commands:
-        download-data  Download data from online to local drive.
-        optimize       Optimize a subset of hyperparameters towards ...
-        train-model    Predict tags for a give input text using a ...
-        predict-tags   Train a model using the specified parameters.
+        download-data     Download data from online to local drive.
+        compute-features  Compute and save features for training.
+        optimize          Optimize a subset of hyperparameters towards ...
+        train-model       Predict tags for a give input text using a ...
+        predict-tags      Train a model using the specified parameters.
         ...
     ```
 
@@ -90,7 +92,7 @@ With Typer, a function's input arguments automatically get rendered as command l
 @app.command()
 def predict_tags(
     text: Optional[str] = "Transfer learning with BERT for self-supervised learning",
-    model_dir: Path = config.MODEL_DIR
+    run_id: Optional[str] = open(Path(config.MODEL_DIR, "run_id.txt")).read(),
 ) -> Dict:
     """Predict tags for a give input text using a trained model.
 
@@ -100,7 +102,7 @@ def predict_tags(
     Args:
         text (str, optional): Input text to predict tags for.
                               Defaults to "Transfer learning with BERT for self-supervised learning".
-        model_dir (Path): location of model artifacts. Defaults to config.MODEL_DIR.
+        run_id (str, optional): ID of the model run to load artifacts. Defaults to run ID in config.MODEL_DIR.
 
     Raises:
         ValueError: Run id doesn't exist in experiment.
@@ -109,12 +111,11 @@ def predict_tags(
         Predicted tags for input text.
     """
     # Predict
-    artifacts = main.load_artifacts(model_dir=model_dir)
+    artifacts = main.load_artifacts(run_id=run_id)
     prediction = predict.predict(texts=[text], artifacts=artifacts)
     logger.info(json.dumps(prediction, indent=2))
 
     return prediction
-    ...
 ```
 
 <div class="animated-code">
@@ -122,25 +123,13 @@ def predict_tags(
     ```console
     # Help for a specific command
     $ tagifai predict-tags --help
+
     Usage: tagifai predict-tags [OPTIONS]
-
-    Predict tags for a give input text using a trained model. Make sure that you have a trained model first!
-
-    Args:
-        text (str, optional):
-            Input text to predict tags for.
-            Defaults to "Transfer learning with BERT.".
-        model_dir (Path, optional):
-            Location of model artifacts.
-            Defaults to config.MODEL_DIR.
-
-    Returns:
-        Predicted tags for input text.
-
+    ...
     Options:
-        --text TEXT       [default: Transfer learning with BERT.]
-        --model-dir TEXT  [default: ]
-        --help            Show this message and exit.
+        --text TEXT    [default: Transfer learning with BERT for self-supervised learning]
+        --run-id TEXT  [default: dce5cc211fbb474e9b86af40939be0ca]
+        --help         Show this message and exit.
     ```
 </div>
 

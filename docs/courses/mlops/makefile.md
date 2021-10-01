@@ -116,7 +116,7 @@ venv:
     pip uninstall dataclasses -y
 ```
 
-However this is only available in Make version 3.82 and above and most Macs currently user version 3.81. You can either update to the current version or chain your commands with `&&`.
+However this is only available in Make version 3.82 and above and most Macs currently use version 3.81. You can either update to the current version or chain your commands with `&&`.
 
 ```bash linenums="1"
 # Environment
@@ -130,8 +130,7 @@ venv:
     pip uninstall dataclasses -y
 ```
 
-!!! note
-    There's a whole lot [more](https://www.gnu.org/software/make/manual/make.html){:target="_blank"} to Makefiles but this is plenty for most applied ML projects.
+> There's a whole lot [more](https://www.gnu.org/software/make/manual/make.html){:target="_blank"} to Makefiles but this is plenty for most applied ML projects.
 
 <!-- Citation -->
 {% include "cite.md" %}

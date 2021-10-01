@@ -33,7 +33,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <div class="ai-center-all" style="margin-top: 2rem;">
     <div class="row">
         <div class="col-md-4" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="1000" data-aos-delay="250">
-            <div class="px-md-3 py-md-3 px-5 py-3 ai-header-card">🏆 &nbsp;Among the <a href="https://github.com/topics/mlops" target="_blank">top MLOps repositories</a> on GitHub.</div>
+            <div class="px-md-3 py-md-3 px-5 py-3 ai-header-card">🏆 &nbsp;Among the <a href="https://github.com/GokuMohandas/MadeWithML" target="_blank">top ML repositories</a> on GitHub.</div>
         </div>
         <div class="col-md-4 mt-4 mt-md-0" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="1000" data-aos-delay="750">
             <div class="px-md-3 py-md-3 px-5 py-3 ai-header-card">❤️ &nbsp;<a href="https://newsletter.madewithml.com/" target="_blank">30K+ community members</a> and growing.</div>
@@ -477,8 +477,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
 
 ## Foundations
-> Learn the foundations of machine learning through intuitive explanations, clean code and visualizations.
-[GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top ML repos](https://github.com/topics/deep-learning){:target="blank"} on GitHub
+> Learn the foundations of machine learning through intuitive explanations, clean code and visualizations. &rarr; [GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"}
 
 <div class="row mt-4 ai-course-list" data-aos="fade-down">
 <div class="col-md-4">
@@ -516,8 +515,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <hr>
 
 ## MLOps
-> Learn how to apply ML to build a production grade product and deliver value.
-[GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"} &rarr; 🏆 &nbsp;Among the [top MLOps repos](https://github.com/topics/mlops){:target="blank"} on GitHub
+> Learn how to apply ML to build a production grade product and deliver value. &rarr; [GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"}
 
 <div class="row mt-4 ai-course-list" data-aos="fade-down">
 <div class="col-md-4">

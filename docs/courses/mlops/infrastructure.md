@@ -11,7 +11,7 @@ repository: https://github.com/GokuMohandas/MLOps
 
 ## Intuition
 
-We’ve already covered the methods of deployment via our API, Docker, and CI/CD lessons where the ML system is its own application, as opposed to being tied to a monolithic general application. This way we’re able to scale our ML workflows as needed and use it to deliver value across any other applications that maybe interested in using it’s outputs. So in this lesson, we’ll instead talk about the types of tasks, serving and how optimize, orchestrate and scale them. We highly recommend using a framework such as [Metaflow](https://metaflow.org/){:target="_blank"} to set up all this infrastructure that we'll be discussing.
+We’ve already covered the methods of deployment via our API, Docker, and CI/CD lessons where the ML system is its own application, as opposed to being tied to a monolithic general application. This way we’re able to scale our ML workflows as needed and use it to deliver value across any other applications that maybe interested in using it’s outputs. So in this lesson, we’ll instead talk about the types of tasks, serving and how optimize, orchestrate and scale them. We highly recommend using a framework such as [Metaflow](https://metaflow.org/){:target="_blank"} to seamlessly interact with all the infrastructure that we'll be discussing.
 
 ## Tasks
 

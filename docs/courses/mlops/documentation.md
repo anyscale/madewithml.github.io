@@ -21,8 +21,10 @@ Another way to [organize](organization.md){:target="_blank"} our code is to docu
 - `#!js docstrings`: meaningful descriptions for functions and classes that describe overall utility as wel as arguments, returns, etc.
 - `#!js documentation`: rendered webpage that summarizes all the functions, classes, API calls, workflows, examples, etc. so we can view and traverse through the code base without actually having to look at the code just yet.
 
-!!! note
-    Be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}.
+!!! question "Code collaboration"
+    How do you currently share your code with others on your team? What can be improved?
+
+> Be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}.
 
 ## Typing
 It's important to be as explicit as possible with our code. We're already discussed choosing explicit names for variables, functions, etc. but another way we can be explicit is by defining the types for our function's inputs and outputs. We want to do this so we can quickly know what data types a function expects and how we can utilize it's outputs for downstream processes.
@@ -41,10 +43,9 @@ def pad_sequences(sequences: np.ndarray, max_seq_len: int = 0) -> np.ndarray:
     return padded_sequences
 ```
 
-Here we're defining that our input argument `sequences` is a NumPy array, `max_seq_len` is an integer with a default value of 0 and our output is also a NumPy array. There are many data types that we can work with, including but not limited to `List`, `Set`, `Dict`, `Tuple`, `Sequence` and [more](https://docs.python.org/3/library/typing.html){:target="_blank"} and of course included types such as `int`, `float`, etc. You can also use any of your own defined classes as types (ex. `nn.Module`, `LabelEncoder`, etc.).
+Here we're defining that our input argument `sequences` is a NumPy array, `max_seq_len` is an integer with a default value of 0 and our output is also a NumPy array. There are many data types that we can work with, including but not limited to `List`, `Set`, `Dict`, `Tuple`, `Sequence` and [more](https://docs.python.org/3/library/typing.html){:target="_blank"}, as well as included types such as `int`, `float`, etc. You can also use any of your own defined classes as types (ex. `nn.Module`, `LabelEncoder`, etc.).
 
-!!! note
-    Starting from Python 3.9+, common types are [built in](https://docs.python.org/3/whatsnew/3.9.html#type-hinting-generics-in-standard-collections){:target="_blank"} so we don't need to import them with ```from typing import List, Set, Dict, Tuple, Sequence``` anymore.
+> Starting from Python 3.9+, common types are [built in](https://docs.python.org/3/whatsnew/3.9.html#type-hinting-generics-in-standard-collections){:target="_blank"} so we don't need to import them with ```from typing import List, Set, Dict, Tuple, Sequence``` anymore.
 
 
 ## Docstrings
@@ -108,7 +109,7 @@ Let's unpack the different parts of this function's docstring:
 - `#!js [Lines 28-29]`: Description of the function's output(s).
 
 !!! note
-    If you're using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank"} (highly recommend), you should get the free [Python Docstrings Generator](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring){:target="_blank"} extension so you can type `"""` under a function and then hit the ++shift++ key to generate a template docstring. It will autofill parts of the docstring using the typing information and even exception in your code!
+    If you're using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank"}, you should get the free [Python Docstrings Generator](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring){:target="_blank"} extension so you can type `"""` under a function and then hit the ++shift++ key to generate a template docstring. It will autofill parts of the docstring using the typing information and even exception in your code!
 
     ![vscode docstring generation](https://github.com/NilsJPWerner/autoDocstring/raw/master/images/demo.gif)
 

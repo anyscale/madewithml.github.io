@@ -18,7 +18,7 @@ It's integral to be able to consistently create an environment to develop in so 
 When we used our [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb){:target="_blank"}, we had a preloaded set of packages (run `!pip list` inside the notebook to see all of them). But now we want to define our environment so we can reproduce it for our Python scripts. There are [many recommended options](https://packaging.python.org/guides/tool-recommendations/){:target="_blank"} when it comes to packaging in Python and we'll be using the traditional and recommended [Pip](https://pip.pypa.io/en/stable/){:target="_blank"}.
 
 !!! note
-    I'm a huge fan (and user) of [Poetry](https://python-poetry.org/){:target="_blank"} which is a dependency management and packaging tool but there are still many things in flux. I'm sticking with Pip because it works for our application and don't want to deal with issues like [long resolve periods](https://github.com/python-poetry/poetry/issues/2094){:target="_blank"}.
+    There are manmy alternative dependency management and packaging tools, such as [Poetry](https://python-poetry.org/){:target="_blank"}, but there are still many things in flux with these newer options. We're going to stick with Pip because it works for our application and don't want to deal with issues like [long resolve periods](https://github.com/python-poetry/poetry/issues/2094){:target="_blank"}.
 
 First thing we'll do is set up a [virtual environment](https://docs.python.org/3/library/venv.html){:target="_blank"} so we can isolate our packages (and versions) necessary for application from our other projects which may have different dependencies. Once we create our virtual environment, we'll activate it and install our required packages.
 
@@ -31,10 +31,33 @@ pip install -e .
 
 Let's unpack what's happening here:
 
-1. Creating a Python virtual environment named `venv`. We can use [pyenv](https://github.com/pyenv/pyenv){:target="_blank"} to manage different Python versions.
+1. Creating a Python virtual environment named `venv`.
 2. Activate our virtual environment. Type `deactivate` to exit the virtual environment.
 3. Upgrading required packages so we download the latest package wheels.
 4. Install from `setup.py` (`-e`, `--editable` installs a project in develop mode)
+
+> We can use [pyenv](https://github.com/pyenv/pyenv){:target="_blank"} to manage different Python versions.
+
+<div class="animated-code">
+
+    ```console
+    # Using pyenv to switch between Python versions
+    $ python --version
+    Python 3.6.9
+    $ pyenv versions
+    system
+    *  3.6.9
+    $ pyenv install 3.7.10
+    $ pyenv local 3.7.10
+    system
+    3.6.9
+    * 3.7.10 (set by /Users/goku/Documents/madewithml/mlops/.python-version)
+    $ python --version
+    Python 3.7.10
+    ```
+
+</div>
+<script src="../../../static/js/termynal.js"></script>
 
 ## setup.py
 
