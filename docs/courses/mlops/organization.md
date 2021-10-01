@@ -68,7 +68,7 @@ Once we're all set up with VSCode, we can start by creating our project director
 4. Open a terminal within VSCode (`View` > `Terminal`) to continue creating scripts (`#!bash touch <FILE_NAME>`) or additional subdirectories (`#!bash mkdir <SUBDIR>`) as needed.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/organization/vscode.png" width="550" alt="vscode">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/organization/vscode.png" width="650" alt="vscode">
 </div>
 
 ## Organizing
