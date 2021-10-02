@@ -78,7 +78,7 @@ There are several ways to organize our code when we're going from the notebooks 
 tagifai/
 ├── data.py       - data processing utilities
 ├── eval.py       - evaluation components
-├── main.py       - training/optimization pipelines
+├── main.py       - training/optimization operations
 ├── models.py     - model architectures
 ├── predict.py    - inference utilities
 ├── train.py      - training utilities
@@ -101,9 +101,9 @@ Once we've decided on the directory architecture, we can start moving the functi
         pip install git+https://github.com/GokuMohandas/MLOps#egg=tagifai
         ```
 
-### Operations
+### Utilities
 
-Now that we've organized our functions/classes, it's time to create some new functions to encapsulate the ad-hoc processes in our notebooks. Recall that we repeatedly performed actions such as setting the device, reading from a JSON file, etc. We should organize these general [utilities](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/utils.py){:target="_blank"} as separate functions that we can reuse later on. For example:
+Now that we've organized our functions and classes, it's time to create some new functions to encapsulate the ad-hoc processes in our notebooks. Recall that we repeatedly performed actions such as setting the device, reading from a JSON file, etc. We should organize these general [utilities](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/utils.py){:target="_blank"} as separate functions that we can reuse later on.
 
 ```python linenums="1"
 # Set device
@@ -127,9 +127,56 @@ def set_device(cuda: bool):
     return device
 ```
 
-For the more main operations (computing features, training, etc.), we can organize them into functions under the [main.py](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/main.py){:target="_blank"} script which we can call using various interfaces ([CLI](cli.md){:target="_blank"} or [API](cli.md){:target="_blank"}).
-
 > As we move code into our scripts, we can format them to look via:  open the Command Palette (`F1` or ++command++ + ++shift++ + `P` on mac) &rarr; type "Format Document" &rarr; hit ++return++. Follow the same instructions by type "Prettify JSON" to format JSON documents.
+
+### Operations
+
+With all of our code modularized and organized, we're ready to start crafting functions that are responsible for our system's main operations. We can organize these in a [main.py](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/main.py){:target="_blank"} script. These are some of the major operations in our script and we'll be adding more later as we go through the future lessons.
+
+- `#!python download_auxiliary_data()`
+- `#!python compute_features(params_fp)`
+- `#!python optimize(params_fp, study_name, num_trials=100)`
+- `#!python train_model(params_fp, experiment_name, run_name)`
+- `#!python load_artifacts(run_id, device)`
+- `#!python delete_experiment(experiment_name)`
+
+We can test all of these via the terminal or with a separate Python script etc. Since this code isn't a perfect transplant from the notebooks, we may need to run it several times and resolve import issues, data passes, etc.
+
+```python linenums="1"
+from pathlib import Path
+from config import config
+from tagifai import main, utils
+
+# Load auxiliary data
+main.download_auxiliary_data()
+
+# Compute features
+main.compute_features()
+
+# Train model (test)
+params_fp = Path(config.CONFIG_DIR, "test_params.json")
+experiment_name = "test"
+main.train_model(params_fp, experiment_name=experiment_name, run_name="model")
+
+# Delete test experiment
+utils.delete_experiment(experiment_name=experiment_name)
+```
+
+<pre class="output">
+[01/01/20 16:36:49] INFO     ✅ Auxiliary data downloaded!
+[01/01/20 16:36:49] INFO     ✅ Computed features!
+[01/01/20 16:36:49] INFO     Run ID: b39c3a8d2c3c494984a3fa2d9d670402
+[01/01/20 16:36:49] INFO     Epoch: 1 | train_loss: 0.00744, val_loss: 0.00648, lr: 1.02E-04, _patience: 10
+[01/01/20 16:36:49] INFO     {
+                               "precision": 0.5625,
+                               "recall": 0.03125,
+                               "f1": 0.05921052631578947,
+                               "num_samples": 32.0
+                             }
+[01/01/20 16:36:49] INFO     ✅ Deleted experiment test!
+</pre>
+
+> Some developers may prefer to interact with the main operations through a command-line interface. We'll modify out main.py script in our ([CLI lesson](cli.md){:target="_blank"} to enable this.
 
 
 ## Reading

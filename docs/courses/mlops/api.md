@@ -250,13 +250,7 @@ We're going to organize our API under the [app](https://github.com/GokuMohandas/
 ```bash linenums="1"
 app/
 ├── api.py        - FastAPI app
-└── cli.py        - CLI app
-├── config.py     - configuration setup
-├── schemas.py    - API model schemas
-tagifai/
-├── data.py       - data processing utilities
-├── ...
-└── utils.py      - supplementary utilities
+└── schemas.py    - API model schemas
 ```
 
 - [`api.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/api.py){:target="_blank"}: the main script that will include our API initialization and endpoints.
@@ -330,7 +324,7 @@ uvicorn app.api:app \       # location of app (`app` directory > `api.py` script
 We're using [Uvicorn](https://www.uvicorn.org/){:target="_blank"}, a fast ASGI server (it can run asynchronous code in a single process) to launch our application. Notice that we only reload on changes to specific directories, as this is to avoid reloading on files that won't impact our application such as log files, etc.
 
 !!! note
-    If we want to manage multiple uvicorn workers to enable parallelism in our application, we can use [Gunicorn](https://gunicorn.org/){:target="_blank"} in conjunction with Uvicorn. This will usually be done in a production environment where we'll be dealing with meaningful traffic. I've included a [`config/gunicorn.py`](https://github.com/GokuMohandas/MLOps/tree/main/config/gunicorn.py){:target="_blank"} script with the customizable configuration and we can launch all the workers with the follow command (or `make app-prod`):
+    If we want to manage multiple uvicorn workers to enable parallelism in our application, we can use [Gunicorn](https://gunicorn.org/){:target="_blank"} in conjunction with Uvicorn. This will usually be done in a production environment where we'll be dealing with meaningful traffic. I've included a [`app/gunicorn.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/gunicorn.py){:target="_blank"} script with the customizable configuration and we can launch all the workers with the follow command (or `make app-prod`):
     ```bash linenums="1"
     gunicorn -c config/gunicorn.py -k uvicorn.workers.UvicornWorker app.api:app
     ```

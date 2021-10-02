@@ -23,18 +23,16 @@ When we used our [notebook](https://colab.research.google.com/github/GokuMohanda
 First thing we'll do is set up a [virtual environment](https://docs.python.org/3/library/venv.html){:target="_blank"} so we can isolate our packages (and versions) necessary for application from our other projects which may have different dependencies. Once we create our virtual environment, we'll activate it and install our required packages.
 
 ```bash linenums="1"
-python3 -m venv venv  # python>=3.7
+python3 -m venv venv
 source venv/bin/activate
 python -m pip install --upgrade pip setuptools wheel
-pip install -e .
 ```
 
 Let's unpack what's happening here:
 
-1. Creating a Python virtual environment named `venv`.
+1. Creating a Python virtual environment named `venv`. Use Python 3.7.10 for our project.
 2. Activate our virtual environment. Type `deactivate` to exit the virtual environment.
 3. Upgrading required packages so we download the latest package wheels.
-4. Install from `setup.py` (`-e`, `--editable` installs a project in develop mode)
 
 > We can use [pyenv](https://github.com/pyenv/pyenv){:target="_blank"} to manage different Python versions.
 
@@ -87,7 +85,7 @@ The heart of the `setup.py` file is the `setup` object which describes how to se
 ```python linenums="53"
 setup(
     ...
-    python_requires=">=3.7",
+    python_requires="==3.7.10",
     install_requires=[required_packages],
     extras_require={
         "test": test_packages,

@@ -90,7 +90,7 @@ The final step in building our image is to specify the executable to be run when
 
 ```dockerfile
 # Start app
-ENTRYPOINT ["gunicorn", "-c", "config/gunicorn.py", "-k", "uvicorn.workers.UvicornWorker", "app.api:app"]
+ENTRYPOINT ["gunicorn", "-c", "app/gunicorn.py", "-k", "uvicorn.workers.UvicornWorker", "app.api:app"]
 ```
 
 !!! note

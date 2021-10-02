@@ -85,12 +85,12 @@ tagifai/
 |   ├── eval.py               # model tests
 tests/                        # code tests
 ├── app/
-|   ├── test_api.py
-|   └── test_cli.py
+|   └── test_api.py
 └── tagifai/
 |   ├── test_config.py
 |   ├── test_data.py
 |   ├── test_eval.py
+|   ├── test_main.py
 |   ├── test_models.py
 |   ├── test_train.py
 |   └── test_utils.py
