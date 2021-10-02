@@ -5,7 +5,7 @@ description: Documenting code for your users and your future self.
 keywords: documentation, mkdocs, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
-documentation: https://gokumohandas.github.io/MLOps/
+documentation: https://github.com/GokuMohandas/follow/tree/documentation
 ---
 
 {% include "styles/lesson.md" %}
@@ -157,11 +157,11 @@ nav:
   - Home:
       - TagIfAI: index.md
   - Getting started: getting_started.md
+  - Operations: tagifai/main.md
+  - Configurations: config/config.md
   - Reference:
-    - API: app/api.md
-    - CLI: app/cli.md
-    - Config: app/config.md
     - Data: tagifai/data.md
+    - Eval: tagifai/data.md
     - Models: tagifai/models.md
     - Training: tagifai/train.md
     - Inference: tagifai/predict.md

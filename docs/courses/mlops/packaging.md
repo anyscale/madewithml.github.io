@@ -4,7 +4,7 @@ title: Packaging a Python Codebase
 description: Using configurations and virtual environments to create a setting for reproducing results.
 keywords: packaging, pip, setup.py, virtual environment, reproducibility, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/follow/tree/packaging
 ---
 
 {% include "styles/lesson.md" %}
@@ -12,6 +12,8 @@ repository: https://github.com/GokuMohandas/MLOps
 ## Intuition
 
 It's integral to be able to consistently create an environment to develop in so that we can reliably reproduce the same results. To do this, we'll need to explicitly detail all the requirements (python version, packages, etc.) as well as create the environment that will load all the requirements. By doing this, we'll not only be able to consistently reproduce results but also enable others to arrive at the same results.
+
+> We can set up our files below (setup.py & requirements.txt) with just the terminal and any text editor but you may use a [code editor](organization.md#editor){:target="_blank"} as well.
 
 ## Virtual environment
 
@@ -64,6 +66,13 @@ Let's dive into our [`setup.py`](https://github.com/GokuMohandas/MLOps/blob/main
 ### Requirements
 
 First, we're retrieving our required packages from our `requirements.txt` file. While we could place these requirements directly inside `setup.py`, many applications still look for a `requirements.txt` file so we'll keep it separate.
+
+```bash
+touch requirements.txt setup.py
+```
+
+And we'll call these requirements in our setup.py script like so:
+
 ```python linenums="10"
 # Load packages from requirements.txt
 with open(Path(BASE_DIR, "requirements.txt"), "r") as file:
@@ -76,7 +85,7 @@ with open(Path(BASE_DIR, "requirements.txt"), "r") as file:
 The next several lines in our `setup.py` file include some packages required for testing (`test_packages`) and development (`dev_packages`). These will be situationally required when we're testing or developing. For example, a general user of our application won't need to to test or develop so they'll only need the required packages, however, a technical developer will want both the test and dev packages to extend our code base.
 
 !!! note
-    We have test and dev packages separated because in our [CI/CD lesson](cicd..md){:target="_blank"}, we'll be using [GitHub actions](https://github.com/features/actions){:target="_blank"} that will only be testing our code so we wanted to specify a way to load only the required packages for testing.
+    We have test and dev packages separated because in our [CI/CD lesson](cicd.md){:target="_blank"}, we'll be using [GitHub actions](https://github.com/features/actions){:target="_blank"} that will only be testing our code so we wanted to specify a way to load only the required packages for testing.
 
 ### Setup
 
@@ -97,7 +106,7 @@ setup(
 
 ### Entry points
 
-The final lines of the file define various entry points we can use to interact with the application. Here we define some console scripts (commands) we can type on our terminal to execute certain actions. For example, after we install our package, we can type the command `tagifai` to run the `app` variable inside [`tagifai/cli.py`](https://github.com/GokuMohandas/MLOps/blob/main/app/cli.py){:target="_blank"}.
+The final lines of the file define various entry points we can use to interact with the application. Here we define some console scripts (commands) we can type on our terminal to execute certain actions. For example, after we install our package, we can type the command `tagifai` to run the `app` variable inside [`tagifai/main.py`](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/main.py){:target="_blank"}.
 
 ```python linenums="59"
 setup(

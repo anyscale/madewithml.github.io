@@ -4,7 +4,7 @@ title: APIs for Machine Learning
 description: Using first principles to designing and implement a API to wrap ML functionality.
 keywords: api, fastapi, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/follow/tree/api
 ---
 
 {% include "styles/lesson.md" %}
@@ -249,11 +249,13 @@ We're going to organize our API under the [app](https://github.com/GokuMohandas/
 
 ```bash linenums="1"
 app/
-├── api.py        - FastAPI app
-└── schemas.py    - API model schemas
+├── api.py          - FastAPI app
+├── gunicorn.py     - WSGI script
+└── schemas.py      - API model schemas
 ```
 
 - [`api.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/api.py){:target="_blank"}: the main script that will include our API initialization and endpoints.
+- [`gunicorn.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/gunicorn.py){:target="_blank"}: script for defining API worker configurations.
 - [`schemas.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/schemas.py){:target="_blank"}: definitions for the different objects we'll use in our resource endpoints.
 
 We'll step through the components in these scripts to show how we'll design our API.

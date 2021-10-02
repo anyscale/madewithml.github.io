@@ -72,8 +72,8 @@ nav:
       - Experiment tracking: courses/mlops/experiment-tracking.md
       - Optimization: courses/mlops/optimization.md
     - 📝 &nbsp; Scripting:
-      - Organization: courses/mlops/organization.md
       - Packaging: courses/mlops/packaging.md
+      - Organization: courses/mlops/organization.md
       - Documentation: courses/mlops/documentation.md
       - Logging: courses/mlops/logging.md
       - Styling: courses/mlops/styling.md

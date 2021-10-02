@@ -4,7 +4,7 @@ title: Makefiles
 description: An automation tool that organizes commands for our application's processes.
 keywords: makefile, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/follow/tree/makefile
 ---
 
 {% include "styles/lesson.md" %}
@@ -34,9 +34,7 @@ We can execute any of the rules by typing `make <target>`:
     👉  Commands:
         venv   : creates development environment.
         style  : runs style formatting.
-        clean  : cleans all unecessary files.
-        dvc    : pushes versioned artifacts to blob storage.
-        test   : run non-training tests.
+        clean  : cleans all unnecessary files.
 
     # Make a target
     $ make venv

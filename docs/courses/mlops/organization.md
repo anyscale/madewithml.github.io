@@ -1,10 +1,10 @@
 ---
 template: lesson.html
-title: Organizing a Repository for ML Applications
+title: Organizing Machine Learning Code
 description: Organizing our code when moving from notebooks to Python scripts.
 keywords: git, github, organization, repository, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/follow/tree/organization
 ---
 
 {% include "styles/lesson.md" %}
@@ -178,6 +178,16 @@ utils.delete_experiment(experiment_name=experiment_name)
 
 > Some developers may prefer to interact with the main operations through a command-line interface. We'll modify out main.py script in our ([CLI lesson](cli.md){:target="_blank"} to enable this.
 
+## Config
+
+To make our main operations work, we've also defined a [config directory](https://github.com/GokuMohandas/MLOps/blob/main/config){:target="_blank"} that has parameters for training, running a small test for training, etc. It also include the [config.py](https://github.com/GokuMohandas/MLOps/blob/main/config/config.py){:target="_blank"} script which specifies locations of our model stores (as well other stores that we will cover later), [logging](logging.md){:target="_blank"}, stopwords, etc.
+
+```bash linenums="1"
+config/
+├── config.py       - configuration setup
+├── params.json     - training parameters
+└── test_params.py  - training test parameters
+```
 
 ## Reading
 So what's the best way to read a code base like this? We could look at the [documentation](https://gokumohandas.github.io/MLOps/){:target="_blank"} but that's usually useful if you're looking for specific functions or classes within a script. What if you want to understand the overall functionality and how it's all organized? Well, we can start with the operations defined in [`main.py`](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/main.py){:target="_blank"} and dive deeper into the specific workflows (training, optimization, etc.).

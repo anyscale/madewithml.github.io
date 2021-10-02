@@ -4,32 +4,36 @@ title: Command Line Interface (CLI) Applications
 description: Using a command line interface (CLI) application to organize our application's processes.
 keywords: cli, application, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/follow/tree/cli
 ---
 
 {% include "styles/lesson.md" %}
 
 ## Intuition
 
-We want to enable others to be able to interact with our application without having to dig into the code and execute functions one at a time. One method is to build a CLI application that allows for interaction via any shell. It should designed such that we can see all possible operations as well the appropriate assistance needed for configuring options and other arguments for each of those operations. Let's see what a CLI looks like for our application which has many different commands (training, prediction, etc.)
+Recall from our [Organization lesson](organization.md){:target="_blank"} when we executed [main operations](organization.md#operations){:target="_blank"} via code. This is acceptable for most developers, but sometimes, we want to enable others to be able to interact with our application without having to dig into the code and execute functions one at a time. One method is to build a CLI application that allows for interaction via any shell. It should designed such that we can see all possible operations as well the appropriate assistance needed for configuring options and other arguments for each of those operations. Let's see what a CLI looks like for our application which has many different operations (training, prediction, etc.).
 
 ```bash linenums="1"
 tagifai/
 ├── data.py       - data processing utilities
 ├── ...
-├── main.py       - CLI wrapper around operations
+├── main.py       - main operations with CLI wrapper
 ├── ...
 └── utils.py      - supplementary utilities
 ```
 
 ## Application
 
-The `app` that we defined inside our [`cli.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/cli.py){:target="_blank"} script is created using [Typer](https://typer.tiangolo.com/){:target="_blank"}, an open-source tool for building command line interface (CLI) applications. It starts by initializing the app and then adding the appropriate decorator to each function we wish to use as a CLI command.
+We're going to create our CLI using [Typer](https://typer.tiangolo.com/){:target="_blank"}, an open-source tool for building command line interface (CLI) applications. It's as simple as initializing the app and then adding the appropriate decorator to each function operation we wish to use as a CLI command.
 
 ```python linenums="1"
-# Typer CLI app
+# Initialize Typer CLI app
+import typer
 app = typer.Typer()
+```
 
+```python linenums="1" hl_lines="2"
+# Repeat for all functions we want to interact via CLI
 @app.command()
 def predict_tags(
     text: str = "Transfer learning with BERT for self-supervised learning",
@@ -48,7 +52,7 @@ def predict_tags(
         ...
         entry_points={
             "console_scripts": [
-                "tagifai = app.cli:app",
+                "tagifai = tagifai.main:app",
             ],
         },
     )
@@ -56,13 +60,14 @@ def predict_tags(
 
 ## Commands
 
-In [`cli.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/cli.py){:target="_blank"} script we have define the following commands. You may see other operations as well but we can skip those for now because we'll be adding those later. But at this point in the course, we're concerned with the operations to load the data, create features, optimize, train and predict.
+In [`main.py`](https://github.com/GokuMohandas/MLOps/tree/main/tagifai/main.py){:target="_blank"} script we have defined the following operations:
 
-- `download-data`: download data from online to local drive.
+- `download-auxiliary-data`: download data from online to local drive.
 - `compute-features`: compute and save features for training.
 - `optimize`: optimize a subset of hyperparameters towards an objective.
 - `train-model`: train a model using the specified parameters.
 - `predict-tags`: predict tags for a give input text using a trained model.
+- + more!
 
 We can list all the CLI commands for our application like so:
 
@@ -73,7 +78,7 @@ We can list all the CLI commands for our application like so:
     $ tagifai --help
     Usage: tagifai [OPTIONS] COMMAND [ARGS]
     👉  Commands:
-        download-data     Download data from online to local drive.
+        download-auxiliary-data     Download data from online to local drive.
         compute-features  Compute and save features for training.
         optimize          Optimize a subset of hyperparameters towards ...
         train-model       Predict tags for a give input text using a ...
@@ -84,16 +89,16 @@ We can list all the CLI commands for our application like so:
 </div>
 <script src="../../../static/js/termynal.js"></script>
 
+!!! warning
+    We may need to run `#!bash python -m pip install -e .` again to connect the entry point since `tagifai.main:app` didn't exist when we initially set up the environment.
+
 ## Arguments
 
 With Typer, a function's input arguments automatically get rendered as command line options. For example, our `predict_tags` function consumes `text` and an optional `model_dir` as inputs which automatically become arguments for the `predict-tags` CLI command.
 
 ```python linenums="1"
 @app.command()
-def predict_tags(
-    text: Optional[str] = "Transfer learning with BERT for self-supervised learning",
-    run_id: Optional[str] = open(Path(config.MODEL_DIR, "run_id.txt")).read(),
-) -> Dict:
+def predict_tags(text: str, run_id: str,) -> Dict:
     """Predict tags for a give input text using a trained model.
 
     Warning:
@@ -101,8 +106,7 @@ def predict_tags(
 
     Args:
         text (str, optional): Input text to predict tags for.
-                              Defaults to "Transfer learning with BERT for self-supervised learning".
-        run_id (str, optional): ID of the model run to load artifacts. Defaults to run ID in config.MODEL_DIR.
+        run_id (str, optional): ID of the model run to load artifacts.
 
     Raises:
         ValueError: Run id doesn't exist in experiment.
@@ -127,8 +131,8 @@ def predict_tags(
     Usage: tagifai predict-tags [OPTIONS]
     ...
     Options:
-        --text TEXT    [default: Transfer learning with BERT for self-supervised learning]
-        --run-id TEXT  [default: dce5cc211fbb474e9b86af40939be0ca]
+        --text TEXT
+        --run-id TEXT
         --help         Show this message and exit.
     ```
 </div>
