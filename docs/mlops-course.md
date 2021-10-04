@@ -955,30 +955,16 @@ We will be applying the concepts we learn each week to iteratively complete two 
     <div class="col-6" data-aos="fade-left">
         <h4 class="mb-1">Week <span class="ml-1">6️⃣</span></h4>
         <div class="row">
-            <div class="col-md-6 mt-md-0 mt-2">
+            <div class="col-md-12 mt-md-0 mt-2">
                 <div class="mb-2">
                 <div>Saturday</div>
-                <small><div>Oct 23rd, 2021</div></small>
-                <small><div>7 am - 10 am PT</div></small>
-                </div>
-                <div><a data-toggle="collapse" href="#collapseNavigationSeries" aria-expanded="false" aria-controls="collapseNavigationSeries">"How to navigate X" series</a></div>
-                <div class="collapse multi-collapse" id="collapseNavigationSeries">
-                    <ul class="ai-course-list">
-                    <li>ML research</li>
-                    <li>Python libraries</li>
-                    <li>Your career</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-6 mt-md-0 mt-2">
-                <div class="mb-2">
-                <div>Sunday</div>
-                <small><div>Oct 24th, 2021</div></small>
+                <small><div>Oct 23th, 2021</div></small>
                 <small><div>7 am - 10 am PT</div></small>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseReflection" aria-expanded="false" aria-controls="collapseReflection">Reflection and next steps</a></div>
                 <div class="collapse multi-collapse" id="collapseReflection">
                     <ul class="ai-course-list">
+                    <li>Product and project management</li>
                     <li>How to continue the learning journey</li>
                     <li>How to continue building personal brand</li>
                     </ul>
