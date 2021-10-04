@@ -20,7 +20,7 @@ It's integral to be able to consistently create an environment to develop in so 
 When we used our [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb){:target="_blank"}, we had a preloaded set of packages (run `!pip list` inside the notebook to see all of them). But now we want to define our environment so we can reproduce it for our Python scripts. There are [many recommended options](https://packaging.python.org/guides/tool-recommendations/){:target="_blank"} when it comes to packaging in Python and we'll be using the traditional and recommended [Pip](https://pip.pypa.io/en/stable/){:target="_blank"}.
 
 !!! note
-    There are manmy alternative dependency management and packaging tools, such as [Poetry](https://python-poetry.org/){:target="_blank"}, but there are still many things in flux with these newer options. We're going to stick with Pip because it works for our application and don't want to deal with issues like [long resolve periods](https://github.com/python-poetry/poetry/issues/2094){:target="_blank"}.
+    There are many alternative dependency management and packaging tools, such as [Poetry](https://python-poetry.org/){:target="_blank"}, but there are still many things in flux with these newer options. We're going to stick with Pip because it works for our application and don't want to deal with issues like [long resolve periods](https://github.com/python-poetry/poetry/issues/2094){:target="_blank"}.
 
 First thing we'll do is set up a [virtual environment](https://docs.python.org/3/library/venv.html){:target="_blank"} so we can isolate our packages (and versions) necessary for application from our other projects which may have different dependencies. Once we create our virtual environment, we'll activate it and install our required packages.
 
@@ -128,7 +128,9 @@ python -m pip install -e ".[dev]"     # installs required + dev packages
 python -m pip install -e ".[test]"    # installs required + test packages
 ```
 
-> There are many alternatives to a setup.py file such as the [`setup.cfg`](https://docs.python.org/3/distutils/configfile.html){:target="_blank"} and the more recent (and increasingly adopted) [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"}.
+> The `-e` or `--editable` flag installs a project in develop mode so we can make changes without having to reinstall packages.
+
+There are many alternatives to a setup.py file such as the [`setup.cfg`](https://docs.python.org/3/distutils/configfile.html){:target="_blank"} and the more recent (and increasingly adopted) [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"}.
 
 <!-- Citation -->
 {% include "cite.md" %}

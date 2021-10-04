@@ -215,6 +215,8 @@ The response we receive from our server is the result of the request we sent. Th
 }
 ```
 
+> We may also want to include other metadata in the response such as model version, data lineage, etc. Anything that the downstream consumer may be interested in or metadata that might be useful for subsequent inspection.
+
 There are many [HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes){:target="_blank"} to choose from depending on the situation but here are the most common options:
 
 <center>
@@ -415,7 +417,7 @@ def _index(request: Request):
 }
 </pre>
 
-There are also some built-in decorators we should be aware of. We've already seen the path operation decorator (ex. `@app.get("/")`) which defines the path for the endpoint as well as [other attributes](https://fastapi.tiangolo.com/tutorial/path-operation-configuration/){:target="_blank"}. There is also the [events decorator](https://fastapi.tiangolo.com/advanced/events/){:target="_blank"} (`@app.on_event()`) which we can use to startup and shutdown our application. For example, we use the `startup` event to load all the previous best runs and identify the best run (and model) to use for inference. The advantage of doing this as an Event is that our service won't start until this is ready so no requests will be prematurely processed and error out.
+There are also some built-in decorators we should be aware of. We've already seen the path operation decorator (ex. `@app.get("/")`) which defines the path for the endpoint as well as [other attributes](https://fastapi.tiangolo.com/tutorial/path-operation-configuration/){:target="_blank"}. There is also the [events decorator](https://fastapi.tiangolo.com/advanced/events/){:target="_blank"} (`@app.on_event()`) which we can use to startup and shutdown our application. For example, we use the (`@app.on_event("startup")`) event to load all the previous best runs and identify the best run (and model) to use for inference. The advantage of doing this as an Event is that our service won't start until this is ready so no requests will be prematurely processed and error out. Similarly, we can perform shutdown events with (`@app.on_event("shutdown")`), such as logging, cleaning, etc.
 
 ```python linenums="1" hl_lines="1"
 @app.on_event("startup")

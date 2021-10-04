@@ -583,8 +583,8 @@ x: 5, y: 2
 
 Classes are object constructors and are a fundamental component of object oriented programming in Python. They are composed of a set of functions that define the class and it's operations.
 
-### Magic functions
-Classes can be customized with magic functions like `__init__` and `__str__`, to enable powerful operations.
+### Magic methods
+Classes can be customized with magic methods like `__init__` and `__str__`, to enable powerful operations. These are also known as dunder methods (ex. dunder init), which stands for `d`ouble `under`scores due to the leading and trailing underscores.
 
 The `__init__` function is used when an instance of the class is initialized.
 ```python linenums="1"

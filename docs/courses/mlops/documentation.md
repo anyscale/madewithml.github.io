@@ -126,7 +126,7 @@ Here are the steps we'll follow to automatically generate our documentation and 
 
 1. Create `mkdocs.yml` in root directory.
 ```bash linenums="1"
-touch mkdocs.yaml
+touch mkdocs.yml
 ```
 2. Fill in metadata, config, extensions and plugins (more setup options like custom styling, overrides, etc. [here](https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/){:target="_blank"}). I add some custom CSS inside `docs/static/csc` to make things look a little bit nicer :)
 ```yaml linenums="1"

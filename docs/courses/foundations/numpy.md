@@ -294,6 +294,50 @@ z:
  [4 5]
 </pre>
 
+### Gotchas
+
+In the situation below, what is the value of `c` and what are its dimensions?
+
+```python linenums="1"
+a = np.array((3, 4, 5))
+b = np.expand_dims(a, axis=1)
+c = a + b
+```
+
+```python linenums="1"
+a.shape # (3,)
+b.shape # (3, 1)
+c.shape # (3, 3)
+print (c)
+```
+<pre class="output">
+array([[ 6,  7,  8],
+        [ 7,  8,  9],
+        [ 8,  9, 10]])
+</pre>
+
+How can we fix this? We need to be careful to ensure that `a` is the same shape as `b` if we don't want this unintentional broadcasting behavior.
+```python linenums="1"
+a = a.reshape(-1, 1)
+a.shape # (3, 1)
+c = a + b
+c.shape # (3, 1)
+print (c)
+```
+<pre class="output">
+array([[ 6],
+       [ 8],
+       [10]])
+</pre>
+
+This kind of unintended broadcasting happens more often then you'd think because this is exactly what happens when we create an array from a list. So we need to ensure that we apply the proper reshaping before using it for any operations.
+
+```python linenums="1"
+a = np.array([3, 4, 5])
+a.shape # (3,)
+a = a.reshape(-1, 1)
+a.shape # (3, 1)
+```
 
 ## Transpose
 We often need to change the dimensions of our tensors for operations like the dot product. If we need to switch two dimensions, we can transpose

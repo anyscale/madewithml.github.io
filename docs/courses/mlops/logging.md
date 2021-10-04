@@ -71,7 +71,15 @@ CRITICAL:root:There is something terribly wrong and process may terminate.
 
 ## Configuration
 
-Now let's go ahead and create well configured loggers that will be useful for our application (our logger configuration is inside [`app/config.py`](https://github.com/GokuMohandas/MLOps/blob/main/app/config.py){:target="_blank"}).
+First we want to configure where our logs will be written to. We're creating a separate `logs` directory which is part of our [.gitignore](https://github.com/GokuMohandas/MLOps/blob/main/.gitignore){:target="_blank"} file so it won't be written to [git](git.md){:target="_blank"}.
+
+``` python linenums="1"
+# Configure location for logs
+LOGS_DIR = Path(BASE_DIR, "logs")
+LOGS_DIR.mkdir(parents=True, exist_ok=True)
+```
+
+Next, we'll configure the loggers that will be useful for our application (our logger configuration is inside [`config/config.py`](https://github.com/GokuMohandas/MLOps/blob/main/config/config.py){:target="_blank"}).
 
 ```python linenums="1"
 # Logger
@@ -256,6 +264,28 @@ We can also check our `logs/info.log` and `logs/error.log` files to see the log 
 <span style="color: #2871CF;">INFO</span> <span style="color: #5A9C4B;">2020-10-21</span> 11:18:42,102 [<span style="color: #3985B9;">config.py</span>:module:<span style="color: #3D9AD9;">72</span>]
 Informative messages from your code.
 </pre>
+
+## Application
+
+In our project, we can replace all of our print statements into logging statements since our logging configuration is set to relay all logged messages (above DEBUG) level to the stdout.
+
+```python linenums="1"
+# One of our handlers
+"console": {
+    "class": "logging.StreamHandler",
+    "stream": sys.stdout,
+    "formatter": "minimal",
+    "level": logging.DEBUG,
+},
+```
+
+All of our log messages are at the `INFO` level but while developing we may have had to use `DEBUG` levels and we also add some `ERROR` or `CRITICAL` log messages if our system behaves in an unintended manner.
+
+- **what**: log all the necessary details you want to surface from our application that will be useful *during* development and *aftwerwards* for retrospective inspection.
+
+- **where**: a best practice is to not clutter our modular functions with log statements. Instead we should log messages outside of small functions and inside larger workflows. For example, there are no log messages inside any of our scripts except the `main.py` and `train.py` files. This is because these scripts use the smaller functions defined in the other scripts (data.py, eval.py, etc.).
+
+> If we ever feel that we the need to log within our other functions, then it usually indicates that the function needs to be broken down further.
 
 !!! note
     The [Elastic stack](https://www.elastic.co/what-is/elk-stack){:target="_blank"} (formerly ELK stack) is a common option for production level logging. It combines the features of [Elasticsearch](https://www.elastic.co/elasticsearch/){:target="_blank"} (distributed search engine), [Logstash](https://www.elastic.co/logstash){:target="_blank"} (ingestion pipeline) and [Kibana](https://www.elastic.co/kibana){:target="_blank"} (customizable visualization).

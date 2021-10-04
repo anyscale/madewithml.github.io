@@ -144,7 +144,7 @@ And we can easily use our CLI app to execute these commands with the appropriate
 
     ```console
     # Prediction
-    $ tagifai predict-tags --text "Transfer learning with BERT."
+    $ tagifai predict-tags "Transfer learning with BERT" $RUN_ID
     {
         "input_text": "Transfer learning with BERT.",
         "preprocessed_text": "transfer learning bert",
