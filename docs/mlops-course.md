@@ -739,7 +739,7 @@ We will be applying the concepts we learn each week to iteratively complete two 
 <section id="schedule" class="p-4" style="background-color: #f5f9fd;">
 <h2 class="ai-center-all mt-0 mb-2 md-typeset"><span class="mr-2">📅</span> Schedule</h2>
 
-<p>This course runs from Saturday, September 18th 2021 to Sunday, October 24th 2021. However, the fundamental skills you develop and the community will be yours forever.</p>
+<p>This course runs from Saturday, September 18th 2021 to Saturday, October 23th 2021. However, the fundamental skills you develop and the community will be yours forever.</p>
 
 <div class="row mt-2">
     <div class="col-6" data-aos="fade-right">
