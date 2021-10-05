@@ -361,7 +361,7 @@ Some applications may require [stream processing](../infrastructure/#stream-proc
 4. Historical data will be validated and used to generate features for training a model. This cadence for how often this happens depends on whether there are data annotation lags, compute constraints, etc.
 
 !!! note
-    There are a few more components we're not visualizing here such as the unified ingestion layer (Spark), that connects data from the varied data sources (warehouse, DB, etc.) to the offline/online stores, or low latency serving (<10 ms). We can read more about all of these in the official [Feast Documentation](https://docs.feast.dev/){:target="_blank"}.
+    There are a few more components we're not visualizing here such as the unified ingestion layer (Spark), that connects data from the varied data sources (warehouse, DB, etc.) to the offline/online stores, or low latency serving (<10 ms). We can read more about all of these in the official [Feast Documentation](https://docs.feast.dev/){:target="_blank"}, which also has [guides](https://docs.feast.dev/how-to-guides/feast-gcp-aws){:target="_blank"} to set up a feature store with Feast with AWS, GCP, etc.
 
 
 ## Additional functionality
@@ -377,7 +377,18 @@ Additional functionality that many feature store providers are currently (or rec
 
 ## Reproducibility
 
-Though we could continue to [version](versioning.md){:target="blank"} our training data with [DVC](https://dvc.org/){:target="_blank"} whenever we release a version of the model, it might not be necessary. We generated our historical training data to train a model using a specific set of entities, feature definitions, timestamps, etc. This request, combined with the [time-travel](https://dvc.org/){:target="blank"} feature available in many databases and data warehouses, will allow to reproduce the exact data that was used to train our model. We can effectively execute our command on the exact prior state of the system which requires that we only keep track of the requests and timestamp of the execution.
+Though we could continue to [version](versioning.md){:target="blank"} our training data with [DVC](https://dvc.org/){:target="_blank"} whenever we release a version of the model, it might not be necessary. When we pull data from source or compute features, should they save the data itself or just the operations?
+
+- **Version the data**
+    - But what happens as data becomes larger and larger and you keep making copies of it.
+    - This is okay if the data is manageable, if your team is small/early stage ML or if changes to the data are infrequent.
+- **Version the operations**
+    - But what happens when the underlying data changes (labels are fixed, etc.)? Now the same operations result is different data and reproducibility is not possible.
+    - We could keep snapshots of the data and provided the operations and timestamp, we can execute operations on those snapshots of the data. Many data systems use [time-travel](https://docs.snowflake.com/en/user-guide/data-time-travel.html){:target="blank"} to achieve this efficiently.
+    - But eventually this also results in data storage bulk. What we need is an append-only data source where all changes are kept in a log instead of directly changing the data itself. So we can use the data system with the logs to deterministically produce versions of the data as they were without having to store the data itself!
+
+Regardless of the choice above, feature stores are very useful here. Instead of coupling data pulls and feature compute with the time of modeling, we can separate these two processes so that features are up-to-date when we need them. And we can still achieve reproducibility via efficient point-in-time correctness, low latency snapshots, etc. This essentially creates the ability to work with any version of the dataset at any point in time.
+
 
 ## Resources
 

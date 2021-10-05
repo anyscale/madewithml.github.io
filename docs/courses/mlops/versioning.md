@@ -161,22 +161,17 @@ When someone else wants to pull updated artifacts or vice verse, we can use the 
 dvc pull
 ```
 
-## Tag
-Not every commit is going to involve a new set of data and model artifacts so we can leverage git [tags](https://git-scm.com/book/en/v2/Git-Basics-Tagging){:target="_blank"} to mark our release commits. We can create tags either through the terminal or the online remote interface and this can be done to previous commits as well (in case we forgot).
+## Operations
 
-```bash
-# Tags
-git tag  # view all existing tags
-git tag -a <TAG_NAME> -m "charCNN"  # create a tag
-git checkout -b <BRANCH_NAME> <TAG_NAME>  # checkout a specific tag
-git tag -d <TAG_NAME>  # delete local tag
-git push origin --delete <TAG_NAME>  # delete remote tag
-git fetch --all --tags  # fetch all tags from remote
-```
+When we pull data from source or compute features, should they save the data itself or just the operations?
 
-!!! note
-    Tag names usually adhere to version naming conventions, such as v1.4.2 where the numbers indicate major, minor and bug changes from left to right.
-
+- **Version the data**
+    - But what happens as data becomes larger and larger and you keep making copies of it.
+    - This is okay if the data is manageable, if your team is small/early stage ML or if changes to the data are infrequent.
+- **Version the operations**
+    - But what happens when the underlying data changes (labels are fixed, etc.)? Now the same operations result is different data and reproducibility is not possible.
+    - We could keep snapshots of the data and provided the operations and timestamp, we can execute operations on those snapshots of the data. Many data systems use [time-travel](https://docs.snowflake.com/en/user-guide/data-time-travel.html){:target="blank"} to achieve this efficiently.
+    - But eventually this also results in data storage bulk. What we need is an append-only data source where all changes are kept in a log instead of directly changing the data itself. So we can use the data system with the logs to deterministically produce versions of the data as they were without having to store the data itself!
 
 <!-- Citation -->
 {% include "cite.md" %}

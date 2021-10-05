@@ -546,5 +546,20 @@ git tag -a v0.1 -m "initial release"
 - Maintain your `main` branch as the "demo ready" branch that always works.
 - Protect branches with [rules](https://docs.github.com/en/github/administering-a-repository/managing-a-branch-protection-rule){:target="_blank"} (especially the `main` branch).
 
+### Tags
+Leverage git [tags](https://git-scm.com/book/en/v2/Git-Basics-Tagging){:target="_blank"} to mark significant release commits. We can create tags either through the terminal or the online remote interface and this can be done to previous commits as well (in case we forgot).
+
+```bash
+# Tags
+git tag  # view all existing tags
+git tag -a <TAG_NAME> -m "charCNN"  # create a tag
+git checkout -b <BRANCH_NAME> <TAG_NAME>  # checkout a specific tag
+git tag -d <TAG_NAME>  # delete local tag
+git push origin --delete <TAG_NAME>  # delete remote tag
+git fetch --all --tags  # fetch all tags from remote
+```
+
+> Tag names usually adhere to version naming conventions, such as `v1.4.2` where the numbers indicate major, minor and bug changes from left to right.
+
 <!-- Citation -->
 {% include "cite.md" %}

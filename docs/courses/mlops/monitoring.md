@@ -1,7 +1,7 @@
 ---
 template: lesson.html
 title: Monitoring ML Systems
-description: Monitoring ML systems to identify and mitigate model performance decay stemming from drift.
+description: Monitoring ML systems to identify and mitigate sources of drift before model performance decay.
 keywords: monitoring, drift, data drift, concept drift, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
