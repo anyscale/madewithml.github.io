@@ -11,7 +11,7 @@ repository: https://github.com/GokuMohandas/MLOps
 
 ## Intuition
 
-Tests are a way for us to ensure that something works as intended. We're incentivized to implement tests and discover sources of error as early in the development cycle as possible so that we can reduce [increasing downstream costs](https://assets.deepsource.io/39ed384/images/blog/cost-of-fixing-bugs/chart.jpg){:target="_blank"} and wasted time. Once we've designed our tests, we can automatically execute them every time we implement a change to our system, and continue to build on them.
+Tests are a way for us to ensure that something works as intended. We're incentivized to implement tests and discover sources of error as early in the development cycle as possible so that we can reduce [increasing downstream costs](https://assets.deepsource.io/39ed384/images/blog/cost-of-fixing-bugs/chart.jpg){:target="_blank"} and wasted time. Once we've designed our tests, we can automatically execute them every time we implement a change to our system and continue to build on them over time.
 
 ### Types of tests
 
@@ -23,12 +23,14 @@ There are many four majors types of tests which are utilized at different points
 4. `#!js Acceptance tests`: tests to verify that requirements have been met, usually referred to as User Acceptance Testing (UAT).
 5. `#!js Regression tests`: testing errors we've seen before to ensure new changes don't reintroduce them.
 
+!!! warning
+    These types of test are not specific to machine learning. However, while ML systems are probabilistic in nature, they are composed of many deterministic components that can be tested in a similar manner as traditional software systems. The distinction between testing ML systems begins when we move from testing code to testing the [data](testing.md#data){:target="_blank"} and [models](testing.md#models){:target="_blank"}.
+
 <div class="ai-center-all">
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/tests.png">
 </div>
 
-!!! note
-    There are many other types of functional and non-functional tests as well, such as smoke tests (quick health checks), performance tests (load, stress), security tests, etc. but we can generalize these under the system tests above.
+> There are many other types of functional and non-functional tests as well, such as smoke tests (quick health checks), performance tests (load, stress), security tests, etc. but we can generalize these under the system tests above.
 
 ### How should we test?
 
@@ -38,16 +40,17 @@ The framework to use when composing tests is the [Arrange Act Assert](http://wik
 - `#!js Act`: apply the inputs on the component we want to test.
 - `#!js Assert`: confirm that we received the expected output.
 
-!!! note
-    `#!js Cleaning` is an unofficial fourth step to this methodology because it's important to not leave remnants of a previous state which may affect subsequent tests. We can use packages such as [pytest-randomly](https://github.com/pytest-dev/pytest-randomly){:target="_blank"} to test against state dependency by executing tests randomly.
+> `#!js Cleaning` is an unofficial fourth step to this methodology because it's important to not leave remnants of a previous state which may affect subsequent tests. We can use packages such as [pytest-randomly](https://github.com/pytest-dev/pytest-randomly){:target="_blank"} to test against state dependency by executing tests randomly.
 
 In Python, there are many tools, such as [unittest](https://docs.python.org/3/library/unittest.html){:target="_blank"}, [pytest](https://docs.pytest.org/en/stable/){:target="_blank"}, etc., that allow us to easily implement our tests while adhering to the *Arrange Act Assert* framework above. These tools come with powerful built-in functionality such as parametrization, filters, and more, to test many conditions at scale.
 
-!!! note
-    When *arranging* our inputs and *asserting* our expected outputs, it's important to test across the entire gambit of inputs and outputs:
+!!! question "What should we be testing for?"
+    When *arranging* our inputs and *asserting* our expected outputs, what are some aspects of our inputs and outputs that we should be testing for?
 
-    - **inputs**: data types, format, length, edge cases (min/max, small/large, etc.)
-    - **outputs**: data types, formats, exceptions, intermediary and final outputs
+    ??? quote "Show answer"
+
+        - **inputs**: data types, format, length, edge cases (min/max, small/large, etc.)
+        - **outputs**: data types, formats, exceptions, intermediary and final outputs
 
 ## Best practices
 Regardless of the framework we use, it's important to strongly tie testing into the development process.
@@ -68,8 +71,7 @@ Regardless of the framework we use, it's important to strongly tie testing into 
 
 Perfect coverage doesn't mean that our application is error free if those tests aren't meaningful and don't encompass the field of possible inputs, intermediates and outputs. Therefore, we should work towards better design and agility when facing errors, quickly resolving them and writing test cases around them to avoid them next time.
 
-!!! warning
-    This topic is still highly debated and I'm only reflecting on my experience and what's worked well for me at a large company (Apple), very early stage startup and running a company of my own. What's most important is that the team is producing reliable systems that can be tested and improved upon.
+> This topic is still highly debated and I'm only reflecting on [my experience](https://linkedin.com/in/goku){:target="_blank"} and what's worked well for my teams. What's most important is that the team is producing reliable systems that can be tested and improved upon.
 
 ## Application
 
