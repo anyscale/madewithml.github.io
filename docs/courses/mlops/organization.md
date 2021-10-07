@@ -133,7 +133,7 @@ def set_device(cuda: bool):
 
 With all of our code modularized and organized, we're ready to start crafting functions that are responsible for our system's main operations. We can organize these in a [main.py](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/main.py){:target="_blank"} script. These are some of the major operations in our script and we'll be adding more later as we go through the future lessons.
 
-- `#!python download_auxiliary_data()`
+- `#!python load_data()`
 - `#!python compute_features(params_fp)`
 - `#!python optimize(params_fp, study_name, num_trials=100)`
 - `#!python train_model(params_fp, experiment_name, run_name)`
@@ -147,8 +147,8 @@ from pathlib import Path
 from config import config
 from tagifai import main, utils
 
-# Load auxiliary data
-main.download_auxiliary_data()
+# Load data
+main.load_data()
 
 # Compute features
 main.compute_features()
@@ -163,7 +163,7 @@ utils.delete_experiment(experiment_name=experiment_name)
 ```
 
 <pre class="output">
-[01/01/20 16:36:49] INFO     ✅ Auxiliary data downloaded!
+[01/01/20 16:36:49] INFO     ✅ Loaded data!
 [01/01/20 16:36:49] INFO     ✅ Computed features!
 [01/01/20 16:36:49] INFO     Run ID: b39c3a8d2c3c494984a3fa2d9d670402
 [01/01/20 16:36:49] INFO     Epoch: 1 | train_loss: 0.00744, val_loss: 0.00648, lr: 1.02E-04, _patience: 10
