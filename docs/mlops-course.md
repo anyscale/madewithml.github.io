@@ -854,8 +854,8 @@ We will be applying the concepts we learn each week to iteratively complete two 
                     <ul class="ai-course-list">
                     <li><a href="/courses/mlops/organization/">Organization</a></li>
                     <li><a href="/courses/mlops/packaging/">Packaging</a></li>
-                    <li><a href="/courses/mlops/documentation/">Documentation</a></li>
                     <li><a href="/courses/mlops/logging/">Logging</a></li>
+                    <li><a href="/courses/mlops/documentation/">Documentation</a></li>
                     <li><a href="/courses/mlops/styling/">Styling</a></li>
                     <li><a href="/courses/mlops/makefile/">Makefile</a></li>
                     </ul>

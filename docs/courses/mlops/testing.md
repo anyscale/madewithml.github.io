@@ -98,8 +98,7 @@ tests/                        # code tests
 |   └── test_utils.py
 ```
 
-!!! note
-    Alternatively, we could've organized our tests by types of tests as well (unit, integration, etc.) but I find it more intuitive for navigation by organizing by how our application is set up. We'll learn about [markers](#markers) below which will allow us to run any subset of tests by specifying filters.
+> Alternatively, we could've organized our tests by types of tests as well (unit, integration, etc.) but I find it more intuitive for navigation by organizing by how our application is set up. But regardless of how we organize our tests, we can use [markers](#markers) to  allow us to run any subset of tests by specifying filters.
 
 ## 🧪&nbsp; Pytest
 
@@ -146,8 +145,7 @@ def test_is_crisp():
         is_crisp(fruit="pear")
 ```
 
-!!! note
-    We can also have assertions about [exceptions](https://docs.pytest.org/en/stable/assert.html#assertions-about-expected-exceptions){:target="_blank"} like we do in lines 6-8 where all the operations under the with statement are expected to raise the specified exception.
+> We can also have assertions about [exceptions](https://docs.pytest.org/en/stable/assert.html#assertions-about-expected-exceptions){:target="_blank"} like we do in lines 6-8 where all the operations under the with statement are expected to raise the specified exception.
 
 ### Execution
 
@@ -167,7 +165,7 @@ tests/food/test_fruits.py::test_is_crisp <span style="color: #5A9C4B; font-weigh
 Had any of our assertions in this test failed, we would see the failed assertions as well as the expected output and the output we received from our function.
 
 !!! note
-    It's important to test for the variety of inputs and expected outputs that we outlined [above](#how-should-we-test) and to never assume that a test is trivial. In our example above, it's important that we test for both "apple" and "Apple" in the event that our function didn't account for casing!
+    It's important to test for the variety of inputs and expected outputs that we outlined [above](#how-should-we-test) and to **never assume that a test is trivial**. In our example above, it's important that we test for both "apple" and "Apple" in the event that our function didn't account for casing!
 
 ### Classes
 
@@ -215,6 +213,37 @@ tests/food/test_fruits.py::TestFruit .  [100%]
 
 > We use test classes to test all of our class modules such as `LabelEncoder`, `Tokenizer`, `CNN`, etc.
 
+### Interfaces
+
+We can also easily test our CLI and API interfaces using their built-in test clients.
+
+```python linenums="1"
+from typer.testing import CliRunner
+from tagifai.main import app
+
+# Initialize runner
+runner = CliRunner()
+
+def test_cli_command():
+    result = runner.invoke(app, <CLI_COMMAND>)
+    assert result.exit_code == 0
+    assert ...
+```
+
+and similarly for the API:
+
+```python linenums="1"
+from fastapi.testclient import TestClient
+
+# Initialize client
+client = TestClient(app)
+
+def test_api_command():
+    response = client.get(<ENDPOINT_PATH>)
+    assert response.status_code == HTTPStatus.OK
+    assert ...
+```
+
 ### Parametrize
 
 So far, in our tests, we've had to create individual assert statements to validate different combinations of inputs and expected outputs. However, there's a bit of redundancy here because the inputs always feed into our functions as arguments and the outputs are compared with our expected outputs. To remove this redundancy, pytest has the [`@pytest.mark.parametrize`](https://docs.pytest.org/en/stable/parametrize.html){:target="_blank"} decorator which allows us to represent our inputs and outputs as parameters.
@@ -260,7 +289,7 @@ pytest tests/food/test_is_crisp_parametrize.py <span style="color: #5A9C4B; font
 
 ### Fixtures
 
-Parametrization allows us to efficiently reduce redundancy inside test functions but what about its inputs? Here, we can use pytest's builtin [fixture](https://docs.pytest.org/en/stable/fixture.html){:target="_blank"} which is a function that is executed before the test function. This significantly reduces redundancy when multiple test functions require the same inputs.
+Parametrization allows us to efficiently reduce redundancy inside test functions but what about its inputs? Here, we can use pytest's builtin [fixture](https://docs.pytest.org/en/stable/fixture.html){:target="_blank"}, which is a function that is executed before the test function. This significantly reduces redundancy when multiple test functions want to use the same inputs.
 
 ```python linenums="1"
 @pytest.fixture
@@ -352,8 +381,7 @@ def test_train_model():
     ...
 ```
 
-!!! note
-    Another way to run custom tests is to use the `-k` flag when running pytest. The [k expression](https://docs.pytest.org/en/stable/example/markers.html#using-k-expr-to-select-tests-based-on-their-name){:target="_blank"} is much less strict compared to the marker expression where we can define expressions even based on names.
+> Another way to run custom tests is to use the `-k` flag when running pytest. The [k expression](https://docs.pytest.org/en/stable/example/markers.html#using-k-expr-to-select-tests-based-on-their-name){:target="_blank"} is much less strict compared to the marker expression where we can define expressions even based on names.
 
 
 ### Coverage
@@ -387,11 +415,12 @@ if self.trial.should_prune():  # pragma: no cover, optuna pruning
     pass
 ```
 
-2. Excluding files by specifying them in our [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} configuration.
+2. Excluding files by specifying them in our [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} configuration, such as our [gunicorn.py](https://github.com/GokuMohandas/MLOps/blob/main/app/gunicorn.py){:target="_blank"} script since it's from a trusted template. We could, however, compose some tests to use this script but for now, we'll omit it.
+
 ```toml linenums="1"
 # Pytest coverage
 [tool.coverage.run]
-omit = ["app/main.py"]  #  sample API calls
+omit = ["app/gunicorn.py"]
 ```
 
 The key here is that we were able to add justification to these exclusions through comments so our team can follow our reasoning.

@@ -546,8 +546,8 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <ul>
     <li><a href="/courses/mlops/packaging/">Packaging</a></li>
     <li><a href="/courses/mlops/organization/">Organization</a></li>
-    <li><a href="/courses/mlops/documentation/">Documentation</a></li>
     <li><a href="/courses/mlops/logging/">Logging</a></li>
+    <li><a href="/courses/mlops/documentation/">Documentation</a></li>
     <li><a href="/courses/mlops/styling/">Styling</a></li>
     <li><a href="/courses/mlops/makefile/">Makefile</a></li>
     </ul>

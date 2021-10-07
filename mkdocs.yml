@@ -74,8 +74,8 @@ nav:
     - 📝 &nbsp; Scripting:
       - Packaging: courses/mlops/packaging.md
       - Organization: courses/mlops/organization.md
-      - Documentation: courses/mlops/documentation.md
       - Logging: courses/mlops/logging.md
+      - Documentation: courses/mlops/documentation.md
       - Styling: courses/mlops/styling.md
       - Makefile: courses/mlops/makefile.md
     - 📦 &nbsp; Interfaces:
