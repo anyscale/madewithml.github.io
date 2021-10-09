@@ -12,8 +12,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/
 
 Even though we've trained and thoroughly evaluated our model, the real work begins once we deploy to production. This is one of the fundamental differences between traditional software engineering and ML development. Traditionally, with rule based, deterministic, software, the majority of the work occurs at the initial stage and once deployed, our system works as we've defined it. But with machine learning, we haven't explicitly defined how something works but used data to architect a probabilistic solution. This approach is subject to natural performance degradation over time, as well as unintended behavior, since the data exposed to the model will be different from what it has been trained on. This isn't something we should be trying to avoid but rather understand and mitigate as much as possible. In this lesson, we'll understand the short comings from attempting to capture performance degradation in order to motivate the need for [drift](#drift) detection.
 
-!!! note
-    Testing and monitoring share a lot of similarities, such as ensuring that certain [expectations](testing.md#expectations){:target="_blank"} around data completeness, distributions, schema adherence, etc. are met. However, a key distinction is that monitoring involves *comparing* live, streaming data distributions from production to fixed/sliding reference distributions from training data.
+> Testing and monitoring share a lot of similarities, such as ensuring that certain [expectations](testing.md#expectations){:target="_blank"} around data completeness, distributions, schema adherence, etc. are met. However, a key distinction is that monitoring involves *comparing* live, streaming data distributions from production to fixed/sliding reference distributions from training data.
 
 ## System health
 
@@ -75,15 +74,14 @@ plt.legend()
     <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/performance_drift.png">
 </div>
 
-!!! note
-    We may need to monitor metrics at various window sizes to catch performance degradation as soon as possible. Here we're monitoring the overall f1 but we can do the same for slices of data, individual classes, etc. For example, if we monitor the performance on a specific tag, we may be able to quickly catch new algorithms that were released for that tag (ex. new transformer architecture).
+> We may need to monitor metrics at various window sizes to catch performance degradation as soon as possible. Here we're monitoring the overall f1 but we can do the same for slices of data, individual classes, etc. For example, if we monitor the performance on a specific tag, we may be able to quickly catch new algorithms that were released for that tag (ex. new transformer architecture).
 
 However, there are two main obstacles with this approach:
 
-- **Delayed outcomes**: we may not always have the ground-truth outcomes available to determine the model's performance on production inputs. This is especially true if there is significant lag or annotation is required on the real-world data. To mitigate this, we could
+- **Delayed outcomes**: we may not always have the ground-truth outcomes available to determine the model's performance on production inputs. This is especially true if there is significant lag or annotation is required on the real-world data. To mitigate this, we could:
     - devise a **proxy signal** that can help us *estimate* the model's performance. For example, in our tag prediction task, we could use the actual tags that an author attributes to a project as the intermediary labels until we have verified labels from an annotation pipeline.
-    - use the statistical features of our inputs and predicted outputs as a indirect [measure](#measuring-drfit).
-- **Too late**: if we wait to catch the model decay based on the performance, it may have already cause significant damage to downstream business pipelines that are dependent on it. We need to employ more fine-grained monitoring to identify the *sources* of model drift prior to actual performance degradation.
+    - use the statistical features of our inputs and predicted outputs as an indirect [measure](#measuring-drift).
+- **Too late**: if we wait to catch the model decay based on the performance, it may have already caused significant damage to downstream business pipelines that are dependent on it. We need to employ more fine-grained monitoring to identify the *sources* of model drift prior to actual performance degradation.
 
 ## Drift
 
@@ -101,7 +99,7 @@ We need to first understand the different types of issues that can cause our mod
 
 ### Data drift
 
-Data drift, also known as feature drift or covariate shift, occurs when the distribution of the *production* data is different from the *training* data. The model is not equipped to deal with this drift in the feature space and so, it's predictions may not be reliable. The actual cause of drift can be attributed to natural changes in the real-world but also to systemic issues such as missing data, pipeline errors, schemas changes, etc. It's important to inspect the drifted data and trace it back along it's pipeline to identify when and where the drift was introduced.
+Data drift, also known as feature drift or covariate shift, occurs when the distribution of the *production* data is different from the *training* data. The model is not equipped to deal with this drift in the feature space and so, it's predictions may not be reliable. The actual cause of drift can be attributed to natural changes in the real-world but also to systemic issues such as missing data, pipeline errors, schema changes, etc. It's important to inspect the drifted data and trace it back along it's pipeline to identify when and where the drift was introduced.
 
 !!! warning
     Besides just looking at the distribution of our input data, we also want to ensure that the workflows to retrieve and process our input data is the same during training and serving to avoid training-serving skew. However, we can skip this step if we retrieve our features from the same source location for both training and serving, ie. from a [feature store](feature-store.md){:target="_blank"}.
@@ -113,12 +111,11 @@ Data drift, also known as feature drift or covariate shift, occurs when the dist
     <small>Data drift can occur in either continuous or categorical features.</small>
 </div>
 
-!!! note
-    As data starts to drift, we may not yet notice significant decay in our model's performance, especially if the model is able to interpolate well. However, this is a great opportunity to [potentially](#solutions) retrain before the drift starts to impact performance.
+> As data starts to drift, we may not yet notice significant decay in our model's performance, especially if the model is able to interpolate well. However, this is a great opportunity to [potentially](#solutions) retrain before the drift starts to impact performance.
 
 ### Target drift
 
-Besides just the input data changing, as with data drift, we can also experience drift in our outcomes. This can be a shift in the distributions but also the removal or addition of new classes with categorical tasks. Though retraining can mitigate the performance decay caused target drift, it can often be avoided with proper inter-pipeline communication about new classes, schemas changes, etc.
+Besides just the input data changing, as with data drift, we can also experience drift in our outcomes. This can be a shift in the distributions but also the removal or addition of new classes with categorical tasks. Though retraining can mitigate the performance decay caused target drift, it can often be avoided with proper inter-pipeline communication about new classes, schema changes, etc.
 
 ### Concept drift
 
@@ -132,8 +129,7 @@ Besides the input and output data drifting, we can have the actual relationship 
 - abruptly as a result of an external event
 - periodically as a result of recurring events
 
-!!! note
-    All the different types of drift we discussed can can occur simultaneously which can complicated identifying the sources of drift.
+> All the different types of drift we discussed can can occur simultaneously which can complicated identifying the sources of drift.
 
 ## Locating drift
 
@@ -146,12 +142,11 @@ Since we're dealing with online drift detection (ie. detecting drift in live pro
 
 [Scikit-multiflow](https://scikit-multiflow.github.io/){:target="_blank"} provides a toolkit for concept drift detection [techniques](https://scikit-multiflow.readthedocs.io/en/stable/api/api.html#module-skmultiflow.drift_detection){:target="_blank"} directly on streaming data. The package offers windowed, moving average functionality (including dynamic preprocessing) and even methods around concepts like [gradual concept drift](https://scikit-multiflow.readthedocs.io/en/stable/api/generated/skmultiflow.drift_detection.EDDM.html#skmultiflow-drift-detection-eddm){:target="_blank"}.
 
-!!! note
-    We can also compare across various window sizes simultaneously to ensure smaller cases of drift aren't averaged out by large window sizes.
+> We can also compare across various window sizes simultaneously to ensure smaller cases of drift aren't averaged out by large window sizes.
 
 ## Measuring drift
 
-Once have the window of points we wish to compare, we need to know how to compare them.
+Once we have the window of points we wish to compare, we need to know how to compare them.
 
 ### Expectations
 
@@ -392,8 +387,7 @@ reference.shape
 torch.Size([200, 186])
 </pre>
 
-!!! note
-    We can't use encoded text because each character's categorical representation is arbitrary. However, the embedded text's representation does capture semantic meaning which makes it possible for us to detect drift on. With tabular data and images, we can use those numerical representation as is (can preprocess if needed) since the values are innately meaningful.
+> We can't use encoded text because each character's categorical representation is arbitrary. However, the embedded text's representation does capture semantic meaning which makes it possible for us to detect drift on. With tabular data and images, we can use those numerical representation as is (can preprocess if needed) since the values are innately meaningful.
 
 #### Dimensionality reduction
 
@@ -563,15 +557,13 @@ embeddings_ks_drift_detector.predict(drift)
 
 We could repeat this process for tensor outputs at various layers in our model (embedding, conv layers, softmax, etc.). Just keep in mind that our outputs from the reducer need to be a 2D matrix so we may need to do additional preprocessing such as pooling 3D embedding tensors. [TorchDrift](https://torchdrift.org/) is another great package that offers a suite of reducers (PCA, AE, etc.) and drift detectors (MMD) to monitor for drift at any stage in our model.
 
-!!! note
-    Another interesting approach for detecting drift involves training a separate model that can distinguish between data from the reference and production distributions. If such a classifier can be trained that it performs better than random chance (0.5), confirmed with a [binomial test](https://en.wikipedia.org/wiki/Binomial_test){:target="_blank"}, then we have two statistically different distributions. This isn't a popular approach because it involves creating distinct datasets and the compute for training every time we want to measure drift with two windows of data.
+> Another interesting approach for detecting drift involves training a separate model that can distinguish between data from the reference and production distributions. If such a classifier can be trained that it performs better than random chance (0.5), confirmed with a [binomial test](https://en.wikipedia.org/wiki/Binomial_test){:target="_blank"}, then we have two statistically different distributions. This isn't a popular approach because it involves creating distinct datasets and the compute for training every time we want to measure drift with two windows of data.
 
 ## Outliers
 
 With drift, we're comparing a window of production data with reference data as opposed to looking at any one specific data point. While each individual point may not be an anomaly or outlier, the group of points may cause a drift. The easiest way to illustrate this is to imagine feeding our live model the same input data point repeatedly. The actual data point may not have anomalous features but feeding it repeatedly will cause the feature distribution that the model is receiving to change and lead to drift.
 
-!!! note
-    When we identify outliers, we may want to let the end user know that the model's response may not be reliable. Additionally, we may want to remove the outliers from the next training set or further inspect them and upsample them in case they're early signs of what future distributions of incoming features will look like.
+> When we identify outliers, we may want to let the end user know that the model's response may not be reliable. Additionally, we may want to remove the outliers from the next training set or further inspect them and upsample them in case they're early signs of what future distributions of incoming features will look like.
 
 <div class="ai-center-all">
     <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/outliers.png">
@@ -593,8 +585,7 @@ outlier_detector.infer_threshold(X, threshold_perc=95)  # infer from % outliers
 preds = outlier_detector.predict(X, outlier_type="instance", outlier_perc=75)
 ```
 
-!!! note
-    Typically, outlier detection algorithms fit (ex. via reconstruction) to the training set to understand what normal data looks like and then we can use a threshold to predict outliers. If we have a small labeled dataset with outliers, we can empirically choose our threshold but if not, we can choose some reasonable tolerance.
+> Typically, outlier detection algorithms fit (ex. via reconstruction) to the training set to understand what normal data looks like and then we can use a threshold to predict outliers. If we have a small labeled dataset with outliers, we can empirically choose our threshold but if not, we can choose some reasonable tolerance.
 
 !!! warning
     We shouldn't identify outliers by looking at a model’s predicted probabilities because they need to be [calibrated](https://arxiv.org/abs/1706.04599){:target="_blank"} before using them as reliable measures of confidence.
@@ -674,8 +665,7 @@ When it actually comes to implementing a monitoring system, we have several opti
 
 We'll often notice that monitoring solutions are offered as part of the larger deployment option such as [TensorFlow Extended (TFX)](https://www.tensorflow.org/tfx){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [Sagemaker](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html){:target="_blank"}, etc. And if we're already working with Kubernetes, we could use [KNative](https://knative.dev/){:target="_blank"} or [Kubeless](https://kubeless.io/){:target="_blank"} for serverless workload management. But we could also use a higher level framework such as [KFServing](https://www.kubeflow.org/docs/components/kfserving/){:target="_blank"} or [Seldon core](https://docs.seldon.io/projects/seldon-core/en/v0.4.0/#){:target="_blank"} that natively use a serverless framework like KNative.
 
-!!! note
-    Learn about how the monitoring workflows connect to the our overall ML systems in our [pipeline lesson](pipelines.md#monitoring). Monitoring offers a stream of signals that our update policy engine consumes to decide what to do next (continue, warrant an inspection, retrain the model on new data, rollback to a previous model version, etc.).
+> Learn about how the monitoring workflows connect to the our overall ML systems in our [pipeline lesson](pipelines.md#monitoring). Monitoring offers a stream of signals that our update policy engine consumes to decide what to do next (continue, warrant an inspection, retrain the model on new data, rollback to a previous model version, etc.).
 
 ## References
 - [An overview of unsupervised drift detection methods](https://onlinelibrary.wiley.com/doi/full/10.1002/widm.1381){:target="_blank"}

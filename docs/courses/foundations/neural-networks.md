@@ -43,8 +43,7 @@ $$ \hat{y} = softmax(z_2) $$
 
 </center>
 
-!!! note
-    We'll exclude the bias $b$ from our notations to avoid crowding the backpropagation calculation.
+> We'll exclude the bias $b$ from our notations to avoid crowding the backpropagation calculation.
 
 - **Objective**:
     - Predict the probability of class $y$ given the inputs $X$. Non-linearity is introduced to model the complex, non-linear data.
@@ -523,15 +522,13 @@ plt.show()
 
 The ReLU activation function ($max(0,z)$) is by far the most widely used activation function for neural networks. But as you can see, each activation function has its own constraints so there are circumstances where you'll want to use different ones. For example, if we need to constrain our outputs between 0 and 1, then the sigmoid activation is the best choice.
 
-!!! note
-    In some cases, using a ReLU activation function may not be sufficient. For instance, when the outputs from our neurons are mostly negative, the activation function will produce zeros. This effectively creates a "dying ReLU" and a recovery is unlikely. To mitigate this effect, we could lower the learning rate or use [alternative ReLU activations](https://medium.com/@danqing/a-practical-guide-to-relu-b83ca804f1f7){:target="_blank"}, ex. leaky ReLU or parametric ReLU (PReLU), which have a small slope for negative neuron outputs.
+> In some cases, using a ReLU activation function may not be sufficient. For instance, when the outputs from our neurons are mostly negative, the activation function will produce zeros. This effectively creates a "dying ReLU" and a recovery is unlikely. To mitigate this effect, we could lower the learning rate or use [alternative ReLU activations](https://medium.com/@danqing/a-practical-guide-to-relu-b83ca804f1f7){:target="_blank"}, ex. leaky ReLU or parametric ReLU (PReLU), which have a small slope for negative neuron outputs.
 
 
 ## NumPy
 Now let's create our multilayer perceptron (MLP) which is going to be exactly like the logistic regression model but with the activation function to map the non-linearity in our data.
 
-!!! note
-    It's normal to find the math and code in this section slightly complex. You can still read each of the steps to build intuition for when we implement this using PyTorch.
+> It's normal to find the math and code in this section slightly complex. You can still read each of the steps to build intuition for when we implement this using PyTorch.
 
 Our goal is to learn a model $\hat{y}$ that models $y$ given $X$. You'll notice that neural networks are just extensions of the generalized linear methods we've seen so far but with non-linear activation functions since our data will be highly non-linear.
 
@@ -1042,8 +1039,7 @@ The probability that you have c1 is 92%
 ## Initializing weights
 So far we have been initializing weights with small random values and this isn't optimal for convergence during training. The objective is to have weights that are able to produce outputs that follow a similar distribution across all neurons. We can do this by enforcing weights to have unit variance prior to the affine and non-linear operations.
 
-!!! note
-    A popular method is to apply [xavier initialization](http://andyljones.tumblr.com/post/110998971763/an-explanation-of-xavier-initialization){:target="_blank"}, which essentially initializes the weights to allow the signal from the data to reach deep into the network. You may be wondering why we don't do this for every forward pass and that's a great question. We'll look at more advanced strategies that help with optimization like [batch normalization](convolutional-neural-networks.md#batch-normalization){:target="_blank"}, etc. in future lessons. Meanwhile you can check out other initializers [here](https://pytorch.org/docs/stable/nn.init.html){:target="_blank"}.
+> A popular method is to apply [xavier initialization](http://andyljones.tumblr.com/post/110998971763/an-explanation-of-xavier-initialization){:target="_blank"}, which essentially initializes the weights to allow the signal from the data to reach deep into the network. You may be wondering why we don't do this for every forward pass and that's a great question. We'll look at more advanced strategies that help with optimization like [batch normalization](convolutional-neural-networks.md#batch-normalization){:target="_blank"}, etc. in future lessons. Meanwhile you can check out other initializers [here](https://pytorch.org/docs/stable/nn.init.html){:target="_blank"}.
 
 ```python linenums="1"
 from torch.nn import init

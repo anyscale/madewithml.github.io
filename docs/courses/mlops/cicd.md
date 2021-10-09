@@ -55,8 +55,7 @@ on:
     - main
 ```
 
-!!! note
-    Be sure to check out the [complete list](https://docs.github.com/en/actions/reference/events-that-trigger-workflows){:target="_blank"} of the different events that can trigger a workflow.
+> Be sure to check out the [complete list](https://docs.github.com/en/actions/reference/events-that-trigger-workflows){:target="_blank"} of the different events that can trigger a workflow.
 
 ### Jobs
 
@@ -69,8 +68,7 @@ jobs:
     runs-on: ubuntu-latest
 ```
 
-!!! note
-    Jobs run in parallel but if you need to create dependent jobs, where if a particular job fails all it's dependent jobs will be skipped, then be sure to use the [needs](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idneeds){:target="_blank"} key. One a similar note, we can also [share](https://docs.github.com/en/actions/learn-github-actions/essential-features-of-github-actions#sharing-data-between-jobs){:target="_blank"} data between jobs.
+> Jobs run in parallel but if you need to create dependent jobs, where if a particular job fails all it's dependent jobs will be skipped, then be sure to use the [needs](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idneeds){:target="_blank"} key. One a similar note, we can also [share](https://docs.github.com/en/actions/learn-github-actions/essential-features-of-github-actions#sharing-data-between-jobs){:target="_blank"} data between jobs.
 
 ### Steps
 
@@ -150,8 +148,7 @@ act -j test-code  # specific job
 <span style="color: #0071CF;">[testing/test-code]</span>   ✅  Success - Execute tests
 </pre>
 
-!!! note
-    While act is able to very closely replicate GitHub's runners there are still a few inconsistencies. For example [caching](https://github.com/nektos/act/issues/329){:target="_blank"} still needs to be figured out with a small HTTP server when the local container is spun up. So if we have a lot of requirements, it might be faster just to experience using GitHub's runners and squashing the commits once we get the workflow to run.
+> While act is able to very closely replicate GitHub's runners there are still a few inconsistencies. For example [caching](https://github.com/nektos/act/issues/329){:target="_blank"} still needs to be figured out with a small HTTP server when the local container is spun up. So if we have a lot of requirements, it might be faster just to experience using GitHub's runners and squashing the commits once we get the workflow to run.
 
 ## Serving
 
@@ -161,8 +158,7 @@ There are a wide variety of GitHub actions available for deploying and serving o
 - container orchestration services such as [AWS ECS](https://github.com/aws-actions/amazon-ecs-deploy-task-definition)  or [Google Kubernetes Engine](https://github.com/google-github-actions/setup-gcloud/tree/master/example-workflows/gke)
 - serverless options such as [AWS Lambda](https://github.com/marketplace/actions/aws-lambda-deploy) or [Google Cloud Functions](https://github.com/google-github-actions/deploy-cloud-functions).
 
-!!! note
-    If we want to deploy and serve multiple models at a time, it's highly recommended to use a purpose-built model server such as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server. These servers have a registry with an API layer to seamlessly inspect, update, serve, rollback, etc. multiple versions of models.
+> If we want to deploy and serve multiple models at a time, it's highly recommended to use a purpose-built model server such as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server. These servers have a registry with an API layer to seamlessly inspect, update, serve, rollback, etc. multiple versions of models.
 
 The specific deployment method we use it entirely up dependent on the application, team, existing infrastructure, etc. The key component is that we are able to update our application when all the integration tests pass without having to manually intervene for deployment.
 
@@ -175,8 +171,7 @@ The Marketplace has actions for a variety of needs, ranging from continuous depl
 - [Great Expectations](https://github.com/marketplace/actions/great-expectations-data){:target="_blank"}: ensure that our GE checkpoints pass when any changes are made that could affect the data engineering pipelines. This action also creates a free GE dashboard with [Netlify](https://www.netlify.com/){:target="_blank"} that has the updated data docs.
 - [Continuous ML](https://github.com/iterative/cml){:target="_blank"}: train, evaluate and monitor your ML models and generate a report summarizing the findings. I personally use this GitHub Action for automatic training jobs on cloud infrastructure (AWS/GCP) or [self hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners?learn=hosting_your_own_runners){:target="_blank"} when a change triggers the training pipeline, as opposed to working with [Terraform](https://www.terraform.io/){:target="_blank"}.
 
-!!! note
-    Don't restrict your workflows to only what's available on the Marketplace or single command operations. We can do things like include code coverage reports, deploy an updated Streamlit dashboard and attach it's URL to the PR, deliver (CD) our application to an AWS Lambda / EC2, etc.
+> Don't restrict your workflows to only what's available on the Marketplace or single command operations. We can do things like include code coverage reports, deploy an updated Streamlit dashboard and attach it's URL to the PR, deliver (CD) our application to an AWS Lambda / EC2, etc.
 
 ## Resources
 

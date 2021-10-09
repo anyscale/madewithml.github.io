@@ -62,8 +62,7 @@ exclude = '''
 '''
 ```
 
-!!! note
-    The [pyproject.toml](https://www.python.org/dev/peps/pep-0518/#file-format){:target="_blank"} was created to establish a more human-readable configuration file that is meant to replace a `setup.py` or `setup.cfg` file and is increasingly widely adopted by many open-source libraries.
+> The [pyproject.toml](https://www.python.org/dev/peps/pep-0518/#file-format){:target="_blank"} was created to establish a more human-readable configuration file that is meant to replace a `setup.py` or `setup.cfg` file and is increasingly widely adopted by many open-source libraries.
 
 Here we're telling Black that our maximum line length should be 79 characters and to include and exclude certain file extensions. We're going to follow the same configuration steps in our pyproject.toml file for configuring isort as well. Place the following configurations right below Black's configurations:
 
@@ -126,8 +125,7 @@ isort .
 Fixing ...
 </pre>
 
-!!! note
-    We may sometimes forget to run these style checks after we finish development. We'll cover how to automate this process using [pre-commit](https://pre-commit.com/){:target="_blank"} so that these checks are automatically executed whenever we want to commit our code.
+> We may sometimes forget to run these style checks after we finish development. We'll cover how to automate this process using [pre-commit](https://pre-commit.com/){:target="_blank"} so that these checks are automatically executed whenever we want to commit our code.
 
 
 <!-- Citation -->

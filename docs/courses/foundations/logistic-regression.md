@@ -28,8 +28,7 @@ $$ \hat{y} = \frac{e^{XW_y}}{\sum_j e^{XW}} $$
 
 </center>
 
-!!! note
-    We'll exclude the bias $b$ from our notations to avoid crowding the backpropagation calculation.
+> We'll exclude the bias $b$ from our notations to avoid crowding the backpropagation calculation.
 
 This function is known as the multinomial logistic regression or the softmax classifier. The softmax classifier will use the linear equation ($z=XW$) and normalize it (using the softmax function) to produce the probability for class y given the inputs.
 
@@ -324,8 +323,7 @@ Our goal is to learn a logistic model $\hat{y}$ that models $y$ given $X$.
 
 $$ \hat{y} = \frac{e^{XW_y}}{\sum_j e^{XW}} $$
 
-!!! note
-    We are going to use multinomial logistic regression even though our task only involves two classes because you can generalize the softmax classifier to any number of classes.
+> We are going to use multinomial logistic regression even though our task only involves two classes because you can generalize the softmax classifier to any number of classes.
 
 
 ### Initialize weights

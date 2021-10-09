@@ -27,8 +27,7 @@ There are many tools available for versioning our artifacts ([GitLFS](https://gi
 
 We'll be using DVC to version our datasets and model weights and store them in a local directory which will act as our blob storage. We could use remote blob storage options such as S3, GCP, Google Drive, [DAGsHub](https://dagshub.com/){:target="_blank"}, etc. but we're going to replicate the same actions locally so we can see how the data is stored.
 
-!!! note
-    We'll be using a local directory to act as our blob storage so we can develop and analyze everything locally. We'll continue to do this for other storage components as well such as feature stores and like we have been doing with our local model registry.
+> We'll be using a local directory to act as our blob storage so we can develop and analyze everything locally. We'll continue to do this for other storage components as well such as feature stores and like we have been doing with our local model registry.
 
 ## Set up
 Let's start by installing DVC and initializing it to create a [.dvc](https://github.com/GokuMohandas/MLOps/tree/main/.dvc){:target="_blank"} directory.

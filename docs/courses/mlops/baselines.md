@@ -65,8 +65,7 @@ Each application's baseline trajectory varies based on the task and motivations.
 
 We'll motivate the need for slowly adding complexity from both the **representation** (ex. embeddings) and **architecture** (ex. CNNs) views, as well as address the limitation at each step of the way.
 
-!!! note
-    If you're unfamiliar with of the modeling concepts here, be sure to check out the [Foundations lessons](https://madewithml.com/#foundations){:target="_blank"}.
+> If you're unfamiliar with of the modeling concepts here, be sure to check out the [Foundations lessons](https://madewithml.com/#foundations){:target="_blank"}.
 
 We'll first set up some functions that we'll be using across the different baseline experiments.
 ```python linenums="1"
@@ -531,8 +530,7 @@ y_pred = label_encoder.encode(y_pred)
 ### Evaluation
 We can look at overall and per-class performance on our test set.
 
-!!! note
-    When considering overall and per-class performance across different models, we should be aware of [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox){:target="_blank"} where a model can perform better on every class subset but not overall.
+> When considering overall and per-class performance across different models, we should be aware of [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox){:target="_blank"} where a model can perform better on every class subset but not overall.
 
 ```python linenums="1"
 # Evaluate
@@ -583,8 +581,7 @@ transfer learn bert self supervis learn
 
 <u><i>limitations</i></u>: we failed to generalize or learn any implicit patterns to predict the labels because we treat the tokens in our input as isolated entities.
 
-!!! note
-    We would ideally spend more time tuning our model because it's so simple and quick to train. This approach also applies to all the other models we'll look at as well.
+> We would ideally spend more time tuning our model because it's so simple and quick to train. This approach also applies to all the other models we'll look at as well.
 
 <hr>
 
@@ -1342,8 +1339,7 @@ label_encoder.decode(y_pred)
 - **representation**: embeddings are not contextual.
 - **architecture**: extracting signal from encoded inputs is limited by filter widths.
 
-!!! note
-    Since we're dealing with simple architectures and fast training times, it's a good opportunity to explore tuning and experiment with k-fold cross validation to properly reach any conclusions about performance.
+> Since we're dealing with simple architectures and fast training times, it's a good opportunity to explore tuning and experiment with k-fold cross validation to properly reach any conclusions about performance.
 
 <hr>
 
@@ -1372,8 +1368,7 @@ CNN: 4.3 MB
 
 We'll consider other tradeoffs such as maintenance overhead, behavioral test performances, etc. as we develop.
 
-!!! note
-    Interpretability was not one of requirements but note that we could've tweaked model outputs to deliver it. For example, since we used SAME padding for our CNN, we can use the activation scores to extract influential n-grams.
+> Interpretability was not one of requirements but note that we could've tweaked model outputs to deliver it. For example, since we used SAME padding for our CNN, we can use the activation scores to extract influential n-grams.
 
 
 ## Resources

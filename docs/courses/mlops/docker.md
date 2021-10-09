@@ -93,8 +93,7 @@ The final step in building our image is to specify the executable to be run when
 ENTRYPOINT ["gunicorn", "-c", "app/gunicorn.py", "-k", "uvicorn.workers.UvicornWorker", "app.api:app"]
 ```
 
-!!! note
-    There are many more commands available for us to use in the Dockerfile, such as using environment variables ([ENV](https://docs.docker.com/engine/reference/builder/#env){:target="_blank"}) and arguments ([ARG](https://docs.docker.com/engine/reference/builder/#arg){:target="_blank"}), command arguments ([CMD](https://docs.docker.com/engine/reference/builder/#cmd){:target="_blank"}), specifying volumes ([VOLUME](https://docs.docker.com/engine/reference/builder/#volume){:target="_blank"}), setting the working directory ([WORKDIR](https://docs.docker.com/engine/reference/builder/#workdir){:target="_blank"}) and many more, all of which you can explore through the [official docs](https://docs.docker.com/engine/reference/builder/){:target="_blank"}.
+> There are many more commands available for us to use in the Dockerfile, such as using environment variables ([ENV](https://docs.docker.com/engine/reference/builder/#env){:target="_blank"}) and arguments ([ARG](https://docs.docker.com/engine/reference/builder/#arg){:target="_blank"}), command arguments ([CMD](https://docs.docker.com/engine/reference/builder/#cmd){:target="_blank"}), specifying volumes ([VOLUME](https://docs.docker.com/engine/reference/builder/#volume){:target="_blank"}), setting the working directory ([WORKDIR](https://docs.docker.com/engine/reference/builder/#workdir){:target="_blank"}) and many more, all of which you can explore through the [official docs](https://docs.docker.com/engine/reference/builder/){:target="_blank"}.
 
 ## Build images
 Once we're done composing the Dockerfile, we're ready to build our image using the [*build*](https://docs.docker.com/engine/reference/commandline/build/){:target="_blank"} command which allows us to add a tag and specify the location of the Dockerfile to use.
@@ -152,8 +151,7 @@ docker stop $(docker ps -a -q)  # stop all containers
 docker rm $(docker ps -a -q)    # remove all containers
 ```
 
-!!! note
-    If our application required multiple containers for different services (API, database, etc.) then we can bring them all up at once using the [docker compose](https://docs.docker.com/compose/){:target="_blank"} functionality and scale and manage them using a container orchestration system like [Kubernetes (K8s)](https://kubernetes.io/){:target="_blank"}. If we're specifically deploying ML workflows, we can use a toolkit like [KubeFlow](https://www.kubeflow.org/){:target="_blank"} to help us manage and scale.
+> If our application required multiple containers for different services (API, database, etc.) then we can bring them all up at once using the [docker compose](https://docs.docker.com/compose/){:target="_blank"} functionality and scale and manage them using a container orchestration system like [Kubernetes (K8s)](https://kubernetes.io/){:target="_blank"}. If we're specifically deploying ML workflows, we can use a toolkit like [KubeFlow](https://www.kubeflow.org/){:target="_blank"} to help us manage and scale.
 
 ## Debug
 

@@ -22,8 +22,7 @@ There are many options for experiment tracking but we're going to use [MLFlow](h
 
 There are also several popular options such as a [Comet ML](https://www.comet.ml/site/){:target="_blank"} (used by Google AI, HuggingFace, etc.), [Neptune](https://neptune.ai/){:target="_blank"} (used by Roche, NewYorker, etc.), [Weights and Biases](https://www.wandb.com/){:target="_blank"} (used by Open AI, Toyota Research, etc.). These are fantastic tools that provide features like dashboards, seamless integration, hyperparameter search, reports and even [debugging](https://wandb.ai/latentspace/published-work/The-Science-of-Debugging-with-W-B-Reports--Vmlldzo4OTI3Ng){:target="_blank"}!
 
-!!! note
-    Many platforms are leveraging their position as the source for experiment data to provide features that extend into other parts of the ML development pipeline such as versioning, debugging, monitoring, etc.
+> Many platforms are leveraging their position as the source for experiment data to provide features that extend into other parts of the ML development pipeline such as versioning, debugging, monitoring, etc.
 
 ## Application
 
@@ -49,8 +48,7 @@ params = Namespace(
 )
 ```
 
-!!! note
-    When we move to Python scripts, we'll use the [Typer](https://typer.tiangolo.com/){:target="_blank"} package instead of argparse for a better CLI experience.
+> When we move to Python scripts, we'll use the [Typer](https://typer.tiangolo.com/){:target="_blank"} package instead of argparse for a better CLI experience.
 
 Next, we'll set up our model registry where all the experiments and their respective runs will be stored. We'll load trained models from this registry as well using specific run IDs.
 ```python linenums="1"
@@ -61,7 +59,12 @@ mlflow.set_tracking_uri("file://" + str(MODEL_REGISTRY.absolute()))
 ```
 
 !!! note
-    When we're collaborating with other team members, this model registry will live on the cloud. Members from our team can connect to it (with authentication) to save and load trained models. If you don't want to set up and maintain a model registry, this is where platforms like [Comet ML](https://www.comet.ml/site/){:target="_blank"}, [Weights and Biases](https://www.wandb.com/){:target="_blank"} and others offload a lot of technical setup.
+    On Windows, the last line where we set the tracking URI should have three forwards slashes:
+    ```python linenums="1"
+    mlflow.set_tracking_uri("file:///" + str(MODEL_REGISTRY.absolute()))
+    ```
+
+> When we're collaborating with other team members, this model registry will live on the cloud. Members from our team can connect to it (with authentication) to save and load trained models. If you don't want to set up and maintain a model registry, this is where platforms like [Comet ML](https://www.comet.ml/site/){:target="_blank"}, [Weights and Biases](https://www.wandb.com/){:target="_blank"} and others offload a lot of technical setup.
 
 ## Training
 
@@ -377,8 +380,7 @@ Let's view what we've tracked from our experiment. MLFlow serves a dashboard for
 from pyngrok import ngrok
 ```
 
-!!! note
-    You may need to rerun the cell below multiple times if the connection times out it is overloaded.
+> You may need to rerun the cell below multiple times if the connection times out it is overloaded.
 
 ```python linenums="1"
 # https://stackoverflow.com/questions/61615818/setting-up-mlflow-on-google-colab

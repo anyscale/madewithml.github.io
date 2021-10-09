@@ -279,8 +279,7 @@ Transforming the data involves feature encoding and engineering.
 - [similarity](https://github.com/dirty-cat/dirty_cat){:target="_blank"}: similar to count vectorization but based on similarities in tokens
 - and many [more](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.feature_extraction){:target="_blank"}!
 
-!!! note
-    Often, teams will want to reuse the same features for different tasks so how can we avoid duplication of efforts? A solution is [feature stores](https://www.tecton.ai/blog/what-is-a-feature-store/){:target="_blank"} which will enable sharing of features and the workflows around feature pipelines. We'll cover feature stores during *Production*.
+> Often, teams will want to reuse the same features for different tasks so how can we avoid duplication of efforts? A solution is [feature stores](https://www.tecton.ai/blog/what-is-a-feature-store/){:target="_blank"} which will enable sharing of features and the workflows around feature pipelines. We'll cover feature stores during *Production*.
 
 
 ## Application
@@ -448,8 +447,7 @@ albumentations fast image augmentation library easy use wrapper around libraries
 
 Many of the *transformations* we're going to do are model specific. For example, for our simple baselines we may do `label encoding` → `tf-idf` while for the more involved architectures we may do `label encoding` → `one-hot encoding` → `embeddings`. So we'll cover these in the next suite of lessons as we implement each of the [baselines](baselines.md){:target="_blank"}.
 
-!!! note
-    In the next section we'll be performing exploratory data analysis (EDA) on our preprocessed dataset. However, the order of the steps can be reversed depending on how well the problem is defined. If we're unsure about how to prepare the data, we can use EDA to figure it out. In fact in our [dashboard](dashboard.md){:target="_blank"} lesson, we can interactively apply data processing and EDA back and forth until we have finalized on constraints.
+> In the next section we'll be performing exploratory data analysis (EDA) on our preprocessed dataset. However, the order of the steps can be reversed depending on how well the problem is defined. If we're unsure about how to prepare the data, we can use EDA to figure it out. In fact in our [dashboard](dashboard.md){:target="_blank"} lesson, we can interactively apply data processing and EDA back and forth until we have finalized on constraints.
 
 
 <!-- Citation -->

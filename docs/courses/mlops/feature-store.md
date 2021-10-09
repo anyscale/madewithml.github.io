@@ -61,8 +61,7 @@ touch features.py
 Creating a new Feast repository in /Users/goku/Documents/madewithml/mlops/features.
 </pre>
 
-!!! note
-    Traditionally, the feature repository would be it's own isolated repository that other services will use to read/write features from but we're going to simplify it and create it directly in our application's repository.
+> Traditionally, the feature repository would be it's own isolated repository that other services will use to read/write features from but we're going to simplify it and create it directly in our application's repository.
 
 The initialized feature repository (with the additional file we've added) will include:
 
@@ -325,8 +324,7 @@ feature_vector
  'project_details__text': ['CMU LTI Low Resource NLP Bootcamp 2020 A low-resource natural language and speech processing bootcamp held by the Carnegie Mellon University Language Technologies Institute in May 2020.']}
 ```
 
-!!! note
-    We can establish all of these components by running [Feast on Kubernetes](https://docs.feast.dev/feast-on-kubernetes/getting-started){:target="_blank"} as well, which I highly recommend when dealing with data streams ([Kafka](https://kafka.apache.org/){:target="_blank"} / [Kinesis](https://aws.amazon.com/kinesis/){:target="_blank"}).
+> We can establish all of these components by running [Feast on Kubernetes](https://docs.feast.dev/feast-on-kubernetes/getting-started){:target="_blank"} as well, which I highly recommend when dealing with data streams ([Kafka](https://kafka.apache.org/){:target="_blank"} / [Kinesis](https://aws.amazon.com/kinesis/){:target="_blank"}).
 
 ## Architecture
 
@@ -360,8 +358,7 @@ Some applications may require [stream processing](../infrastructure/#stream-proc
 3. Streaming features are also written from the data stream to the batch data source (data warehouse, db, etc.) to be processed for generating training data later on.
 4. Historical data will be validated and used to generate features for training a model. This cadence for how often this happens depends on whether there are data annotation lags, compute constraints, etc.
 
-!!! note
-    There are a few more components we're not visualizing here such as the unified ingestion layer (Spark), that connects data from the varied data sources (warehouse, DB, etc.) to the offline/online stores, or low latency serving (<10 ms). We can read more about all of these in the official [Feast Documentation](https://docs.feast.dev/){:target="_blank"}, which also has [guides](https://docs.feast.dev/how-to-guides/feast-gcp-aws){:target="_blank"} to set up a feature store with Feast with AWS, GCP, etc.
+> There are a few more components we're not visualizing here such as the unified ingestion layer (Spark), that connects data from the varied data sources (warehouse, DB, etc.) to the offline/online stores, or low latency serving (<10 ms). We can read more about all of these in the official [Feast Documentation](https://docs.feast.dev/){:target="_blank"}, which also has [guides](https://docs.feast.dev/how-to-guides/feast-gcp-aws){:target="_blank"} to set up a feature store with Feast with AWS, GCP, etc.
 
 
 ## Additional functionality

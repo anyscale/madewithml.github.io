@@ -111,7 +111,7 @@ Let's unpack the different parts of this function's docstring:
 !!! note
     If you're using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank"}, you should get the free [Python Docstrings Generator](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring){:target="_blank"} extension so you can type `"""` under a function and then hit the ++shift++ key to generate a template docstring. It will autofill parts of the docstring using the typing information and even exception in your code!
 
-    ![vscode docstring generation](https://github.com/NilsJPWerner/autoDocstring/raw/master/images/demo.gif)
+    ![vscode docstring generation](https://github.com/NilsJPWerner/autoDocstring/blob/13875f7e5d3a2ad2a2a7e42bad6a10d09fed7472/images/demo.gif)
 
 ## Mkdocs
 
@@ -189,8 +189,7 @@ nav:
 
 :octicons-info-24: View our rendered documentation via GitHub pages → [here](https://gokumohandas.github.io/MLOps/){:target="_blank"}.
 
-!!! note
-    We can easily serve our documentation for free using [GitHub pages](https://squidfunk.github.io/mkdocs-material/publishing-your-site/){:target="_blank"} and even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"}. All we had to do was add the file [`.github/workflows/documentation.yml`](https://github.com/GokuMohandas/MLOps/blob/main/.github/workflows/documentation.yml){:target="_blank"} which [GitHub Actions](https://github.com/features/actions){:target="_blank"}  will use to build and deploy our documentation every time we push to the `main` branch (we'll learn about GitHub Actions in our CI/CD lesson soon).
+> We can easily serve our documentation for free using [GitHub pages](https://squidfunk.github.io/mkdocs-material/publishing-your-site/){:target="_blank"} and even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"}. All we had to do was add the file [`.github/workflows/documentation.yml`](https://github.com/GokuMohandas/MLOps/blob/main/.github/workflows/documentation.yml){:target="_blank"} which [GitHub Actions](https://github.com/features/actions){:target="_blank"}  will use to build and deploy our documentation every time we push to the `main` branch (we'll learn about GitHub Actions in our CI/CD lesson soon).
 
 <!-- Citation -->
 {% include "cite.md" %}

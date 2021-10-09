@@ -77,8 +77,7 @@ While it may be easy (and justified) to say "don't use machine learning" as your
 ## Application
 For our solution, we'll have an initial set of baselines where we'll start with a rule-based approach and then slowly add complexity (rule-based &rarr; regression &rarr; CNN). Though you are welcome to use any stochastic model you like because all the subsequent lessons are model agnostic.
 
-!!! note
-    For the purpose of this course, even our MVP will be an ML model, however we would normally deploy the rule-based approach first as long as it satisfies a performance threshold so we can quickly close the loop.
+> For the purpose of this course, even our MVP will be an ML model, however we would normally deploy the rule-based approach first as long as it satisfies a performance threshold so we can quickly close the loop.
 
 As for monitoring and iterating on our solution, we'll be looking at things like overall performance, class specific performances, # of relevant tags, etc. We'll also create workflows to look at new data for anomalies, apply active learning, ease the annotation process, etc. More on this in our [testing](testing.md){:target="_blank"} and [monitoring](monitoring.md){:target="_blank"} lessons.
 

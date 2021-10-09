@@ -287,8 +287,7 @@ All of our log messages are at the `INFO` level but while developing we may have
 
 > If we ever feel that we the need to log within our other functions, then it usually indicates that the function needs to be broken down further.
 
-!!! note
-    The [Elastic stack](https://www.elastic.co/what-is/elk-stack){:target="_blank"} (formerly ELK stack) is a common option for production level logging. It combines the features of [Elasticsearch](https://www.elastic.co/elasticsearch/){:target="_blank"} (distributed search engine), [Logstash](https://www.elastic.co/logstash){:target="_blank"} (ingestion pipeline) and [Kibana](https://www.elastic.co/kibana){:target="_blank"} (customizable visualization).
+> The [Elastic stack](https://www.elastic.co/what-is/elk-stack){:target="_blank"} (formerly ELK stack) is a common option for production level logging. It combines the features of [Elasticsearch](https://www.elastic.co/elasticsearch/){:target="_blank"} (distributed search engine), [Logstash](https://www.elastic.co/logstash){:target="_blank"} (ingestion pipeline) and [Kibana](https://www.elastic.co/kibana){:target="_blank"} (customizable visualization).
 
 <!-- Citation -->
 {% include "cite.md" %}

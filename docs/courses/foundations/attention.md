@@ -760,8 +760,7 @@ print ("output: ", output.shape)
 output:  torch.Size([64, 4])
 </pre>
 
-!!! note
-    In a many-to-many task such as machine translation, our attentional interface will also account for the encoded representation of token in the output as well (via concatenation) so we can know which encoded inputs to attend to based on the encoded output we're focusing on. For more on this, be sure to explore [Bahdanau's attention paper](https://arxiv.org/abs/1409.0473){:target="_blank"}.
+> In a many-to-many task such as machine translation, our attentional interface will also account for the encoded representation of token in the output as well (via concatenation) so we can know which encoded inputs to attend to based on the encoded output we're focusing on. For more on this, be sure to explore [Bahdanau's attention paper](https://arxiv.org/abs/1409.0473){:target="_blank"}.
 
 ### Model
 

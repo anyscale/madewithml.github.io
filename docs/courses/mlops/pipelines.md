@@ -25,8 +25,7 @@ We'll need to break down our end-to-end ML pipeline into in it's constituent Dat
 - integration with the ecosystem (data ingestion, processing, etc.)
 - ability to run locally and scale easily
 
-!!! note
-    We'll be running Airflow locally but we can easily scale it by running on a managed cluster platform where we can run Python, Hadoop, Spark, etc. on large batch processing jobs (AWS' [EMR](https://aws.amazon.com/emr/){:target="_blank"}, Google Cloud's [Dataproc](https://cloud.google.com/dataproc){:target="_blank"}, on-prem hardware, etc.)
+> We'll be running Airflow locally but we can easily scale it by running on a managed cluster platform where we can run Python, Hadoop, Spark, etc. on large batch processing jobs (AWS' [EMR](https://aws.amazon.com/emr/){:target="_blank"}, Google Cloud's [Dataproc](https://cloud.google.com/dataproc){:target="_blank"}, on-prem hardware, etc.)
 
 ## Airflow
 
@@ -139,8 +138,7 @@ default_args = {
 }
 ```
 
-!!! note
-    There are many [more default arguments](https://airflow.apache.org/docs/apache-airflow/stable/tutorial.html#default-arguments){target="_blank"} and we'll cover them as we go through the concepts.
+> There are many [more default arguments](https://airflow.apache.org/docs/apache-airflow/stable/tutorial.html#default-arguments){target="_blank"} and we'll cover them as we go through the concepts.
 
 We can initialize DAGs with many [parameters](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html#airflow.models.dag.DAG){:target="_blank"} (which will override the same parameters in `default_args`) and in several different ways:
 
@@ -173,8 +171,7 @@ def dataops():
     pass
 ```
 
-!!! note
-    There are many [parameters](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html#airflow.models.dag.DAG){:target="_blank"} that we can initialize our DAGs with, including a `start_date` and a `schedule_interval`. While we could have our workflows execute on a temporal cadence, many ML workflows are initiated by events, which we can map using [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/index.html){:target="_blank"} and [hooks](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/hooks/index.html){:target="_blank"} to external databases, file systems, etc.
+> There are many [parameters](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html#airflow.models.dag.DAG){:target="_blank"} that we can initialize our DAGs with, including a `start_date` and a `schedule_interval`. While we could have our workflows execute on a temporal cadence, many ML workflows are initiated by events, which we can map using [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/index.html){:target="_blank"} and [hooks](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/hooks/index.html){:target="_blank"} to external databases, file systems, etc.
 
 
 ## Tasks
@@ -214,8 +211,7 @@ def example():
         return x+1
 ```
 
-!!! note
-    Though the graphs are directed, we can establish certain [trigger rules](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html#trigger-rules){:target="_blank"} for each task to execute on conditional successes or failures of the parent tasks.
+> Though the graphs are directed, we can establish certain [trigger rules](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html#trigger-rules){:target="_blank"} for each task to execute on conditional successes or failures of the parent tasks.
 
 ### Operators
 
@@ -236,8 +232,7 @@ task_2 = PythonOperator(
 
 There are also many other Airflow native [Operators](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/index.html){:target="_blank"} (email, S3, MySQL, Hive, etc.), as well as [community maintained provider packages](https://airflow.apache.org/docs/apache-airflow-providers/packages-ref.html){:target="_blank"} (Kubernetes, Snowflake, Azure, AWS, Salesforce, Tableau, etc.), to execute tasks specific to certain platforms or tools.
 
-!!! note
-    We can also create our own [custom Operators](https://airflow.apache.org/docs/apache-airflow/stable/howto/custom-operator.html){:target="_blank"} by extending the [BashOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/bash/index.html#airflow.operators.bash.BashOperator){:target="_blank"} class.
+> We can also create our own [custom Operators](https://airflow.apache.org/docs/apache-airflow/stable/howto/custom-operator.html){:target="_blank"} by extending the [BashOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/bash/index.html#airflow.operators.bash.BashOperator){:target="_blank"} class.
 
 ### Relationships
 
@@ -354,15 +349,13 @@ from airflow.utils.dates import days_ago
 We could also specify a [cron](https://crontab.guru/){:target="_blank"} expression for our `schedule_interval` parameter or even use [cron presets](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html#cron-presets){:target="_blank"}.
 
 
-!!! note
-    Airflow's Scheduler will run our workflows one `schedule_interval` from the `start_date`. For example, if we want our workflow to start on `01-01-1983` and run `@daily`, then the first run will be immediately after `01-01-1983T11:59`.
+> Airflow's Scheduler will run our workflows one `schedule_interval` from the `start_date`. For example, if we want our workflow to start on `01-01-1983` and run `@daily`, then the first run will be immediately after `01-01-1983T11:59`.
 
 ### Sensors
 
 While it may make sense to execute many data processing workflows on a scheduled interval, machine learning workflows may require more nuanced triggers. We shouldn't be wasting compute by running executing our DataOps and MLOps pipelines *just in case* we have new data. Instead, we can use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/){:target="_blank"} to trigger workflows when some external condition is met. For example, we can initiate data processing when annotated data appears in a database, or when a specific file appears in a file system.
 
-!!! note
-    There's so much more to Airflow (monitoring, Task groups, smart senors, etc.) so be sure to explore them as you need them by using the [official documentation](https://airflow.apache.org/docs/apache-airflow/stable/index.html){:target="_blank"}.
+> There's so much more to Airflow (monitoring, Task groups, smart senors, etc.) so be sure to explore them as you need them by using the [official documentation](https://airflow.apache.org/docs/apache-airflow/stable/index.html){:target="_blank"}.
 
 
 ## DataOps
@@ -398,8 +391,7 @@ When we talk about data that we want to process on in our DataOps pipelines, we 
 
 - **Warehouse**: data is often moved from the database to a data warehouse (DWH) for the added benefits of a powerful analytics engine, front-end clients, etc. to make it very easy for downstream developers to efficiently use the data at scale. Typical choices are [Google BigQuery](https://cloud.google.com/bigquery){:target="_blank"}, [Amazon RedShift](https://aws.amazon.com/redshift/){:target="_blank"}, [SnowFlake](https://www.snowflake.com/){:target="_blank"}, [Hive](https://hive.apache.org/){:target="_blank"}, etc.
 
-!!! note
-    While both databases and data warehouses hold data, they're different kinds of processing systems. A database is an [online transaction processing (OLTP)](https://en.wikipedia.org/wiki/Online_transaction_processing){:target="_blank"} system because it's typically used for day-to-day CRUD (create, read, update, delete) operations connected to the main application. Whereas, a data warehouse is an [online analytical processing (OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing){:target="_blank"} system because it's used ad-hoc querying on aggregate views of the data. Data moves from a database to a warehouse through ETL (extract, transform, load) pipelines, which the warehouse will use to drive business insights, which can drive change back to the database (schemas, values, etc.).
+> While both databases and data warehouses hold data, they're different kinds of processing systems. A database is an [online transaction processing (OLTP)](https://en.wikipedia.org/wiki/Online_transaction_processing){:target="_blank"} system because it's typically used for day-to-day CRUD (create, read, update, delete) operations connected to the main application. Whereas, a data warehouse is an [online analytical processing (OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing){:target="_blank"} system because it's used ad-hoc querying on aggregate views of the data. Data moves from a database to a warehouse through ETL (extract, transform, load) pipelines, which the warehouse will use to drive business insights, which can drive change back to the database (schemas, values, etc.).
 
 Typically we'll use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/){:target="_blank"} to trigger workflows when a condition is met or trigger them directly from the external source via API calls, etc. Our workflows can communicate with the different platforms by establishing a [connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html){:target="_blank"} and then using [hooks](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/hooks/index.html){:target="_blank"} to interface with the database, data warehouse, etc.
 
@@ -472,8 +464,7 @@ cache = BashOperator(
 )
 ```
 
-!!! note
-    Learn all about what features stores are, why we need them and how to implement them in our [feature stores lesson](feature-store.md){:target="_blank"}.
+> Learn all about what features stores are, why we need them and how to implement them in our [feature stores lesson](feature-store.md){:target="_blank"}.
 
 
 ## MLOps (model)
@@ -522,8 +513,7 @@ train_model = BashOperator(
 )
 ```
 
-!!! note
-    An interesting trend in continual learning involves algorithmic advancements where models build on their knowledge without retraining from scratch and suffering from catastrophic forgetting. Check out this survey (rev. 04/2021) for a review of methods: [A continual learning survey: Defying forgetting in classification tasks](https://arxiv.org/abs/1909.08383){:target="_blank"}.
+> An interesting trend in continual learning involves algorithmic advancements where models build on their knowledge without retraining from scratch and suffering from catastrophic forgetting. Check out this survey (rev. 04/2021) for a review of methods: [A continual learning survey: Defying forgetting in classification tasks](https://arxiv.org/abs/1909.08383){:target="_blank"}.
 
 ### Evaluation
 

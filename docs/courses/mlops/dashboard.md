@@ -165,8 +165,7 @@ We can create some plots of key metric improvements (or regressions) across time
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/overview.png">
 </div>
 
-!!! note
-    We can see that as our application matures, we'll have many tags and potentially different versions deployed simultaneously. At this point, we should invest in having a metadata or evaluation store where all parameter and performance artifacts are efficiently indexed by model IDs.
+> We can see that as our application matures, we'll have many tags and potentially different versions deployed simultaneously. At this point, we should invest in having a metadata or evaluation store where all parameter and performance artifacts are efficiently indexed by model IDs.
 
 Now when we want to zoom into the difference between two versions, we can use a simple [selectbox](https://docs.streamlit.io/en/stable/api.html#streamlit.selectbox){:target="_blank"} to choose which tags to compare. This could either be the current workspace with the current deployed tag, two previously deployed tags, etc.
 
@@ -232,8 +231,7 @@ We're also going to inspect the true positive (TP), false positive (FP) and fals
 - Inspect FP / FN samples by [estimating training data influences (TracIn)](https://arxiv.org/abs/2002.08484){:target="_blank"} on their predictions.
 - Inspect the trained model's behavior under various conditions using the [WhatIf](https://pair-code.github.io/what-if-tool/){:target="_blank"} tool.
 
-!!! note
-    Our dashboard can have many other pages as well, especially critical views for [iteration](pipelines.md#continual-learning){:target="_blank"}, such as [active learning](labeling.md#active-learning){:target="_blank"}, [composing retraining datasets](continual-learning.md#retraining){:target="_blank"}, etc.
+> Our dashboard can have many other pages as well, especially critical views for [iteration](pipelines.md#continual-learning){:target="_blank"}, such as [active learning](labeling.md#active-learning){:target="_blank"}, [composing retraining datasets](continual-learning.md#retraining){:target="_blank"}, etc.
 
 
 ## Caching

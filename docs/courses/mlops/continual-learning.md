@@ -22,8 +22,7 @@ In the pipelines lesson, we covered the [Dataops](pipelines.md#dataops){:target=
 
 A continual learning system like this will guide us with when to update, what exactly to update and how to update it (easily). The goal is not always to build a continuous system that automatically updates but rather a continual system that iteratively updates and gains our trust over time. Though we’ve closed the iteration loop for our continual system with our [update workflow](pipelines.md#mlops-update){:_target="blank"}, there are many decisions involved that prevent the iteration from occurring continuously.
 
-!!! note
-    Continual learning not only applies to MLOps workflow architecture but on the [algorithmic front](https://arxiv.org/abs/1909.08383){:target="_blank"} as well, where models learn to adapt to new data without having to retrain or suffer from catastrophic forgetting (forget previously learned patterns when presented with new data).
+> Continual learning not only applies to MLOps workflow architecture but on the [algorithmic front](https://arxiv.org/abs/1909.08383){:target="_blank"} as well, where models learn to adapt to new data without having to retrain or suffer from catastrophic forgetting (forget previously learned patterns when presented with new data).
 
 ### Monitoring
 

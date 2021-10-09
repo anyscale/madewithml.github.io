@@ -19,8 +19,7 @@ It's integral to be able to consistently create an environment to develop in so 
 
 When we used our [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb){:target="_blank"}, we had a preloaded set of packages (run `!pip list` inside the notebook to see all of them). But now we want to define our environment so we can reproduce it for our Python scripts. There are [many recommended options](https://packaging.python.org/guides/tool-recommendations/){:target="_blank"} when it comes to packaging in Python and we'll be using the traditional and recommended [Pip](https://pip.pypa.io/en/stable/){:target="_blank"}.
 
-!!! note
-    There are many alternative dependency management and packaging tools, such as [Poetry](https://python-poetry.org/){:target="_blank"}, but there are still many things in flux with these newer options. We're going to stick with Pip because it works for our application and don't want to deal with issues like [long resolve periods](https://github.com/python-poetry/poetry/issues/2094){:target="_blank"}.
+> There are many alternative dependency management and packaging tools, such as [Poetry](https://python-poetry.org/){:target="_blank"}, but there are still many things in flux with these newer options. We're going to stick with Pip because it works for our application and don't want to deal with issues like [long resolve periods](https://github.com/python-poetry/poetry/issues/2094){:target="_blank"}.
 
 First thing we'll do is set up a [virtual environment](https://docs.python.org/3/library/venv.html){:target="_blank"} so we can isolate our packages (and versions) necessary for application from our other projects which may have different dependencies. Once we create our virtual environment, we'll activate it and install our required packages.
 
@@ -79,13 +78,11 @@ with open(Path(BASE_DIR, "requirements.txt"), "r") as file:
     required_packages = [ln.strip() for ln in file.readlines()]
 ```
 
-!!! note
-    We've should add packages (with versions) to our `requirements.txt` as we've installed them but if we haven't, you can't just do `pip freeze > requirements.txt` because it dumps the dependencies of all our packages into the file (even the ones we didn't explicitly install). When a certain package updates, the stale dependency will still be there. To mitigate this, there are tools such as [pipreqs](https://github.com/bndr/pipreqs){:target="_blank"}, [pip-tools](https://github.com/jazzband/pip-tools){:target="_blank"}, [pipchill](https://github.com/rbanffy/pip-chill){:target="_blank"}, etc. that will only list the packages that are not dependencies. However, if you're separating packages for different environments, then these solutions are limited as well.
+> We've should add packages (with versions) to our `requirements.txt` as we've installed them but if we haven't, you can't just do `pip freeze > requirements.txt` because it dumps the dependencies of all our packages into the file (even the ones we didn't explicitly install). When a certain package updates, the stale dependency will still be there. To mitigate this, there are tools such as [pipreqs](https://github.com/bndr/pipreqs){:target="_blank"}, [pip-tools](https://github.com/jazzband/pip-tools){:target="_blank"}, [pipchill](https://github.com/rbanffy/pip-chill){:target="_blank"}, etc. that will only list the packages that are not dependencies. However, if you're separating packages for different environments, then these solutions are limited as well.
 
 The next several lines in our `setup.py` file include some packages required for testing (`test_packages`) and development (`dev_packages`). These will be situationally required when we're testing or developing. For example, a general user of our application won't need to to test or develop so they'll only need the required packages, however, a technical developer will want both the test and dev packages to extend our code base.
 
-!!! note
-    We have test and dev packages separated because in our [CI/CD lesson](cicd.md){:target="_blank"}, we'll be using [GitHub actions](https://github.com/features/actions){:target="_blank"} that will only be testing our code so we wanted to specify a way to load only the required packages for testing.
+> We have test and dev packages separated because in our [CI/CD lesson](cicd.md){:target="_blank"}, we'll be using [GitHub actions](https://github.com/features/actions){:target="_blank"} that will only be testing our code so we wanted to specify a way to load only the required packages for testing.
 
 ### Setup
 

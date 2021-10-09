@@ -776,8 +776,7 @@ Each token in the input is represented via embeddings (all out-of-vocabulary (OO
 ## Padding
 Our inputs are all of varying length but we need each batch to be uniformly shaped. Therefore, we will use padding to make all the inputs in the batch the same length. Our padding index will be 0 (note that this is consistent with the `<PAD>` token defined in our `Tokenizer`).
 
-!!! note
-    While embedding our input tokens will create a batch of shape (`N`, `max_seq_len`, `embed_dim`) we only need to provide a 2D matrix (`N`, `max_seq_len`) for using embeddings with PyTorch.
+> While embedding our input tokens will create a batch of shape (`N`, `max_seq_len`, `embed_dim`) we only need to provide a 2D matrix (`N`, `max_seq_len`) for using embeddings with PyTorch.
 
 ```python linenums="1"
 def pad_sequences(sequences, max_seq_len=0):

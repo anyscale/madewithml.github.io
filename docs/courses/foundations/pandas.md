@@ -120,8 +120,7 @@ These are the different features:
 ## Exploratory data analysis (EDA)
 Now that we loaded our data, we're ready to start exploring it to find interesting information.
 
-!!! note
-    Be sure to check out our entire lesson focused on [EDA](https://madewithml.com/courses/mlops/exploratory-data-analysis/){:target="_blank"} in our [MLOps](https://madewithml.com/courses/mlops/){:target="_blank"} course.
+> Be sure to check out our entire lesson focused on [EDA](https://madewithml.com/courses/mlops/exploratory-data-analysis/){:target="_blank"} in our [MLOps](https://madewithml.com/courses/mlops/){:target="_blank"} course.
 
 ```python linenums="1"
 import matplotlib.pyplot as plt
@@ -545,8 +544,7 @@ df.iloc[0, 1]
 ## Preprocessing
 After exploring, we can clean and preprocess our dataset.
 
-!!! note
-    Be sure to check out our entire lesson focused on [preprocessing](https://madewithml.com/courses/mlops/preprocessing/){:target="_blank"} in our [MLOps](https://madewithml.com/courses/mlops/){:target="_blank"} course.
+> Be sure to check out our entire lesson focused on [preprocessing](https://madewithml.com/courses/mlops/preprocessing/){:target="_blank"} in our [MLOps](https://madewithml.com/courses/mlops/){:target="_blank"} course.
 
 ```python linenums="1"
 # Rows with at least one NaN value

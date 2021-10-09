@@ -13,8 +13,7 @@ repository: https://github.com/GokuMohandas/MLOps
 
 Whether we're working individually or with a team, it's important that we have a system to track changes to our projects so that we can revert to previous versions and so that others can reproduce our work and contribute to it. [Git](https://git-scm.com/){:target="_blank"} is a distributed versional control system that allows us do exactly this. Git runs *locally* on our computer and it keeps track of our files and their histories. To enable collaboration with others, we can use a *remote* host ([GitHub](https://github.com/){:target="_blank"}, [GitLab](https://gitlab.com/){:target="_blank"}, [BitBucket](https://bitbucket.org/){:target="_blank"}, etc.) to host our files and their histories. We'll use git to push our local changes and pull other's changes to and from the remote host.
 
-!!! note
-    Git is traditionally used to store and version small files <100MB (scripts, READMEs, etc.), however, we can still version large artifacts (datasets, model weights, etc.) using text pointers pointing to blob stores. These pointers will contain information such as where the asset is located, it's specific contents/version (ex. via hashing), etc. We'll see this in action in our [versioning](versioning.md){:target="_blank"} lesson where we'll create a pointer to a specific version of our dataset and models.
+> Git is traditionally used to store and version small files <100MB (scripts, READMEs, etc.), however, we can still version large artifacts (datasets, model weights, etc.) using text pointers pointing to blob stores. These pointers will contain information such as where the asset is located, it's specific contents/version (ex. via hashing), etc. We'll see this in action in our [versioning](versioning.md){:target="_blank"} lesson where we'll create a pointer to a specific version of our dataset and models.
 
 ## Application
 
@@ -81,8 +80,7 @@ git status
 
 We can see that we have our do_not_push.txt file as an untracked file in our working directory, as well as some other clutter (mac .DS_Store file). We can create a .gitignore file to make sure we aren't checking in these files.
 
-!!! note
-    Check out our tagifai's [.gitignore](https://github.com/GokuMohandas/MLOps/blob/main/.gitignore){:target="_blank"} for an more complete example or [generate](https://www.toptal.com/developers/gitignore){:target="_blank"} our own based on the tools we're using.
+> Check out our tagifai's [.gitignore](https://github.com/GokuMohandas/MLOps/blob/main/.gitignore){:target="_blank"} for an more complete example or [generate](https://www.toptal.com/developers/gitignore){:target="_blank"} our own based on the tools we're using.
 
 ```bash
 # Inside .gitignore
@@ -316,8 +314,7 @@ git pull origin main
     <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/merge.png" style="border-radius: 7px;">
 </div>
 
-!!! note
-    We only have a conflict because both branches were forked from a previous version of the `main` branch and they both happened to alter the same content. Had we created one branch first and then updated main before creating the second branch, we wouldn't have any conflicts. But in a collaborative setting, different developers may fork off the same version of the branch anytime.
+> We only have a conflict because both branches were forked from a previous version of the `main` branch and they both happened to alter the same content. Had we created one branch first and then updated main before creating the second branch, we wouldn't have any conflicts. But in a collaborative setting, different developers may fork off the same version of the branch anytime.
 
 ### Stash
 
@@ -438,8 +435,7 @@ git log --oneline  # short version
     <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/log.png" style="border-radius: 7px;">
 </div>
 
-!!! note
-    Commit IDs are 40 characters long but we can represent them with the first few (seven digits is the default for a Git SHA). If there is ambiguity, Git will notify us and we can simply add more of the commit ID.
+> Commit IDs are 40 characters long but we can represent them with the first few (seven digits is the default for a Git SHA). If there is ambiguity, Git will notify us and we can simply add more of the commit ID.
 
 ### Diff
 
@@ -495,8 +491,7 @@ git reset <PREVIOUS_COMMIT_ID>  # or HEAD^
     <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/reset.png">
 </div>
 
-!!! note
-    `HEAD` is a quick way to refer to the previous commit. Both `HEAD` and any previous commit ID can be accompanied with a `^` or `~` symbol which acts as a relative reference. <COMMIT_ID>`^`n refers to the nth parent of the commit while <COMMIT_ID>`~`n refers to the nth grandparent. Of course we can always just explicitly use commit IDs but these short hands can come in handy for quick checks without doing `git log` to retrieve commit IDs.
+> `HEAD` is a quick way to refer to the previous commit. Both `HEAD` and any previous commit ID can be accompanied with a `^` or `~` symbol which acts as a relative reference. <COMMIT_ID>`^`n refers to the nth parent of the commit while <COMMIT_ID>`~`n refers to the nth grandparent. Of course we can always just explicitly use commit IDs but these short hands can come in handy for quick checks without doing `git log` to retrieve commit IDs.
 
 ### Revert
 

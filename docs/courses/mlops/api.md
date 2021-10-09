@@ -272,8 +272,7 @@ We're going to use [FastAPI](https://fastapi.tiangolo.com/){:target="_blank"} as
 - dependency injection
 - security via OAuth2
 
-!!! note
-    Your choice of framework also depends on your team's existing systems and processes. However, with the wide adoption of microservices, we can wrap our specific application is any framework we choose and expose the appropriate resources so all other systems can easily communicate with it.
+> Your choice of framework also depends on your team's existing systems and processes. However, with the wide adoption of microservices, we can wrap our specific application is any framework we choose and expose the appropriate resources so all other systems can easily communicate with it.
 
 To show how intuitive and powerful FastAPI is, we could laboriously go through the [documentation](https://fastapi.tiangolo.com/){:target="_blank"} but instead we'll walk through everything as we cover the components of our own application.
 
@@ -308,8 +307,7 @@ def _index():
 
 We let our application know that the endpoint is at `/` through the path operation decorator in line 3 and we simply return a JSON response with the `200 OK` HTTP status code. Let's go ahead and start our application and see what this response looks like!
 
-!!! note
-    In our actual [`api.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/api.py){:target="_blank"} script, you'll notice that even our index function looks different. Don't worry, we're slowly adding components to our endpoints and justifying them along the way.
+> In our actual [`api.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/api.py){:target="_blank"} script, you'll notice that even our index function looks different. Don't worry, we're slowly adding components to our endpoints and justifying them along the way.
 
 
 ## Launching
@@ -456,8 +454,7 @@ def _index(request: Request):
     return response
 ```
 
-!!! note
-    You can also use `/redoc` endpoint to view the [ReDoc](https://redocly.github.io/redoc/){:target="_blank"} documentation or [Postman](https://www.postman.com/use-cases/application-development/){:target="_blank"} to execute and manage tests that you can save and share with others.
+> You can also use `/redoc` endpoint to view the [ReDoc](https://redocly.github.io/redoc/){:target="_blank"} documentation or [Postman](https://www.postman.com/use-cases/application-development/){:target="_blank"} to execute and manage tests that you can save and share with others.
 
 ## Resources
 
@@ -712,8 +709,7 @@ If you are building a product, then I highly recommending forking this [generati
 
 However, for the majority of ML developers, thanks to the wide adoption of microservices, we don't need to do all of this. A well designed API service that can seamlessly communicate with all other services (framework agnostic) will fit into any process and add value to the overall product. Our main focus should be to ensure that our service is working as it should and constantly improve, which is exactly what the next cluster of lessons will focus on ([testing](testing.md){:target="_blank"} and [monitoring](monitoring.md){:target="_blank"})
 
-!!! note
-    Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers, such as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server, provide a common interface to interact with models for inspection, inference, etc. In fact, modules like RedisAI can even offer added benefits such as data locality for super fast inference.
+> Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers, such as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server, provide a common interface to interact with models for inspection, inference, etc. In fact, modules like RedisAI can even offer added benefits such as data locality for super fast inference.
 
 ## Resources
 

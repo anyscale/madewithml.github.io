@@ -34,10 +34,9 @@ We can make batch predictions on a finite set of inputs which are then written t
 - ❌&nbsp; predictions can become stale if user develops new interests that aren’t captured by the old data that the current predictions are based on.
 - ❌&nbsp; input feature space must be finite because we need to generate all the predictions before they're needed for real-time.
 
-> Recommend content that *existing* users will like based on their viewing history. New users may just receive some generic recommendations until we process their history the next day.
+> Recommend content that *existing* users will like based on their viewing history.
 
-!!! note
-    Even if we're not doing batch serving, it might still be useful to cache very popular sets of input features so that we can serve those predictions faster.
+New users may just receive some generic recommendations until we process their history the next day. Even if we're not doing batch serving, it might still be useful to cache very popular sets of input features so that we can serve those predictions faster.
 
 ### Real-time serving
 
@@ -51,8 +50,7 @@ We can also serve live predictions, typically through an HTTPS call with the app
 - ❌&nbsp; requires managed microservices to handle request traffic.
 - ❌&nbsp; requires real-time monitoring since input space in unbounded, which could yield erroneous predictions.
 
-!!! note
-    Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers, such as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server, provide a common interface to interact with models for inspection, inference, etc. In fact, modules like RedisAI can even offer added benefits such as data locality for super fast inference.
+> Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers, such as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server, provide a common interface to interact with models for inspection, inference, etc. In fact, modules like RedisAI can even offer added benefits such as data locality for super fast inference.
 
 ## Processing
 
@@ -71,8 +69,7 @@ Batch process features for a given entity at a previous point in time, which are
 - ✅&nbsp; can perform heavy feature computations offline and have it ready for fast inference.
 - ❌&nbsp; features can become stale since they were predetermined a while ago. This can be a huge disadvantage when your prediction depends on very recent events. (ex. catching fraudulent transactions as quickly as possible).
 
-!!! note
-    We'll discuss how these features are stored for training and inference in the [feature stores lesson](feature-store.md){:target="_blank"}.
+> We'll discuss how these features are stored for training and inference in the [feature stores lesson](feature-store.md){:target="_blank"}.
 
 ### Stream processing
 
@@ -87,8 +84,7 @@ Perform inference on a given set of inputs with near real-time, streaming, featu
 
 > Recommend content based on the real-time history that the users have generated. Note that the same model is used but the input data can change and grow.
 
-!!! note
-    If we infinitely reduce how often we do batch processing, we’ll [effectively have](https://www.ververica.com/blog/batch-is-a-special-case-of-streaming){:target="_blank"} stream (real-time) processing since the features will always be up-to-date.
+If we infinitely reduce how often we do batch processing, we’ll [effectively have](https://www.ververica.com/blog/batch-is-a-special-case-of-streaming){:target="_blank"} stream (real-time) processing since the features will always be up-to-date.
 
 ## Learning
 
@@ -106,8 +102,7 @@ The traditional approach is to train our models offline and then deploy them to 
 - ✅&nbsp; no urgency to get recent data immediately labeled and validated.
 - ❌&nbsp; the model can become stale and may not adapt to recent changes until some monitoring alerts trigger retraining.
 
-!!! note
-    Learn more about the executing MLOps pipeline tasks using a workflow orchestrator in the [Pipelines lesson](pipelines.md){:target="_blank"}.
+> Learn more about the executing MLOps pipeline tasks using a workflow orchestrator in the [Pipelines lesson](pipelines.md){:target="_blank"}.
 
 ### Online learning
 
@@ -185,8 +180,7 @@ Serverless options such as [AWS Lambda](https://aws.amazon.com/lambda/){:target=
 - **Pros**: no need to manage any servers and it all scale automatically depending on the request traffic.
 - **Cons**: size limits on function storage, payload, etc. based on provider and usually no accelerators (GPU, TPU, etc.)
 
-!!! note
-    Be sure to explore the [CI/CD workflows](cicd.md#serving){:target="_blank"} that accompany many of these deployment and serving options so you can have a continuous training, validation and serving process.
+> Be sure to explore the [CI/CD workflows](cicd.md#serving){:target="_blank"} that accompany many of these deployment and serving options so you can have a continuous training, validation and serving process.
 
 ## Application
 

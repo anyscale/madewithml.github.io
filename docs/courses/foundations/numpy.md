@@ -124,8 +124,9 @@ np.random.random((2,2)):
 
 ## Indexing
 We can extract specific values from our tensors using indexing.
-!!! note
-    Keep in mind that when indexing the row and column, indices start at `0`. And like indexing with lists, we can use negative indices as well (where `-1` is the last item).
+
+> Keep in mind that when indexing the row and column, indices start at `0`. And like indexing with lists, we can use negative indices as well (where `-1` is the last item).
+
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/indexing.png" width="300">
 </div>

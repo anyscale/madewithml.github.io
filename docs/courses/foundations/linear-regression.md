@@ -144,8 +144,7 @@ Since our task is a regression task, we will randomly split our dataset into thr
 - `val` : used to validate our model's performance during training.
 - `test`: used to do an evaluation of our fully trained model.
 
-!!! note
-    Be sure to check out our entire lesson focused on *properly* [splitting](https://madewithml.com/courses/mlops/splitting/){:target="_blank"} data in our [MLOps](https://madewithml.com/courses/mlops/){:target="_blank"} course.
+> Be sure to check out our entire lesson focused on *properly* [splitting](https://madewithml.com/courses/mlops/splitting/){:target="_blank"} data in our [MLOps](https://madewithml.com/courses/mlops/){:target="_blank"} course.
 
 ```python linenums="1"
 TRAIN_SIZE = 0.7
@@ -306,8 +305,7 @@ dW = -(2/N) * np.sum((y_train - y_pred) * X_train)
 db = -(2/N) * np.sum((y_train - y_pred) * 1)
 ```
 
-!!! note
-    The gradient is the derivative, or the rate of change of a function. It's a vector that points in the direction of greatest increase of a function. For example the gradient of our loss function ($J$) with respect to our weights ($W$) will tell us how to change $W$ so we can maximize $J$. However, we want to minimize our loss so we subtract the gradient from $W$.
+> The gradient is the derivative, or the rate of change of a function. It's a vector that points in the direction of greatest increase of a function. For example the gradient of our loss function ($J$) with respect to our weights ($W$) will tell us how to change $W$ so we can maximize $J$. However, we want to minimize our loss so we subtract the gradient from $W$.
 
 
 ### Update weights
@@ -326,8 +324,7 @@ W += -LEARNING_RATE * dW
 b += -LEARNING_RATE * db
 ```
 
-!!! note
-    The learning rate $\alpha$ is a way to control how much we update the weights by. If we choose a small learning rate, it may take a long time for our model to train. However, if we choose a large learning rate, we may overshoot and our training will never converge. The specific learning rate depends on our data and the type of models we use but it's typically good to explore in the range of $[1e^{-8}, 1e^{-1}]$. We'll explore learning rate update strategies in later lessons.
+> The learning rate $\alpha$ is a way to control how much we update the weights by. If we choose a small learning rate, it may take a long time for our model to train. However, if we choose a large learning rate, we may overshoot and our training will never converge. The specific learning rate depends on our data and the type of models we use but it's typically good to explore in the range of $[1e^{-8}, 1e^{-1}]$. We'll explore learning rate update strategies in later lessons.
 
 
 ### Training
@@ -374,8 +371,7 @@ Epoch: 80, loss: 0.028
 Epoch: 90, loss: 0.028
 </pre>
 
-!!! note
-    To keep the code simple, we're not calculating and displaying the validation loss after each epoch here. But in [later lessons](convolutional-neural-networks.md#training){:target="_blank"}, the performance on the validation set will be crucial in influencing the learning process (learning rate, when to stop training, etc.).
+> To keep the code simple, we're not calculating and displaying the validation loss after each epoch here. But in [later lessons](convolutional-neural-networks.md#training){:target="_blank"}, the performance on the validation set will be crucial in influencing the learning process (learning rate, when to stop training, etc.).
 
 ### Evaluation
 Now we're ready to see how well our trained model will perform on our test (hold-out) data split. This will be our best measure on how well the model would perform on the real world, given that our dataset's distribution is close to unseen data.
@@ -424,8 +420,7 @@ plt.show()
 ### Interpretability
 Since we standardized our inputs and outputs, our weights were fit to those standardized values. So we need to unstandardize our weights so we can compare it to our true weight (3.5).
 
-!!! note
-    Note that both $X$ and $y$ were standardized.
+> Note that both $X$ and $y$ were standardized.
 
 $$ \hat{y}_{scaled} = b_{scaled} + \sum_{j=1}^{k}{W_{scaled}}_j{x_{scaled}}_j $$
 
@@ -792,8 +787,7 @@ print (f"[model] y_hat = {W_unscaled[0]:.1f}X + {b_unscaled[0]:.1f}")
 ### Regularization
 Regularization helps decrease overfitting. Below is `L2` regularization (ridge regression). There are many forms of regularization but they all work to reduce overfitting in our models. With `L2` regularization, we are penalizing large weight values by decaying them because having large weights will lead to preferential bias with the respective inputs and we want the model to work with all the inputs and not just a select few. There are also other types of regularization like `L1` (lasso regression) which is useful for creating sparse models where some feature coefficients are zeroed out, or elastic which combines `L1` and `L2` penalties.
 
-!!! note
-    Regularization is not just for linear regression. You can use it to regularize any model's weights including the ones we will look at in future lessons.
+> Regularization is not just for linear regression. You can use it to regularize any model's weights including the ones we will look at in future lessons.
 
 $$ J(\theta) = \frac{1}{2}\sum_{i}(X_iW - y_i)^2 + \frac{\lambda}{2}W^TW $$
 

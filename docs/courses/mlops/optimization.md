@@ -31,8 +31,7 @@ There are many factors to consider when performing hyperparameter optimization a
 3. `[OPTIONAL]` Choose a [pruner](https://optuna.readthedocs.io/en/stable/reference/pruners.html){:target="_blank"} to end unpromising trials early.
 4. Define the parameters to tune in each [trial](https://optuna.readthedocs.io/en/stable/reference/trial.html){:target="_blank"} and the [distribution](https://optuna.readthedocs.io/en/stable/reference/generated/optuna.trial.Trial.html#optuna-trial-trial){:target="_blank"} of values to sample.
 
-!!! note
-    There are many more options (multiple objectives, storage options, etc.) to explore but this basic set up will allow us to optimize quite well.
+> There are many more options (multiple objectives, storage options, etc.) to explore but this basic set up will allow us to optimize quite well.
 
 ```python linenums="1"
 from argparse import Namespace
@@ -521,8 +520,7 @@ Best value (f1): 0.6953118802537894
 Best hyperparameters: {'embedding_dim': 234, 'num_filters': 383, 'hidden_dim': 265, 'dropout_p': 0.4174131267446717, 'lr': 0.0004392663090337615}
 </pre>
 
-!!! note
-    Don't forget to save learned parameters (ex. decision threshold) during training which you'll need later for inference.
+> Don't forget to save learned parameters (ex. decision threshold) during training which you'll need later for inference.
 
 ```python linenums="1"
 # Save best parameters
@@ -559,8 +557,7 @@ print (json.dumps(params, indent=2, cls=NumpyEncoder))
 
 ... and now we're finally ready to move from working in Jupyter notebooks to Python scripts. We'll be revisiting everything we did so far, but this time with proper software engineering prinicples such as object oriented programming (OOPs), styling, testing, etc. → [https://madewithml.com/#mlops](https://madewithml.com/#mlops)
 
-!!! note
-    You'll most likely be using the CLI application to optimize and train your models. If you don't have access to GPUs (personal machine, AWS, GCP, etc.), check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Google Colab and transfer the entire MLFlow experiment to your local machine. We essentially run optimization, then train the best model to download and transfer it's artifacts.
+> You'll most likely be using the CLI application to optimize and train your models. If you don't have access to GPUs (personal machine, AWS, GCP, etc.), check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Google Colab and transfer the entire MLFlow experiment to your local machine. We essentially run optimization, then train the best model to download and transfer it's artifacts.
 
 <!-- Citation -->
 {% include "cite.md" %}

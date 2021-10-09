@@ -183,9 +183,7 @@ df.head(5)
 
 The reason we want to iteratively add more features is because it introduces more complexity and effort. We may have additional data about each feature such as author info, html from links in the description, etc. While these may have meaningful signal, we want to slowly introduce these after we close the loop.
 
-!!! question "What's the
-!!! note
-    Over time, our dataset will grow and we'll need to label new data. So far, we had a team of moderators clean the existing data but we'll need to establish proper workflow to make this process easier and reliable. Typically, we'll use collaborative UIs where annotators can fix errors, etc. and then use a tool like [Airflow](https://airflow.apache.org/){:target="_blank"} or [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"} for workflow / pipeline orchestration to know when new data is ready to be labeled and also when it's ready to be used for QA and eventually, modeling.
+> Over time, our dataset will grow and we'll need to label new data. So far, we had a team of moderators clean the existing data but we'll need to establish proper workflow to make this process easier and reliable. Typically, we'll use collaborative UIs where annotators can fix errors, etc. and then use a tool like [Airflow](https://airflow.apache.org/){:target="_blank"} or [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"} for workflow / pipeline orchestration to know when new data is ready to be labeled and also when it's ready to be used for QA and eventually, modeling.
 
 ## Auxiliary data
 
@@ -314,8 +312,7 @@ def contains_tensorflow(text):
     return "tensorflow" if condition else None
 ```
 
-!!! note
-    An easy way to validate our labels (before modeling) is to use the aliases in our auxillary datasets to create labeling functions for the different classes. Then we can look for false positives and negatives to identify potentially mislabeled samples. We'll actually implement a similar kind of inspection approach, but using a trained model as a heuristic, in our [dashboards lesson](dashboard.md#inspection){:target="_blank"}.
+> An easy way to validate our labels (before modeling) is to use the aliases in our auxillary datasets to create labeling functions for the different classes. Then we can look for false positives and negatives to identify potentially mislabeled samples. We'll actually implement a similar kind of inspection approach, but using a trained model as a heuristic, in our [dashboards lesson](dashboard.md#inspection){:target="_blank"}.
 
 ## Iteration
 

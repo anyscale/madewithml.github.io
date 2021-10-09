@@ -720,8 +720,7 @@ $$ h_t = tanh(W_{hh}h_{t-1} + W_{xh}X_t+b_h) $$
 
 </center>
 
-!!! note
-    At the first time step, the previous hidden state $h_{t-1}$ can either be a zero vector (unconditioned) or initialized (conditioned). If we are conditioning the RNN, the first hidden state $h_0$ can belong to a specific condition or we can concat the specific condition to the randomly initialized hidden vectors at each time step. More on this in the subsequent notebooks on RNNs.
+> At the first time step, the previous hidden state $h_{t-1}$ can either be a zero vector (unconditioned) or initialized (conditioned). If we are conditioning the RNN, the first hidden state $h_0$ can belong to a specific condition or we can concat the specific condition to the randomly initialized hidden vectors at each time step. More on this in the subsequent notebooks on RNNs.
 
 ```python linenums="1"
 RNN_HIDDEN_DIM = 128
@@ -982,8 +981,7 @@ While our simple RNNs so far are great for sequentially processing our inputs, t
 
 There are two popular types of gated RNNs: Long Short-term Memory (LSTMs) units and Gated Recurrent Units (GRUs).
 
-!!! note
-    When deciding between LSTMs and GRUs, empirical performance is the best factor but in general GRUs offer similar performance with less complexity (less weights).
+> When deciding between LSTMs and GRUs, empirical performance is the best factor but in general GRUs offer similar performance with less complexity (less weights).
 
 <div class="ai-center-all">
     <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/rnn/gated.png">
@@ -1230,8 +1228,7 @@ print (json.dumps(prob_dist, indent=2))
 }
 </pre>
 
-!!! note
-    We will learn how to create more context-aware representations and a little bit of interpretability with RNNs in the next lesson on [attention](attention.md){:target="_blank"}.
+> We will learn how to create more context-aware representations and a little bit of interpretability with RNNs in the next lesson on [attention](attention.md){:target="_blank"}.
 
 
 <!-- Citation -->

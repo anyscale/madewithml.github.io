@@ -13,8 +13,7 @@ repository: https://github.com/GokuMohandas/MLOps
 
 Before performing a commit to our local repository, there are a lot of items on our mental todo list, ranging from styling, formatting, testing, etc. And it's very easy to forget some of these steps, especially when we want to "push to quick fix". To help us manage all these important steps, we can use pre-commit hooks, which will automatically be triggered when we try to perform a commit.
 
-!!! note
-    Though we can add these checks directly in our CI/CD pipeline (ex. via GitHub actions), it's significantly faster to validate our commits before pushing to our remote host and waiting to see what needs to be fixed before submitting yet another PR.
+> Though we can add these checks directly in our CI/CD pipeline (ex. via GitHub actions), it's significantly faster to validate our commits before pushing to our remote host and waiting to see what needs to be fixed before submitting yet another PR.
 
 ## Installation
 
@@ -65,8 +64,7 @@ Inside the sample configuration, we can see that pre-commit has added some defau
 ...
 ```
 
-!!! note
-    Be sure to explore the many other [built-in hooks](https://github.com/pre-commit/pre-commit-hooks){:target="_blank"} because there are some really useful ones that we use in our project. For example, `check-merge-conflict` to see if there are any lingering merge conflict strings or `detect-aws-credentials` if we accidently left our credentials exposed in a file, and so much more.
+> Be sure to explore the many other [built-in hooks](https://github.com/pre-commit/pre-commit-hooks){:target="_blank"} because there are some really useful ones that we use in our project. For example, `check-merge-conflict` to see if there are any lingering merge conflict strings or `detect-aws-credentials` if we accidently left our credentials exposed in a file, and so much more.
 
 And we can also exclude certain files from being processed by the hooks by using the optional *exclude* key.
 ```yaml

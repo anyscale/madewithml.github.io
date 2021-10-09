@@ -164,8 +164,7 @@ tests/food/test_fruits.py::test_is_crisp <span style="color: #5A9C4B; font-weigh
 </pre>
 Had any of our assertions in this test failed, we would see the failed assertions as well as the expected output and the output we received from our function.
 
-!!! note
-    It's important to test for the variety of inputs and expected outputs that we outlined [above](#how-should-we-test) and to **never assume that a test is trivial**. In our example above, it's important that we test for both "apple" and "Apple" in the event that our function didn't account for casing!
+> It's important to test for the variety of inputs and expected outputs that we outlined [above](#how-should-we-test) and to **never assume that a test is trivial**. In our example above, it's important that we test for both "apple" and "Apple" in the event that our function didn't account for casing!
 
 ### Classes
 
@@ -310,9 +309,10 @@ class TestFruit:
     ...
 ```
 
-> We use fixtures to efficiently pass a set of inputs (ex. Pandas DataFrame) to different testing functions that require them (cleaning, splitting, etc.).
+We use fixtures to efficiently pass a set of inputs (ex. Pandas DataFrame) to different testing functions that require them (cleaning, splitting, etc.).
+
 ```python linenums="1"
-@pytest.fixture
+@pytest.fixture(scope="module")
 def df():
     projects_fp = Path(config.DATA_DIR, "projects.json")
     projects_dict = utils.load_dict(filepath=projects_fp)
@@ -325,8 +325,18 @@ def test_split(df):
     ...
 ```
 
+> Typically, when we have too many fixtures in a particular test file, we can organize them all in a `fixtures.py` script and invoke them as needed.
+
 !!! note
-    Typically, when we have too many fixtures in a particular test file, we can organize them all in a `fixtures.py` script and invoke them as needed.
+    Fixtures can have different scopes depending on how we want to use them. For example our `df` fixture has the module scope because we don't want to keep recreating it after every test but, instead, we want to create it just once for all the tests in our module ([tests/test_data.py]((https://github.com/GokuMohandas/MLOps/blob/main/tests/test_data.py)){:target="_blank"}).
+
+    - `function`: fixture is destroyed after every test. `#!js [default]`
+    - `class`: fixture is destroyed after the last test in the class.
+    - `module`: fixture is destroyed after the last test in the module (script).
+    - `package`: fixture is destroyed after the last test in the package.
+    - `session`: fixture is destroyed after the last test of the session.
+
+    Functions are lowest level scope while [sessions](https://docs.pytest.org/en/6.2.x/fixture.html#scope-sharing-fixtures-across-classes-modules-packages-or-session){:target="_blank"} are the highest level. The highest level scoped fixtures are executed first.
 
 
 ### Markers
@@ -423,7 +433,7 @@ if self.trial.should_prune():  # pragma: no cover, optuna pruning
 omit = ["app/gunicorn.py"]
 ```
 
-The key here is that we were able to add justification to these exclusions through comments so our team can follow our reasoning.
+> The main point is that we were able to add justification to these exclusions through comments so our team can follow our reasoning.
 
 ## Machine learning
 
@@ -431,29 +441,45 @@ Now that we have a foundation for testing traditional software, let's dive into 
 
 ## 🔢&nbsp; Data
 
-We've already tested the functions that act on our data through unit and integration tests but we haven't tested the validity of the data itself. Once we define what our data should look like, we can use (and add to) these expectations as our dataset grows.
+We've already tested the functions that act on our data through unit and integration tests but we haven't tested the validity of the data itself. Once we define what our data should look like, we can use, expand and adapt these expectations as our dataset grows.
 
 ### Expectations
 
 There are many dimensions to what our data is expected to look like. We'll briefly talk about a few of them, including ones that may not directly be applicable to our task but, nonetheless, are very important to be aware of.
 
 - `#!js rows / cols`: the most basic expectation is validating the presence of samples (rows) and features (columns). These can help identify mismatches between upstream backend database schema changes, upstream UI form changes, etc.
-    - presence of specific features
-    - row count (exact or range) of samples
+
+    !!! question "Rows/cols"
+        What are aspects of rows and cols in our dataset that we should test for?
+
+        ??? quote "Show answer"
+            - presence of specific features
+            - row count (exact or range) of samples
+
 - `#!js individual values`: we can also have expectations about the individual values of specific features.
-    - missing values
-    - type adherence (ex. feature values are all `float`)
-    - values must be unique or from a predefined set
-    - list (categorical) / range (continuous) of allowed values
-    - feature value relationships with other feature values (ex. column 1 values must always be great that column 2)
-- `#!js aggregate values`: we can also expectations about all the values of specific features.
-    - value statistics (mean, std, median, max, min, sum, etc.)
-    - distribution shift by comparing current values to previous values (useful for detecting drift)
+
+    !!! question "Individual"
+        What are aspects of individual values that we should test for?
+
+        ??? quote "Show answer"
+            - missing values
+            - type adherence (ex. feature values are all `float`)
+            - values must be unique or from a predefined set
+            - list (categorical) / range (continuous) of allowed values
+            - feature value relationships with other feature values (ex. column 1 values must always be great that column 2)
+
+- `#!js aggregate values`: we can also set expectations about all the values of specific features.
+
+    !!! question "Aggregate"
+        What are aspects of aggregate values that we should test for?
+
+        ??? quote "Show answer"
+            - value statistics (mean, std, median, max, min, sum, etc.)
+            - distribution shift by comparing current values to previous values (useful for detecting drift)
 
 To implement these expectations, we could compose assert statements or we could leverage the open-source library called [Great Expectations](https://github.com/great-expectations/great_expectations){:target="_blank"}. It's a fantastic library that already has many of these expectations builtin (map, aggregate, multi-column, distributional, etc.) and allows us to create custom expectations as well. It also provides modules to seamlessly connect with backend data sources such as local file systems, S3, databases and even DAG runners. Let's explore the library by implementing the expectations we'll need for our application.
 
-!!! note
-    Though Great Expectations has all the data validation functionality we need, there are several other production-grade data validation options available as well, such as [TFX](https://www.tensorflow.org/tfx/data_validation/get_started){:target="_blank"}, [AWS Deequ](https://github.com/awslabs/deequ){:target="_blank"}, etc.
+> Though Great Expectations has all the data validation functionality we need, there are several other production-grade data validation options available as well, such as [TFX](https://www.tensorflow.org/tfx/data_validation/get_started){:target="_blank"}, [AWS Deequ](https://github.com/awslabs/deequ){:target="_blank"}, etc.
 
 First we'll load the data we'd like to apply our expectations on. We can load our data from a variety of [sources](https://docs.greatexpectations.io/en/latest/guides/how_to_guides/configuring_datasources.html){:target="_blank"} (filesystem, S3, DB, etc.) which we can then wrap around a [Dataset module](https://docs.greatexpectations.io/en/latest/autoapi/great_expectations/dataset/index.html){:target="_blank"} (Pandas / Spark DataFrame, SQLAlchemy).
 
@@ -673,16 +699,15 @@ df.expect_column_values_to_not_be_null(column="tags")
 df.expect_column_list_values_to_be_unique(column="tags")
 ```
 
-!!! note
-    There are various levels of [abstraction](https://docs.greatexpectations.io/en/latest/guides/how_to_guides/creating_and_editing_expectations/how_to_create_custom_expectations.html){:target="_blank"} (following a template vs. completely from scratch) available when it comes to creating a custom expectation with Great Expectations.
+> There are various levels of [abstraction](https://docs.greatexpectations.io/en/latest/guides/how_to_guides/creating_and_editing_expectations/how_to_create_custom_expectations.html){:target="_blank"} (following a template vs. completely from scratch) available when it comes to creating a custom expectation with Great Expectations.
 
 
 ### Projects
 So far we've worked with the Great Expectations library at the Python script level but we can organize our expectations even more by creating a Project.
 
-1. Initialize the Project using ```#!bash great_expectations init```. This will interactively walk us through setting up data sources, naming, etc. and set up a [great_expectations](https://github.com/GokuMohandas/MLOps/blob/main/great_expectations){:target="_blank"} directory with the following structure:
+1. Initialize the Project using ```#!bash great_expectations init -d tests/```. This will interactively walk us through setting up data sources, naming, etc. and set up a [great_expectations](https://github.com/GokuMohandas/MLOps/blob/main/great_expectations){:target="_blank"} directory with the following structure:
 ```bash linenums="1"
-great_expectations/
+tests/great_expectations/
 |   ├── checkpoints/
 |   ├── expectations/
 |   ├── notebooks/
@@ -703,10 +728,11 @@ datasources:
     batch_kwargs_generators:
       subdir_reader:
         class_name: SubdirReaderBatchKwargsGenerator
-        base_directory: ../assets/data
+        base_directory: ../data
 ```
 3. Create expectations using the profiler, which creates automatic expectations based on the data, or we can also create our own expectations. All of this is done interactively via a launched Jupyter notebook and saved under our [great_expectations/expectations](https://github.com/GokuMohandas/MLOps/tree/main/great_expectations/expectations){:target="_blank"} directory.
 ```bash linenums="1"
+cd tests
 great_expectations suite scaffold SUITE_NAME  # uses profiler
 great_expectations suite new --suite  # no profiler
 great_expectations suite edit SUITE_NAME  # add your own custom expectations
@@ -715,10 +741,22 @@ great_expectations suite edit SUITE_NAME  # add your own custom expectations
 
 4. Create Checkpoints where a Suite of Expectations are applied to a specific Data Asset. This is a great way of programmatically applying checkpoints on our existing and new data sources.
 ```bash linenums="1"
+cd tests
 great_expectations checkpoint new CHECKPOINT_NAME SUITE_NAME
 great_expectations checkpoint run CHECKPOINT_NAME
 ```
 5. Run checkpoints on new batches of incoming data by adding to our testing pipeline via Makefile, or workflow orchestrator like [Airflow](https://airflow.apache.org/){:target="_blank"}, [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"}, etc. We can also use the [Great Expectations GitHub Action](https://github.com/great-expectations/great_expectations_action){:target="_blank"} to automate validating our data pipeline code when we push a change. More on using these Checkpoints with pipelines in our [Pipelines](pipelines.md){:target="_blank"} lesson.
+
+```makefile linenums="1"
+# Test
+.PHONY: test
+test:
+	cd tests && great_expectations checkpoint run projects
+	cd tests && great_expectations checkpoint run tags
+	pytest -m "not training"
+```
+
+> Note that we're only executing the tests with the `training` [marker](testing.md#markers).
 
 <div class="ai-center-all">
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/ge.png" style="border-radius: 7px;">
@@ -832,7 +870,6 @@ Besides just looking at metrics, we also want to conduct some behavior sanity te
 tokens = ["revolutionized", "disrupted"]
 tags = [["transformers"], ["transformers"]]
 texts = [f"Transformers have {token} the ML field." for token in tokens]
-compare_tags(texts=texts, tags=tags, artifacts=artifacts, test_type="INV")
 ```
 - `#!js directional`: Change should affect outputs.
 ```python linenums="1"
@@ -843,7 +880,6 @@ tags = [
     ["huggingface", "transformers"],
 ]
 texts = [f"A {token} implementation of transformers." for token in tokens]
-compare_tags(texts=texts, tags=tags, artifacts=artifacts, test_type="DIR")
 ```
 - `#!js minimum functionality`: Simple combination of inputs and expected outputs.
 ```python linenums="1"
@@ -851,8 +887,25 @@ compare_tags(texts=texts, tags=tags, artifacts=artifacts, test_type="DIR")
 tokens = ["transformers", "graph neural networks"]
 tags = [["transformers"], ["graph-neural-networks"]]
 texts = [f"{token} have revolutionized machine learning." for token in tokens]
-compare_tags(texts=texts, tags=tags, artifacts=artifacts, test_type="MFT")
 ```
+
+And we can easily convert these behavioral tests into parameterized pytest functions.
+
+```python linenums="1"
+@pytest.mark.parametrize(
+    "text, tags",
+    [
+        ("Transformers have revolutionized machine learning.", ["transformers"]),
+        ("GNNs have revolutionized machine learning.", ["graph-neural-networks"]),
+    ],
+)
+def test_mft(text, tags, artifacts):
+    """# Minimum Functionality Tests (simple input/output pairs)."""
+    results = predict.predict(texts=[text], artifacts=artifacts)
+    assert [set(result["predicted_tags"]).issubset(set(tags)) for result in results]
+```
+
+> If not all behavioral tests are meant to be passed, then we could compute a behavioral score and use that as part of our evaluation criteria.
 
 !!! note
     Be sure to explore the [NLP Checklist](https://github.com/marcotcr/checklist){:target="_blank"} package which simplifies and augments the creation of these behavioral tests via functions, templates, pretrained models and interactive GUIs in Jupyter notebooks.
@@ -863,60 +916,6 @@ compare_tags(texts=texts, tags=tags, artifacts=artifacts, test_type="MFT")
     <div class="ai-center-all mt-2">
         <a href="https://github.com/marcotcr/checklist" target="_blank">NLP Checklist</a>
     </div>
-
-We combine all of these behavioral tests to create a behavioral report (`tagifai.eval.get_behavioral_report()`) which quantifies how many of these tests are passed by a particular instance of a trained model. This report is then saved with the run's performance artifact so we can use this information when choosing which model(s) to deploy to production.
-
-```json linenums="1" hl_lines="2 4 41"
-"behavioral_report": {
-    "score": 1.0,
-    "results": {
-        "passed": [
-            {
-                "input": {
-                    "text": "Transformers have revolutionized the ML field.",
-                    "tags": [
-                        "transformers"
-                    ]
-                },
-                "prediction": {
-                    "input_text": "Transformers have revolutionized the ML field.",
-                    "preprocessed_text": "transformers revolutionized ml field",
-                    "predicted_tags": [
-                        "natural-language-processing",
-                        "transformers"
-                    ]
-                },
-                "type": "INV"
-            },
-            ...
-            {
-                "input": {
-                    "text": "graph neural networks have revolutionized machine learning.",
-                    "tags": [
-                        "graph-neural-networks"
-                    ]
-                },
-                "prediction": {
-                    "input_text": "graph neural networks have revolutionized machine learning.",
-                    "preprocessed_text": "graph neural networks revolutionized machine learning",
-                    "predicted_tags": [
-                        "graph-neural-networks",
-                        "graphs"
-                    ]
-                },
-                "type": "MFT"
-            }
-        ],
-        "failed": []
-    }
-}
-```
-
-!!! warning
-    When you create additional behavioral tests, be sure to reevaluate all the models you're considering on the new set of tests so their scores can be compared. We can do this since behavioral tests are not dependent on data or model versions and are simply tests that treat the model as a black box.
-    ```bash linenums="1"
-    tagifai behavioral-reevaluation
-    ```
 
 ### Inference
 
@@ -951,12 +950,7 @@ assert len(response.json()["data"]["predictions"]) == len(data["texts"])
 
 ### Deployment
 
-There are also a whole class of model tests that are beyond metrics or behavioral testing and focus on the system as a whole. Many of them involve testing and benchmarking the [tradeoffs](baselines.md#tradeoffs){:target="_blank"} (ex. latency, compute, etc.) we discussed from the [baselines](baselines.md){:target="_blank"} lesson. These tests also need to performed across the different systems (ex. devices) that our model may be on. For example, development may happen on a CPU but the deployed model may be loaded on a GPU and there may be incompatible components (ex. reparametrization) that may cause errors. As a rule of thumb, we should test with the system specifications that our production environment utilizes.
-
-!!! note
-    We'll automate tests on different devices in our [CI/CD lesson](cicd.md){:target="_blank"} where we'll use GitHub Actions to spin up our application with Docker Machine on cloud compute instances (we'll also use this for training).
-
-Once we've tested our model's ability to perform in the production environment (**offline tests**), we can run several types of **online tests** to determine the quality of that performance.
+Once we've tested our model's ability to perform in the production environment (**offline tests**), we can run several types of **online tests** to determine the quality of that performance. These test are a mix of system and acceptance tests because we want to see how our system behaves as part of the larger product and to ensure that it meets certain acceptance criteria (ex. latency).
 
 #### AB tests
 AB tests involve sending production traffic to the different systems that we're evaluating and then using statistical hypothesis testing to decide which system is better. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination. In many cases, if we're simply trying to compare the different versions for a certain metric, multi-armed bandits will be a better approach.
@@ -973,7 +967,15 @@ Canary tests involve sending most of the production traffic to the currently dep
 </div>
 
 #### Shadow tests
-Shadow testing involves sending the same production traffic to the different systems. We don't have to worry about system contamination and it's very safe compared to the previous approaches since the new system's results are not served. However, we do need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. But overall, shadow testing is easy to monitor, validate operational consistency, etc.
+Shadow testing involves sending the same production traffic to the different systems. We don't have to worry about system contamination and it's very safe compared to the previous approaches since the new system's results are not served.
+
+!!! question "Why can go wrong?"
+    If shadow tests allow us to test our updated system without having to actually serve the new results, why doesn't everyone adopt it?
+
+    ??? quote "Show answer"
+        We need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. This is rarely possible because. while your ML system may be a standalone microservice, it ultimately interacts with an intricate production environment that has *many* dependencies.
+
+But overall, shadow testing is easy to monitor, validate operational consistency, etc.
 
 <div class="ai-center-all">
     <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/shadow.png">
@@ -990,7 +992,7 @@ With [monitoring](monitoring.md){:target="_blank"}, there are quite a few distin
 - in situations with large data, we need to know which data points to label and upsample for training.
 - identifying anomalies and outliers.
 
-We'll cover all of these concepts in much more depth (and code) in our [monitoring](monitoring.md){:target="_blank"} lesson.
+> We'll cover all of these concepts in much more depth (and code) in our [monitoring](monitoring.md){:target="_blank"} lesson and cover some data-centric approaches in our [data-driven development lesson](data-driven-development.md){:target="_blank"}.
 
 ## Resources
 - [Great Expectations](https://github.com/great-expectations/great_expectations){:target="_blank"}

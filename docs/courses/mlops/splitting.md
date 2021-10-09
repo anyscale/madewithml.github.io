@@ -32,8 +32,7 @@ To determine the efficacy of our models, we need to have an unbiased measuring a
         - shuffle your data if it's organized in a way that prevents input variance
         - avoid random shuffles if you task can suffer from data leaks (ex. `time-series`)
 
-!!! note
-    We need to [clean](preprocessing.md) our data first before splitting, at least for the features that splitting depends on. So the process is more like: preprocessing (global, cleaning) → splitting → preprocessing (local, transformations).
+> We need to [clean](preprocessing.md) our data first before splitting, at least for the features that splitting depends on. So the process is more like: preprocessing (global, cleaning) → splitting → preprocessing (local, transformations).
 
 ## Label encoding
 Before we split our dataset, we're going to encode our output labels where we'll be assigning each tag a unique index.
@@ -109,8 +108,7 @@ class LabelEncoder(object):
         return cls(**kwargs)
 ```
 
-!!! note
-    If you're not familiar with the `@classmethod` decorator, learn more about it from our [Python lesson](../foundations/python.md#methods){:target="_blank"}.
+> If you're not familiar with the `@classmethod` decorator, learn more about it from our [Python lesson](../foundations/python.md#methods){:target="_blank"}.
 
 ```python linenums="1"
 # Encode
@@ -557,8 +555,7 @@ np.mean(np.std(dist_df.to_numpy(), axis=0))
 9.936725114942407
 </pre>
 
-!!! note
-    For simple multiclass classification, you can specify how to stratify the split by adding the [`stratify`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html){:target="_blank"} keyword argument. But our task is multilabel classification, so we'll need to use other techniques to create even splits.
+> For simple multiclass classification, you can specify how to stratify the split by adding the [`stratify`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html){:target="_blank"} keyword argument. But our task is multilabel classification, so we'll need to use other techniques to create even splits.
 
 
 ## Stratified split
@@ -814,8 +811,7 @@ np.mean(np.std(dist_df.to_numpy(), axis=0))
 
 The standard deviation is much better but not 0 (perfect splits) because keep in mind that an input can have any combination of of classes yet each input can only belong in one of the data splits.
 
-!!! note
-    [Iterative stratification](http://scikit.ml/_modules/skmultilearn/model_selection/iterative_stratification.html#IterativeStratification){:target="_blank"} essentially creates splits while "trying to maintain balanced representation with respect to order-th label combinations". We used to an `order=1` for our iterative split which means we cared about providing representative distribution of each tag across the splits. But we can account for [higher-order](https://arxiv.org/abs/1704.08756){:target="_blank"} label relationships as well where we may care about the distribution of label combinations.
+> [Iterative stratification](http://scikit.ml/_modules/skmultilearn/model_selection/iterative_stratification.html#IterativeStratification){:target="_blank"} essentially creates splits while "trying to maintain balanced representation with respect to order-th label combinations". We used to an `order=1` for our iterative split which means we cared about providing representative distribution of each tag across the splits. But we can account for [higher-order](https://arxiv.org/abs/1704.08756){:target="_blank"} label relationships as well where we may care about the distribution of label combinations.
 
 ## Resources
 - [How (and why) to create a good validation set](https://www.fast.ai/2017/11/13/validation-sets/){:target="_blank"}

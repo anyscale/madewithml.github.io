@@ -28,8 +28,7 @@ print (type(x))
 &lt;class 'int'&gt;
 </pre>
 
-!!! note
-    Here we use the variable name `x` in our examples but when you're working on a specific task, be sure to be explicit (ex. `first_name`) when creating variables (applies to functions, classes, etc. as well).
+> Here we use the variable name `x` in our examples but when you're working on a specific task, be sure to be explicit (ex. `first_name`) when creating variables (applies to functions, classes, etc. as well).
 
 We can change the value of a variable by simply assigning a new value to it.
 
@@ -560,8 +559,7 @@ print (joined_name)
 Goku Mohandas
 </pre>
 
-!!! note
-    We can be even more explicit with our function definitions by specifying the [types](documentation.md#typing){:target="_blank"} of our input and output arguments. We cover this in our [documentation lesson](documentation.md){:target="_blank"} because the typing information is automatically leveraged to create very intuitive [documentation](https://gokumohandas.github.io/MLOps/){:target="_blank"}.
+> We can be even more explicit with our function definitions by specifying the [types](documentation.md#typing){:target="_blank"} of our input and output arguments. We cover this in our [documentation lesson](documentation.md){:target="_blank"} because the typing information is automatically leveraged to create very intuitive [documentation](https://gokumohandas.github.io/MLOps/){:target="_blank"}.
 
 It's good practice to always use keyword argument when using a function so that it's very clear what input variable belongs to what function input parameter. On a related note, you will often see the terms `*args` and `**kwargs` which stand for arguments and keyword arguments. You can extract them when they are passed into a function. The significance of the `*` is that any number of arguments and keyword arguments can be passed into the function.
 
@@ -637,8 +635,7 @@ dog named Scooby
 Scooby
 </pre>
 
-!!! note
-    We'll be exploring additional built-in functions in subsequent notebooks (like `__len__`, `__iter__` and `__getitem__`, etc.) but if you're curious, here is a [tutorial](https://rszalski.github.io/magicmethods/){:target="_blank"} on more magic methods.
+> We'll be exploring additional built-in functions in subsequent notebooks (like `__len__`, `__iter__` and `__getitem__`, etc.) but if you're curious, here is a [tutorial](https://rszalski.github.io/magicmethods/){:target="_blank"} on more magic methods.
 
 
 ### Object functions
@@ -874,8 +871,7 @@ operations.__name__, operations.__doc__
 </pre>
 Awesome! We were able to decorate our main function `operation()` to achieve the customization we wanted without actually altering the function. We can reuse our decorator for other functions that may need the same customization!
 
-!!! note
-    This was a dummy example to show how decorators work but we'll be using them heavily during our [MLOps](https://madewithml.com/courses/mlops/) lessons. A simple scenario would be using decorators to create uniform JSON responses from each API endpoint without including the bulky code in each endpoint.
+> This was a dummy example to show how decorators work but we'll be using them heavily during our [MLOps](https://madewithml.com/courses/mlops/) lessons. A simple scenario would be using decorators to create uniform JSON responses from each API endpoint without including the bulky code in each endpoint.
 
 
 ### Callbacks

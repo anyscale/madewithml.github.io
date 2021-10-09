@@ -657,8 +657,7 @@ And here's how it all fits together! It's an end-to-end architecture that create
 <small><a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention Is All You Need</a></small>
 </div>
 
-!!! note
-    We're not going to the implement the Transformer [from scratch](https://nlp.seas.harvard.edu/2018/04/03/attention.html){:target="_blank"} but we will use the[ Hugging Face library](https://github.com/huggingface/transformers){:target="_blank"} to do so in the [baselines](https://madewithml.com/courses/mlops/baselines/#transformers-w-contextual-embeddings){:target="_blank"} lesson!
+> We're not going to the implement the Transformer [from scratch](https://nlp.seas.harvard.edu/2018/04/03/attention.html){:target="_blank"} but we will use the[ Hugging Face library](https://github.com/huggingface/transformers){:target="_blank"} to do so in the [baselines](https://madewithml.com/courses/mlops/baselines/#transformers-w-contextual-embeddings){:target="_blank"} lesson!
 
 ### Model
 
@@ -691,8 +690,7 @@ class Transformer(nn.Module):
         return z
 ```
 
-!!! note
-    We decided to work with the pooled output, but we could have just as easily worked with the sequential output (encoder representation for each sub-token) and applied a CNN (or other decoder options) on top of it.
+> We decided to work with the pooled output, but we could have just as easily worked with the sequential output (encoder representation for each sub-token) and applied a CNN (or other decoder options) on top of it.
 
 ```python linenums="1"
 # Initialize model

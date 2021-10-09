@@ -133,8 +133,7 @@ Besides just inspecting the metrics for each class, we can also identify the tru
 - False positives: potentially identify samples which may need to be relabeled.
 - False negatives: identify the model's less performant areas to oversample later.
 
-!!! note
-    It's a good to have our FP/FN samples feed back into our annotation pipelines in the event we want to fix their labels and have those changes be reflected everywhere.
+> It's a good to have our FP/FN samples feed back into our annotation pipelines in the event we want to fix their labels and have those changes be reflected everywhere.
 
 ```python linenums="1"
 # TP, FP, FN samples
