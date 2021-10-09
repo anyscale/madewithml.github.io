@@ -88,6 +88,8 @@ tests/
 |   |   ├── projects.json
 |   |   └── tags.json
 |   ├── ...
+├── model/
+|   └── test_behavioral.py
 └── tagifai/
 |   ├── test_data.py
 |   ├── test_eval.py
