@@ -78,18 +78,17 @@ Perfect coverage doesn't mean that our application is error free if those tests 
 In our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}, we'll be testing the code, data and models. Be sure to look inside each of the different testing scripts after reading through the components below.
 
 ```bash linenums="1"
-great_expectations/           # data tests
+tests/
+├── app/
+|   └── test_api.py
+├── config/
+|   └── test_config.py
+├── great_expectations/
 |   ├── expectations/
 |   |   ├── projects.json
 |   |   └── tags.json
 |   ├── ...
-tagifai/
-|   ├── eval.py               # model tests
-tests/                        # code tests
-├── app/
-|   └── test_api.py
 └── tagifai/
-|   ├── test_config.py
 |   ├── test_data.py
 |   ├── test_eval.py
 |   ├── test_main.py
