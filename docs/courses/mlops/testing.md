@@ -4,7 +4,7 @@ title: "Testing ML Systems: Code, Data and Models"
 description: Testing code, data and models to ensure consistent behavior in ML systems.
 keywords: testing, pytest, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/follow/tree/testing
 ---
 
 {% include "styles/lesson.md" %}
@@ -329,7 +329,7 @@ def test_split(df):
 > Typically, when we have too many fixtures in a particular test file, we can organize them all in a `fixtures.py` script and invoke them as needed.
 
 !!! note
-    Fixtures can have different scopes depending on how we want to use them. For example our `df` fixture has the module scope because we don't want to keep recreating it after every test but, instead, we want to create it just once for all the tests in our module ([tests/test_data.py]((https://github.com/GokuMohandas/MLOps/blob/main/tests/test_data.py)){:target="_blank"}).
+    Fixtures can have different scopes depending on how we want to use them. For example our `df` fixture has the module scope because we don't want to keep recreating it after every test but, instead, we want to create it just once for all the tests in our module ([tests/test_data.py](https://github.com/GokuMohandas/MLOps/blob/main/tests/test_data.py){:target="_blank"}).
 
     - `function`: fixture is destroyed after every test. `#!js [default]`
     - `class`: fixture is destroyed after the last test in the class.

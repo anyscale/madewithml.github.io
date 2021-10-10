@@ -4,7 +4,6 @@ title: "Git"
 description: Tracking changes in our work for reproducibility and collaboration.
 keywords: git, versioning, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
