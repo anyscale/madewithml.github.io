@@ -156,8 +156,17 @@ Now we're ready to start adding to our project and committing the changes.
     If we (or someone else) doesn't already have the local repository set up and connected with the remote host, we can use the *clone* command.
     ```bash
     # Clone
-    git clone https://github.com/GokuMohandas/git-tutorial <PATH_TO_PROJECT_DIR>
+    git clone <REMOTE_REPO_URL> <PATH_TO_PROJECT_DIR>
     ```
+    And we can clone a specific branch of a repository as well:
+    ```bash
+    # Clone specific branch
+    git clone -b <BRANCH> <REMOTE_REPO_URL> <PATH_TO_PROJECT_DIR>
+    ```
+
+    - `<REMOTE_REPO_URL>` is the location of the remote repo, ex. https://github.com/GokuMohandas/git-tutorial
+    - `<PATH_TO_PROJECT_DIR>` is the name of the local directory you want to clone the project into.
+
 
 ### Create a branch
 

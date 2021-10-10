@@ -15,7 +15,7 @@ We learned how to version our code but there are several other very important cl
 
 - repository should store pointers to large data and model artifacts living in blob storage.
 - use commits to store snapshots of the code, config, data and model and be able to update and rollback versions.
-- expose configurations and performances so we can inspect for improvements and regressions.
+- expose configurations so we can see and compare parameters.
 
 <div class="ai-center-all">
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/versioning/versioning.png">
@@ -39,7 +39,14 @@ dvc init
 ```
 
 ## Remote storage
-After initializing DVC, we can establish where our remote storage will be. We be using the `stores/blob` directory which won't be checked into our remote repository.
+After initializing DVC, we can establish where our remote storage will be. We be creating and using the `stores/blob` directory which won't be checked into our remote repository.
+
+```python linenums="1" hl_lines="3"
+# Local stores
+MODEL_REGISTRY = Path(STORES_DIR, "model")
+BLOB_STORE = Path(STORES_DIR, "blob")
+```
+
 ```bash
 # Add remote storage
 dvc remote add -d storage stores/blob
@@ -65,12 +72,14 @@ Now we're ready to *add* our data which will create text pointer files for each 
 # Add artifacts
 dvc add data/projects.json
 dvc add data/tags.json
+dvc add data/features.json
 ```
 
 ```bash
 # Pointer files added
 📂 data
   📄 .gitignore
+  📄 features.json
   📄 projects.json
   📄 projects.json.dvc
   📄 tags.json
@@ -87,26 +96,29 @@ outs:
   path: projects.json
 ```
 
-The data directory containing the files will also have a .gitignore file that includes the actual artifacts so we don't check them into our repository.
+The data directory containing the files will also have a [.gitignore](https://github.com/GokuMohandas/MLOps/blob/main/data/.gitignore){:target="_blank"} file that includes the actual artifacts so we don't check them into our repository.
 
 ```yaml
 # data/.gitignore
 /projects.json
 /tags.json
+/features.json
 ```
 
+> In order for the [.gitignore](https://github.com/GokuMohandas/MLOps/blob/main/data/.gitignore){:target="_blank"} file to be generated inside the data directory, we have to remove it from our root's [.gitignore](https://github.com/GokuMohandas/MLOps/blob/main/.gitignore){:target="_blank"} file. We placed it for earlier branches so that we weren't pushing our data to git but now that we're using DVC we don't have to worry about that.
+
 !!! note
-    In terms of versioning our model artifacts, we aren't pushing anything to our blob storage because our model registry already takes care of all that. Instead we expose the run ID so we can load necessary artifacts, [params.json](https://raw.githubusercontent.com/GokuMohandas/MLOps/main/model/params.json){:target="_blank"} and [performance.json](https://raw.githubusercontent.com/GokuMohandas/MLOps/main/model/performance.json){:target="_blank"}, because we'll be using them to compare different model versions (and they're small enough to version via Git).
+    In terms of versioning our model artifacts, we aren't pushing anything to our blob storage because our model registry already takes care of all that. Instead we expose the run ID, parameters and performance inside the [config directory](https://github.com/GokuMohandas/MLOps/blob/main/config){:target="_blank"} so we can easily view results and compare them with other local runs.
 
     ```bash
     # Model artifacts
-    📂 model
+    📂 config
       📄 run_id.txt
       📄 params.json
       📄 performance.json
     ```
 
-    For very large applications, these artifacts would be stores in a metadata or evaluation store where they'll be indexed by model run IDs.
+    For very large applications or in the case of multiple models in production, these artifacts would be stored in a metadata or evaluation store where they'll be indexed by model run IDs.
 
 ## Push
 Now we're ready to push our artifacts to our blob store with the *push* command.
@@ -130,16 +142,17 @@ If we inspect our storage (stores/blob), we'll can see that the data is efficien
 !!! note
     In case we forget to add or push our artifacts, we can add it as a pre-commit hook so it happens automatically when we try to commit. If there are no changes to our versioned files, nothing will happen.
 
-    ```yaml hl_lines="9"
+    ```yaml linenums="1" hl_lines="9"
     # Makefile
     .PHONY: dvc
     dvc:
         dvc add data/projects.json
         dvc add data/tags.json
+        dvc add data/features.json
         dvc push
     ```
 
-    ```yaml
+    ```yaml linenums="1"
     # Pre-commit hook
     - repo: local
       hooks:
@@ -159,6 +172,8 @@ When someone else wants to pull updated artifacts or vice verse, we can use the 
 # Pull from remote storage
 dvc pull
 ```
+
+> We can quickly test this by deleting our data files (the `.json` files not the `.dvc` pointers) and run `#!bash dvc pull` to load the files from our blob store.
 
 ## Operations
 

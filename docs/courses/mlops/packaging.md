@@ -9,6 +9,17 @@ repository: https://github.com/GokuMohandas/follow/tree/packaging
 
 {% include "styles/lesson.md" %}
 
+## Set up
+
+All of the work that we're doing with Python script is available in the [main repository](https://github.com/GokuMohandas/MLOps){:target="_blank"}, however, it's difficult to follow along this repository because all of the content we cover in this course is available there in one snapshot. So we highly recommend using the [branches](https://github.com/GokuMohandas/follow/branches){:target="_blank"} in the repository to follow along. Each branch's name will match with the lesson's name (ex. this lesson's branch is called [packaging](https://github.com/GokuMohandas/follow/tree/packaging){:target="_blank"}) and we can pull that branch to follow along the respective lesson.
+
+```bash linenums="1"
+git clone -b <BRANCH> <REMOTE_REPO_URL> <PATH_TO_PROJECT_DIR>
+```
+
+- `<REMOTE_REPO_URL>` is the location of the remote repo (ex. [https://github.com/GokuMohandas/follow](https://github.com/GokuMohandas/follow){:target="_blank"}).
+- `<PATH_TO_PROJECT_DIR>` is the name of the local directory you want to clone the project into (ex. mlops).
+
 ## Intuition
 
 It's integral to be able to consistently create an environment to develop in so that we can reliably reproduce the same results. To do this, we'll need to explicitly detail all the requirements (python version, packages, etc.) as well as create the environment that will load all the requirements. By doing this, we'll not only be able to consistently reproduce results but also enable others to arrive at the same results.

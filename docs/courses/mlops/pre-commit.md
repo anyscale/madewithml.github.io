@@ -54,7 +54,7 @@ When it comes to creating and using hooks, we have several options to choose fro
 
 ### Built-in
 
-Inside the sample configuration, we can see that pre-commit has added some default hooks from it's repository. It specifies the location of the repository, version as well as the specific hook ids to use. We can read about the function of these hooks and add even more by exploring pre-commit's [built-in hooks](https://github.com/pre-commit/pre-commit-hooks){:target="_blank"}. Many of them accept arguments such as `maxkb` (max kilobytes) for the `check-added-large-files` hook. We can easily add argument to our configuration file like so:
+Inside the sample configuration, we can see that pre-commit has added some default hooks from it's repository. It specifies the location of the repository, version as well as the specific hook ids to use. We can read about the function of these hooks and add even more by exploring pre-commit's [built-in hooks](https://github.com/pre-commit/pre-commit-hooks){:target="_blank"}. Many of them also have additional arguments that we can configure to customize the hook.
 
 ```yaml
 # Inside .pre-commit-config.yaml
@@ -66,7 +66,8 @@ Inside the sample configuration, we can see that pre-commit has added some defau
 
 > Be sure to explore the many other [built-in hooks](https://github.com/pre-commit/pre-commit-hooks){:target="_blank"} because there are some really useful ones that we use in our project. For example, `check-merge-conflict` to see if there are any lingering merge conflict strings or `detect-aws-credentials` if we accidently left our credentials exposed in a file, and so much more.
 
-And we can also exclude certain files from being processed by the hooks by using the optional *exclude* key.
+And we can also exclude certain files from being processed by the hooks by using the optional *exclude* key. There are many other [optional keys](https://pre-commit.com/#pre-commit-configyaml---hooks){:target="_blank"} we can configure for each hook ID.
+
 ```yaml
 # Inside .pre-commit-config.yaml
 ...
@@ -74,8 +75,6 @@ And we can also exclude certain files from being processed by the hooks by using
     exclude: "mkdocs.yml"
 ...
 ```
-
-There are many other [optional keys](https://pre-commit.com/#pre-commit-configyaml---hooks){:target="_blank"} we can configure for each hook ID.
 
 
 ### Custom
@@ -105,10 +104,10 @@ We can also create our own local hooks without configuring a separate .pre-commi
 ...
 - repo: local
   hooks:
-    - id: test-non-training
-      name: test-non-training
+    - id: test
+      name: test
       entry: make
-      args: ["test-non-training"]
+      args: ["test"]
       language: system
       pass_filenames: false
     - id: clean
@@ -153,6 +152,8 @@ It is highly not recommended to skip running any of the pre-commit hooks because
 # Commit without hooks
 git commit -m <MESSAGE> --no-verify
 ```
+
+> Highly recommend **not** doing this because no commit deserves to be force pushed no matter how "small" your change was. If you accidentally did this and want to clear the cache, run `#!bash pre-commit run --all-files` and execute the commit message operation again.
 
 ## Update
 
