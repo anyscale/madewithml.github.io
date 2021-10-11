@@ -53,13 +53,14 @@ Next we're going to install our application dependencies. First, we'll [COPY](ht
 
 ```dockerfile
 # Install dependencies
+WORKDIR mlops
 COPY setup.py setup.py
 COPY requirements.txt requirements.txt
-COPY Makefile Makefile
 RUN apt-get update \
     && apt-get install -y --no-install-recommends gcc build-essential \
     && rm -rf /var/lib/apt/lists/* \
-    && make install \
+    && python -m pip install --upgrade pip setuptools wheel \
+    && python -m pip install -e . --no-cache-dir \
     && apt-get purge -y --auto-remove gcc build-essential
 ```
 
@@ -70,7 +71,6 @@ Next we're ready to COPY over the required files to actually RUN our application
 COPY tagifai tagifai
 COPY app app
 COPY data data
-COPY model model
 COPY config config
 COPY stores stores
 
@@ -86,7 +86,7 @@ Since our application (API) requires PORT 500 to be open, we need to specify in 
 EXPOSE 5000
 ```
 
-The final step in building our image is to specify the executable to be run when a container is built from our image. For our application, we want to launch our API with gunicorn. Note that we aren't using the `make` command here since we previously uninstalled it after installing our dependencies.
+The final step in building our image is to specify the executable to be run when a container is built from our image. For our application, we want to launch our API with gunicorn.
 
 ```dockerfile
 # Start app
@@ -128,6 +128,22 @@ Once we've built our image, we're ready to run a container using that image with
 ```bash
 # Run container
 docker run -p 5000:5000 --name tagifai tagifai:latest
+```
+
+Once we have our container running, we can use the API thanks for the port we're sharing (5000):
+
+```bash linenums="1"
+curl -X 'POST' \
+  'http://localhost:5000/predict' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "texts": [
+    {
+      "text": "Transfer learning with transformers for self-supervised learning."
+    }
+  ]
+}'
 ```
 
 We can inspect all containers (running or stopped) like so:
