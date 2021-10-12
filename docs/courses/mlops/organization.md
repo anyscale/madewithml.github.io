@@ -25,7 +25,7 @@ Before we can start moving our code from notebooks to proper Python scripts, we 
 
 ??? quote "Recommended extensions"
     I recommend installing these extensions, which you can by copy/pasting this command:
-    ```bash linenums="1"
+    ```bash
     code --install-extension 74th.monokai-charcoal-high-contrast
     code --install-extension alefragnani.project-manager
     code --install-extension bierner.markdown-preview-github-styles
@@ -40,7 +40,6 @@ Before we can start moving our code from notebooks to proper Python scripts, we 
     code --install-extension mikestead.dotenv
     code --install-extension mohsen1.prettify-json
     code --install-extension ms-azuretools.vscode-docker
-    code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
     code --install-extension ms-python.python
     code --install-extension ms-python.vscode-pylance
     code --install-extension ms-vscode.sublime-keybindings
@@ -55,7 +54,7 @@ Before we can start moving our code from notebooks to proper Python scripts, we 
     ```
 
     If you add your own extensions and want to share it with others, just run this command to generate the list of commands:
-    ```bash linenums="1"
+    ```bash
     code --list-extensions | xargs -L 1 echo code --install-extension
     ```
 
@@ -74,7 +73,7 @@ Once we're all set up with VSCode, we can start by creating our project director
 ## Organizing
 There are several ways to organize our code when we're going from the notebooks to scripts but they're all based on utility. For example, we're organizing our code based on pipeline components (data processing, training, evaluation, prediction, etc.):
 
-```bash linenums="1"
+```bash
 tagifai/
 ├── data.py       - data processing utilities
 ├── eval.py       - evaluation components
@@ -97,7 +96,7 @@ Once we've decided on the directory architecture, we can start moving the functi
     ??? quote "Show answer"
 
         As you work on more projects, you may find it useful for you and your team members to contribute your generalizable functions and classes to a central repository. Provided that all the code is [tested](testing.md){:target="_blank"} and [documented](documentation.md){:target="_blank"}, this can reduce boilerplate code and allow for reliable and faster development. To use your repository, you can [package](https://packaging.python.org/tutorials/packaging-projects/){:target="_blank"} it and install directly from your public/private repo or load it from a private PyPI mirror, etc.
-        ```bash linenums="1"
+        ```bash
         pip install git+https://github.com/GokuMohandas/MLOps#egg=tagifai
         ```
 
@@ -182,7 +181,7 @@ utils.delete_experiment(experiment_name=experiment_name)
 
 To make our main operations work, we've also defined a [config directory](https://github.com/GokuMohandas/MLOps/blob/main/config){:target="_blank"} that has parameters for training, running a small test for training, etc. It also include the [config.py](https://github.com/GokuMohandas/MLOps/blob/main/config/config.py){:target="_blank"} script which specifies locations of our model stores (as well other stores that we will cover later), [logging](logging.md){:target="_blank"}, stopwords, etc.
 
-```bash linenums="1"
+```bash
 config/
 ├── config.py       - configuration setup
 ├── params.json     - training parameters

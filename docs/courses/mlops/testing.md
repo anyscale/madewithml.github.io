@@ -77,7 +77,7 @@ Perfect coverage doesn't mean that our application is error free if those tests 
 
 In our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}, we'll be testing the code, data and models. Be sure to look inside each of the different testing scripts after reading through the components below.
 
-```bash linenums="1"
+```bash
 tests/
 ├── app/
 |   └── test_api.py
@@ -152,7 +152,7 @@ def test_is_crisp():
 
 We can execute our tests above using several different levels of granularity:
 
-```bash linenums="1"
+```bash
 pytest                                           # all tests
 pytest tests/food                                # tests under a directory
 pytest tests/food/test_fruits.py                 # tests for a single file
@@ -207,7 +207,7 @@ class TestFruit(object):
 
 We can execute all the tests for our class by specifying the class name:
 
-```bash linenums="1"
+```bash
 tests/food/test_fruits.py::TestFruit .  [100%]
 ```
 
@@ -363,7 +363,7 @@ def test_fruit(my_fruit):
 
 We can execute them by using the `-m` flag which requires a (case-sensitive) marker expression like below:
 
-```bash linenums="1"
+```bash
 pytest -m "fruits"      #  runs all tests marked with `fruits`
 pytest -m "not fruits"  #  runs all tests besides those marked with `fruits`
 ```
@@ -399,8 +399,8 @@ def test_train_model():
 
 As we're developing tests for our application's components, it's important to know how well we're covering our code base and to know if we've missed anything. We can use the [Coverage](https://coverage.readthedocs.io/){:target="_blank"} library to track and visualize how much of our codebase our tests account for. With pytest, it's even easier to use this package thanks to the [pytest-cov](https://pytest-cov.readthedocs.io/){:target="_blank"} plugin.
 
-```bash linenums="1"
-pytest --cov tagifai --cov app --cov-report html
+```bash
+pytest --cov config --cov tagifai --cov app --cov-report html
 ```
 
 <div class="ai-center-all">
@@ -467,7 +467,7 @@ There are many dimensions to what our data is expected to look like. We'll brief
             - type adherence (ex. feature values are all `float`)
             - values must be unique or from a predefined set
             - list (categorical) / range (continuous) of allowed values
-            - feature value relationships with other feature values (ex. column 1 values must always be great that column 2)
+            - feature value relationships with other feature values (ex. column 1 values must always be greater than column 2)
 
 - `#!js aggregate values`: we can also set expectations about all the values of specific features.
 
@@ -707,7 +707,7 @@ df.expect_column_list_values_to_be_unique(column="tags")
 So far we've worked with the Great Expectations library at the Python script level but we can organize our expectations even more by creating a Project.
 
 1. Initialize the Project using ```#!bash great_expectations init -d tests/```. This will interactively walk us through setting up data sources, naming, etc. and set up a [great_expectations](https://github.com/GokuMohandas/MLOps/blob/main/great_expectations){:target="_blank"} directory with the following structure:
-```bash linenums="1"
+```bash
 tests/great_expectations/
 |   ├── checkpoints/
 |   ├── expectations/
@@ -732,7 +732,7 @@ datasources:
         base_directory: ../data
 ```
 3. Create expectations using the profiler, which creates automatic expectations based on the data, or we can also create our own expectations. All of this is done interactively via a launched Jupyter notebook and saved under our [great_expectations/expectations](https://github.com/GokuMohandas/MLOps/tree/main/great_expectations/expectations){:target="_blank"} directory.
-```bash linenums="1"
+```bash
 cd tests
 great_expectations suite scaffold SUITE_NAME  # uses profiler
 great_expectations suite new --suite  # no profiler
@@ -741,7 +741,7 @@ great_expectations suite edit SUITE_NAME  # add your own custom expectations
 > When using the automatic profiler, you can choose which feature columns to apply profiling to. Since our tags feature is a list feature, we'll leave it commented and create our own expectations using the `suite edit` command.
 
 4. Create Checkpoints where a Suite of Expectations are applied to a specific Data Asset. This is a great way of programmatically applying checkpoints on our existing and new data sources.
-```bash linenums="1"
+```bash
 cd tests
 great_expectations checkpoint new CHECKPOINT_NAME SUITE_NAME
 great_expectations checkpoint run CHECKPOINT_NAME
@@ -805,7 +805,7 @@ assert epoch_loss < prev_epoch_loss
 - Overfit on a batch
 ```python linenums="1"
 accuracy = train(model, inputs=batches[0])
-assert accuracy == pytest.approx(1.0, abs=0.05) # 1.0 ± 0.05
+assert accuracy == pytest.approx(0.95, abs=0.05) # 0.95 ± 0.05
 ```
 - Train to completion (tests early stopping, saving, etc.)
 ```python linenums="1"
@@ -974,7 +974,9 @@ Shadow testing involves sending the same production traffic to the different sys
     If shadow tests allow us to test our updated system without having to actually serve the new results, why doesn't everyone adopt it?
 
     ??? quote "Show answer"
-        We need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. This is rarely possible because. while your ML system may be a standalone microservice, it ultimately interacts with an intricate production environment that has *many* dependencies.
+        With shadow deployment, we'll miss out on any live feedback signals (explicit/implicit) from our users since users are not directly interacting with the product using our new version.
+
+        We also need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. This is rarely possible because, while your ML system may be a standalone microservice, it ultimately interacts with an intricate production environment that has *many* dependencies.
 
 But overall, shadow testing is easy to monitor, validate operational consistency, etc.
 

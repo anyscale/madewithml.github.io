@@ -13,7 +13,7 @@ repository: https://github.com/GokuMohandas/follow/tree/cli
 
 Recall from our [Organization lesson](organization.md){:target="_blank"} when we executed [main operations](organization.md#operations){:target="_blank"} via code. This is acceptable for most developers, but sometimes, we want to enable others to be able to interact with our application without having to dig into the code and execute functions one at a time. One method is to build a CLI application that allows for interaction via any shell. It should designed such that we can see all possible operations as well the appropriate assistance needed for configuring options and other arguments for each of those operations. Let's see what a CLI looks like for our application which has many different operations (training, prediction, etc.).
 
-```bash linenums="1"
+```bash
 tagifai/
 ├── data.py       - data processing utilities
 ├── ...

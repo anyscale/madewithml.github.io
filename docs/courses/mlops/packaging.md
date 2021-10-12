@@ -13,7 +13,7 @@ repository: https://github.com/GokuMohandas/follow/tree/packaging
 
 All of the work that we're doing with Python script is available in the [main repository](https://github.com/GokuMohandas/MLOps){:target="_blank"}, however, it's difficult to follow along this repository because all of the content we cover in this course is available there in one snapshot. So we highly recommend using the [branches](https://github.com/GokuMohandas/follow/branches){:target="_blank"} in the repository to follow along. Each branch's name will match with the lesson's name (ex. this lesson's branch is called [packaging](https://github.com/GokuMohandas/follow/tree/packaging){:target="_blank"}) and we can pull that branch to follow along the respective lesson.
 
-```bash linenums="1"
+```bash
 git clone -b <BRANCH> <REMOTE_REPO_URL> <PATH_TO_PROJECT_DIR>
 ```
 
@@ -34,7 +34,7 @@ When we used our [notebook](https://colab.research.google.com/github/GokuMohanda
 
 First thing we'll do is set up a [virtual environment](https://docs.python.org/3/library/venv.html){:target="_blank"} so we can isolate our packages (and versions) necessary for application from our other projects which may have different dependencies. Once we create our virtual environment, we'll activate it and install our required packages.
 
-```bash linenums="1"
+```bash
 python3 -m venv venv
 source venv/bin/activate
 python -m pip install --upgrade pip setuptools wheel
@@ -102,7 +102,7 @@ The heart of the `setup.py` file is the `setup` object which describes how to se
 ```python linenums="53"
 setup(
     ...
-    python_requires="==3.7.10",
+    python_requires=">=3.7",
     install_requires=[required_packages],
     extras_require={
         "test": test_packages,
@@ -130,7 +130,7 @@ setup(
 ## Usage
 
 We can install our package for different situations like so:
-```bash linenums="1"
+```bash
 python -m pip install -e .            # installs required packages only
 python -m pip install -e ".[dev]"     # installs required + dev packages
 python -m pip install -e ".[test]"    # installs required + test packages

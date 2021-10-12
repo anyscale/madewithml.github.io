@@ -80,6 +80,7 @@ dvc add data/features.json
 📂 data
   📄 .gitignore
   📄 features.json
+  📄 features.json.dvc
   📄 projects.json
   📄 projects.json.dvc
   📄 tags.json

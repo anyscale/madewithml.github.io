@@ -132,7 +132,7 @@ docker run -p 5000:5000 --name tagifai tagifai:latest
 
 Once we have our container running, we can use the API thanks for the port we're sharing (5000):
 
-```bash linenums="1"
+```bash
 curl -X 'POST' \
   'http://localhost:5000/predict' \
   -H 'accept: application/json' \

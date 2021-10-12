@@ -40,7 +40,7 @@ Each of these components is fairly easy to set up but connecting them all togeth
 
 We're going to leverage [Feast](https://feast.dev/){:target="_blank"} as the feature store for our application for it's ease of local setup, SDK for training/serving, etc.
 
-```bash linenums="1"
+```bash
 # Install Feast
 pip install feast==0.10.5 -q
 pip freeze | grep feast
@@ -51,7 +51,7 @@ feast==0.10.5
 
 We're going to create a feature repository at the root of our project. Feast will create a configuration file for us and we're going to add an additional [features.py](https://github.com/GokuMohandas/MLOps/blob/main/features/features.py){:target="_blank"} file to define our features.
 
-```bash linenums="1"
+```bash
 feast init --minimal --template local features
 cd features
 touch features.py
@@ -289,7 +289,7 @@ training_df.head()
 
 For online inference, we want to retrieve features very quickly via our online store, as opposed to fetching them from slow joins. However, the features are not in our online store just yet, so we'll need to [materialize](https://docs.feast.dev/quickstart#4-materializing-features-to-the-online-store){:target="_blank"} them first.
 
-```bash linenums="1"
+```bash
 cd features
 CURRENT_TIME=$(date -u +"%Y-%m-%dT%H:%M:%S")
 feast materialize-incremental $CURRENT_TIME

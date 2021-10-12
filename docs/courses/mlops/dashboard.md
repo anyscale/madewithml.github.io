@@ -11,11 +11,11 @@ repository: https://github.com/GokuMohandas/MLOps
 
 ## Intuition
 
-When developing an application, we may know the nuances (preprocessing, performance, etc.) quite well but how can we effectively communicate this to other developers and business stakeholders? One option is a Jupyter notebook but it's often cluttered with code and isn't very easy for non-technical team members to access and run. We need to create a dashboard that can be accessed without any technical prerequisites and effectively communicates key findings. It would be even more useful if our dashboard was interactive such that even technical developers would find use from exploring it prior to the next iteration.
+When developing an application, there are a lot of technical decisions and results (preprocessing, performance, etc.) that are integral to our system. How can we **effectively communicate** this to other developers and business stakeholders? One option is a Jupyter [notebook](../foundations/notebooks.md){:target="_blank"} but it's often cluttered with code and isn't very easy for non-technical team members to access and run. We need to create a dashboard that can be accessed without any technical prerequisites and effectively communicates key findings. It would be even more useful if our dashboard was interactive such that it provides utility even for the technical developers.
 
 ## Streamlit
 
-There are some great tooling options, such as [Dash](https://plotly.com/dash/){:target="_blank"}, [Gradio](https://gradio.app/){:target="_blank"}, [Streamlit](https://streamlit.io/){:target="_blank"}, etc. for creating dashboards to deliver data oriented insights. Traditionally, interactive dashboards we exclusively created using front-end programming languages such as HTML Javascript, CSS, etc. However, given that many developers working in machine learning are using Python, the tooling landscape has evolved to bridge this gap. These tools now allow ML developers to create interactive dashboards and visualizations in Python while offering full customization via HTML, JS, CSS for the more niche creations. We'll be using Streamlit to create our dashboards because of it's intuitive API, sharing capabilities and increasing community adoption.
+There are some great tooling options, such as [Dash](https://plotly.com/dash/){:target="_blank"}, [Gradio](https://gradio.app/){:target="_blank"}, [Streamlit](https://streamlit.io/){:target="_blank"}, [Tableau](https://www.tableau.com/){:target="_blank"} etc. for creating dashboards to deliver data oriented insights. Traditionally, interactive dashboards were exclusively created using front-end programming languages such as HTML Javascript, CSS, etc. However, given that many developers working in machine learning are using Python, the tooling landscape has evolved to bridge this gap. These tools now allow ML developers to create interactive dashboards and visualizations in Python while offering full customization via HTML, JS, and CSS. We'll be using Streamlit to create our dashboards because of it's intuitive API, sharing capabilities and increasing community adoption.
 
 ## Set up
 With Streamlit, we can quickly create an empty application and as we develop, the UI will update as well.
@@ -31,7 +31,7 @@ Local URL: http://localhost:8501
 </pre>
 
 ## Components
-Before we create a dashboard for our specific application, we need to learn about the different Streamlit [API components](https://docs.streamlit.io/en/stable/api.html){:target="_blank"}. Instead of going through them all in this lesson, take ten minutes and go through the entire documentation page. We normally don't suggest this but it's quite short and we promised you'll be amazed at how many UI components (styled text, latex, tables, plots, etc.) you can create using just Python. We'll explore the different components in detail as they apply to creating different interactions for our specific dashboard below.
+Before we create a dashboard for our specific application, we need to learn about the different Streamlit [API components](https://docs.streamlit.io/en/stable/api.html){:target="_blank"}. Instead of going through them all in this lesson, take ten minutes and go through the entire documentation page. It's quite short and we promise you'll be amazed at how many UI components (styled text, latex, tables, plots, etc.) you can create using just Python. We'll explore the different components in detail as they apply to creating different interactions for our specific dashboard below.
 
 ## Pages
 Our application's [dashboard](https://github.com/GokuMohandas/MLOps/blob/main/streamlit/st_app.py){:target="_blank"} will feature several pages organized by the insight they will provide where the view can choose what via interactive [radio buttons](https://docs.streamlit.io/en/stable/api.html#streamlit.radio){:target="_blank"}.
@@ -44,7 +44,7 @@ Our application's [dashboard](https://github.com/GokuMohandas/MLOps/blob/main/st
 
 The data page contains findings from data [labeling](labeling.md){:target="_blank"}, [exploratory data analysis](exploratory-data-analysis.md){:target="_blank"} and [preprocessing](preprocessing.md){:target="_blank"} but with interactive components.
 
-We start by showing a sample of our different data sources because, for many people, this may be the first time they see the data so it's a great for them to understand all the different features, formats, etc. For displaying the tags, we don't want to just dump all of them on the dashboard but instead we can use a [selectbox](https://docs.streamlit.io/en/stable/api.html#streamlit.selectbox){:target="_blank"} to allow the user to view them one at a time.
+We start by showing a sample of our different data sources because, for many people, this may be the first time they see the data so it's a good opportunity for them to understand all the different features, formats, etc. For displaying the tags, we don't want to just dump all of them on the dashboard but instead we can use a [selectbox](https://docs.streamlit.io/en/stable/api.html#streamlit.selectbox){:target="_blank"} to allow the user to view them one at a time.
 
 ```python linenums="1"
 # Load data

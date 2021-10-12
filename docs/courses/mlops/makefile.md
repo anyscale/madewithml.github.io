@@ -17,7 +17,7 @@ We have just started and there are already so many different commands to keep tr
 
 Inside our [Makefile](https://github.com/GokuMohandas/MLOps/tree/main/Makefile){:target="_blank"}, we can see a list of rules (help, venv, clean, etc.). These rules have a `target` which can sometimes have `prerequisites` that need to be met (can be other targets) and on the next line a ++tab++ followed by a `recipe` which specifies how to create the target.
 
-```bash linenums="1"
+```bash
 # Makefile
 target: prerequisites
 <TAB> recipe
@@ -58,7 +58,7 @@ A Makefile is called as such because traditionally the `targets` are supposed to
 </div>
 
 We can fix this by defining a [`PHONY`](https://www.gnu.org/software/make/manual/make.html#Phony-Targets){:target="_blank"} target in our makefile by adding this line above the target:
-```bash linenums="1"
+```bash
 .PHONY: <target_name>
 ```
 
@@ -68,7 +68,7 @@ Most of the rules in our Makefile will require the `PHONY` target because we wan
 
 Before we make a target, we can attach prerequisites to them. These can either be file targets that must exist or PHONY target commands that need to be executed prior to *making* this target. We use the *style* target as a prerequisite for the *clean* target so that all files are formatted appropriately prior to cleaning them.
 
-```bash linenums="1" hl_lines="3"
+```bash hl_lines="3"
 # Cleaning
 .PHONY: clean
 clean: style
@@ -83,7 +83,7 @@ clean: style
 We can also set and use [variables](https://www.gnu.org/software/make/manual/make.html#Using-Variables){:target="_blank"} inside our Makefile to organize all of our rules.
 
 - We can set the variables directly inside the Makefile. If the variable isn't defined in the Makefile, then it would default to any environment variable with the same name.
-```bash linenums="1"
+```bash
 # Set variable
 MESSAGE := "hello world"
 
@@ -93,7 +93,7 @@ greeting:
 ```
 
 - We can also use variables passed in when executing the rule like so (ensure that the variable is not overriden inside the Makefile):
-```bash linenums="1"
+```bash
 make greeting MESSAGE="hi"
 ```
 
@@ -101,7 +101,7 @@ make greeting MESSAGE="hi"
 
 Each line in a recipe for a rule will execute in a separate sub-shell. However for certain recipes such as activating a virtual environment and loading packages, we want to execute all steps in one shell. To do this, we can add the [`.ONESHELL`](https://www.gnu.org/software/make/manual/make.html#One-Shell){:target="blank"} special target above any target.
 
-```bash linenums="1" hl_lines="2"
+```bash hl_lines="2"
 # Environment
 .ONESHELL:
 venv:
@@ -116,7 +116,7 @@ venv:
 
 However this is only available in Make version 3.82 and above and most Macs currently use version 3.81. You can either update to the current version or chain your commands with `&&`.
 
-```bash linenums="1"
+```bash
 # Environment
 venv:
     python3 -m venv ${name}

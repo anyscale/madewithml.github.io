@@ -144,7 +144,7 @@ The method is the operation to execute on the specific resource defined by the U
 !!! note
     You could use either the `POST` or `PUT` request method to create and modify resources but the main difference is that `PUT` is idempotent which means you can call the method repeatedly and it'll produce the same state every time. Whereas, calling `POST` multiple times can result in creating multiple instance and so changing the overall state each time.
 
-    ```bash linenums="1"
+    ```bash
     POST /models/<new_model> -d {}       # error since we haven't created the `new_model` resource yet
     POST /models -d {}                   # creates a new model based on information provided in data
     POST /models/<existing_model> -d {}  # updates an existing model based on information provided in data
@@ -171,7 +171,7 @@ We can use [cURL](https://linuxize.com/post/curl-rest-api/){:target="_blank"} to
 <script src="../../../static/js/termynal.js"></script>
 
 For example, if we want to GET all `users`:
-```bash linenums="1"
+```bash
 curl -X GET "http://localhost:5000/users"
 ```
 
@@ -180,7 +180,7 @@ curl -X GET "http://localhost:5000/users"
 ### Headers
 
 Headers contain information about a certain event and are usually found in both the client's request as well as the server's response. It can range from what type of format they'll send and receive, authentication and caching info, etc.
-```bash linenums="1"
+```bash
 curl -X GET "http://localhost:5000/" \          # method and URI
     -H  "accept: application/json"  \           # client accepts JSON
     -H  "Content-Type: application/json" \      # client sends JSON
@@ -192,7 +192,7 @@ curl -X GET "http://localhost:5000/" \          # method and URI
 
 The body contains information that may be necessary for the request to be processed. It's usually a JSON object sent during `POST`, `PUT`/`PATCH`, `DELETE` request methods.
 
-```bash linenums="1"
+```bash
 curl -X POST "http://localhost:5000/models" \   # method and URI
     -H  "accept: application/json" \            # client accepts JSON
     -H  "Content-Type: application/json" \      # client sends JSON
@@ -205,7 +205,7 @@ curl -X POST "http://localhost:5000/models" \   # method and URI
 
 The response we receive from our server is the result of the request we sent. The response also includes headers and a body which should include the proper HTTP status code as well as explicit messages, data, etc.
 
-```bash linenums="1"
+```bash
 {
   "message": "OK",
   "method": "GET",
@@ -249,7 +249,7 @@ When designing our API, there are some best practices to follow:
 
 We're going to organize our API under the [app](https://github.com/GokuMohandas/MLOps/tree/main/app){:target="_blank"} directory because in the future we may have additional packages like `tagifai` so we don't want our app to be attached to any one package. Our API will be defined in the following scripts:
 
-```bash linenums="1"
+```bash
 app/
 ├── api.py          - FastAPI app
 ├── gunicorn.py     - WSGI script
@@ -314,7 +314,7 @@ We let our application know that the endpoint is at `/` through the path operati
 
 We can launch our application with the following command (also saved as a Makefile target as `make app`):
 
-```bash linenums="1"
+```bash
 uvicorn app.api:app \       # location of app (`app` directory > `api.py` script > `app` object)
     --host 0.0.0.0 \        # localhost
     --port 5000 \           # port 5000
@@ -327,7 +327,7 @@ We're using [Uvicorn](https://www.uvicorn.org/){:target="_blank"}, a fast ASGI s
 
 !!! note
     If we want to manage multiple uvicorn workers to enable parallelism in our application, we can use [Gunicorn](https://gunicorn.org/){:target="_blank"} in conjunction with Uvicorn. This will usually be done in a production environment where we'll be dealing with meaningful traffic. I've included a [`app/gunicorn.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/gunicorn.py){:target="_blank"} script with the customizable configuration and we can launch all the workers with the follow command (or `make app-prod`):
-    ```bash linenums="1"
+    ```bash
     gunicorn -c config/gunicorn.py -k uvicorn.workers.UvicornWorker app.api:app
     ```
 
@@ -337,7 +337,7 @@ Now that we have our application running, we can submit our `GET` request using 
 
 - Visit the endpoint on your browser at [http://localhost:5000/](http://localhost:5000/){:target="_blank"}
 - cURL
-```bash linenums="1"
+```bash
 curl -X GET http://localhost:5000/
 ```
 - Access endpoints via code. Here we show how to do it with the [requests](https://requests.readthedocs.io/en/master/){:target="_blank"} library in Python but it can be done with most popular languages. You can even use an [online tool](https://curl.trillworks.com/){:target="_blank"} to convert your cURL commands into code!
@@ -479,7 +479,7 @@ def _performance(request: Request, filter: Optional[str] = None) -> Dict:
 ```
 You'll notice that we're passing an optional query parameter `filter` here to indicate the subset of performance we care about. We'd include this parameter in our `GET` request like so:
 
-```bash linenums="1"
+```bash
 curl -X "GET" \
   "http://localhost:5000/performance?filter=overall" \
   -H "accept: application/json"
@@ -524,7 +524,7 @@ def _param(request: Request, param: str) -> Dict:
 ```
 
 We can perform our `GET` request like so, where the `param` is part of the request URI's path as opposed to being part of it's query string.
-```bash linenums="1"
+```bash
 curl -X "GET" \
   "http://localhost:5000/params/hidden_dim" \
   -H "accept: application/json"
@@ -626,7 +626,7 @@ curl -X 'POST' 'http://0.0.0.0:5000/predict' \
 
 We're using pydantic's [`BaseModel`](https://pydantic-docs.helpmanual.io/usage/models/){:target="_blank"} object here because it offers built-in validation for all of our schemas. In our case, if a `Text` instance is less than 1 character, then our service will return the appropriate error message and code.
 
-```bash linenums="1"
+```bash
 curl -X POST "http://localhost:5000/predict" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"texts\":[{\"text\":\"\"}]}"
 ```
 <pre class="output">
@@ -667,7 +667,7 @@ class PredictPayload(BaseModel):
     ...
 ```
 
-```bash linenums="1"
+```bash
 curl -X POST "http://localhost:5000/predict" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"texts\":[]}"
 ```
 <pre class="output">

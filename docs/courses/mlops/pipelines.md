@@ -38,7 +38,7 @@ To install and run Airflow, we can either do so [locally](https://airflow.apache
 !!! warning
     If you do decide to use docker-compose to run Airflow inside Docker containers, you'll want to allocate at least 4 GB in memory.
 
-```bash linenums="1"
+```bash
 # Configurations
 export AIRFLOW_HOME=${PWD}/airflow
 AIRFLOW_VERSION=2.0.1
@@ -54,7 +54,7 @@ airflow db init
 
 This will create an `airflow` directory with the following components:
 
-```bash linenums="1"
+```bash
 airflow/
 ├── logs/
 └── airflow.cfg
@@ -72,13 +72,13 @@ load_examples = False  # don't clutter webserver with examples
 
 And we'll perform a reset to account for the configuration changes.
 
-```bash linenums="1"
+```bash
 airflow db reset
 ```
 
 Now we're ready to initialize our database with an admin user, which we'll use to login to access our workflows in the webserver.
 
-```bash linenums="1"
+```bash
 # We'll be prompted to enter a password
 airflow users create \
     --username admin \
@@ -403,7 +403,7 @@ With the Airflow concepts we've learned so far, there are many ways to use our d
 
 Recall from our testing lesson that we used the following CLI commands to perform our data validation tests:
 
-```bash linenums="1"
+```bash
 great_expectations checkpoint run projects
 great_expectations checkpoint run tags
 ```
@@ -531,7 +531,7 @@ evaluate_model = BranchPythonOperator(  # BranchPythonOperator returns a task_id
 
 This Operator will execute a function whose return response will be a single (or a list) task id.
 
-```python
+```python linenums="1"
 def _evaluate_model():
     if improvement_criteria():
         return "improved"  # improved is a task id

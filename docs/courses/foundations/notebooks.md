@@ -23,7 +23,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/
 !!! Note "Alternatives to Google Colab"
     Alternatively, you can run these notebooks locally by using [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/index.html){:target="_blank"}. You should first set up a directory for our project, create a [virtual environment](packaging.md#virtual-environment){:target="_blank"} and install jupyterlab.
 
-    ```bash linenums="1"
+    ```bash
     mkdir mlops
     python3 -m venv venv
     source venv/bin/activate
@@ -46,7 +46,7 @@ Click on a desired location in the notebook and create the cell by clicking on t
 
 Once you create the cell, click on it and type the following text inside it:
 
-```bash linenums="1"
+```bash
 ### This is a header
 Hello world!
 ```

@@ -18,7 +18,7 @@ Another way to [organize](organization.md){:target="_blank"} our code is to docu
 
 - `#!js comments`: short descriptions of why a piece of code exists.
 - `#!js typing`: specification of a function's inputs and outputs data types, providing insight into what a function consumes and produces at a quick glance.
-- `#!js docstrings`: meaningful descriptions for functions and classes that describe overall utility as wel as arguments, returns, etc.
+- `#!js docstrings`: meaningful descriptions for functions and classes that describe overall utility as well as arguments, returns, etc.
 - `#!js documentation`: rendered webpage that summarizes all the functions, classes, API calls, workflows, examples, etc. so we can view and traverse through the code base without actually having to look at the code just yet.
 
 !!! question "Code collaboration"
@@ -111,24 +111,74 @@ Let's unpack the different parts of this function's docstring:
 !!! note
     If you're using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank"}, you should get the free [Python Docstrings Generator](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring){:target="_blank"} extension so you can type `"""` under a function and then hit the ++shift++ key to generate a template docstring. It will autofill parts of the docstring using the typing information and even exception in your code!
 
-    ![vscode docstring generation](https://github.com/NilsJPWerner/autoDocstring/blob/13875f7e5d3a2ad2a2a7e42bad6a10d09fed7472/images/demo.gif)
+    ![vscode docstring generation](https://github.com/NilsJPWerner/autoDocstring/blob/13875f7e5d3a2ad2a2a7e42bad6a10d09fed7472/images/demo.gif?raw=true)
 
 ## Mkdocs
 
 So we're going through all this effort to including typing and docstrings to our functions but it's all tucked away inside our scripts. But what if we can collect all this effort and **automatically** surface it as documentation? Well that's exactly what we'll do with the following open-source packages → final result [here](https://gokumohandas.github.io/MLOps/){:target="_blank"}.
 
 - [mkdocs](https://github.com/mkdocs/mkdocs){:target="_blank"}                                  (generates project documentation)
-- [mkdocs-macros-plugin](https://github.com/fralau/mkdocs_macros_plugin){:target="_blank"}      (required plugins)
 - [mkdocs-material](https://github.com/squidfunk/mkdocs-material){:target="_blank"}             (styling to beautiful render documentation)
 - [mkdocstrings](https://github.com/pawamoy/mkdocstrings){:target="_blank"}                     (fetch documentation automatically from docstrings)
 
 Here are the steps we'll follow to automatically generate our documentation and serve it. You can find all the files we're talking about in our [repository](https://github.com/GokuMohandas/MLOps){:target="_blank"}.
 
-1. Create `mkdocs.yml` in root directory.
-```bash linenums="1"
-touch mkdocs.yml
+1. Install the required packages. We already did this when we initially set up our dev environment.
+```python linenums="1"
+# setup.py
+...
+docs_packages = [
+    "mkdocs==1.1.2",
+    "mkdocs-material==7.2.3",
+    "mkdocstrings==0.15.2",
+]
+...
+setup(
+    ...
+    extras_require={
+        "test": test_packages,
+        "dev": test_packages + dev_packages + docs_packages,
+        "docs": docs_packages,
+    },
+    ...
+)
 ```
-2. Fill in metadata, config, extensions and plugins (more setup options like custom styling, overrides, etc. [here](https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/){:target="_blank"}). I add some custom CSS inside `docs/static/csc` to make things look a little bit nicer :)
+```bash
+python -m pip install -e ".[dev]"
+```
+> Mkdocs related packages are part of the docs packages and not part of the required packages specified in [requirements.txt](https://github.com/GokuMohandas/MLOps/blob/main/requirements.txt){:target="_blank"} since not all users will be maintaining the documentation.
+2. Initialize mkdocs
+```bash
+mkdocs new .
+```
+This will create the following files:
+```bash
+.
+├─ docs/
+│  └─ index.md
+└─ mkdocs.yml
+```
+3. Create a documentation file for each item in our navigation tree and add ` ::: tagifai.<SCRIPT_NAME>` to each Markdown file to populate it with the information from function and class docstrings from `tagifai/<SCRIPT_NAME>.py`. We can add our own text directly to the Markdown file as well, like we do in [`docs/tagifai/config.md`](https://github.com/GokuMohandas/follow/blob/main/docs/config/config.md){:target="_blank"}.
+```bash
+# Documentation directory structure
+docs/
+├── app/
+| ├── api.md
+| └── schemas.md
+├── config/
+| ├── config.md
+├── tagifai/
+| ├── data.md
+| ├── ...
+| └── utils.md
+├── getting_started.md
+└── index.md
+```
+```bash
+# docs/tagifai/data.md
+::: tagifai.data
+```
+4. Fill in project metadata inside [mkdocs.yaml](https://github.com/GokuMohandas/follow/blob/main/mkdocs.yml){:target="_blank"}.
 ```yaml linenums="1"
 # Project information
 site_name: TagifAI
@@ -142,46 +192,52 @@ repo_name: GokuMohandas/MLOps
 edit_uri: "" #disables edit button
 ...
 ```
-3. Add logo image and favicon to `static/images`.
+5. Add theme, extensions and plugins (see more [options](https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/){:target="_blank"}).
 ```yaml linenums="1"
 # Configuration
 theme:
   name: material
-  logo: static/images/logo.png
-  favicon: static/images/favicon.ico
+
+# Extensions
+markdown_extensions:
+  - admonition # alerts
+  - codehilite
+  - pymdownx.highlight
+
+# Plugins
+plugins:
+  - search
+  - mkdocstrings
 ```
-4. Fill in navigation in `mkdocs.yml`.
+6. Create our documentation's navigation tree.
 ```yaml linenums="1"
 # Page tree
 nav:
   - Home:
       - TagIfAI: index.md
   - Getting started: getting_started.md
+  - Application:
+    - API: app/api.md
+    - Schemas: app/schemas.md
   - Operations: tagifai/main.md
   - Configurations: config/config.md
   - Reference:
     - Data: tagifai/data.md
-    - Eval: tagifai/data.md
+    - Eval: tagifai/eval.md
     - Models: tagifai/models.md
     - Training: tagifai/train.md
     - Inference: tagifai/predict.md
     - Utilities: tagifai/utils.md
 ```
-5. Fill in `mkdocstrings` plugin information inside `mkdocs.yml`.
-6. Add ` ::: tagifai.<SCRIPT_NAME>` to each Markdown file to populate it with the information from function and class docstrings from `tagifai/<SCRIPT_NAME>.py`. Repeat for other scripts as well. We can add our own text directly to the Markdown file as well, like we do in [`tagifai/config.md`](https://github.com/GokuMohandas/MLOps/blob/main/docs/app/config.md){:target="_blank"}.
-```bash linenums="1"
-# docs/tagifai/data.md
-::: tagifai.data
-```
-7. Run `python -m mkdocs serve` to serve your docs to `http://localhost:8000/`.
+7. Run `python -m mkdocs serve -a localhost:8000` to serve your docs.
 <div class="animated-code">
 
     ```console
     # Serve documentation
-    $ python -m mkdocs serve
+    $ python -m mkdocs serve -a localhost:8000
     INFO    -  Building documentation...
     INFO    -  Cleaning site directory
-    INFO    -  Serving on http://127.0.0.1:8000
+    INFO    -  Serving on http://localhost:8000
     ```
 
 </div>
@@ -189,7 +245,7 @@ nav:
 
 :octicons-info-24: View our rendered documentation via GitHub pages → [here](https://gokumohandas.github.io/MLOps/){:target="_blank"}.
 
-> We can easily serve our documentation for free using [GitHub pages](https://squidfunk.github.io/mkdocs-material/publishing-your-site/){:target="_blank"} and even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"}. All we had to do was add the file [`.github/workflows/documentation.yml`](https://github.com/GokuMohandas/MLOps/blob/main/.github/workflows/documentation.yml){:target="_blank"} which [GitHub Actions](https://github.com/features/actions){:target="_blank"}  will use to build and deploy our documentation every time we push to the `main` branch (we'll learn about GitHub Actions in our CI/CD lesson soon).
+> We can easily serve our documentation for free using [GitHub pages](https://squidfunk.github.io/mkdocs-material/publishing-your-site/){:target="_blank"} for public repositories as wells as [private documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site){:target="_blank"} for private repositories. And we can even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"} (ex. company's subdomain). All we had to do was add the file [`.github/workflows/documentation.yml`](https://github.com/GokuMohandas/MLOps/blob/main/.github/workflows/documentation.yml){:target="_blank"} which [GitHub Actions](https://github.com/features/actions){:target="_blank"}  will use to build and deploy our documentation every time we push to the `main` branch (we'll learn about GitHub Actions in our CI/CD lesson soon).
 
 <!-- Citation -->
 {% include "cite.md" %}

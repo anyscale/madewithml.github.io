@@ -26,7 +26,7 @@ We will be using a very popular blend of style and formatting conventions that m
 - [`flake8`](https://flake8.pycqa.org/en/latest/index.html){:target="_blank"}: a code linter with stylistic conventions that adhere to PEP8.
 
 We installed all of these as they were defined in out `setup.py` file under `dev_packages`.
-```bash linenums="1" hl_lines="3-5"
+```bash hl_lines="3-5"
 # setup.py
 dev_packages = [
     "black==20.8b1",
@@ -66,7 +66,7 @@ exclude = '''
 
 Here we're telling Black that our maximum line length should be 79 characters and to include and exclude certain file extensions. We're going to follow the same configuration steps in our pyproject.toml file for configuring isort as well. Place the following configurations right below Black's configurations:
 
-```bash linenums="20"
+```toml linenums="1"
 # iSort
 [tool.isort]
 profile = "black"
@@ -111,7 +111,7 @@ By placing the `# NOQA: <error-code>` on a line, we're telling flake8 to do NO Q
 ## Usage
 
 To use these tools that we've configured, we could run these commands individually (the `.` signifies that the configuration file for that package is in the current directory) but we can also use the `style` target command from our `Makefile`:
-```bash linenums="1"
+```bash
 black .
 flake8
 isort .
