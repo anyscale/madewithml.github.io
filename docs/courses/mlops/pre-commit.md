@@ -56,7 +56,7 @@ When it comes to creating and using hooks, we have several options to choose fro
 
 Inside the sample configuration, we can see that pre-commit has added some default hooks from it's repository. It specifies the location of the repository, version as well as the specific hook ids to use. We can read about the function of these hooks and add even more by exploring pre-commit's [built-in hooks](https://github.com/pre-commit/pre-commit-hooks){:target="_blank"}. Many of them also have additional arguments that we can configure to customize the hook.
 
-```yaml
+```yaml linenums="1"
 # Inside .pre-commit-config.yaml
 ...
 -   id: check-added-large-files
@@ -68,7 +68,7 @@ Inside the sample configuration, we can see that pre-commit has added some defau
 
 And we can also exclude certain files from being processed by the hooks by using the optional *exclude* key. There are many other [optional keys](https://pre-commit.com/#pre-commit-configyaml---hooks){:target="_blank"} we can configure for each hook ID.
 
-```yaml
+```yaml linenums="1"
 # Inside .pre-commit-config.yaml
 ...
 -   id: check-yaml
@@ -81,7 +81,7 @@ And we can also exclude certain files from being processed by the hooks by using
 
 Besides pre-commit's built-in hooks, there are also many custom, 3rd party [popular hooks](https://pre-commit.com/hooks.html){:target="_blank"} that we can choose from. For example, if we want to apply formatting checks with Black as a hook, we can leverage Black's pre-commit hook.
 
-```yaml
+```yaml linenums="1"
 # Inside .pre-commit-config.yaml
 ...
 -   repo: https://github.com/psf/black
@@ -99,7 +99,7 @@ This specific hook is defined under a [.pre-commit-hooks.yaml](https://github.co
 
 We can also create our own local hooks without configuring a separate .pre-commit-hooks.yaml. Here we're defining two pre-commit hooks, `test-non-training` and `clean`, to run some commands that we've defined in our Makefile. Similarly, we can run any entry command with arguments to create hooks very quickly.
 
-```yaml
+```yaml linenums="1"
 # Inside .pre-commit-config.yaml
 ...
 - repo: local
@@ -166,7 +166,7 @@ pre-commit autoupdate
 
 We can also add this command to our Makefile to execute when a development environment is created so everything is up-to-date.
 
-```yaml hl_lines="7"
+```yaml linenums="1" hl_lines="7"
 # Makefile
 ...
 .PHONY: install-dev

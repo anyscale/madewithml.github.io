@@ -21,7 +21,7 @@ There are many tooling options for when it comes to creating our CI/CD pipelines
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/cicd/workflows.png">
 </div>
 
-GitHub Actions has the added advantage of integrating really well with GitHub and since all of our work is versioned there, we can easily create workflows based on GitHub events (push, PR, release, etc.). GitHub Actions also has a rich marketplace full of workflows that we can use for our own project. And, best of all, GitHub Actions is [free](https://docs.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-actions){:target="_blank"} for public repositories and actions using self-hosted runners (running workflows on your own hardware or on the cloud).
+GitHub Actions has the added advantage of integrating really well with GitHub and since all of our work is versioned there, we can easily create workflows based on GitHub events (push, PR, release, etc.). GitHub Actions also has a rich marketplace full of workflows that we can use for our own project. And, best of all, GitHub Actions is [free for public repositories](https://docs.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-actions){:target="_blank"}.
 
 ## Components
 
@@ -33,9 +33,17 @@ We'll learn about GitHub Actions by understanding the components that compose an
 
 ### Workflows
 
-With GitHub Actions, we are creating automatic **workflows** to do something for us. For example, this [testing workflow](https://github.com/GokuMohandas/MLOps/blob/main/.github/workflows/testing.yml){:target="_blank"} is responsible for conducting tests on our code base. We can specify the name of our workflow at the top of our YAML file.
+With GitHub Actions, we are creating automatic **workflows** to do something for us. We'll start by creating a .github/workflows directory to organize all of our workflows.
 
-```yaml
+```bash
+mkdir -p .github/workflows
+touch .github/workflows/testing.yml
+touch .github/workflows/documentation.yml
+```
+
+Each workflow file will contain the specific instructions for that action. For example, this [testing workflow](https://github.com/GokuMohandas/MLOps/blob/main/.github/workflows/testing.yml){:target="_blank"} is responsible for conducting tests on our code base. We can specify the name of our workflow at the top of our YAML file.
+
+```yaml linenums="1"
 # .github/workflows/testing.yml
 name: testing
 ```
@@ -44,15 +52,17 @@ name: testing
 
 Workflows are triggered by an **event**, which can be something that occurs on a schedule ([cron](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html){:target="_blank"}), webhook or manually. In our application, we'll be using the [push](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#push){:target="_blank"} and [pull request](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request){:target="_blank"} webhook events to run the testing workflow when someone directly pushes or submits a PR to the main branch.
 
-```yaml
+```yaml linenums="1"
 # .github/workflows/testing.yml
 on:
   push:
     branches:
     - main
+    - master
   pull_request:
     branches:
     - main
+    - master
 ```
 
 > Be sure to check out the [complete list](https://docs.github.com/en/actions/reference/events-that-trigger-workflows){:target="_blank"} of the different events that can trigger a workflow.
@@ -61,7 +71,7 @@ on:
 
 Once the event is triggered, a set of **jobs** run on a [**runner**](https://github.com/actions/runner){:target="_blank"}, which is the application that runs the job using a specific operating system. Our first (and only) job is `test-code` which runs on the latest version of ubuntu.
 
-```yaml
+```yaml linenums="1"
 # .github/workflows/testing.yml
 jobs:
   test-code:
@@ -74,7 +84,7 @@ jobs:
 
 Each job contains a series of **steps** which are executed in order. Each step has a name, as well as actions to use from the GitHub Action marketplace or commands we want to run. For the `test-code` job, the steps are to checkout the repo, install the necessary dependencies and run tests.
 
-```yaml
+```yaml linenums="1"
 # .github/workflows/testing.yml
 jobs:
   test-code:
@@ -92,71 +102,52 @@ jobs:
           path: $/{/{ env.pythonLocation /}/}
           key: $/{/{ env.pythonLocation /}/}-$/{/{ hashFiles('setup.py') /}/}-$/{/{ hashFiles('requirements.txt') /}/}
       - name: Install dependencies
-        run: python -m pip install -e ".[test]" --no-cache-dir
-      - name: Run tests
-        run: pytest tests/tagifai --cov tagifai --cov-report html
+        run: |
+          python -m pip install -e ".[test]" --no-cache-dir
+      - name: Execute tests
+        run: pytest tests/tagifai --ignore tests/tagifai/test_main.py --ignore tests/tagifai/test_data.py
 ```
 
-!!! note
-    Notice that one of our steps is to [cache](https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows){:target="_blank"} the entire Python environment with a specific key. This will significantly speed up the time required to run our Action the next time as long as the key remains unchanged (same python location, setup.py and requirements.txt).
+> We are only executing a subset of the tests here because we won't access to data or model artifacts when these tests are executed on GitHub's runners. However, if our blob storage and model registry are on the cloud (as they would be for a collaborative project), we can access them and perform all the tests. This will often involve using credentials to access these resources, which we can set as Action secrets (GitHub repository page > `Settings` > `Secrets`).
 
-    <div class="ai-center-all">
-        <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/cicd/cache.png">
-    </div>
+Notice that one of our steps is to [cache](https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows){:target="_blank"} the entire Python environment with a specific key. This will significantly speed up the time required to run our Action the next time as long as the key remains unchanged (same python location, setup.py and requirements.txt).
+
+<div class="ai-center-all">
+    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/cicd/cache.png">
+</div>
+
+Our other workflow is responsible for automatically generating and deploying our mkdocs documentation. The "Deploy documentation" step below will create/update a new branch in our repository called [gh-pages](https://github.com/GokuMohandas/follow/tree/gh-pages){:target="_blank"} which will have the generation UI files for our documentation. We can deploy this branch as a GitHub pages website by going to `Settings` > `Pages` and setting the source branch to `gh-pages` and folder to `/root` > `Save`. This will generate the public URL for our documentation and it will automatically update every time our workflow runs after each PR.
+
+```yaml linenums="1"
+# .github/workflows/documentation.yml
+name: documentation
+...
+jobs:
+  build-docs:
+      ...
+      - name: Deploy documentation
+        run: mkdocs gh-deploy --force
+```
+
+> We can also generate [private documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site){:target="_blank"} for private repositories and even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"}.
 
 ## Runs
 
-Recall that workflows will be triggered when certain events occur. For example, our testing workflow will initiate on a push or PR to the main branch. We can see the workflow's runs (current and previous) on the *Actions* tab on our repository page. And if we click on a specific run, we can view the all the steps and their outputs as well.
+Recall that workflows will be triggered when certain events occur. For example, our testing workflow will initiate on a push or PR to the main branch. We can see the workflow's runs (current and previous) on the *Actions* tab on our repository page. And if we click on a specific run, we can view the all the steps and their outputs as well. We can also set branch protection rules (GitHub repository page > `Settings` > `Branches`) to ensure that these workflow runs are all successful before we can merge to the main branch.
 
 <div class="ai-center-all">
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/cicd/results.png">
 </div>
 
-However, when we're first creating a GitHub Action, we may not get our workflow to run so smoothly. Instead of creating multiple commits (if you do, at least squash them together), we can use [act](https://github.com/nektos/act){:target="_blank"} to run and test workflows locally. Act executes the jobs defined in our workflows by spinning up a container with an image that is very similar to the image that GitHub's runners use. It has the same environment specifications, variables, etc. and you can inspect both the images and running containers with the respective docker commands (docker images, docker ps).
-
-<div class="animated-code">
-
-    ```console
-    # List of jobs
-    $ act -l
-    ID          Stage  Name
-    build-docs  0      build-docs
-    test-code   0      test-code
-    ```
-
-</div>
-<script src="../../../static/js/termynal.js"></script>
-
-With act, we can run all the jobs, a specific job, jobs for a specific event (ex. PR), etc.
-
-```bash
-# Running GitHub Actions locally
-act  # Run default PUSH event
-act -l  # list all jobs
-act pull_request  # PR event
-act -j test-code  # specific job
-```
-
-<pre class="output">
-<span style="color: #0071CF;">[testing/test-code]</span> 🚀  Start image=catthehacker/ubuntu:act-latest
-<span style="color: #0071CF;">[testing/test-code]</span>   🐳  docker run image=catthehacker/ubuntu:act-latest platform=linux/amd64 entrypoint=["/usr/bin/tail" "-f" "/dev/null"] cmd=[]
-<span style="color: #0071CF;">[testing/test-code]</span>   🐳  docker cp src=/Users/goku/Documents/madewithml/mlops/. dst=/Users/goku/Documents/madewithml/mlops
-<span style="color: #0071CF;">[testing/test-code]</span> ⭐  Run Checkout repo
-<span style="color: #0071CF;">[testing/test-code]</span>   ✅  Success - Checkout repo
-...
-<span style="color: #0071CF;">[testing/test-code]</span> ⭐  Run Execute tests
-<span style="color: #0071CF;">[testing/test-code]</span>   ✅  Success - Execute tests
-</pre>
-
-> While act is able to very closely replicate GitHub's runners there are still a few inconsistencies. For example [caching](https://github.com/nektos/act/issues/329){:target="_blank"} still needs to be figured out with a small HTTP server when the local container is spun up. So if we have a lot of requirements, it might be faster just to experience using GitHub's runners and squashing the commits once we get the workflow to run.
+> While there are methods, such as [act](https://github.com/nektos/act){:target="_blank"}, to run and test workflows locally, many of them are not stable enough for reliable use.
 
 ## Serving
 
 There are a wide variety of GitHub actions available for deploying and serving our ML applications after all the integration tests have passed. Most of them will require that we have a Dockerfile defined that will load and launch our service with the appropriate artifacts. Read more about ML deployment infrastructure in our [lesson](infrastructure.md){:target="_blank"}.
 
-- [AWS EC2](https://github.com/aws-actions), [Google Compute Engine](https://github.com/google-github-actions), [Azure VM](https://github.com/Azure/actions), etc.
-- container orchestration services such as [AWS ECS](https://github.com/aws-actions/amazon-ecs-deploy-task-definition)  or [Google Kubernetes Engine](https://github.com/google-github-actions/setup-gcloud/tree/master/example-workflows/gke)
-- serverless options such as [AWS Lambda](https://github.com/marketplace/actions/aws-lambda-deploy) or [Google Cloud Functions](https://github.com/google-github-actions/deploy-cloud-functions).
+- [AWS EC2](https://github.com/aws-actions){:target="_blank"}, [Google Compute Engine](https://github.com/google-github-actions){:target="_blank"}, [Azure VM](https://github.com/Azure/actions){:target="_blank"}, etc.
+- container orchestration services such as [AWS ECS](https://github.com/aws-actions/amazon-ecs-deploy-task-definition){:target="_blank"}  or [Google Kubernetes Engine](https://github.com/google-github-actions/setup-gcloud/tree/master/example-workflows/gke){:target="_blank"}
+- serverless options such as [AWS Lambda](https://github.com/marketplace/actions/aws-lambda-deploy){:target="_blank"} or [Google Cloud Functions](https://github.com/google-github-actions/deploy-cloud-functions){:target="_blank"}.
 
 > If we want to deploy and serve multiple models at a time, it's highly recommended to use a purpose-built model server such as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server. These servers have a registry with an API layer to seamlessly inspect, update, serve, rollback, etc. multiple versions of models.
 

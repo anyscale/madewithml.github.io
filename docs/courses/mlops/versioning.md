@@ -89,7 +89,7 @@ dvc add data/features.json
 
 Each pointer file will contain the md5 hash, size and the location w.r.t to the directory which we'll be checking into our git repository.
 
-```yaml
+```yaml linenums="1"
 # data/projects.json.dvc
 outs:
 - md5: dafec16f20e07c58af2ab05efe6818ce
@@ -99,7 +99,7 @@ outs:
 
 The data directory containing the files will also have a [.gitignore](https://github.com/GokuMohandas/MLOps/blob/main/data/.gitignore){:target="_blank"} file that includes the actual artifacts so we don't check them into our repository.
 
-```yaml
+```yaml linenums="1"
 # data/.gitignore
 /projects.json
 /tags.json

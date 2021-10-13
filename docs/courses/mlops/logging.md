@@ -79,6 +79,8 @@ LOGS_DIR = Path(BASE_DIR, "logs")
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
 ```
 
+> If we wanted to save our logs in production, we would simply [upload](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-uploading-files.html){:target="_blank"} the log files generated inside this logs directory to a blog storage in the cloud.
+
 Next, we'll configure the loggers that will be useful for our application (our logger configuration is inside [`config/config.py`](https://github.com/GokuMohandas/MLOps/blob/main/config/config.py){:target="_blank"}).
 
 ```python linenums="1"
