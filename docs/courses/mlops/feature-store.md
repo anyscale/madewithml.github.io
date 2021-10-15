@@ -71,15 +71,16 @@ features/
 └── features.py         - feature definitions
 ```
 
-We're going to configure the locations for our registry and online store in our [feature_store.yaml](https://github.com/GokuMohandas/MLOps/blob/main/features/feature_store.yaml){:target="_blank"} file.
+We're going to configure the locations for our registry and online store in our [features/feature_store.yaml](https://github.com/GokuMohandas/MLOps/blob/main/features/feature_store.yaml){:target="_blank"} file.
 
 - **registry**: contains information about our feature repository, such as data sources, feature views, etc. Since it's in a database, instead of a Python file, it can very quickly be accessed in production.
 - **online store**: DB (SQLite for local) that stores the (latest) features for defined entities (users, projects, etc.) to be used for online inference.
 
 If all definitions look valid, Feast will sync the metadata about Feast objects to the registry. This step is necessary because the production feature serving infrastructure won't be able to access Python files in the feature repository at run time, but it will be able to efficiently and securely read the feature definitions from the registry.
 
-```yaml linenums="1"
-# Inside feature_store.yaml
+Paste the following into our [features/feature_store.yaml](https://github.com/GokuMohandas/MLOps/blob/main/features/feature_store.yaml){:target="_blank"}:
+```yaml
+# features/feature_store.yaml
 project: features
 registry: ../stores/feature/registry.db
 provider: local
@@ -123,6 +124,26 @@ df.to_parquet(
     allow_truncated_timestamps=True,
 )
 ```
+!!! note
+    Since this is a new data file, we need to version it accordingly:
+
+    ```bash
+    dvc add data/features.parquet
+    dvc push
+    ```
+
+    And make the appropriate change to our Makefile as well:
+
+    ```bash hl_lines="7"
+    # DVC
+    .PHONY: dvc
+    dvc:
+        dvc add data/projects.json
+        dvc add data/tags.json
+        dvc add data/features.json
+        dvc add data/features.parquet
+        dvc push
+    ```
 
 ### Feature definitions
 
@@ -177,6 +198,52 @@ project_details_view = FeatureView(
     tags={},
 )
 ```
+
+So let's go ahead and define our feature views by moving this code into [features/features.py](https://github.com/GokuMohandas/MLOps/blob/main/features/features.py){:target="_blank"}:
+
+??? quote "Show code"
+    ```python
+    # Feature definition
+    from datetime import datetime
+    from pathlib import Path
+
+    from feast import Entity, Feature, FeatureView, ValueType
+    from feast.data_source import FileSource
+    from google.protobuf.duration_pb2 import Duration
+
+    from config import config
+
+    # Read data
+    START_TIME = "2020-02-17"
+    project_details = FileSource(
+        path=str(Path(config.DATA_DIR, "features.parquet")),
+        event_timestamp_column="created_on",
+    )
+
+    # Define an entity for the project
+    project = Entity(
+        name="id",
+        value_type=ValueType.INT64,
+        description="project id",
+    )
+
+    # Define a Feature View for each project
+    # Can be used for fetching historical data and online serving
+    project_details_view = FeatureView(
+        name="project_details",
+        entities=["id"],
+        ttl=Duration(
+            seconds=(datetime.today() - datetime.strptime(START_TIME, "%Y-%m-%d")).days * 24 * 60 * 60
+        ),
+        features=[
+            Feature(name="text", dtype=ValueType.STRING),
+            Feature(name="tags", dtype=ValueType.STRING_LIST),
+        ],
+        online=True,
+        input=project_details,
+        tags={},
+    )
+    ```
 
 Once we've defined our feature views, we can apply it to push a version controlled definition of our features to the registry for fast access. It will also configure our registry and online stores that we've defined in our [feature_store.yaml](https://github.com/GokuMohandas/MLOps/blob/main/features/feature_store.yaml){:target="_blank"} file.
 
@@ -284,6 +351,38 @@ training_df.head()
   </tbody>
 </table>
 </div></div>
+
+!!! note
+    We'll be using this function to retrieve historical feature again in our [pipelines lesson](pipelines.md){:target="_blank"} so let's add this to our [tagifai/main.py](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/main.py){:target="_blank"} and write the appropriate test.
+
+    ```python linenums="1"
+    # tagifai/main.py
+    @app.command()
+    def get_historical_features():
+        """Retrieve historical features for training."""
+        # Entities to pull data for (should dynamically read this from somewhere)
+        project_ids = [1, 2, 3]
+        now = datetime.now()
+        timestamps = [datetime(now.year, now.month, now.day)] * len(project_ids)
+        entity_df = pd.DataFrame.from_dict({"id": project_ids, "event_timestamp": timestamps})
+
+        # Get historical features
+        store = FeatureStore(repo_path=Path(config.BASE_DIR, "features"))
+        training_df = store.get_historical_features(
+            entity_df=entity_df,
+            feature_refs=["project_details:text", "project_details:tags"],
+        ).to_df()
+        logger.info(training_df.head())
+        return training_df
+    ```
+
+    ```python linenums="1"
+    # tests/tagifai/test_main.py
+    @pytest.mark.training
+    def test_get_historical_features():
+        result = runner.invoke(app, ["get-historical-features"])
+        assert result.exit_code == 0
+    ```
 
 ### Online features
 

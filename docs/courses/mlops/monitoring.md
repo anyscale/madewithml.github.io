@@ -237,6 +237,8 @@ plt.show()
  'meta': {'name': 'KSDrift', 'detector_type': 'offline', 'data_type': None}}
 </pre>
 
+> &darr; p-value = &uarr; confident that the distributions are different.
+
 <div class="ai-center-all">
     <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/ks_no_drift.png">
 </div>
@@ -354,7 +356,7 @@ device = utils.set_device(cuda=False)
 
 ```python linenums="1"
 # Load model
-run_id = open(Path(config.MODEL_DIR, "run_id.txt")).read()
+run_id = open(Path(config.CONFIG_DIR, "run_id.txt")).read()
 artifacts = main.load_artifacts(run_id=run_id)
 ```
 
@@ -454,25 +456,6 @@ embeddings_mmd_drift_detector.predict(no_drift)
 </pre>
 
 ```python linenums="1"
-# No drift (with benign injection)
-texts = ["BERT " + text for text in df.text[-200:].to_list()]
-drift = get_data_tensor(texts=texts)
-embeddings_mmd_drift_detector.predict(drift)
-```
-
-<pre class="output">
-{'data': {'is_drift': 0,
-  'distance': 0.0030127763748168945,
-  'p_val': 0.10000000149011612,
-  'threshold': 0.01,
-  'distance_threshold': 0.0038004518},
- 'meta': {'name': 'MMDDriftTorch',
-  'detector_type': 'offline',
-  'data_type': None,
-  'backend': 'pytorch'}}
-</pre>
-
-```python linenums="1"
 # Drift
 texts = ["UNK " + text for text in df.text[-200:].to_list()]
 drift = get_data_tensor(texts=texts)
@@ -555,21 +538,21 @@ embeddings_ks_drift_detector.predict(drift)
 
 > Note that each feature (enc_dim=32) has a distance and an associated p-value.
 
-We could repeat this process for tensor outputs at various layers in our model (embedding, conv layers, softmax, etc.). Just keep in mind that our outputs from the reducer need to be a 2D matrix so we may need to do additional preprocessing such as pooling 3D embedding tensors. [TorchDrift](https://torchdrift.org/) is another great package that offers a suite of reducers (PCA, AE, etc.) and drift detectors (MMD) to monitor for drift at any stage in our model.
+We could repeat this process for tensor outputs at various layers in our model (embedding, conv layers, softmax, etc.). Another interesting approach for detecting drift involves training a separate model that can distinguish between data from the reference and production distributions. If such a classifier can be trained that it performs better than random chance (0.5), confirmed with a [binomial test](https://en.wikipedia.org/wiki/Binomial_test){:target="_blank"}, then we have two statistically different distributions. This isn't a popular approach because it involves creating distinct datasets and the compute for training every time we want to measure drift with two windows of data.
 
-> Another interesting approach for detecting drift involves training a separate model that can distinguish between data from the reference and production distributions. If such a classifier can be trained that it performs better than random chance (0.5), confirmed with a [binomial test](https://en.wikipedia.org/wiki/Binomial_test){:target="_blank"}, then we have two statistically different distributions. This isn't a popular approach because it involves creating distinct datasets and the compute for training every time we want to measure drift with two windows of data.
+> [TorchDrift](https://torchdrift.org/){:target="_blank"} is another great package that offers a suite of reducers (PCA, AE, etc.) and drift detectors (MMD) to monitor for drift at any stage in our model.
 
 ## Outliers
 
-With drift, we're comparing a window of production data with reference data as opposed to looking at any one specific data point. While each individual point may not be an anomaly or outlier, the group of points may cause a drift. The easiest way to illustrate this is to imagine feeding our live model the same input data point repeatedly. The actual data point may not have anomalous features but feeding it repeatedly will cause the feature distribution that the model is receiving to change and lead to drift.
-
-> When we identify outliers, we may want to let the end user know that the model's response may not be reliable. Additionally, we may want to remove the outliers from the next training set or further inspect them and upsample them in case they're early signs of what future distributions of incoming features will look like.
+With drift, we're comparing a window of production data with reference data as opposed to looking at any one specific data point. While each individual point may not be an anomaly or outlier, the group of points may cause a drift. The easiest way to illustrate this is to imagine feeding our live model the same input data point repeatedly. The actual data point may not have anomalous features but feeding it repeatedly will cause the feature distribution to change and lead to drift.
 
 <div class="ai-center-all">
     <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/outliers.png">
 </div>
 
 Unfortunately, it's not very easy to detect outliers because it's hard to constitute the criteria for an outlier. Therefore the outlier detection task is typically unsupervised and requires a stochastic streaming algorithm to identify potential outliers. Luckily, there are several powerful libraries such as [PyOD](https://pyod.readthedocs.io/en/latest/){:target="_blank"}, [Alibi Detect](https://docs.seldon.io/projects/alibi-detect/en/latest/){:target="_blank"}, [WhyLogs](https://whylogs.readthedocs.io/en/latest/){:target="_blank"} (uses [Apache DataSketches](https://datasketches.apache.org/){:target="_blank"}), etc. that offer a suite of outlier detection functionality (largely for tabular and image data for now). We can use these packages with our [pipelines](pipelines.md){:target="_blank"} or even [Kafka](https://kafka.apache.org/){:target="_blank"} data streams to continuously monitor for outliers.
+
+> When we identify outliers, we may want to let the end user know that the model's response may not be reliable. Additionally, we may want to remove the outliers from the next training set or further inspect them and upsample them in case they're early signs of what future distributions of incoming features will look like.
 
 ```python linenums="1"
 from alibi_detect.od import OutlierVAE
@@ -586,9 +569,6 @@ preds = outlier_detector.predict(X, outlier_type="instance", outlier_perc=75)
 ```
 
 > Typically, outlier detection algorithms fit (ex. via reconstruction) to the training set to understand what normal data looks like and then we can use a threshold to predict outliers. If we have a small labeled dataset with outliers, we can empirically choose our threshold but if not, we can choose some reasonable tolerance.
-
-!!! warning
-    We shouldn't identify outliers by looking at a model’s predicted probabilities because they need to be [calibrated](https://arxiv.org/abs/1706.04599){:target="_blank"} before using them as reliable measures of confidence.
 
 ## Solutions
 
@@ -614,7 +594,7 @@ from alibi_detect.cd import KSDrift
 length_drift_detector = KSDrift(reference, p_val=0.01)
 ```
 
-Once we have our carefully crafted alerting workflows in place, we can notify stakeholders as issues arise via email, [Slack](https://slack.com/){:target="_blank"}, [PageDuty](https://www.pagerduty.com/){:target="_blank"}, etc. The stakeholders can be of various levels (core engineers, managers, etc.) and they can subscribe to the alerts that are appropriate for them.
+Once we have our carefully crafted alerting workflows in place, we can notify stakeholders as issues arise via email, [Slack](https://slack.com/){:target="_blank"}, [PageDuty](https://www.pagerduty.com/){:target="_blank"}, etc. The stakeholders can be of various levels (core engineers, managers, etc.) and they can subscribe to the alerts that are relevant for them.
 
 ### Inspect
 
@@ -661,7 +641,7 @@ Since detecting drift and outliers can involve compute intensive operations, we 
     <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/serverless.png">
 </div>
 
-When it actually comes to implementing a monitoring system, we have several options, ranging from fully managed to from-scratch. Several popular managed solutions are [Fiddler](https://www.fiddler.ai/ml-monitoring){:target="_blank"}, [Arize](https://arize.com/){:target="_blank"}, [Arthur](https://www.arthur.ai/){:target="_blank"}, [Mona](https://www.monalabs.io/){:target="_blank"}, [WhyLogs](https://whylogs.readthedocs.io/en/latest/){:target="_blank"}, etc., all of which allow us to create custom monitoring views, trigger alerts, etc. There are even several great open-source solutions such as [Gantry](https://gantry.io/){:target="_blank"}, [TorchDrift](https://torchdrift.org/){:target="_blank"}, [WhyLabs](https://whylabs.ai/){:target="_blank"}, [EvidentlyAI](https://evidentlyai.com/){:target="_blank"}, etc.
+When it actually comes to implementing a monitoring system, we have several options, ranging from fully managed to from-scratch. Several popular managed solutions are [Fiddler](https://www.fiddler.ai/ml-monitoring){:target="_blank"}, [Arize](https://arize.com/){:target="_blank"}, [Arthur](https://www.arthur.ai/){:target="_blank"}, [Mona](https://www.monalabs.io/){:target="_blank"}, [WhyLabs](https://whylabs.ai/){:target="_blank"}, etc., all of which allow us to create custom monitoring views, trigger alerts, etc. There are even several great open-source solutions such as [Gantry](https://gantry.io/){:target="_blank"}, [TorchDrift](https://torchdrift.org/){:target="_blank"}, [WhyLogs](https://whylogs.readthedocs.io/en/latest/){:target="_blank"}, [EvidentlyAI](https://evidentlyai.com/){:target="_blank"}, etc.
 
 We'll often notice that monitoring solutions are offered as part of the larger deployment option such as [TensorFlow Extended (TFX)](https://www.tensorflow.org/tfx){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [Sagemaker](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html){:target="_blank"}, etc. And if we're already working with Kubernetes, we could use [KNative](https://knative.dev/){:target="_blank"} or [Kubeless](https://kubeless.io/){:target="_blank"} for serverless workload management. But we could also use a higher level framework such as [KFServing](https://www.kubeflow.org/docs/components/kfserving/){:target="_blank"} or [Seldon core](https://docs.seldon.io/projects/seldon-core/en/v0.4.0/#){:target="_blank"} that natively use a serverless framework like KNative.
 

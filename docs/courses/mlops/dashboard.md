@@ -152,48 +152,7 @@ st.write("Preprocessed text", preprocessed_text)
 
 ### Performance
 
-This page allows us to quickly compare the improvements and regression of current and previous deployments. Since our application deployments are [organized via tags](versioning.md#tags){:target="_blank"}, we need to be able to compare the model's across different tags, as well as what's available on current workspace.
-
-We want to provide two different performance views:
-
-1. View change in key metrics across all versions.
-2. Inspect detailed differences between two versions.
-
-We can create some plots of key metric improvements (or regressions) across time (releases). We can fetch all the available tags (and current workspace) and extract their respective performance metadata and visualize them on a plot.
-
-<div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/overview.png">
-</div>
-
-> We can see that as our application matures, we'll have many tags and potentially different versions deployed simultaneously. At this point, we should invest in having a metadata or evaluation store where all parameter and performance artifacts are efficiently indexed by model IDs.
-
-Now when we want to zoom into the difference between two versions, we can use a simple [selectbox](https://docs.streamlit.io/en/stable/api.html#streamlit.selectbox){:target="_blank"} to choose which tags to compare. This could either be the current workspace with the current deployed tag, two previously deployed tags, etc.
-
-```python linenums="1"
-# Compare tags
-d = {}
-col1, col2 = st.beta_columns(2)
-with col1:
-    tag_a = st.selectbox("Tag A", tags, index=0)
-    d[tag_a] = {"links": {}}
-with col2:
-    tag_b = st.selectbox("Tag B", tags, index=1)
-    d[tag_b] = {"links": {}}
-if tag_a == tag_b:
-    raise Exception("Tags must be different in order to compare them.")
-```
-
-<div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/tags.png">
-</div>
-
-Once we've chosen which two tags to compare, we can view their differences in performance. With ML applications, we need to compare many key metrics and weigh different tradeoffs in order to decide if one version is *better* than the other. Therefore, we want to create visualizations that will help us draw the insights quickly and make the decision. For example, we could have visualized the key metric values for two different tags by instead we can plot the differences directly to quickly extract the key metric improvements and regressions.
-
-<div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/diff.png">
-</div>
-
-We also want to enable a closer analysis of the overall, class and slices performance improvements and regressions.
+This page allows us to quickly compare the improvements and regressions of our local system and what's currently in production. We want to provide the key differences in both the performance and parameters used for each system version. We could also use constructs, such as [Git tags](git.md#tags){:target="_blank"}, to visualize these details across multiple previous releases.
 
 <div class="ai-center-all">
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/performance.png">
@@ -226,23 +185,32 @@ We're also going to inspect the true positive (TP), false positive (FP) and fals
 
 #### Extensions
 
-- Use false positives to identify potentially mislabeled data.
 - Connect inspection pipelines with annotation systems so that changes to the data can be reviewed and incorporated.
-- Inspect FP / FN samples by [estimating training data influences (TracIn)](https://arxiv.org/abs/2002.08484){:target="_blank"} on their predictions.
+- Use false positives to identify potentially mislabeled data or [estimate training data influences (TracIn)](https://arxiv.org/abs/2002.08484){:target="_blank"} on their predictions.
 - Inspect the trained model's behavior under various conditions using the [WhatIf](https://pair-code.github.io/what-if-tool/){:target="_blank"} tool.
+- Compare performances across multiple releases to visualize improvements/regressions over time.
 
 > Our dashboard can have many other pages as well, especially critical views for [iteration](pipelines.md#continual-learning){:target="_blank"}, such as [active learning](labeling.md#active-learning){:target="_blank"}, [composing retraining datasets](continual-learning.md#retraining){:target="_blank"}, etc.
 
 
 ## Caching
 
-There are a few functions defined at the start of our [st_app.py](https://github.com/GokuMohandas/MLOps/blob/main/streamlit/st_app.py){:target="_blank"} script which have a `@st.cache` decorator. This calls for Streamlit to cache the function by the combination of it's inputs which will significantly improve performance involving computation heavy functions.
+There are a few functions defined at the start of our [st_app.py](https://github.com/GokuMohandas/MLOps/blob/main/streamlit/st_app.py){:target="_blank"} script which have a `@st.cache` decorator. This calls for Streamlit to cache the function by the combination of it's inputs which will significantly improve performance involving computationally heavy functions.
 
 ```python linenums="1"
-@st.cache
-def get_diff(author, repo, tag_a, tag_b):
-    diff = cli.diff(author=author, repo=repo, tag_a=tag_a, tag_b=tag_b)
-    return diff
+@st.cache()
+def load_data():
+    # Filepaths
+    projects_fp = Path(config.DATA_DIR, "projects.json")
+    tags_fp = Path(config.DATA_DIR, "tags.json")
+    features_fp = Path(config.DATA_DIR, "features.json")
+
+    # Load data
+    projects = utils.load_dict(filepath=projects_fp)
+    tags_dict = utils.list_to_dict(utils.load_dict(filepath=tags_fp), key="tag")
+    features = utils.load_dict(filepath=features_fp)
+
+    return projects, tags_dict, features
 ```
 
 ## Deploy

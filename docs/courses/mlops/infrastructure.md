@@ -11,7 +11,7 @@ repository: https://github.com/GokuMohandas/MLOps
 
 ## Intuition
 
-We’ve already covered the methods of deployment via our API, Docker, and CI/CD lessons where the ML system is its own application, as opposed to being tied to a monolithic general application. This way we’re able to scale our ML workflows as needed and use it to deliver value across any other applications that maybe interested in using it’s outputs. So in this lesson, we’ll instead talk about the types of tasks, serving and how optimize, orchestrate and scale them. We highly recommend using a framework such as [Metaflow](https://metaflow.org/){:target="_blank"} to seamlessly interact with all the infrastructure that we'll be discussing.
+We’ve already covered the methods of deployment via our API, Docker, and CI/CD lessons where the ML system is its own microservice, as opposed to being tied to a monolithic general application. This way we’re able to scale our ML workflows as needed and use it to deliver value to downstream applications. So in this lesson, we’ll instead discuss the types of tasks, serving strategies and how to optimize, orchestrate and scale them. We highly recommend using a framework such as [Metaflow](https://metaflow.org/){:target="_blank"} to seamlessly interact with all the infrastructure that we'll be discussing.
 
 ## Tasks
 
@@ -19,7 +19,7 @@ Before we talk about the infrastructure needed for ML tasks, we need to talk abo
 
 ## Serving
 
-The first decision to make it to whether serve predictions via batches or real-time, which is entirely based on the feature space (finite vs. unbound).
+The first decision is whether to serve predictions via batches or real-time, which is entirely based on the feature space (finite vs. unbound).
 
 ### Batch serving
 
@@ -34,9 +34,11 @@ We can make batch predictions on a finite set of inputs which are then written t
 - ❌&nbsp; predictions can become stale if user develops new interests that aren’t captured by the old data that the current predictions are based on.
 - ❌&nbsp; input feature space must be finite because we need to generate all the predictions before they're needed for real-time.
 
-> Recommend content that *existing* users will like based on their viewing history.
+!!! question "Batch serving tasks"
+    What are some tasks where batch serving is ideal?
 
-New users may just receive some generic recommendations until we process their history the next day. Even if we're not doing batch serving, it might still be useful to cache very popular sets of input features so that we can serve those predictions faster.
+    ??? quote "Show answer"
+        Recommend content that *existing* users will like based on their viewing history. However, *new* users may just receive some generic recommendations based on their explicit interests until we process their history the next day. And even if we're not doing batch serving, it might still be useful to cache very popular sets of input features (ex. combination of explicit interests > recommended content) so that we can serve those predictions faster.
 
 ### Real-time serving
 
@@ -46,9 +48,15 @@ We can also serve live predictions, typically through an HTTPS call with the app
     <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/real_time_serving.png">
 </div>
 
-- ✅&nbsp; can yield more up-to-date predictions which may can yield a more meaningful user experience, etc.
+- ✅&nbsp; can yield more up-to-date predictions which may yield a more meaningful user experience, etc.
 - ❌&nbsp; requires managed microservices to handle request traffic.
 - ❌&nbsp; requires real-time monitoring since input space in unbounded, which could yield erroneous predictions.
+
+!!! question "Real-time serving tasks"
+    In our example task for batch serving above, how can real-time serving significantly improve content recommendations?
+
+    ??? quote "Show answer"
+        With batch processing, we generate content recommendations for users offline using their history. These recommendations won't change until we process the batch the next day using the updated user features. But what is the user's taste significantly changes during the day (ex. user is searching for horror movies to watch). With real-time serving, we can use these recent features to recommend highly relevant content based on the immediate searches.
 
 > Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers, such as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server, provide a common interface to interact with models for inspection, inference, etc. In fact, modules like RedisAI can even offer added benefits such as data locality for super fast inference.
 
@@ -56,7 +64,7 @@ We can also serve live predictions, typically through an HTTPS call with the app
 
 We also have control over the features that we use to generate our real-time predictions.
 
-Our use case doesn't necessarily involve entity features changing over time so it makes sense to just have one processing pipeline. However, not all entities in ML applications work this way. Using our Netflix content recommendation example, a given user can have certain features that are updated over time, such as top genres, click rate, etc. As we'll see below, we have the option to batch process features for users at a previous time or we could process features in a stream as they become available to make live predictions.
+Our use case doesn't necessarily involve entity features changing over time so it makes sense to just have one processing pipeline. However, not all entities in ML applications work this way. Using our content recommendation example, a given user can have certain features that are updated over time, such as favorite genres, click rate, etc. As we'll see below, we have the option to batch process features for users at a previous time or we could process features in a stream as they become available and use them to make relevant predictions.
 
 ### Batch processing
 
@@ -84,15 +92,15 @@ Perform inference on a given set of inputs with near real-time, streaming, featu
 
 > Recommend content based on the real-time history that the users have generated. Note that the same model is used but the input data can change and grow.
 
-If we infinitely reduce how often we do batch processing, we’ll [effectively have](https://www.ververica.com/blog/batch-is-a-special-case-of-streaming){:target="_blank"} stream (real-time) processing since the features will always be up-to-date.
+If we infinitely reduce the time between each batch processing event, we’ll [effectively have](https://www.ververica.com/blog/batch-is-a-special-case-of-streaming){:target="_blank"} stream (real-time) processing since the features will always be up-to-date.
 
 ## Learning
 
-While we have the option to use batch / streaming features and serve batch / real-time predictions, we've kept the model completely unchanged. This, however, is another decision that we have to make depending on the use case and what our infrastructure allows for.
+So far, while we have the option to use batch / streaming features and serve batch / real-time predictions, we've kept the model fixed. This, however, is another decision that we have to make depending on the use case and what our infrastructure allows for.
 
 ### Offline learning
 
-The traditional approach is to train our models offline and then deploy them to inference. We may periodically retrain them offline as new data becomes labeled, validated, etc. and deploy them after evaluation. We may also retrain them if we discover an issue during monitoring such as drift.
+The traditional approach is to train our models offline and then deploy them to inference. We may periodically retrain them offline as new data becomes labeled, validated, etc. and deploy them after evaluation. We may also expedite retraining if we discover an issue during [monitoring](monitoring.md){:target="_blank"} such as drift.
 
 <div class="ai-center-all">
     <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/offline_learning.png">
@@ -114,7 +122,7 @@ In order to truly serve the most informed predictions, we should have a model tr
 
 - ✅&nbsp; model is aware of recent data distributions, trends, etc. which can provide highly informed predictions.
 - ❌&nbsp; compute requirements can quickly surge depending on the retraining schedule.
-- ❌&nbsp; need to have quick pipelines to deliver labeled and validated data which can become a bottleneck it it involves human intervention.
+- ❌&nbsp; need to have quick pipelines to deliver labeled and validated data which can become a bottleneck if it involves human intervention.
 - ❌&nbsp; might not be able to do more involved model validation, such as AB or shadow testing, with such limited time in between models.
 
 ## Testing
@@ -142,6 +150,14 @@ Shadow testing involves sending the same production traffic to the different sys
     <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/shadow.png">
 </div>
 
+!!! question "What can go wrong?"
+    If shadow tests allow us to test our updated system without having to actually serve the new results, why doesn't everyone adopt it?
+
+    ??? quote "Show answer"
+        With shadow deployment, we'll miss out on any live feedback signals (explicit/implicit) from our users since users are not directly interacting with the product using our new version.
+
+        We also need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. This is rarely possible because, while your ML system may be a standalone microservice, it ultimately interacts with an intricate production environment that has *many* dependencies.
+
 ## Optimization
 
 We’ve discussed [distributed training](baselines.md#distributed-training){:target="_blank"} strategies for when our data or models are too large for training but what about when our models are too large to deploy? The following model compression techniques are commonly used to make large models fit within existing infrastructure:
@@ -149,8 +165,6 @@ We’ve discussed [distributed training](baselines.md#distributed-training){:tar
 - **Pruning**: remove weights (unstructured) or entire channels (structured) to reduce the size of the network. The objective is to preserve the model’s performance while increasing its sparsity.
 - **Quantization**: reduce the memory footprint of the weights by reducing their precision (ex. 32 bit to 8 bit). We may loose some precision but it shouldn’t affect performance too much.
 - **Distillation**: training smaller networks to “mimic” larger networks by having it reproduce the larger network’s layers’ outputs.
-
-There are always new model compression techniques coming out so best keep up to date via [survey papers](https://arxiv.org/abs/1710.09282){:target="_blank"} on them.
 
 ## Methods
 
@@ -181,14 +195,6 @@ Serverless options such as [AWS Lambda](https://aws.amazon.com/lambda/){:target=
 - **Cons**: size limits on function storage, payload, etc. based on provider and usually no accelerators (GPU, TPU, etc.)
 
 > Be sure to explore the [CI/CD workflows](cicd.md#serving){:target="_blank"} that accompany many of these deployment and serving options so you can have a continuous training, validation and serving process.
-
-## Application
-
-For our application, we'll need the following components to best serve our users.
-
-- **real-time serving** since the inputs features (title, description, etc.) are user generated just moments before predicted tags are needed. This is why we've created an API around our models and defined a Dockerfile, which can be used to create and scale our microservice. Since our models and overall Docker images are small, we could use serverless options such as AWS Lambda to deploy our versioned applications. We could do this directly through GitHub actions once the CI/CD workflows have all passed.
-- **stream processing** since our predictions are on entities (projects) that have never been seen before. We'll want to have the latest (and only) features for each project so we can predict the most appropriate tags. However, our use case doesn't necessarily involve entity features changing over time so it makes sense to just have one processing pipeline and not have to worry about separate batch and stream pipelines.
-- **offline learning** will work just fine for our application since the vocabulary and tag spaces are fairly constrained for a given period of time. However, we will use [monitoring](monitoring.md){:target="_blank"} to ensure that our input and output spaces are as expected and initiate retraining periodically.
 
 ## Resources
 

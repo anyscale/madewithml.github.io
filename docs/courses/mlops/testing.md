@@ -968,21 +968,19 @@ Canary tests involve sending most of the production traffic to the currently dep
 </div>
 
 #### Shadow tests
-Shadow testing involves sending the same production traffic to the different systems. We don't have to worry about system contamination and it's very safe compared to the previous approaches since the new system's results are not served.
+Shadow testing involves sending the same production traffic to the different systems. We don't have to worry about system contamination and it's very safe compared to the previous approaches since the new system's results are not served. But overall, shadow testing is easy to monitor, validate operational consistency, etc.
 
-!!! question "Why can go wrong?"
+<div class="ai-center-all">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/shadow.png">
+</div>
+
+!!! question "What can go wrong?"
     If shadow tests allow us to test our updated system without having to actually serve the new results, why doesn't everyone adopt it?
 
     ??? quote "Show answer"
         With shadow deployment, we'll miss out on any live feedback signals (explicit/implicit) from our users since users are not directly interacting with the product using our new version.
 
         We also need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. This is rarely possible because, while your ML system may be a standalone microservice, it ultimately interacts with an intricate production environment that has *many* dependencies.
-
-But overall, shadow testing is easy to monitor, validate operational consistency, etc.
-
-<div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/shadow.png">
-</div>
 
 ## Testing vs. monitoring
 
