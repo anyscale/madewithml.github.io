@@ -73,8 +73,14 @@ features/
 
 We're going to configure the locations for our registry and online store in our [features/feature_store.yaml](https://github.com/GokuMohandas/MLOps/blob/main/features/feature_store.yaml){:target="_blank"} file.
 
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/feature_store/batch.png" width="1000" alt="batch processing">
+</div>
+
 - **registry**: contains information about our feature repository, such as data sources, feature views, etc. Since it's in a database, instead of a Python file, it can very quickly be accessed in production.
 - **online store**: DB (SQLite for local) that stores the (latest) features for defined entities (users, projects, etc.) to be used for online inference.
+
+> When we run Feast locally, the offline store is effectively represented via Pandas point-in-time joins. Whereas, in production, the offline store can be something more robust like [Google BigQuery](https://cloud.google.com/bigquery){:target="_blank"}, [Amazon RedShift](https://aws.amazon.com/redshift/){:target="_blank"}, etc.
 
 If all definitions look valid, Feast will sync the metadata about Feast objects to the registry. This step is necessary because the production feature serving infrastructure won't be able to access Python files in the feature repository at run time, but it will be able to efficiently and securely read the feature definitions from the registry.
 
@@ -101,7 +107,8 @@ The first step is to establish connections with our data sources (databases, dat
 ```python linenums="1"
 import pandas as pd
 from pathlib import Path
-from tagifai import config, utils
+from config import config
+from tagifai import utils
 ```
 
 ```python linenums="1"
@@ -124,6 +131,7 @@ df.to_parquet(
     allow_truncated_timestamps=True,
 )
 ```
+
 !!! note
     Since this is a new data file, we need to version it accordingly:
 

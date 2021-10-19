@@ -83,15 +83,7 @@ df[np.abs(df.A - df.A.mean()) <= (2 * df.A.std())]
 df.C = df.A + df.B
 ```
 
-!!! note
-    Many teams save their processed features to a central [feature store](feature-store.md){:target="_blank"} for the benefits of:
-
-    - reduce duplication of effort when engineering features.
-    - remove training and serving skew for creating and using features.
-    - avoid data leaks with point-in-time validation (es. during SQL joins).
-    - data validation and monitoring on features distributions.
-
-    Learn more about feature stores and implementing them with [Feast](https://github.com/feast-dev/feast){:target="_blank"} in our [Feature Stores lesson](feature-store.md){:target="_blank"}.
+> After engineering our features, we can use techniques such as [SHAP](https://github.com/slundberg/shap){:target="_blank"} (SHapley Additive exPlanations) or [LIME](https://github.com/marcotcr/lime){:target="_blank"} (Local Interpretable Model-agnostic Explanations) to inspect feature importance. On a high level, these techniques learn which features have the most signal by assessing the performance in their absence. These inspections can be done on a model's single prediction or at a coarse-grained, overall level.
 
 ### Cleaning
 - use domain expertise and EDA
@@ -223,6 +215,8 @@ Transforming the data involves feature encoding and engineering.
     </pre>
 
 - and many [more](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing){:target="_blank"}!
+
+> We can also encode our data using it's attributes instead of the exact entity itself. For example, representing a user by their location + favorites as opposed to using their user ID.
 
 ### Extraction
 

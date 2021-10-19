@@ -535,9 +535,9 @@ class Dataset(torch.utils.data.Dataset):
     def collate_fn(self, batch):
         """Processing on a batch."""
         # Get inputs
-        batch = np.array(batch, dtype=object)
+        batch = np.array(batch)
         X = batch[:, 0]
-        y = np.stack(batch[:, 1], axis=0)
+        y = batch[:, 1]
 
         # Pad sequences
         X = pad_sequences(X, max_seq_len=self.max_filter_size)
@@ -798,7 +798,7 @@ Size: torch.Size([64, 50, 1])
 </pre>
 
 ### Batch normalization
-The last topic we'll cover before constructing our model is [batch normalization](https://arxiv.org/abs/1502.03167){:target="_blank"}. It's an operation that will standardize (mean=0, std=1) the activations from the previous layer. Recall that we used to standardize our inputs in previous notebooks so our model can optimize quickly with larger learning rates. It's the same concept here but we continue to maintain standardized values throughout the forward pass to further aid optimization.
+The last topic we'll cover before constructing our model is [batch normalization](https://arxiv.org/abs/1502.03167){:target="_blank"}. It's an operation that will standardize (mean=0, std=1) the activations from the previous layer. Recall that we used to standardize our inputs in previous notebooks so our model can optimize quickly with larger learning rates. It's the same concept here but we continue to maintain standardized values throughout the repeated forward passes to further aid optimization.
 
 ```python linenums="1"
 # Batch normalization
@@ -811,10 +811,10 @@ z: torch.Size([64, 50, 6])
 </pre>
 ```python linenums="1"
 # Mean and std before batchnorm
-print (f"mean: {torch.mean(conv1(x)):.2f}, std: {torch.std(conv(x)):.2f}")
+print (f"mean: {torch.mean(conv(x)):.2f}, std: {torch.std(conv(x)):.2f}")
 ```
 <pre class="output">
-mean: 0.01, std: 0.57
+mean: -0.00, std: 0.57
 </pre>
 ```python linenums="1"
 # Mean and std after batchnorm

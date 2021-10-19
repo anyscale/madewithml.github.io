@@ -49,7 +49,7 @@ In our application, we have a set of [projects](https://raw.githubusercontent.co
 
 Our assigned problem is to:
 
-> **Improve search and discoverability** because users have complained that they are not able to discover the appropriate resources..
+> **Improve search and discoverability** because users have complained that they are not able to discover the appropriate resources.
 
 Based on key words in the problems, it's easy to prematurely jump to technological objectives such as:
 
@@ -57,7 +57,7 @@ Based on key words in the problems, it's easy to prematurely jump to technologic
 - we need better search infrastructure
 - we need a sleeker search interface
 
-Though some of these objectives may be valid, they may not resolve the underlying issue. What we need to think about is **why** the *user* isn't able to discover the right resource.
+Though some of these objectives may be valid, they may not resolve the underlying issue. What we need to think about is **why** the *user* isn't able to discover the right resource in order to decouple the most pressing objective.
 
 - What exactly are the user complaints?
 - Is it an issue of content presence or discoverability?

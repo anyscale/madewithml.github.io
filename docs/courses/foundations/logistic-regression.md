@@ -22,9 +22,10 @@ $$ \hat{y} = \frac{e^{XW_y}}{\sum_j e^{XW}} $$
 | Variable    | Description                          |
 | :---------- | :----------------------------------- |
 | $N$         | total numbers of samples             |
-| $\hat{y}$   | predictions $\in \mathbb{R}^{NX1}$   |
+| $C$         | number of classes                    |
+| $\hat{y}$   | predictions $\in \mathbb{R}^{NXC}$   |
 | $X$         | inputs $\in \mathbb{R}^{NXD}$        |
-| $W$         | weights $\in \mathbb{R}^{DX1}$       |
+| $W$         | weights $\in \mathbb{R}^{DXC}$       |
 
 </center>
 
@@ -573,11 +574,9 @@ class LogisticRegression(nn.Module):
         super(LogisticRegression, self).__init__()
         self.fc1 = nn.Linear(input_dim, num_classes)
 
-    def forward(self, x_in, apply_softmax=False):
-        y_pred = self.fc1(x_in)
-        if apply_softmax:
-            y_pred = F.softmax(y_pred, dim=1)
-        return y_pred
+    def forward(self, x_in):
+        z = self.fc1(x_in)
+        return z
 ```
 ```python linenums="1"
 # Initialize model
@@ -691,8 +690,8 @@ from sklearn.metrics import accuracy_score
 ```
 ```python linenums="1"
 # Predictions
-pred_train = model(X_train, apply_softmax=True)
-pred_test = model(X_test, apply_softmax=True)
+pred_train = F.softmax(model(X_train), dim=1)
+pred_test = F.softmax(model(X_test), dim=1)
 print (f"sample probability: {pred_test[0]}")
 pred_train = pred_train.max(dim=1)[1]
 pred_test = pred_test.max(dim=1)[1]
@@ -802,7 +801,7 @@ def plot_multiclass_decision_boundary(model, X, y):
     cmap = plt.cm.Spectral
 
     X_test = torch.from_numpy(np.c_[xx.ravel(), yy.ravel()]).float()
-    y_pred = model(X_test, apply_softmax=True)
+    y_pred = F.softmax(model(X_test), dim=1)
     _, y_pred = y_pred.max(dim=1)
     y_pred = y_pred.reshape(xx.shape)
     plt.contourf(xx, yy, y_pred, cmap=plt.cm.Spectral, alpha=0.8)
@@ -841,7 +840,7 @@ print (X_infer)
 </pre>
 ```python linenums="1"
 # Predict
-y_infer = model(torch.Tensor(X_infer), apply_softmax=True)
+y_infer = F.softmax(model(torch.Tensor(X_infer)), dim=1)
 prob, _class = y_infer.max(dim=1)
 label = label_encoder.decode(_class.detach().numpy())[0]
 print (f"The probability that you have a {label} tumor is {prob.detach().numpy()[0]*100.0:.0f}%")
@@ -873,7 +872,7 @@ In the expression above, we can see the expression $\hat{y}_{unscaled} = W_{unsc
 
 | Variable    | Description                          |
 | :---------- | :----------------------------------- |
-| $W_{unscaled}$   | $\sum_{j=1}^{k} (\frac{ {W_{scaled}}_j }{\sigma_j})$                     |
+| $W_{unscaled}$   | $\frac{ {W_{scaled}}_j }{\sigma_j}$                     |
 | $b_{unscaled}$   | $b_{scaled} - \sum_{j=1}^{k} {W_{scaled}}_j\frac{\bar{x}_j}{\sigma_j}$   |
 
 </center>

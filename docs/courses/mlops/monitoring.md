@@ -40,10 +40,10 @@ sns.set_theme()
 ```
 ```python linenums="1"
 # Generate data
-hourly_f1 = list(np.random.randint(94, 98, 24*20)) + \
-            list(np.random.randint(92, 96, 24*5)) + \
-            list(np.random.randint(88, 96, 24*5)) + \
-            list(np.random.randint(86, 92, 24*5))
+hourly_f1 = list(np.random.randint(low=94, high=98, size=24*20)) + \
+            list(np.random.randint(low=92, high=96, size=24*5)) + \
+            list(np.random.randint(low=88, high=96, size=24*5)) + \
+            list(np.random.randint(low=86, high=92, size=24*5))
 ```
 ```python linenums="1"
 # Rolling f1
@@ -245,7 +245,7 @@ plt.show()
 
 ```python linenums="1"
 # Drift
-drift = np.random.normal(10, 2, len(reference))
+drift = np.random.normal(loc=10, scale=2, size=len(reference))
 length_drift_detector.predict(drift, return_p_val=True, return_distance=True)
 plt.hist(reference, alpha=0.75, label="reference")
 plt.hist(drift, alpha=0.5, label="production")
@@ -552,7 +552,7 @@ With drift, we're comparing a window of production data with reference data as o
 
 Unfortunately, it's not very easy to detect outliers because it's hard to constitute the criteria for an outlier. Therefore the outlier detection task is typically unsupervised and requires a stochastic streaming algorithm to identify potential outliers. Luckily, there are several powerful libraries such as [PyOD](https://pyod.readthedocs.io/en/latest/){:target="_blank"}, [Alibi Detect](https://docs.seldon.io/projects/alibi-detect/en/latest/){:target="_blank"}, [WhyLogs](https://whylogs.readthedocs.io/en/latest/){:target="_blank"} (uses [Apache DataSketches](https://datasketches.apache.org/){:target="_blank"}), etc. that offer a suite of outlier detection functionality (largely for tabular and image data for now). We can use these packages with our [pipelines](pipelines.md){:target="_blank"} or even [Kafka](https://kafka.apache.org/){:target="_blank"} data streams to continuously monitor for outliers.
 
-> When we identify outliers, we may want to let the end user know that the model's response may not be reliable. Additionally, we may want to remove the outliers from the next training set or further inspect them and upsample them in case they're early signs of what future distributions of incoming features will look like.
+Typically, outlier detection algorithms fit (ex. via reconstruction) to the training set to understand what normal data looks like and then we can use a threshold to predict outliers. If we have a small labeled dataset with outliers, we can empirically choose our threshold but if not, we can choose some reasonable tolerance.
 
 ```python linenums="1"
 from alibi_detect.od import OutlierVAE
@@ -568,7 +568,7 @@ outlier_detector.infer_threshold(X, threshold_perc=95)  # infer from % outliers
 preds = outlier_detector.predict(X, outlier_type="instance", outlier_perc=75)
 ```
 
-> Typically, outlier detection algorithms fit (ex. via reconstruction) to the training set to understand what normal data looks like and then we can use a threshold to predict outliers. If we have a small labeled dataset with outliers, we can empirically choose our threshold but if not, we can choose some reasonable tolerance.
+> When we identify outliers, we may want to let the end user know that the model's response may not be reliable. Additionally, we may want to remove the outliers from the next training set or further inspect them and upsample them in case they're early signs of what future distributions of incoming features will look like.
 
 ## Solutions
 

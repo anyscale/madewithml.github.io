@@ -54,6 +54,7 @@ import pandas as pd
 import random
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 ```
 ```python linenums="1"
 SEED = 1234
@@ -482,10 +483,10 @@ class Dataset(torch.utils.data.Dataset):
     def collate_fn(self, batch):
         """Processing on a batch."""
         # Get inputs
-        batch = np.array(batch, dtype=object)
+        batch = np.array(batch)
         X = batch[:, 0]
         seq_lens = batch[:, 1]
-        y = np.stack(batch[:, 2], axis=0)
+        y = batch[:, 2]
 
         # Pad inputs
         X = pad_sequences(sequences=X)
@@ -633,7 +634,7 @@ class Trainer(object):
 
                 # Forward pass w/ inputs
                 inputs, targets = batch[:-1], batch[-1]
-                y_prob = self.model(inputs, apply_softmax=True)
+                y_prob = F.softmax(model(inputs), dim=1)
 
                 # Store outputs
                 y_probs.extend(y_prob)
@@ -794,7 +795,7 @@ class RNN(nn.Module):
         self.fc1 = nn.Linear(rnn_hidden_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, inputs, apply_softmax=False):
+    def forward(self, inputs):
         # Embed
         x_in, seq_lens = inputs
         x_in = self.embeddings(x_in)
@@ -810,11 +811,9 @@ class RNN(nn.Module):
         # Predict
         z = self.fc1(c)
         z = self.dropout(z)
-        y_pred = self.fc2(z)
+        z = self.fc2(z)
 
-        if apply_softmax:
-            y_pred = F.softmax(y_pred, dim=1)
-        return y_pred
+        return z
 ```
 
 ```python linenums="1"
@@ -1039,7 +1038,7 @@ class InterpretAttn(nn.Module):
         self.fc1 = nn.Linear(rnn_hidden_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, inputs, apply_softmax=False):
+    def forward(self, inputs):
         # Embed
         x_in, seq_lens = inputs
         x_in = self.embeddings(x_in)

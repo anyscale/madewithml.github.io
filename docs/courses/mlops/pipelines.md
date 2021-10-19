@@ -398,10 +398,7 @@ Now that we've reviewed Airflow's major concepts, we're ready to create the Data
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/dataops.png" width="1000" alt="dataops workflow">
 </div>
 
-```python linenums="1"
-# Task relationships
-extract_data >> [validate_projects, validate_tags] >> compute_features >> cache
-```
+### Extraction
 
 To keep things simple, we'll continue to keep our data as a local file:
 
@@ -415,10 +412,6 @@ extract_data = BashOperator(
 
 ... but in a real production setting, our data can come from a wide variety of sources. For example, we have a dataset prepared for the purposes of this course but where does this data originate from and where does it end up before we're ready to use it for machine learning?
 
-### Extraction
-
-When we talk about data that we want to process on in our DataOps pipelines, we need to think about both it's origin and where it lives.
-
 - **Database**: most applications (including the [old Made With ML](https://madewithml.com/pivot/){:target="_blank"} that our dataset comes from) have a database to store and read information from. Typical choices are [PostgreSQL](https://www.postgresql.org/){:target="_blank"}, [MySQL](https://www.mysql.com/){:target="_blank"}, [MongoDB](https://www.mongodb.com/){:target="_blank"}, [Cassandra](https://cassandra.apache.org/){:target="_blank"}, etc. The specific choice depends on the schemas, data scale, etc. We can also have auxiliary data coming from other services around our main application such as user analytics (ex. [Google Analytics](https://analytics.google.com/analytics/web/){:target="_blank"} or [Segment](https://segment.com/){:target="_blank"}), financial transactions (ex. [Stripe](https://stripe.com/){:target="_blank"}), CRM services (ex. [SalesForce](https://www.salesforce.com/){:target="_blank"}), etc. Data can also be taken from the origin database and moved to another specialized database after it goes through labeling/annotation and QA pipelines.
 
 - **Warehouse**: data is often moved from the database to a data warehouse (DWH) for the added benefits of a powerful analytics engine, front-end clients, etc. to make it very easy for downstream developers to efficiently use the data at scale. Typical choices are [Google BigQuery](https://cloud.google.com/bigquery){:target="_blank"}, [Amazon RedShift](https://aws.amazon.com/redshift/){:target="_blank"}, [SnowFlake](https://www.snowflake.com/){:target="_blank"}, [Hive](https://hive.apache.org/){:target="_blank"}, etc.
@@ -427,16 +420,6 @@ While both databases and data warehouses hold data, they're different kinds of p
 
 > Typically we'll use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/){:target="_blank"} to trigger workflows when a condition is met or trigger them directly from the external source via API calls, etc. Our workflows can communicate with the different platforms by establishing a [connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html){:target="_blank"} and then using [hooks](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/hooks/index.html){:target="_blank"} to interface with the database, data warehouse, etc.
 
-In our application, we can simply extract from our blog storage:
-
-```python linenums="1"
-# airflow/dags/workflows.py
-# Extract data from DWH, blob storage, etc.
-extract_data = BashOperator(
-    task_id="extract_data",
-    bash_command=f"cd {config.BASE_DIR} && dvc pull",
-)
-```
 
 ### Validation
 
@@ -508,6 +491,12 @@ cache = BashOperator(
 
 > Learn all about what features stores are, why we need them and how to implement them in our [feature stores lesson](feature-store.md){:target="_blank"}.
 
+<hr>
+
+```python linenums="1"
+# Task relationships
+extract_data >> [validate_projects, validate_tags] >> compute_features >> cache
+```
 
 ## MLOps (model)
 
@@ -516,13 +505,6 @@ Once we have our features in our feature store, we can use them for MLOps tasks 
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/model.png" width="1000" alt="mlops model training workflow">
 </div>
-
-```python linenums="1"
-# Task relationships
-optimization >> train_model >> evaluate_model >> [improved, regressed]
-improved >> [set_monitoring_references, deploy_model, notify_teams]
-regressed >> [notify_teams, file_report]
-```
 
 ### Extract data
 
@@ -616,13 +598,6 @@ regressed = BashOperator(
 
 The returning task ids can correspond to tasks that are simply used to direct the workflow towards a certain set of tasks based on upstream results. In our case, we want to serve the improved model or log a report in the event of a regression.
 
-```python linenums="1"
-# Task relationships
-extract_data >> optimization >> train >> evaluate >> [improved, regressed]
-improved >> serve
-regressed >> report
-```
-
 ### Serving
 
 If our model passed our evaluation criteria then we can deploy and serve our model. Again, there are many different options here such as using our CI/CD Git workflows to deploy the model wrapped as a scalable microservice or for more streamlined deployments, we can use a purpose-build model server such as as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server. These servers have a registry with an API layer to seamlessly inspect, update, serve, rollback, etc. multiple versions of models. Typically a model artifact will be loaded to an inference app which directly interfaces to fulfill any requests from the user-facing application.
@@ -635,6 +610,15 @@ serve = BashOperator(
 )
 ```
 
+<hr>
+
+```python linenums="1"
+# Task relationships
+extract_data >> optimization >> train >> evaluate >> [improved, regressed]
+improved >> serve
+regressed >> report
+```
+
 ## MLOps (update)
 
 Once we've validated and served our model, how do we know *when* and *how* it needs to be updated? We'll need to compose a set of workflows that reflect the update policies we want to set in place.
@@ -642,12 +626,6 @@ Once we've validated and served our model, how do we know *when* and *how* it ne
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/update.png" width="1000" alt="mlops model update workflow">
 </div>
-
-```python linenums="1"
-# Task relationships
-monitoring >> update_policy_engine >> [_continue, inspect, improve, rollback]
-improve >> compose_retraining_dataset >> retrain
-```
 
 ### Monitoring
 Our inference application will receive requests from our user-facing application and we'll use our versioned model artifact to return inference responses. All of these inputs, predictions and other values will also be sent (batch/real-time) to a monitoring workflow that ensures the health of our system. We have already covered the foundations of monitoring in our [monitoring lesson](monitoring.md){:target="_blank"} but here we'll look at how triggered alerts fit with the overall operational workflow.
@@ -671,6 +649,14 @@ If we need to improve on the existing version of the model, it's not just the ma
 - `#!js evaluation`:  creation of an evaluation dataset that's representative of what the model will encounter once deployed.
 
 Once we have the proper dataset for retraining, we can kickoff the featurization and model training workflows where a new model will be trained and evaluated before being deployed and receiving new inference requests. In the [next lesson](continual-learning.md){:target="_blank"}, we'll discuss how to combine these pipelines together to create a continual learning system.
+
+<hr>
+
+```python linenums="1"
+# Task relationships
+monitoring >> update_policy_engine >> [_continue, inspect, improve, rollback]
+improve >> compose_retraining_dataset >> retrain
+```
 
 ## References
 - [Airflow official documentation](https://airflow.apache.org/docs/apache-airflow/stable/index.html){:target="_blank"}

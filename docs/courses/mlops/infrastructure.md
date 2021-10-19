@@ -81,7 +81,7 @@ Batch process features for a given entity at a previous point in time, which are
 
 ### Stream processing
 
-Perform inference on a given set of inputs with near real-time, streaming, features for a given entity.
+Perform inference on a given set of inputs with *near* real-time, streaming, features for a given entity.
 
 <div class="ai-center-all">
     <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/stream_processing.png">
@@ -93,6 +93,9 @@ Perform inference on a given set of inputs with near real-time, streaming, featu
 > Recommend content based on the real-time history that the users have generated. Note that the same model is used but the input data can change and grow.
 
 If we infinitely reduce the time between each batch processing event, we’ll [effectively have](https://www.ververica.com/blog/batch-is-a-special-case-of-streaming){:target="_blank"} stream (real-time) processing since the features will always be up-to-date.
+
+!!! tip
+    Even if our application requires stream processing, it's a good idea to implement the system with batch processing first if it's technically easier. If our task is high-stakes and requires stream processing even for the initial deployments, we can still experiment with batch processing for internal releases. This can allow us to start collecting feedback, generating more data to label, etc.
 
 ## Learning
 
@@ -157,14 +160,6 @@ Shadow testing involves sending the same production traffic to the different sys
         With shadow deployment, we'll miss out on any live feedback signals (explicit/implicit) from our users since users are not directly interacting with the product using our new version.
 
         We also need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. This is rarely possible because, while your ML system may be a standalone microservice, it ultimately interacts with an intricate production environment that has *many* dependencies.
-
-## Optimization
-
-We’ve discussed [distributed training](baselines.md#distributed-training){:target="_blank"} strategies for when our data or models are too large for training but what about when our models are too large to deploy? The following model compression techniques are commonly used to make large models fit within existing infrastructure:
-
-- **Pruning**: remove weights (unstructured) or entire channels (structured) to reduce the size of the network. The objective is to preserve the model’s performance while increasing its sparsity.
-- **Quantization**: reduce the memory footprint of the weights by reducing their precision (ex. 32 bit to 8 bit). We may loose some precision but it shouldn’t affect performance too much.
-- **Distillation**: training smaller networks to “mimic” larger networks by having it reproduce the larger network’s layers’ outputs.
 
 ## Methods
 

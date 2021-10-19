@@ -274,12 +274,10 @@ class MLP(nn.Module):
         self.fc1 = nn.Linear(input_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, x_in, apply_softmax=False):
-        z = F.relu(self.fc1(x_in)) # ReLU activaton function added!
-        y_pred = self.fc2(z)
-        if apply_softmax:
-            y_pred = F.softmax(y_pred, dim=1)
-        return y_pred
+    def forward(self, x_in):
+        z = F.relu(self.fc1(x_in)) # ReLU activation function added!
+        z = self.fc2(z)
+        return z
 ```
 ```python linenums="1"
 # Initialize model
@@ -393,7 +391,7 @@ def get_metrics(y_true, y_pred, classes):
 ```
 ```python linenums="1"
 # Predictions
-y_prob = model(X_test, apply_softmax=True)
+y_prob = F.softmax(model(X_test), dim=1)
 y_pred = y_prob.max(dim=1)[1]
 ```
 ```python linenums="1"
@@ -437,7 +435,7 @@ def plot_multiclass_decision_boundary(model, X, y):
     cmap = plt.cm.Spectral
 
     X_test = torch.from_numpy(np.c_[xx.ravel(), yy.ravel()]).float()
-    y_pred = model(X_test, apply_softmax=True)
+    y_pred = F.softmax(model(X_test), dim=1)
     _, y_pred = y_pred.max(dim=1)
     y_pred = y_pred.reshape(xx.shape)
     plt.contourf(xx, yy, y_pred, cmap=plt.cm.Spectral, alpha=0.8)
@@ -668,7 +666,7 @@ Epoch: 40 | loss: 0.27, accuracy: 99.8
 
 ```python linenums="1"
 # Predictions
-y_prob = model(X_test, apply_softmax=True)
+y_prob = F.softmax(model(X_test), dim=1)
 y_pred = y_prob.max(dim=1)[1]
 ```
 ```python linenums="1"

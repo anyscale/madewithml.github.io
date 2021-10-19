@@ -38,7 +38,7 @@ $$ \hat{y} = softmax(z_2) $$
 | $f$         | non-linear activation function                       |
 | $a_1$       | activations from first layer $\in \mathbb{R}^{NXH}$  |
 | $W_2$       | 2nd layer weights $\in \mathbb{R}^{HXC}$             |
-| $z_2$       | outputs from second layer $\in \mathbb{R}^{NXH}$     |
+| $z_2$       | outputs from second layer $\in \mathbb{R}^{NXC}$     |
 | $\hat{y}$   | prediction $\in \mathbb{R}^{NXC}$                    |
 
 </center>
@@ -284,12 +284,10 @@ class LinearModel(nn.Module):
         self.fc1 = nn.Linear(input_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, x_in, apply_softmax=False):
+    def forward(self, x_in):
         z = self.fc1(x_in) # linear activation
-        y_pred = self.fc2(z)
-        if apply_softmax:
-            y_pred = F.softmax(y_pred, dim=1)
-        return y_pred
+        z = self.fc2(z)
+        return z
 ```
 ```python linenums="1"
 # Initialize model
@@ -409,7 +407,7 @@ def get_metrics(y_true, y_pred, classes):
 ```
 ```python linenums="1"
 # Predictions
-y_prob = model(X_test, apply_softmax=True)
+y_prob = F.softmax(model(X_test), dim=1)
 print (f"sample probability: {y_prob[0]}")
 y_pred = y_prob.max(dim=1)[1]
 print (f"sample class: {y_pred[0]}")
@@ -461,7 +459,7 @@ def plot_multiclass_decision_boundary(model, X, y):
     cmap = plt.cm.Spectral
 
     X_test = torch.from_numpy(np.c_[xx.ravel(), yy.ravel()]).float()
-    y_pred = model(X_test, apply_softmax=True)
+    y_pred = F.softmax(model(X_test), dim=1)
     _, y_pred = y_pred.max(dim=1)
     y_pred = y_pred.reshape(xx.shape)
     plt.contourf(xx, yy, y_pred, cmap=plt.cm.Spectral, alpha=0.8)
@@ -649,7 +647,7 @@ $$ = - \frac{1}{\frac{e^{W_{2y}a_1}}{\sum_j e^{a_1W}}}\frac{\sum_j e^{a_1W}e^{a_
 
 $$ \frac{\partial{J}}{\partial{W_{2y}}} = \frac{\partial{J}}{\partial{\hat{y}}}\frac{\partial{\hat{y}}}{\partial{W_{2y}}} = - \frac{1}{\hat{y}}\frac{\partial{\hat{y}}}{\partial{W_{2y}}} = $$
 
-$$ = - \frac{1}{\frac{e^{W_{2y}a_1}}{\sum_j e^{a_1W}}}\frac{\sum_j e^{a_1W}e^{a_1W_{2y}}a_1 - e^{a_1W_{2y}}e^{a_1W_{2y}}a_1}{(\sum_j e^{a_1W})^2} = \frac{1}{\hat{y}}(a_1\hat{y} - a_1\hat{y}^2) = a_1(\hat{y}-1) $$
+$$ = - \frac{1}{\frac{e^{W_{2y}a_1}}{\sum_j e^{a_1W}}}\frac{\sum_j e^{a_1W}e^{a_1W_{2y}}a_1 - e^{a_1W_{2y}}e^{a_1W_{2y}}a_1}{(\sum_j e^{a_1W})^2} = -\frac{1}{\hat{y}}(a_1\hat{y} - a_1\hat{y}^2) = a_1(\hat{y}-1) $$
 
 The gradient of the loss w.r.t $W_1$ is a bit trickier since we have to backpropagate through two sets of weights.
 
@@ -873,12 +871,10 @@ class MLP(nn.Module):
         self.fc1 = nn.Linear(input_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, num_classes)
 
-    def forward(self, x_in, apply_softmax=False):
-        z = F.relu(self.fc1(x_in)) # ReLU activaton function added!
-        y_pred = self.fc2(z)
-        if apply_softmax:
-            y_pred = F.softmax(y_pred, dim=1)
-        return y_pred
+    def forward(self, x_in):
+        z = F.relu(self.fc1(x_in)) # ReLU activation function added!
+        z = self.fc2(z)
+        return z
 ```
 ```python linenums="1"
 # Initialize model
@@ -957,7 +953,7 @@ Epoch: 90 | loss: 0.10, accuracy: 97.8
 ### Evaluation
 ```python linenums="1"
 # Predictions
-y_prob = model(X_test, apply_softmax=True)
+y_prob = F.softmax(model(X_test), dim=1)
 y_pred = y_prob.max(dim=1)[1]
 ```
 ```python linenums="1"
@@ -1027,7 +1023,7 @@ print (X_infer)
 </pre>
 ```python linenums="1"
 # Predict
-y_infer = model(torch.Tensor(X_infer), apply_softmax=True)
+y_infer = F.softmax(model(torch.Tensor(X_infer)), dim=1)
 prob, _class = y_infer.max(dim=1)
 label = label_encoder.inverse_transform(_class.detach().numpy())[0]
 print (f"The probability that you have {label} is {prob.detach().numpy()[0]*100.0:.0f}%")
@@ -1037,9 +1033,9 @@ The probability that you have c1 is 92%
 </pre>
 
 ## Initializing weights
-So far we have been initializing weights with small random values and this isn't optimal for convergence during training. The objective is to have weights that are able to produce outputs that follow a similar distribution across all neurons. We can do this by enforcing weights to have unit variance prior to the affine and non-linear operations.
+So far we have been initializing weights with small random values but this isn't optimal for convergence during training. The objective is to initialize the appropriate weights such that our activations (outputs of layers) don't vanish (too small) or explode (too large), as either of these situations will hinder convergence. We can do this by sampling the weights uniformly from a bound distribution (many that take into account the precise activation function used) such that all activations have unit variance.
 
-> A popular method is to apply [xavier initialization](http://andyljones.tumblr.com/post/110998971763/an-explanation-of-xavier-initialization){:target="_blank"}, which essentially initializes the weights to allow the signal from the data to reach deep into the network. You may be wondering why we don't do this for every forward pass and that's a great question. We'll look at more advanced strategies that help with optimization like [batch normalization](convolutional-neural-networks.md#batch-normalization){:target="_blank"}, etc. in future lessons. Meanwhile you can check out other initializers [here](https://pytorch.org/docs/stable/nn.init.html){:target="_blank"}.
+> You may be wondering why we don't do this for every forward pass and that's a great question. We'll look at more advanced strategies that help with optimization like [batch normalization](convolutional-neural-networks.md#batch-normalization){:target="_blank"}, etc. in future lessons. Meanwhile you can check out other initializers [here](https://pytorch.org/docs/stable/nn.init.html){:target="_blank"}.
 
 ```python linenums="1"
 from torch.nn import init
@@ -1054,12 +1050,10 @@ class MLP(nn.Module):
     def init_weights(self):
         init.xavier_normal(self.fc1.weight, gain=init.calculate_gain("relu"))
 
-    def forward(self, x_in, apply_softmax=False):
-        z = F.relu(self.fc1(x_in)) # ReLU activaton function added!
-        y_pred = self.fc2(z)
-        if apply_softmax:
-            y_pred = F.softmax(y_pred, dim=1)
-        return y_pred
+    def forward(self, x_in):
+        z = F.relu(self.fc1(x_in)) # ReLU activation function added!
+        z = self.fc2(z)
+        return z
 ```
 
 
@@ -1090,13 +1084,11 @@ class MLP(nn.Module):
     def init_weights(self):
         init.xavier_normal(self.fc1.weight, gain=init.calculate_gain("relu"))
 
-    def forward(self, x_in, apply_softmax=False):
+    def forward(self, x_in):
         z = F.relu(self.fc1(x_in))
         z = self.dropout(z) # dropout
-        y_pred = self.fc2(z)
-        if apply_softmax:
-            y_pred = F.softmax(y_pred, dim=1)
-        return y_pred
+        z = self.fc2(z)
+        return z
 ```
 ```python linenums="1"
 # Initialize model
@@ -1232,7 +1224,7 @@ Epoch: 480 | loss: 0.80, accuracy: 67.6
 </pre>
 ```python linenums="1"
 # Predictions
-y_prob = model(X_test, apply_softmax=True)
+y_prob = F.softmax(model(X_test), dim=1)
 y_pred = y_prob.max(dim=1)[1]
 ```
 ```python linenums="1"

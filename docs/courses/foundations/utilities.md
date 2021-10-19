@@ -330,9 +330,9 @@ class Dataset(torch.utils.data.Dataset):
     def collate_fn(self, batch):
         """Processing on a batch."""
         # Get inputs
-        batch = np.array(batch, dtype=object)
+        batch = np.array(batch)
         X = np.stack(batch[:, 0], axis=0)
-        y = np.stack(batch[:, 1], axis=0)
+        y = batch[:, 1]
 
         # Cast
         X = torch.FloatTensor(X.astype(np.float32))
@@ -542,7 +542,7 @@ def predict_step(self, dataloader):
             z = self.model(inputs)
 
             # Store outputs
-            z = F.softmax(z).cpu().numpy()
+            y_prob = F.softmax(z).cpu().numpy()
             y_probs.extend(y_prob)
 
     return np.vstack(y_probs)

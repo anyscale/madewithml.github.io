@@ -41,7 +41,7 @@ Regardless of whether we have a custom labeling platform or we choose a generali
 ### Preliminary steps
 - Decide what needs to be labeled
     - consult with domain experts to ensure you're labeling the appropriate signals
-    - ensure your labeling allows for future changes (addition/removal of labels)
+    - consolidate the appropriate labels for your task (consider [hierarchical labeling](https://aws.amazon.com/blogs/machine-learning/creating-hierarchical-label-taxonomies-using-amazon-sagemaker-ground-truth/){:target="_blank"})
 - Design the interface where labeling will be done
     - intuitive, data modality dependent and quick (keybindings are a must!)
     - avoid option paralysis by allowing labeler to dig deeper or suggest likely labels
@@ -313,6 +313,7 @@ def contains_tensorflow(text):
 ```
 
 > An easy way to validate our labels (before modeling) is to use the aliases in our auxillary datasets to create labeling functions for the different classes. Then we can look for false positives and negatives to identify potentially mislabeled samples. We'll actually implement a similar kind of inspection approach, but using a trained model as a heuristic, in our [dashboards lesson](dashboard.md#inspection){:target="_blank"}.
+
 
 ## Iteration
 

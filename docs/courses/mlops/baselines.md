@@ -724,6 +724,21 @@ All the training we need to do for our application happens on one worker with on
 
 There are lots of options for applying distributed training such as with PyTorch's [distributed package](https://pytorch.org/tutorials/beginner/dist_overview.html){:target="_blank"}, [Ray](https://ray.io/){:target="_blank"}, [Horovd](https://horovod.ai/){:target="_blank"}, etc.
 
+## Optimization
+
+Distributed training strategies are great for when our data or models are too large for training but what about when our models are too large to deploy? The following model compression techniques are commonly used to make large models fit within existing infrastructure:
+
+- [**Pruning**](https://pytorch.org/tutorials/intermediate/pruning_tutorial.html){:target="_blank"}: remove weights (unstructured) or entire channels (structured) to reduce the size of the network. The objective is to preserve the model’s performance while increasing its sparsity.
+- [**Quantization**](https://pytorch.org/docs/stable/torch.quantization.html){:target="_blank"}: reduce the memory footprint of the weights by reducing their precision (ex. 32 bit to 8 bit). We may loose some precision but it shouldn’t affect performance too much.
+- [**Distillation**](https://arxiv.org/abs/2011.14691){:target="_blank"}: training smaller networks to “mimic” larger networks by having it reproduce the larger network’s layers’ outputs.
+
+<div class="ai-center-all">
+    <img width="800" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/baselines/kd.png">
+</div>
+<div class="ai-center-all">
+    <small>Distilling the knowledge in a neural network [<a href="https://nni.readthedocs.io/en/latest/TrialExample/KDExample.html" target="_blank">source</a>]</small>
+</div>
+
 <hr>
 
 ## CNN w/ Embeddings
@@ -948,9 +963,9 @@ class CNNTextDataset(torch.utils.data.Dataset):
     def collate_fn(self, batch):
         """Processing on a batch."""
         # Get inputs
-        batch = np.array(batch, dtype=object)
+        batch = np.array(batch)
         X = batch[:, 0]
-        y = np.stack(batch[:, 1], axis=0)
+        y = batch[:, 1]
 
         # Pad inputs
         X = pad_sequences(sequences=X, max_seq_len=self.max_filter_size)

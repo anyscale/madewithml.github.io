@@ -447,7 +447,7 @@ $$ \hat{y}_{unscaled} = W_{unscaled}x + b_{unscaled} $$
 
 | Variable    | Description                          |
 | :---------- | :----------------------------------- |
-| $W_{unscaled}$   | $\sum_{j=1}^{k}{W}_j(\frac{\sigma_y}{\sigma_j})$ |
+| $W_{unscaled}$   | ${W}_j(\frac{\sigma_y}{\sigma_j})$ |
 | $b_{unscaled}$   | $b_{scaled}\sigma_y + \bar{y} - \sum_{j=1}^{k} {W}_j(\frac{\sigma_y}{\sigma_j})\bar{x}_j$   |
 
 </center>
