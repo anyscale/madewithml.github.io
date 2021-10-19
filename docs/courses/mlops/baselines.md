@@ -1046,7 +1046,7 @@ Let's visualize the model's forward pass.
 
 1. We'll first tokenize our inputs (`batch_size`, `max_seq_len`).
 2. Then we'll embed our tokenized inputs (`batch_size`, `max_seq_len`, `embedding_dim`).
-3. We'll apply convolution via filters (`filter_size`, `vocab_size`, `num_filters`) followed by batch normalization. Our filters act as character level n-gram detecors. We have three different filter sizes (2, 3 and 4) and they will act as bi-gram, tri-gram and 4-gram feature extractors, respectivelyy.
+3. We'll apply convolution via filters (`filter_size`, `embedding_dim`, `num_filters`) followed by batch normalization. Our filters act as character level n-gram detectors. We have three different filter sizes (2, 3 and 4) and they will act as bi-gram, tri-gram and 4-gram feature extractors, respectively.
 4. We'll apply 1D global max pooling which will extract the most relevant information from the feature maps for making the decision.
 5. We feed the pool outputs to a fully-connected (FC) layer (with dropout).
 6. We use one more FC layer with softmax to derive class probabilities.

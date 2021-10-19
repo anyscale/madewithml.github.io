@@ -1202,7 +1202,7 @@ print (json.dumps(prob_dist, indent=2))
 </pre>
 
 ## Interpretability
-We went through all the trouble of padding our inputs before convolution to result is outputs of the same shape as our inputs so we can try to get some interpretability. Since every token is mapped to a convolutional output on which we apply max pooling, we can see which token's output was most influential towards the prediction. We first need to get the conv outputs from our model:
+We went through all the trouble of padding our inputs before convolution to result in outputs of the same shape as our inputs so we can try to get some interpretability. Since every token is mapped to a convolutional output on which we apply max pooling, we can see which token's output was most influential towards the prediction. We first need to get the conv outputs from our model:
 
 ```python linenums="1"
 import collections

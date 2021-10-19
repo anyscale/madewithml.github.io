@@ -902,7 +902,7 @@ Let's visualize the model's forward pass.
 
 1. We'll first tokenize our inputs (`batch_size`, `max_seq_len`).
 2. Then we'll embed our tokenized inputs (`batch_size`, `max_seq_len`, `embedding_dim`).
-3. We'll apply convolution via filters (`filter_size`, `vocab_size`, `num_filters`) followed by batch normalization. Our filters act as character level n-gram detecors. We have three different filter sizes (2, 3 and 4) and they will act as bi-gram, tri-gram and 4-gram feature extractors, respectivelyy.
+3. We'll apply convolution via filters (`filter_size`, `embedding_dim`, `num_filters`) followed by batch normalization. Our filters act as character level n-gram detectors. We have three different filter sizes (2, 3 and 4) and they will act as bi-gram, tri-gram and 4-gram feature extractors, respectively.
 4. We'll apply 1D global max pooling which will extract the most relevant information from the feature maps for making the decision.
 5. We feed the pool outputs to a fully-connected (FC) layer (with dropout).
 6. We use one more FC layer with softmax to derive class probabilities.
@@ -1029,7 +1029,7 @@ print (f"<Embeddings(words={embedding_matrix.shape[0]}, dim={embedding_matrix.sh
 </pre>
 
 ## Experiments
-We have first have to decice whether to use pretrained embeddings randomly initialized ones. Then, we can choose to freeze our embeddings or continue to train them using the supervised data (this could lead to overfitting). Here are the three experiments we're going to conduct:
+We have first have to decide whether to use pretrained embeddings randomly initialized ones. Then, we can choose to freeze our embeddings or continue to train them using the supervised data (this could lead to overfitting). Here are the three experiments we're going to conduct:
 
 * randomly initialized embeddings (fine-tuned)
 * GloVe embeddings (frozen)
@@ -1596,13 +1596,22 @@ InterpretableCNN(
   (fc2): Linear(in_features=100, out_features=4, bias=True)
 )
 </pre>
-```python linenums="1"
-# Initialize trainer
-interpretable_trainer = Trainer(model=interpretable_model, device=device)
-```
+
 ```python linenums="1"
 # Get conv outputs
-conv_outputs = interpretable_trainer.predict_step(dataloader)
+interpretable_model.eval()
+conv_outputs = []
+with torch.inference_mode():
+    for i, batch in enumerate(dataloader):
+
+        # Forward pass w/ inputs
+        inputs, targets = batch[:-1], batch[-1]
+        z = interpretable_model(inputs)
+
+        # Store conv outputs
+        conv_outputs.extend(z)
+
+conv_outputs = np.vstack(conv_outputs)
 print (conv_outputs.shape) # (len(filter_sizes), num_filters, max_seq_len)
 ```
 <pre class="output">
