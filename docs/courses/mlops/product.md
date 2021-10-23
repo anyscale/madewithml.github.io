@@ -98,6 +98,13 @@ We have also validated that the vast majority of user complaints step from missi
     ??? quote "Show answer"
         It depends. By understanding the constraints, you'll unravel systemic issues in your team. Such as legacy systems introducing bugs or simple systems that have yet to be build (ex. full-text search). At this point, you need to have a discussion with your team on whether the system change needs to worked on first because it might remove the problem all together (can cause tension/conflict!)
 
+### Objectives
+
+> What are the key objectives that we're trying to satisfy? These could be general objectives which we can then decouple or it can be specific success criteria/metrics.
+
+- Predict the relevant tags for a given content with 70% recall.
+- Reduce week-to-week tickets based on search errors by 20%.
+
 ### Solutions
 
 > Describe current solutions, feasible solutions and alternative approaches considered. Start with the most obvious solutions and ask questions to decouple the objectives.
