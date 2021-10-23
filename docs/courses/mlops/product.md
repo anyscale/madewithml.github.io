@@ -14,7 +14,8 @@ While this template should be completed in sequential order but will naturally i
 
 [Progress](#progress) (*Where*) → [Product](#product-management) (*What* & *Why*) → [Methodology](#methodology) (*How*) → [Project](#project-management) (*Who* & *When*)
 
-> This is not an exact template to follow but is a guide for important aspect to consider when planning and designing your ML projects.
+!!! warning
+    This is not an exact template to follow but is a guide for important aspect to consider when planning and designing your ML projects.
 
 And each of these sections should follow these best practices and should be overseen by the directly responsible individual (**DRI**):
 
