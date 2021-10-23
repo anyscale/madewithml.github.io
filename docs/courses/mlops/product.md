@@ -51,7 +51,7 @@ On-schedule | v1.5
 
 We are a service that has content (with tags) with a rudimentary search mechanism that involves searching by tags. Recently, there has been an increase in complaints pertaining to the search and discovery experience. Upon further investigation, the vast majority of the complaints are a result of content having insufficient or irrelevant tags.
 
-```json
+```json linenums="1"
 {
     "id": 2427,
     "title": "Knowledge Transfer in Self Supervised Learning",
