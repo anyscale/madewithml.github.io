@@ -133,6 +133,7 @@ Alternatives considered
 Discuss the constraints that we have to account for in our solutions. A large majority of constraints can directly come from our service-level agreements (SLAs) with customers and internal systems regarding time, $, performance, latency, infrastructure, privacy, security, UI/UX.
 
 - maintain low latency (>100ms) when providing our generated tags. **[Latency]**
+- only recommend tags from our list of approved tags. **[Security]**
 - avoid overwhelming the author with too many predicted tags. **[UI/UX]**
 
 !!! question "Converting constraints to timelines"
@@ -212,7 +213,7 @@ How does this effort integrate with the current system and what additional work 
 
 ### Out of scope
 
-> What aspects of the feature/problem should we not be concerned with for the immediate planning?
+> What aspects of the feature/problem should we not be concerned with for the immediate planning? Out of scope doesn't mean that we will never address but just not during this specific deliverable.
 
 - using text from content metadata besides title and description, such as full-text HTML from associated links.
 - interpretability for why we recommend certain tags.
@@ -252,6 +253,13 @@ How does this effort integrate with the current system and what additional work 
   </tr>
 </tbody>
 </table>
+
+### Risks
+
+> What are potential risks, concerns and uncertainties that every one should be aware of?
+
+- how long to continue to QA every single incoming sample
+- system ways to account for popular tags that are not in our accepted list of tags that we're using to recommend relevant tags
 
 ## Methodology
 
