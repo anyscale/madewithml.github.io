@@ -56,7 +56,7 @@ nav:
       - Transformers: courses/foundations/transformers.md
   - MLOps:
     - Lessons: /#mlops
-    - 📦 &nbsp; Product:
+    - 📦 &nbsp; Purpose:
       - Product: courses/mlops/product.md
       - Methodology: courses/mlops/product/#methodology
       - Project: courses/mlops/product/#project-management
