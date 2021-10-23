@@ -325,6 +325,19 @@ The main goal here is to think like a problem solver and motivate the need for a
 
 </center>
 
+#### ML specific methodology
+
+With ML, we’re not writing explicit rules to apply to data but rather using data to learn implicit rules. This inherently involves more trial-and-error compared to composing deterministic systems. Therefore, it’s important to iteratively and regularly scope out the problem towards promising techniques.
+
+1. Proof of concept (POC) with a static, labeled dataset to explore if the input features we have are sufficient enough for the task. Though this is just [baselining](baselines.md){:target="_blank"}, this approach still requires thorough [testing](testing.md){:target="_blank"} (code, data + models) and [evaluation](evaluation.md){:target="_blank"}.
+2. [Optimizing](optimization.md){:target="_blank"} on the solution, while potentially using the POC to collect more data, so that the system achieves performance requirements.
+3. [Deploy](infrastructure.md){:target="_blank"}, [monitor](monitoring.md){:target="_blank"} and maintain the versioned and reproducible models.
+4. If using an end-to-end system, start to decouple into individual [pipeline workflows](workflows.md){:target="_blank"} that can be scaled, debugged and executed separately. This can involve using constructs such as feature stores and model servers to quickly iterate towards a [continual learning system](continual-learning.md){:target="_blank"}.
+
+!!! warning
+    While it's important to iterate and optimize the internals of our workflows, it's even more important to ensure that our ML systems are actually making an impact. We need to constantly engage with stakeholders (management, users) to iterate on why our ML system exists.
+
+
 ### Rollout
 
 > What do the release strategies look like for our different versions? Note that not all releases have to be high stakes, external facing to the whole world. We can always include internal releases, gather feedback and iterate until we’re ready to increase the scope.
