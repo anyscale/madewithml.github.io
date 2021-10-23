@@ -311,7 +311,11 @@ Fortunately in our application, when we make a mistake, it's not catastrophic. T
     - **Internal vs. external**: not all early releases have to be end-user facing. We can use early versions for internal validation, feedback, data collection, etc.
     - **Thorough**: every approach needs to be well [tested](testing.md){:target="_blank"} (code, data + models) and [evaluated](evaluation.md){:target="_blank"}, so we can objectively benchmark different approaches.
 
-For the purpose of this course, we're going to develop a solution that involves machine learning from the very beginning. However, we would also do [A/B testing](infrastructure.md#ab-tests){:target="_blank"} with other approaches such as simply altering the process where users add tags to projects. Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags. This is a simple solution that needs to be tested against other approaches for effectiveness. Then, we would try rule-based approaches such as simple text matching before trying to predict relevant tags from content metadata.
+For the purpose of this course, we're going to develop a solution that involves machine learning from the very beginning. However, we would also do [A/B testing](infrastructure.md#ab-tests){:target="_blank"} with other approaches:
+
+- simple UI change to encourage authors to add specific classes of tags (`frameworks`, `tasks`, `algorithms`, etc.)
+- rule-based approaches using text matching from list of curated tags/aliases
+- predict relevant tags from content title and descriptions
 
 The main goal here is to think like a problem solver and motivate the need for additional complexity, as opposed to a naive model fitter:
 
@@ -328,6 +332,13 @@ The main goal here is to think like a problem solver and motivate the need for a
 #### ML specific methodology
 
 With ML, we’re not writing explicit rules to apply to data but rather using data to learn implicit rules. This inherently involves more trial-and-error compared to composing deterministic systems. Therefore, it’s important to iteratively and regularly scope out the problem towards promising techniques.
+
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/iteration/development_cycle.png" width="700" alt="product development cycle">
+</div>
+<div class="ai-center-all mb-3">
+  <small>ML product development cycle</small>
+</div>
 
 1. Proof of concept (POC) with a static, labeled dataset to explore if the input features we have are sufficient enough for the task. Though this is just [baselining](baselines.md){:target="_blank"}, this approach still requires thorough [testing](testing.md){:target="_blank"} (code, data + models) and [evaluation](evaluation.md){:target="_blank"}.
 2. [Optimizing](optimization.md){:target="_blank"} on the solution, while potentially using the POC to collect more data, so that the system achieves performance requirements.
