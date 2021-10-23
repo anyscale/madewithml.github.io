@@ -296,14 +296,12 @@ Fortunately in our application, when we make a mistake, it's not catastrophic. T
 > Describe the different approaches that each deliver end-to-end utility.
 
 !!! note
-    Good principles to abide by here include:
-
     - **End-to-end utility**: the end result from every iteration should deliver minimum end-to-end utility so that we can benchmark iterations against each other and plug-and-play with the system.
     - **Keep it simple stupid (KISS)**: start from the simplest solution and slowly add complexity with justification along the way → [baselines](https://madewithml.com/courses/mlops/baselines){:target="_blank"}.
     - **Manual before ML**: incorporate deterministic components where we define the rules before using probabilistic ones that infer rules from data.
     - **Augment vs. automate**: allow the system to supplement the decision making process as opposed to making the final decision.
     - **Internal vs. external**: not all early releases have to be end-user facing. We can use early versions for internal validation, feedback, data collection, etc.
-    - **Thorough**: every approach needs to be well [tested](testing.md){:target="_blank"} (code, data + models) and [evaluated](evaluation.md){:target="_blank"} so we can objectively benchmark different approaches.
+    - **Thorough**: every approach needs to be well [tested](testing.md){:target="_blank"} (code, data + models) and [evaluated](evaluation.md){:target="_blank"}, so we can objectively benchmark different approaches.
 
 For the purpose of this course, we're going to develop a solution that involves machine learning from the very beginning. However, we would also do [A/B testing](infrastructure.md#ab-tests){:target="_blank"} with other approaches such as simply altering the process where users add tags to projects. Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags. This is a simple solution that needs to be tested against other approaches for effectiveness. Then, we would try rule-based approaches such as simple text matching before trying to predict relevant tags from content metadata.
 
