@@ -21,7 +21,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/
 </div>
 
 !!! Note "Alternatives to Google Colab"
-    Alternatively, you can run these notebooks locally by using [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/index.html){:target="_blank"}. You should first set up a directory for our project, create a [virtual environment](packaging.md#virtual-environment){:target="_blank"} and install jupyterlab.
+    Alternatively, you can run these notebooks locally by using [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/index.html){:target="_blank"}. You should first set up a directory for our project, create a [virtual environment](../mlops/packaging.md#virtual-environment){:target="_blank"} and install jupyterlab.
 
     ```bash
     mkdir mlops

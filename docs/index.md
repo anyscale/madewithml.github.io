@@ -519,7 +519,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 
 <div class="row mt-4 ai-course-list" data-aos="fade-down">
 <div class="col-md-4">
-    <b><span class="mr-1">📦</span> Product</b>
+    <b><span class="mr-1">📦</span> Purpose</b>
     <ul>
     <li><a href="/courses/mlops/product/">Product</a></li>
     <li><a href="/courses/mlops/product#methodology">Methodology</a></li>

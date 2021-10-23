@@ -152,7 +152,7 @@ Discuss the constraints that we have to account for in our solutions. A large ma
         - create a plan outlining the problem proposed solutions and your plan for each part of the design process (each part = units in this MLOps course, ie. testing, monitoring, etc.)
         - educate and set expectations with leadership because ML solutions involve a lot of trial and error.
         - have frequent meetings at the start of a project so that your team can quickly pivot (very important in this non-linear path with data-driven solutions).
-        - architect initial solution to be deterministic and close the loop (more in [iteration lesson](iteration.md){:target="_blank"})
+        - architect initial solution to be deterministic and close the loop.
         - subsequent projects can leverage well tested code and systems, so be sure to account for this.
         - your judgement improves as you develop solution in this problem space and understand its nuances ([testing](testing.md){:target="_blank"}, [monitoring](monitoring.md){:target="_blank"}, etc.)
 
@@ -291,7 +291,7 @@ We want to be able to suggest highly relevant tags (precision) so we don't fatig
     For your respective industries or areas of interest, do you know where the priorities are (metrics, errors and other tradeoffs)?
 
     ??? quote "Show answer"
-        It entirely depends on the specific task. For example, in an email spam detector, precision is very important because it's better than we some spam then completely miss an important email. Overtime, we need to [iteration](iteration.md){:target="_blank"} on our solution so all evaluation metrics improve but it's important to know which one's we can't comprise on from the get-go.
+        It entirely depends on the specific task. For example, in an email spam detector, precision is very important because it's better than we some spam then completely miss an important email. Overtime, we need to iterate on our solution so all evaluation metrics improve but it's important to know which one's we can't comprise on from the get-go.
 
 #### Offline vs. online
 For offline evaluation, we'll need a gold standard labeled dataset that we can use to benchmark all of our [methods](#methods), while for online evaluation we can initially use the signal on whether the author used our suggested tags and then we can adjust the labels after that new data goes through a proper QA pipeline.
@@ -336,14 +336,11 @@ With ML, we’re not writing explicit rules to apply to data but rather using da
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/iteration/development_cycle.png" width="700" alt="product development cycle">
 </div>
-<div class="ai-center-all mb-3">
-  <small>ML product development cycle</small>
-</div>
 
 1. Proof of concept (POC) with a static, labeled dataset to explore if the input features we have are sufficient enough for the task. Though this is just [baselining](baselines.md){:target="_blank"}, this approach still requires thorough [testing](testing.md){:target="_blank"} (code, data + models) and [evaluation](evaluation.md){:target="_blank"}.
 2. [Optimizing](optimization.md){:target="_blank"} on the solution, while potentially using the POC to collect more data, so that the system achieves performance requirements.
 3. [Deploy](infrastructure.md){:target="_blank"}, [monitor](monitoring.md){:target="_blank"} and maintain the versioned and reproducible models.
-4. If using an end-to-end system, start to decouple into individual [pipeline workflows](workflows.md){:target="_blank"} that can be scaled, debugged and executed separately. This can involve using constructs such as feature stores and model servers to quickly iterate towards a [continual learning system](continual-learning.md){:target="_blank"}.
+4. If using an end-to-end system, start to decouple into individual [pipeline workflows](pipelines.md){:target="_blank"} that can be scaled, debugged and executed separately. This can involve using constructs such as [feature stores](feature-store.md){:target="_blank"} and [model servers](cicd.md#serving){:target="_blank"} to quickly iterate towards a [continual learning system](continual-learning.md){:target="_blank"}.
 
 !!! warning
     While it's important to iterate and optimize the internals of our workflows, it's even more important to ensure that our ML systems are actually making an impact. We need to constantly engage with stakeholders (management, users) to iterate on why our ML system exists.

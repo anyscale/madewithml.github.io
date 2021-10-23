@@ -13,7 +13,7 @@ repository: https://github.com/GokuMohandas/follow/tree/styling
 
 > Code is read more often than it is written. -- [Guido Van Rossum](https://gvanrossum.github.io/){:target="_blank"} (author of Python)
 
-When we write a piece of code, it's almost never the last time we see it or the last time it's edited. So we need to (1) explain what's going on (via [documentation](documentation.md)) but also (2) make it easy to read. One of the easiest ways to make code more readable is to follow consistent style and formatting conventions.
+When we write a piece of code, it's almost never the last time we see it or the last time it's edited. So we need to (1) explain what's going on (via [documentation](documentation.md){:target="_blank"}) but also (2) make it easy to read. One of the easiest ways to make code more readable is to follow consistent style and formatting conventions.
 
 There are many options when it comes to Python style conventions to adhere to, but most are based on [PEP8](https://www.python.org/dev/peps/pep-0008/) conventions. You'll notice that different teams follow different conventions and that's perfectly alright. The most important aspects are that everybody is consistently following the same convection and that there are pipelines in place to automatically and effortlessly ensure that consistency. Let's see what this looks like in our application.
 
