@@ -10,37 +10,30 @@ image: https://madewithml.com/static/images/mlops.png
 
 ## Template
 
-While this template should be completed in sequential order but will naturally involve nonlinear engagement based on feedback:
+This template is designed to guide product development that justifies and involves machine learning. While this template will initially be completed in sequential order, it will naturally involve nonlinear engagement based on iterative feedback. We should follow this template for every major release of our products so that all the decision making is transparent and documented, which acts as a guide for development.
 
-[Progress](#progress) (*Where*) → [Product](#product-management) (*What* & *Why*) → [Methodology](#methodology) (*How*) → [Project](#project-management) (*Who* & *When*)
+[Product](#product-management) (*What* & *Why*) → [Methodology](#methodology) (*How*) → [Project](#project-management) (*Who* & *When*)
 
-!!! warning
-    This is not an exact template to follow but is a guide for important aspect to consider when planning and designing your ML projects.
+We're going to be covering all of these sections in this template but in reality, this template can be broken down into individual documents. Where there is a main project page which describes the overall product and the scoped releases. Each of which point to the components (product, methods and project) that we cover in this template (for that particular release).
 
-And each of these sections should follow these best practices and should be overseen by the directly responsible individual (**DRI**):
+```bash
+# Project scoping
+project/
+├── release-1
+| ├── product requirements [Product]
+| ├── design documentation [Methodology]
+| ├── project planning     [Project]
+├── ...
+└── release-n
+```
 
-- **Details**: each section should be thoroughly written using insights from relevant team members, research, etc. This often involves white boarding sessions to break down the intricate details and then writing about them to easily convey them to others.
-- **Feedback**: each section should also be approved by relevant stakeholders. This can be done iteratively by performing a canary feedback rollout to ensure there are no open unanswered questions before engaging with executives.
-- **Updates**: this documentation should always be kept up-to-date so new (and current) members can always refer to it in the event of on-boarding, conflict, validation, etc.
+> It's important that we organize our projects this way so that there is one central location where all documentation can be found and updated. This also enforces that we scope releases appropriately and provide the thorough planning and documentation to execute each one.
 
-!!! warning
-    We shouldn’t try to create one master document for all versions of our product. Each version should have its own documentation with what’s in and out of scope so we can focus all the discussion around what’s immediately relevant.
+Before we dive into the template, there are several core principles that apply to every section:
 
-## Progress
-
-[*Where*]: status of where we are in the project in terms of timeline? This is to just provide a quick update on progress and relevant links for those new to it.
-
-### Current state
-
-> What is the status of the team’s progress and what release are they working on which should be linked to the appropriate version details below.
-
-On-schedule | v1.5
-
-### Resources
-
-> Include all relevant links to key presentations, supplementary documentation, contact info, etc.
-
-[Exec Keynote]() | [PRD](https://en.wikipedia.org/wiki/Product_requirements_document){:target="_blank"} | [Project plan](https://en.wikipedia.org/wiki/Project_plan){:target="_blank"} | [RFC](https://en.wikipedia.org/wiki/Request_for_Comments){:target="_blank"} | [DRI Contact](mailto:hello@madewithml.com){:target="_blank"}
+- **Details**: each section should be thoroughly written using insights from relevant team members, research, etc. This often involves white boarding sessions to break down the intricate details and then documenting them to share and implement.
+- **Feedback**: each section should be reviewed and approved by relevant stakeholders. This can be done iteratively by performing a canary feedback rollout to ensure there are no open unanswered questions before engaging with executives.
+- **Updates**: the documentation should always be kept up-to-date so new (and current) members can always refer to it in the event of on-boarding, conflict, validation, etc.
 
 ## Product management
 
@@ -459,6 +452,8 @@ We need to break down all the [requirements](#requirements) for a particular rel
   </tr>
 </tbody>
 </table>
+
+<small>Thank you to [Amr Al-Hamad](https://www.linkedin.com/in/amr-alhamad/){:target="_blank"}, [Amanda Bertsch](https://www.linkedin.com/in/amanda-bertsch/){:target="_blank"}, [Clara Matos](https://www.linkedin.com/in/claramatos/){:target="_blank"} and [Sherry Wang](https://www.linkedin.com/in/sherrywang31/){:target="_blank"} for their contributions. </small>
 
 <!-- Citation -->
 {% include "cite.md" %}
