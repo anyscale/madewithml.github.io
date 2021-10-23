@@ -152,7 +152,7 @@ Discuss the constraints that we have to account for in our solutions. A large ma
 How does this effort integrate with the current system and what additional work is needed for it? Our project team will use this to request for comments from appropriate team members and allocate resources in the releases. These integrations may also require separate documentation around specification for involved teams that can include wireframes, user stories, mock-ups, etc.
 
 - **dependencies**: cluster resources to maintain and scale microservice based on demand.
-- **consumers**: content creation/update UI to consume and display predicted tags. **[MOCK]**
+- **consumers**: content creation/update UI to consume and display predicted tags. *[MOCK]*
 
 ### Requirements
 
@@ -259,41 +259,17 @@ How does this effort integrate with the current system and what additional work 
 
 ### Data
 
-> What sources of relevant data do we need and what are the workflows we need to establish around data retrieval and validation?
+> What sources of relevant data do we need and what are the workflows we need to establish around data retrieval and [validation](testing.md#data){:target="_blank"}?
 
 - **Sources**: access to a labeled and validated dataset with content metadata and all relevant tags.
 - **Workflows**: access to live content metadata as an author is creating content.
 
 ### Evaluation
 
-> Regardless of our version of implementation, we need to be able to evaluate how we’re performing. This evaluation criteria needs to be comprehensive and mimic what we can expect in production as much as possible. If we do update our evaluation criteria, we should apply it to all previous approaches so that we can objectively compare them. And if we have multiple metrics to evaluate on, we should **prioritize** what is most important. In many situations, this is also the section where we would discuss offline (ex. labeled dataset) and online ([proxy signals](monitoring.md#performance){:target="_blank"}) evaluation methods.
+> Regardless of our version of implementation, we need to be able to evaluate how we’re performing. This evaluation criteria needs to be comprehensive and mimic what we can expect in production as much as possible. If we do update our evaluation criteria, we should apply it to all previous approaches so that we can objectively compare them. And if we have multiple metrics to evaluate on, we should **prioritize** what is most important. In many situations, this is also the section where we would discuss [offline](evaluation.md){:target="_blank"} and [online](monitoring.md#performance){:target="_blank"} evaluation methods.
 
-We want to be able to suggest highly relevant tags (precision) so we don't fatigue the user with noise. But *recall* that the whole point of this task is to suggest tags that the author will miss (recall) so we can allow our users to find the best resource! So we'll need to tradeoff between precision and recall.
-
-$$ \text{accuracy} = \frac{TP+TN}{TP+TN+FP+FN} $$
-
-$$ \text{recall} = \frac{TP}{TP+FN} $$
-
-$$ \text{precision} = \frac{TP}{TP+FP} $$
-
-$$ F_1 = 2 * \frac{\text{precision }  *  \text{ recall}}{\text{precision } + \text{ recall}} $$
-
-<center>
-
-| Variable    | Description                          |
-| :---------- | :----------------------------------- |
-| $TP$         | # of samples truly predicted to be positive and were positive         |
-| $TN$         | # of samples truly predicted to be negative and were negative         |
-| $FP$         | # of samples falsely predicted to be positive but were negative       |
-| $FN$         | # of samples falsely predicted to be negative but were positive       |
-
-</center>
-
-Normally, a good goto option would be the F1 score (weighted precision and recall) but we shouldn't be afraid to craft our own evaluation metrics that best represents our needs. For example, we may want to account for both precision and recall but give more weight to recall. We may also want to evaluate performance for specific classes or [slices](evaluation.md#slices){:target="_blank"} of data.
-
-For offline evaluation, we'll need a gold standard labeled dataset that we can use to benchmark all of our [methods](#methods), while for online evaluation we can initially use the signal on whether the author used our suggested tags and then we can adjust the labels after that new data goes through a proper QA pipeline.
-
-Fortunately in our application, when we make a mistake, it's not catastrophic. The author will simply ignore it but we'll capture the error based on the tags that the author does add. We'll use this feedback (in addition to an annotation workflow) to improve on our solution over time.
+#### Metrics
+We want to be able to suggest highly relevant tags (precision) so we don't fatigue the user with noise. But *recall* that the whole point of this task is to suggest tags that the author will miss (recall) so we can allow our users to find the best resource! So we'll need to tradeoff between precision and recall. Normally, a good goto option would be the F1 score (weighted precision and recall) but we shouldn't be afraid to craft our own evaluation metrics that best represents our needs. For example, we may want to account for both precision and recall but give more weight to recall. We may also want to evaluate performance for specific classes or [slices](evaluation.md#slices){:target="_blank"} of data.
 
 !!! question "What are your priorities"
     For your respective industries or areas of interest, do you know where the priorities are (metrics, errors and other tradeoffs)?
@@ -301,9 +277,15 @@ Fortunately in our application, when we make a mistake, it's not catastrophic. T
     ??? quote "Show answer"
         It entirely depends on the specific task. For example, in an email spam detector, precision is very important because it's better than we some spam then completely miss an important email. Overtime, we need to [iteration](iteration.md){:target="_blank"} on our solution so all evaluation metrics improve but it's important to know which one's we can't comprise on from the get-go.
 
+#### Offline vs. online
+For offline evaluation, we'll need a gold standard labeled dataset that we can use to benchmark all of our [methods](#methods), while for online evaluation we can initially use the signal on whether the author used our suggested tags and then we can adjust the labels after that new data goes through a proper QA pipeline.
+
+#### Implications
+Fortunately in our application, when we make a mistake, it's not catastrophic. The author will simply ignore it but we'll capture the error based on the tags that the author does add. We'll use this feedback (in addition to an annotation workflow) to improve on our solution over time.
+
 ### Methods
 
-> Describe the different iterations of the product that each deliver end-to-end utility.
+> Describe the different approaches that each deliver end-to-end utility while ensuring that they are well [tested](testing.md#models){:target="_blank"} and [evaluated](evaluation.md){:target="_blank"}.
 
 !!! note
     Good principles to abide by here include:
