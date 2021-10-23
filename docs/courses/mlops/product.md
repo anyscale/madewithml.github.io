@@ -123,7 +123,7 @@ What are the signals?
 
 Alternatives considered
 
-- Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like frameworks, tasks, algorithms, etc. to guide the user to add relevant tags.
+- Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags.
 
 !!! warning
     We would definitely implement this simple alternative first and continue to use it for A/B testing to benchmark against more sophisticated methods. But for this course, we're going to jump the ML-based solution so we can design and implement components that are particular to ML systems.
@@ -133,7 +133,7 @@ Alternatives considered
 Discuss the constraints that we have to account for in our solutions. A large majority of constraints can directly come from our service-level agreements (SLAs) with customers and internal systems regarding time, $, performance, latency, infrastructure, privacy, security, UI/UX.
 
 - maintain low latency (>100ms) when providing our generated tags. **[Latency]**
-- monitor # of predicted tags to avoid overwhelming the author. **[UI/UX]**
+- avoid overwhelming the author with too many predicted tags. **[UI/UX]**
 
 !!! question "Converting constraints to timelines"
     How can we best estimate the time it will take to develop our solutions while accounting for all these constraints? And for the sake of this course, we'll assume that our solution involves machine learning. How can we predict how long an experimental and iterative process can take?
@@ -151,13 +151,8 @@ Discuss the constraints that we have to account for in our solutions. A large ma
 
 How does this effort integrate with the current system and what additional work is needed for it? Our project team will use this to request for comments from appropriate team members and allocate resources in the releases. These integrations may also require separate documentation around specification for involved teams that can include wireframes, user stories, mock-ups, etc.
 
-**Dependencies**:
-
-- cluster resources to maintain and scale microservice based on demand.
-
-**Consumers**:
-
-- suggested tags for main UI. [MOCK]
+- **dependencies**: cluster resources to maintain and scale microservice based on demand.
+- **consumers**: content creation/update UI to consume and display predicted tags. **[MOCK]**
 
 ### Requirements
 
@@ -318,7 +313,7 @@ Fortunately in our application, when we make a mistake, it's not catastrophic. T
     - **Manual before ML**: incorporate deterministic components where we define the rules before using probabilistic ones that infer rules from data.
     - **Augment vs. automate**: allow the system to supplement the decision making process as opposed to making the final decision.
     - **Internal vs. external**: not all early releases have to be end-user facing. We can use early versions for internal validation, feedback, data collection, etc.
-    - **Tested**: every approach needs to be well [tested](https://madewithml.com/courses/mlops/testing){:target="_blank"} (code, data + models) with the appropriate reporting so we can objectively benchmark different approaches.
+    - **Tested**: every approach needs to be well [tested](testing.md){:target="_blank"} (code, data + models) with the appropriate reporting so we can objectively benchmark different approaches.
 
 For the purpose of this course, we're going to develop a solution that involves machine learning from the very beginning. However, we would also do [A/B testing](infrastructure.md#ab-tests){:target="_blank"} with other approaches such as simply altering the process where users add tags to projects. Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags. This is a simple solution that needs to be tested against other approaches for effectiveness. Then, we would try rule-based approaches such as simple text matching before trying to predict relevant tags from content metadata.
 
@@ -346,10 +341,10 @@ The main goal here is to think like a problem solver and motivate the need for a
 
 > How do we receive feedback on our system and incorporate it into the next iteration? This can involve both human-in-the-loop feedback as well as automatic feedback via [monitoring](monitoring.md){:target="_blank"}, etc.
 
-- Use feedback from the internal rollout to figure out how to educate early users of the feature with new session hooks.
-- Use author's chosen tags as a proxy signal to quantify online performance.
-- Enforce human-in-loop checks on where they are conflicts between recommended tags and manually chosen tags.
-- Allow users to report issues related to suggested tags.
+- use feedback from the internal rollout to figure out how to educate early users of the feature with new session hooks.
+- use author's chosen tags as a proxy signal to quantify online performance.
+- enforce human-in-loop checks on where they are conflicts between recommended tags and manually chosen tags.
+- allow users to report issues related to suggested tags.
 
 ## Project management
 
