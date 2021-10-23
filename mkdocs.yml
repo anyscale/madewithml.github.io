@@ -203,5 +203,8 @@ plugins:
             "courses/applied-ml/documentation.md": "courses/mlops/documentation.md"
             "courses/applied-ml/api.md": "courses/mlops/api.md"
             "courses/applied-ml/testing.md": "courses/mlops/testing.md"
+            "courses/mlops/objective.md": "courses/mlops/product.md"
+            "courses/mlops/solution.md": "courses/mlops/product.md"
+            "courses/mlops/iteration.md": "courses/mlops/product.md"
             # "mlops-course": "index.md"
 
