@@ -173,7 +173,7 @@ Fortunately in our application, when we make a mistake, it's not catastrophic. T
 
 > Rule #1: Don’t be afraid to launch a product without machine learning. - [Google's Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml#rule_1_don%E2%80%99t_be_afraid_to_launch_a_product_without_machine_learning){:target="_blank"}
 
-For the purpose of this course, we're going to develop a solution that involves machine learning from the very beginning. However, we would also do [A/B testing](infrastructure/#ab-tests){:target="_blank"} with other approaches such as simply altering the process where users add tags to projects. Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags. This is a simple solution that needs to be tested against other approaches for effectiveness.
+For the purpose of this course, we're going to develop a solution that involves machine learning from the very beginning. However, we would also do [A/B testing](infrastructure.md#ab-tests){:target="_blank"} with other approaches such as simply altering the process where users add tags to projects. Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags. This is a simple solution that needs to be tested against other approaches for effectiveness.
 
 
 ## Resources

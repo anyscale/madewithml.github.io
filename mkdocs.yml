@@ -57,9 +57,9 @@ nav:
   - MLOps:
     - Lessons: /#mlops
     - 📦 &nbsp; Product:
-      - Objective: courses/mlops/objective.md
-      - Solution: courses/mlops/solution.md
-      - Iteration: courses/mlops/iteration.md
+      - Product: courses/mlops/product.md
+      - Methodology: courses/mlops/product/#methodology
+      - Project: courses/mlops/product/#project-management
     - 🔢 &nbsp; Data:
       - Labeling: courses/mlops/labeling.md
       - Preprocessing: courses/mlops/preprocessing.md
