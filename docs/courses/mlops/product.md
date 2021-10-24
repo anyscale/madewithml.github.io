@@ -45,100 +45,109 @@ Before we dive into the template, there are several core principles that apply t
 
 ### Overview
 
-> Describe the feature/problem at a high level. This is the section where you’re setting the scene for someone new to the topic, so avoid getting into the details until you reach the sections further below.
+Describe the feature/problem at a high level. This is the section where you’re setting the scene for someone new to the topic, so avoid getting into the details until you reach the sections further below.
 
-We are a service that has content (with tags) with a rudimentary search mechanism that involves searching by tags. Recently, there has been an increase in complaints pertaining to the search and discovery experience. Upon further investigation, the vast majority of the complaints are a result of content having insufficient or irrelevant tags.
+??? quote "Our task"
 
-```json linenums="1"
-{
-    "id": 2427,
-    "title": "Knowledge Transfer in Self Supervised Learning",
-    "description": "A general framework to transfer knowledge from deep self-supervised models to shallow task-specific models.",
-    "tags": [
-        "article",
-        "tutorial",
-        "knowledge-distillation",
-        "model-compression",
-        "self-supervised-learning"
-    ]
-}
-```
+    We are a service that has content (with tags) with a rudimentary search mechanism that involves searching by tags. Recently, there has been an increase in complaints pertaining to the search and discovery experience. Upon further investigation, the vast majority of the complaints are a result of content having insufficient or irrelevant tags.
+
+    ```json linenums="1"
+    {
+        "id": 2427,
+        "title": "Knowledge Transfer in Self Supervised Learning",
+        "description": "A general framework to transfer knowledge from deep self-supervised models to shallow task-specific models.",
+        "tags": [
+            "article",
+            "tutorial",
+            "knowledge-distillation",
+            "model-compression",
+            "self-supervised-learning"
+        ]
+    }
+    ```
 
 ### Relevance
 
-> Why is this feature/problem important and why now? Talk about experiences leading to its discovery and the impact on the business. Out of all the other problems we could be addressing right now, why is this problem the one that’s worth solving right now? Justify using relative impact on business compared to other issues in the backlog. As a general rule, it’s good to be as specific as possible in this section and use numerical values to strengthen claims.
+Why is this feature/problem important and why now? Talk about experiences leading to its discovery and the impact on the business. Out of all the other problems we could be addressing right now, why is this problem the one that’s worth solving right now? Justify using relative impact on business compared to other issues in the backlog. As a general rule, it’s good to be as specific as possible in this section and use numerical values to strengthen claims.
 
-**Core business values**
-One of our core business values is to provide the curation that our users are not able to find anywhere else. Therefore, it’s a top priority to ensure that we meet this core value.
+??? quote "Our task"
 
-**Engagement**
-When our users are able to discover the precise resources for their needs, this drives engagement on our platform and improves perceived value. If we had addressed the search related complaints over the last X months, it would have increased engagement by X% leading to Y% increase in sponsorship fees.
+    **Core business values**
+    One of our core business values is to provide the curation that our users are not able to find anywhere else. Therefore, it’s a top priority to ensure that we meet this core value.
+
+    **Engagement**
+    When our users are able to discover the precise resources for their needs, this drives engagement on our platform and improves perceived value. If we had addressed the search related complaints over the last X months, it would have increased engagement by X% leading to Y% increase in sponsorship fees.
 
 
 ### Background
-> Describe any background information relevant to this project, especially details that may not be so intuitive. This is also the section to mention previous approaches, competitive landscape, internal studies (with relevant summary of findings) and known obstacles.
 
-- **Q**: Why are tags even used?
+Describe any background information relevant to this project, especially details that may not be so intuitive. This is also the section to mention previous approaches, competitive landscape, internal studies (with relevant summary of findings) and known obstacles.
 
-    - Tags are added by the project's author and they represent core concepts that the project covers.
-    - Keywords in a project's description does not necessarily signify that it's a core concept.
+??? quote "Our task"
 
-- **Q**: What can tags provide that keywords in full-text cannot?
+    - **Q**: Why are tags even used?
 
-    - Many tags are inferred and don't explicitly exist in the metadata, such as `natural-language-processing`, and users will definitely use these in their search terms for broad search and filtering.
+        - Tags are added by the project's author and they represent core concepts that the project covers.
+        - Keywords in a project's description does not necessarily signify that it's a core concept.
 
-We have also validated that the vast majority of user complaints step from missing implicit tags and so a full-text-based approach would not address this underlying issue.
+    - **Q**: What can tags provide that keywords in full-text cannot?
 
-!!! question "What to focus on first?"
-    What can you do if your solution architecture process unravels system issues in your team. Do you ignore those and do your best or punt the problem until they're addressed?
+        - Many tags are inferred and don't explicitly exist in the metadata, such as `natural-language-processing`, and users will definitely use these in their search terms for broad search and filtering.
 
-    ??? quote "Show answer"
-        It depends. By understanding the constraints, you'll unravel systemic issues in your team. Such as legacy systems introducing bugs or simple systems that have yet to be build (ex. full-text search). At this point, you need to have a discussion with your team on whether the system change needs to worked on first because it might remove the problem all together. This can cause tension/conflict amongst the teams because we're passing the responsibility around. However, if it's something that is not critical to your current product, be transparent about the issue and plan to return to this stage when it's ready.
+    We have also validated that the vast majority of user complaints step from missing implicit tags and so a full-text-based approach would not address this underlying issue.
 
 ### Objectives
 
-> What are the key objectives that we're trying to satisfy? These could be general objectives which we can then decouple or it can be specific success criteria/metrics.
+What are the key objectives that we're trying to satisfy? These could be general objectives which we can then decouple or it can be specific success criteria/metrics.
 
-- Identify the relevant tags for a given content with 70% recall.
-- Reduce week-to-week tickets based on search errors by 20%.
+??? quote "Our task"
+
+    - Identify the relevant tags for a given content with 70% recall.
+    - Reduce week-to-week tickets based on search errors by 20%.
 
 !!! warning "Objectives vs. constraints"
     Objectives and [constraints](#constraints) are often incorrectly used interchangeably but they're very different. Objectives are things that we want to **achieve** that are under our control. Usually, they start with the phrase "We want <objective>" whereas constraints are **limitations** that we need to abide by and sound like "We can't do X because <constraint>". Another way to think about constraints is that it's something we wouldn't impose on ourselves if we didn't have to.
 
 ### Solutions
 
-> Describe current solutions and alternative approaches that our teams considered. These solutions may also require separate documentation around specification for involved teams that can include wireframes, user stories, mock-ups, etc.
+Describe current solutions and alternative approaches that our teams considered. These solutions may also require separate documentation around specification for involved teams that can include wireframes, user stories, mock-ups, etc.
 
-- Current solutions → None
-- Identify tags for a given content → use available signals from content.
-- Measure engagement on platform → track engagement after discovery of content.
+??? quote "Our task"
 
-<div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/solution/suggested_tags.png" width="550" alt="suggested tags">
-</div>
-<div class="ai-center-all">
-  <small>UX of our hypothetical solution</small>
-</div>
+    - Current solutions → None
+    - Identify tags for a given content → use available signals from content.
+    - Measure engagement on platform → track engagement after discovery of content.
 
-- Alternatives considered
-    - Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags.
+    <div class="ai-center-all">
+        <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/solution/suggested_tags.png" width="550" alt="suggested tags">
+    </div>
+    <div class="ai-center-all">
+    <small>UX of our hypothetical solution</small>
+    </div>
+
+    - Alternatives considered
+        - Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags.
 
 ### Feasibility
 
-> Our solutions have so many nuances tied to them that will be revealed when we decouple the objectives. This will also help our project team scope these into separate releases that will each provide end-to-end value. We should also note potential data dependencies **[DATA]** and explorations **[EXPLORE]** required to assess the feasibility of our proposals.
+Our solutions have so many nuances tied to them that will be revealed when we decouple the objectives. This will also help our project team scope these into separate releases that will each provide end-to-end value. We should also note potential data dependencies **[DATA]** and explorations **[EXPLORE]** required to assess the feasibility of our proposals.
 
-What are the signals?
+??? quote "Our task"
 
-- title, description and other relevant metadata from the content **[DATA]**
-- are the tokens in the content metadata enough signal to identify explicit and implicit tags **[EXPLORE]**
+    What are the signals?
+
+    - title, description and other relevant metadata from the content **[DATA]**
+    - are the tokens in the content metadata enough signal to identify explicit and implicit tags **[EXPLORE]**
 
 ### Constraints
 
 Discuss the constraints that we have to account for in our solutions. A large majority of constraints can directly come from our service-level agreements (SLAs) with customers and internal systems regarding time, $, performance, latency, infrastructure, privacy, security, UI/UX.
 
-- maintain low latency (>100ms) when providing our generated tags. **[Latency]**
-- only recommend tags from our list of approved tags. **[Security]**
-- avoid overwhelming the author with too many predicted tags. **[UI/UX]**
+??? quote "Our task"
+
+    - maintain low latency (>100ms) when providing our generated tags. **[Latency]**
+    - only recommend tags from our list of approved tags. **[Security]**
+    - avoid overwhelming the author with too many predicted tags. **[UI/UX]**
 
 !!! question "Solutions → Constraints or vice versa?"
     Is it naive to consider solutions before constraints because they dictate the nuances of our constraints right?
@@ -146,121 +155,136 @@ Discuss the constraints that we have to account for in our solutions. A large ma
     ??? quote "Show answer"
         We believe that freely brainstorming solutions without being biased by constraints can lead to very creative solutions. Additionally, in future releases, constraints can often be overcome if the solution motivates it. However, for this current release, it's good to scope the solution by accounting for the constraints. But because we've documented our ideal solution, we can work towards that in future releases.
 
+!!! question "What to focus on first?"
+    What if our constraints are a result of issues in our team. Do we ignore those and do our best or delay our task until they're addressed?
+
+    ??? quote "Show answer"
+        It depends. By understanding the constraints, we'll unravel systemic issues in our team, such as legacy systems introducing bugs or simple systems that have yet to be build. At this point, we need to have a discussion with our team on whether the system change needs to worked on first because it might remove the problem all together. This can cause tension/conflict amongst the teams because we're passing the responsibility around. However, if it's something that is not critical to our current product, be transparent about the issue and plan to return to this stage when it's ready.
+
 ### Integration
 
 How does this effort integrate with the current system and what additional work is needed for it? Our project team will use this to request comments from appropriate team members and allocate resources for the releases. Also, besides just thinking about *our* dependencies and consumers, it's important to think about coexistence and potential conflicts with other system components as well.
 
-- **dependencies**:
-    - labeled dataset to benchmark current and subsequent approaches.
-    - cluster resources to maintain and scale microservice based on demand.
-- **consumers**:
-    - content creation/update UI to consume and display predicted tags. *[MOCK]*
+??? quote "Our task"
+
+    - **dependencies**:
+        - labeled dataset to benchmark current and subsequent approaches.
+        - cluster resources to maintain and scale microservice based on demand.
+    - **consumers**:
+        - content creation/update UI to consume and display predicted tags. *[MOCK]*
 
 !!! tip "Be transparent"
     If our dependencies are already established, it's important that we let the respective teams know that we are consumers so that we are included in conversations around future changes that may potentially break our system.
 
 ### Requirements
 
-> Describe core requirements that will help shape the functionality for this specific release. The project teams will use these product requirements to plan the specific [deliverables](#deliverables) to fulfill each requirement.
+Describe core requirements that will help shape the functionality for this specific release. The project teams will use these product requirements to plan the specific [deliverables](#deliverables) to fulfill each requirement.
 
-<table>
-<thead>
-  <tr>
-    <th>Requirement</th>
-    <th>Priority</th>
-    <th>Release</th>
-    <th>Status</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Identify explicit tags using rule-based text matching.</td>
-    <td>should-have</td>
-    <td>v1</td>
-    <td>Complete</td>
-  </tr>
-  <tr>
-    <td>Predict explicit and implicit tags for given content metadata.</td>
-    <td>should-have</td>
-    <td>v1</td>
-    <td>Complete</td>
-  </tr>
-  <tr>
-    <td>UI to poll prediction service when relevant content metadata is changed during content creation/update process.</td>
-    <td>should-have</td>
-    <td>v1</td>
-    <td>Complete</td>
-  </tr>
-  <tr>
-    <td>Allow authors to click on the recommended tag to automatically add it to their content.</td>
-    <td>nice-to-have</td>
-    <td>v1</td>
-    <td>In-progress</td>
-  </tr>
-  <tr>
-    <td>Remove predicted tags if the author has already manually included them.</td>
-    <td>nice-to-have</td>
-    <td>v1</td>
-    <td>In-progress</td>
-  </tr>
-  <tr>
-    <td>...</td>
-    <td>...</td>
-    <td>...</td>
-    <td>...</td>
-  </tr>
-</tbody>
-</table>
+??? quote "Our task"
+
+    <table>
+    <thead>
+    <tr>
+        <th>Requirement</th>
+        <th>Priority</th>
+        <th>Release</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Identify explicit tags using rule-based text matching.</td>
+        <td>should-have</td>
+        <td>v1</td>
+        <td>Complete</td>
+    </tr>
+    <tr>
+        <td>Predict explicit and implicit tags for given content metadata.</td>
+        <td>should-have</td>
+        <td>v1</td>
+        <td>Complete</td>
+    </tr>
+    <tr>
+        <td>UI to poll prediction service when relevant content metadata is changed during content creation/update process.</td>
+        <td>should-have</td>
+        <td>v1</td>
+        <td>Complete</td>
+    </tr>
+    <tr>
+        <td>Allow authors to click on the recommended tag to automatically add it to their content.</td>
+        <td>nice-to-have</td>
+        <td>v1</td>
+        <td>In-progress</td>
+    </tr>
+    <tr>
+        <td>Remove predicted tags if the author has already manually included them.</td>
+        <td>nice-to-have</td>
+        <td>v1</td>
+        <td>In-progress</td>
+    </tr>
+    <tr>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+    </tr>
+    </tbody>
+    </table>
 
 ### Out of scope
 
-> What aspects of the feature/problem should we not be concerned with for the immediate planning? Out of scope doesn't mean that we will never address but just not during this specific deliverable.
+What aspects of the feature/problem should we not be concerned with for the immediate planning? Out of scope doesn't mean that we will never address but just not during this specific deliverable.
 
-- identify relevant tags beyond our [approved list](https://github.com/GokuMohandas/MadeWithML/blob/main/datasets/tags.json){:target="_blank"} of tags
-- using text from content metadata besides title and description, such as full-text HTML from associated links.
-- interpretability for why we recommend certain tags.
+??? quote "Our task"
+
+    - identify relevant tags beyond our [approved list](https://github.com/GokuMohandas/MadeWithML/blob/main/datasets/tags.json){:target="_blank"} of tags
+    - using text from content metadata besides title and description, such as full-text HTML from associated links.
+    - interpretability for why we recommend certain tags.
 
 ### Decisions
 
-> Given the feasibility evaluation, constraints and what's out of scope, what are the key decisions that need to be made? A recommended framework to use is driver, approver, contributors and informed ([DACI](https://en.wikipedia.org/wiki/Responsibility_assignment_matrix#DACI){:target="_blank"}) responsibility assignment matrix.
+Given the feasibility evaluation, constraints and what's out of scope, what are the key decisions that need to be made? A recommended framework to use is driver, approver, contributors and informed ([DACI](https://en.wikipedia.org/wiki/Responsibility_assignment_matrix#DACI){:target="_blank"}) responsibility assignment matrix.
 
-<table>
-<thead>
-  <tr>
-    <th>Driver</th>
-    <th>Approver</th>
-    <th>Contributors</th>
-    <th>Informed</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Using only the title and description as relevant signal for recommending tags</td>
-    <td>Product DRI</td>
-    <td>Data scientist</td>
-    <td>Executives, external stakeholders, etc.</td>
-  </tr>
-  <tr>
-    <td>Recommend tags from our approved list of tags only</td>
-    <td>Product DRI</td>
-    <td>Product DRI</td>
-    <td>Executives, external stakeholders, etc.</td>
-  </tr>
-  <tr>
-    <td>...</td>
-    <td>...</td>
-    <td>...</td>
-    <td>...</td>
-  </tr>
-</tbody>
-</table>
+??? quote "Our task"
+    <table>
+    <thead>
+    <tr>
+        <th>Driver</th>
+        <th>Approver</th>
+        <th>Contributors</th>
+        <th>Informed</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Using only the title and description as relevant signal for recommending tags</td>
+        <td>Product DRI</td>
+        <td>Data scientist</td>
+        <td>Executives, external stakeholders, etc.</td>
+    </tr>
+    <tr>
+        <td>Recommend tags from our approved list of tags only</td>
+        <td>Product DRI</td>
+        <td>Product DRI</td>
+        <td>Executives, external stakeholders, etc.</td>
+    </tr>
+    <tr>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+    </tr>
+    </tbody>
+    </table>
 
 ### Concerns
 
-> What are potential risks, concerns and uncertainties that every one should be aware of?
+What are potential risks, concerns and uncertainties that every one should be aware of?
 
-- how long to continue to QA every single incoming sample
-- system ways to account for popular tags that are not in our accepted list of tags that we're using to recommend relevant tags
+??? quote "Our task"
+
+    - how long to continue to QA every single incoming sample
+    - system ways to account for popular tags that are not in our accepted list of tags that we're using to recommend relevant tags
 
 ## Methodology
 
@@ -268,24 +292,30 @@ How does this effort integrate with the current system and what additional work 
 
 ### Data
 
-> Describe the static (ex. labeled dataset) and dynamic (ex. data streams that deliver live features) sources of data that we depend on. This is also the space to think about data privacy/security and sources of data that we *would* like to have but are not available. We can also use this section to describe the process of labeling our dataset and even how we settled on the inputs and target space.
+Describe the static (ex. labeled dataset) and dynamic (ex. data streams that deliver live features) sources of data that we depend on. This is also the space to think about data privacy/security and sources of data that we *would* like to have but are not available. We can also use this section to describe the process of labeling our dataset and even how we settled on the inputs and target space.
 
-- **static**:
-    - access to a labeled and validated dataset with content metadata and all relevant tags.
-    - information on feature origins and schemas.
-    - how did we settle on these labels?
-    - what kind of validation did this data go through?
-    - was there sampling of any kind applied to create this dataset?
-    - are we introducing any data leaks?
-- **dynamic**:
-    - access to live content metadata as an author is creating content.
+??? quote "Our task"
+
+    - **static**:
+        - access to a labeled and validated dataset with content metadata and all relevant tags.
+        - information on feature origins and schemas.
+        - how did we settle on these labels?
+        - what kind of validation did this data go through?
+        - was there sampling of any kind applied to create this dataset?
+        - are we introducing any data leaks?
+    - **dynamic**:
+        - access to live content metadata as an author is creating content.
 
 ### Evaluation
 
-> Regardless of our approach, we need to be able to evaluate how we’re performing. This evaluation criteria needs to be comprehensive and mimic what we can expect in production as much as possible. One of the hardest challenges with evaluation is trying the metrics from the product's [objectives](#objectives) with metrics that our model is able to produce. We need to prove that what we're optimizing for is the best direct measure of the core business metric(s) that we're concerned with. This is also the section where we would discuss [offline](evaluation.md){:target="_blank"} and [online](monitoring.md#performance){:target="_blank"} evaluation methods.
+Regardless of our approach, we need to be able to evaluate how we’re performing. This evaluation criteria needs to be comprehensive and mimic what we can expect in production as much as possible.  This is also the section where we would discuss [offline](evaluation.md){:target="_blank"} and [online](monitoring.md#performance){:target="_blank"} evaluation methods.
 
 #### Metrics
-We want to be able to suggest highly relevant tags (precision) so we don't fatigue the user with noise. But *recall* that the whole point of this task is to suggest tags that the author will miss (recall) so we can allow our users to find the best resource! We may also want to evaluate performance for specific classes or [slices](evaluation.md#slices){:target="_blank"} of data.
+
+One of the hardest challenges with evaluation is trying the metrics from the product's [objectives](#objectives) with metrics that our model is able to produce. We need to prove that what we're optimizing for is the best direct measure of the core business metric(s) that we're concerned with.
+
+??? quote "Our task"
+    We want to be able to suggest highly relevant tags (precision) so we don't fatigue the user with noise. But *recall* that the whole point of this task is to suggest tags that the author will miss (recall) so we can allow our users to find the best resource! We may also want to evaluate performance for specific classes or [slices](evaluation.md#slices){:target="_blank"} of data.
 
 !!! question "What are our priorities"
     For our respective industries or areas of interest, do you we where the priorities are (metrics, errors and other tradeoffs)?
@@ -294,27 +324,28 @@ We want to be able to suggest highly relevant tags (precision) so we don't fatig
         It entirely depends on the specific task. For example, in an email spam detector, precision is very important because it's better than we some spam then completely miss an important email. Overtime, we need to iterate on our solution so all evaluation metrics improve but it's important to know which one's we can't comprise on from the get-go.
 
 #### Offline vs. online
-For offline evaluation, we'll need a gold standard labeled dataset that we can use to benchmark all of our [approaches](#approaches), while for online evaluation we can initially use the [proxy signal](monitoring.md#performance){:target="_blank"} on whether the author used our suggested tags and then we can adjust the labels after that new data goes through a proper QA pipeline.
+For [offline evaluation](evaluation.md){:target="_blank"}, we'll need a gold standard labeled dataset that we can use to benchmark all of our [approaches](#approaches), while for [online evaluation](monitoring.md#performance){:target="_blank"} we can initially use the [proxy signal](monitoring.md#performance){:target="_blank"} on whether the author used our suggested tags and then we can adjust the labels after that new data goes through a proper QA pipeline.
 
 ### Approaches
 
-> Describe the different approaches that each deliver end-to-end utility.
+Describe the different approaches that each deliver end-to-end utility.
 
-!!! note
-    - **End-to-end utility**: the end result from every iteration should deliver minimum end-to-end utility so that we can benchmark iterations against each other and plug-and-play with the system.
-    - **Keep it simple (KISS)**: start from the simplest solution and slowly add complexity with justification along the way → [baselines](https://madewithml.com/courses/mlops/baselines){:target="_blank"}.
-    - **Manual before ML**: incorporate deterministic components where we define the rules before using probabilistic ones that infer rules from data.
-    - **Augment vs. automate**: allow the system to supplement the decision making process as opposed to making the final decision.
-    - **Internal vs. external**: not all early releases have to be end-user facing. We can use early versions for internal validation, feedback, data collection, etc.
-    - **Thorough**: every approach needs to be well [tested](testing.md){:target="_blank"} (code, data + models) and [evaluated](evaluation.md){:target="_blank"}, so we can objectively benchmark different approaches.
+- **End-to-end utility**: the end result from every iteration should deliver minimum end-to-end utility so that we can benchmark iterations against each other and plug-and-play with the system.
+- **Keep it simple (KISS)**: start from the simplest solution and slowly add complexity with justification along the way → [baselines](https://madewithml.com/courses/mlops/baselines){:target="_blank"}.
+- **Manual before ML**: incorporate deterministic components where we define the rules before using probabilistic ones that infer rules from data.
+- **Augment vs. automate**: allow the system to supplement the decision making process as opposed to making the final decision.
+- **Internal vs. external**: not all early releases have to be end-user facing. We can use early versions for internal validation, feedback, data collection, etc.
+- **Thorough**: every approach needs to be well [tested](testing.md){:target="_blank"} (code, data + models) and [evaluated](evaluation.md){:target="_blank"}, so we can objectively benchmark different approaches.
 
 For the purpose of this course, we're going to develop a solution that involves machine learning from the very beginning. However, we would've followed an iterative approach where we start with simple solutions and slowly add complexity. We would also be evaluating each approach using a gold-standard labeled dataset thats representative of the production space.
 
-- v1: creating a gold-standard labeled dataset that is representative of the production space to evaluate approaches with.
-- v2: simple UI change to encourage authors to add specific classes of tags (`frameworks`, `tasks`, `algorithms`, etc.)
-- v3: rule-based approaches using text matching from list of curated tags/aliases
-- v4: predict relevant tags from content title and descriptions
-- v5: ...
+??? quote "Our task"
+
+    - v1: creating a gold-standard labeled dataset that is representative of the production space to evaluate approaches with.
+    - v2: simple UI change to encourage authors to add specific classes of tags (`frameworks`, `tasks`, `algorithms`, etc.)
+    - v3: rule-based approaches using text matching from list of curated tags/aliases
+    - v4: predict relevant tags from content title and descriptions
+    - v5: ...
 
 !!! warning "Decouple POCs and implementations"
     Each of these approaches would involve proof-of-concept (POC) release and an implementation release after validating it's utility over previous approaches. We should decouple POCs and implementations because if a POC doesn't prove successful, then we can't do the implementation and all the associated planning is no longer applicable.
@@ -355,7 +386,7 @@ With ML, we’re not writing explicit rules to apply to data but rather using da
 
 ### Rollout
 
-> What do the release strategies look like for our different versions? Note that not all releases have to be high stakes, external facing to the whole world. We can always include internal releases, gather feedback and iterate until we’re ready to increase the scope.
+What do the release strategies look like for our different versions? Note that not all releases have to be high stakes, external facing to the whole world. We can always include internal releases, gather feedback and iterate until we’re ready to increase the scope.
 
 - Canary internal rollout, monitoring for proxy/actual performance, etc.
 - Rollout to the larger internal team for more feedback.
@@ -363,12 +394,14 @@ With ML, we’re not writing explicit rules to apply to data but rather using da
 
 ### Feedback
 
-> How do we receive feedback on our system and incorporate it into the next iteration? This can involve both human-in-the-loop feedback as well as automatic feedback via [monitoring](monitoring.md){:target="_blank"}, etc.
+How do we receive feedback on our system and incorporate it into the next iteration? This can involve both human-in-the-loop feedback as well as automatic feedback via [monitoring](monitoring.md){:target="_blank"}, etc.
 
-- use feedback from the internal rollout to figure out how to educate early users of the feature with new session hooks.
-- use author's chosen tags as a proxy signal to quantify online performance.
-- enforce human-in-loop checks on where they are conflicts between recommended tags and manually chosen tags.
-- allow users to report issues related to suggested tags.
+??? quote "Our task"
+
+    - use feedback from the internal rollout to figure out how to educate early users of the feature with new session hooks.
+    - use author's chosen tags as a proxy signal to quantify online performance.
+    - enforce human-in-loop checks on where they are conflicts between recommended tags and manually chosen tags.
+    - allow users to report issues related to suggested tags.
 
 ## Project management
 
@@ -376,95 +409,99 @@ With ML, we’re not writing explicit rules to apply to data but rather using da
 
 ### Team
 
-> Which teams and specific members from those teams need to be involved in this project? It’s important to consider even the minor features so that everyone is aware of it and so we can properly scope and prioritize our timelines. Keep in mind that this isn’t the only project that people might be working on.
+Which teams and specific members from those teams need to be involved in this project? It’s important to consider even the minor features so that everyone is aware of it and so we can properly scope and prioritize our timelines. Keep in mind that this isn’t the only project that people might be working on.
 
-- **Product**: the members responsible for outlining the product requirements and approving them may involve product managers, executives, external stakeholders, etc.
-- **Methodology**:
-    - Data engineering: these developers are often responsible for the data dependencies, which include robust workflows to continually deliver the data and ensuring that it’s properly validated and ready for downstream applications
-    - Machine learning: develop the probabilistic systems with appropriate evaluation.
-    - DevOps: deploy the application and help autoscale based on traffic.
-    - UI/UX: consume the system’s outputs to deliver the new experience to the user.
-    - Accessibility: help educate the community for the new rollouts and to assist with decisions around sensitive issues.
-    - Site reliability: maintain the application and to potentially oversee that online evaluation/monitoring workflows are working as they should.
-- **Project**: the members responsible for iterative engagement with the product and engineering teams to ensure that the right product is being built and that it’s being built appropriately may include project managers, engineering managers, etc.
+??? quote "Our task"
+
+    - **Product**: the members responsible for outlining the product requirements and approving them may involve product managers, executives, external stakeholders, etc.
+    - **Methodology**:
+        - Data engineering: these developers are often responsible for the data dependencies, which include robust workflows to continually deliver the data and ensuring that it’s properly validated and ready for downstream applications
+        - Machine learning: develop the probabilistic systems with appropriate evaluation.
+        - DevOps: deploy the application and help autoscale based on traffic.
+        - UI/UX: consume the system’s outputs to deliver the new experience to the user.
+        - Accessibility: help educate the community for the new rollouts and to assist with decisions around sensitive issues.
+        - Site reliability: maintain the application and to potentially oversee that online evaluation/monitoring workflows are working as they should.
+    - **Project**: the members responsible for iterative engagement with the product and engineering teams to ensure that the right product is being built and that it’s being built appropriately may include project managers, engineering managers, etc.
 
 ### Deliverables
 
 We need to break down all the [requirements](#requirements) for a particular release into clear deliverables that specify the deliverable, contributors, dependencies, acceptance criteria and status. This will become the granular checklist that our teams will use to decide what to work on next and to ensure that they’re working on it properly (with all considerations).
 
-<table>
-<thead>
-  <tr>
-    <th>Requirement</th>
-    <th>Priority</th>
-    <th>Release</th>
-    <th>Status</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Predict explicit and implicit tags for given content metadata.</td>
-    <td>Medium</td>
-    <td>v1</td>
-    <td>Complete</td>
-  </tr>
-</tbody>
-</table>
+??? quote "Our task"
+    <table>
+    <thead>
+    <tr>
+        <th>Requirement</th>
+        <th>Priority</th>
+        <th>Release</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Predict explicit and implicit tags for given content metadata.</td>
+        <td>Medium</td>
+        <td>v1</td>
+        <td>Complete</td>
+    </tr>
+    </tbody>
+    </table>
 
-<table>
-<thead>
-  <tr>
-    <th>Deliverable</th>
-    <th>Contributors</th>
-    <th>Dependencies</th>
-    <th>Acceptance criteria</th>
-    <th>Status</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Labeled dataset with content metadata and ground-truth tags</td>
-    <td>Project DRI, data engineer</td>
-    <td>Access to location of content with relevant metadata</td>
-    <td>Validation of ground-truth labels</td>
-    <td>TBD<br><br><br></td>
-  </tr>
-  <tr>
-    <td>Trained model that can predict relevant tags given content metadata</td>
-    <td>Data scientist</td>
-    <td>Labeled dataset</td>
-    <td>Versioned, reproducible, tested (coverage) and evaluation results.</td>
-    <td>TBD</td>
-  </tr>
-  <tr>
-    <td>Scalable endpoint that can be used to retrieve relevant tags</td>
-    <td>ML engineer, DevOps engineer</td>
-    <td>Versioned, reproducible, tested and evaluated model</td>
-    <td>Stress tests to ensure autoscaling capabilities.</td>
-    <td>TBD</td>
-  </tr>
-  <tr>
-    <td>...</td>
-    <td>...</td>
-    <td>...</td>
-    <td>...</td>
-    <td>...</td>
-  </tr>
-</tbody>
-</table>
+    <table>
+    <thead>
+    <tr>
+        <th>Deliverable</th>
+        <th>Contributors</th>
+        <th>Dependencies</th>
+        <th>Acceptance criteria</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Labeled dataset with content metadata and ground-truth tags</td>
+        <td>Project DRI, data engineer</td>
+        <td>Access to location of content with relevant metadata</td>
+        <td>Validation of ground-truth labels</td>
+        <td>TBD<br><br><br></td>
+    </tr>
+    <tr>
+        <td>Trained model that can predict relevant tags given content metadata</td>
+        <td>Data scientist</td>
+        <td>Labeled dataset</td>
+        <td>Versioned, reproducible, tested (coverage) and evaluation results.</td>
+        <td>TBD</td>
+    </tr>
+    <tr>
+        <td>Scalable endpoint that can be used to retrieve relevant tags</td>
+        <td>ML engineer, DevOps engineer</td>
+        <td>Versioned, reproducible, tested and evaluated model</td>
+        <td>Stress tests to ensure autoscaling capabilities.</td>
+        <td>TBD</td>
+    </tr>
+    <tr>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
+    </tr>
+    </tbody>
+    </table>
 
 ### Timeline
 
-> This is where the project scoping begins to take place. Often, the stakeholders will have a desired time to release and the functionality to be delivered. There  *will* be a lot of batch and forth on this based on the results from the feasibility studies, so it's very important to be thorough and transparent to set expectations quickly.
+This is where the project scoping begins to take place. Often, the stakeholders will have a desired time to release and the functionality to be delivered. There  *will* be a lot of batch and forth on this based on the results from the feasibility studies, so it's very important to be thorough and transparent to set expectations quickly.
 
-**v1**: predict relevant tags using content title and description metadata
+??? quote "Our task"
+    **v1**: predict relevant tags using content title and description metadata
 
-- Exploration studies conducted by XX
-- Pushed to dev for A/B testing by XX
-- Pushed to staging with on-boarding hooks by XX
-- Pushed to prod by XX
+    - Exploration studies conducted by XX
+    - Pushed to dev for A/B testing by XX
+    - Pushed to staging with on-boarding hooks by XX
+    - Pushed to prod by XX
 
-This is an extremely simplified timeline. An actual timeline would depict timelines from all the different teams stacked on top of each other with vertical lines at specified time-constraints or version releases.
+    This is an extremely simplified timeline. An actual timeline would depict timelines from all the different teams stacked on top of each other with vertical lines at specified time-constraints or version releases.
 
 <small>Thank you to [Amr Al-Hamad](https://www.linkedin.com/in/amr-alhamad/){:target="_blank"}, [Amanda Bertsch](https://www.linkedin.com/in/amanda-bertsch/){:target="_blank"}, [Clara Matos](https://www.linkedin.com/in/claramatos/){:target="_blank"} and [Sherry Wang](https://www.linkedin.com/in/sherrywang31/){:target="_blank"} for their contributions. </small>
 
