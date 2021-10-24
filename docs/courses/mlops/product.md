@@ -37,7 +37,7 @@ Before we dive into the template, there are several core principles that apply t
 - **Updates**: the documentation should always be kept up-to-date so new (and current) members can always refer to it in the event of on-boarding, conflict, validation, etc.
 
 !!! tip "People are not going to read all of this..."
-    It can be an onerous task if need need stakeholders to review this kind of detailed documentation for each release. DRIs can mitigate the burder by highlighting which parts of the templates specific stakeholders need to review and the key differences/improvements since last time. After this, we can lead them to any decisions that they need to sign off on before we can proceed with executing the release.
+    It can be an onerous task if need need stakeholders to review this kind of detailed documentation for each release. DRIs can mitigate the burden by highlighting which parts of the templates specific stakeholders need to review and the key differences/improvements since last time. After this, we can lead them to any decisions that they need to sign off on before we can proceed with executing the release.
 
 ## Product management
 
