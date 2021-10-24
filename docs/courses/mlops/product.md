@@ -14,7 +14,7 @@ This template is designed to guide product development that justifies and involv
 
 [Product](#product-management) (*What* & *Why*) → [Methodology](#methodology) (*How*) → [Project](#project-management) (*Who* & *When*)
 
-We're going to be covering all of these sections in this template but in reality, this template can be broken down into individual documents. Where there is a main project page which describes the overall product and the scoped releases. Each of which point to the components (product, methods and project) that we cover in this template (for that particular release). We can also include the key differences/improvements between each release so it's easy to discover which release has the relevant details for specific features.
+We're going to be covering all of these sections in this template but in reality, this template can be broken down into individual documents. Where there is a main project page which describes the overall product and the scoped releases. Each of which point to the components (product, methods and project) that we cover in this template (for that particular release).
 
 ```bash
 # Project scoping
@@ -35,6 +35,9 @@ Before we dive into the template, there are several core principles that apply t
 - **Details**: each section should be thoroughly written using insights from relevant team members, research, etc. This often involves white boarding sessions to break down the intricate details and then documenting them to share and implement.
 - **Feedback**: each section should be reviewed and approved by relevant stakeholders. This can be done iteratively by performing a canary feedback rollout to ensure there are no open unanswered questions before engaging with executives.
 - **Updates**: the documentation should always be kept up-to-date so new (and current) members can always refer to it in the event of on-boarding, conflict, validation, etc.
+
+!!! tip "People are not going to read this..."
+    It can be an onerous task if need need stakeholders to review this kind of detailed documentation for each release. DRIs can mitigate the burder by highlighting which parts of the templates specific stakeholders need to review and the key differences/improvements since last time. After this, we can lead them to any decisions that they need to sign off on before we can proceed with executing the release.
 
 ## Product management
 
@@ -99,7 +102,7 @@ We have also validated that the vast majority of user complaints step from missi
 - Identify the relevant tags for a given content with 70% recall.
 - Reduce week-to-week tickets based on search errors by 20%.
 
-!!! warning
+!!! warning "Objectives vs. constraints"
     Objectives and [constraints](#constraints) are often incorrectly used interchangeably but they're very different. Objectives are things that we want to **achieve** that are under our control. Usually, they start with the phrase "We want <objective>" whereas constraints are **limitations** that we need to abide by and sound like "We can't do X because <constraint>". Another way to think about constraints is that it's something we wouldn't impose on ourselves if we didn't have to.
 
 ### Solutions
@@ -129,18 +132,6 @@ What are the signals?
 - title, description and other relevant metadata from the content **[DATA]**
 - are the tokens in the content metadata enough signal to identify explicit and implicit tags **[EXPLORE]**
 
-!!! warning
-    We would definitely implement simple solutions first and benchmark against them as we develop more sophisticated methods. To even discuss building a probabilistic system, we're assuming that there have already been previous releases to get to this point. For example:
-
-    - v1: creating a gold-standard labeled dataset that is representative of the production space to evaluate approaches with.
-    - v2: proof-of-concept (POC) to explore if simple rule-based can perform the task.
-    - v3: create a system with end-to-end utility using the rule-based approach.
-    - v4: POC to explore if probabilistic approaches can outperform previous approaches.
-    - v5: create a system with end-to-end utility using the probabilistic approach.
-    - ...
-
-    → Read more about this iterative development approach in our [Approaches section](#approaches) below.
-
 ### Constraints
 
 Discuss the constraints that we have to account for in our solutions. A large majority of constraints can directly come from our service-level agreements (SLAs) with customers and internal systems regarding time, $, performance, latency, infrastructure, privacy, security, UI/UX.
@@ -165,7 +156,7 @@ How does this effort integrate with the current system and what additional work 
 - **consumers**:
     - content creation/update UI to consume and display predicted tags. *[MOCK]*
 
-!!! warning
+!!! tip "Be transparent"
     If our dependencies are already established, it's important that we let the respective teams know that we are consumers so that we are included in conversations around future changes that may potentially break our system.
 
 ### Requirements
@@ -296,8 +287,8 @@ How does this effort integrate with the current system and what additional work 
 #### Metrics
 We want to be able to suggest highly relevant tags (precision) so we don't fatigue the user with noise. But *recall* that the whole point of this task is to suggest tags that the author will miss (recall) so we can allow our users to find the best resource! We may also want to evaluate performance for specific classes or [slices](evaluation.md#slices){:target="_blank"} of data.
 
-!!! question "What are your priorities"
-    For your respective industries or areas of interest, do you know where the priorities are (metrics, errors and other tradeoffs)?
+!!! question "What are our priorities"
+    For our respective industries or areas of interest, do you we where the priorities are (metrics, errors and other tradeoffs)?
 
     ??? quote "Show answer"
         It entirely depends on the specific task. For example, in an email spam detector, precision is very important because it's better than we some spam then completely miss an important email. Overtime, we need to iterate on our solution so all evaluation metrics improve but it's important to know which one's we can't comprise on from the get-go.
@@ -325,7 +316,10 @@ For the purpose of this course, we're going to develop a solution that involves 
 - v4: predict relevant tags from content title and descriptions
 - v5: ...
 
-Each of these approaches would involve proof-of-concept (POC) release and an implementation release after validating it's utility over previous approaches. And **it's ok** if some of the earlier, simpler, approaches don't deliver on a certain performance objective. We can still use those approaches to:
+!!! warning "Decouple POCs and implementations"
+    Each of these approaches would involve proof-of-concept (POC) release and an implementation release after validating it's utility over previous approaches. We should decouple POCs and implementations because if a POC doesn't prove successful, then we can't do the implementation and all the associated planning is no longer applicable.
+
+And **it's ok** if some of the earlier, simpler, approaches don't deliver on a certain performance objective. We can still use those approaches to:
 
 - get internal feedback on end-to-end utility
 - perform A/B testing to understand UI/UX design
@@ -356,7 +350,7 @@ With ML, we’re not writing explicit rules to apply to data but rather using da
 3. [Deploy](infrastructure.md){:target="_blank"}, [monitor](monitoring.md){:target="_blank"} and maintain the versioned and reproducible models.
 4. If using an end-to-end system, start to decouple into individual [pipeline workflows](pipelines.md){:target="_blank"} that can be scaled, debugged and executed separately. This can involve using constructs such as [feature stores](feature-store.md){:target="_blank"} and [model servers](cicd.md#serving){:target="_blank"} to quickly iterate towards a [continual learning system](continual-learning.md){:target="_blank"}.
 
-!!! warning
+!!! warning "Always return to purpose"
     While it's important to iterate and optimize the internals of our workflows, it's even more important to ensure that our ML systems are actually making an impact. We need to constantly engage with stakeholders (management, users) to iterate on why our ML system exists.
 
 ### Rollout
