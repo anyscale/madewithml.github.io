@@ -76,7 +76,7 @@ When our users are able to discover the precise resources for their needs, this 
 
 
 ### Background
-> Describe any relevant background information relevant to this project, especially details that may not be so intuitive. This is also the section to mention previous approaches, competitive landscape, internal studies (with relevant summary of findings) and known obstacles.
+> Describe any background information relevant to this project, especially details that may not be so intuitive. This is also the section to mention previous approaches, competitive landscape, internal studies (with relevant summary of findings) and known obstacles.
 
 - **Q**: Why are tags even used?
 
@@ -255,7 +255,7 @@ How does this effort integrate with the current system and what additional work 
 </tbody>
 </table>
 
-### Risks
+### Concerns
 
 > What are potential risks, concerns and uncertainties that every one should be aware of?
 
