@@ -499,7 +499,7 @@ This is where the project scoping begins to take place. Often, the stakeholders 
 
     This is an extremely simplified timeline. An actual timeline would depict timelines from all the different teams stacked on top of each other with vertical lines at specified time-constraints or version releases.
 
-<small>Thank you to [Amr Al-Hamad](https://www.linkedin.com/in/amr-alhamad/){:target="_blank"}, [Amanda Bertsch](https://www.linkedin.com/in/amanda-bertsch/){:target="_blank"}, [Clara Matos](https://www.linkedin.com/in/claramatos/){:target="_blank"} and [Sherry Wang](https://www.linkedin.com/in/sherrywang31/){:target="_blank"} for their contributions. </small>
+<small>Thank you to [Chip Huyen](https://www.linkedin.com/in/chiphuyen/){:target="_blank"}, [Amr Al-Hamad](https://www.linkedin.com/in/amr-alhamad/){:target="_blank"}, [Ammar Asmro](https://www.linkedin.com/in/ammar-asmro/){:target="_blank"}, [Amanda Bertsch](https://www.linkedin.com/in/amanda-bertsch/){:target="_blank"}, [Clara Matos](https://www.linkedin.com/in/claramatos/){:target="_blank"} and [Sherry Wang](https://www.linkedin.com/in/sherrywang31/){:target="_blank"} for their contributions. </small>
 
 <!-- Citation -->
 {% include "cite.md" %}
