@@ -18,13 +18,13 @@ We're going to be covering all of these sections in this template but in reality
 
 ```bash
 # Project scoping
-project/
-├── release-1
-| ├── product requirements [Product]
-| ├── design documentation [Methodology]
-| ├── project planning     [Project]
+📂 project/
+├── 📂 release-1
+| ├── 📄 product requirements [Product]
+| ├── 📄 design documentation [Methodology]
+| ├── 📄 project planning     [Project]
 ├── ...
-└── release-n
+└── 📂 release-n
 ```
 
 > It's important that we organize our projects this way so that there is one central location where all documentation can be found and updated. This also enforces that we scope releases appropriately and provide the thorough planning and documentation to execute each one.
@@ -36,7 +36,7 @@ Before we dive into the template, there are several core principles that apply t
 - **Feedback**: each section should be reviewed and approved by relevant stakeholders. This can be done iteratively by performing a canary feedback rollout to ensure there are no open unanswered questions before engaging with executives.
 - **Updates**: the documentation should always be kept up-to-date so new (and current) members can always refer to it in the event of on-boarding, conflict, validation, etc.
 
-!!! tip "People are not going to read this..."
+!!! tip "People are not going to read all of this..."
     It can be an onerous task if need need stakeholders to review this kind of detailed documentation for each release. DRIs can mitigate the burder by highlighting which parts of the templates specific stakeholders need to review and the key differences/improvements since last time. After this, we can lead them to any decisions that they need to sign off on before we can proceed with executing the release.
 
 ## Product management
@@ -106,7 +106,7 @@ What are the key objectives that we're trying to satisfy? These could be general
     - Reduce week-to-week tickets based on search errors by 20%.
 
 !!! warning "Objectives vs. constraints"
-    Objectives and [constraints](#constraints) are often incorrectly used interchangeably but they're very different. Objectives are things that we want to **achieve** that are under our control. Usually, they start with the phrase "We want <objective>" whereas constraints are **limitations** that we need to abide by and sound like "We can't do X because <constraint>". Another way to think about constraints is that it's something we wouldn't impose on ourselves if we didn't have to.
+    Objectives and [constraints](#constraints) are often incorrectly used interchangeably but they're very different. Objectives are things that we want to **achieve** that are under our control. Usually, they start with the phrase "We want &lt;objective&gt;" whereas constraints are **limitations** that we need to abide by and sound like "We can't do X because &lt;constraint&gt;". Another way to think about constraints is that it's something we wouldn't impose on ourselves if we didn't have to.
 
 ### Solutions
 
@@ -155,15 +155,9 @@ Discuss the constraints that we have to account for in our solutions. A large ma
     ??? quote "Show answer"
         We believe that freely brainstorming solutions without being biased by constraints can lead to very creative solutions. Additionally, in future releases, constraints can often be overcome if the solution motivates it. However, for this current release, it's good to scope the solution by accounting for the constraints. But because we've documented our ideal solution, we can work towards that in future releases.
 
-!!! question "What to focus on first?"
-    What if our constraints are a result of issues in our team. Do we ignore those and do our best or delay our task until they're addressed?
-
-    ??? quote "Show answer"
-        It depends. By understanding the constraints, we'll unravel systemic issues in our team, such as legacy systems introducing bugs or simple systems that have yet to be build. At this point, we need to have a discussion with our team on whether the system change needs to worked on first because it might remove the problem all together. This can cause tension/conflict amongst the teams because we're passing the responsibility around. However, if it's something that is not critical to our current product, be transparent about the issue and plan to return to this stage when it's ready.
-
 ### Integration
 
-How does this effort integrate with the current system and what additional work is needed for it? Our project team will use this to request comments from appropriate team members and allocate resources for the releases. Also, besides just thinking about *our* dependencies and consumers, it's important to think about coexistence and potential conflicts with other system components as well.
+What are the dependencies and consumers we need to integrate with? Our project team will use this to request comments from appropriate team members and allocate resources for the releases. It's also important to think about coexistence and potential conflicts with other system components as well.
 
 ??? quote "Our task"
 
@@ -194,25 +188,25 @@ Describe core requirements that will help shape the functionality for this speci
     <tbody>
     <tr>
         <td>Identify explicit tags using rule-based text matching.</td>
-        <td>should-have</td>
+        <td>must-have</td>
         <td>v1</td>
         <td>Complete</td>
     </tr>
     <tr>
         <td>Predict explicit and implicit tags for given content metadata.</td>
-        <td>should-have</td>
+        <td>must-have</td>
         <td>v1</td>
         <td>Complete</td>
     </tr>
     <tr>
         <td>UI to poll prediction service when relevant content metadata is changed during content creation/update process.</td>
-        <td>should-have</td>
+        <td>must-have</td>
         <td>v1</td>
         <td>Complete</td>
     </tr>
     <tr>
         <td>Allow authors to click on the recommended tag to automatically add it to their content.</td>
-        <td>nice-to-have</td>
+        <td>should-have</td>
         <td>v1</td>
         <td>In-progress</td>
     </tr>
@@ -249,6 +243,7 @@ Given the feasibility evaluation, constraints and what's out of scope, what are 
     <table>
     <thead>
     <tr>
+        <th>Decision</th>
         <th>Driver</th>
         <th>Approver</th>
         <th>Contributors</th>
@@ -259,16 +254,19 @@ Given the feasibility evaluation, constraints and what's out of scope, what are 
     <tr>
         <td>Using only the title and description as relevant signal for recommending tags</td>
         <td>Product DRI</td>
+        <td>Senior manager</td>
         <td>Data scientist</td>
         <td>Executives, external stakeholders, etc.</td>
     </tr>
     <tr>
         <td>Recommend tags from our approved list of tags only</td>
+        <td>Security team</td>
         <td>Product DRI</td>
         <td>Product DRI</td>
         <td>Executives, external stakeholders, etc.</td>
     </tr>
     <tr>
+        <td>...</td>
         <td>...</td>
         <td>...</td>
         <td>...</td>
@@ -356,18 +354,6 @@ And **it's ok** if some of the earlier, simpler, approaches don't deliver on a c
 - perform A/B testing to understand UI/UX design
 - deployed locally to start generating more data required for more complex approaches
 
-The main goal here is to think like a problem solver and motivate the need for additional complexity, as opposed to a naive model fitter:
-
-<center>
-
-| ❌&nbsp;&nbsp; Model fitter    | ✅&nbsp;&nbsp; Problem solver                          |
-| :---------- | :----------------------------------- |
-| *naively maps* a set of inputs to outputs         | knows which set of inputs and outputs are *worth mapping*             |
-| obsesses on *methods* (models, SOTA, single metric, etc.)  | focuses on *product* (objective, constraints, evaluation, etc.)   |
-| fitting methods are *ephemeral*        | reproducible systems are *enduring*        |
-
-</center>
-
 #### ML specific methodology
 
 With ML, we’re not writing explicit rules to apply to data but rather using data to learn implicit rules. This inherently involves more trial-and-error compared to composing deterministic systems. Therefore, it’s important to iteratively and regularly scope out the problem towards promising techniques.
@@ -376,7 +362,7 @@ With ML, we’re not writing explicit rules to apply to data but rather using da
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/iteration/development_cycle.png" width="700" alt="product development cycle">
 </div>
 
-1. Proof of concept (POC) with a static, labeled dataset to explore if the input features we have are sufficient enough for the task. Though this is just [baselining](baselines.md){:target="_blank"}, this approach still requires thorough [testing](testing.md){:target="_blank"} (code, data + models) and [evaluation](evaluation.md){:target="_blank"}.
+1. Proof of concept (POC) with a static, [labeled](labeling.md) dataset to explore if the input features we have are sufficient enough for the task. Though this is just [baselining](baselines.md){:target="_blank"}, this approach still requires thorough [testing](testing.md){:target="_blank"} (code, data + models) and [evaluation](evaluation.md){:target="_blank"}.
 2. [Optimizing](optimization.md){:target="_blank"} on the solution, while potentially using the POC to collect more data, so that the system achieves performance requirements.
 3. [Deploy](infrastructure.md){:target="_blank"}, [monitor](monitoring.md){:target="_blank"} and maintain the versioned and reproducible models.
 4. If using an end-to-end system, start to decouple into individual [pipeline workflows](pipelines.md){:target="_blank"} that can be scaled, debugged and executed separately. This can involve using constructs such as [feature stores](feature-store.md){:target="_blank"} and [model servers](cicd.md#serving){:target="_blank"} to quickly iterate towards a [continual learning system](continual-learning.md){:target="_blank"}.
