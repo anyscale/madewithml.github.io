@@ -29,7 +29,7 @@ extra:
     - icon: fontawesome/brands/youtube
       link: https://www.youtube.com/madewithml?sub_confirmation=1
     - icon: fontawesome/solid/paper-plane
-      link: mailto:hello@madewithml.com
+      link: mailto:goku@madewithml.com
 
 # Page tree
 nav:

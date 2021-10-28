@@ -85,7 +85,7 @@ airflow users create \
     --firstname Goku \
     --lastname Mohandas \
     --role Admin \
-    --email hello@madewithml.com
+    --email goku@madewithml.com
 ```
 
 ## Webserver

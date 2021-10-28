@@ -10,7 +10,7 @@ image: https://madewithml.com/static/images/mlops.png
 
 ## Overview
 
-The template on this page is for adding structure to how we think about product, methodology and project planning. It's quite comprehensive, so feel free to use the sections that are relevant to your use case and certainly feel free to add domain-specific sections to your planning docs. This template structure is recommended for planning the iterative releases for our product but before documentation, we always have conversations to set the scene.
+The template on this page is for adding structure to how we think about product, methodology and project planning. It's quite comprehensive since the structure is recommended for planning the iterative releases for our product. But before documentation, it's important to think about the following aspects:
 
 - **Company**: describe the company's core values, goals, user base, etc. This will be important to refer to when dealing with uncertainties.
 - **Product**: what do we envision the product to do and why do we need it? We'll explore this in detail in the [product management](#product-management) section.

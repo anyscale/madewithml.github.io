@@ -1282,7 +1282,7 @@ If you attend the live sessions and complete the deliverables yet still don’t 
 <div class="row mt-3 mb-0">
     <div class="col-md-12">
         <div class="admonition question">
-            <p class="admonition-title">More questions?</p> <p>Feel free to send us an <a href="mailto:hello@madewithml.com" target="_blank">email</a> with all your additional questions and we'll get back to you very soon.</p>
+            <p class="admonition-title">More questions?</p> <p>Feel free to send us an <a href="mailto:goku@madewithml.com" target="_blank">email</a> with all your additional questions and we'll get back to you very soon.</p>
         </div>
     </div>
 </div>
