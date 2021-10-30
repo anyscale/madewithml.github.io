@@ -803,9 +803,9 @@ We will be applying the concepts we learn each week to iteratively complete two 
                 <div><a data-toggle="collapse" href="#collapseProduct" aria-expanded="false" aria-controls="collapseProduct">Product</a></div>
                 <div class="collapse multi-collapse" id="collapseProduct">
                     <ul class="ai-course-list">
-                    <li><a href="/courses/mlops/objective/">Objective</a></li>
-                    <li><a href="/courses/mlops/solution/">Solution</a></li>
-                    <li><a href="/courses/mlops/iteration/">Iteration</a></li>
+                    <li><a href="/courses/mlops/product/">Product</a></li>
+                    <li><a href="/courses/mlops/product#methodology">Methodology</a></li>
+                    <li><a href="/courses/mlops/product#project-management">Project</a></li>
                     </ul>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseData" aria-expanded="false" aria-controls="collapseData">Data</a></div>
