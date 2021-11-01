@@ -174,7 +174,8 @@ plugins:
   - redirects:
         redirect_maps:
             "subscribe": "index.md"
-            "topics": "pivot.md"
+            "topics": "index.md"
+            "pivot": "index.md"
             "courses/basics.md": "https://madewithml.com/#foundations"
             "courses/foundations.md": "https://madewithml.com/#foundations"
             "courses/mlops.md": "https://madewithml.com/#mlops"
