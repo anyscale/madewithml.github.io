@@ -83,6 +83,9 @@ df[np.abs(df.A - df.A.mean()) <= (2 * df.A.std())]
 df.C = df.A + df.B
 ```
 
+!!! tip
+    Feature engineering can be done in collaboration with domain experts that can guide us on what features to engineering and use.
+
 > After engineering our features, we can use techniques such as [SHAP](https://github.com/slundberg/shap){:target="_blank"} (SHapley Additive exPlanations) or [LIME](https://github.com/marcotcr/lime){:target="_blank"} (Local Interpretable Model-agnostic Explanations) to inspect feature importance. On a high level, these techniques learn which features have the most signal by assessing the performance in their absence. These inspections can be done on a model's single prediction or at a coarse-grained, overall level.
 
 ### Cleaning

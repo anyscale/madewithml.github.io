@@ -1109,7 +1109,8 @@ df.head()
 </table>
 </div></div>
 
-
+!!! tip
+    Feature engineering can be done in collaboration with domain experts that can guide us on what features to engineering and use.
 
 ## Save data
 Finally, let's save our preprocessed data into a new CSV file to use later.

@@ -10,7 +10,10 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/
 
 ## Intuition
 
-Let's motivate the need for a feature store by chronologically looking at what challenges developers face in their current workflows.
+Let's motivate the need for a feature store by chronologically looking at what challenges developers face in their current workflows. Suppose we had a task where we needed to predict something for an entity (ex. user) using their features.
+
+!!! warning "Don't over-engineer it"
+    Not all ML tasks will require a feature store. The real utility shines when we need to have up-to-date features for an entity that we continually generate predictions for.
 
 1. **Isolation**: feature development in isolation (for each unique ML application) can lead to duplication of efforts (setting up ingestion pipelines, feature engineering, etc.).
     - `#!js Solution`: create a central feature repository where the entire team contributes maintained features that anyone can use for any application.
@@ -19,11 +22,10 @@ Let's motivate the need for a feature store by chronologically looking at what c
 3. **Values**: once we set up our data pipelines, we need to ensure that our input feature values are up-to-date so we aren't working with stale data, while maintaining point-in-time correctness so we don't introduce data leaks.
     - `#!js Solution`: retrieve input features for the respective outcomes by pulling what's available when a prediction would be made.
 
-!!! note
-    Point-in-time correctness refers to mapping the appropriately up-to-date input feature values to an observed outcome at $t_{n+1}$. This involves knowing the time ($t_n$) that a prediction is needed so we can collect feature values ($X$) at that time.
-    <div class="ai-center-all">
-        <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/feature_store/point_in_time.png" width="500" alt="point in time">
-    </div>
+Point-in-time correctness refers to mapping the appropriately up-to-date input feature values to an observed outcome at $t_{n+1}$. This involves knowing the time ($t_n$) that a prediction is needed so we can collect feature values ($X$) at that time.
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/feature_store/point_in_time.png" width="500" alt="point in time">
+</div>
 
 When actually constructing our feature store, there are several core components we need to have to address these challenges:
 
@@ -34,7 +36,29 @@ When actually constructing our feature store, there are several core components 
 
 Each of these components is fairly easy to set up but connecting them all together requires a managed service, SDK layer for interactions, etc. Instead of building from scratch, it's best to leverage one of the production-ready, feature store options such as [Feast](https://feast.dev/){:target="_blank"}, [Hopsworks](https://www.hopsworks.ai/){:target="_blank"}, [Tecton](https://www.tecton.ai/){:target="_blank"}, [Rasgo](https://www.rasgoml.com/){:target="_blank"}, etc. And of course, the large cloud providers have their own feature store options as well (Amazon's [SageMaker Feature Store](https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store.html){:target="_blank"}, Google's [Vertex AI](https://cloud.google.com/vertex-ai/docs/featurestore){:target="_blank"}, etc.)
 
+!!! question "When do I need a feature store?"
+    The advantages of a feature store are obvious but when does our team need one?
+
+    ??? quote "Show answer"
+        As usual, it depends.
+
+        Use it from the very beginning if:
+
+        - someone on our team has set one up before
+        - we have time to focus on infrastructure
+
+        Delay using it until later if:
+
+        - nobody has set up one before
+        - we need to iterate on product first (ex. early-stage startup)
+        - we want to motivate the need for each advantage of a feature store
+
+        However, If we follow the delayed approach, we need to consider adopting a feature store if we find ourselves repeating feature preparation and serving steps repeatedly for every new project. The time wasted through these repeated efforts will be significantly more than the time needed to set up a feature store (not to mention improving the developer's experience).
+
+
 ## Feast
+
+### Set up
 
 > All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/feature_store.ipynb){:target="_blank"}.
 
@@ -93,10 +117,6 @@ provider: local
 online_store:
     path: ../stores/feature/online_store.db
 ```
-
-## Components
-
-We're going to start creating the components of the feature store, one at a time, using Feast.
 
 ### Data ingestion
 
