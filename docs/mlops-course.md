@@ -1107,7 +1107,7 @@ We will be applying the concepts we learn each week to iteratively complete two 
     <div class="col-md-12">
         <div class="admonition info">
             <p class="admonition-title">Reimbursement</p>
-            <p>Our alumni have had a lot of success getting 100% of the course reimbursed by their employers since all of this directly falls under career development and, in many cases, immediately necessary for their work. After you apply and are accepted for a cohort, check out this <b><a href="reimbursement.md" target="_blank">email template</a></b> that we've put together that you can send to your manager to get this course reimbursed.</p>
+            <p>Our alumni have had a lot of success getting 100% of the course reimbursed by their employers since all of this directly falls under career development and, in many cases, immediately necessary for their work. After you apply and are accepted for a cohort, check out this <b><a href="../reimbursement.md" target="_blank">email template</a></b> that we've put together that you can send to your manager to get this course reimbursed.</p>
         </div>
     </div>
 </div>

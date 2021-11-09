@@ -55,7 +55,6 @@ Each of these components is fairly easy to set up but connecting them all togeth
 
         However, If we follow the delayed approach, we need to consider adopting a feature store if we find ourselves repeating feature preparation and serving steps repeatedly for every new project. The time wasted through these repeated efforts will be significantly more than the time needed to set up a feature store (not to mention improving the developer's experience).
 
-
 ## Feast
 
 ### Set up
