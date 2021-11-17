@@ -10,7 +10,7 @@ image: https://madewithml.com/static/images/mlops.png
 
 ## Overview
 
-The template on this page is for adding structure to how we think about product, methodology and project planning. It's quite comprehensive since the structure is recommended for planning the iterative releases for our product. But before documentation, it's important to think about the following aspects:
+The template on this page is for adding structure to how we think about ML + product. It's quite comprehensive since the structure is recommended for planning the iterative releases for our product. But before using the template, it's important to think about the following:
 
 - **Company**: describe the company's core values, goals, user base, etc. This will be important to refer to when dealing with uncertainties.
 - **Product**: what do we envision the product to do and why do we need it? We'll explore this in detail in the [product management](#product-management) section.
@@ -21,9 +21,9 @@ The template on this page is for adding structure to how we think about product,
 
 This template is designed to guide product development that justifies and involves machine learning. While this template will initially be completed in sequential order, it will naturally involve nonlinear engagement based on iterative feedback. We should follow this template for every major release of our products so that all the decision making is transparent and documented, which acts as a guide for development.
 
-[Product](#product-management) (*What* & *Why*) → [Methodology](#methodology) (*How*) → [Project](#project-management) (*Who* & *When*)
+[Product](#product) (*What* & *Why*) → [System design](#system-design) (*How*) → [Project](#project) (*Who* & *When*)
 
-We're going to be covering all of these sections in this template but in reality, this template can be broken down into individual documents. Where there is a main project page which describes the overall product and the scoped releases. Each of which point to the components (product, methods and project) that we cover in this template (for that particular release).
+We're going to be covering all of these sections in this template but in reality, this template can be broken down into individual documents. Where there is a main project page which describes the overall product and the scoped releases. Each of which point to the components (product, system design and project) that we cover in this template (for that particular release).
 
 ```bash
 # Project scoping
@@ -31,7 +31,7 @@ We're going to be covering all of these sections in this template but in reality
 ├── 📄 Overview
 ├── 📂 release-1
 | ├── 📄 product requirements [Product]
-| ├── 📄 design documentation [Methodology]
+| ├── 📄 design documentation [System design]
 | ├── 📄 project planning     [Project]
 ├── ...
 └── 📂 release-n
@@ -49,7 +49,7 @@ Before we dive into the template, there are several core principles that apply t
 !!! tip "People are not going to read all of this..."
     It can be an onerous task if need need stakeholders to review this kind of detailed documentation for each release. DRIs can mitigate the burden by highlighting which parts of the templates specific stakeholders need to review and the key differences/improvements since last time. After this, we can lead them to any decisions that they need to sign off on before we can proceed with executing the release.
 
-## Product management
+## Product
 
 [*What* & *Why*]: motivate the need for the product and outline the objectives and key results.
 
@@ -76,7 +76,7 @@ Describe the feature/problem at a high level. This is the section where you’re
     }
     ```
 
-### Relevance
+#### Relevance
 
 Why is this feature/problem important and why now? Talk about experiences leading to its discovery and the impact on the business. Out of all the other problems we could be addressing right now, why is this problem the one that’s worth solving right now? Justify using relative impact on business compared to other issues in the backlog. As a general rule, it’s good to be as specific as possible in this section and use numerical values to strengthen claims.
 
@@ -89,7 +89,7 @@ Why is this feature/problem important and why now? Talk about experiences leadin
     When our users are able to discover the precise resources for their needs, this drives engagement on our platform and improves perceived value. If we had addressed the search related complaints over the last X months, it would have increased engagement by X% leading to Y% increase in sponsorship fees.
 
 
-### Background
+#### Background
 
 Describe any background information relevant to this project, especially details that may not be so intuitive. This is also the section to mention previous approaches, competitive landscape, internal studies (with relevant summary of findings) and known obstacles.
 
@@ -106,7 +106,7 @@ Describe any background information relevant to this project, especially details
 
     We have also validated that the vast majority of user complaints step from missing implicit tags and so a full-text-based approach would not address this underlying issue.
 
-### Objectives
+#### Objectives
 
 What are the key objectives that we're trying to satisfy? These could be general objectives which we can then decouple or it can be specific success criteria/metrics.
 
@@ -138,7 +138,7 @@ Describe current solutions and alternative approaches that our teams considered.
     - Alternatives considered
         - Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags.
 
-### Feasibility
+#### Feasibility
 
 Our solutions have so many nuances tied to them that will be revealed when we decouple the objectives. This will also help our project team scope these into separate releases that will each provide end-to-end value. We should also note potential data dependencies **[DATA]** and explorations **[EXPLORE]** required to assess the feasibility of our proposals.
 
@@ -149,7 +149,7 @@ Our solutions have so many nuances tied to them that will be revealed when we de
     - title, description and other relevant metadata from the content **[DATA]**
     - are the tokens in the content metadata enough signal to identify explicit and implicit tags **[EXPLORE]**
 
-### Constraints
+#### Constraints
 
 Discuss the constraints that we have to account for in our solutions. A large majority of constraints can directly come from our service-level agreements (SLAs) with customers and internal systems regarding time, $, performance, latency, infrastructure, privacy, security, UI/UX.
 
@@ -165,7 +165,7 @@ Discuss the constraints that we have to account for in our solutions. A large ma
     ??? quote "Show answer"
         We believe that freely brainstorming solutions without being biased by constraints can lead to very creative solutions. Additionally, in future releases, constraints can often be overcome if the solution motivates it. However, for this current release, it's good to scope the solution by accounting for the constraints. But because we've documented our ideal solution, we can work towards that in future releases.
 
-### Integration
+#### Integration
 
 What are the dependencies and consumers we need to integrate with? Our project team will use this to request comments from appropriate team members and allocate resources for the releases. It's also important to think about coexistence and potential conflicts with other system components as well.
 
@@ -235,7 +235,7 @@ Describe core requirements that will help shape the functionality for this speci
     </tbody>
     </table>
 
-### Out of scope
+#### Out of scope
 
 What aspects of the feature/problem should we not be concerned with for the immediate planning? Out of scope doesn't mean that we will never address but just not during this specific deliverable.
 
@@ -245,7 +245,7 @@ What aspects of the feature/problem should we not be concerned with for the imme
     - using text from content metadata besides title and description, such as full-text HTML from associated links.
     - interpretability for why we recommend certain tags.
 
-### Decisions
+#### Decisions
 
 Given the feasibility evaluation, constraints and what's out of scope, what are the key decisions that need to be made? A recommended framework to use is driver, approver, contributors and informed ([DACI](https://en.wikipedia.org/wiki/Responsibility_assignment_matrix#DACI){:target="_blank"}) responsibility assignment matrix.
 
@@ -285,7 +285,7 @@ Given the feasibility evaluation, constraints and what's out of scope, what are 
     </tbody>
     </table>
 
-### Concerns
+#### Concerns
 
 What are potential risks, concerns and uncertainties that every one should be aware of?
 
@@ -294,9 +294,9 @@ What are potential risks, concerns and uncertainties that every one should be aw
     - how long to continue to QA every single incoming sample
     - system ways to account for popular tags that are not in our accepted list of tags that we're using to recommend relevant tags
 
-## Methodology
+## System design
 
-[*How*]: describe our sequential approach towards building the product.
+[*How*]: describe our systemic approach towards building the product.
 
 ### Data
 
@@ -364,7 +364,7 @@ And **it's ok** if some of the earlier, simpler, approaches don't deliver on a c
 - perform A/B testing to understand UI/UX design
 - deployed locally to start generating more data required for more complex approaches
 
-#### ML specific methodology
+#### ML systems
 
 With ML, we’re not writing explicit rules to apply to data but rather using data to learn implicit rules. This inherently involves more trial-and-error compared to composing deterministic systems. Therefore, it’s important to iteratively and regularly scope out the problem towards promising techniques.
 
@@ -377,10 +377,10 @@ With ML, we’re not writing explicit rules to apply to data but rather using da
 3. [Deploy](infrastructure.md){:target="_blank"}, [monitor](monitoring.md){:target="_blank"} and maintain the versioned and reproducible models.
 4. If using an end-to-end system, start to decouple into individual [pipeline workflows](pipelines.md){:target="_blank"} that can be scaled, debugged and executed separately. This can involve using constructs such as [feature stores](feature-store.md){:target="_blank"} and [model servers](cicd.md#serving){:target="_blank"} to quickly iterate towards a [continual learning system](continual-learning.md){:target="_blank"}.
 
-!!! warning "Always return to purpose"
+!!! warning "Always return to the purpose"
     While it's important to iterate and optimize the internals of our workflows, it's even more important to ensure that our ML systems are actually making an impact. We need to constantly engage with stakeholders (management, users) to iterate on why our ML system exists.
 
-### Rollout
+#### Rollout
 
 What do the release strategies look like for our different versions? Note that not all releases have to be high stakes, external facing to the whole world. We can always include internal releases, gather feedback and iterate until we’re ready to increase the scope.
 
@@ -388,7 +388,7 @@ What do the release strategies look like for our different versions? Note that n
 - Rollout to the larger internal team for more feedback.
 - A/B rollout to a subset of the population to better understand UX, utility, etc.
 
-### Feedback
+#### Feedback
 
 How do we receive feedback on our system and incorporate it into the next iteration? This can involve both human-in-the-loop feedback as well as automatic feedback via [monitoring](monitoring.md){:target="_blank"}, etc.
 
@@ -399,7 +399,7 @@ How do we receive feedback on our system and incorporate it into the next iterat
     - enforce human-in-loop checks on where they are conflicts between recommended tags and manually chosen tags.
     - allow users to report issues related to suggested tags.
 
-## Project management
+## Project
 
 [*Who* & *When*]: organizing all the product requirements into manageable timelines so we can deliver on the vision.
 
@@ -410,13 +410,13 @@ Which teams and specific members from those teams need to be involved in this pr
 ??? quote "Our task"
 
     - **Product**: the members responsible for outlining the product requirements and approving them may involve product managers, executives, external stakeholders, etc.
-    - **Methodology**:
-        - Data engineering: these developers are often responsible for the data dependencies, which include robust workflows to continually deliver the data and ensuring that it’s properly validated and ready for downstream applications
-        - Machine learning: develop the probabilistic systems with appropriate evaluation.
-        - DevOps: deploy the application and help autoscale based on traffic.
-        - UI/UX: consume the system’s outputs to deliver the new experience to the user.
-        - Accessibility: help educate the community for the new rollouts and to assist with decisions around sensitive issues.
-        - Site reliability: maintain the application and to potentially oversee that online evaluation/monitoring workflows are working as they should.
+    - **System design**:
+        - **Data engineering**: these developers are often responsible for the data dependencies, which include robust workflows to continually deliver the data and ensuring that it’s properly validated and ready for downstream applications
+        - **Machine learning**: develop the probabilistic systems with appropriate evaluation.
+        - **DevOps**: deploy the application and help autoscale based on traffic.
+        - **UI/UX**: consume the system’s outputs to deliver the new experience to the user.
+        - **Accessibility**: help educate the community for the new rollouts and to assist with decisions around sensitive issues.
+        - **Site reliability**: maintain the application and to potentially oversee that online evaluation/monitoring workflows are working as they should.
     - **Project**: the members responsible for iterative engagement with the product and engineering teams to ensure that the right product is being built and that it’s being built appropriately may include project managers, engineering managers, etc.
 
 ### Deliverables

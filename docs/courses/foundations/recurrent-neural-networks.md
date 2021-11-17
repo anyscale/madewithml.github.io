@@ -38,7 +38,7 @@ $$ h_t = tanh(W_{hh}h_{t-1} + W_{xh}X_t+b_h) $$
 </center>
 
 * **Objective**:
-    - Process sequential data by accounting for the currend input and also what has been learned from previous inputs.
+    - Process sequential data by accounting for the current input and also what has been learned from previous inputs.
 * **Advantages**:
     - Account for order and previous inputs in a meaningful way.
     - Conditioned generation for generating sequences.
@@ -688,7 +688,7 @@ EMBEDDING_DIM = 100
 # Input
 sequence_size = 8 # words per input
 x = torch.rand((BATCH_SIZE, sequence_size, EMBEDDING_DIM))
-seq_lens = torch.randint(high=sequence_size, size=(1, BATCH_SIZE))
+seq_lens = torch.randint(high=sequence_size, size=(BATCH_SIZE, ))
 print (x.shape)
 print (seq_lens.shape)
 ```
@@ -725,7 +725,6 @@ $$ h_t = tanh(W_{hh}h_{t-1} + W_{xh}X_t+b_h) $$
 ```python linenums="1"
 RNN_HIDDEN_DIM = 128
 DROPOUT_P = 0.1
-RNN_DROPOUT_P = 0.1
 ```
 ```python linenums="1"
 # Initialize hidden state
@@ -977,7 +976,7 @@ print (json.dumps(performance["overall"], indent=2))
 </pre>
 
 ## Gated RNN
-While our simple RNNs so far are great for sequentially processing our inputs, they have quite a few disadvantages. They commonly suffer from exploding or vanishing gradients as a result using the same set of weights ($W_{xh}$ and $W_{hh}$) with each timestep's input. During backpropagation, this can cause gradients to explode (>1) or vanish (<1). If you multiply any number greater than 1 with itself over and over, it moves towards infinity (exploding gradients) and similarly,  If you multiply any number less than 1 with itself over and over, it moves towards zero (vanishing gradients). To mitigate this issue, gated RNNs were devised to selectively retrain information. If you're interested in learning more of the specifics, this [post](http://colah.github.io/posts/2015-08-Understanding-LSTMs/) is a must-read.
+While our simple RNNs so far are great for sequentially processing our inputs, they have quite a few disadvantages. They commonly suffer from exploding or vanishing gradients as a result using the same set of weights ($W_{xh}$ and $W_{hh}$) with each timestep's input. During backpropagation, this can cause gradients to explode (>1) or vanish (<1). If you multiply any number greater than 1 with itself over and over, it moves towards infinity (exploding gradients) and similarly,  If you multiply any number less than 1 with itself over and over, it moves towards zero (vanishing gradients). To mitigate this issue, gated RNNs were devised to selectively retain information. If you're interested in learning more of the specifics, this [post](http://colah.github.io/posts/2015-08-Understanding-LSTMs/) is a must-read.
 
 There are two popular types of gated RNNs: Long Short-term Memory (LSTMs) units and Gated Recurrent Units (GRUs).
 

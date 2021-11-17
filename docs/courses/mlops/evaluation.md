@@ -30,12 +30,11 @@ test_loss, y_true, y_prob = trainer.eval_step(dataloader=test_dataloader)
 y_pred = np.array([np.where(prob >= threshold, 1, 0) for prob in y_prob])
 ```
 
-## Overall metrics
+## Coarse-grained
 
 While we were iteratively developing our baselines, our evaluation process involved computing the coarse-grained metrics such as overall precision, recall and f1 metrics.
 
 ```python linenums="1"
-# Evaluate
 # Overall metrics
 overall_metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
 metrics["overall"]["precision"] = overall_metrics[0]
@@ -63,9 +62,9 @@ print (json.dumps(metrics["overall"], indent=4))
     - `weighted`: per-class metrics which are averaged by accounting for class imbalance.
     - `samples`: metrics are calculated at the per-sample level.
 
-## Per-class metrics
+## Fine-grained
 
-Inspecting these coarse-grained, overall metrics is a start but we can go deeper by evaluating the same fine-grained metrics at the per-class level.
+Inspecting these coarse-grained, overall metrics is a start but we can go deeper by evaluating the same fine-grained metrics at the categorical feature levels.
 
 ```python linenums="1"
 # Per-class metrics
@@ -84,7 +83,7 @@ tag = "transformers"
 print (json.dumps(metrics["class"][tag], indent=2))
 ```
 <pre class="output">
-
+{
   "precision": 0.6428571428571429,
   "recall": 0.6428571428571429,
   "f1": 0.6428571428571429,
@@ -129,9 +128,9 @@ There are, of course, nuances to this general rule such as the complexity of dis
 
 Besides just inspecting the metrics for each class, we can also identify the true positives, false positives and false negatives. Each of these will give us insight about our model beyond what the metrics can provide.
 
-- True positives: learn about where our model performs well.
-- False positives: potentially identify samples which may need to be relabeled.
-- False negatives: identify the model's less performant areas to oversample later.
+- **True positives (TP)**: prediction = ground-truth → learn about where our model performs well.
+- **False positives (FP)**: falsely predict sample belongs to class → identify potentially mislabeled samples.
+- **False negatives (FN)**: falsely predict sample does not belong to class → identify the model's less performant areas to upsample later.
 
 > It's a good to have our FP/FN samples feed back into our annotation pipelines in the event we want to fix their labels and have those changes be reflected everywhere.
 
@@ -249,12 +248,6 @@ class = 'transformers'
     pred: []
 
 </pre>
-
-!!! question "What can we do with this?"
-    How can we leverage this type of inspection to improve on our performance?
-
-    ??? quote "Show answer"
-        We can use the FPs to find *potentially* mislabeled samples and use FNs to see what aspects of our input data we're not able to map to.
 
 ## Slices
 
