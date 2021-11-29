@@ -13,7 +13,7 @@ image: https://madewithml.com/static/images/mlops.png
 The template on this page is for adding structure to how we think about ML + product. It's quite comprehensive since the structure is recommended for planning the iterative releases for our product. But before using the template, it's important to think about the following:
 
 - **Company**: describe the company's core values, goals, user base, etc. This will be important to refer to when dealing with uncertainties.
-- **Product**: what do we envision the product to do and why do we need it? We'll explore this in detail in the [product management](#product-management) section.
+- **Product**: what do we envision the product to do and why do we need it? We'll explore this in detail in the [product management](#product) section.
 - **Releases**: how do we iteratively envision our product to be developed? Data, POCs, Rule-based, ML, UI/UX, personalization, etc.
 - **Concerns**: what are major concerns that our releases should be addressing? privacy, security, moderation, controversial decisions, etc.
 
@@ -59,7 +59,7 @@ Describe the feature/problem at a high level. This is the section where you’re
 
 ??? quote "Our task"
 
-    We are a service that has content (with tags) with a rudimentary search mechanism that involves searching by tags. Recently, there has been an increase in complaints pertaining to the search and discovery experience. Upon further investigation, the vast majority of the complaints are a result of content having insufficient or irrelevant tags.
+    There have been a lot of articles, videos, research papers, etc. from the machine learning community on our platform lately and we want to be able to organize all of it. We want to be able to attach relevant (explicit and implicit) tags to the content so that our users can discover them when they need it.
 
     ```json linenums="1"
     {
@@ -95,16 +95,12 @@ Describe any background information relevant to this project, especially details
 
 ??? quote "Our task"
 
-    - **Q**: Why are tags even used?
+    Our current search capabilities involve basic text matching with search queries. Unfortunately, many of the terms that our users are searching for involve queries that are not explicit in the content (ex. natural language processing). We need to be able to tag these implicit tags to all the content so that our users can discover them.
 
-        - Tags are added by the project's author and they represent core concepts that the project covers.
-        - Keywords in a project's description does not necessarily signify that it's a core concept.
+    - **Q**: Why do we even need tags?
 
-    - **Q**: What can tags provide that keywords in full-text cannot?
-
-        - Many tags are inferred and don't explicitly exist in the metadata, such as `natural-language-processing`, and users will definitely use these in their search terms for broad search and filtering.
-
-    We have also validated that the vast majority of user complaints step from missing implicit tags and so a full-text-based approach would not address this underlying issue.
+        - Tags represent core concepts that may be implicit.
+        - Keywords in a project's title or description may not be a core concept → noisy search results.
 
 #### Objectives
 
@@ -124,7 +120,7 @@ Describe current solutions and alternative approaches that our teams considered.
 
 ??? quote "Our task"
 
-    - Current solutions → None
+    - Current solutions → simple text matching based search (noisy and incomplete).
     - Identify tags for a given content → use available signals from content.
     - Measure engagement on platform → track engagement after discovery of content.
 
@@ -136,7 +132,7 @@ Describe current solutions and alternative approaches that our teams considered.
     </div>
 
     - Alternatives considered
-        - Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags.
+        - Currently, the tagging process involves adding tags into an input box but what if we could separate the process into sections like `frameworks`, `tasks`, `algorithms`, etc. to guide the user to add relevant tags. This is a very simple solution that should be A/B tested on and could even complement more sophisticated solutions.
 
 #### Feasibility
 
@@ -498,8 +494,6 @@ This is where the project scoping begins to take place. Often, the stakeholders 
     - Pushed to prod by XX
 
     This is an extremely simplified timeline. An actual timeline would depict timelines from all the different teams stacked on top of each other with vertical lines at specified time-constraints or version releases.
-
-<small>Thank you to [Chip Huyen](https://www.linkedin.com/in/chiphuyen/){:target="_blank"}, [Amr Al-Hamad](https://www.linkedin.com/in/amr-alhamad/){:target="_blank"}, [Ammar Asmro](https://www.linkedin.com/in/ammar-asmro/){:target="_blank"}, [Amanda Bertsch](https://www.linkedin.com/in/amanda-bertsch/){:target="_blank"}, [Clara Matos](https://www.linkedin.com/in/claramatos/){:target="_blank"} and [Sherry Wang](https://www.linkedin.com/in/sherrywang31/){:target="_blank"} for their contributions. </small>
 
 <!-- Citation -->
 {% include "cite.md" %}

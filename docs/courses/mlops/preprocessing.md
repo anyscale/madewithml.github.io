@@ -397,6 +397,7 @@ if len(stopwords):
     pattern = re.compile(r"\b(" + r"|".join(stopwords) + r")\b\s*")
     text = pattern.sub("", text)
 ```
+
 3. Filters and spacing
 ```python linenums="1"
 # Separate filters attached to tokens
@@ -412,6 +413,13 @@ text = re.sub(" +", " ", text)
 # Strip white space at the ends
 text = text.strip()
 ```
+
+    !!! note
+        We could definitely try and include emojis, punctuations, etc. because they do have a lot of signal for the task but it's best to simplify the initial feature set we use to just what we think are the most influential and then we can slowly introduce other features and assess utility.
+
+    !!! warning
+        We'll want to introduce less frequent features as they become more frequent or encode them in a clever way (ex. binning, extract general attributes, common n-grams, mean encoding using other feature values, etc.) so that we can mitigate the feature value dimensionality issue until we're able to collect more data.
+
 4. remove URLs using regex (discovered during EDA)
 ```python linenums="1"
 text = re.sub(r"http\S+", "", text)
