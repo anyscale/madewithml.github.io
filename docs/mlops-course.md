@@ -544,8 +544,8 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <b><span class="mr-1">📦</span> Purpose</b>
     <ul>
     <li><a href="/courses/mlops/product/">Product</a></li>
-    <li><a href="/courses/mlops/product#methodology">Methodology</a></li>
-    <li><a href="/courses/mlops/product#project-management">Project</a></li>
+    <li><a href="/courses/mlops/product#system-design">Methodology</a></li>
+    <li><a href="/courses/mlops/product#project">Project</a></li>
     </ul>
     <b><span class="mr-1">🔢</span> Data</b>
     <ul>
@@ -804,8 +804,8 @@ We will be applying the concepts we learn each week to iteratively complete two 
                 <div class="collapse multi-collapse" id="collapseProduct">
                     <ul class="ai-course-list">
                     <li><a href="/courses/mlops/product/">Product</a></li>
-                    <li><a href="/courses/mlops/product#methodology">Methodology</a></li>
-                    <li><a href="/courses/mlops/product#project-management">Project</a></li>
+                    <li><a href="/courses/mlops/product#system-design">Methodology</a></li>
+                    <li><a href="/courses/mlops/product#project">Project</a></li>
                     </ul>
                 </div>
                 <div><a data-toggle="collapse" href="#collapseData" aria-expanded="false" aria-controls="collapseData">Data</a></div>
