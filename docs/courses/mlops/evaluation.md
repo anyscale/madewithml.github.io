@@ -254,6 +254,7 @@ class = 'transformers'
 While the confusion-matrix sample analysis was a coarse-grained process, we can also use fine-grained confidence based approaches to identify potentially mislabeled samples. Here we’re going to focus on the specific labeling quality as opposed to the final model predictions.
 
 Simple confidence based techniques include identifying samples whose:
+
 - Categorical
     - prediction is incorrect (also indicate TN, FP, FN)
     - confidence score for the correct class is below a threshold

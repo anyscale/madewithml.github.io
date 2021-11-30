@@ -993,7 +993,7 @@ With [monitoring](monitoring.md){:target="_blank"}, there are quite a few distin
 - in situations with large data, we need to know which data points to label and upsample for training.
 - identifying anomalies and outliers.
 
-> We'll cover all of these concepts in much more depth (and code) in our [monitoring](monitoring.md){:target="_blank"} lesson and cover some data-centric approaches in our [data-driven development lesson](data-driven-development.md){:target="_blank"}.
+> We'll cover all of these concepts in much more depth (and code) in our [monitoring](monitoring.md){:target="_blank"} lesson and cover some data-centric approaches in our [data-centric AI lesson](data-centric-ai.md){:target="_blank"}.
 
 ## Resources
 - [Great Expectations](https://github.com/great-expectations/great_expectations){:target="_blank"}

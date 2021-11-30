@@ -35,6 +35,9 @@ The exact method of data augmentation depends largely on the type of data and th
 - **Natural language processing (NLP)**: substitutions (synonyms, tfidf, embeddings, masked models), random noise, spelling errors, etc.
 - **Computer vision (CV)**: crop, flip, rotate, pad, saturate, increase brightness, etc.
 
+!!! warning
+    While the transformations on some data modalities, such as images, are easy to inspect and validate, others may introduce silent errors. For example, shifting the order of tokens in text can significantly alter the meaning (“this is really cool” → “is this really cool”). Therefore, it’s important to measure the noise that our augmentation policies will introduce and do have granular control over the transformations that take place.
+
 ## Libraries
 
 Depending on the feature types and tasks, there are many data augmentation libraries which allow us to extend our training data.

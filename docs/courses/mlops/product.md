@@ -353,11 +353,14 @@ For the purpose of this course, we're going to develop a solution that involves 
 !!! warning "Decouple POCs and implementations"
     Each of these approaches would involve proof-of-concept (POC) release and an implementation release after validating it's utility over previous approaches. We should decouple POCs and implementations because if a POC doesn't prove successful, then we can't do the implementation and all the associated planning is no longer applicable.
 
-And **it's ok** if some of the earlier, simpler, approaches don't deliver on a certain performance objective. We can still use those approaches to:
 
-- get internal feedback on end-to-end utility
-- perform A/B testing to understand UI/UX design
-- deployed locally to start generating more data required for more complex approaches
+!!! question "Utility in starting simple"
+    Some of the earlier, simpler, approaches may not deliver on a certain performance objective. What are some advantages of still starting simple?
+
+    ??? quote "Show answer"
+        - get internal feedback on end-to-end utility
+        - perform A/B testing to understand UI/UX design
+        - deployed locally to start generating more data required for more complex approaches
 
 #### ML systems
 
