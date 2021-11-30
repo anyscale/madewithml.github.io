@@ -58,7 +58,7 @@ nav:
     - Lessons: /#mlops
     - 📦 &nbsp; Purpose:
       - Product: courses/mlops/product.md
-      - Methodology: courses/mlops/product/#system-design
+      - System design: courses/mlops/product/#system-design
       - Project: courses/mlops/product/#project
     - 🔢 &nbsp; Data:
       - Labeling: courses/mlops/labeling.md

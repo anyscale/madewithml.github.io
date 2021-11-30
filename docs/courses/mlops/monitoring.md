@@ -83,6 +83,19 @@ However, there are two main obstacles with this approach:
     - use the statistical features of our inputs and predicted outputs as an indirect [measure](#measuring-drift).
 - **Too late**: if we wait to catch the model decay based on the performance, it may have already caused significant damage to downstream business pipelines that are dependent on it. We need to employ more fine-grained monitoring to identify the *sources* of model drift prior to actual performance degradation.
 
+## Importance weighting
+
+However, approximate signals are not always available for every situation because there is no feedback on the ML system’s outputs or it’s too delayed. For these situations, a recent line of research relies on the only component that’s available in all situations: the input data.
+
+<div class="ai-center-all">
+    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/mandoline.png">
+</div>
+<div class="ai-center-all">
+    <small><a href="https://arxiv.org/abs/2107.00643" target="_blank">Mandoline: Model Evaluation under Distribution Shift</a></small>
+</div>
+
+The core idea is to develop slicing functions that may potentially capture the ways our data may experience distribution shift. These slicing functions should capture obvious slices such as class labels or different categorical feature values but also slices based on implicit metadata. These slicing functions are then applied to our labeled dataset to create matrices with the corresponding labels. The same slicing functions are applied to our unlabeled production data to approximate what weighted labels would be. With this, we can determine the approximate performance! The intuition here is that we can better approximate performance on our unlabeled dataset based on the similarity between the labeled slice matrix and unlabeled slice matrix. A core dependency of this assumption is that our slicing functions are comprehensive enough that they capture the causes of distributional shift.
+
 ## Drift
 
 We need to first understand the different types of issues that can cause our model's performance to decay (model drift). The best way to do this is to look at all the moving pieces of what we're trying to model and how each one can experience drift.

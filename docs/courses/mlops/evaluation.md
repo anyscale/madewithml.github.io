@@ -124,7 +124,7 @@ for x, y, label in zip(num_samples[-n:], f1s[-n:], label_encoder.classes[-n:]):
 
 There are, of course, nuances to this general rule such as the complexity of distinguishing between some classes where we may not need as many samples for easier sub-tasks. In our case, classes with over 100 training samples consistently perform better than 0.6 f1 score, whereas the other class' performances are mixed.
 
-## Confusion matrix sample analysis
+## Confusion matrix
 
 Besides just inspecting the metrics for each class, we can also identify the true positives, false positives and false negatives. Each of these will give us insight about our model beyond what the metrics can provide.
 
@@ -249,7 +249,23 @@ class = 'transformers'
 
 </pre>
 
-## Slices
+## Confidence learning
+
+While the confusion-matrix sample analysis was a coarse-grained process, we can also use fine-grained confidence based approaches to identify potentially mislabeled samples. Here we’re going to focus on the specific labeling quality as opposed to the final model predictions.
+
+Simple confidence based techniques include identifying samples whose:
+- Categorical
+    - prediction is incorrect (also indicate TN, FP, FN)
+    - confidence score for the correct class is below a threshold
+    - confidence score for an incorrect class is above a threshold
+    - standard deviation of confidence scores over top N samples is low
+    - different predictions from sample model using different parameters
+- Continuous
+    - difference between predicted and ground-truth values is above some %
+
+But these are fairly crude techniques because neural networks are easily [overconfident](https://arxiv.org/abs/1706.04599){:target="_blank"} and so their confidences cannot be used without calibrating them. Recent work on [confidence learning](https://arxiv.org/abs/1706.04599){:target="_blank"} focuses on identifying noisy labels while accounting for this overconfidence which can then be properly relabeled and used for training.
+
+## Manual slices
 
 Just inspecting the overall and class metrics isn't enough to deploy our new version to production. There may be key slices of our dataset that we expect to do really well on (ie. minority groups, large customers, etc.) and we need to ensure that their metrics are also improving. An easy way to create and evaluate slices is to define slicing functions.
 
@@ -314,7 +330,6 @@ short_text_df[["text", "tags"]].head()
 </table>
 </div></div>
 
-
 We can define even more slicing functions and create a slices record array using the [`PandasSFApplier`](https://snorkel.readthedocs.io/en/v0.9.6/packages/_autosummary/slicing/snorkel.slicing.PandasSFApplier.html){:target="_blank"}. The slices array has N (# of data points) items and each item has S (# of slicing functions) items, indicating whether that data point is part of that slice. Think of this record array as a masking layer for each slicing function on our data.
 
 ```python linenums="1"
@@ -372,6 +387,13 @@ print(json.dumps(metrics["slices"], indent=2))
   }
 }
 </pre>
+
+## Generated slices
+
+Manually creating slices is a massive improvement towards identifying problem subsets in our dataset compared to coarse-grained evaluation but what if there are problematic slices of our dataset that we failed to identify? [SliceLine](https://mboehm7.github.io/resources/sigmod2021b_sliceline.pdf){:target="_blank"} is a recent work that uses a linear-algebra and pruning based technique to identify large slices (specify minimum slice size) that result in meaningful errors from the forward pass. Without pruning, automatic slice identification becomes computationally intensive because it involves enumerating through many combinations of data points to identify the slices. But with this technique, we can discover hidden underperforming subsets in our dataset that we weren’t explicitly looking for!
+
+In the event where we need to create slices where feature values / metadata is not explicit (ex. Unlabeled features in an image), there are very recent sophisticated [clustering-based techniques](https://arxiv.org/abs/2011.12945){:target="_blank"} to identify these hidden slices and improve the system.
+
 
 > In our [testing lesson](https://madewithml.com/courses/mlops/testing/){:target="_blank"}, we'll cover another way to evaluate our model known as [behavioral testing](https://madewithml.com/courses/mlops/testing/#behavioral-testing){:target="_blank"}, which we'll also include as part of performance report.
 

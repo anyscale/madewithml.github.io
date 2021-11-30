@@ -98,7 +98,6 @@ Describe any background information relevant to this project, especially details
     Our current search capabilities involve basic text matching with search queries. Unfortunately, many of the terms that our users are searching for involve queries that are not explicit in the content (ex. natural language processing). We need to be able to tag these implicit tags to all the content so that our users can discover them.
 
     - **Q**: Why do we even need tags?
-
         - Tags represent core concepts that may be implicit.
         - Keywords in a project's title or description may not be a core concept → noisy search results.
 

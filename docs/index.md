@@ -522,7 +522,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <b><span class="mr-1">📦</span> Purpose</b>
     <ul>
     <li><a href="/courses/mlops/product/">Product</a></li>
-    <li><a href="/courses/mlops/product#system-design">Methodology</a></li>
+    <li><a href="/courses/mlops/product#system-design">System design</a></li>
     <li><a href="/courses/mlops/product#project">Project</a></li>
     </ul>
     <b><span class="mr-1">🔢</span> Data</b>

@@ -34,7 +34,16 @@ Starting backwards from our update workflow, there are so many moving pieces inv
 
 ### Retraining
 
-If the appropriate action is to retrain, it’s not just the matter of fact of retraining on the old data + new data (if only it was that easy)! There’s an entire workflow (often human-in-the-loop) that is responsible for composing the retraining dataset. We use the word “compose” because it really is an art. Labeling, active learning, views for domain experts, quality assurance, augmentation, up/down sampling, evaluation dataset with appropriate slice representations, etc. Read more about the nuances of this process in our [data-driven development lesson](data-driven-development.md){:target="_blank"} which focuses on data-driven development and treating data as the first class citizen.
+If the appropriate action is to retrain, it’s not just the matter of fact of retraining on the old data + new data (if only it was that easy)! There’s an entire workflow (often human-in-the-loop) that is responsible for composing the retraining dataset. We use the word “compose” because it really is an art. Labeling, active learning, views for domain experts, quality assurance, augmentation, up/down sampling, evaluation dataset with appropriate slice representations, etc. Once we’ve labeled any new data and validated our new dataset, we’re ready to retrain our system. But we want to retrain in such a manner that the model learns to behave more robustly on the slices of data it previously performed poorly on.
+
+#### Upsampling
+
+With the appropriate dataset creation workflows with labeling, QA, etc. we should have a quality updated dataset to tran our model with. However, our model will still get some things wrong. We want to identify these subsets and increase their exposure via upsampling. A recent technique proposed for this is Just Train Twice (JTT), which initially trains a model and upsamples the training data points that the model continues to misclassify. This sampled dataset is now used to train a second model to improve performance on the “worst-group” subsets. [Just Train Twice]
+
+#### Not a panacea
+
+While retraining is a natural process of iteration, not all issues will be resolved by just retraining. Data-driven changes such as improving labeling consistency, updating labeling instructions, removing noisy samples, etc. are just a few of the steps we can take to improve our system. If we don’t address these underlying issues, all the other data-driven techniques around slices and boosting will have propagated these issues and retraining won’t be as impactful as we may have intended.
+
 
 ### Evaluation
 
