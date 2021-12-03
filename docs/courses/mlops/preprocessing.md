@@ -219,7 +219,7 @@ Transforming the data involves feature encoding and engineering.
 
 - and many [more](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing){:target="_blank"}!
 
-> We can also encode our data using it's attributes instead of the exact entity itself. For example, representing a user by their location + favorites as opposed to using their user ID.
+> We can also encode our data with hashing or using it's attributes instead of the exact entity itself. For example, representing a user by their location and favorites as opposed to using their user ID. These methods are great when we want to use features that suffer from the curse of dimensionality (lots of feature values for a feature but not enough data samples for each one) or [online learning](infrastructure.md#online-learning){:target="_blank"} scenarios.
 
 ### Extraction
 

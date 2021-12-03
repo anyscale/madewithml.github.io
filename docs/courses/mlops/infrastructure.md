@@ -77,7 +77,7 @@ Batch process features for a given entity at a previous point in time, which are
 - ✅&nbsp; can perform heavy feature computations offline and have it ready for fast inference.
 - ❌&nbsp; features can become stale since they were predetermined a while ago. This can be a huge disadvantage when your prediction depends on very recent events. (ex. catching fraudulent transactions as quickly as possible).
 
-> We'll discuss how these features are stored for training and inference in the [feature stores lesson](feature-store.md){:target="_blank"}.
+> We discuss more about different [data management architectures](pipelines.md#extraction){:target="_blank"}, such as databases and data warehouses (DWH) in the [pipelines](pipelines.md){:target="_blank"} lesson.
 
 ### Stream processing
 
@@ -117,20 +117,28 @@ The traditional approach is to train our models offline and then deploy them to 
 
 ### Online learning
 
-In order to truly serve the most informed predictions, we should have a model trained on the most recent data.
+In order to truly serve the most informed predictions, we should have a model trained on the most recent data. However, instead of using expensive stateless batch learning, a stateful and incremental learning approach is adopted. Here the model is trained offline, as usual, on the initial dataset but is then stochastically updated at a single instance or mini-batch level as new data becomes available. This removes the compute costs associated with traditional stateless, redundant training on same same past data.
 
 <div class="ai-center-all">
     <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/online_learning.png">
 </div>
 
-- ✅&nbsp; model is aware of recent data distributions, trends, etc. which can provide highly informed predictions.
-- ❌&nbsp; compute requirements can quickly surge depending on the retraining schedule.
-- ❌&nbsp; need to have quick pipelines to deliver labeled and validated data which can become a bottleneck if it involves human intervention.
-- ❌&nbsp; might not be able to do more involved model validation, such as AB or shadow testing, with such limited time in between models.
+- ✅&nbsp; model is aware of distributional shifts and can quickly adapt to provide highly informed predictions.
+- ✅&nbsp; stateful training can significantly lower compute costs and provide faster convergence.
+- ✅&nbsp; possible for tasks where the event that occurs is the label (user clicks, time-series, etc.)
+- ❌&nbsp; may not be possible for tasks that involve explicit labeling or delayed outcomes.
+- ❌&nbsp; prone to catastrophic inference where the model is learning from malicious live production data (mitigated with monitoring and rollbacks).
+- ❌&nbsp; models may suffer from [catastrophic forgetting](https://en.wikipedia.org/wiki/Catastrophic_interference){:target="_blank"} as we continue to update it using new data.
 
-## Testing
+!!! question "What about new feature values?"
+    With online learning, how can we encode new feature values without retraining from scratch?
 
-Once our application is deployed after our [offline tests](testing.md#evaluation){:taret="_blank"}, several types of **online tests** that we can run to determine the performance quality.
+    ??? quote "Show answer"
+        We can use clever tricks to represent out-of-vocabulary feature values such encoding based on mapped feature values or hashing. For example, we may wan to encode the name of a few restaurant but it's not mapped explicitly by our encoder. Instead we could choose to represent restaurants based on it's location, cuisine, etc. and so any new restaurant who has these feature values can be represented in a similar manner as restaurants we had available during training. Similarly, hashing can map OOV values but keep in mind that this is a one-way encoding (can't reverse the hashing to see what the value was) and we have to choose a hash size large enough to avoid collisions (<10%).
+
+## Experimentation
+
+Once our application is deployed after our [offline tests](testing.md#evaluation){:taret="_blank"}, there are several types of **online tests** that we can run to determine the performance quality in real-time.
 
 ### AB tests
 AB tests involve sending production traffic to the different systems that we're evaluating and then using statistical hypothesis testing to decide which system is better. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination. In many cases, if we're simply trying to compare the different versions for a certain metric, multi-armed bandits will be a better approach.
