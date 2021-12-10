@@ -28,7 +28,7 @@ Fortunately, most cloud providers and even orchestration layers will provide thi
 
 Unfortunately, just monitoring the system's health won't be enough to capture the underlying issues with our model. So, naturally, the next layer of metrics to monitor involves the model's performance. These could be quantitative evaluation metrics that we used during model evaluation (accuracy, precision, f1, etc.) but also key business metrics that the model influences (ROI, click rate, etc.).
 
-It's usually never enough to just analyze the coarse-grained (rolling) performance metrics across the entire span of time since the model has been deployed. Instead, we should inspect performance across a period of time that's significant for our application (ex. daily). These fine-grained metrics might be more indicative of our system's health and we might be able to identify issues faster by not undermining them with historical data.
+It's usually never enough to just analyze the coarse-grained (rolling) performance metrics across the entire span of time since the model has been deployed. Instead, we should inspect performance across a period of time that's significant for our application (ex. daily). These fine-grained metrics might be more indicative of our system's health and we might be able to identify issues faster by not obscuring them with historical data.
 
 > All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/monitoring.ipynb){:target="_blank"}.
 
@@ -76,12 +76,12 @@ plt.legend()
 
 > We may need to monitor metrics at various window sizes to catch performance degradation as soon as possible. Here we're monitoring the overall f1 but we can do the same for slices of data, individual classes, etc. For example, if we monitor the performance on a specific tag, we may be able to quickly catch new algorithms that were released for that tag (ex. new transformer architecture).
 
-However, there are two main obstacles with this approach:
+## Delayed outcomes
 
-- **Delayed outcomes**: we may not always have the ground-truth outcomes available to determine the model's performance on production inputs. This is especially true if there is significant lag or annotation is required on the real-world data. To mitigate this, we could:
-    - devise a **proxy signal** that can help us *estimate* the model's performance. For example, in our tag prediction task, we could use the actual tags that an author attributes to a project as the intermediary labels until we have verified labels from an annotation pipeline.
-    - use the statistical features of our inputs and predicted outputs as an indirect [measure](#measuring-drift).
-- **Too late**: if we wait to catch the model decay based on the performance, it may have already caused significant damage to downstream business pipelines that are dependent on it. We need to employ more fine-grained monitoring to identify the *sources* of model drift prior to actual performance degradation.
+We may not always have the ground-truth outcomes available to determine the model's performance on production inputs. This is especially true if there is significant lag or annotation is required on the real-world data. To mitigate this, we could:
+
+- devise an **approximate signal** that can help us *estimate* the model's performance. For example, in our tag prediction task, we could use the actual tags that an author attributes to a project as the intermediary labels until we have verified labels from an annotation pipeline.
+- label a small subset of our live dataset to estimate performance. This subset should try to be representative of the various distributions in the live data.
 
 ## Importance weighting
 
@@ -95,6 +95,9 @@ However, approximate signals are not always available for every situation becaus
 </div>
 
 The core idea is to develop slicing functions that may potentially capture the ways our data may experience distribution shift. These slicing functions should capture obvious slices such as class labels or different categorical feature values but also slices based on implicit metadata. These slicing functions are then applied to our labeled dataset to create matrices with the corresponding labels. The same slicing functions are applied to our unlabeled production data to approximate what weighted labels would be. With this, we can determine the approximate performance! The intuition here is that we can better approximate performance on our unlabeled dataset based on the similarity between the labeled slice matrix and unlabeled slice matrix. A core dependency of this assumption is that our slicing functions are comprehensive enough that they capture the causes of distributional shift.
+
+!!! warning
+    If we wait to catch the model decay based on the performance, it may have already caused significant damage to downstream business pipelines that are dependent on it. We need to employ more fine-grained monitoring to identify the *sources* of model drift prior to actual performance degradation.
 
 ## Drift
 

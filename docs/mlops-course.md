@@ -1071,7 +1071,7 @@ We will be applying the concepts we learn each week to iteratively complete two 
             </div>
             <div class="card-footer bg-transparent">
                 <div class="ai-center-all">
-                    <p class="mt-0 mb-2" style="font-size: 0.9rem;">$550 USD</p>
+                    <p class="mt-0 mb-2" style="font-size: 0.9rem;">$1,250 USD</p>
                 </div>
                 <div class="ai-center-all">
                     <a href="https://forms.gle/6mHLoMzEPx11ZRsK6" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>
@@ -1091,7 +1091,7 @@ We will be applying the concepts we learn each week to iteratively complete two 
             </div>
             <div class="card-footer bg-transparent">
                 <div class="ai-center-all">
-                    <p class="mt-0 mb-2" style="font-size: 0.9rem;">$850 USD</p>
+                    <p class="mt-0 mb-2" style="font-size: 0.9rem;">$2,000 USD</p>
                 </div>
                 <div class="ai-center-all">
                     <a href="https://forms.gle/Cz7omhnToUTpupD98" target="_blank" class="md-button md-button--purple-gradient mb-2 mb-md-1 mt-md-0 mt-1" style="cursor: pointer !important;">Apply</a>

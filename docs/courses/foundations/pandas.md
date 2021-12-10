@@ -113,7 +113,7 @@ These are the different features:
 - `ticket`: ticket number
 - `fare`: cost of the ticket
 - `cabin`: location of room
-- `emarked`: port that the passenger embarked at (C - Cherbourg, S - Southampton, Q - Queenstown)
+- `embarked`: port that the passenger embarked at
 - `survived`: survial metric (0 - died, 1 - survived)
 
 
@@ -1129,6 +1129,7 @@ drwxr-xr-x 1 root root  4096 Nov 21 16:30 sample_data
 -rw-r--r-- 1 root root 85153 Dec  3 17:36 titanic.csv
 </pre>
 
+> Check out [Dask](https://dask.org/){;target="_blank"} for scaling Pandas workflows with minimal change to existing code.
 
 <!-- Citation -->
 {% include "cite.md" %}

@@ -589,6 +589,8 @@ y:
 y.shape:  (2, 3)
 </pre>
 
+> Check out [Dask](https://dask.org/){;target="_blank"} for scaling NumPy workflows with minimal change to existing code.
+
 
 <!-- Citation -->
 {% include "cite.md" %}

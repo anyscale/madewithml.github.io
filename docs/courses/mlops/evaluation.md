@@ -400,7 +400,7 @@ In the event where we need to create slices where feature values / metadata is n
 
 
 !!! question "How can we choose?"
-    With all these different ways for evaluation, how can we choose "the best" option if some solutions are better for some evaluation criteria?
+    With all these different ways for evaluation, how can we choose "the best" version of our model if some versions are better for some evaluation criteria?
 
     ??? quote "Show answer"
         You and your team need to agree on what evaluation criteria are most important and what is the minimum performance required for each one. This will allow us to filter amongst all the different solutions by removing ones that don't satisfy al the minimum requirements and ranking amongst the remaining by which ones perform the best for the highest priority criteria.
