@@ -327,11 +327,11 @@ One of the hardest challenges with evaluation is trying the metrics from the pro
         It entirely depends on the specific task. For example, in an email spam detector, precision is very important because it's better than we some spam then completely miss an important email. Overtime, we need to iterate on our solution so all evaluation metrics improve but it's important to know which one's we can't comprise on from the get-go.
 
 #### Offline vs. online
-For [offline evaluation](evaluation.md){:target="_blank"}, we'll need a gold standard labeled dataset that we can use to benchmark all of our [approaches](#approaches), while for [online evaluation](monitoring.md#performance){:target="_blank"} we can initially use the [proxy signal](monitoring.md#performance){:target="_blank"} on whether the author used our suggested tags and then we can adjust the labels after that new data goes through a proper QA pipeline.
+For [offline evaluation](evaluation.md){:target="_blank"}, we'll need a gold standard labeled dataset that we can use to benchmark all of our [methods](#methodologies), while for [online evaluation](monitoring.md#performance){:target="_blank"} we can initially use the [proxy signal](monitoring.md#performance){:target="_blank"} on whether the author used our suggested tags and then we can adjust the labels after that new data goes through a proper QA pipeline.
 
-### Approaches
+### Methodologies
 
-Describe the different approaches that each deliver end-to-end utility.
+Describe the different methodologies that each deliver end-to-end utility.
 
 - **End-to-end utility**: the end result from every iteration should deliver minimum end-to-end utility so that we can benchmark iterations against each other and plug-and-play with the system.
 - **Keep it simple (KISS)**: start from the simplest solution and slowly add complexity with justification along the way → [baselines](https://madewithml.com/courses/mlops/baselines){:target="_blank"}.

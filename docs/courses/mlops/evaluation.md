@@ -268,7 +268,7 @@ But these are fairly crude techniques because neural networks are easily [overco
 
 ## Manual slices
 
-Just inspecting the overall and class metrics isn't enough to deploy our new version to production. There may be key slices of our dataset that we expect to do really well on (ie. minority groups, large customers, etc.) and we need to ensure that their metrics are also improving. An easy way to create and evaluate slices is to define slicing functions.
+Just inspecting the overall and class metrics isn't enough to deploy our new version to production. There may be key slices of our dataset that we need to do really well on (ie. minority groups, large customers, etc.) or capture implicit metadata (hidden aspects of the data that are not explicit feature columns). An easy way to create and evaluate slices is to define slicing functions.
 
 ```python linenums="1"
 from snorkel.slicing import PandasSFApplier
@@ -399,8 +399,8 @@ In the event where we need to create slices where feature values / metadata is n
 > In our [testing lesson](https://madewithml.com/courses/mlops/testing/){:target="_blank"}, we'll cover another way to evaluate our model known as [behavioral testing](https://madewithml.com/courses/mlops/testing/#behavioral-testing){:target="_blank"}, which we'll also include as part of performance report.
 
 
-!!! question "How can we choose?"
-    With all these different ways for evaluation, how can we choose "the best" version of our model if some versions are better for some evaluation criteria?
+!!! question "Seems straightforward, doesn't it?"
+    With all these different evaluation methods, how can we choose "the best" version of our model if some versions are better for some evaluation criteria?
 
     ??? quote "Show answer"
         You and your team need to agree on what evaluation criteria are most important and what is the minimum performance required for each one. This will allow us to filter amongst all the different solutions by removing ones that don't satisfy al the minimum requirements and ranking amongst the remaining by which ones perform the best for the highest priority criteria.

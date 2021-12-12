@@ -24,7 +24,7 @@ Let's motivate the need for a feature store by chronologically looking at what c
 
 Point-in-time correctness refers to mapping the appropriately up-to-date input feature values to an observed outcome at $t_{n+1}$. This involves knowing the time ($t_n$) that a prediction is needed so we can collect feature values ($X$) at that time.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/feature_store/point_in_time.png" width="500" alt="point in time">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/feature_store/point_in_time.png" width="700" alt="point-in-time correctness">
 </div>
 
 When actually constructing our feature store, there are several core components we need to have to address these challenges:
