@@ -38,7 +38,7 @@ If the appropriate action is to retrain, it’s not just the matter of fact of r
 
 #### Upsampling
 
-With the appropriate dataset creation workflows with labeling, QA, etc. we should have a quality updated dataset to tran our model with. However, our model will still get some things wrong. We want to identify these subsets and increase their exposure via upsampling. A recent technique proposed for this is Just Train Twice (JTT), which initially trains a model and upsamples the training data points that the model continues to misclassify. This sampled dataset is now used to train a second model to improve performance on the “worst-group” subsets. [Just Train Twice]
+With the appropriate dataset creation workflows with labeling, QA, etc. we should have a quality updated dataset to tran our model with. However, our model will still get some things wrong. We want to identify these subsets and increase their exposure via upsampling. A recent technique proposed for this is [Just Train Twice (JTT)](https://arxiv.org/abs/2107.09044){:target="_blank"}, which initially trains a model and upsamples the training data points that the model continues to misclassify. This sampled dataset is now used to train a second model to improve performance on the “worst-group” subsets.
 
 #### Not a panacea
 

@@ -282,7 +282,7 @@ In each branch, change the same word (ex. "good)" to another word but make sure 
 
 ```bash
 # PR 1
-git checkout good
+git checkout great
 git add .
 git commit -m "changed good to great"
 git push origin good
@@ -294,7 +294,7 @@ Now we'll create a PR with the `great` branch and this time when we try to merge
 
 ```bash
 # PR 2
-git checkout great
+git checkout fantastic
 git add .
 git commit -m "changed good to fantastic"
 git push origin great

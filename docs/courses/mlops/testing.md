@@ -775,15 +775,14 @@ When we create expectations using the CLI application, Great Expectations automa
 
 We've applied expectations on our source dataset but there are many other key areas to test the data as well. Throughout the ML development pipeline, we should test the intermediate outputs from processes such as cleaning, augmentation, splitting, preprocessing, tokenization, etc. We'll use these expectations to monitor new batches of data and before combining them with our existing data assets.
 
-!!! note
-    Currently, these data processing steps are tied with our application code but in future lessons, we'll separate these into individual pipelines and use Great Expectation Checkpoints in between to apply all these expectations in an orchestrated fashion.
+Also note that the way we performed data validation on our static data file is not how it occurs in mature data pipelines. Many of these expectations will be executed when the data is originally loaded to different data platforms (databases, data warehouses, etc.), decoupled from any downstream uses cases such as ML systems. We'll learn more about these in the [pipelines lesson](pipelines.md){:target="_blank"} but we can see below how Great Expectations checkpoint validations are used at every step of the way (including transformations using tools like [dbt](https://www.getdbt.com/){:target="_blank"}).
 
-    <div class="ai-center-all">
-        <img width="650" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/pipelines.png">
-    </div>
-    <div class="ai-center-all">
-        <a href="https://docs.greatexpectations.io/en/latest/_images/ge_tutorials_pipeline.png" target="_blank">Pipelines with Great Expectations Checkpoints</a>
-    </div>
+<div class="ai-center-all">
+    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/pipelines.png">
+</div>
+<div class="ai-center-all">
+    <small>Using Great Expectations in mature data pipelines, decoupled from downstream use cases such as ML.</small>
+</div>
 
 
 ## 🤖&nbsp; Models

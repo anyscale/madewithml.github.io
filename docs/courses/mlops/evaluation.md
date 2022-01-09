@@ -260,11 +260,11 @@ Simple confidence based techniques include identifying samples whose:
     - confidence score for the correct class is below a threshold
     - confidence score for an incorrect class is above a threshold
     - standard deviation of confidence scores over top N samples is low
-    - different predictions from sample model using different parameters
+    - different predictions from same model using different parameters
 - Continuous
     - difference between predicted and ground-truth values is above some %
 
-But these are fairly crude techniques because neural networks are easily [overconfident](https://arxiv.org/abs/1706.04599){:target="_blank"} and so their confidences cannot be used without calibrating them. Recent work on [confidence learning](https://arxiv.org/abs/1706.04599){:target="_blank"} focuses on identifying noisy labels while accounting for this overconfidence which can then be properly relabeled and used for training.
+But these are fairly crude techniques because neural networks are easily [overconfident](https://arxiv.org/abs/1706.04599){:target="_blank"} and so their confidences cannot be used without calibrating them. Recent work on [confidence learning](https://arxiv.org/abs/1911.00068){:target="_blank"} focuses on identifying noisy labels while accounting for this overconfidence which can then be properly relabeled and used for training.
 
 ## Manual slices
 
@@ -398,12 +398,15 @@ In the event where we need to create slices where feature values / metadata is n
 
 > In our [testing lesson](https://madewithml.com/courses/mlops/testing/){:target="_blank"}, we'll cover another way to evaluate our model known as [behavioral testing](https://madewithml.com/courses/mlops/testing/#behavioral-testing){:target="_blank"}, which we'll also include as part of performance report.
 
-
 !!! question "Seems straightforward, doesn't it?"
     With all these different evaluation methods, how can we choose "the best" version of our model if some versions are better for some evaluation criteria?
 
     ??? quote "Show answer"
         You and your team need to agree on what evaluation criteria are most important and what is the minimum performance required for each one. This will allow us to filter amongst all the different solutions by removing ones that don't satisfy al the minimum requirements and ranking amongst the remaining by which ones perform the best for the highest priority criteria.
+
+## Model CI
+
+An effective way to evaluate our systems is to encapsulate them as a collection (suite) and use them for [continuous integration](cicd.md){:target="_blank"}. We would continue to add to our evaluation suites and they would be executed whenever we are experimenting with changes to our system (new models, data, etc.). Often, problematic slices of data identified during [monitoring](monitoring.md){:target="blank"} are often added to the evaluation test suite to avoid repeating the same regressions in the future.
 
 
 ## Resources
