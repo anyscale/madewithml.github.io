@@ -780,7 +780,7 @@ Also note that the way we performed data validation on our static data file is n
 <div class="ai-center-all">
     <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/pipelines.png">
 </div>
-<div class="ai-center-all">
+<div class="ai-center-all mt-2">
     <small>Using Great Expectations in mature data pipelines, decoupled from downstream use cases such as ML.</small>
 </div>
 

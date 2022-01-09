@@ -16,7 +16,7 @@ In the pipelines lesson, we covered the [Dataops](pipelines.md#dataops){:target=
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/continual_learning/connect.png" width="1000" alt="continual learning system">
 </div>
-<div class="ai-center-all">
+<div class="ai-center-all mt-3">
   <small>A simplified view to illustrate how workflows connect. Not depicting <a href="versioning.md" target="_blank">version control</a>, <a href="cicd.md" target="_blank">CI/CD</a> across multiple environments, <a href="cicd.md#deployment" target="_blank">deployment</a>/<a href="infrastructure.md#testing" target="_blank">testing</a> strategies, etc.</small>
 </div>
 
