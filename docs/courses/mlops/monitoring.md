@@ -28,7 +28,7 @@ Fortunately, most cloud providers and even orchestration layers will provide thi
 
 Unfortunately, just monitoring the system's health won't be enough to capture the underlying issues with our model. So, naturally, the next layer of metrics to monitor involves the model's performance. These could be quantitative evaluation metrics that we used during model evaluation (accuracy, precision, f1, etc.) but also key business metrics that the model influences (ROI, click rate, etc.).
 
-It's usually never enough to just analyze the coarse-grained (rolling) performance metrics across the entire span of time since the model has been deployed. Instead, we should inspect performance across a period of time that's significant for our application (ex. daily). These fine-grained metrics might be more indicative of our system's health and we might be able to identify issues faster by not obscuring them with historical data.
+It's usually never enough to just analyze the cumulative performance metrics across the entire span of time since the model has been deployed. Instead, we should also inspect performance across a period of time that's significant for our application (ex. daily). These sliding metrics might be more indicative of our system's health and we might be able to identify issues faster by not obscuring them with historical data. **Note**: cumulative and sliding metrics are often referred to as rolling and window metrics but the former pair is much more intuitive as coined in [Designing Machine Learning Systems](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/){:target="_blank"}.
 
 > All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/monitoring.ipynb){:target="_blank"}.
 
@@ -46,27 +46,27 @@ hourly_f1 = list(np.random.randint(low=94, high=98, size=24*20)) + \
             list(np.random.randint(low=86, high=92, size=24*5))
 ```
 ```python linenums="1"
-# Rolling f1
-rolling_f1 = [np.mean(hourly_f1[:n]) for n in range(1, len(hourly_f1)+1)]
-print (f"Average rolling f1 on the last day: {np.mean(rolling_f1[-24:]):.1f}")
+# Cumulative f1
+cumulative_f1 = [np.mean(hourly_f1[:n]) for n in range(1, len(hourly_f1)+1)]
+print (f"Average cumulative f1 on the last day: {np.mean(cumulative_f1[-24:]):.1f}")
 ```
 <pre class="output">
-Average rolling f1 on the last day: 93.7
+Average cumulative f1 on the last day: 93.7
 </pre>
 ```python linenums="1"
-# Window f1
+# Sliding f1
 window_size = 24
-window_f1 = np.convolve(hourly_f1, np.ones(window_size)/window_size, mode="valid")
-print (f"Average window f1 on the last day: {np.mean(window_f1[-24:]):.1f}")
+sliding_f1 = np.convolve(hourly_f1, np.ones(window_size)/window_size, mode="valid")
+print (f"Average sliding f1 on the last day: {np.mean(sliding_f1[-24:]):.1f}")
 ```
 <pre class="output">
-Average window f1 on the last day: 88.8
+Average sliding f1 on the last day: 88.8
 </pre>
 ```python linenums="1"
 plt.ylim([80, 100])
 plt.hlines(y=90, xmin=0, xmax=len(hourly_f1), colors="blue", linestyles="dashed", label="threshold")
-plt.plot(rolling_f1, label="rolling")
-plt.plot(window_f1, label="window")
+plt.plot(cumulative_f1, label="cumulative")
+plt.plot(sliding_f1, label="sliding")
 plt.legend()
 ```
 
