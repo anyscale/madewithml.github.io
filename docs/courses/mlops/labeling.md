@@ -235,6 +235,7 @@ With our datasets, we may often notice a data imbalance problem where a range of
 We could have used the user provided tags as our labels but what if the user added a wrong tag or forgot to add a relevant one. To remove this dependency on the user to provide the gold standard labels, we can leverage labeling tools and platforms. These tools allow for quick and organized labeling of the dataset to ensure its quality. And instead of starting from scratch and asking our labeler to provide all the relevant tags for a given project, we can provide the author's original tags and ask the labeler to add / remove as necessary. The specific labeling tool may be something that needs to be custom built or leverages something from the ecosystem.
 
 ### General
+- [Labelbox](https://labelbox.com/){:target="_blank"}: the data platform for high quality training and validation data for AI applications.
 - [Label Studio](https://github.com/heartexlabs/label-studio){:target="_blank"}: a multi-type data labeling and annotation tool with standardized output format.
 - [Universal Data Tool](https://github.com/UniversalDataTool/universal-data-tool){:target="_blank"}: collaborate and label any type of data, images, text, or documents in an easy web interface or desktop app.
 - [Prodigy](https://github.com/explosion/prodigy-recipes){:target="_blank"}: recipes for the Prodigy, our fully scriptable annotation tool.
