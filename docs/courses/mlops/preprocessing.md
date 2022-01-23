@@ -225,8 +225,8 @@ Transforming the data involves feature encoding and engineering.
 
 - signal extraction from existing features
 - combine existing features
-- [transfer learning](https://ruder.io/transfer-learning/){:target="_blank"}: using a pretrained model as a feature extractor and finetuning on it's results
-- [autoencoders](https://www.jeremyjordan.me/autoencoders/){:target="_blank"}: learn to encode inputs for compressed knowledge representation
+- transfer learning: using a pretrained model as a feature extractor and finetuning on it's results
+- autoencoders: learn to encode inputs for compressed knowledge representation
 
 - [principle component analysis (PCA)](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA){:target="_blank"}: linear dimensionality reduction to project data in a lower dimensional space.
 
