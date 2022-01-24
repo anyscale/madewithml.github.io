@@ -81,35 +81,6 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/sergey_karayev.jpeg">
-                                    </div>
-                                    <div class="col-9 col-md-10 pl-2">
-                                        <div>
-                                            <b>Sergey Karayev</b>
-                                            <a href="https://twitter.com/sergeykarayev/status/1409929002744041472" target="_blank">
-                                                <span class="twemoji twitter ml-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
-                                                </span>
-                                            </a>
-                                        </div>
-                                <span class="ai-testimonial-org">Fullstack Deep Learning</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="card-subtitle mb-0">"Can't speak highly enough of <a href="https://twitter.com/GokuMohandas" target="_blank">@GokuMohandas</a> and what he built at <a href="https://twitter.com/MadeWithML" target="_blank">@madewithml</a>!"</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item px-4">
-            <div class="row">
-                <div class="col-md-6 mb-2">
-                    <div class="card ai-testimonial-card mt-2">
-                        <div class="card-body">
-                            <div>
-                                <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/daniel_bourke.jpeg">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
@@ -126,6 +97,35 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                 </div>
                             </div>
                             <p class="card-subtitle mb-0">"Built some machine learning models? Want to take them to the next level? I do. And I’m using <a href="https://twitter.com/MadeWithML" target="_blank">@madewithml</a> to learn how. Outstanding MLOps lessons!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item px-4">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <div class="card ai-testimonial-card mt-2">
+                        <div class="card-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/ask_katnoria.jpeg">
+                                    </div>
+                                    <div class="col-9 col-md-10 pl-2">
+                                        <div>
+                                            <b>Ash Katnoria</b>
+                                            <a href="https://twitter.com/katnoria1/status/1409782295968448514" target="_blank">
+                                                <span class="twemoji twitter ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                                                </span>
+                                            </a>
+                                        </div>
+                                <span class="ai-testimonial-org">Katnoria</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="card-subtitle mb-0">"Easily one of the most comprehensive series. I am amazed by how much ground it covers starting with data collection,  all the way up to k8s + model monitoring."</p>
                         </div>
                     </div>
                 </div>
@@ -313,60 +313,6 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                 </div>
                             </div>
                             <p class="card-subtitle mb-0">"Following all through, it's really amazing to see how you demonstrated best practices in building an ML driven application."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item px-4">
-            <div class="row">
-                <div class="col-md-6 mb-2">
-                    <div class="card ai-testimonial-card mt-2">
-                        <div class="card-body">
-                            <div>
-                                <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/ask_katnoria.jpeg">
-                                    </div>
-                                    <div class="col-9 col-md-10 pl-2">
-                                        <div>
-                                            <b>Ash Katnoria</b>
-                                            <a href="https://twitter.com/katnoria1/status/1409782295968448514" target="_blank">
-                                                <span class="twemoji twitter ml-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
-                                                </span>
-                                            </a>
-                                        </div>
-                                <span class="ai-testimonial-org">Katnoria</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="card-subtitle mb-0">"Easily one of the most comprehensive series. I am amazed by how much ground it covers starting with data collection,  all the way up to k8s + model monitoring."</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-2">
-                    <div class="card ai-testimonial-card mt-2">
-                        <div class="card-body">
-                            <div>
-                                <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/josh_tobin.jpeg">
-                                    </div>
-                                    <div class="col-9 col-md-10 pl-2">
-                                        <div>
-                                            <b>Josh Tobin</b>
-                                            <a href="https://twitter.com/josh_tobin_/status/1316028117333405696" target="_blank">
-                                                <span class="twemoji twitter ml-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
-                                                </span>
-                                            </a>
-                                        </div>
-                                <span class="ai-testimonial-org">Fullstack Deep Learning</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="card-subtitle mb-0">"This looks like a comprehensive overview / case study of putting an ML model in production -- worth checking out!"</p>
                         </div>
                     </div>
                 </div>
