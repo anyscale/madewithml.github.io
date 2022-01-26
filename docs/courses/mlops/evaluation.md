@@ -575,8 +575,13 @@ An effective way to evaluate our systems is to encapsulate them as a collection 
 
 ## Resources
 
-- [Slice-based Learning: A Programming Model for Residual Learning in Critical Data Slices](https://papers.nips.cc/paper/2019/file/351869bde8b9d6ad1e3090bd173f600d-Paper.pdf){:target="_blank"}
-- [Robustness Gym: Unifying the NLP Evaluation Landscape](https://arxiv.org/abs/2101.04840){:target="_blank"}
+- [On Calibration of Modern Neural Networks](https://arxiv.org/abs/1706.04599){:target="_blank"}
+- [Confident Learning: Estimating Uncertainty in Dataset Labels](https://arxiv.org/abs/1911.00068){:target="_blank"}
+- [Automated Data Slicing for Model Validation](https://arxiv.org/abs/1807.06068){:target="_blank"}
+- [SliceLine: Fast, Linear-Algebra-based Slice Finding for ML Model Debugging](https://mboehm7.github.io/resources/sigmod2021b_sliceline.pdf){:target="_blank"}
+- [Distributionally Robust Neural Networks for Group Shifts](https://arxiv.org/abs/1911.08731){:target="_blank"}
+- [No Subclass Left Behind: Fine-Grained Robustness in Coarse-Grained Classification Problems](https://arxiv.org/abs/2011.12945){:target="_blank"}
+- [Model Patching: Closing the Subgroup Performance Gap with Data Augmentation](https://arxiv.org//2008.06775){:target="_blank"}
 
 
 <!-- Citation -->

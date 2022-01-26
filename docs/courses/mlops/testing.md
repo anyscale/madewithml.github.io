@@ -964,7 +964,7 @@ With [monitoring](monitoring.md){:target="_blank"}, there are quite a few distin
 - [Great Expectations](https://github.com/great-expectations/great_expectations){:target="_blank"}
 - [The ML Test Score: A Rubric for ML Production Readiness and Technical Debt Reduction](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/aad9f93b86b7addfea4c419b9100c6cdd26cacea.pdf){:target="_blank"}
 - [Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://arxiv.org/abs/2005.04118){:target="_blank"}
-- [A Recipe for Training Neural Networks](http://karpathy.github.io/2019/04/25/recipe/){:target="_blank"}
+- [Robustness Gym: Unifying the NLP Evaluation Landscape](https://arxiv.org/abs/2101.04840){:target="_blank"}
 
 <!-- Citation -->
 {% include "cite.md" %}
