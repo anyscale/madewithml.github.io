@@ -537,8 +537,10 @@ To address this, there are recent [clustering-based techniques](https://arxiv.or
 
 Another recent work on [model patching](https://arxiv.org/abs/2008.06775){:target="_blank"} takes this another step further by learning how to transform between subgroups so we can train models on the augmented data:
 
-1. Learn transformations (ex. CycleGAN) needed to go from one subgroup to another under the same superclass (label)
-2. Learn model on augmented data with artificially introduced subgroup features
+1. Learn subgroups
+2. Learn transformations (ex. [CycleGAN](https://junyanz.github.io/CycleGAN/){:target="_blank"}) needed to go from one subgroup to another under the same superclass (label)
+3. Augment data with artificially introduced subgroup features
+4. Train new robust model on augmented data
 
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/model_patching.png" width="400" alt="Using learned subgroup transformations to augment data.">

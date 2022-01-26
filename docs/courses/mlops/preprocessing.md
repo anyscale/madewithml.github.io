@@ -363,7 +363,7 @@ Tags that just missed the cut:
   ('adversarial-learning', 28)]
 </pre>
 ```python linenums="1"
-# Filter tags that have fewer than <min_tag_freq> occurances
+# Filter tags that have fewer than <min_tag_freq> occurrences
 min_tag_freq = 30
 tags_above_freq = Counter(tag for tag in tags.elements()
                           if tags[tag] >= min_tag_freq)
