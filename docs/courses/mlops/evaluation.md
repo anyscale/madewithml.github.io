@@ -504,7 +504,7 @@ print(json.dumps(metrics["slices"], indent=2))
 Manually creating slices is a massive improvement towards identifying problem subsets in our dataset compared to coarse-grained evaluation but what if there are problematic slices of our dataset that we failed to identify? [SliceLine](https://mboehm7.github.io/resources/sigmod2021b_sliceline.pdf){:target="_blank"} is a recent work that uses a linear-algebra and pruning based technique to identify large slices (specify minimum slice size) that result in meaningful errors from the forward pass. Without pruning, automatic slice identification becomes computationally intensive because it involves enumerating through many combinations of data points to identify the slices. But with this technique, we can discover hidden underperforming subsets in our dataset that we weren’t explicitly looking for!
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/slicefinder.png" width="400" alt="slicefinder GUI">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/slicefinder.png" width="1000" alt="slicefinder GUI">
 </div>
 <div class="ai-center-all mt-1">
   <small>SliceFinder GUI<br><a href="https://arxiv.org/abs/1807.06068" target="_blank">Automated Data Slicing for Model Validation</a></small>
