@@ -484,7 +484,7 @@ print(json.dumps(metrics["slices"], indent=2))
 
 <pre class="output">
 {
-  "pytorch_transformers": {
+  "cv_transformers": {
     "precision": 0.9230769230769231,
     "recall": 0.8571428571428571,
     "f1": 0.888888888888889,
@@ -582,7 +582,6 @@ An effective way to evaluate our systems is to encapsulate them as a collection 
 - [Distributionally Robust Neural Networks for Group Shifts](https://arxiv.org/abs/1911.08731){:target="_blank"}
 - [No Subclass Left Behind: Fine-Grained Robustness in Coarse-Grained Classification Problems](https://arxiv.org/abs/2011.12945){:target="_blank"}
 - [Model Patching: Closing the Subgroup Performance Gap with Data Augmentation](https://arxiv.org//2008.06775){:target="_blank"}
-
 
 <!-- Citation -->
 {% include "cite.md" %}
