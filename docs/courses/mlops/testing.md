@@ -826,41 +826,7 @@ assert train(model, device=torch.device("cuda"))
         ...
     ```
 
-### Evaluation
-
-When it comes to testing how well our model performs, we need to first have our priorities in line.
-
-- What metrics are important?
-- What tradeoffs are we willing to make?
-- Are there certain subsets (slices) of data that are important?
-
-#### Metrics
-
-##### Overall
-We want to ensure that our key metrics on the overall dataset improves with each iteration of our model. Overall metrics include accuracy, precision, recall, f1, etc. and we should define what counts as a performance regression. For example, is a higher precision at the expensive of recall an improvement or a regression? Usually, a team of developers and domain experts will establish what the key metric(s) are while also specifying the lowest regression tolerance for other metrics.
-
-```python linenums="1"
-assert precision > prev_precision  # most important, cannot regress
-assert recall >= best_prev_recall - 0.03  # recall cannot regress > 3%
-```
-
-##### Per-class
-
-We can perform similar assertions for class specific metrics as well.
-
-```python linenums="1"
-assert metrics["class"]["data_augmentation"]["f1"] > prev_data_augmentation_f1  # priority class
-```
-
-##### Slices
-
-In the same vain, we can create assertions for certain key [slices](evaluation.md#slices){:target="_blank"} of our data as well. This can be very simple test to ensure that our high priority slices of data continue to improve in performance.
-
-```python linenums="1"
-assert metrics["slices"]["class"]["cv_transformers"]["f1"] > prev_cv_transformers_f1  # priority slice
-```
-
-#### Behavioral testing
+### Behavioral testing
 
 Besides just looking at metrics, we also want to conduct some behavior sanity tests. Behavioral testing is the process of testing input data and expected outputs while treating the model as a black box. They don't necessarily have to be adversarial in nature but more along the types of perturbations we'll see in the real world once our model is deployed. A landmark paper on this topic is [Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://arxiv.org/abs/2005.04118){:target="_blank"} which breaks down behavioral testing into three types of tests:
 

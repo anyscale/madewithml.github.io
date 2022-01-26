@@ -254,24 +254,131 @@ class = 'transformers'
 
 ## Confidence learning
 
-While the confusion-matrix sample analysis was a coarse-grained process, we can also use fine-grained confidence based approaches to identify potentially mislabeled samples. Here we’re going to focus on the specific labeling quality as opposed to the final model predictions.
+While the confusion-matrix sample analysis was a coarse-grained process, we can also use fine-grained confidence based approaches to identify potentially mislabeled samples. Here we’re going to focus on the specific probabilities as opposed to the final model predictions.
 
 Simple confidence based techniques include identifying samples whose:
 
-- Categorical
+- **Categorical**
     - prediction is incorrect (also indicate TN, FP, FN)
     - confidence score for the correct class is below a threshold
     - confidence score for an incorrect class is above a threshold
     - standard deviation of confidence scores over top N samples is low
-    - different predictions from same model using different parameters
-- Continuous
+    - different predictions from same model using different/previous parameters
+- **Continuous**
     - difference between predicted and ground-truth values is above some %
 
-But these are fairly crude techniques because neural networks are easily [overconfident](https://arxiv.org/abs/1706.04599){:target="_blank"} and so their confidences cannot be used without calibrating them. Recent work on [confidence learning](https://arxiv.org/abs/1911.00068){:target="_blank"} focuses on identifying noisy labels while accounting for this overconfidence which can then be properly relabeled and used for training.
+```python linenums="1"
+# Confidence score for the incorrect class is above a threshold
+high_confidence = []
+max_threshold = 0.2
+for i in range(len(y_test)):
+    indices = np.where(y_test[i]==0)[0]
+    probs = y_prob[i][indices]
+    classes = []
+    for index in np.where(probs>=max_threshold)[0]:
+        classes.append(label_encoder.index_to_class[indices[index]])
+    if len(classes):
+        high_confidence.append({"text": test_df.text[i], "classes": classes})
+```
+
+```python linenums="1"
+high_confidence[0:5]
+```
+
+<pre class="output">
+[{'classes': ['computer-vision', 'scikit-learn'],
+  'text': 'mljar supervised automated machine learning python package designed save time data scientist'},
+ {'classes': ['computer-vision', 'pytorch'],
+  'text': 'bootstrap latent approach self supervised learning new approach self supervised image representation learning'},
+ {'classes': ['attention', 'huggingface'],
+  'text': 'simple transformers transformers classification ner qa language modeling language generation t5 multi modal conversational ai'},
+ {'classes': ['embeddings'],
+  'text': 'entity embedding lstm time series demonstration using lstm forecasting structured time series data containing categorical numerical features'},
+ {'classes': ['huggingface'],
+  'text': 'bertviz tool visualizing attention transformer model bert gpt 2 albert xlnet roberta ctrl etc'}]
+</pre>
+
+## Calibration
+
+But these are fairly crude techniques because neural networks are easily overconfident and so their confidences cannot be used without [calibrating](https://arxiv.org/abs/1706.04599){:target="_blank"} them.
+
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/calibration.png" width="400" alt="accuracy vs. confidence">
+</div>
+<div class="ai-center-all mt-1">
+  <small>Modern (large) neural networks result in higher accuracies but are over confident.<br><a href="https://arxiv.org/abs/1706.04599" target="_blank">On Calibration of Modern Neural Networks</a></small>
+</div>
+
+* **Assumption**: *“the probability associated with the predicted class label should reflect its ground truth correctness likelihood.”*
+* **Reality**: *“modern (large) neural networks are no longer well-calibrated”*
+* **Solution**: apply temperature scaling (extension of [Platt scaling](https://en.wikipedia.org/wiki/Platt_scaling){:target="_blank"}) on model outputs
+
+Recent work on [confident learning](https://arxiv.org/abs/1911.00068){:target="_blank"} ([cleanlab](https://github.com/cleanlab/cleanlab){:target="_blank"}) focuses on identifying noisy labels (with calibration), which can then be properly relabeled and used for training.
+
+```python linenums="1"
+import cleanlab
+from cleanlab.util import onehot2int
+from cleanlab.pruning import get_noise_indices
+```
+
+```python linenums="1"
+# Format our noisy labels `s` (cleanlab expects list of integers for multilabel tasks)
+correctly_formatted_labels = onehot2int(y_test)
+```
+
+```python linenums="1"
+# Determine potential labeling errors
+label_error_indices = get_noise_indices(
+            s=correctly_formatted_labels,
+            psx=y_prob,
+            multi_label=True,
+            sorted_index_method="self_confidence",
+            verbose=0)
+```
+
+Not all of these are necessarily labeling errors but situations where the predicted probabilities were not so confident. Therefore, it will be useful to attach the predicted outcomes along side results. This way, we can know if we need to relabel, upsample, etc. as mitigation strategies to improve our performance.
+
+```python linenums="1"
+num_samples = 5
+for index in label_error_indices[:num_samples]:
+    print ("text:", test_df.iloc[index].text)
+    print ("labels:",test_df.iloc[index].tags)
+    print ("pred:", label_encoder.decode([y_pred[index]]))
+    print ()
+```
+
+<pre class="output">
+text: simclr keras tensorflow keras implementation simclr
+labels: ['keras', 'self-supervised-learning', 'tensorflow']
+pred: [['keras', 'tensorflow']]
+
+text: tensorflow js object detection browser real time object detection model browser using tensorflow js
+labels: ['computer-vision', 'object-detection', 'tensorflow', 'tensorflow-js']
+pred: [['computer-vision', 'convolutional-neural-networks', 'keras', 'object-detection', 'tensorflow', 'tensorflow-js']]
+
+text: pokezoo deep learning based web app developed using mern stack tensorflow js
+labels: ['computer-vision', 'image-classification', 'tensorflow', 'tensorflow-js']
+pred: [['computer-vision', 'keras', 'tensorflow', 'tensorflow-js']]
+
+text: pcdet 3d point cloud detection pcdet toolbox pytorch 3d object detection point cloud
+labels: ['computer-vision', 'convolutional-neural-networks', 'object-detection', 'pytorch']
+pred: [['computer-vision', 'object-detection', 'pytorch']]
+
+text: clustered graph convolutional networks pytorch implementation cluster gcn efficient algorithm training deep large graph convolutional networks kdd 2019
+labels: ['embeddings', 'graphs', 'node-classification', 'pytorch', 'representation-learning']
+pred: [['embeddings', 'graph-neural-networks', 'graphs', 'node-classification', 'pytorch', 'representation-learning']]
+</pre>
 
 ## Manual slices
 
-Just inspecting the overall and class metrics isn't enough to deploy our new version to production. There may be key slices of our dataset that we need to do really well on (ie. minority groups, large customers, etc.) or capture implicit metadata (hidden aspects of the data that are not explicit feature columns). An easy way to create and evaluate slices is to define slicing functions.
+Just inspecting the overall and class metrics isn't enough to deploy our new version to production. There may be key slices of our dataset that we need to do really well on:
+
+- Target / predicted classes (+ combinations)
+- Features (explicit and implicit)
+- Metadata (timestamps, sources, etc.)
+- Priority slices / experience (minority groups, large customers, etc.)
+
+An easy way to create and evaluate slices is to define slicing functions.
 
 ```python linenums="1"
 from snorkel.slicing import PandasSFApplier
@@ -396,16 +503,68 @@ print(json.dumps(metrics["slices"], indent=2))
 
 Manually creating slices is a massive improvement towards identifying problem subsets in our dataset compared to coarse-grained evaluation but what if there are problematic slices of our dataset that we failed to identify? [SliceLine](https://mboehm7.github.io/resources/sigmod2021b_sliceline.pdf){:target="_blank"} is a recent work that uses a linear-algebra and pruning based technique to identify large slices (specify minimum slice size) that result in meaningful errors from the forward pass. Without pruning, automatic slice identification becomes computationally intensive because it involves enumerating through many combinations of data points to identify the slices. But with this technique, we can discover hidden underperforming subsets in our dataset that we weren’t explicitly looking for!
 
-In the event where we need to create slices where feature values / metadata is not explicit (ex. Unlabeled features in an image), there are very recent sophisticated [clustering-based techniques](https://arxiv.org/abs/2011.12945){:target="_blank"} to identify these hidden slices and improve the system.
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/slicefinder.png" width="400" alt="slicefinder GUI">
+</div>
+<div class="ai-center-all mt-1">
+  <small>SliceFinder GUI<br><a href="https://arxiv.org/abs/1807.06068" target="_blank">Automated Data Slicing for Model Validation</a></small>
+</div>
 
+### Hidden stratification
 
-> In our [testing lesson](https://madewithml.com/courses/mlops/testing/){:target="_blank"}, we'll cover another way to evaluate our model known as [behavioral testing](https://madewithml.com/courses/mlops/testing/#behavioral-testing){:target="_blank"}, which we'll also include as part of performance report.
+What if the features to generate slices on are implicit/hidden?
+
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/subgroups.png" width="400" alt="Subgroup examples">
+</div>
+<div class="ai-center-all mt-1">
+  <small><a href="https://arxiv.org/abs/1911.08731" target="_blank">Distributionally Robust Neural Networks for Group Shifts</a></small>
+</div>
+
+To address this, there are recent [clustering-based techniques](https://arxiv.org/abs/2011.12945){:target="_blank"} to identify these hidden slices and improve the system.
+
+1. Estimate implicit subclass labels via unsupervised clustering
+2. Train new more robust model using these clusters
+
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/clustering.png" width="400" alt="Identifying subgroups via clustering and training on them.">
+</div>
+<div class="ai-center-all mt-1">
+  <small><a href="https://arxiv.org/abs/2011.12945" target="_blank">No Subclass Left Behind: Fine-Grained Robustness in Coarse-Grained Classification Problems</a></small>
+</div>
+
+### Model patching
+
+Another recent work on [model patching](https://arxiv.org/abs/2008.06775){:target="_blank"} takes this another step further by learning how to transform between subgroups so we can train models on the augmented data:
+
+1. Learn transformations (ex. CycleGAN) needed to go from one subgroup to another under the same superclass (label)
+2. Learn model on augmented data with artificially introduced subgroup features
+
+<div class="ai-center-all">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/model_patching.png" width="400" alt="Using learned subgroup transformations to augment data.">
+</div>
+<div class="ai-center-all mt-1">
+  <small><a href="https://arxiv.org//2008.06775" target="_blank">Model Patching: Closing the Subgroup Performance Gap with Data Augmentation</a></small>
+</div>
+
+## Evaluating evaluations
+
+We want to ensure that our key metrics on the overall dataset improves with each iteration of our model. Overall metrics include accuracy, precision, recall, f1, etc. and we should define what counts as a performance regression. For example, is a higher precision at the expensive of recall an improvement or a regression? Usually, a team of developers and domain experts will establish what the key metric(s) are while also specifying the lowest regression tolerance for other metrics.
+
+```python linenums="1"
+assert precision > prev_precision  # most important, cannot regress
+assert recall >= best_prev_recall - 0.03  # recall cannot regress > 3%
+assert metrics["class"]["data_augmentation"]["f1"] > prev_data_augmentation_f1  # priority class
+assert metrics["slices"]["class"]["cv_transformers"]["f1"] > prev_cv_transformers_f1  # priority slice
+```
 
 !!! question "Seems straightforward, doesn't it?"
     With all these different evaluation methods, how can we choose "the best" version of our model if some versions are better for some evaluation criteria?
 
     ??? quote "Show answer"
         You and your team need to agree on what evaluation criteria are most important and what is the minimum performance required for each one. This will allow us to filter amongst all the different solutions by removing ones that don't satisfy al the minimum requirements and ranking amongst the remaining by which ones perform the best for the highest priority criteria.
+
+> In our [testing lesson](https://madewithml.com/courses/mlops/testing/){:target="_blank"}, we'll cover another way to evaluate our model known as [behavioral testing](https://madewithml.com/courses/mlops/testing/#behavioral-testing){:target="_blank"}, which we'll also include as part of performance report.
 
 ## Model CI
 
