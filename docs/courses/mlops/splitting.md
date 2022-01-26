@@ -30,7 +30,7 @@ To determine the efficacy of our models, we need to have an unbiased measuring a
         - the dataset (and each data split) should be representative of data we will encounter
         - equal distributions of output values across all splits
         - shuffle your data if it's organized in a way that prevents input variance
-        - avoid random shuffles if you task can suffer from data leaks (ex. `time-series`)
+        - avoid random shuffles if your task can suffer from data leaks (ex. `time-series`)
 
 > We need to [clean](preprocessing.md) our data first before splitting, at least for the features that splitting depends on. So the process is more like: preprocessing (global, cleaning) → splitting → preprocessing (local, transformations).
 

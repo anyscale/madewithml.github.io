@@ -249,6 +249,9 @@ class = 'transformers'
 
 </pre>
 
+!!! tip
+    While this view is great for cursory inspection, we should have a scaled version that's tied to labeling and boosting workflows so we can act on our findings from this view.
+
 ## Confidence learning
 
 While the confusion-matrix sample analysis was a coarse-grained process, we can also use fine-grained confidence based approaches to identify potentially mislabeled samples. Here we’re going to focus on the specific labeling quality as opposed to the final model predictions.
