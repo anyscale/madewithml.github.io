@@ -515,7 +515,7 @@ Manually creating slices is a massive improvement towards identifying problem su
 What if the features to generate slices on are implicit/hidden?
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/subgroups.png" width="400" alt="Subgroup examples">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/subgroups.png" width="1000" alt="Subgroup examples">
 </div>
 <div class="ai-center-all mt-1">
   <small><a href="https://arxiv.org/abs/1911.08731" target="_blank">Distributionally Robust Neural Networks for Group Shifts</a></small>
@@ -527,7 +527,7 @@ To address this, there are recent [clustering-based techniques](https://arxiv.or
 2. Train new more robust model using these clusters
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/clustering.png" width="400" alt="Identifying subgroups via clustering and training on them.">
+    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/clustering.png" width="1000" alt="Identifying subgroups via clustering and training on them.">
 </div>
 <div class="ai-center-all mt-1">
   <small><a href="https://arxiv.org/abs/2011.12945" target="_blank">No Subclass Left Behind: Fine-Grained Robustness in Coarse-Grained Classification Problems</a></small>
