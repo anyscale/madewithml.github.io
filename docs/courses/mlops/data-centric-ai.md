@@ -1,7 +1,7 @@
 ---
 template: lesson.html
 title: Data-centric AI
-description: Leveraging data-centric views to architect a continual system that programmatically delivers trust and enables iteration.
+description: Leveraging data-centric views to architect a continual system that delivers trust and enables iteration.
 keywords: data-centric AI, continual learning, retraining, monitoring, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
@@ -18,24 +18,27 @@ In the previous lesson, we covered the [Dataops](pipelines.md#dataops){:target="
 
 > We use the word `continual` (repeat with breaks) instead of `continuous` (repeat without interruption / intervention) because we're **not** trying to create a system that will automatically update with new incoming data without human intervention.
 
-But before we can talk about a continual learning system, we first need to discuss the key data-centric views that will enable us to make decisions along the way. We've covered most of these views extensively in previous lectures but now we'll see them in relation to the rest of the workflows for on continual learning system. These data-centric views all involve data as the first-class citizen, where developers and subject matter experts alike can interact at the data level to make decisions.
+But before we can talk about a continual learning system, we first need to discuss the key data-centric views that will enable us to make decisions along the way. We've covered most of these views extensively in previous lectures but now we'll see them in relation to the rest of the workflows for on continual learning system.
 
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/data_centric_ai/views.png" width="500" alt="data-centric views">
 </div>
 
-With these data-centric views, we can develop a continual learning system that will guide us on when to update, what exactly to update and how to (easily) update it. The goal is not always to build a continuous system that automatically updates but rather a continual system that iteratively updates and gains our trust over time.
+These data-centric views all involve data as the first-class citizen, where developers and subject matter experts alike can interact at the data level to make decisions. And with them, we can develop a continual learning system that will guide us on when to update and what exactly to update.
 
 <div class="ai-center-all">
     <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/data_centric_ai/workflows.png" width="1000" alt="mlops workflows">
 </div>
 <div class="ai-center-all mt-3">
-  <small>A simplified view to illustrate decouples DataOps and MLOps workflows. Not depicting <a href="versioning.md" target="_blank">version control</a>, <a href="cicd.md" target="_blank">CI/CD</a> across multiple environments, <a href="cicd.md#deployment" target="_blank">deployment</a>/<a href="infrastructure.md#testing" target="_blank">testing</a> strategies, etc.</small>
+  <small>A simplified view to illustrate decoupled DataOps and MLOps workflows with data-centric views.</small>
 </div>
 
-Though we’ve closed the iteration loop for our continual system with our [update workflow](pipelines.md#mlops-update){:_target="blank"}, there are many decisions involved that prevent the iteration from occurring continuously.
+> Diagram above does not depict <a href="versioning.md" target="_blank">version control</a>, <a href="cicd.md" target="_blank">CI/CD</a> across multiple environments, <a href="cicd.md#deployment" target="_blank">deployment</a>/<a href="infrastructure.md#testing" target="_blank">testing</a> strategies, etc.
 
-> Continual learning not only applies to MLOps workflow architecture but on the [algorithmic front](https://arxiv.org/abs/1909.08383){:target="_blank"} as well, where models learn to adapt to new data without having to retrain or suffer from catastrophic forgetting (forget previously learned patterns when presented with new data).
+The goal is not always to build a continuous system that automatically updates but rather a continual system that iteratively updates and gains our trust over time. Though we’ve closed the iteration loop for our continual system with our [update workflow](pipelines.md#mlops-update){:_target="blank"}, there are many decisions involved that prevent the iteration from occurring continuously.
+
+!!! note
+    Continual learning not only applies to MLOps workflow architecture but on the [algorithmic front](https://arxiv.org/abs/1909.08383){:target="_blank"} as well, where models learn to adapt to new data without having to retrain or suffer from catastrophic forgetting (forget previously learned patterns when presented with new data).
 
 ## Evaluation
 
