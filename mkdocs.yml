@@ -97,7 +97,7 @@ nav:
       - Monitoring: courses/mlops/monitoring.md
       - Feature store: courses/mlops/feature-store.md
       - Pipelines: courses/mlops/pipelines.md
-      - Continual learning: courses/mlops/continual-learning.md
+      - Data-centric AI: courses/mlops/data-centric-ai.md
   # - Blog: coming-soon.md
   # - Community: https://community.madewithml.com/
   - Subscribe: https://newsletter.madewithml.com/

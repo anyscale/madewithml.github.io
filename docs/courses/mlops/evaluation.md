@@ -551,7 +551,11 @@ Another recent work on [model patching](https://arxiv.org/abs/2008.06775){:targe
 
 ## Evaluating evaluations
 
-We want to ensure that our key metrics on the overall dataset improves with each iteration of our model. Overall metrics include accuracy, precision, recall, f1, etc. and we should define what counts as a performance regression. For example, is a higher precision at the expensive of recall an improvement or a regression? Usually, a team of developers and domain experts will establish what the key metric(s) are while also specifying the lowest regression tolerance for other metrics.
+How can we know if our models and systems are performing better over time? Unfortunately, depending on how often we retrain or how quickly our dataset grows, it won't always be a simple decision where all metrics/slices are performing better than the previous version. In these scenarios, it's important to know what our main priorities are and where we can have some leighway:
+
+- What criteria are most important?
+- What criteria can/cannot regress?
+- How much of a regression can be tolerated?
 
 ```python linenums="1"
 assert precision > prev_precision  # most important, cannot regress
@@ -560,11 +564,13 @@ assert metrics["class"]["data_augmentation"]["f1"] > prev_data_augmentation_f1  
 assert metrics["slices"]["class"]["cv_transformers"]["f1"] > prev_cv_transformers_f1  # priority slice
 ```
 
+And as we develop these criteria over time, we can systematically enforce them via [CI/CD workflows](cicd.md){:target="_blank"} to decrease the manual time in between system updates.
+
 !!! question "Seems straightforward, doesn't it?"
     With all these different evaluation methods, how can we choose "the best" version of our model if some versions are better for some evaluation criteria?
 
     ??? quote "Show answer"
-        You and your team need to agree on what evaluation criteria are most important and what is the minimum performance required for each one. This will allow us to filter amongst all the different solutions by removing ones that don't satisfy al the minimum requirements and ranking amongst the remaining by which ones perform the best for the highest priority criteria.
+        You and your team need to agree on what evaluation criteria are most important and what is the minimum performance required for each one. This will allow us to filter amongst all the different solutions by removing ones that don't satisfy all the minimum requirements and ranking amongst the remaining by which ones perform the best for the highest priority criteria.
 
 > In our [testing lesson](https://madewithml.com/courses/mlops/testing/){:target="_blank"}, we'll cover another way to evaluate our model known as [behavioral testing](https://madewithml.com/courses/mlops/testing/#behavioral-testing){:target="_blank"}, which we'll also include as part of performance report.
 

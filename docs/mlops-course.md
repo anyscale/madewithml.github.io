@@ -547,7 +547,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
     <li><a href="/courses/mlops/pipelines/">Pipelines</a></li>
-    <li><a href="/courses/mlops/continual-learning/">Continual learning</a></li>
+    <li><a href="/courses/mlops/data-centric-ai/">Data-centric AI</a></li>
     </ul>
 </div>
 </div>
@@ -892,7 +892,7 @@ We will be applying the concepts we learn each week to iteratively complete two 
                     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
                     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
                     <li><a href="/courses/mlops/pipelines/">Pipelines</a></li>
-                    <li><a href="/courses/mlops/continual-learning/">Continual learning</a></li>
+                    <li><a href="/courses/mlops/data-centric-ai/">Data-centric AI</a></li>
                     </ul>
                 </div>
             </div>
