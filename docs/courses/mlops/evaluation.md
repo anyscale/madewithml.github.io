@@ -549,6 +549,56 @@ Another recent work on [model patching](https://arxiv.org/abs/2008.06775){:targe
   <small><a href="https://arxiv.org//2008.06775" target="_blank">Model Patching: Closing the Subgroup Performance Gap with Data Augmentation</a></small>
 </div>
 
+## Explainability
+
+Besides just comparing predicted outputs with ground truth values, we can also inspect the inputs to our models. What aspects of the input are more influential towards the prediction? If the focus is not on intuitive features of our input, then we need to explore if there is a hidden pattern we're missing or if our model has learned to overfit on the incorrect features. We can use techniques such as [SHAP](https://github.com/slundberg/shap){:target="_blank"} (SHapley Additive exPlanations) or [LIME](https://github.com/marcotcr/lime){:target="_blank"} (Local Interpretable Model-agnostic Explanations) to inspect feature importance. On a high level, these techniques learn which features have the most signal by assessing the performance in their absence. These inspections can be performed on a global level (ex. per-class) or on a local level (ex. single prediction).
+
+**TODO**: Adding relevant code and results for this section this week.
+
+> We can also use model-specific approaches to explainability we we did in our [embeddings lesson](../foundations/embeddings.md#interpretability){:target="_blank"}, where we used `SAME` padding to extract the most influential n-grams in our text.
+
+## Counterfactuals
+
+Another way to evaluate our systems is to identify counterfactuals -- data with similar features that belongs to another class (classification) or above a certain difference (regression). These points allow us to evaluate model sensitivity to certain features and feature values that may be signs of overfitting. A great tool to identify and probe for counterfactuals (also great for slicing and fairness metrics) is the [What-if tool](https://pair-code.github.io/what-if-tool/){:target="_blank"}.
+
+<div class="ai-center-all">
+    <img src="https://4.bp.blogspot.com/-hnqXfHQvl5I/W5b3f-hk0yI/AAAAAAAADUc/hBOXtobPdAUQ5aAG_xOwYf8AWp8YbL-kQCLcBGAs/s640/image2.gif" width="500" alt="Identifying counterfactuals using the What-if tool">
+</div>
+<div class="ai-center-all mt-2">
+  <small><a href="https://ai.googleblog.com/2018/09/the-what-if-tool-code-free-probing-of.html" target="_blank">Identifying counterfactuals using the What-if tool</a></small>
+</div>
+
+## Behavioral testing
+
+Besides just looking at metrics, we also want to conduct some behavior sanity tests. Behavioral testing is the process of testing input data and expected outputs while treating the model as a black box. They don't necessarily have to be adversarial in nature but more along the types of perturbations we'll see in the real world once our model is deployed. A landmark paper on this topic is [Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://arxiv.org/abs/2005.04118){:target="_blank"} which breaks down behavioral testing into three types of tests:
+
+- `#!js invariance`: Changes should not affect outputs.
+```python linenums="1"
+# INVariance via verb injection (changes should not affect outputs)
+tokens = ["revolutionized", "disrupted"]
+tags = [["transformers"], ["transformers"]]
+texts = [f"Transformers have {token} the ML field." for token in tokens]
+```
+- `#!js directional`: Change should affect outputs.
+```python linenums="1"
+# DIRectional expectations (changes with known outputs)
+tokens = ["PyTorch", "Huggingface"]
+tags = [
+    ["pytorch", "transformers"],
+    ["huggingface", "transformers"],
+]
+texts = [f"A {token} implementation of transformers." for token in tokens]
+```
+- `#!js minimum functionality`: Simple combination of inputs and expected outputs.
+```python linenums="1"
+# Minimum Functionality Tests (simple input/output pairs)
+tokens = ["transformers", "graph neural networks"]
+tags = [["transformers"], ["graph-neural-networks"]]
+texts = [f"{token} have revolutionized machine learning." for token in tokens]
+```
+
+> We'll learn how to systematically create tests in our [testing lesson](testing.md){:target="_blank"}.
+
 ## Evaluating evaluations
 
 How can we know if our models and systems are performing better over time? Unfortunately, depending on how often we retrain or how quickly our dataset grows, it won't always be a simple decision where all metrics/slices are performing better than the previous version. In these scenarios, it's important to know what our main priorities are and where we can have some leighway:
