@@ -657,7 +657,7 @@ If we need to improve on the existing version of the model, it's not just the ma
 - `#!js sampling`: upsampling and downsampling to address imbalanced data slices.
 - `#!js evaluation`:  creation of an evaluation dataset that's representative of what the model will encounter once deployed.
 
-Once we have the proper dataset for retraining, we can kickoff the featurization and model training workflows where a new model will be trained and evaluated before being deployed and receiving new inference requests. In the [next lesson](data-centric-ai.md){:target="_blank"}, we'll discuss how to combine these pipelines together to create a continual learning system with data-centric views.
+Once we have the proper dataset for retraining, we can kickoff the featurization and model training workflows where a new model will be trained and evaluated before being deployed and receiving new inference requests. In the [next lesson](continual-learning.md){:target="_blank"}, we'll discuss how to combine these pipelines together to create a continual learning system.
 
 <hr>
 

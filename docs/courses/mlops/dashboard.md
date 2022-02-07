@@ -190,7 +190,7 @@ We're also going to inspect the true positive (TP), false positive (FP) and fals
 - Inspect the trained model's behavior under various conditions using the [WhatIf](https://pair-code.github.io/what-if-tool/){:target="_blank"} tool.
 - Compare performances across multiple releases to visualize improvements/regressions over time.
 
-> Our dashboard can have many other pages as well, especially critical views for [iteration](data-centric-ai.md){:target="_blank"}, such as [active learning](labeling.md#active-learning){:target="_blank"}, [composing retraining datasets](cdata-centric-ai.md#retraining){:target="_blank"}, etc.
+> Our dashboard can have many other pages as well, especially critical views for [iteration](data-centric-ai.md){:target="_blank"}, such as [active learning](labeling.md#active-learning){:target="_blank"}, [composing retraining datasets](continual-learning.md#retraining){:target="_blank"}, etc.
 
 
 ## Caching
