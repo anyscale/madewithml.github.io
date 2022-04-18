@@ -41,6 +41,23 @@
   <meta name="twitter:image" content="{{ card_image }}" />
 {% endblock %}
 
+{% block announce %}
+<div style="text-align: center;">
+  <span class="mr-1">⚡️</span> Lots of new updates coming in about 1 month! Follow on
+  <a href="https://twitter.com/GokuMohandas" target="_blank" style="color: #fff;">
+    <span class="twemoji twitter">
+      {% include ".icons/fontawesome/brands/twitter.svg" %}
+    </span>
+  </a> and
+  <a href="https://linkedin.com/in/goku" target="_blank" style="color: #fff;">
+    <span class="twemoji linkedin" style="color: #0A66C2;">
+      {% include ".icons/fontawesome/brands/linkedin.svg" %}
+    </span>
+  </a>
+  for updates.
+</div>
+{% endblock %}
+
 
 {% block content %}
   {% if page.edit_url %}

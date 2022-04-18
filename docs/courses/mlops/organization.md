@@ -31,7 +31,6 @@ Before we can start moving our code from notebooks to proper Python scripts, we 
     code --install-extension bierner.markdown-preview-github-styles
     code --install-extension bradgashler.htmltagwrap
     code --install-extension christian-kohler.path-intellisense
-    code --install-extension CoenraadS.bracket-pair-colorizer-2
     code --install-extension euskadi31.json-pretty-printer
     code --install-extension formulahendry.auto-close-tag
     code --install-extension formulahendry.auto-rename-tag

@@ -920,7 +920,7 @@ tracker.history
     It seems like we've just done some operations before and after the function's main process? Isn't that what a decorator is for?
 
     ??? quote "Show answer"
-        With callbacks, it's easier to keep track of objects since it's all defined in a separate callback class. It's also now possible to interact with our function, not jut before or after but throughout the entire process! Imagine a function with:
+        With callbacks, it's easier to keep track of objects since it's all defined in a separate callback class. It's also now possible to interact with our function, not just before or after but throughout the entire process! Imagine a function with:
 
         - multiple processes where we want to execute operations in between them
         - execute operations repeatedly when loops are involved in functions

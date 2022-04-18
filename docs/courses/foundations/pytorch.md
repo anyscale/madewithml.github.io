@@ -258,7 +258,7 @@ tensor([[0.3372, 0.6638]])
 
 ## Slicing
 ```python linenums="1"
-# Select with dimensional indicies
+# Select with dimensional indices
 x = torch.randn(2, 3)
 print(f"Values: \n{x}")
 

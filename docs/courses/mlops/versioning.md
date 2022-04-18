@@ -183,8 +183,8 @@ When we pull data from source or compute features, should they save the data its
 - **Version the data**
     - But what happens as data becomes larger and larger and you keep making copies of it.
     - This is okay if the data is manageable, if your team is small/early stage ML or if changes to the data are infrequent.
-- **Version the operations**
     - But what happens when the underlying data changes (labels are fixed, etc.)? Now the same operations result is different data and reproducibility is not possible.
+- **Version the operations**
     - We could keep snapshots of the data and provided the operations and timestamp, we can execute operations on those snapshots of the data. Many data systems use [time-travel](https://docs.snowflake.com/en/user-guide/data-time-travel.html){:target="blank"} to achieve this efficiently.
     - But eventually this also results in data storage bulk. What we need is an append-only data source where all changes are kept in a log instead of directly changing the data itself. So we can use the data system with the logs to deterministically produce versions of the data as they were without having to store the data itself!
 
