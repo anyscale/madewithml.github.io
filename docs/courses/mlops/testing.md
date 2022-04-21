@@ -1,7 +1,7 @@
 ---
 template: lesson.html
 title: "Testing ML Systems: Code, Data and Models"
-description: Testing code, data and models to ensure consistent behavior in ML systems.
+description: Testing machine learning code, data and models to ensure consistent behavior in ML systems.
 keywords: testing, pytest, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/follow/tree/testing
@@ -11,7 +11,7 @@ repository: https://github.com/GokuMohandas/follow/tree/testing
 
 ## Intuition
 
-Tests are a way for us to ensure that something works as intended. We're incentivized to implement tests and discover sources of error as early in the development cycle as possible so that we can reduce [increasing downstream costs](https://assets.deepsource.io/39ed384/images/blog/cost-of-fixing-bugs/chart.jpg){:target="_blank"} and wasted time. Once we've designed our tests, we can automatically execute them every time we implement a change to our system and continue to build on them over time.
+Tests are a way for us to ensure that something works as intended. We're incentivized to implement tests and discover sources of error as early in the development cycle as possible so that we can reduce [increasing downstream costs](https://assets.deepsource.io/39ed384/images/blog/cost-of-fixing-bugs/chart.jpg){:target="_blank"} and wasted time. Once we've designed our tests, we can automatically execute them every time we implement a change to our system and continue to build on them over time. In this lesson, we'll learn how to test machine learning code, data and models to construct a system that we can reliably iterate on.
 
 ### Types of tests
 
