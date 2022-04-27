@@ -43,12 +43,11 @@
   padding: 0rem 0 0 0;
 }
 
-.md-header-nav__button.md-logo img {
-  width: 1.5rem;
-  height: auto;
+.md-header__button.md-logo img {
+  height: 1.5rem !important;
 }
 
-.md-header-nav__button.md-logo {
+.md-header__button.md-logo {
   margin: .2rem;
   padding: .4rem;
   margin-right: 0rem;
@@ -753,6 +752,12 @@ th {
 
 .ai-testimonial-card .card-subtitle {
   font-size: 0.7rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0rem;
+}
+
+.ai-testimonial-card .twemoji {
+  width: 0.85rem;
 }
 
 .ai-testimonial-profile-image {
@@ -762,6 +767,7 @@ th {
 
 .ai-testimonial-org {
   color: #9a9a9a;
+  margin-top: 0rem;
   font-size: 0.75rem !important;
 }
 

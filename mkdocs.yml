@@ -121,7 +121,7 @@ theme:
     - navigation.tabs
     # - navigation.expand
   icon:
-    repo: fontawesome/brands/github
+    repo: fontawesome/brands/github-square
 
 # Extensions
 markdown_extensions:
@@ -137,6 +137,8 @@ markdown_extensions:
   - pymdownx.keys # show keystroke symbols
   - pymdownx.snippets # insert content from other files
   - pymdownx.tabbed # content tabs
+  - attr_list
+  - md_in_html
   - footnotes
   - def_list
   - pymdownx.arithmatex: # mathjax

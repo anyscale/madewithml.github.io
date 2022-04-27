@@ -71,7 +71,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle mb-0">"For production ML, I cannot possibly think of a better resource out there ... this resource is the gold standard."</p>
+                            <p class="card-subtitle">"For production ML, I cannot possibly think of a better resource out there ... this resource is the gold standard."</p>
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle mb-0">"Built some machine learning models? Want to take them to the next level? I do. And I’m using <a href="https://twitter.com/MadeWithML" target="_blank">@madewithml</a> to learn how. Outstanding MLOps lessons!"</p>
+                            <p class="card-subtitle">"Built some machine learning models? Want to take them to the next level? I do. And I’m using <a href="https://twitter.com/MadeWithML" target="_blank">@madewithml</a> to learn how. Outstanding MLOps lessons!"</p>
                         </div>
                     </div>
                 </div>
@@ -125,7 +125,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle mb-0">"Easily one of the most comprehensive series. I am amazed by how much ground it covers starting with data collection,  all the way up to k8s + model monitoring."</p>
+                            <p class="card-subtitle">"Easily one of the most comprehensive series. I am amazed by how much ground it covers starting with data collection,  all the way up to k8s + model monitoring."</p>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle mb-0">"Ideal place for grad students and software engineers to learn about practical ML. Couldn't have a better resource collection than this!"</p>
+                            <p class="card-subtitle">"Ideal place for grad students and software engineers to learn about practical ML. Couldn't have a better resource collection than this!"</p>
                         </div>
                     </div>
                 </div>
@@ -179,7 +179,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle mb-0">"Covers the broad MLOps landscape in great detail, extremely high quality tested code and not just talking about concepts on a high level, open-sourced."</p>
+                            <p class="card-subtitle">"Covers the broad MLOps landscape in great detail, extremely high quality tested code and not just talking about concepts on a high level, open-sourced."</p>
                         </div>
                     </div>
                 </div>
@@ -204,7 +204,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle mb-0">"For anyone interested in seeing MLOps in action, this is the best practical resource out there! Thank you for this wonderful course. Highly recommended!"</p>
+                            <p class="card-subtitle">"For anyone interested in seeing MLOps in action, this is the best practical resource out there! Thank you for this wonderful course. Highly recommended!"</p>
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle mb-0">"This will be a great journey for those interested in deploying machine learning models which lead to a positive impact on the product."</p>
+                            <p class="card-subtitle">"This will be a great journey for those interested in deploying machine learning models which lead to a positive impact on the product."</p>
                         </div>
                     </div>
                 </div>
@@ -258,7 +258,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle mb-0">"Best available practical course on MLOps. Thanks <a href="https://twitter.com/GokuMohandas" target="_blank">@GokuMohandas</a> for creating such awesome content and sharing it!"</p>
+                            <p class="card-subtitle">"Best available practical course on MLOps. Thanks <a href="https://twitter.com/GokuMohandas" target="_blank">@GokuMohandas</a> for creating such awesome content and sharing it!"</p>
                         </div>
                     </div>
                 </div>
@@ -287,7 +287,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle mb-0">"This is not a usual ML class, it covers productionalization part of ML projects - the most important part from a business point of view."</p>
+                            <p class="card-subtitle">"This is not a usual ML class, it covers productionalization part of ML projects - the most important part from a business point of view."</p>
                         </div>
                     </div>
                 </div>
@@ -312,7 +312,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle mb-0">"Following all through, it's really amazing to see how you demonstrated best practices in building an ML driven application."</p>
+                            <p class="card-subtitle">"Following all through, it's really amazing to see how you demonstrated best practices in building an ML driven application."</p>
                         </div>
                     </div>
                 </div>
@@ -341,7 +341,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle mb-0">"The best MLOps resource that I've come across on the web. Goes over whys, hows, tradeoffs, tools & their alternatives via high-quality explanations and code."</p>
+                            <p class="card-subtitle">"The best MLOps resource that I've come across on the web. Goes over whys, hows, tradeoffs, tools & their alternatives via high-quality explanations and code."</p>
                         </div>
                     </div>
                 </div>
@@ -366,7 +366,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle mb-0">"Completely sold out on the clean code and detailed writeup. This is one of the few ML courses which doesn't stop on just training a model but goes beyond that."</p>
+                            <p class="card-subtitle">"Completely sold out on the clean code and detailed writeup. This is one of the few ML courses which doesn't stop on just training a model but goes beyond that."</p>
                         </div>
                     </div>
                 </div>
