@@ -120,6 +120,7 @@ theme:
     # - navigation.instant # causes mathjax issues
     # - navigation.expand
     - navigation.tabs
+    - content.code.annotate
   icon:
     repo: fontawesome/brands/github
 
