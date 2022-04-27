@@ -323,5 +323,14 @@ Labeling isn't just a one time event or something we repeat identically. As new 
 - [Human in the Loop: Deep Learning without Wasteful Labelling](https://oatml.cs.ox.ac.uk/blog/2019/06/24/batchbald.html){:target="_blank"}
 - [Harnessing Organizational Knowledge for Machine Learning](https://ai.googleblog.com/2019/03/harnessing-organizational-knowledge-for.html){:target="_blank"}
 
+``` yaml
+theme:
+  features:
+    - content.code.annotate # (1)
+```
+
+1.  :man_raising_hand: I'm a code annotation! I can contain `code`, __formatted
+    text__, images, ... basically anything that can be written in Markdown.
+
 <!-- Citation -->
 {% include "cite.md" %}

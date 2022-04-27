@@ -10,7 +10,7 @@ repo_name: GokuMohandas/MadeWithML
 edit_uri: ''  #disables edit button
 
 # Copyright
-copyright: Created by <a href="https://twitter.com/GokuMohandas" target="_blank">Goku Mohandas</a>.
+copyright: Created by <a href="https://twitter.com/GokuMohandas" target="_blank">Goku Mohandas</a>
 
 # Google Analytics (key picked up by GitHub Actions from repo secrets)
 google_analytics:
@@ -118,8 +118,9 @@ theme:
     code: Roboto Mono
   features:
     # - navigation.instant # causes mathjax issues
-    - navigation.tabs
     # - navigation.expand
+    - navigation.tabs
+    - content.code.annotate
   icon:
     repo: fontawesome/brands/github
 
