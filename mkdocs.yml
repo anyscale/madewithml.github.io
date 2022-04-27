@@ -121,7 +121,7 @@ theme:
     - navigation.tabs
     # - navigation.expand
   icon:
-    repo: fontawesome/brands/github-square
+    repo: fontawesome/brands/github
 
 # Extensions
 markdown_extensions:
