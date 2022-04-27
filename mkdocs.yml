@@ -118,8 +118,8 @@ theme:
     code: Roboto Mono
   features:
     # - navigation.instant # causes mathjax issues
-    # - navigation.expand
     - navigation.tabs
+    # - navigation.expand
   icon:
     repo: fontawesome/brands/github
 
