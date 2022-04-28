@@ -27,6 +27,11 @@
   font-size: 0.6rem;
 }
 
+.md-source__facts {
+  font-size: .6rem;
+  font-weight: 600 !important;
+}
+
 /* navigation bar active color*/
 .md-nav__item .md-nav__link--active {
   font-weight: bold !important;
