@@ -23,6 +23,10 @@
   display: flex;
 }
 
+.md-source__repository {
+  font-size: 0.6rem;
+}
+
 /* navigation bar active color*/
 .md-nav__item .md-nav__link--active {
   font-weight: bold !important;
