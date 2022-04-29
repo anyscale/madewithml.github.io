@@ -1,7 +1,7 @@
 ---
 template: lesson.html
-title: Project Management for Machine Learning
-description: A template to guide the development cycle for machine learning systems that factors in product requirements, design and project considerations that are integral to planning and developing.
+title: Designing Machine Learning Products
+description: A template to guide the development cycle for machine learning systems that factors in product requirements, design docs and project considerations.
 keywords: project management, product management, design docs, scoping, management, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 ---
@@ -10,83 +10,83 @@ image: https://madewithml.com/static/images/mlops.png
 
 ## Overview
 
-The template on this page is for adding structure to how we think about ML + product. It's quite comprehensive since the structure is recommended for planning the iterative releases for our product. But before using the template, it's important to think about the following:
+With so much content on machine learning these days, it's hard to keep things organized. We want to create a product that will automatically discover and classify content so that everything is organized for discovery. In this course, we'll not only develop the ML models but talk about all the important ML system and software design components required to put our model into production in a reproducible, reliable and robust manner.
+
+We start this course by setting the scene for the precise product we'll be building. While this is a technical course, this initial product design process is everything. It's what creates great products that continue to improve over time. This lesson will offer the structure for how to think about ML + product. But before using the template, it's important to think about the following:
 
 - **Company**: describe the company's core values, goals, user base, etc. This will be important to refer to when dealing with uncertainties.
 - **Product**: what do we envision the product to do and why do we need it? We'll explore this in detail in the [product management](#product) section.
-- **Releases**: how do we iteratively envision our product to be developed? Data, POCs, Rule-based, ML, UI/UX, personalization, etc.
+- **Releases**: how do we iteratively envision our product improve? Data, POCs, models, user experience, personalization, etc.
 - **Concerns**: what are major concerns that our releases should be addressing? privacy, security, moderation, controversial decisions, etc.
 
 ## Template
 
-This template is designed to guide product development that justifies and involves machine learning. While this template will initially be completed in sequential order, it will naturally involve nonlinear engagement based on iterative feedback. We should follow this template for every major release of our products so that all the decision making is transparent and documented, which acts as a guide for development.
+This template is designed to guide machine learning product development. While this template will initially be completed in sequential order, it will naturally involve nonlinear engagement based on iterative feedback. We should follow this template for every major release of our products so that all the decision making is transparent and documented.
 
 [Product](#product) (*What* & *Why*) → [System design](#system-design) (*How*) → [Project](#project) (*Who* & *When*)
 
-We're going to be covering all of these sections in this template but in reality, this template can be broken down into individual documents. Where there is a main project page which describes the overall product and the scoped releases. Each of which point to the components (product, system design and project) that we cover in this template (for that particular release).
+Before we dive into the template, there are several details that apply to every section:
 
-```bash
-# Project scoping
-📂 project/
-├── 📄 Overview
-├── 📂 release-1
-| ├── 📄 product requirements [Product]
-| ├── 📄 design documentation [System design]
-| ├── 📄 project planning     [Project]
-├── ...
-└── 📂 release-n
-```
-
-> It's important that we organize our projects this way so that there is one central location where all documentation can be found and updated. This also enforces that we scope releases appropriately and provide the thorough planning and documentation to execute each one.
-
-Before we dive into the template, there are several core principles that apply to every section:
-
-- **DRI**: each section should have directly responsible individuals (DRIs) appointed to own components and to keep the respective documentation updated.
+- **DRI**: each section should have directly responsible individuals (DRIs) appointed to own the components and to keep the respective documentation updated. These individuals are also important for communicating and highlighting key points during and across releases.
 - **Details**: each section should be thoroughly written using insights from relevant team members, research, etc. This often involves white boarding sessions to break down the intricate details and then documenting them to share and implement.
 - **Feedback**: each section should be reviewed and approved by relevant stakeholders. This can be done iteratively by performing a canary feedback rollout to ensure there are no open unanswered questions before engaging with executives.
 - **Updates**: the documentation should always be kept up-to-date so new (and current) members can always refer to it in the event of on-boarding, conflict, validation, etc.
 
-!!! tip "People are not going to read all of this..."
-    It can be an onerous task if need need stakeholders to review this kind of detailed documentation for each release. DRIs can mitigate the burden by highlighting which parts of the templates specific stakeholders need to review and the key differences/improvements since last time. After this, we can lead them to any decisions that they need to sign off on before we can proceed with executing the release.
+!!! note "Organizing design documentation"
+    All great products improve over time and they require releases with clear objectives. In this lesson, we'll be designing the initial release but you would do the same for all future releases as well. The organizational structure of all this documentation would look like this:
+
+    ```bash
+    # Project scoping
+    📂 project/
+    ├── 📄 Overview
+    ├── 📂 release-1
+    | ├── 📄 product requirements [Product]
+    | ├── 📄 design documentation [System design]
+    | ├── 📄 project planning     [Project]
+    ├── ...
+    └── 📂 release-n
+    ```
+
+    It's important that we organize our projects this way so that there is one central location where all documentation can be found and updated. This also enforces that we scope releases appropriately and provide the thorough planning and documentation to execute each one.
 
 ## Product
 
 [*What* & *Why*]: motivate the need for the product and outline the objectives and key results.
 
+> Each section below has a dropdown component called "Our task", which will discuss the specific topic with respect to the specific product that we're trying to build.
+
 ### Overview
 
-Describe the feature/problem at a high level. This is the section where you’re setting the scene for someone new to the topic, so avoid getting into the details until you reach the sections further below.
+Describe the problem and product features at a high level. This is the section where you’re setting the scene for someone new to the topic, so avoid getting into the details until you reach the sections further below.
 
 ??? quote "Our task"
 
-    There have been a lot of articles, videos, research papers, etc. from the machine learning community on our platform lately and we want to be able to organize all of it. We want to be able to attach relevant (explicit and implicit) tags to the content so that our users can discover them when they need it.
+    Our objective is to create a system that can classify incoming ML content so that it's organized for discovery. To simplify our task, let's assume we already have a pipeline that delivers ML content from popular sources (Reddit, Twitter, etc.) and it's our job to classify these incoming streams.
 
-    ```json linenums="1"
+    ```json linenums="1" title="Sample data point"
     {
-        "id": 2427,
-        "title": "Knowledge Transfer in Self Supervised Learning",
-        "description": "A general framework to transfer knowledge from deep self-supervised models to shallow task-specific models.",
+        "id": 443,
+        "created_on": "2020-04-10 17:51:39",
+        "title": "AllenNLP Interpret",
+        "description": "A Framework for Explaining Predictions of NLP Models",
         "tags": [
-            "article",
-            "tutorial",
-            "knowledge-distillation",
-            "model-compression",
-            "self-supervised-learning"
-        ]
+            "natural-language-processing"
+        ],
+        "text": "allennlp interpret framework explaining predictions nlp models"
     }
     ```
 
 #### Relevance
 
-Why is this feature/problem important and why now? Talk about experiences leading to its discovery and the impact on the business. Out of all the other problems we could be addressing right now, why is this problem the one that’s worth solving right now? Justify using relative impact on business compared to other issues in the backlog. As a general rule, it’s good to be as specific as possible in this section and use numerical values to strengthen claims.
+Why is this important to work on and why now? We need to justify the efforts required with the potential impact on the business compared to other problems (backlog) we could be working on. As a general rule, it’s good to be as specific as possible in this section and use numerical values to strengthen claims.
 
 ??? quote "Our task"
 
     **Core business values**
-    One of our core business values is to provide the curation that our users are not able to find anywhere else. Therefore, it’s a top priority to ensure that we meet this core value.
+    We want to be able to organize ML content and so being able to identify them correctly is crucial to our core business objective.
 
     **Engagement**
-    When our users are able to discover the precise resources for their needs, this drives engagement on our platform and improves perceived value. If we had addressed the search related complaints over the last X months, it would have increased engagement by X% leading to Y% increase in sponsorship fees.
+    When our users are able to discover the precise resources for their needs, this drives engagement on our platform and improves perceived value.
 
 
 #### Background

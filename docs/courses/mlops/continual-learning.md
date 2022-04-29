@@ -67,5 +67,8 @@ These are just a few of the dynamic levers that need to be evaluated and adjuste
 
 Tooling is improving ([monitoring](monitoring.md){:target="_blank"}, [evaluation](testing.md){:target="_blank"}, [feature store](feature-store.md){:target="_blank"}, etc.) & control planes (ex. [Metaflow](https://metaflow.org/){:target="_blank"}) are emerging to connect them. Even tooling to allow domain experts to interact with the ML system beyond just labeling (dataset curation, segmented monitoring investigations, explainability). A lot of companies are also building centralized ML platforms (ex. Uber's [Michelangelo](https://eng.uber.com/michelangelo-machine-learning-platform/){:target="_blank"} or LinkedIn's [ProML](https://engineering.linkedin.com/blog/2019/01/scaling-machine-learning-productivity-at-linkedin){:target="_blank"}) to allow their developers to move faster and not create redundant workflows (shared feature stores, health assurance monitoring pipelines, etc.)
 
+## Resources
+- [Continual Learning in Practice](https://arxiv.org/abs/1903.05202){:target="_blank"}
+
 <!-- Citation -->
 {% include "cite.md" %}

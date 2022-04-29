@@ -1,6 +1,6 @@
 ---
 template: lesson.html
-title: "CI/CD Workflows"
+title: "CI/CD for Machine Learning"
 description: Using workflows to establish continuous integration and delivery pipelines to reliably iterate on our application.
 keywords: ci/cd, github actions, devops, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
