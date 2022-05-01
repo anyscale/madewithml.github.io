@@ -1,8 +1,8 @@
 ---
 template: lesson.html
 title: "Testing Machine Learning Systems: Code, Data and Models"
-description: Learn how to test machine learning code, data and models to ensure consistent behavior in our ML systems.
-keywords: testing, pytest, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
+description: Learn how to test ML models (and their code and data) to ensure consistent behavior in our ML systems.
+keywords: testing, testing ml, pytest, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/follow/tree/testing
 ---
