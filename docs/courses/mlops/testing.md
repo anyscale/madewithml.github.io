@@ -1,6 +1,6 @@
 ---
 template: lesson.html
-title: "Testing ML Systems: Code, Data and Models"
+title: "Testing Machine Learning Systems: Code, Data and Models"
 description: Testing machine learning code, data and models to ensure consistent behavior in ML systems.
 keywords: testing, pytest, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
@@ -436,7 +436,7 @@ omit = ["app/gunicorn.py"]
 
 > The main point is that we were able to add justification to these exclusions through comments so our team can follow our reasoning.
 
-## Machine learning
+## How to Test Machine Learning Models?
 
 Now that we have a foundation for testing traditional software, let's dive into testing our data and models in the context of machine learning systems.
 
