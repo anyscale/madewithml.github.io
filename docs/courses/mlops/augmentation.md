@@ -31,7 +31,7 @@ The exact method of data augmentation depends largely on the type of data and th
     <small><a href="https://www.snorkel.org/blog/tanda" target="_blank">Data Augmentation with Snorkel</a></small>
 </div>
 
-- **General**: normalization, smoothing, random noise, etc. can be used for audio, tabular and other forms of data.
+- **General**: normalization, smoothing, random noise, synthetic oversampling ([SMOTE](https://arxiv.org/abs/1106.1813){:target="_blank"}), etc.
 - **Natural language processing (NLP)**: substitutions (synonyms, tfidf, embeddings, masked models), random noise, spelling errors, etc.
 - **Computer vision (CV)**: crop, flip, rotate, pad, saturate, increase brightness, etc.
 

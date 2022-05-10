@@ -57,7 +57,7 @@ nav:
   - MLOps:
     - Lessons: /#mlops
     - 📦 &nbsp; Purpose:
-      - Product: courses/mlops/product.md
+      - Product: courses/mlops/purpose.md
       - System design: courses/mlops/product/#system-design
       - Project: courses/mlops/product/#project
     - 🔢 &nbsp; Data:
@@ -206,8 +206,9 @@ plugins:
             "courses/applied-ml/documentation.md": "courses/mlops/documentation.md"
             "courses/applied-ml/api.md": "courses/mlops/api.md"
             "courses/applied-ml/testing.md": "courses/mlops/testing.md"
-            "courses/mlops/objective.md": "courses/mlops/product.md"
-            "courses/mlops/solution.md": "courses/mlops/product.md"
-            "courses/mlops/iteration.md": "courses/mlops/product.md"
+            "courses/mlops/objective.md": "courses/mlops/purpose.md"
+            "courses/mlops/solution.md": "courses/mlops/purpose.md"
+            "courses/mlops/iteration.md": "courses/mlops/purpose.md"
+            "courses/mlops/product.md": "courses/mlops/purpose.md"
             # "mlops-course": "index.md"
 

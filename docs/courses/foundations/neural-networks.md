@@ -417,7 +417,7 @@ sample probability: tensor([0.9306, 0.0683, 0.0012])
 sample class: 0
 </pre>
 ```python linenums="1"
-# Performance report
+# # Performance
 performance = get_metrics(y_true=y_test, y_pred=y_pred, classes=classes)
 print (json.dumps(performance, indent=2))
 ```
@@ -779,7 +779,7 @@ y_prob = model.predict(X_test)
 y_pred = np.argmax(y_prob, axis=1)
 ```
 ```python linenums="1"
-# Performance report
+# # Performance
 performance = get_metrics(y_true=y_test, y_pred=y_pred, classes=classes)
 print (json.dumps(performance, indent=2))
 ```
@@ -957,7 +957,7 @@ y_prob = F.softmax(model(X_test), dim=1)
 y_pred = y_prob.max(dim=1)[1]
 ```
 ```python linenums="1"
-# Performance report
+# # Performance
 performance = get_metrics(y_true=y_test, y_pred=y_pred, classes=classes)
 print (json.dumps(performance, indent=2))
 ```
@@ -1228,7 +1228,7 @@ y_prob = F.softmax(model(X_test), dim=1)
 y_pred = y_prob.max(dim=1)[1]
 ```
 ```python linenums="1"
-# Performance report
+# # Performance
 performance = get_metrics(y_true=y_test, y_pred=y_pred, classes=classes)
 print (json.dumps(performance, indent=2))
 ```

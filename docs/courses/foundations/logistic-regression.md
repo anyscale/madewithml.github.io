@@ -763,7 +763,7 @@ def get_metrics(y_true, y_pred, classes):
     return performance
 ```
 ```python linenums="1"
-# Performance report
+# # Performance
 performance = get_metrics(y_true=y_test, y_pred=pred_test, classes=label_encoder.classes)
 print (json.dumps(performance, indent=2))
 ```

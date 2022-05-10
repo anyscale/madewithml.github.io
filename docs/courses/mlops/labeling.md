@@ -221,7 +221,7 @@ def display_tag_details(tag="question-answering"):
 
 ## Data imbalance
 
-With our datasets, we may often notice a data imbalance problem where a range of continuous values (regression) or certain classes (classification) may have insufficient amounts of data to learn from. This becomes a major issue when training because the model will learn to generalize to the data available and perform poorly on regions where the data is sparse. There are several techniques to mitigate data imbalance, including [resampling](https://github.com/scikit-learn-contrib/imbalanced-learn){:target="_blank"} (oversampling from minority classes / undersampling from majority classes), account for the [data distributions via the loss function](baselines.md#data-imbalance){:target="_blank"} (since that drives the learning process), etc.
+With our datasets, we may often notice a data imbalance problem where a range of continuous values (regression) or certain classes (classification) may have insufficient amounts of data to learn from. This becomes a major issue when training because the model will learn to generalize to the data available and perform poorly on regions where the data is sparse. There are several techniques to mitigate data imbalance, including [resampling](https://github.com/scikit-learn-contrib/imbalanced-learn){:target="_blank"} (oversampling from minority classes / undersampling from majority classes), incorporate class weights, [augmentation](augmentation.md){:target="_blank"}, etc.
 
 !!! question "How can we do better?"
 
@@ -236,6 +236,7 @@ We could have used the user provided tags as our labels but what if the user add
 
 ### General
 - [Labelbox](https://labelbox.com/){:target="_blank"}: the data platform for high quality training and validation data for AI applications.
+- [Scale AI](https://scale.com/){:target="_blank"}: data platform for AI that provides high quality training data.
 - [Label Studio](https://github.com/heartexlabs/label-studio){:target="_blank"}: a multi-type data labeling and annotation tool with standardized output format.
 - [Universal Data Tool](https://github.com/UniversalDataTool/universal-data-tool){:target="_blank"}: collaborate and label any type of data, images, text, or documents in an easy web interface or desktop app.
 - [Prodigy](https://github.com/explosion/prodigy-recipes){:target="_blank"}: recipes for the Prodigy, our fully scriptable annotation tool.

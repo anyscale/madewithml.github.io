@@ -524,7 +524,7 @@ def eval_step(self, dataloader):
     return loss, np.vstack(y_trues), np.vstack(y_probs)
 ```
 
-The final function is the `predict_step` which will be used for inference. It's fairly similar to the `eval_step` except we don't calculate any metrics. We pass on the predictions which we can use to generate our performance report.
+The final function is the `predict_step` which will be used for inference. It's fairly similar to the `eval_step` except we don't calculate any metrics. We pass on the predictions which we can use to generate our performance scores.
 
 ```python linenums="1"
 def predict_step(self, dataloader):

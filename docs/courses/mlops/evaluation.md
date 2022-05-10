@@ -1,6 +1,6 @@
 ---
 template: lesson.html
-title: Evaluating ML Models
+title: Evaluating Machine Learning Models
 description: Evaluating ML models by assessing overall, per-class and slice performances.
 keywords: evaluation, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
@@ -622,7 +622,38 @@ And as we develop these criteria over time, we can systematically enforce them v
     ??? quote "Show answer"
         You and your team need to agree on what evaluation criteria are most important and what is the minimum performance required for each one. This will allow us to filter amongst all the different solutions by removing ones that don't satisfy all the minimum requirements and ranking amongst the remaining by which ones perform the best for the highest priority criteria.
 
-> In our [testing lesson](https://madewithml.com/courses/mlops/testing/){:target="_blank"}, we'll cover another way to evaluate our model known as [behavioral testing](https://madewithml.com/courses/mlops/testing/#behavioral-testing){:target="_blank"}, which we'll also include as part of performance report.
+## Online evaluation
+
+Once we've evaluated our model's ability to perform on a static dataset that is representative of production data, we can run several types of **online evaluation** techniques to determine performance on actual product data. These test are a mix of system and acceptance tests because we want to see how our system behaves as part of the larger product and to ensure that it meets certain acceptance criteria (ex. latency).
+
+### AB tests
+AB tests involve sending production traffic to the different systems that we're evaluating and then using statistical hypothesis testing to decide which system is better. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination. In many cases, if we're simply trying to compare the different versions for a certain metric, multi-armed bandits will be a better approach.
+
+<div class="ai-center-all">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/ab.png">
+</div>
+
+### Canary tests
+Canary tests involve sending most of the production traffic to the currently deployed system but sending traffic from a small cohort of users to the new system we're trying to evaluate. Again we need to make sure that the same users continue to interact with the same system as we gradually roll out the new system.
+
+<div class="ai-center-all">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/canary.png">
+</div>
+
+### Shadow tests
+Shadow testing involves sending the same production traffic to the different systems. We don't have to worry about system contamination and it's very safe compared to the previous approaches since the new system's results are not served. But overall, shadow testing is easy to monitor, validate operational consistency, etc.
+
+<div class="ai-center-all">
+    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/shadow.png">
+</div>
+
+!!! question "What can go wrong?"
+    If shadow tests allow us to test our updated system without having to actually serve the new results, why doesn't everyone adopt it?
+
+    ??? quote "Show answer"
+        With shadow deployment, we'll miss out on any live feedback signals (explicit/implicit) from our users since users are not directly interacting with the product using our new version.
+
+        We also need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. This is rarely possible because, while your ML system may be a standalone microservice, it ultimately interacts with an intricate production environment that has *many* dependencies.
 
 ## Model CI
 

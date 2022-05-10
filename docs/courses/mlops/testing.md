@@ -912,39 +912,6 @@ assert len(response.json()["data"]["predictions"]) == len(data["texts"])
 ...
 ```
 
-### Deployment
-
-Once we've tested our model's ability to perform in the production environment (**offline tests**), we can run several types of **online tests** to determine the quality of that performance. These test are a mix of system and acceptance tests because we want to see how our system behaves as part of the larger product and to ensure that it meets certain acceptance criteria (ex. latency).
-
-#### AB tests
-AB tests involve sending production traffic to the different systems that we're evaluating and then using statistical hypothesis testing to decide which system is better. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination. In many cases, if we're simply trying to compare the different versions for a certain metric, multi-armed bandits will be a better approach.
-
-<div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/ab.png">
-</div>
-
-#### Canary tests
-Canary tests involve sending most of the production traffic to the currently deployed system but sending traffic from a small cohort of users to the new system we're trying to evaluate. Again we need to make sure that the same users continue to interact with the same system as we gradually roll out the new system.
-
-<div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/canary.png">
-</div>
-
-#### Shadow tests
-Shadow testing involves sending the same production traffic to the different systems. We don't have to worry about system contamination and it's very safe compared to the previous approaches since the new system's results are not served. But overall, shadow testing is easy to monitor, validate operational consistency, etc.
-
-<div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/infrastructure/shadow.png">
-</div>
-
-!!! question "What can go wrong?"
-    If shadow tests allow us to test our updated system without having to actually serve the new results, why doesn't everyone adopt it?
-
-    ??? quote "Show answer"
-        With shadow deployment, we'll miss out on any live feedback signals (explicit/implicit) from our users since users are not directly interacting with the product using our new version.
-
-        We also need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. This is rarely possible because, while your ML system may be a standalone microservice, it ultimately interacts with an intricate production environment that has *many* dependencies.
-
 ## Testing vs. monitoring
 
 We'll conclude by talking about the similarities and distinctions between testing and [monitoring](monitoring.md){:target="_blank"}. They're both integral parts of the ML development pipeline and depend on each other for iteration. Testing is assuring that our system (code, data and models) passes the expectations that we've established at $t_0$. Whereas, monitoring involves that these expectations continue to pass on live production data while also ensuring that their data distributions are [comparable](monitoring.md#measuring-drift){:target="_blank"} to the reference window (typically subset of training data) through $t_n$. When these conditions no longer hold true, we need to inspect more closely (retraining may not always fix our root problem).
