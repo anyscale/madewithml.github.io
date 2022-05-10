@@ -18,10 +18,14 @@ This template is designed to guide machine learning product development. While t
 
 [Product](#product) (*What* & *Why*) → [System design](#system-design) (*How*) → [Project](#project) (*Who* & *When*)
 
-All great products improve over time and they require release documentation with clear objectives. In this lesson, we'll be designing the initial release but you would do the same for all future releases as well. It's important that we organize our projects this way so that there is one central location where all documentation can be found and kept up-to-date. This also enforces that we scope releases appropriately and provide the thorough planning and documentation to execute each one.
+While our documentation will be detailed, we can start the process by walking through a machine learning canvas:
+
+
+
+From this high-level canvas, we can create detailed documentation for each release:
 
 ```bash
-# Project scoping
+# Documentation
 📂 project/
 ├── 📄 Overview
 ├── 📂 release-1
@@ -32,8 +36,7 @@ All great products improve over time and they require release documentation with
 └── 📂 release-n
 ```
 
-!!! note "Assumptions"
-    Throughout this lesson, we'll state and justify the assumptions we made to simplify the problem space.
+> Throughout this lesson, we'll state and justify the assumptions we made to simplify the problem space.
 
 ## Product Management
 
@@ -88,7 +91,13 @@ What are the key objectives that we're trying to satisfy (specific success crite
 
 ### Solutions
 
-#### Current
+Describe the proposed solution and it's features. These solutions may also require separate documentation including wireframes, user stories, mock-ups, etc.
+
+??? quote "Our task"
+
+    We want to create a product that will automatically discover and classify content so that everything is organized for discovery. To simplify our task, let's assume we already have a pipeline that delivers ML content from popular sources (Reddit, Twitter, etc.) as an hourly stream. We can develop a model that can classify the incoming content so that it adheres to how our platform organizes content. From the consumer's point of view, they will (magically) see content on the platform that is updated regularly and organized by category.
+
+#### Alternatives
 
 Describe current approaches and alternative solutions that were considered and why they're not ideal
 
@@ -97,14 +106,6 @@ Describe current approaches and alternative solutions that were considered and w
     - Current approach → individuals add content to the platform on a daily basis.
     - Alternatives → increasing marketing efforts to attract more users to add and organize content.
     - Not ideal → manually adding content is the main bottleneck so we need to address this from a different angle.
-
-#### Proposal
-
-Describe the proposed solution and it's features. These solutions may also require separate documentation including wireframes, user stories, mock-ups, etc.
-
-??? quote "Our task"
-
-    We want to create a product that will automatically discover and classify content so that everything is organized for discovery. To simplify our task, let's assume we already have a pipeline that delivers ML content from popular sources (Reddit, Twitter, etc.) as an hourly stream. We can develop a model that can classify the incoming content so that it adheres to how our platform organizes content. From the consumer's point of view, they will (magically) see content on the platform that is updated regularly and organized by category.
 
 #### Feasibility
 
@@ -215,6 +216,38 @@ What are potential risks, concerns and uncertainties that the team should be awa
 
 ### Data
 
+Describe the static (ex. labeled dataset) and dynamic (ex. data streams that deliver live features) sources of data that we depend on.
+
+??? quote "Our task"
+
+    - **static**:
+        - access to a labeled and validated datasets for training.
+        - information on feature origins and schemas.
+        - how did we settle on these labels?
+        - what kind of validation did this data go through?
+        - was there sampling of any kind applied to create this dataset?
+        - are we introducing any data leaks?
+    - **dynamic**:
+        - access to streams of ML content from scattered sources (Reddit, Twitter, etc.)
+        - how can we trust that this stream only has data that is consistent with what we have historically seen?
+
+    <table>
+    <thead>
+    <tr>
+        <th>Assumption</th>
+        <th>Actual</th>
+        <th>Reason</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>ML stream only has ML relevant content.</td>
+        <td>Filter to remove spam content from these 3rd party streams.</td>
+        <td>Would require us to source relevant data and build another model.</td>
+    </tr>
+    </tbody>
+    </table>
+
 #### Labeling
 
 Describe the labeling process and how we settled on the features and labels.
@@ -252,41 +285,7 @@ Describe the labeling process and how we settled on the features and labels.
     <tr>
         <td>Content can only belong to one category (multiclass).</td>
         <td>Content can belong to more than one category (multilabel).</td>
-        <td>Simplicity and many Python libraries don't support multilabel scenarios.</td>
-    </tr>
-    </tbody>
-    </table>
-
-#### Sources
-
-Describe the static (ex. labeled dataset) and dynamic (ex. data streams that deliver live features) sources of data that we depend on.
-
-??? quote "Our task"
-
-    - **static**:
-        - access to a labeled and validated datasets for training.
-        - information on feature origins and schemas.
-        - how did we settle on these labels?
-        - what kind of validation did this data go through?
-        - was there sampling of any kind applied to create this dataset?
-        - are we introducing any data leaks?
-    - **dynamic**:
-        - access to streams of ML content from scattered sources (Reddit, Twitter, etc.)
-        - how can we trust that this stream only has data that is consistent with what we have historically seen?
-
-    <table>
-    <thead>
-    <tr>
-        <th>Assumption</th>
-        <th>Actual</th>
-        <th>Reason</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>ML stream only has ML relevant content.</td>
-        <td>Filter to remove spam content from these 3rd party streams.</td>
-        <td>Would require us to source relevant data and build another model.</td>
+        <td>Simplicity since many Python libraries don't support or complicate multilabel scenarios.</td>
     </tr>
     </tbody>
     </table>
@@ -314,11 +313,10 @@ One of the hardest challenges with evaluation is trying the metrics from the pro
     For our respective industries or areas of interest, do you we where the priorities are (metrics, errors and other tradeoffs)?
 
     ??? quote "Show answer"
-        It entirely depends on the specific task. For example, in an email spam detector, precision is very important because it's better than we some spam then completely miss an important email. Overtime, we need to iterate on our solution so all evaluation metrics improve but it's important to know which one's we can't comprise on from the get-go.
 
 #### Offline
 
-[Offline evaluation](evaluation.md){:target="_blank"} requires a gold standard labeled dataset that we can use to benchmark all of our [methods](#methodologies).
+[Offline evaluation](evaluation.md){:target="_blank"} requires a gold standard labeled dataset that we can use to benchmark all of our [methods](#methods).
 
 ??? quote "Our task"
 
@@ -336,9 +334,7 @@ One of the hardest challenges with evaluation is trying the metrics from the pro
     - asking the initial set of users viewing a newly categorized content if it's appropriately categorized.
     - allow users to report misclassified content by our model.
 
-### Methodologies
-
-#### Principles
+### Methods
 
 While the specific methodology we employ can differ based on the problem, there are core principles we always want to follow:
 
@@ -383,7 +379,7 @@ While the specific methodology we employ can differ based on the problem, there 
         - perform A/B testing to understand UI/UX design.
         - deployed locally to start generating more data required for more complex approaches.
 
-#### Maturation
+#### Iteration
 
 As we prove out our proof of concepts (POCs), we'll want make our system increasingly mature so that less manual intervention is required.
 

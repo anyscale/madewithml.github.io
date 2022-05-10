@@ -80,6 +80,9 @@ body {
 
 .md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
   background-color: #ebebeb !important;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 .md-content__inner {
