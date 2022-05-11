@@ -34,6 +34,7 @@ extra:
 # Page tree
 nav:
   - Home: index.md
+  - About: about.md
   - Foundations:
     - Lessons: /#foundations
     - 🛠 &nbsp; Toolkit:
@@ -58,8 +59,8 @@ nav:
     - Lessons: /#mlops
     - 📦 &nbsp; Purpose:
       - Product: courses/mlops/purpose.md
-      - System design: courses/mlops/product/#system-design
-      - Project: courses/mlops/product/#project
+      - System design: courses/mlops/product/#systems-design
+      - Project: courses/mlops/product/#project-management
     - 🔢 &nbsp; Data:
       - Labeling: courses/mlops/labeling.md
       - Preprocessing: courses/mlops/preprocessing.md
@@ -156,7 +157,7 @@ extra_css:
   - static/css/extra.css
   - static/css/bs.css
   - static/css/termynal.css
-  - https://unpkg.com/aos@2.3.1/dist/aos.css
+  # - https://unpkg.com/aos@2.3.1/dist/aos.css
 
 # Extra JS
 extra_javascript:
@@ -165,7 +166,7 @@ extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://unpkg.com/aos@2.3.1/dist/aos.js
+  # - https://unpkg.com/aos@2.3.1/dist/aos.js
   - static/js/custom.js
   - static/js/termynal.js
 
