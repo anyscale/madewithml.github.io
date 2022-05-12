@@ -20,7 +20,11 @@ This template is designed to guide machine learning product development. While t
 
 While our documentation will be detailed, we can start the process by walking through a machine learning canvas:
 
+<div class="ai-center-all">
+    <a href="/static/templates/ml-canvas.pdf" target="_blank"><img src="/static/images/mlops/purpose/ml_canvas.png" width="1000" alt="machine learning canvas"></a>
+</div>
 
+👉 &nbsp; Download a PDF of the ML canvas to use for your own products → [ml-canvas.pdf](/static/templates/ml-canvas.pdf){:target="_blank"}
 
 From this high-level canvas, we can create detailed documentation for each release:
 
@@ -49,11 +53,130 @@ From this high-level canvas, we can create detailed documentation for each relea
 
 #### Background
 
-Describe the problem and product features at a high level. This is the section where you’re setting the scene for someone new, so avoid getting into the details until you reach the sections further below.
+Set the scene for what we're trying to do through a customer-centric approach:
+
+- `#!js customer`: profile of the customer we want to address
+- `#!js goal`: main goal for the customer
+- `#!js pains`: obstacles in the way of the customer achieving the goal
+- `#!js gains`: what would make the job easier for the customer?
 
 ??? quote "Our task"
 
-    With so much content on machine learning these days, it's hard to keep things organized. We have (hypothetically) created a platform where people can add and categorize ML content they created or found online for others to discover. However, this process is severely limited by the individuals adding content while our passive consumers want to see a lot more organized content. We do see relevant ML content all over the internet but it's all scattered and unorganized.
+    - `#!js customer`: machine learning developers and researchers.
+    - `#!js goal`: stay up-to-date on ML content for work, knowledge, etc.
+    - `#!js pains`: too much uncategorized content scattered around the internet.
+    - `#!js gains`: a central location with categorized content from trusted 3rd party sources.
+
+    <table>
+    <thead>
+    <tr>
+        <th>Assumption</th>
+        <th>Actual</th>
+        <th>Reason</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Assume we have customers on our platform already.</td>
+        <td>Doesn't matter what you build if no one is there to use it.</td>
+        <td>This is a course on ML, not cold start growth.</td>
+    </tr>
+    <tr>
+        <td>Customers want to stay up-to-date with ML content.</td>
+        <td>Thorough customer studies required to confirm this.</td>
+        <td>We need a task that we can model in this course.</td>
+    </tr>
+    </tbody>
+    </table>
+
+#### Value proposition
+
+Propose the value we can create through a product-centric approach:
+
+- `#!js product`: what needs to be build to help the customer reach their goal
+- `#!js alleviates`: how will the product reduce pains?
+- `#!js advantages`: how will the product create gains?
+
+??? quote "Our task"
+
+    - `#!js product`: service that discovers and categorizes ML content from popular sources.
+    - `#!js alleviates`: timely display categorized content for customers to discover.
+    - `#!js advantages`: customers only have to visit our product to stay up-to-date.
+
+#### Objectives
+
+Breakdown the product into key objectives that we want to focus on.
+
+??? quote "Our task"
+
+    - Allow customers to add and categorize their own projects.
+    - Discover ML content from trusted sources to bring into our platform.
+    - Classify incoming content (>85% precision) for our customers to easily discover. **[OUR FOCUS]**
+    - Display categorized content on our platform (recent, popular, recommended, etc.)
+
+    <table>
+    <thead>
+    <tr>
+        <th>Assumption</th>
+        <th>Actual</th>
+        <th>Reason</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Assume we have a pipeline that delivers ML content from popular sources (Reddit, Twitter, etc.).</td>
+        <td>We would have to build this as a batch service and is not trivial.</td>
+        <td>This is a course on ML, not batch web scraping.</td>
+    </tr>
+    </tbody>
+    </table>
+
+### Solution
+
+Describe the solution required to meet our objectives, including it's core features, integration, alternatives, constraints and what's out-of-scope.
+
+> May require separate documentation (wireframes, user stories, mock-ups, etc.).
+
+??? quote "Our task"
+
+    Develop a model that can classify the incoming content so that it can be organized by category on our platform.
+
+    `#!js Core features`:
+
+    - ML service that will predict the correct categories for incoming content. **[OUR FOCUS]**
+    - user feedback process for incorrectly classified content.
+    - workflows to categorize content that the service was incorrect about or not as confident in.
+    - duplicate screening for content that already exists on the platform.
+
+    `#!js Integrations`:
+
+    - categorized content will be sent to the UI service to be displayed.
+    - classification feedback from users will sent to labeling workflows.
+
+    `#!js Alternatives`:
+
+    - allow users to add content manually (bottleneck).
+
+    `#!js Constraints`:
+
+    - maintain low latency (>100ms) when classifying incoming content. **[Latency]**
+    - only recommend tags from our list of approved tags. **[Security]**
+    - avoid duplicate content from being added to the platform. **[UI/UX]**
+
+    `#!js Out-of-scope`:
+
+    - identify relevant tags beyond our approved list of tags.
+    - using full-text HTML from content links to aid in classification.
+    - interpretability for why we recommend certain tags.
+    - identifying multiple categories (see [dataset](#dataset) section for details).
+
+#### Feasibility
+
+How feasible is our solution and do we have the required resources to deliver it (data, $, team, etc.)?
+
+??? quote "Our task"
+
+    We have a dataset of ML content that have been labeled. We'll need to assess if it has the necessary signals to meet our [objectives](#objectives).
 
     ```json linenums="1" title="Sample data point"
     {
@@ -65,170 +188,23 @@ Describe the problem and product features at a high level. This is the section w
     }
     ```
 
-#### Relevance
-
-Why is this important to work on and why now? We need to justify the efforts for the potential value proposition. As a general rule, it’s good to be as specific as possible in this section and use numerical values to strengthen claims.
-
-??? quote "Our task"
-
-    **Core business values**
-    We want to be able to organize the overwhelming amount of ML content and provide a discovery hub for the community.
-
-    **Engagement**
-    When our users are able to discover the precise resources for their needs, this drives engagement on our platform and improves perceived value.
-
-#### Objectives
-
-What are the key objectives that we're trying to satisfy (specific success criteria/metrics)?
-
-??? quote "Our task"
-
-    - Increase the amount of daily content on the platform by >20%.
-    - Correctly categorize content with >85% precision.
-
-!!! warning "Objectives vs. constraints"
-    Objectives and [constraints](#constraints) are often incorrectly used interchangeably but they're very different. Objectives are things that we want to **achieve** that are under our control. Usually, they start with the phrase "We want &lt;objective&gt;" whereas constraints are **limitations** that we need to abide by and often look like "We can't do X because &lt;constraint&gt;". Another way to think about constraints is that it's something we wouldn't impose on ourselves if we didn't have to.
-
-### Solutions
-
-Describe the proposed solution and it's features. These solutions may also require separate documentation including wireframes, user stories, mock-ups, etc.
-
-??? quote "Our task"
-
-    We want to create a product that will automatically discover and classify content so that everything is organized for discovery. To simplify our task, let's assume we already have a pipeline that delivers ML content from popular sources (Reddit, Twitter, etc.) as an hourly stream. We can develop a model that can classify the incoming content so that it adheres to how our platform organizes content. From the consumer's point of view, they will (magically) see content on the platform that is updated regularly and organized by category.
-
-#### Alternatives
-
-Describe current approaches and alternative solutions that were considered and why they're not ideal
-
-??? quote "Our task"
-
-    - Current approach → individuals add content to the platform on a daily basis.
-    - Alternatives → increasing marketing efforts to attract more users to add and organize content.
-    - Not ideal → manually adding content is the main bottleneck so we need to address this from a different angle.
-
-#### Feasibility
-
-How realistic is our proposed solution and what are some of the dependencies (ex. data)? We may also discover questions that need further exploration.
-
-??? quote "Our task"
-
-    We have access to all the [projects](https://github.com/GokuMohandas/MadeWithML/blob/main/datasets/projects.json){:target="_blank"} that have been added to the platform already. They have the relevant signals (text) and the respective tag (labels). We can use this historical data to develop a model to replicate this process at scale.
-
-    - data → title, description and other relevant metadata.
-    - explore → do the text feature provide adequate signal for the classification task?
-
-#### Constraints
-
-What are the constraints that we have to account for in our solutions? A large majority of constraints can directly come from our service-level agreements (SLAs) with customers and internal systems regarding time, $, performance, latency, infrastructure, privacy, security, UI/UX, etc.
-
-??? quote "Our task"
-
-    - maintain low latency (>100ms) when classifying incoming content. **[Latency]**
-    - only recommend tags from our list of approved tags. **[Security]**
-    - avoid duplicate content from being added to the platform. **[UI/UX]**
-
-!!! question "Solutions → Constraints or vice versa?"
-    Is it naive to consider solutions before constraints because they dictate the nuances of our constraints right?
-
-    ??? quote "Show answer"
-        We believe that freely brainstorming solutions without being biased by constraints can lead to very creative solutions. Additionally, in future releases, constraints can often be overcome if the solution motivates it. However, for this current release, it's good to scope the solution by accounting for the constraints. But because we've documented our ideal solution, we can work towards that in future releases.
-
-#### Integration
-
-What are the dependencies and dependents we need to integrate with? Any potential conflicts?
-
-??? quote "Our task"
-
-    - **dependencies**:
-        - labeled dataset to benchmark current and future approaches.
-        - stream of content from trusted sources (Reddit, Twitter, etc.)
-        - resources to run and scale service.
-    - **dependents**:
-        - platform UI to display categorized content.
-
-### Requirements
-
-Describe core requirements that will help shape the functionality for this specific release. The project team will use these product requirements to plan the specific [deliverables](#deliverables) to fulfill each requirement.
-
-??? quote "Our task"
-
-    <table>
-    <thead>
-    <tr>
-        <th>Requirement</th>
-        <th>Priority</th>
-        <th>Release</th>
-        <th>Status</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Classify incoming content using provided features.</td>
-        <td>must-have</td>
-        <td>v1</td>
-        <td>Complete</td>
-    </tr>
-    <tr>
-        <td>user feedback process for incorrectly classified content.</td>
-        <td>must-have</td>
-        <td>v1</td>
-        <td>Complete</td>
-    </tr>
-    <tr>
-        <td>Duplicate screening when users add content or via automated discovery pipelines.</td>
-        <td>nice-to-have</td>
-        <td>v1</td>
-        <td>In-progress</td>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-    </tr>
-    </tbody>
-    </table>
-
-#### Out of scope
-
-What aspects of the feature/problem should we not be concerned with for the immediate planning? Out of scope doesn't mean that we will never address but just not during this specific deliverable.
-
-??? quote "Our task"
-
-    - identify relevant tags beyond our approved list of tags.
-    - using full-text HTML from content links to aid in classification.
-    - interpretability for why we recommend certain tags.
-    - identifying multiple relevant categories (see [dataset](#dataset) section for details).
-
-#### Concerns
-
-What are potential risks, concerns and uncertainties that the team should be aware of?
-
-??? quote "Our task"
-
-    - quality assurance on the classifications on incoming data.
-    - not capturing new categories that may be highly relevant to our users.
-
 ## Systems design
 
 [*How*]: describe our systemic approach towards building the product.
 
 ### Data
 
-Describe the static (ex. labeled dataset) and dynamic (ex. data streams that deliver live features) sources of data that we depend on.
+Describe the training and production (batches/streams) sources of data.
 
 ??? quote "Our task"
 
-    - **static**:
-        - access to a labeled and validated datasets for training.
+    - **training**:
+        - access to a labeled and validated [dataset](https://github.com/GokuMohandas/MadeWithML/blob/main/datasets/projects.json){:target="_blank"} for training.
         - information on feature origins and schemas.
-        - how did we settle on these labels?
-        - what kind of validation did this data go through?
         - was there sampling of any kind applied to create this dataset?
         - are we introducing any data leaks?
-    - **dynamic**:
-        - access to streams of ML content from scattered sources (Reddit, Twitter, etc.)
+    - **production**:
+        - access to timely batches of ML content from scattered sources (Reddit, Twitter, etc.)
         - how can we trust that this stream only has data that is consistent with what we have historically seen?
 
     <table>
@@ -254,22 +230,17 @@ Describe the labeling process and how we settled on the features and labels.
 
 ??? quote "Our task"
 
-    **Labeling**
-    We have [historical data](https://github.com/GokuMohandas/MadeWithML/blob/main/datasets/projects.json){:target="_blank"} that was manually added by users where they categorized content. These labels underwent manual inspection and are of high quality. We also have workflows in place to label and inspect new incoming data so that we can improve our performance.
+    **Labeling**: manually labeled [historical data](https://github.com/GokuMohandas/MadeWithML/blob/main/datasets/projects.json){:target="_blank"}.
 
-    **Features**
-    We expect the text features (title and description) to offer the signal required for a machine learning model to perform this task.
+    **Features**: text features (title and description) to provide signal for the classification task.
 
-    **Labels**
-    Users were only allowed to add content that belonged to a specific set of categories:
+    **Labels**: reflect the content categories we currently display on our platform:
 
     ```python linenums="1"
     ['natural-language-processing',
      'computer-vision',
      'mlops',
-     'reinforcement-learning',
-     'graph-learning',
-     'time-series',
+      ...
      'other']
     ```
 
@@ -285,38 +256,31 @@ Describe the labeling process and how we settled on the features and labels.
     <tr>
         <td>Content can only belong to one category (multiclass).</td>
         <td>Content can belong to more than one category (multilabel).</td>
-        <td>Simplicity since many Python libraries don't support or complicate multilabel scenarios.</td>
+        <td>For simplicity and many libraries don't support or complicate multilabel scenarios.</td>
     </tr>
     </tbody>
     </table>
 
-#### Storage
-
-Describe the [data management systems](labeling.md#data-management-systems){:target="_blank"} (databases, warehouse, [feature store](feature-store.md){:target="_blank"}, etc.) used to store the data.
-
-??? quote "Our task"
-
-    Our training data lives in the form of a [versioned](versioning.md){:target="_blank"} JSON file fetched from a DB and our inference data can come from batch ETL jobs that have aggregating relevant ML content that needs to be classified from across the internet.
-
 ### Evaluation
 
-Before we can model our objective, we need to be able to evaluate how we’re performing. This evaluation criteria needs to represent the aspects of the scenario we prioritize.
+Before we can model our objective, we need to be able to evaluate how we’re performing.
 
 #### Metrics
 
-One of the hardest challenges with evaluation is trying the metrics from the product's [objectives](#objectives) with metrics that our model is able to produce. We need to prove that what we're optimizing for is the best direct measure of the core business metric(s) that we're concerned with.
+One of the hardest challenges with evaluation is tying our core [objectives](#objectives) (may be qualitative) with quantitative metrics that our model can optimize on.
 
 ??? quote "Our task"
-    We want to be able to categorize incoming data with high precision so that we can categorize them under the appropriate topic. For the projects that we categorize as `other`, we can *recall* any misclassified content using manual labeling workflows. We may also want to evaluate performance for specific classes or [slices](evaluation.md#slices){:target="_blank"} of data.
+    We want to be able to classify incoming data with high precision so we can display them properly. For the projects that we categorize as `other`, we can *recall* any misclassified content using manual labeling workflows. We may also want to evaluate performance for specific classes or [slices](evaluation.md#slices){:target="_blank"} of data.
 
 !!! question "What are our priorities"
-    For our respective industries or areas of interest, do you we where the priorities are (metrics, errors and other tradeoffs)?
+    How do we decide which metrics to prioritize?
 
     ??? quote "Show answer"
+        It entirely depends on the specific task. For example, in an email spam detector, precision is very important because it's better than we some spam then completely miss an important email. Overtime, we need to iterate on our solution so all evaluation metrics improve but it's important to know which one's we can't comprise on from the get-go.
 
 #### Offline
 
-[Offline evaluation](evaluation.md){:target="_blank"} requires a gold standard labeled dataset that we can use to benchmark all of our [methods](#methods).
+[Offline evaluation](evaluation.md){:target="_blank"} requires a gold standard labeled dataset that we can use to benchmark all of our [modeling](#modeling).
 
 ??? quote "Our task"
 
@@ -324,17 +288,15 @@ One of the hardest challenges with evaluation is trying the metrics from the pro
 
 #### Online
 
-[Online evaluation](monitoring.md#performance){:target="_blank"} can be performed using labels or, in the event we don't readily have labels, [proxy signals](monitoring.md#performance){:target="_blank"}.
+Online evaluation ensures that our model continues to perform well in production and can be performed using labels or, in the event we don't readily have labels, [proxy signals](monitoring.md#performance){:target="_blank"}.
 
-??? quote "Out task"
+??? quote "Our task"
 
-    Proxy signals in our task can be:
-
-    - send manually added content (manually categorized) to compare with the model's prediction.
-    - asking the initial set of users viewing a newly categorized content if it's appropriately categorized.
+    - manually label a subset of incoming data to evaluate periodically.
+    - asking the initial set of users viewing a newly categorized content if it's correctly classified.
     - allow users to report misclassified content by our model.
 
-### Methods
+### Modeling
 
 While the specific methodology we employ can differ based on the problem, there are core principles we always want to follow:
 
@@ -379,29 +341,13 @@ While the specific methodology we employ can differ based on the problem, there 
         - perform A/B testing to understand UI/UX design.
         - deployed locally to start generating more data required for more complex approaches.
 
-#### Iteration
+#### Experimentation
 
-As we prove out our proof of concepts (POCs), we'll want make our system increasingly mature so that less manual intervention is required.
+How can we [experiment](infrastructure.md#experimentation){:target="_blank"} with our model to measure real-time performance before committing to replace our existing version of the system.
 
-??? quote "Out task"
+> Not all releases have to be high stakes and external facing. We can always include internal releases, gather feedback and iterate until we’re ready to increase the scope.
 
-    1. POC with a static, [labeled](labeling.md) dataset to explore if the input features we have are sufficient enough for the task. Though this is just [baselining](baselines.md){:target="_blank"}, this approach still requires thorough [testing](testing.md){:target="_blank"} (code, data + models) and [evaluation](evaluation.md){:target="_blank"}.
-    2. [Optimizing](optimization.md){:target="_blank"} on the solution, while potentially using the POC to collect more data, so that the system achieves performance requirements.
-    3. [Deploy](infrastructure.md){:target="_blank"}, [monitor](monitoring.md){:target="_blank"} and maintain the versioned and reproducible models.
-    4. If using an end-to-end system, start to decouple into individual [pipeline workflows](pipelines.md){:target="_blank"} that can be scaled, debugged and executed separately. This can involve using constructs such as [feature stores](feature-store.md){:target="_blank"} and [model servers](cicd.md#serving){:target="_blank"} to quickly iterate towards a [continual learning system](continual-learning.md){:target="_blank"}.
-
-!!! warning "Always return to the value proposition"
-    While it's important to iterate and optimize the internals of our workflows, it's even more important to ensure that our ML systems are actually making an impact. We need to constantly engage with stakeholders (management, users) to iterate on why our ML system exists.
-
-    <div class="ai-center-all">
-        <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/iteration/development_cycle.png" width="600" alt="product development cycle">
-    </div>
-
-#### Rollout
-
-What do the [online evaluation](evaluation.md#online-evaluation){:target="_blank"} (experimentation) and release strategies look like for our different versions? Note that not all releases have to be high stakes, external facing to the whole world. We can always include internal releases, gather feedback and iterate until we’re ready to increase the scope.
-
-- Canary internal rollout, monitoring for proxy/actual performance, etc.
+- Internal canary rollout, monitoring for proxy/actual performance, etc.
 - Rollout to the larger internal team for more feedback.
 - A/B rollout to a subset of the population to better understand UX, utility, etc.
 
@@ -411,9 +357,15 @@ How do we receive feedback on our system and incorporate it into the next iterat
 
 ??? quote "Our task"
 
-    - use author's chosen tags as a proxy signal to quantify online performance.
     - enforce human-in-loop checks when there is low confidence in classifications.
     - allow users to report issues related to misclassification.
+
+!!! warning "Always return to the value proposition"
+    While it's important to iterate and optimize the internals of our workflows, it's even more important to ensure that our ML systems are actually making an impact. We need to constantly engage with stakeholders (management, users) to iterate on why our ML system exists.
+
+    <div class="ai-center-all">
+        <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/iteration/development_cycle.png" width="600" alt="product development cycle">
+    </div>
 
 ## Project Management
 
@@ -427,7 +379,7 @@ Which teams and specific members from those teams need to be involved in this pr
 
     - **Product**: the members responsible for outlining the product requirements and approving them may involve product managers, executives, external stakeholders, etc.
     - **System design**:
-        - **Data engineering**: these developers are often responsible for the data dependencies, which include robust workflows to continually deliver the data and ensuring that it’s properly validated and ready for downstream applications
+        - **Data engineering**: responsible for the data dependencies, which include robust workflows to continually deliver the data and ensuring that it’s properly validated and ready for downstream applications.
         - **Machine learning**: develop the probabilistic systems with appropriate evaluation.
         - **DevOps**: deploy the application and help autoscale based on traffic.
         - **UI/UX**: consume the system’s outputs to deliver the new experience to the user.
@@ -437,13 +389,13 @@ Which teams and specific members from those teams need to be involved in this pr
 
 ### Deliverables
 
-We need to break down all the [requirements](#requirements) for a particular release into clear deliverables that specify the deliverable, contributors, dependencies, acceptance criteria and status. This will become the granular checklist that our teams will use to decide what to work on next and to ensure that they’re working on it properly (with all considerations).
+We need to break down all the [objectives](#objectives) for a particular release into clear deliverables that specify the deliverable, contributors, dependencies, acceptance criteria and status. This will become the granular checklist that our teams will use to decide what to prioritize.
 
 ??? quote "Our task"
     <table>
     <thead>
     <tr>
-        <th>Requirement</th>
+        <th>Objective</th>
         <th>Priority</th>
         <th>Release</th>
         <th>Status</th>
@@ -451,10 +403,9 @@ We need to break down all the [requirements](#requirements) for a particular rel
     </thead>
     <tbody>
     <tr>
-        <td>Predict explicit and implicit tags for given content metadata.</td>
-        <td>Medium</td>
+        <td>Classify incoming content (>85% precision) for our customers to easily discover.</td>
+        <td>High</td>
         <td>v1</td>
-        <td>Complete</td>
     </tr>
     </tbody>
     </table>
@@ -471,25 +422,25 @@ We need to break down all the [requirements](#requirements) for a particular rel
     </thead>
     <tbody>
     <tr>
-        <td>Labeled dataset with content metadata and ground-truth tags</td>
-        <td>Project DRI, data engineer</td>
+        <td>Labeled dataset for training</td>
+        <td>Project DRI, labeling team, data engineer</td>
         <td>Access to location of content with relevant metadata</td>
         <td>Validation of ground-truth labels</td>
-        <td>TBD<br><br><br></td>
+        <td>Complete</td>
     </tr>
     <tr>
-        <td>Trained model that can predict relevant tags given content metadata</td>
+        <td>Trained model with high >85% precision</td>
         <td>Data scientist</td>
         <td>Labeled dataset</td>
-        <td>Versioned, reproducible, tested (coverage) and evaluation results.</td>
-        <td>TBD</td>
+        <td>Versioned, reproducible, test coverage report and evaluation results</td>
+        <td>In-progress</td>
     </tr>
     <tr>
-        <td>Scalable endpoint that can be used to retrieve relevant tags</td>
+        <td>Scalable service for inference</td>
         <td>ML engineer, DevOps engineer</td>
         <td>Versioned, reproducible, tested and evaluated model</td>
-        <td>Stress tests to ensure autoscaling capabilities.</td>
-        <td>TBD</td>
+        <td>Stress tests to ensure autoscaling capabilities</td>
+        <td>Pending</td>
     </tr>
     <tr>
         <td>...</td>
@@ -503,17 +454,17 @@ We need to break down all the [requirements](#requirements) for a particular rel
 
 ### Timeline
 
-This is where the project scoping begins to take place. Often, the stakeholders will have a desired time to release and the functionality to be delivered. There  *will* be a lot of batch and forth on this based on the results from the feasibility studies, so it's very important to be thorough and transparent to set expectations quickly.
+This is where the project scoping begins to take place. Often, the stakeholders will have a desired time for release and the functionality to be delivered. There *will* be a lot of back and forth on this based on the results from the feasibility studies, so it's very important to be thorough and transparent to set expectations.
 
 ??? quote "Our task"
-    **v1**: predict relevant tags using content title and description metadata
+    **v1**: classify incoming content (>85% precision) for our customers to easily discover.
 
     - Exploration studies conducted by XX
     - Pushed to dev for A/B testing by XX
     - Pushed to staging with on-boarding hooks by XX
     - Pushed to prod by XX
 
-    This is an extremely simplified timeline. An actual timeline would depict timelines from all the different teams stacked on top of each other with vertical lines at specified time-constraints or version releases.
+    > This is an extremely simplified timeline. An actual timeline would depict timelines from all the different teams stacked on top of each other with vertical lines at specified time-constraints or version releases.
 
 <!-- Citation -->
 {% include "cite.md" %}

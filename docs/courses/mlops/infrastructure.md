@@ -138,7 +138,7 @@ In order to truly serve the most informed predictions, we should have a model tr
 
 ## Experimentation
 
-Once our application is deployed after our [offline tests](testing.md#evaluation){:taret="_blank"}, there are several types of **online tests** that we can run to determine the performance quality in real-time.
+There are many different experimentation strategies we can use to measure real-time performance before committing to replace our existing version of the system.
 
 ### AB tests
 AB tests involve sending production traffic to the different systems that we're evaluating and then using statistical hypothesis testing to decide which system is better. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination. In many cases, if we're simply trying to compare the different versions for a certain metric, multi-armed bandits will be a better approach.
