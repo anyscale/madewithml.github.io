@@ -24,7 +24,7 @@ While our documentation will be detailed, we can start the process by walking th
     <a href="/static/templates/ml-canvas.pdf" target="_blank"><img src="/static/images/mlops/purpose/ml_canvas.png" width="1000" alt="machine learning canvas"></a>
 </div>
 
-👉 &nbsp; Download a PDF of the ML canvas to use for your own products → [ml-canvas.pdf](/static/templates/ml-canvas.pdf){:target="_blank"}
+👉 &nbsp; Download a PDF of the ML canvas to use for your own products (right click the link and hit "Save link as") → [ml-canvas.pdf](/static/templates/ml-canvas.pdf){:target="_blank"}
 
 From this high-level canvas, we can create detailed documentation for each release:
 
