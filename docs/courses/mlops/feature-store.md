@@ -24,7 +24,7 @@ Let's motivate the need for a feature store by chronologically looking at what c
 
 Point-in-time correctness refers to mapping the appropriately up-to-date input feature values to an observed outcome at $t_{n+1}$. This involves knowing the time ($t_n$) that a prediction is needed so we can collect feature values ($X$) at that time.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/feature_store/point_in_time.png" width="700" alt="point-in-time correctness">
+    <img src="/static/images/mlops/feature_store/point_in_time.png" width="700" alt="point-in-time correctness">
 </div>
 
 When actually constructing our feature store, there are several core components we need to have to address these challenges:
@@ -97,7 +97,7 @@ features/
 We're going to configure the locations for our registry and online store in our [features/feature_store.yaml](https://github.com/GokuMohandas/MLOps/blob/main/features/feature_store.yaml){:target="_blank"} file.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/feature_store/batch.png" width="1000" alt="batch processing">
+    <img src="/static/images/mlops/feature_store/batch.png" width="1000" alt="batch processing">
 </div>
 
 - **registry**: contains information about our feature repository, such as data sources, feature views, etc. Since it's in a database, instead of a Python file, it can very quickly be accessed in production.
@@ -459,7 +459,7 @@ feature_vector
 The feature store we implemented above assumes that our task requires [batch processing](../infrastructure/#batch-processing){:target="_blank"}. This means that inference requests on specific entity instances can use features that have been materialized from the offline store. Note that they may not be the most recent feature values for that entity.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/feature_store/batch.png" width="1000" alt="batch processing">
+    <img src="/static/images/mlops/feature_store/batch.png" width="1000" alt="batch processing">
 </div>
 
 1. Application data is stored in a database and/or a data warehouse, etc. And it goes through the [DataOps pipeline](../pipelines/#dataops){:target="_blank"} to validate the data and engineer the features.
@@ -476,7 +476,7 @@ The feature store we implemented above assumes that our task requires [batch pro
 Some applications may require [stream processing](../infrastructure/#stream-processing){:target="_blank"} where we require near real-time feature values to deliver up-to-date predictions at low latency. While we'll still utilize an offline store for retrieving historical data, our application's real-time event data will go directly through our data streams to an online store for serving.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/feature_store/stream.png" width="1000" alt="stream processing">
+    <img src="/static/images/mlops/feature_store/stream.png" width="1000" alt="stream processing">
 </div>
 
 1. Real-time event data enters our running data streams ([Kafka](https://kafka.apache.org/){:target="_blank"} / [Kinesis](https://aws.amazon.com/kinesis/){:target="_blank"}, etc.) where they can be processed to generate features.

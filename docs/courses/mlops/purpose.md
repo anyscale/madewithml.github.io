@@ -364,7 +364,7 @@ How do we receive feedback on our system and incorporate it into the next iterat
     While it's important to iterate and optimize the internals of our workflows, it's even more important to ensure that our ML systems are actually making an impact. We need to constantly engage with stakeholders (management, users) to iterate on why our ML system exists.
 
     <div class="ai-center-all">
-        <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/iteration/development_cycle.png" width="600" alt="product development cycle">
+        <img src="/static/images/mlops/iteration/development_cycle.png" width="600" alt="product development cycle">
     </div>
 
 ## Project Management

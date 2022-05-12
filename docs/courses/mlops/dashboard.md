@@ -37,7 +37,7 @@ Before we create a dashboard for our specific application, we need to learn abou
 Our application's [dashboard](https://github.com/GokuMohandas/MLOps/blob/main/streamlit/st_app.py){:target="_blank"} will feature several pages organized by the insight they will provide where the view can choose what via interactive [radio buttons](https://docs.streamlit.io/en/stable/api.html#streamlit.radio){:target="_blank"}.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/pages.png">
+    <img width="700" src="/static/images/mlops/dashboard/pages.png">
 </div>
 
 ### Data
@@ -63,7 +63,7 @@ with col2:
 ```
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/data.png">
+    <img width="700" src="/static/images/mlops/dashboard/data.png">
 </div>
 
 We can also show our a snapshot of the loaded DataFrame which has sortable columns that people can play with to explore the data.
@@ -76,7 +76,7 @@ st.write(df)
 ```
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/df.png">
+    <img width="700" src="/static/images/mlops/dashboard/df.png">
 </div>
 
 We can essentially walk viewers through our entire data phase (EDA, preprocessing, etc.) and allow them (and ourselves) to explore key decisions. For example, we chose to introduce a minimum tag frequency constraint so that we can have enough samples. We can now interactively change that value with a [slider widget](https://docs.streamlit.io/en/stable/api.html#streamlit.slider){:target="_blank"} and see which tags just made and missed the cut.
@@ -108,7 +108,7 @@ with st.beta_expander("Excluded tags"):
 ```
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/frequency.png">
+    <img width="700" src="/static/images/mlops/dashboard/frequency.png">
 </div>
 
 What makes this truly interactive is that when we alter the value here, all the downstream tables and plots will update to reflect that change immediately. This is a great way to explore what constraints to use because we can quickly visualize the impact it can have on our data.
@@ -128,7 +128,7 @@ st.pyplot(plt)
 ```
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/plots.png">
+    <img width="700" src="/static/images/mlops/dashboard/plots.png">
 </div>
 
 On a similar note, we can also interactively view how our preprocessing functions behave. We can alter any of the function's default input arguments, as well as the input text.
@@ -144,7 +144,7 @@ st.write("Preprocessed text", preprocessed_text)
 ```
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/preprocessing.png">
+    <img width="700" src="/static/images/mlops/dashboard/preprocessing.png">
 </div>
 
 !!! bug
@@ -155,7 +155,7 @@ st.write("Preprocessed text", preprocessed_text)
 This page allows us to quickly compare the improvements and regressions of our local system and what's currently in production. We want to provide the key differences in both the performance and parameters used for each system version. We could also use constructs, such as [Git tags](git.md#tags){:target="_blank"}, to visualize these details across multiple previous releases.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/performance.png">
+    <img width="700" src="/static/images/mlops/dashboard/performance.png">
 </div>
 
 ### Inference
@@ -163,7 +163,7 @@ This page allows us to quickly compare the improvements and regressions of our l
 With the inference page, we want to be able to test our model using various inputs to receive predictions, as well as intermediate outputs (ex. preprocessed text). This is a great way for our team members to quickly play with the latest deployed model.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/inference.png">
+    <img width="700" src="/static/images/mlops/dashboard/inference.png">
 </div>
 
 ### Inspection
@@ -171,13 +171,13 @@ With the inference page, we want to be able to test our model using various inpu
 Our last page will enable a closer inspection on the test split's predictions to identify areas to improve, collect more data, etc. First we offer a quick view of each tag's performance and we could also do the same for specific slices of the data we may care about (high priority, minority, etc.)
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/inspection.png">
+    <img width="700" src="/static/images/mlops/dashboard/inspection.png">
 </div>
 
 We're also going to inspect the true positive (TP), false positive (FP) and false negative (FN) samples across our different tags. It's a great way to catch issues with labeling (FP), weaknesses (FN), etc.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/dashboard/fp.png">
+    <img width="700" src="/static/images/mlops/dashboard/fp.png">
 </div>
 
 !!! warning

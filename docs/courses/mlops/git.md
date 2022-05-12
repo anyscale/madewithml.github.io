@@ -59,7 +59,7 @@ This is a decent tutorial on Git.
 ### Initialize git
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/environments.png">
+    <img width="600" src="/static/images/mlops/git/environments.png">
 </div>
 
 *Initialize* a *local repository* (.git directory) to track our files.
@@ -74,7 +74,7 @@ git status
 ```
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/status1.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/status1.png" style="border-radius: 7px;">
 </div>
 
 We can see that we have our do_not_push.txt file as an untracked file in our working directory, as well as some other clutter (mac .DS_Store file). We can create a .gitignore file to make sure we aren't checking in these files.
@@ -95,7 +95,7 @@ git status  # note that do_not_push.txt is not here
 ```
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/status2.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/status2.png" style="border-radius: 7px;">
 </div>
 
 
@@ -117,7 +117,7 @@ git add .
 Now running `git status` will show us all the staged files:
 
 <div class="ai-center-all">
-    <img width="450" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/status3.png" style="border-radius: 7px;">
+    <img width="450" src="/static/images/mlops/git/status3.png" style="border-radius: 7px;">
 </div>
 
 ### Commit to repo
@@ -133,7 +133,7 @@ git branch -M main  # rename branch to main (if needed)
 The commit requires a message indicating what changes took place. We can use `git commit --amend` to edit the commit message if needed. If we do a `git status` check we'll see that there is nothing else to commit from our staging area.
 
 <div class="ai-center-all">
-    <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/status4.png" style="border-radius: 7px;">
+    <img width="400" src="/static/images/mlops/git/status4.png" style="border-radius: 7px;">
 </div>
 
 ### Push to remote
@@ -211,7 +211,7 @@ Note that we are pushing this branch to our remote repository, which doesn't yet
 When we push our new branch to the remote repository, we'll need to create a pull request (PR) to merge with another branch (ex. our main branch in this case).
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/branch.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/branch.png" style="border-radius: 7px;">
 </div>
 <div class="ai-center-all mt-2">
     <small>Visualize the git history using the <a href="https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph" target="_blank">Git Graph</a> extension on VS Code.</small>
@@ -220,7 +220,7 @@ When we push our new branch to the remote repository, we'll need to create a pul
 When merging our work with another branch (ex. main), it's called a pull request because we're requesting the branch to *pull* our committed work. We can create the pull request using steps outlined here: [Creating a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request){:target="_blank"}.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/merge_gh.png">
+    <img width="700" src="/static/images/mlops/git/merge_gh.png">
 </div>
 
 !!! note
@@ -253,7 +253,7 @@ git push origin --delete <BRANCH_NAME>  # remote
 ```
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/delete_branch.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/delete_branch.png" style="border-radius: 7px;">
 </div>
 
 ## Collaborating
@@ -303,13 +303,13 @@ git push origin great
 When we try to merge this PR, we have to resolve the conflicts between this new PR and what already exists in the `main` branch.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/resolve.png">
+    <img width="700" src="/static/images/mlops/git/resolve.png">
 </div>
 
 We can resolve the conflict by choosing which content (current `main` which merged with the `great` branch or this `fantastic` branch) to keep and delete the other one. Then we can merge the PR successfully and update our local `main` branch.
 
 <div class="ai-center-all">
-    <img width="350" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/conflict_gh.png">
+    <img width="350" src="/static/images/mlops/git/conflict_gh.png">
 </div>
 
 ```bash
@@ -319,7 +319,7 @@ git pull origin main
 ```
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/merge.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/merge.png" style="border-radius: 7px;">
 </div>
 
 > We only have a conflict because both branches were forked from a previous version of the `main` branch and they both happened to alter the same content. Had we created one branch first and then updated main before creating the second branch, we wouldn't have any conflicts. But in a collaborative setting, different developers may fork off the same version of the branch anytime.
@@ -353,7 +353,7 @@ git stash
 ```
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/stash.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/stash.png" style="border-radius: 7px;">
 </div>
 
 ### Rebase
@@ -366,7 +366,7 @@ git rebase main
 ```
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/rebase.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/rebase.png" style="border-radius: 7px;">
 </div>
 
 While still in the `fantastic` branch, we can reapply the changes we stashed on top of the updated branch.
@@ -380,13 +380,13 @@ git stash apply 0  # apply a saved stash
 This time we'll have to resolve conflicts directly in our IDE (note that VS Code provides a simple button to accept the incoming change).
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/conflict_vs.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/conflict_vs.png" style="border-radius: 7px;">
 </div>
 
 Once we accept the incoming change, we now have some uncommitted changes on our `fantastic` branch which we'll add, commit and push. Now when we perform a PR with the `main` branch, there will be no further conflicts to resolve.
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/apply.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/apply.png" style="border-radius: 7px;">
 </div>
 
 Once we're done using the stash, we can drop it to keep things clean.
@@ -397,7 +397,7 @@ git stash drop 0  # remove the applied stash (optional)
 ```
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/drop.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/drop.png" style="border-radius: 7px;">
 </div>
 
 
@@ -413,7 +413,7 @@ git rebase -i origin/main
 This will open up an interactive text editor where we can choosing which commits to squash (replace `pick` with `squash` (or `s`)) and after saving another text editor will appear to allow us to create a summarizing commit message. We can also do this on the online Git interface before merging the pull request.
 
 <div class="ai-center-all">
-    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/squash.png">
+    <img width="1000" src="/static/images/mlops/git/squash.png">
 </div>
 
 ## Inspection
@@ -440,7 +440,7 @@ git log
 git log --oneline  # short version
 ```
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/log.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/log.png" style="border-radius: 7px;">
 </div>
 
 > Commit IDs are 40 characters long but we can represent them with the first few (seven digits is the default for a Git SHA). If there is ambiguity, Git will notify us and we can simply add more of the commit ID.
@@ -457,7 +457,7 @@ git diff <COMMIT_A>:<PATH_TO_FILE> <COMMIT_B>:<PATH_TO_FILE>  # file diff b/w tw
 ```
 
 <div class="ai-center-all">
-    <img width="350" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/diff.png" style="border-radius: 7px;">
+    <img width="350" src="/static/images/mlops/git/diff.png" style="border-radius: 7px;">
 </div>
 
 ### Blame
@@ -470,7 +470,7 @@ git blame -L 1,3 <PATH_TO_FILE>  # blame for lines 1 and 3
 ```
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/blame.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/blame.png" style="border-radius: 7px;">
 </div>
 
 
@@ -496,7 +496,7 @@ git reset <PREVIOUS_COMMIT_ID>  # or HEAD^
 ```
 
 <div class="ai-center-all">
-    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/reset.png">
+    <img width="1000" src="/static/images/mlops/git/reset.png">
 </div>
 
 > `HEAD` is a quick way to refer to the previous commit. Both `HEAD` and any previous commit ID can be accompanied with a `^` or `~` symbol which acts as a relative reference. <COMMIT_ID>`^`n refers to the nth parent of the commit while <COMMIT_ID>`~`n refers to the nth grandparent. Of course we can always just explicitly use commit IDs but these short hands can come in handy for quick checks without doing `git log` to retrieve commit IDs.
@@ -512,7 +512,7 @@ git revert <COMMIT_TO_ROLLBACK_TO>..<COMMIT_TO_ROLLBACK_FROM>  # range
 ```
 
 <div class="ai-center-all">
-    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/revert.png">
+    <img width="1000" src="/static/images/mlops/git/revert.png">
 </div>
 
 ### Checkout
@@ -524,7 +524,7 @@ git checkout -b <BRANCH_NAME> <COMMIT_ID>
 ```
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/git/checkout.png" style="border-radius: 7px;">
+    <img width="550" src="/static/images/mlops/git/checkout.png" style="border-radius: 7px;">
 </div>
 
 

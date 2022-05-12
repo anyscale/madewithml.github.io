@@ -15,7 +15,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/
 In the <a target="_blank" href="https://madewithml.com/courses/foundations/recurrent-neural-networks/">RNN lesson</a>, we were constrained to using the representation at the very end but what if we could give contextual weight to each encoded input ($h_i$) when making our prediction? This is also preferred because it can help mitigate the vanishing gradient issue which stems from processing very long sequences. Below is attention applied to the outputs from an RNN. In theory, the outputs can come from anywhere where we want to learn how to weight amongst them but since we're working with the context of an RNN from the previous lesson , we'll continue with that.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/attention/attention.png" width="500">
+    <img src="/static/images/foundations/attention/attention.png" width="500">
 </div>
 
 $$ \alpha = softmax(W_{attn}h) $$
@@ -676,7 +676,7 @@ class Trainer(object):
 Attention applied to the outputs from an RNN. In theory, the outputs can come from anywhere where we want to learn how to weight amongst them but since we're working with the context of an RNN from the previous lesson , we'll continue with that.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/attention/attention.png" width="500">
+    <img src="/static/images/foundations/attention/attention.png" width="500">
 </div>
 
 $$ \alpha = softmax(W_{attn}h) $$
@@ -1117,7 +1117,7 @@ Hard attention is focusing on a specific set of the encoded inputs at each time 
 - **disadvantages**: non-differentiable and so we need to use more complex techniques (variance reduction, reinforcement learning, etc.) to train.
 
 <div class="ai-center-all">
-<img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/attention/soft_attention.png" width="700">
+<img src="/static/images/foundations/attention/soft_attention.png" width="700">
 </div>
 <div class="ai-center-all">
 <small><a href="https://arxiv.org/abs/1502.03044" target="_blank">Show, Attend and Tell: Neural Image Caption Generation with Visual Attention</a></small>
@@ -1131,7 +1131,7 @@ Hard attention is focusing on a specific set of the encoded inputs at each time 
 - **disadvantages**: need to determine the alignment vector for each output but it's a worthwhile trade off to determine the right window of inputs to attend to in order to avoid attending to all of them.
 
 <div class="ai-center-all">
-<img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/attention/local_attention.png" width="700">
+<img src="/static/images/foundations/attention/local_attention.png" width="700">
 </div>
 <div class="ai-center-all">
 <small><a href="https://arxiv.org/abs/1508.04025" target="_blank">Effective Approaches to Attention-based Neural Machine Translation
@@ -1143,7 +1143,7 @@ Hard attention is focusing on a specific set of the encoded inputs at each time 
 We can also use attention within the encoded input sequence to create a weighted representation that based on the similarity between input pairs. This will allow us to create rich representations of the input sequence that are aware of the relationships between each other. For example, in the image below you can see that when composing the representation of the token "its", this specific attention head will be incorporating signal from the token "Law" (it's learned that "its" is referring to the "Law").
 
 <div class="ai-center-all">
-<img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/attention/self_attention.png" width="300">
+<img src="/static/images/foundations/attention/self_attention.png" width="300">
 </div>
 <div class="ai-center-all">
 <small><a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention Is All You Need</a></small>

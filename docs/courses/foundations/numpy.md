@@ -24,7 +24,7 @@ np.random.seed(seed=1234)
 
 ## Basics
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/tensors.png" width="600">
+    <img src="/static/images/foundations/numpy/tensors.png" width="600">
 </div>
 
 ```python linenums="1"
@@ -128,7 +128,7 @@ We can extract specific values from our tensors using indexing.
 > Keep in mind that when indexing the row and column, indices start at `0`. And like indexing with lists, we can use negative indices as well (where `-1` is the last item).
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/indexing.png" width="300">
+    <img src="/static/images/foundations/numpy/indexing.png" width="300">
 </div>
 
 ```python linenums="1"
@@ -224,7 +224,7 @@ x * y:
 ## Dot product
 One of the most common NumPy operations we’ll use in machine learning is matrix multiplication using the dot product. Suppose we wanted to take the dot product of two matrices with shapes `[2 X 3]` and `[3 X 2]`. We take the rows of our first matrix (2) and the columns of our second matrix (2) to determine the dot product, giving us an output of `[2 X 2]`. The only requirement is that the inside dimensions match, in this case the first matrix has 3 columns and the second matrix has 3 rows.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/dot.gif" width="450">
+    <img src="/static/images/foundations/numpy/dot.gif" width="450">
 </div>
 
 ```python linenums="1"
@@ -244,7 +244,7 @@ print (c)
 ## Axis operations
 We can also do operations across a specific axis.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/axis.gif" width="450">
+    <img src="/static/images/foundations/numpy/axis.gif" width="450">
 </div>
 
 ```python linenums="1"
@@ -280,7 +280,7 @@ min axis=1:  [1 4]
 ## Broadcast
 What happens when we try to do operations with tensors with seemingly incompatible shapes? Their dimensions aren’t compatible as is but how does NumPy still gives us the right result? This is where broadcasting comes in. The scalar is *broadcast* across the vector so that they have compatible shapes.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/broadcast.png" width="300">
+    <img src="/static/images/foundations/numpy/broadcast.png" width="300">
 </div>
 
 ```python linenums="1"
@@ -344,7 +344,7 @@ a.shape # (3, 1)
 We often need to change the dimensions of our tensors for operations like the dot product. If we need to switch two dimensions, we can transpose
 the tensor.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/transpose.png" width="400">
+    <img src="/static/images/foundations/numpy/transpose.png" width="400">
 </div>
 
 ```python linenums="1"
@@ -400,7 +400,7 @@ z.shape:  (2, 3)
  The way reshape works is by looking at each dimension of the new tensor and separating our original tensor into that many units. So here the dimension at index 0 of the new tensor is 2 so we divide our original tensor into 2 units, and each of those has 3 values.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/reshape.png" width="450">
+    <img src="/static/images/foundations/numpy/reshape.png" width="450">
 </div>
 
 !!! question "Unintended reshaping"
@@ -449,7 +449,7 @@ z.shape:  (2, 3)
         When we naively do a reshape, we get the right shape but the values are not what we're looking for.
 
         <div class="ai-center-all">
-            <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/reshape_wrong.png" width="600">
+            <img src="/static/images/foundations/numpy/reshape_wrong.png" width="600">
         </div>
 
         ```python linenums="1"
@@ -469,7 +469,7 @@ z.shape:  (2, 3)
         Instead, if we transpose the tensor and then do a reshape, we get our desired tensor. Transpose allows us to put our two vectors that we want to combine together and then we use reshape to join them together. And as a general rule, we should always get our dimensions together before reshaping to combine them.
 
         <div class="ai-center-all">
-            <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/numpy/reshape_right.png" width="600">
+            <img src="/static/images/foundations/numpy/reshape_right.png" width="600">
         </div>
 
         ```python linenums="1"

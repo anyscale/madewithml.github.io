@@ -16,7 +16,7 @@ So far our workflows have involved directly running functions from our Python sc
 The interactions in our situation involve the client (users, other applications, etc.) sending a *request* to the server (our application) and receiving a *response* in return.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/api/interactions.png">
+    <img width="500" src="/static/images/mlops/api/interactions.png">
 </div>
 
 ## Request
@@ -431,13 +431,13 @@ def load_artifacts():
 When we define an endpoint, FastAPI automatically generates some documentation, adhering to [OpenAPI](https://swagger.io/specification/){:target="_blank"} standards, based on the function's inputs, typing, outputs, etc. We can access the [Swagger UI](https://swagger.io/tools/swagger-ui/){:target="_blank"} for our documentation by going to `/docs` endpoints on any browser.
 
 <div class="ai-center-all">
-    <img width="400" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/api/documentation.png">
+    <img width="400" src="/static/images/mlops/api/documentation.png">
 </div>
 
 Click on an endpoint > `Try it out` > `Execute` to see what the server's response will look like. Since this was a `GET` request without any inputs, our request body was empty but for other method's we'll need to provide some information (we'll illustrate this when we do a `POST` request).
 
 <div class="ai-center-all">
-    <img width="450" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/api/execute.png">
+    <img width="450" src="/static/images/mlops/api/execute.png">
 </div>
 
 You'll notice that our endpoints are organized under sections in the UI. This is because we used `tags` when defining our endpoints in the script.
@@ -690,7 +690,7 @@ curl -X POST "http://localhost:5000/predict" -H  "accept: application/json" -H  
 Lastly, we have a [`schema_extra`](https://fastapi.tiangolo.com/tutorial/schema-extra-example/){:target="_blank"} object under the `Config` class to depict what an example `PredictPayload` should look like. When we do this, it automatically appears in our endpoint's documentation when we want to "Try it out".
 
 <div class="ai-center-all">
-    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/api/predict.png">
+    <img width="1000" src="/static/images/mlops/api/predict.png">
 </div>
 
 

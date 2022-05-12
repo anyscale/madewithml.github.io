@@ -376,15 +376,15 @@ MLflow Tracking UI: https://d19689b7ba4e.ngrok.io
 
 You can compare all (or a subset) of the trials in our experiment.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/hyperparameter_optimization/compare.png" width="1000" alt="compare experiments">
+    <img src="/static/images/mlops/hyperparameter_optimization/compare.png" width="1000" alt="compare experiments">
 </div>
 
 We can then view the results through various lens (contours, parallel coordinates, etc.)
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/hyperparameter_optimization/contour.png" width="1000" alt="contour plot">
+    <img src="/static/images/mlops/hyperparameter_optimization/contour.png" width="1000" alt="contour plot">
 </div>
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/hyperparameter_optimization/parallel_coordinates.png" width="1000" alt="parallel coordinates">
+    <img src="/static/images/mlops/hyperparameter_optimization/parallel_coordinates.png" width="1000" alt="parallel coordinates">
 </div>
 
 ```python linenums="1"

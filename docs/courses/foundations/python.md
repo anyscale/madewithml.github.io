@@ -14,7 +14,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/
 Variables are containers for holding data and they're defined by a name and value.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/variables.png" width="250">
+    <img src="/static/images/foundations/python/variables.png" width="250">
 </div>
 
 ```python linenums="1"
@@ -210,7 +210,7 @@ print (set(text.split(" ")))
 ## Indexing
 Indexing and slicing from lists allow us to retrieve specific values within lists. Note that indices can be positive (starting from 0) or negative (-1 and lower, where -1 is the last item in the list).
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/indexing.png" width="300">
+    <img src="/static/images/foundations/python/indexing.png" width="300">
 </div>
 
 ```python linenums="1"
@@ -261,7 +261,7 @@ x[:-1]:  [3, 'hello']
 ## Dictionaries
 Dictionaries are an unordered, mutable collection of key-value pairs. You can retrieve values based on the key and a dictionary cannot have two of the same keys.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/dictionaries.png" width="350">
+    <img src="/static/images/foundations/python/dictionaries.png" width="350">
 </div>
 
 ```python linenums="1"
@@ -469,7 +469,7 @@ print (y)
 </pre>
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/comprehension.png" width="350">
+    <img src="/static/images/foundations/python/comprehension.png" width="350">
 </div>
 
 ```python linenums="1"
@@ -512,7 +512,7 @@ print (y)
 ## Functions
 Functions are a way to modularize reusable pieces of code. They're defined by the keyword `def` which stands for definition and they can have the following components.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/functions.png" width="350">
+    <img src="/static/images/foundations/python/functions.png" width="350">
 </div>
 
 ```python linenums="1"
@@ -525,7 +525,7 @@ def add_two(x):
 
 Here are the components that may be required when we want to use the function. we need to ensure that the function name and the input parameters match with how we defined the function above.
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/python/calling_functions.png" width="400">
+    <img src="/static/images/foundations/python/calling_functions.png" width="400">
 </div>
 
 ```python linenums="1"

@@ -17,7 +17,7 @@ repository: https://github.com/GokuMohandas/MLOps
 Key data-centric views that will enable us to make decisions along the way. We've covered most of these views extensively in previous lectures but now we'll see them in relation to the rest of the workflows for on continual learning system.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/data_centric_ai/views.png" width="500" alt="data-centric views">
+    <img src="/static/images/mlops/data_centric_ai/views.png" width="500" alt="data-centric views">
 </div>
 
 These data-centric views all involve data as the first-class citizen, where developers and subject matter experts alike can interact at the data level to make decisions. And with them, we can develop a [continual learning system](continual-learning.md){:target="_blank"} that will guide us on when to update and what exactly to update.

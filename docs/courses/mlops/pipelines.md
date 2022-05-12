@@ -101,7 +101,7 @@ airflow webserver --port 8080  # http://localhost:8080
 The webserver allows us to run and inspect workflows, establish connections to external data storage, manager users, etc. through a UI. Similarly, we could also use Airflow's [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html){:target="_blank"} or [Command-line interface (CLI)](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html){:target="_blank"} to perform the same operations. However, we'll be using the webserver because it's convenient to visually inspect our workflows.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/webserver.png" width="700" alt="airflow webserver">
+    <img src="/static/images/mlops/pipelines/webserver.png" width="700" alt="airflow webserver">
 </div>
 
 We'll explore the different components of the webserver as we learn about Airflow and implement our workflows.
@@ -126,7 +126,7 @@ As our scheduler reads from the metadata database, the executor determines what 
 Workflows are defined by directed acyclic graphs (DAGs), whose nodes represent tasks and edges represent the data flow relationship between the tasks. Direct and acyclic implies that workflows can only execute in one direction and a previous, upstream task cannot run again once a downstream task has started.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/basic_dag.png" width="250" alt="basic DAG">
+    <img src="/static/images/mlops/pipelines/basic_dag.png" width="250" alt="basic DAG">
 </div>
 
 DAGs can be defined inside Python workflow scripts inside the `airflow/dags` directory and they'll automatically appear (and continuously be updated) on the webserver.
@@ -280,7 +280,7 @@ y = task_2(x=x)
     [task_3, task_4] >> task_5
     ```
     <div class="ai-center-all">
-        <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/dag.png" width="500" alt="DAG">
+        <img src="/static/images/mlops/pipelines/dag.png" width="500" alt="DAG">
     </div>
 
 ### XComs
@@ -315,7 +315,7 @@ def example2():
 We can also view our XComs on the webserver by going to **Admin** >> **XComs**:
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/xcoms.png" width="700" alt="xcoms">
+    <img src="/static/images/mlops/pipelines/xcoms.png" width="700" alt="xcoms">
 </div>
 
 !!! warning
@@ -336,7 +336,7 @@ If we refresh our webserver page ([http://localhost:8080/](http://localhost:8080
 Our DAG is initially paused since we specified `dags_are_paused_at_creation = True` inside our [airflow.cfg](https://github.com/GokuMohandas/MLOps/blob/main/airflow/airflow.cfg){:target="_blank"} configuration, so we'll have to manually execute this DAG by clicking on it > unpausing it (toggle) > triggering it (button). To view the logs for any of the tasks in our DAG run, we can click on the task > Log.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/trigger.png" width="700" alt="triggering a DAG">
+    <img src="/static/images/mlops/pipelines/trigger.png" width="700" alt="triggering a DAG">
 </div>
 
 !!! note
@@ -395,7 +395,7 @@ While it may make sense to execute many data processing workflows on a scheduled
 Now that we've reviewed Airflow's major concepts, we're ready to create the DataOps pipeline for our application. It involves a series of tasks, starting from extracting the data, validating it and storing it at the right place for others to use for downstream workflows and applications.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/dataops.png" width="1000" alt="dataops workflow">
+    <img src="/static/images/mlops/pipelines/dataops.png" width="1000" alt="dataops workflow">
 </div>
 
 ### Extraction
@@ -512,7 +512,7 @@ extract_data >> [validate_projects, validate_tags] >> compute_features >> cache
 Once we have our features in our feature store, we can use them for MLOps tasks responsible for model creating such as optimization, training, validation, serving, etc.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/model.png" width="1000" alt="mlops model training workflow">
+    <img src="/static/images/mlops/pipelines/model.png" width="1000" alt="mlops model training workflow">
 </div>
 
 ### Extract data
@@ -633,7 +633,7 @@ regressed >> report
 Once we've validated and served our model, how do we know *when* and *how* it needs to be updated? We'll need to compose a set of workflows that reflect the update policies we want to set in place.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/update.png" width="1000" alt="mlops model update workflow">
+    <img src="/static/images/mlops/pipelines/update.png" width="1000" alt="mlops model update workflow">
 </div>
 
 ### Monitoring

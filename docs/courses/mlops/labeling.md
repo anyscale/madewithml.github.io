@@ -51,7 +51,7 @@ Regardless of whether we have a custom labeling platform or we choose a generali
     - course of action for discrepancies
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/labeling/ui.png" width="400" alt="labeling view">
+    <img src="/static/images/mlops/labeling/ui.png" width="400" alt="labeling view">
 </div>
 <div class="ai-center-all mt-2">
   <small>Multi-label text classification for our task using  <a href="https://prodi.gy/" target="_blank">Prodigy</a> (labeling + QA)</small>
@@ -66,7 +66,7 @@ Regardless of whether we have a custom labeling platform or we choose a generali
     - yet still communicates with labeling workflow for relabeling errors
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/labeling/workflow.png" width="800" alt="labeling workflow">
+    <img src="/static/images/mlops/labeling/workflow.png" width="800" alt="labeling workflow">
 </div>
 
 ### Iterative setup
@@ -288,7 +288,7 @@ Even with a powerful labeling tool and established workflows, it's easy to see h
 > This can be significantly more cost-effective and faster than labeling the entire dataset.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/labeling/active_learning.png" width="700" alt="active learning">
+    <img src="/static/images/mlops/labeling/active_learning.png" width="700" alt="active learning">
 </div>
 <div class="ai-center-all mt-1 mb-3">
   <small><a href="http://burrsettles.com/pub/settles.activelearning.pdf" target="_blank">Active Learning Literature Survey</a></small>

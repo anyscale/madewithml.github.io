@@ -97,7 +97,7 @@ But how do we learn the embeddings the first place? The intuition behind embeddi
 All of these approaches involve create data to train our model on. Every word in a sentence becomes the target word and the context words are determines by a window. In the image below (skip-gram), the window size is 2 (2 words to the left and right of the target word). We repeat this for every sentence in our corpus and this results in our training data for the unsupervised task. This in an unsupervised learning technique since we don't have official labels for contexts. The idea is that similar target words will appear with similar contexts and we can learn this relationship by repeatedly training our mode with (context, target) pairs.
 
 <div class="ai-center-all">
-    <img width="550" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/embeddings/skipgram.png">
+    <img width="550" src="/static/images/foundations/embeddings/skipgram.png">
 </div>
 
 We can learn embeddings using any of these approaches above and some work better than others. You can inspect the learned embeddings but the best way to choose an approach is to empirically validate the performance on a supervised task.
@@ -908,7 +908,7 @@ Let's visualize the model's forward pass.
 6. We use one more FC layer with softmax to derive class probabilities.
 
 <div class="ai-center-all">
-    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/embeddings/model.png">
+    <img width="1000" src="/static/images/foundations/embeddings/model.png">
 </div>
 
 ```python linenums="1"

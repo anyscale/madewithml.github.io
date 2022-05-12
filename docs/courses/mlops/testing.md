@@ -27,7 +27,7 @@ There are many four majors types of tests which are utilized at different points
     These types of test are not specific to machine learning. However, while ML systems are probabilistic in nature, they are composed of many deterministic components that can be tested in a similar manner as traditional software systems. The distinction between testing ML systems begins when we move from testing code to testing the [data](testing.md#data){:target="_blank"} and [models](testing.md#models){:target="_blank"}.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/tests.png">
+    <img width="700" src="/static/images/mlops/testing/tests.png">
 </div>
 
 > There are many other types of functional and non-functional tests as well, such as smoke tests (quick health checks), performance tests (load, stress), security tests, etc. but we can generalize these under the system tests above.
@@ -404,13 +404,13 @@ pytest --cov config --cov tagifai --cov app --cov-report html
 ```
 
 <div class="ai-center-all">
-    <img width="650" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/pytest.png" style="border-radius: 7px;">
+    <img width="650" src="/static/images/mlops/testing/pytest.png" style="border-radius: 7px;">
 </div>
 
 Here we're asking for coverage for all the code in our tagifai and app directories and to generate the report in HTML format. When we run this, we'll see the tests from our tests directory executing while the coverage plugin is keeping tracking of which lines in our application are being executed. Once our tests are complete, we can view the generated report (default is `htmlcov/index.html`) and click on individual files to see which parts were not covered by any tests. This is especially useful when we forget to test for certain conditions, exceptions, etc.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/coverage.png">
+    <img width="500" src="/static/images/mlops/testing/coverage.png">
 </div>
 
 !!! warning
@@ -758,7 +758,7 @@ test:
 > Note that we're only executing the tests with the `training` [marker](testing.md#markers).
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/ge.png" style="border-radius: 7px;">
+    <img width="700" src="/static/images/mlops/testing/ge.png" style="border-radius: 7px;">
 </div>
 
 
@@ -766,7 +766,7 @@ test:
 When we create expectations using the CLI application, Great Expectations automatically generates documentation for our tests. It also stores information about validation runs and their results. We can launch the generate data documentation with the following command: ```#!bash great_expectations docs build```
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/docs.png">
+    <img width="700" src="/static/images/mlops/testing/docs.png">
 </div>
 
 ### Best practices
@@ -776,7 +776,7 @@ We've applied expectations on our source dataset but there are many other key ar
 Also note that the way we performed data validation on our static data file is not how it occurs in mature data pipelines. Many of these expectations will be executed when the data is originally loaded to different data platforms (databases, data warehouses, etc.), decoupled from any downstream uses cases such as ML systems. We'll learn more about these in the [pipelines lesson](pipelines.md){:target="_blank"} but we can see below how Great Expectations checkpoint validations are used at every step of the way (including transformations using tools like [dbt](https://www.getdbt.com/){:target="_blank"}).
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/pipelines.png">
+    <img width="700" src="/static/images/mlops/testing/pipelines.png">
 </div>
 <div class="ai-center-all mt-2">
     <small>Using Great Expectations in mature data pipelines, decoupled from downstream use cases such as ML.</small>
@@ -875,7 +875,7 @@ def test_mft(text, tags, artifacts):
     Be sure to explore the [NLP Checklist](https://github.com/marcotcr/checklist){:target="_blank"} package which simplifies and augments the creation of these behavioral tests via functions, templates, pretrained models and interactive GUIs in Jupyter notebooks.
 
     <div class="ai-center-all">
-        <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/testing/checklist.gif">
+        <img width="600" src="/static/images/mlops/testing/checklist.gif">
     </div>
     <div class="ai-center-all mt-2">
         <a href="https://github.com/marcotcr/checklist" target="_blank">NLP Checklist</a>

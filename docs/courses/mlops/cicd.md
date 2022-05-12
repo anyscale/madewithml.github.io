@@ -18,7 +18,7 @@ Continuous integration (CI) allows our team to develop, test and integrate code 
 There are many tooling options for when it comes to creating our CI/CD pipelines, such as [Jenkins](https://www.jenkins.io/){:target="_blank"}, [TeamCity](https://www.jetbrains.com/teamcity/){:target="_blank"}, [CircleCI](https://circleci.com/){:target="_blank"} and many others. However, we're going to use [GitHub Actions](https://docs.github.com/en/actions){:target="_blank"} to create automatic workflows to setup our CI/CD pipelines.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/cicd/workflows.png">
+    <img width="700" src="/static/images/mlops/cicd/workflows.png">
 </div>
 
 GitHub Actions has the added advantage of integrating really well with GitHub and since all of our work is versioned there, we can easily create workflows based on GitHub events (push, PR, release, etc.). GitHub Actions also has a rich marketplace full of workflows that we can use for our own project. And, best of all, GitHub Actions is [free for public repositories](https://docs.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-actions){:target="_blank"}.
@@ -28,7 +28,7 @@ GitHub Actions has the added advantage of integrating really well with GitHub an
 We'll learn about GitHub Actions by understanding the components that compose an Action. These components abide by a specific [workflow syntax](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions){:target="_blank"} which can be extended with the appropriate [context and expression syntax](https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions){:target="_blank"}.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/cicd/actions.png">
+    <img width="700" src="/static/images/mlops/cicd/actions.png">
 </div>
 
 ### Workflows
@@ -113,7 +113,7 @@ jobs:
 Notice that one of our steps is to [cache](https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows){:target="_blank"} the entire Python environment with a specific key. This will significantly speed up the time required to run our Action the next time as long as the key remains unchanged (same python location, setup.py and requirements.txt).
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/cicd/cache.png">
+    <img width="700" src="/static/images/mlops/cicd/cache.png">
 </div>
 
 Our other workflow is responsible for automatically generating and deploying our mkdocs documentation. The "Deploy documentation" step below will create/update a new branch in our repository called [gh-pages](https://github.com/GokuMohandas/follow/tree/gh-pages){:target="_blank"} which will have the generation UI files for our documentation. We can deploy this branch as a GitHub pages website by going to `Settings` > `Pages` and setting the source branch to `gh-pages` and folder to `/root` > `Save`. This will generate the public URL for our documentation and it will automatically update every time our workflow runs after each PR.
@@ -136,7 +136,7 @@ jobs:
 Recall that workflows will be triggered when certain events occur. For example, our testing workflow will initiate on a push or PR to the main branch. We can see the workflow's runs (current and previous) on the *Actions* tab on our repository page. And if we click on a specific run, we can view the all the steps and their outputs as well. We can also set branch protection rules (GitHub repository page > `Settings` > `Branches`) to ensure that these workflow runs are all successful before we can merge to the main branch.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/cicd/results.png">
+    <img width="700" src="/static/images/mlops/cicd/results.png">
 </div>
 
 > While there are methods, such as [act](https://github.com/nektos/act){:target="_blank"}, to run and test workflows locally, many of them are not stable enough for reliable use.

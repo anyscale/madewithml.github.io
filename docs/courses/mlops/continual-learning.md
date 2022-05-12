@@ -16,7 +16,7 @@ In the pipelines lesson, we covered the [Dataops](pipelines.md#dataops){:target=
 > We use the word `continual` (repeat with breaks) instead of `continuous` (repeat without interruption / intervention) because we're **not** trying to create a system that will automatically update with new incoming data without human intervention.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/continual-learning/workflows.png" width="1000" alt="mlops workflows">
+    <img src="/static/images/mlops/continual-learning/workflows.png" width="1000" alt="mlops workflows">
 </div>
 <div class="ai-center-all mt-3">
   <small>A simplified view to illustrate decoupled DataOps and MLOps workflows with data-centric views.</small>
@@ -33,7 +33,7 @@ A continual learning system like this will guide us with when to update, what ex
 There are decisions in our workflows that need to be [evaluated](evaluation.md){:target="_blank"} as well such as adding to the set of [expectations](testing.md#expectations){:target="_blank"} that our features and models need to pass. These evaluation criteria are added a result of our system interacting with the real world. Usually, with the exception of large concept drift, these expectations should remain valid and should require fewer updates after the first several iterations.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/dataops.png" width="1000" alt="continual learning system">
+    <img src="/static/images/mlops/pipelines/dataops.png" width="1000" alt="continual learning system">
 </div>
 
 ## Monitoring
@@ -41,7 +41,7 @@ There are decisions in our workflows that need to be [evaluated](evaluation.md){
 There are so many moving pieces involved with [monitoring](monitoring.md){:target="_blank"}. What values to monitor for drift (data, target, concept), how to measure drift (chi^2, KS, MMD, etc.), window sizes/frequencies, thresholds for triggering alerts and more. Once an alert is actually triggered, what events take place? These policies evolve based on experience from previous iterations, domain expertise, etc. And how do we avoid alerting fatigue and actually identify the root cause (we need smart slicing & aggregation).
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/pipelines/update.png" width="1000" alt="continual learning system">
+    <img src="/static/images/mlops/pipelines/update.png" width="1000" alt="continual learning system">
 </div>
 
 ## Iteration

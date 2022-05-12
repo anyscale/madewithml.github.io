@@ -25,7 +25,7 @@ We'll often want to increase the size and diversity of our training data split t
 The exact method of data augmentation depends largely on the type of data and the application. Here are a few ways different modalities of data can be augmented:
 
 <div class="ai-center-all mt-4">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/augmentation/snorkel.png">
+    <img width="700" src="/static/images/mlops/augmentation/snorkel.png">
 </div>
 <div class="ai-center-all mb-4">
     <small><a href="https://www.snorkel.org/blog/tanda" target="_blank">Data Augmentation with Snorkel</a></small>

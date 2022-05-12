@@ -733,7 +733,7 @@ Distributed training strategies are great for when our data or models are too la
 - [**Distillation**](https://arxiv.org/abs/2011.14691){:target="_blank"}: training smaller networks to “mimic” larger networks by having it reproduce the larger network’s layers’ outputs.
 
 <div class="ai-center-all">
-    <img width="800" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/baselines/kd.png">
+    <img width="800" src="/static/images/mlops/baselines/kd.png">
 </div>
 <div class="ai-center-all">
     <small>Distilling the knowledge in a neural network [<a href="https://nni.readthedocs.io/en/latest/TrialExample/KDExample.html" target="_blank">source</a>]</small>
@@ -794,7 +794,7 @@ cuda
 We're going to tokenize our input text as character tokens so we can be robust to spelling errors and learn to generalize across tags. (ex. learning that RoBERTa, or any other future BERT based archiecture, warrants same tag as BERT).
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/cnn/inputs.png">
+    <img width="500" src="/static/images/foundations/cnn/inputs.png">
 </div>
 
 ```python linenums="1"
@@ -1039,7 +1039,7 @@ Sample batch:
 We'll be using a convolutional neural network on top of our embedded tokens to extract meaningful spatial signal. This time, we'll be using many filter widths to act as n-gram feature extractors. If you're not familiar with CNNs be sure to check out the [CNN lesson](https://madewithml.com/courses/foundations/convolutional-neural-networks/){:target="_blank"} where we walkthrough every component of the architecture.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/cnn/convolution.gif">
+    <img width="500" src="/static/images/foundations/cnn/convolution.gif">
 </div>
 
 Let's visualize the model's forward pass.
@@ -1052,7 +1052,7 @@ Let's visualize the model's forward pass.
 6. We use one more FC layer with softmax to derive class probabilities.
 
 <div class="ai-center-all">
-    <img width="1000" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/embeddings/model.png">
+    <img width="1000" src="/static/images/foundations/embeddings/model.png">
 </div>
 
 ```python linenums="1"
@@ -1127,7 +1127,7 @@ class CNN(nn.Module):
 - **SAME**: adds padding evenly to the right (preferred) and left sides of the input so that all values in the input are processed.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/cnn/padding.png">
+    <img width="500" src="/static/images/foundations/cnn/padding.png">
 </div>
 
 We're add `SAME` padding so that the convolutional outputs are the same shape as our inputs. The amount of padding for the SAME padding can be determined using the same equation. We want out output to have the same width as our input, so we solve for P:

@@ -303,7 +303,7 @@ high_confidence[0:5]
 But these are fairly crude techniques because neural networks are easily overconfident and so their confidences cannot be used without [calibrating](https://arxiv.org/abs/1706.04599){:target="_blank"} them.
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/calibration.png" width="400" alt="accuracy vs. confidence">
+    <img src="/static/images/mlops/evaluation/calibration.png" width="400" alt="accuracy vs. confidence">
 </div>
 <div class="ai-center-all mt-1">
   <small>Modern (large) neural networks result in higher accuracies but are over confident.<br><a href="https://arxiv.org/abs/1706.04599" target="_blank">On Calibration of Modern Neural Networks</a></small>
@@ -504,7 +504,7 @@ print(json.dumps(metrics["slices"], indent=2))
 Manually creating slices is a massive improvement towards identifying problem subsets in our dataset compared to coarse-grained evaluation but what if there are problematic slices of our dataset that we failed to identify? [SliceLine](https://mboehm7.github.io/resources/sigmod2021b_sliceline.pdf){:target="_blank"} is a recent work that uses a linear-algebra and pruning based technique to identify large slices (specify minimum slice size) that result in meaningful errors from the forward pass. Without pruning, automatic slice identification becomes computationally intensive because it involves enumerating through many combinations of data points to identify the slices. But with this technique, we can discover hidden underperforming subsets in our dataset that we weren’t explicitly looking for!
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/slicefinder.png" width="1000" alt="slicefinder GUI">
+    <img src="/static/images/mlops/evaluation/slicefinder.png" width="1000" alt="slicefinder GUI">
 </div>
 <div class="ai-center-all mt-1">
   <small>SliceFinder GUI<br><a href="https://arxiv.org/abs/1807.06068" target="_blank">Automated Data Slicing for Model Validation</a></small>
@@ -515,7 +515,7 @@ Manually creating slices is a massive improvement towards identifying problem su
 What if the features to generate slices on are implicit/hidden?
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/subgroups.png" width="1000" alt="Subgroup examples">
+    <img src="/static/images/mlops/evaluation/subgroups.png" width="1000" alt="Subgroup examples">
 </div>
 <div class="ai-center-all mt-1">
   <small><a href="https://arxiv.org/abs/1911.08731" target="_blank">Distributionally Robust Neural Networks for Group Shifts</a></small>
@@ -527,7 +527,7 @@ To address this, there are recent [clustering-based techniques](https://arxiv.or
 2. Train new more robust model using these clusters
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/clustering.png" width="1000" alt="Identifying subgroups via clustering and training on them.">
+    <img src="/static/images/mlops/evaluation/clustering.png" width="1000" alt="Identifying subgroups via clustering and training on them.">
 </div>
 <div class="ai-center-all mt-1">
   <small><a href="https://arxiv.org/abs/2011.12945" target="_blank">No Subclass Left Behind: Fine-Grained Robustness in Coarse-Grained Classification Problems</a></small>
@@ -543,7 +543,7 @@ Another recent work on [model patching](https://arxiv.org/abs/2008.06775){:targe
 4. Train new robust model on augmented data
 
 <div class="ai-center-all">
-    <img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/evaluation/model_patching.png" width="400" alt="Using learned subgroup transformations to augment data.">
+    <img src="/static/images/mlops/evaluation/model_patching.png" width="400" alt="Using learned subgroup transformations to augment data.">
 </div>
 <div class="ai-center-all mt-1">
   <small><a href="https://arxiv.org//2008.06775" target="_blank">Model Patching: Closing the Subgroup Performance Gap with Data Augmentation</a></small>

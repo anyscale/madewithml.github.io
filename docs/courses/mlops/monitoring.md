@@ -71,7 +71,7 @@ plt.legend()
 ```
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/performance_drift.png">
+    <img width="500" src="/static/images/mlops/monitoring/performance_drift.png">
 </div>
 
 > We may need to monitor metrics at various window sizes to catch performance degradation as soon as possible. Here we're monitoring the overall f1 but we can do the same for slices of data, individual classes, etc. For example, if we monitor the performance on a specific tag, we may be able to quickly catch new algorithms that were released for that tag (ex. new transformer architecture).
@@ -88,7 +88,7 @@ We may not always have the ground-truth outcomes available to determine the mode
 However, approximate signals are not always available for every situation because there is no feedback on the ML system’s outputs or it’s too delayed. For these situations, a recent line of research relies on the only component that’s available in all situations: the input data.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/mandoline.png">
+    <img width="700" src="/static/images/mlops/monitoring/mandoline.png">
 </div>
 <div class="ai-center-all">
     <small><a href="https://arxiv.org/abs/2107.00643" target="_blank">Mandoline: Model Evaluation under Distribution Shift</a></small>
@@ -121,7 +121,7 @@ Data drift, also known as feature drift or covariate shift, occurs when the dist
     Besides just looking at the distribution of our input data, we also want to ensure that the workflows to retrieve and process our input data is the same during training and serving to avoid training-serving skew. However, we can skip this step if we retrieve our features from the same source location for both training and serving, ie. from a [feature store](feature-store.md){:target="_blank"}.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/data_drift.png">
+    <img width="700" src="/static/images/mlops/monitoring/data_drift.png">
 </div>
 <div class="ai-center-all">
     <small>Data drift can occur in either continuous or categorical features.</small>
@@ -138,7 +138,7 @@ Besides just the input data changing, as with data drift, we can also experience
 Besides the input and output data drifting, we can have the actual relationship between them drift as well. This concept drift renders our model ineffective because the patterns it learned to map between the original inputs and outputs are no longer relevant. Concept drift can be something that occurs in [various patterns](https://link.springer.com/article/10.1007/s11227-018-2674-1){:target="_blank"}:
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/concept_drift.png">
+    <img width="500" src="/static/images/mlops/monitoring/concept_drift.png">
 </div>
 
 - gradually over a period of time
@@ -256,7 +256,7 @@ plt.show()
 > &darr; p-value = &uarr; confident that the distributions are different.
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/ks_no_drift.png">
+    <img width="500" src="/static/images/mlops/monitoring/ks_no_drift.png">
 </div>
 
 ```python linenums="1"
@@ -278,7 +278,7 @@ plt.show()
 </pre>
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/ks_drift.png">
+    <img width="500" src="/static/images/mlops/monitoring/ks_drift.png">
 </div>
 
 #### Chi-squared test
@@ -320,7 +320,7 @@ target_drift_detector.predict(no_drift, return_p_val=True, return_distance=True)
 </pre>
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/chi_no_drift.png">
+    <img width="500" src="/static/images/mlops/monitoring/chi_no_drift.png">
 </div>
 
 ```python linenums="1"
@@ -343,7 +343,7 @@ target_drift_detector.predict(drift, return_p_val=True, return_distance=True)
 </pre>
 
 <div class="ai-center-all">
-    <img width="500" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/chi_drift.png">
+    <img width="500" src="/static/images/mlops/monitoring/chi_drift.png">
 </div>
 
 ### Multivariate
@@ -351,7 +351,7 @@ target_drift_detector.predict(drift, return_p_val=True, return_distance=True)
 As we can see, measuring drift is fairly straightforward for univariate data but difficult for multivariate data. We'll summarize the reduce and measure approach outlined in the following paper: [Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift](https://arxiv.org/abs/1810.11953){:target="_blank"}.
 
 <div class="ai-center-all">
-    <img width="700" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/failing_loudly.png">
+    <img width="700" src="/static/images/mlops/monitoring/failing_loudly.png">
 </div>
 <div class="ai-center-all mt-2">
     <small>Detecting drift as outlined in <a href="https://arxiv.org/abs/1810.11953" target="_blank">Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift</a></small>
@@ -563,7 +563,7 @@ We could repeat this process for tensor outputs at various layers in our model (
 With drift, we're comparing a window of production data with reference data as opposed to looking at any one specific data point. While each individual point may not be an anomaly or outlier, the group of points may cause a drift. The easiest way to illustrate this is to imagine feeding our live model the same input data point repeatedly. The actual data point may not have anomalous features but feeding it repeatedly will cause the feature distribution to change and lead to drift.
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/outliers.png">
+    <img width="600" src="/static/images/mlops/monitoring/outliers.png">
 </div>
 
 Unfortunately, it's not very easy to detect outliers because it's hard to constitute the criteria for an outlier. Therefore the outlier detection task is typically unsupervised and requires a stochastic streaming algorithm to identify potential outliers. Luckily, there are several powerful libraries such as [PyOD](https://pyod.readthedocs.io/en/latest/){:target="_blank"}, [Alibi Detect](https://docs.seldon.io/projects/alibi-detect/en/latest/){:target="_blank"}, [WhyLogs](https://whylogs.readthedocs.io/en/latest/){:target="_blank"} (uses [Apache DataSketches](https://datasketches.apache.org/){:target="_blank"}), etc. that offer a suite of outlier detection functionality (largely for tabular and image data for now). We can use these packages with our [pipelines](pipelines.md){:target="_blank"} or even [Kafka](https://kafka.apache.org/){:target="_blank"} data streams to continuously monitor for outliers.
@@ -654,7 +654,7 @@ There are many different ways we can act to drift based on the situation. An ini
 Since detecting drift and outliers can involve compute intensive operations, we need a solution that can execute serverless workloads on top of our event data streams (ex. [Kafka](https://kafka.apache.org/){:target="_blank"}). Typically these solutions will ingest payloads (ex. model's inputs and outputs) and can trigger monitoring workloads. This allows us to segregate the resources for monitoring from our actual ML application and scale them as needed.
 
 <div class="ai-center-all">
-    <img width="600" src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/mlops/monitoring/serverless.png">
+    <img width="600" src="/static/images/mlops/monitoring/serverless.png">
 </div>
 
 When it actually comes to implementing a monitoring system, we have several options, ranging from fully managed to from-scratch. Several popular managed solutions are [Arize](https://arize.com/){:target="_blank"}, [Arthur](https://www.arthur.ai/){:target="_blank"}, [Fiddler](https://www.fiddler.ai/ml-monitoring){:target="_blank"}, [Gantry](https://gantry.io/){:target="_blank"}, [Mona](https://www.monalabs.io/){:target="_blank"}, [WhyLabs](https://whylabs.ai/){:target="_blank"}, etc., all of which allow us to create custom monitoring views, trigger alerts, etc. There are even several great open-source solutions such as [EvidentlyAI](https://evidentlyai.com/){:target="_blank"}, [TorchDrift](https://torchdrift.org/){:target="_blank"}, [WhyLogs](https://whylogs.readthedocs.io/en/latest/){:target="_blank"}, etc.

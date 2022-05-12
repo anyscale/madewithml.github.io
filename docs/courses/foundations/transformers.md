@@ -24,7 +24,7 @@ Transformers are a very popular architecture that leverage and extend the concep
     - required large amounts of data (mitigated using pretrained models)
 
 <div class="ai-center-all">
-<img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/transformers/architecture.png" width="800">
+<img src="/static/images/foundations/transformers/architecture.png" width="800">
 </div>
 <div class="ai-center-all">
 <small><a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention Is All You Need</a></small>
@@ -651,7 +651,7 @@ This effectively allows us to represent each token's relative position using a f
 And here's how it all fits together! It's an end-to-end architecture that creates these contextual representations and uses an encoder-decoder architecture to predict the outcomes (one-to-one, many-to-one, many-to-many, etc.) Due to the complexity of the architecture, they require massive amounts of data for training without overfitting, however, they can be leveraged as pretrained models to finetune with smaller datasets that are similar to the larger set it was initially trained on.
 
 <div class="ai-center-all">
-<img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/transformers/architecture.png" width="800">
+<img src="/static/images/foundations/transformers/architecture.png" width="800">
 </div>
 <div class="ai-center-all">
 <small><a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention Is All You Need</a></small>
@@ -1047,7 +1047,7 @@ head_view(attention=attn, tokens=tokens)
 ```
 
 <div class="ai-center-all">
-<img src="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/images/foundations/transformers/interpretability.png" width="375">
+<img src="/static/images/foundations/transformers/interpretability.png" width="375">
 </div>
 
 Now we're ready to start the [MLOps lessons](https://madewithml.com/#mlops){:target="_blank"} to learn how to apply all this foundational modeling knowledge to responsibly deliver value.
