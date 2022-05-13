@@ -103,6 +103,12 @@ Propose the value we can create through a product-centric approach:
     - `#!js alleviates`: timely display categorized content for customers to discover.
     - `#!js advantages`: customers only have to visit our product to stay up-to-date.
 
+    <div class="ai-center-all">
+        <img src="/static/images/mlops/purpose/product.png" width="1000" alt="product mockup"></a>
+    </div>
+
+    > Yes, we actually did build this before realizing it exacerbated noise and hype. And so, we pivoted into teaching the community how to responsible deliver value with ML.
+
 #### Objectives
 
 Breakdown the product into key objectives that we want to focus on.
