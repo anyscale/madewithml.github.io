@@ -93,7 +93,7 @@ Set the scene for what we're trying to do through a customer-centric approach:
 
 Propose the value we can create through a product-centric approach:
 
-- `#!js product`: what needs to be build to help the customer reach their goal
+- `#!js product`: what needs to be build to help the customer reach their goal?
 - `#!js alleviates`: how will the product reduce pains?
 - `#!js advantages`: how will the product create gains?
 
@@ -182,7 +182,7 @@ How feasible is our solution and do we have the required resources to deliver it
 
 ??? quote "Our task"
 
-    We have a dataset of ML content that have been labeled. We'll need to assess if it has the necessary signals to meet our [objectives](#objectives).
+    We have a dataset of ML content that our users have manually added to the platform. We'll need to assess if it has the necessary signals to meet our [objectives](#objectives).
 
     ```json linenums="1" title="Sample data point"
     {
@@ -193,6 +193,23 @@ How feasible is our solution and do we have the required resources to deliver it
         "tag": "natural-language-processing"
     }
     ```
+
+    <table>
+    <thead>
+    <tr>
+        <th>Assumption</th>
+        <th>Actual</th>
+        <th>Reason</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>This dataset is of high quality because they were added by actual users.</td>
+        <td>Need to assess the quality of the labels, especially since it was created by users!</td>
+        <td>The dataset is of good quality but we've left some errors in there so we can discover them during the evaluation process.</td>
+    </tr>
+    </tbody>
+    </table>
 
 ## Systems design
 

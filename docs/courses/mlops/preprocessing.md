@@ -86,7 +86,7 @@ df.C = df.A + df.B
 !!! tip
     Feature engineering can be done in collaboration with domain experts that can guide us on what features to engineer and use.
 
-> After engineering our features, we can use techniques such as [SHAP](https://github.com/slundberg/shap){:target="_blank"} (SHapley Additive exPlanations) or [LIME](https://github.com/marcotcr/lime){:target="_blank"} (Local Interpretable Model-agnostic Explanations) to inspect feature importance. On a high level, these techniques learn which features have the most signal by assessing the performance in their absence. These inspections can be done on a model's single prediction or at a coarse-grained, overall level.
+> We can use techniques such as [SHAP](https://github.com/slundberg/shap){:target="_blank"} (SHapley Additive exPlanations) or [LIME](https://github.com/marcotcr/lime){:target="_blank"} (Local Interpretable Model-agnostic Explanations) to inspect feature importance. On a high level, these techniques learn which features have the most signal by assessing the performance in their absence. These inspections can be done on a model's single prediction or at a coarse-grained, overall level.
 
 ### Cleaning
 - use domain expertise and EDA
@@ -291,98 +291,6 @@ We can combine existing input features to create new meaningful signal (helping 
 df["text"] = df.title + " " + df.description
 ```
 
-## Filtering
-In the same vain, we can also reduce the size of our data by placing constraints as to what data is worth annotation or labeling. Here we decide to filter tags above a certain frequency threshold because those with fewer samples won't be adequate for training.
-
-```python linenums="1"
-def filter(l, include=[], exclude=[]):
-    """Filter a list using inclusion and exclusion lists of items."""
-    filtered = [item for item in l if item in include and item not in exclude]
-    return filtered
-```
-
-!!! question "Why do we need the exclude list?"
-    You may be wondering we have explicit include and exclude lists. Why can't we just use the include list?
-
-    ??? quote "Show answer"
-
-        Keep in mind that authors are allowed to add any tag they want to their projects (noisy tags). So, we want to:
-
-            - *include* all the tags in our [tags.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json){:target="_blank"}
-            - *exclude* some general tags
-
-        The exclude list is important here because my include list is being create automatically. I want the overlapping tagging to not be in the dataset.
-
-        ```python linenums="1"
-        # Inclusion/exclusion criteria for tags
-        include = list(tags_dict.keys())
-        exclude = ["machine-learning", "deep-learning",  "data-science",
-                   "neural-networks", "python", "r", "visualization"]
-        ```
-
-> Since we're *constraining* the output space here, we'll want to [monitor](monitoring.md){:target="_blank"} the prevalence of new tags over time so we can capture them.
-
-```python linenums="1"
-# Filter tags for each project
-df.tags = df.tags.apply(filter, include=include, exclude=exclude)
-tags = Counter(itertools.chain.from_iterable(df.tags.values))
-```
-
-We're also going to restrict the mapping to only tags that are above a certain frequency threshold. The tags that don't have enough projects will not have enough samples to model their relationships.
-```python linenums="1"
-@widgets.interact(min_tag_freq=(0, tags.most_common()[0][1]))
-def separate_tags_by_freq(min_tag_freq=30):
-    tags_above_freq = Counter(tag for tag in tags.elements()
-                                    if tags[tag] >= min_tag_freq)
-    tags_below_freq = Counter(tag for tag in tags.elements()
-                                    if tags[tag] < min_tag_freq)
-    print ("Most popular tags:\n", tags_above_freq.most_common(5))
-    print ("\nTags that just made the cut:\n", tags_above_freq.most_common()[-5:])
-    print ("\nTags that just missed the cut:\n", tags_below_freq.most_common(5))
-```
-<pre class="output">
-Most popular tags:
- [('natural-language-processing', 429),
-  ('computer-vision', 388),
-  ('pytorch', 258),
-  ('tensorflow', 213),
-  ('transformers', 196)]
-
-Tags that just made the cut:
- [('time-series', 34),
-  ('flask', 34),
-  ('node-classification', 33),
-  ('question-answering', 32),
-  ('pretraining', 30)]
-
-Tags that just missed the cut:
- [('model-compression', 29),
-  ('fastai', 29),
-  ('graph-classification', 29),
-  ('recurrent-neural-networks', 28),
-  ('adversarial-learning', 28)]
-</pre>
-```python linenums="1"
-# Filter tags that have fewer than <min_tag_freq> occurrences
-min_tag_freq = 30
-tags_above_freq = Counter(tag for tag in tags.elements()
-                          if tags[tag] >= min_tag_freq)
-df.tags = df.tags.apply(filter, include=list(tags_above_freq.keys()))
-```
-
-## Cleaning
-
-After applying our filters, it's important that we remove any samples that didn't make the cut. In our case, we'll want to remove inputs that have no remaining (not enough frequency) tags.
-
-```python linenums="1"
-# Remove projects with no more remaining relevant tags
-df = df[df.tags.map(len) > 0]
-print (f"{len(df)} projects")
-```
-<pre class="output">
-1444 projects
-</pre>
-
 And since we're dealing with text data, we can apply some of the common preparation processes:
 
 1. lower (conditional)
@@ -440,12 +348,13 @@ def preprocess(text):
 
 ```python linenums="1"
 # Apply to dataframe
-preprocessed_df.text = preprocessed_df.text.apply(preprocess, lower=True, stem=False)
-print (f"{df.text.values[0]}\n\n{preprocessed_df.text.values[0]}")
+original_df = df.copy()
+df.text = df.text.apply(preprocess, lower=True, stem=False)
+print (f"{original_df.text.values[0]}\n{df.text.values[0]}")
 ```
 <pre class="output">
-Albumentations Fast image augmentation library and easy to use wrapper around other libraries.
-albumentations fast image augmentation library easy use wrapper around libraries
+Comparison between YOLO and RCNN on real world videos Bringing theory to experiment is cool. We can easily train models in colab and find the results in minutes.
+comparison yolo rcnn real world videos bringing theory experiment cool easily train models colab find results minutes
 </pre>
 
 ## Transformations

@@ -410,22 +410,7 @@ extract_data = BashOperator(
 )
 ```
 
-... but in a real production setting, our data can come from a wide variety of sources. For example, we have a dataset prepared for the purposes of this course but where does this data originate from and where does it end up before we're ready to use it for machine learning?
-
-- **Database**: most applications have a database to store and read information from. Typical choices are [PostgreSQL](https://www.postgresql.org/){:target="_blank"}, [MySQL](https://www.mysql.com/){:target="_blank"}, [MongoDB](https://www.mongodb.com/){:target="_blank"}, [Cassandra](https://cassandra.apache.org/){:target="_blank"}, etc. The specific choice depends on the schemas, data scale, etc. We can also have auxiliary data coming from other services around our main application such as user analytics (ex. [Google Analytics](https://analytics.google.com/analytics/web/){:target="_blank"} or [Segment](https://segment.com/){:target="_blank"}), financial transactions (ex. [Stripe](https://stripe.com/){:target="_blank"}), CRM services (ex. [SalesForce](https://www.salesforce.com/){:target="_blank"}), etc. Data can also be taken from the origin database and moved to another specialized database after it goes through labeling/annotation and QA pipelines.
-
-- **Warehouse**: data is often moved from the database to a data warehouse (DWH) for the added benefits of a powerful analytics engine, front-end clients, etc. to make it very easy for downstream developers to efficiently use the data at scale. Typical choices are [Google BigQuery](https://cloud.google.com/bigquery){:target="_blank"}, [Amazon RedShift](https://aws.amazon.com/redshift/){:target="_blank"}, [SnowFlake](https://www.snowflake.com/){:target="_blank"}, [Hive](https://hive.apache.org/){:target="_blank"}, etc.
-
-!!! question "What's the difference?"
-
-    Both databases and data warehouses hold data, so what's the difference?
-
-    ??? quote "Show answer"
-        They're different kinds of processing systems. A database is an [online transaction processing (OLTP)](https://en.wikipedia.org/wiki/Online_transaction_processing){:target="_blank"} system because it's typically used for day-to-day CRUD (create, read, update, delete) operations connected to the main application.
-
-        Whereas, a data warehouse is an [online analytical processing (OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing){:target="_blank"} system because it's used for ad-hoc querying on aggregate views of the data. Data moves from a database to a warehouse through ETL (extract, transform, load) pipelines, which the warehouse will use to drive business insights, which can drive change back to the database (schemas, values, etc.).
-
-We may see many other data management architectures such as these in the future (data lakes for structured and unstructured, lakehouses, etc.). What's important is that we understand that they are all interfaces for housing our data and may provide unique advantages for governing and interacting with the data.
+> In a real production setting, our data can come from a wide variety of [data management systems](infrastructure.md#data-management-sytems){:target="_blank"}.
 
 > Typically we'll use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/){:target="_blank"} to trigger workflows when a condition is met or trigger them directly from the external source via API calls, etc. Our workflows can communicate with the different platforms by establishing a [connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html){:target="_blank"} and then using [hooks](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/hooks/index.html){:target="_blank"} to interface with the database, data warehouse, etc.
 

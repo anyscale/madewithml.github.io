@@ -11,15 +11,66 @@ repository: https://github.com/GokuMohandas/MLOps
 
 ## Intuition
 
-We’ve already covered the methods of deployment via our API, Docker, and CI/CD lessons where the ML system is its own microservice, as opposed to being tied to a monolithic general application. This way we’re able to scale our ML workflows as needed and use it to deliver value to downstream applications. So in this lesson, we’ll instead discuss the types of tasks, serving strategies and how to optimize, orchestrate and scale them. We highly recommend using a framework such as [Metaflow](https://metaflow.org/){:target="_blank"} to seamlessly interact with all the infrastructure that we'll be discussing.
+In this lessons, we’ll discuss the different options we have for processing features, learning from them, experimenting on models and serving them. We'll also talk about the different options for infrastructure to orchestrate and scale them.
 
 ## Tasks
 
-Before we talk about the infrastructure needed for ML tasks, we need to talk about the fundamental types of ML tasks. A task can involve features that don't change over time. For example if an API classifies uploaded images, all the input features come from the image the user just uploaded. If that same image is uploaded later and the same model is used, the prediction will remain unchanged. However, a task can also involve features that change over time. For example, if you want to predict whether a user would enjoy a movie, you'll want to retrieve the latest available data for that user's behavior. Using the exact same model, your prediction can change as the user's features change over time. This subtle difference can drive key architectural choices when it comes how to store, process and retrieve your data (feature stores, data streams, etc.).
+Before we talk about the infrastructure needed for ML tasks, we need to talk about the fundamental types of ML tasks.
+
+### Static
+A task can involve features that don't change over time. For example if an API classifies uploaded images, all the input features come from the image the user just uploaded. If that same image is uploaded later and the same model is used, the prediction will remain unchanged.
+
+### Dynamic
+A task can also involve features that change over time. For example, if you want to predict whether a user would enjoy a movie, you'll want to retrieve the latest available data for that user's behavior. Using the exact same model, your prediction can change as the user's features change over time.
+
+> This subtle difference can drive key architectural choices when it comes how to store, process and retrieve your data (ex. databases, feature stores, streams, etc.).
+
+## Data management systems
+
+We also want to set the scene for where our data could live. So far, we've been using a JSON file (which is great for quick POCs) but for production, we'll need to rely on much more reliable sources of data.
+
+<div class="ai-center-all">
+    <img width="1000" src="/static/images/mlops/infrastructure/data.png" alt="data management systems">
+</div>
+
+1. First, we have our **data sources**, which can be from APIs, users, other databases, etc. and can be:
+
+    - `#!js structured`: organized data stored in an explicit structure (ex. tables)
+    - `#!js semi-structured`: data with some structure but no formal schema or data types (web pages, CSV, JSON, etc.)
+    - `#!js unstructured`: qualitative data with no formal structure (text, images, audio, etc.)
+
+2. These data sources are usually consumed by a **data lake**, which is a central repository that stores the data in its raw format. Traditionally, **object stores**, which manage as objects, as opposed to files under a certain structure, are used as the storage platform for the data lake.
+
+    > Common options: [Amazon S3](https://aws.amazon.com/s3/){:target="_blank"}, [Google Cloud Storage](https://cloud.google.com/storage){:target="_blank"}, etc.
+
+3. Raw data from data lakes are moved to more organized storage options via [ETL](https://en.wikipedia.org/wiki/Extract,_transform,_load){:target="_blank"} (extract, transform, load) pipelines.
+
+4. Data can be loaded into a variety of storage options depending on the types of operations we want do. Some popular options include:
+
+    - **databases** (DB): an organized collection of data that adheres to either:
+        - relational schema (tables with rows and columns) often referred to as a Relational Database Management System (RDBMS) or SQL database.
+        - non-relational (key/value, graph, etc.), often referred to as a non-relational database or NoSQL database.
+
+        A database is an [online transaction processing (OLTP)](https://en.wikipedia.org/wiki/Online_transaction_processing){:target="_blank"} system because it's typically used for day-to-day CRUD (create, read, update, delete) operations where typically information is accessed by rows.
+
+        > Common options: [PostgreSQL](https://www.postgresql.org/){:target="_blank"}, [MySQL](https://www.mysql.com/){:target="_blank"}, [MongoDB](https://www.mongodb.com/){:target="_blank"}, [Cassandra](https://cassandra.apache.org/){:target="_blank"}, etc.
+
+    - **data warehouse** (DWH): a type of database that stores transactional data in a way that's efficient for analytics purposes. Here, the downstream tasks are more concerned about aggregating column values (trends) rather than accessing specific rows. It's an [online analytical processing (OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing){:target="_blank"} system because it's used for ad-hoc querying on aggregate views of the data.
+
+        > Common options: [Google BigQuery](https://cloud.google.com/bigquery){:target="_blank"}, [Amazon RedShift](https://aws.amazon.com/redshift/){:target="_blank"}, [SnowFlake](https://www.snowflake.com/){:target="_blank"}, [Hive](https://hive.apache.org/){:target="_blank"}, etc.
+
+5. Finally, our **data consumers** can ingest data from these storage options for downstream tasks such as data analytics, machine learning, etc. There may be additional data systems that may further simplify the data pipelines for consumers such as a [feature store](feature-store.md){:target="_blank"} to load the appropriate features for training or inference.
+
+!!! note
+
+    As a data scientist or machine learning engineer, you most likely will not be creating these data management systems yourself but will instead be consuming the data pipelines that the data engineering team. So it's imperative that you know how to integrate your workflows with them.
+
+    > Every company has their own system so you typically learn how to interact with them through existing team members, documentation, etc.
+
 
 ## Serving
 
-The first decision is whether to serve predictions via batches or real-time, which is entirely based on the feature space (finite vs. unbound).
+The first decision is whether to serve predictions via batches or real-time, which is entirely based on the feature space (finite vs. unbound). We're starting backwards here because this decision will dictate many of the upstream decision around processing, learning and experimentation.
 
 ### Batch serving
 
@@ -141,11 +192,13 @@ In order to truly serve the most informed predictions, we should have a model tr
 There are many different experimentation strategies we can use to measure real-time performance before committing to replace our existing version of the system.
 
 ### AB tests
-AB tests involve sending production traffic to the different systems that we're evaluating and then using statistical hypothesis testing to decide which system is better. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination. In many cases, if we're simply trying to compare the different versions for a certain metric, multi-armed bandits will be a better approach.
+AB tests involve sending production traffic to the different systems that we're evaluating and then using statistical hypothesis testing to decide which system is better. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination.
 
 <div class="ai-center-all">
     <img width="500" src="/static/images/mlops/infrastructure/ab.png">
 </div>
+
+> In many cases, if we're simply trying to compare the different versions for a certain metric, multi-armed bandits will be a better approach.
 
 ### Canary tests
 Canary tests involve sending most of the production traffic to the currently deployed system but sending traffic from a small cohort of users to the new system we're trying to evaluate. Again we need to make sure that the same users continue to interact with the same system as we gradually roll out the new system.

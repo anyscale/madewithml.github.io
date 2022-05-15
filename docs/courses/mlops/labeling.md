@@ -14,12 +14,12 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/
 
 Labeling (or annotation) is the process of identifying the inputs and outputs that are **worth** modeling (*not* just what could be modeled).
 
-- use objective as a guide to determine the necessary signals
-- explore creating new signals (via combining features, collecting new data, etc.)
-- iteratively add more features to control complexity and effort
+- use objective as a guide to determine the necessary signals.
+- explore creating new signals (via combining features, collecting new data, etc.).
+- iteratively add more features to justify complexity and effort.
 
 !!! warning
-    Be careful not to include features in the dataset that will not be available during inference time, causing [data leakage](feature-store.md){:target="_blank"}.
+    Be careful not to include features in the dataset that will not be available during prediction, causing [data leaks](feature-store.md#intuition){:target="_blank"}.
 
 !!! question "What else can we learn?"
     It's not just about identifying and labeling our initial dataset. What else can we learn from it?
@@ -32,21 +32,22 @@ Labeling (or annotation) is the process of identifying the inputs and outputs th
             - enhance using auxiliary data
             - simplify using constraints
             - remove noisy samples
-            - figure out where labeling process can be improved
+            - improve the labeling process
 
 ## Process
 
-Regardless of whether we have a custom labeling platform or we choose a generalized platform, the process to manage labeling and all it's related workflows (QA, data import/export, etc.) follow a similar approach.
+Regardless of whether we have a custom labeling platform or we choose a generalized platform, the process of labeling and all it's related workflows (QA, data import/export, etc.) follow a similar approach.
 
 ### Preliminary steps
-- Decide what needs to be labeled
+- `#!js [WHAT]` Decide what needs to be labeled:
+    - identify natural labels you may already have (ex. time-series)
     - consult with domain experts to ensure you're labeling the appropriate signals
-    - consolidate the appropriate labels for your task (consider [hierarchical labeling](https://aws.amazon.com/blogs/machine-learning/creating-hierarchical-label-taxonomies-using-amazon-sagemaker-ground-truth/){:target="_blank"})
-- Design the interface where labeling will be done
+    - decide on the appropriate labels (and [hierarchy](https://aws.amazon.com/blogs/machine-learning/creating-hierarchical-label-taxonomies-using-amazon-sagemaker-ground-truth/){:target="_blank"}) for your task
+- `#!js [WHERE]` Design the labeling interface:
     - intuitive, data modality dependent and quick (keybindings are a must!)
-    - avoid option paralysis by allowing labeler to dig deeper or suggest likely labels
-    - account for measuring and resolving inter-labeler discrepancy
-- Compose highly detailed labeling instructions for annotators
+    - avoid option paralysis by allowing the labeler to dig deeper or suggesting likely labels
+    - measure and resolve inter-labeler discrepancy
+- `#!js [HOW]` Compose labeling instructions:
     - examples of each labeling scenario
     - course of action for discrepancies
 
@@ -58,12 +59,12 @@ Regardless of whether we have a custom labeling platform or we choose a generali
 </div>
 
 ### Workflow setup
-- Establish data import and export pipelines
-    - need to know when new data is ready for annotation
-    - need to know when annotated data is ready for QA, modeling, etc.
-- Create a quality assurance (QA) workflow
-    - separate from labeling workflow
-    - yet still communicates with labeling workflow for relabeling errors
+- Establish data pipelines:
+    - `#!js [IMPORT]` *new data* for annotation
+    - `#!js [EXPORT]` *annotated data* for QA, [testing](testing.md#data){:target="_blank"}, modeling, etc.
+- Create a quality assurance (QA) workflow:
+    - separate from labeling workflow (no bias)
+    - communicates with labeling workflow to escalate errors
 
 <div class="ai-center-all">
     <img src="/static/images/mlops/labeling/workflow.png" width="800" alt="labeling workflow">
@@ -71,48 +72,47 @@ Regardless of whether we have a custom labeling platform or we choose a generali
 
 ### Iterative setup
 - Implement strategies to reduce labeling efforts
-    - determine subsets of the data to label next using [active learning](#active-learning)
-    - auto-label entire or parts of a data point using [weak supervision](#weak-supervision)
-    - focus constrained labeling efforts on long tail of edge cases over time
+    - identify subsets of the data to label next using [active learning](#active-learning)
+    - auto-label entire or parts of a dataset using [weak supervision](#weak-supervision)
+    - focus labeling efforts on long tail of edge cases over time
 
 > Check out the [data-centric AI lesson](data-centric-ai.md){:target="_blank"} to learn more about the nuances of how labeling plays a crucial part of the data-driven development process.
 
-## Datasets
-- [projects.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json){:target="_blank"}: projects with title, description and tags (cleaned by mods).
-- [tags.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json){:target="_blank"}: tags used in dropdown to aid autocompletion.
+## Labeling
+- [projects.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json){:target="_blank"}: projects with title, description and tag.
+- [tags.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json){:target="_blank"}: auxiliary information on the tags we are about of our platform.
 
-Recall that our objective was to augment authors to add the appropriate tags for their project so the community can discover them. So we want to use the metadata provided in each project to determine what the relevant tags are. We'll want to start with the highly influential features and iteratively experiment with additional features.
+> Recall that our objective was to classify incoming content so that the community can discover them.
 
-## Load data
+### Projects
 We'll first load our dataset from the JSON file.
 
 ```python linenums="1"
-from collections import Counter, OrderedDict
+from collections import Counter
 import ipywidgets as widgets
 import itertools
 import json
 import pandas as pd
 from urllib.request import urlopen
 ```
+
+> Traditionally, our data assets will be stored, versioned and updated in a database, warehouse, etc. We'll learn more about these different [data management systems](infrastructure.md#data-management-systems) later, but for now, we'll load our data as a JSON file from our repository.
+
 ```python linenums="1"
 # Load projects
 url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json"
 projects = json.loads(urlopen(url).read())
-print (json.dumps(projects[-305], indent=2))
+print (f"{len(projects)} projects")
+print (json.dumps(projects[0], indent=2))
 ```
 <pre class="output">
+955 projects
 {
-  "id": 324,
-  "title": "AdverTorch",
-  "description": "A Toolbox for Adversarial Robustness Research",
-  "tags": [
-    "code",
-    "library",
-    "security",
-    "adversarial-learning",
-    "adversarial-attacks",
-    "adversarial-perturbations"
-  ]
+  "id": 6,
+  "created_on": "2020-02-20 06:43:18",
+  "title": "Comparison between YOLO and RCNN on real world videos",
+  "description": "Bringing theory to experiment is cool. We can easily train models in colab and find the results in minutes.",
+  "tag": "computer-vision"
 }
 </pre>
 Now we can load our data into a Pandas DataFrame.
@@ -132,107 +132,323 @@ df.head(5)
       <th>created_on</th>
       <th>title</th>
       <th>description</th>
-      <th>tags</th>
+      <th>tag</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
-      <td>2020-02-17 06:30:41</td>
-      <td>Machine Learning Basics</td>
-      <td>A practical set of notebooks on machine learni...</td>
-      <td>[code, tutorial, keras, pytorch, tensorflow, d...</td>
+      <td>6</td>
+      <td>2020-02-20 06:43:18</td>
+      <td>Comparison between YOLO and RCNN on real world...</td>
+      <td>Bringing theory to experiment is cool. We can ...</td>
+      <td>computer-vision</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2</td>
-      <td>2020-02-17 06:41:45</td>
-      <td>Deep Learning with Electronic Health Record (E...</td>
-      <td>A comprehensive look at recent machine learnin...</td>
-      <td>[article, tutorial, deep-learning, health, ehr]</td>
+      <td>7</td>
+      <td>2020-02-20 06:47:21</td>
+      <td>Show, Infer &amp; Tell: Contextual Inference for C...</td>
+      <td>The beauty of the work lies in the way it arch...</td>
+      <td>computer-vision</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>3</td>
-      <td>2020-02-20 06:07:59</td>
-      <td>Automatic Parking Management using computer vi...</td>
-      <td>Detecting empty and parked spaces in car parki...</td>
-      <td>[code, tutorial, video, python, machine-learni...</td>
+      <td>9</td>
+      <td>2020-02-24 16:24:45</td>
+      <td>Awesome Graph Classification</td>
+      <td>A collection of important graph embedding, cla...</td>
+      <td>graph-learning</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>4</td>
-      <td>2020-02-20 06:21:57</td>
-      <td>Easy street parking using region proposal netw...</td>
-      <td>Get a text on your phone whenever a nearby par...</td>
-      <td>[code, tutorial, python, pytorch, machine-lear...</td>
+      <td>15</td>
+      <td>2020-02-28 23:55:26</td>
+      <td>Awesome Monte Carlo Tree Search</td>
+      <td>A curated list of Monte Carlo tree search pape...</td>
+      <td>reinforcement-learning</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>5</td>
-      <td>2020-02-20 06:29:18</td>
-      <td>Deep Learning based parking management system ...</td>
-      <td>Fastai provides easy to use wrappers to quickl...</td>
-      <td>[code, tutorial, fastai, deep-learning, parkin...</td>
+      <td>19</td>
+      <td>2020-03-03 13:54:31</td>
+      <td>Diffusion to Vector</td>
+      <td>Reference implementation of Diffusion2Vec (Com...</td>
+      <td>graph-learning</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </pre>
 
-The reason we want to iteratively add more features is because it introduces more complexity and effort. We may have additional data about each feature such as author info, html from links in the description, etc. While these may have meaningful signal, we want to slowly introduce these after we close the loop.
+```python linenums="1"
+# Most common tags
+tags = Counter(df.tag.values)
+tags.most_common()
+```
+<pre class="output">
+[('natural-language-processing', 388),
+ ('computer-vision', 356),
+ ('mlops', 79),
+ ('reinforcement-learning', 56),
+ ('graph-learning', 45),
+ ('time-series', 31)]
+</pre>
 
-> Over time, our dataset will grow and we'll need to label new data. So far, we had a team of moderators clean the existing data but we'll need to establish proper workflow to make this process easier and reliable. Typically, we'll use collaborative UIs where annotators can fix errors, etc. and then use a tool like [Airflow](https://airflow.apache.org/){:target="_blank"} or [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"} for workflow / pipeline orchestration to know when new data is ready to be labeled and also when it's ready to be used for QA and eventually, modeling.
+> We'll address the [data imbalance](baselines.md#data-imbalance){:target="_blank"} after splitting into our train split and prior to training our model.
 
-## Auxiliary data
+### Tags
 
-We're also going to be using an [auxiliary dataset](https://github.com/GokuMohandas/MadeWithML/blob/main/datasets/tags.json){:target="_blank"} which contains a collection of all the tags with their aliases and parent/child relationships. This auxiliary dataset was used by our application to automatically add the relevant parent tags when the child tags were present.
+We're also going to be using an [auxiliary dataset](https://github.com/GokuMohandas/MadeWithML/blob/main/datasets/tags.json){:target="_blank"} which contains a collection of all the tags that are currently relevant to us.
 
 ```python linenums="1"
 # Load tags
 url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json"
-tags = json.loads(urlopen(url).read())
 tags_dict = {}
-for item in tags:
+for item in json.loads(urlopen(url).read()):
     key = item.pop("tag")
     tags_dict[key] = item
 print (f"{len(tags_dict)} tags")
 ```
 <pre class="output">
-400
+4 tags
 </pre>
 ```python linenums="1"
 @widgets.interact(tag=list(tags_dict.keys()))
-def display_tag_details(tag="question-answering"):
+def display_tag_details(tag="computer-vision"):
     print (json.dumps(tags_dict[tag], indent=2))
 ```
 <pre class="output">
-"question-answering": {
-    "aliases": [
-      "qa"
-    ],
-    "parents": [
-      "natural-language-processing"
-    ]
-  }
+"computer-vision": {
+  "aliases": [
+    "cv",
+    "vision"
+  ]
+}
 </pre>
 
+> It's important that this auxillary information about our tags resides in a separate location so that everyone uses the same source of truth. This asset can also be [versioned](versioning.md){:target="_blank"} and kept up-to-date.
 
-## Data imbalance
+### Constraints
 
-With our datasets, we may often notice a data imbalance problem where a range of continuous values (regression) or certain classes (classification) may have insufficient amounts of data to learn from. This becomes a major issue when training because the model will learn to generalize to the data available and perform poorly on regions where the data is sparse. There are several techniques to mitigate data imbalance, including [resampling](https://github.com/scikit-learn-contrib/imbalanced-learn){:target="_blank"} (oversampling from minority classes / undersampling from majority classes), incorporate class weights, [augmentation](augmentation.md){:target="_blank"}, etc.
+We're going to apply several constraints on labeling our data:
+- if a data point has a tag that we currently don't support, we'll replace it with `other`
+- if a certain tag doesn't have *enough* samples, we'll replace it with `other`
 
-!!! question "How can we do better?"
+```python linenums="1"
+# Out of scope (OOS) tags
+oos_tags = [item for item in df.tag.unique() if item not in tags_dict.keys()]
+oos_tags
+```
+<pre class="output">
+['reinforcement-learning', 'time-series']
+</pre>
 
-    The techniques above *indirectly* address data imbalance by manipulating parts of the data / system. What's the best solution to data imbalance?
+```python linenums="1"
+# Samples with OOS tags
+oos_indices = df[df.tag.isin(oos_tags)].index
+df[df.tag.isin(oos_tags)].head()
+```
+<pre class="output">
+<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>created_on</th>
+      <th>title</th>
+      <th>description</th>
+      <th>tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>15</td>
+      <td>2020-02-28 23:55:26</td>
+      <td>Awesome Monte Carlo Tree Search</td>
+      <td>A curated list of Monte Carlo tree search pape...</td>
+      <td>reinforcement-learning</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>121</td>
+      <td>2020-03-24 04:56:38</td>
+      <td>Deep Reinforcement Learning in TensorFlow2</td>
+      <td>deep-rl-tf2 is a repository that implements a ...</td>
+      <td>reinforcement-learning</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>218</td>
+      <td>2020-04-06 11:29:57</td>
+      <td>Distributional RL using TensorFlow2</td>
+      <td>🐳 Implementation of various Distributional Rei...</td>
+      <td>reinforcement-learning</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>239</td>
+      <td>2020-04-06 18:39:48</td>
+      <td>Prophet: Forecasting At Scale</td>
+      <td>Tool for producing high quality forecasts for ...</td>
+      <td>time-series</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>277</td>
+      <td>2020-04-07 00:30:33</td>
+      <td>Curriculum for Reinforcement Learning</td>
+      <td>Curriculum learning applied to reinforcement l...</td>
+      <td>reinforcement-learning</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</pre>
 
-    ??? quote "Show answer"
-        While these data imbalance mitigation techniques will allow our model to perform decently, the best long term approach is to *directly* address the imbalance issue. Identify which areas of the data need more samples and go collect them! This becomes a more more robust approach compared to focusing the model to learn from repeated samples or ignoring samples.
+```python linenums="1"
+# Replace this tag with other
+df.tag = df.tag.apply(lambda x: "other" if x in oos_tags else x)
+```
+
+```python linenums="1"
+# OOS samples should be "other"
+df.iloc[oos_indices].head()
+```
+<pre class="output">
+<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>created_on</th>
+      <th>title</th>
+      <th>description</th>
+      <th>tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>15</td>
+      <td>2020-02-28 23:55:26</td>
+      <td>Awesome Monte Carlo Tree Search</td>
+      <td>A curated list of Monte Carlo tree search pape...</td>
+      <td>other</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>121</td>
+      <td>2020-03-24 04:56:38</td>
+      <td>Deep Reinforcement Learning in TensorFlow2</td>
+      <td>deep-rl-tf2 is a repository that implements a ...</td>
+      <td>other</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>218</td>
+      <td>2020-04-06 11:29:57</td>
+      <td>Distributional RL using TensorFlow2</td>
+      <td>🐳 Implementation of various Distributional Rei...</td>
+      <td>other</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>239</td>
+      <td>2020-04-06 18:39:48</td>
+      <td>Prophet: Forecasting At Scale</td>
+      <td>Tool for producing high quality forecasts for ...</td>
+      <td>other</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>277</td>
+      <td>2020-04-07 00:30:33</td>
+      <td>Curriculum for Reinforcement Learning</td>
+      <td>Curriculum learning applied to reinforcement l...</td>
+      <td>other</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</pre>
+
+We're also going to restrict the mapping to only tags that are above a certain frequency threshold. The tags that don't have enough projects will not have enough samples to model their relationships.
+
+```python linenums="1"
+# Minimum frequency required for a tag
+min_tag_freq = 75
+tags = Counter(df.tag.values)
+```
+
+```python linenums="1"
+# Tags that just made / missed the cut
+@widgets.interact(min_tag_freq=(0, tags.most_common()[0][1]))
+def separate_tags_by_freq(min_tag_freq=min_tag_freq):
+    tags_above_freq = Counter(tag for tag in tags.elements()
+                                    if tags[tag] >= min_tag_freq)
+    tags_below_freq = Counter(tag for tag in tags.elements()
+                                    if tags[tag] < min_tag_freq)
+    print ("Most popular tags:\n", tags_above_freq.most_common(3))
+    print ("\nTags that just made the cut:\n", tags_above_freq.most_common()[-3:])
+    print ("\nTags that just missed the cut:\n", tags_below_freq.most_common(3))
+```
+<pre class="output">
+Most popular tags:
+ [('natural-language-processing', 388), ('computer-vision', 356), ('other', 87)]
+
+Tags that just made the cut:
+ [('computer-vision', 356), ('other', 87), ('mlops', 79)]
+
+Tags that just missed the cut:
+ [('graph-learning', 45)]
+</pre>
+
+```python linenums="1"
+def filter(tag, include=[]):
+    """Determine if a given tag is to be included."""
+    if tag not in include:
+        tag = None
+    return tag
+```
+
+```python linenums="1"
+# Filter tags that have fewer than <min_tag_freq> occurrences
+tags_above_freq = Counter(tag for tag in tags.elements()
+                          if (tags[tag] >= min_tag_freq))
+df.tag = df.tag.apply(filter, include=list(tags_above_freq.keys()))
+```
+
+```python linenums="1"
+# Fill None with other
+df.tag = df.tag.fillna("other")
+```
+
+```python linenums="1"
+# Remove projects with no relevant tags
+df = df[df.tag.notnull()]
+print (f"{len(df)} projects")
+```
+<pre class="output">
+955 projects
+</pre>
+
+We'll save our clean, labeled data as a separate asset so we don't have to repeat these steps later on and so we don't alter the integrity of our raw data assets.
+
+```python linenums="1"
+# Save clean labeled data
+with open("labeled_projects.json", "w") as fp:
+    json.dump(df.to_dict("records"), fp, indent=4)
+```
 
 ## Libraries
 
 We could have used the user provided tags as our labels but what if the user added a wrong tag or forgot to add a relevant one. To remove this dependency on the user to provide the gold standard labels, we can leverage labeling tools and platforms. These tools allow for quick and organized labeling of the dataset to ensure its quality. And instead of starting from scratch and asking our labeler to provide all the relevant tags for a given project, we can provide the author's original tags and ask the labeler to add / remove as necessary. The specific labeling tool may be something that needs to be custom built or leverages something from the ecosystem.
+
+> As our platform grows, so too will our dataset and labeling needs so it's imperative to use the proper tooling that supports the workflows we'll depend on.
 
 ### General
 - [Labelbox](https://labelbox.com/){:target="_blank"}: the data platform for high quality training and validation data for AI applications.
