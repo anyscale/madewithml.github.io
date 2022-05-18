@@ -773,7 +773,7 @@ When we create expectations using the CLI application, Great Expectations automa
 
 We've applied expectations on our source dataset but there are many other key areas to test the data as well. Throughout the ML development pipeline, we should test the intermediate outputs from processes such as cleaning, augmentation, splitting, preprocessing, tokenization, etc. We'll use these expectations to monitor new batches of data and before combining them with our existing data assets.
 
-Also note that the way we performed data validation on our static data file is not how it occurs in mature data pipelines. Many of these expectations will be executed when the data is originally loaded to different data platforms (databases, data warehouses, etc.), decoupled from any downstream uses cases such as ML systems. We'll learn more about these in the [pipelines lesson](pipelines.md){:target="_blank"} but we can see below how Great Expectations checkpoint validations are used at every step of the way (including transformations using tools like [dbt](https://www.getdbt.com/){:target="_blank"}).
+Also note that the way we performed data validation on our static data file is not how it occurs in mature data pipelines. Many of these expectations will be executed when the data is originally extracted and loaded to different data platforms (ex. [data warehouse](infrastructure.md#data-management-systems){:target="_blank"}), decoupled from any downstream uses cases such as ML systems. We can see below how Great Expectations checkpoint validations are used at every step of the way, include before and after applying data transformations (using tools like [dbt](https://www.getdbt.com/){:target="_blank"}) inside our data warehouse.
 
 <div class="ai-center-all">
     <img width="700" src="/static/images/mlops/testing/pipelines.png">
@@ -782,6 +782,7 @@ Also note that the way we performed data validation on our static data file is n
     <small>Using Great Expectations in mature data pipelines, decoupled from downstream use cases such as ML.</small>
 </div>
 
+> Learn more about different data management systems in our [infrastructure lesson](infrastructure.md#data-management-systems){:target="_blank"} if you're not familiar with them.
 
 ## 🤖&nbsp; Models
 

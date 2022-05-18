@@ -86,8 +86,6 @@ df.C = df.A + df.B
 !!! tip
     Feature engineering can be done in collaboration with domain experts that can guide us on what features to engineer and use.
 
-> We can use techniques such as [SHAP](https://github.com/slundberg/shap){:target="_blank"} (SHapley Additive exPlanations) or [LIME](https://github.com/marcotcr/lime){:target="_blank"} (Local Interpretable Model-agnostic Explanations) to inspect feature importance. On a high level, these techniques learn which features have the most signal by assessing the performance in their absence. These inspections can be done on a model's single prediction or at a coarse-grained, overall level.
-
 ### Cleaning
 - use domain expertise and EDA
 - apply constraints via filters
@@ -219,14 +217,12 @@ Transforming the data involves feature encoding and engineering.
 
 - and many [more](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing){:target="_blank"}!
 
-> We can also encode our data with hashing or using it's attributes instead of the exact entity itself. For example, representing a user by their location and favorites as opposed to using their user ID. These methods are great when we want to use features that suffer from the curse of dimensionality (lots of feature values for a feature but not enough data samples for each one) or [online learning](infrastructure.md#online-learning){:target="_blank"} scenarios.
-
 ### Extraction
 
 - signal extraction from existing features
 - combine existing features
-- transfer learning: using a pretrained model as a feature extractor and finetuning on it's results
-- autoencoders: learn to encode inputs for compressed knowledge representation
+- [transfer learning](https://en.wikipedia.org/wiki/Transfer_learning){:target="_blank"}: using a pretrained model as a feature extractor and finetuning on it's results
+- [autoencoders](https://en.wikipedia.org/wiki/Autoencoder){:target="_blank"}: learn to encode inputs for compressed knowledge representation
 
 - [principle component analysis (PCA)](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA){:target="_blank"}: linear dimensionality reduction to project data in a lower dimensional space.
 
@@ -276,8 +272,13 @@ Transforming the data involves feature encoding and engineering.
 - [similarity](https://github.com/dirty-cat/dirty_cat){:target="_blank"}: similar to count vectorization but based on similarities in tokens
 - and many [more](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.feature_extraction){:target="_blank"}!
 
-> Often, teams will want to reuse the same features for different tasks so how can we avoid duplication of efforts? A solution is [feature stores](https://www.tecton.ai/blog/what-is-a-feature-store/){:target="_blank"} which will enable sharing of features and the workflows around feature pipelines. We'll cover feature stores during *Production*.
+> We'll often was to retrieve feature values for an entity (user, item, etc.) over time and reuse the same features across different projects. To ensure that we're retrieving the proper feature values and to avoid duplication of efforts, we can use a [feature store](feature-store.md){:target="_blank"}.
 
+!!! question "Curse of dimensionality"
+    What can we do if a feature has lots of unique values but enough data points for each unique value (ex. URL as a feature)?
+
+    ??? quote "Show answer"
+        We can encode our data with [hashing](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.FeatureHasher.html){:target="_blank"} or using it's attributes instead of the exact entity itself. For example, representing a user by their location and favorites as opposed to using their user ID or representing a webpage with it's domain as opposed to the exact url. This methods effectively decrease the total number of unique feature values and increase the number of data points for each.
 
 ## Application
 
@@ -359,7 +360,7 @@ comparison yolo rcnn real world videos bringing theory experiment cool easily tr
 
 ## Transformations
 
-Many of the *transformations* we're going to do are model specific. For example, for our simple baselines we may do `label encoding` → `tf-idf` while for the more involved architectures we may do `label encoding` → `one-hot encoding` → `embeddings`. So we'll cover these in the next suite of lessons as we implement each of the [baselines](baselines.md){:target="_blank"}.
+Many of the *transformations* we're going to do are model specific. For example, for our simple baselines we may do `label encoding` → `tf-idf` while for the more involved architectures we may do `label encoding` → `one-hot encoding` → `embeddings`. So we'll cover these in the next suite of lessons as we implement our [baselines](baselines.md){:target="_blank"}.
 
 > In the next section we'll be performing exploratory data analysis (EDA) on our preprocessed dataset. However, the order of the steps can be reversed depending on how well the problem is defined. If we're unsure about how to prepare the data, we can use EDA to figure it out. In fact in our [dashboard](dashboard.md){:target="_blank"} lesson, we can interactively apply data processing and EDA back and forth until we have finalized on constraints.
 

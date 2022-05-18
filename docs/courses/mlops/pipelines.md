@@ -400,7 +400,7 @@ Now that we've reviewed Airflow's major concepts, we're ready to create the Data
 
 ### Extraction
 
-To keep things simple, we'll continue to keep our data as a local file:
+To keep things simple, we'll continue to keep our data as a local file but in a real production setting, our data can come from a wide variety of [data management systems](infrastructure.md#data-management-sytems){:target="_blank"}.
 
 ```python linenums="1"
 # Extract data from DWH, blog storage, etc.
@@ -409,8 +409,6 @@ extract_data = BashOperator(
     bash_command=f"cd {config.BASE_DIR} && dvc pull",
 )
 ```
-
-> In a real production setting, our data can come from a wide variety of [data management systems](infrastructure.md#data-management-sytems){:target="_blank"}.
 
 > Typically we'll use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/){:target="_blank"} to trigger workflows when a condition is met or trigger them directly from the external source via API calls, etc. Our workflows can communicate with the different platforms by establishing a [connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html){:target="_blank"} and then using [hooks](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/hooks/index.html){:target="_blank"} to interface with the database, data warehouse, etc.
 
@@ -594,7 +592,7 @@ The returning task ids can correspond to tasks that are simply used to direct th
 
 ### Serving
 
-If our model passed our evaluation criteria then we can deploy and serve our model. Again, there are many different options here such as using our CI/CD Git workflows to deploy the model wrapped as a scalable microservice or for more streamlined deployments, we can use a purpose-build model server such as as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server. These servers have a registry with an API layer to seamlessly inspect, update, serve, rollback, etc. multiple versions of models. Typically a model artifact will be loaded to an inference app which directly interfaces to fulfill any requests from the user-facing application.
+If our model passed our evaluation criteria then we can deploy and serve our model. Again, there are many different options here such as using our CI/CD Git workflows to deploy the model wrapped as a scalable microservice or for more streamlined deployments, we can use a purpose-build [model server](api.md#model-server){:target="_blank"} to seamlessly inspect, update, serve, rollback, etc. multiple versions of models.
 
 ```python linenums="1"
 # Serve model(s)

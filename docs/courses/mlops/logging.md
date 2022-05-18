@@ -91,7 +91,7 @@ logging_config = {
     "formatters": {
         "minimal": {"format": "%(message)s"},
         "detailed": {
-            "format": "%(levelname)s %(asctime)s [%(filename)s:%(funcName)s:%(lineno)d]\n%(message)s\n"
+            "format": "%(levelname)s %(asctime)s [%(name)s:%(filename)s:%(funcName)s:%(lineno)d]\n%(message)s\n"
         },
     },
     "handlers": {
@@ -118,12 +118,10 @@ logging_config = {
             "level": logging.ERROR,
         },
     },
-    "loggers": {
-        "root": {
-            "handlers": ["console", "info", "error"],
-            "level": logging.INFO,
-            "propagate": True,
-        },
+    "root": {
+        "handlers": ["console", "info", "error"],
+        "level": logging.INFO,
+        "propagate": True,
     },
 }
 ```
@@ -143,8 +141,8 @@ We chose to define a dictionary configuration for our logger but there are other
     import logging
     from rich.logging import RichHandler
 
-    # Create logger
-    logger = logging.getLogger("root")
+    # Get root logger
+    logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 
     # Create handlers
@@ -166,7 +164,7 @@ We chose to define a dictionary configuration for our logger but there are other
     # Create formatters
     minimal_formatter = logging.Formatter(fmt="%(message)s")
     detailed_formatter = logging.Formatter(
-        fmt="%(levelname)s %(asctime)s [%(filename)s:%(funcName)s:%(lineno)d]\n%(message)s\n"
+        fmt="%(levelname)s %(asctime)s [%(name)s:%(filename)s:%(funcName)s:%(lineno)d]\n%(message)s\n"
     )
 
     # Hook it all up
@@ -190,7 +188,7 @@ We chose to define a dictionary configuration for our logger but there are other
 
     [formatter_detailed]
     format=
-        %(levelname)s %(asctime)s [%(filename)s:%(funcName)s:%(lineno)d]
+        %(levelname)s %(asctime)s [%(name)s:%(filename)s:%(funcName)s:%(lineno)d]
         %(message)s
 
     [handlers]
@@ -234,14 +232,14 @@ We chose to define a dictionary configuration for our logger but there are other
 
     # Use config file to initialize logger
     logging.config.fileConfig(Path(CONFIG_DIR, "logging.config"))
-    logger = logging.getLogger("root")
+    logger = logging.getLogger()
     logger.handlers[0] = RichHandler(markup=True)  # set rich handler
     ```
 
 We can load our configuration dict like so:
 ```python linenums="1"
 logging.config.dictConfig(logging_config)
-logger = logging.getLogger("root")
+logger = logging.getLogger()
 logger.handlers[0] = RichHandler(markup=True)
 
 # Sample messages (not we use configured `logger` now)

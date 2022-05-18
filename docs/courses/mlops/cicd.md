@@ -149,7 +149,7 @@ There are a wide variety of GitHub actions available for deploying and serving o
 - container orchestration services such as [AWS ECS](https://github.com/aws-actions/amazon-ecs-deploy-task-definition){:target="_blank"}  or [Google Kubernetes Engine](https://github.com/google-github-actions/setup-gcloud/tree/master/example-workflows/gke){:target="_blank"}
 - serverless options such as [AWS Lambda](https://github.com/marketplace/actions/aws-lambda-deploy){:target="_blank"} or [Google Cloud Functions](https://github.com/google-github-actions/deploy-cloud-functions){:target="_blank"}.
 
-> If we want to deploy and serve multiple models at a time, it's highly recommended to use a purpose-built model server such as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server. These servers have a registry with an API layer to seamlessly inspect, update, serve, rollback, etc. multiple versions of models.
+> If we want to deploy and serve multiple models at a time, it's highly recommended to use a purpose-built [model server](api.md#model-server){:target="_blank"} to seamlessly inspect, update, serve, rollback, etc. multiple versions of models.
 
 The specific deployment method we use it entirely up dependent on the application, team, existing infrastructure, etc. The key component is that we are able to update our application when all the integration tests pass without having to manually intervene for deployment.
 

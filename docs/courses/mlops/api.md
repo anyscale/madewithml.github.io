@@ -1,8 +1,8 @@
 ---
 template: lesson.html
-title: APIs for Machine Learning
-description: Using first principles to designing and implement a API to wrap ML functionality.
-keywords: api, fastapi, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
+title: APIs for Model Serving
+description: Designing and deploying an API to serve machine learning models.
+keywords: serving, deployment,api, fastapi, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/follow/tree/api
 ---
@@ -11,9 +11,44 @@ repository: https://github.com/GokuMohandas/follow/tree/api
 
 ## Intuition
 
-So far our workflows have involved directly running functions from our Python scripts and more recently, using the [CLI application](cli.md){:target="_blank"} to quickly execute commands. But not all of our users will want to work at the code level or even download the package as we would need to for the CLI app. Instead, many users will simply want to use the functionality of our model and inspect the relevant details around it. To address this, we can develop an application programming interface (API) that provides the appropriate level of abstraction that enables our users to interact with the underlying data in our application.
+So far our workflows have involved directly running functions from our Python scripts and more recently, using the [CLI application](cli.md){:target="_blank"} to quickly execute commands. But not all of our users will want to work at the code level or even download the package as we would need to for the CLI app. Instead, many users will simply want to use the trained model for inference. To address this, we can develop an application programming interface (API) that delivers the appropriate level of abstraction in order to serve our models.
 
-The interactions in our situation involve the client (users, other applications, etc.) sending a *request* to the server (our application) and receiving a *response* in return.
+## Serving
+
+When it comes to serving predictions, we need to decide if we'll do that in batches or real-time, which is entirely based on the feature space (finite vs. unbound).
+
+### Batch serving
+
+We can make batch predictions on a finite set of inputs which are then written to a database for low latency inference. When a user or downstream process sends an inference request in real-time, cached results from the database are returned.
+
+<div class="ai-center-all">
+    <img width="600" src="/static/images/mlops/infrastructure/batch_serving.png">
+</div>
+
+- ✅&nbsp; generate and cache predictions for very fast inference for users.
+- ✅&nbsp; the model doesn't need to be spun up as it's own service since it's never used in real-time.
+- ❌&nbsp; predictions can become stale if user develops new interests that aren’t captured by the old data that the current predictions are based on.
+- ❌&nbsp; input feature space must be finite because we need to generate all the predictions before they're needed for real-time.
+
+!!! question "Batch serving tasks"
+    What are some tasks where batch serving is ideal?
+
+    ??? quote "Show answer"
+        Recommend content that *existing* users will like based on their viewing history. However, *new* users may just receive some generic recommendations based on their explicit interests until we process their history the next day. And even if we're not doing batch serving, it might still be useful to cache very popular sets of input features (ex. combination of explicit interests leads to certain recommended content) so that we can serve those predictions faster.
+
+### Real-time serving
+
+We can also serve live predictions, typically through a request to an API with the appropriate input data. This will involve spinning up our ML application as a microservice since users or downstream processes will interact directly with the model.
+
+<div class="ai-center-all">
+    <img width="400" src="/static/images/mlops/infrastructure/real_time_serving.png">
+</div>
+
+- ✅&nbsp; can yield more up-to-date predictions which may yield a more meaningful user experience, etc.
+- ❌&nbsp; requires managed microservices to handle request traffic.
+- ❌&nbsp; requires real-time monitoring since input space in unbounded, which could yield erroneous predictions.
+
+In this lesson, we'll create the API required to enable real-time serving. The interactions in our situation involve the client (users, other applications, etc.) sending a *request* (ex. prediction given inputs) to the server (our application with a trained model) and receiving a *response* (ex. prediction) in return.
 
 <div class="ai-center-all">
     <img width="500" src="/static/images/mlops/api/interactions.png">
@@ -21,7 +56,7 @@ The interactions in our situation involve the client (users, other applications,
 
 ## Request
 
-We'll first take a look at the different components of a request:
+Users will interact with our API in the form of a request. We'll first take a look at the different components of a request:
 
 ### URI
 
@@ -709,7 +744,11 @@ If you are building a product, then I highly recommending forking this [generati
 
 However, for the majority of ML developers, thanks to the wide adoption of microservices, we don't need to do all of this. A well designed API service that can seamlessly communicate with all other services (framework agnostic) will fit into any process and add value to the overall product. Our main focus should be to ensure that our service is working as it should and constantly improve, which is exactly what the next cluster of lessons will focus on ([testing](testing.md){:target="_blank"} and [monitoring](monitoring.md){:target="_blank"})
 
-> Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers, such as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server, provide a common interface to interact with models for inspection, inference, etc. In fact, modules like RedisAI can even offer added benefits such as data locality for super fast inference.
+## Model server
+
+Besides wrapping our models as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers provide a registry with an API layer to seamlessly inspect, update, serve, rollback, etc. multiple versions of models. They also offer automatic scaling to meet throughput and latency needs. Popular options include [BentoML](https://www.bentoml.com/){:target="_blank"}, [MLFlow](https://docs.databricks.com/applications/mlflow/model-serving.html){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"}, [Nvidia Triton Inference Server](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"}, etc.
+
+> Model servers are experiencing a lot of adoption for their ability to standardize the model deployment and serving processes across the team -- enabling seamless upgrades, validation and integration.
 
 ## Resources
 

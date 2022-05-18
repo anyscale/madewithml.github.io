@@ -490,7 +490,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </ul>
 </div>
 <div class="col-md-4">
-    <b><span class="mr-1">📝</span> Scripting</b>
+    <b><span class="mr-1">💻</span> Developing</b>
     <ul>
     <li><a href="/courses/mlops/packaging/">Packaging</a></li>
     <li><a href="/courses/mlops/organization/">Organization</a></li>
@@ -499,7 +499,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <li><a href="/courses/mlops/styling/">Styling</a></li>
     <li><a href="/courses/mlops/makefile/">Makefile</a></li>
     </ul>
-    <b><span class="mr-1">📦</span> Interfaces</b>
+    <b><span class="mr-1">📦</span> Serving</b>
     <ul>
     <li><a href="/courses/mlops/cli/">Command-line</a></li>
     <li><a href="/courses/mlops/api/">RESTful API</a></li>

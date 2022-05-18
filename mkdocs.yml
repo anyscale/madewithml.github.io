@@ -72,14 +72,14 @@ nav:
       - Evaluation: courses/mlops/evaluation.md
       - Experiment tracking: courses/mlops/experiment-tracking.md
       - Optimization: courses/mlops/optimization.md
-    - 📝 &nbsp; Scripting:
+    - 💻 &nbsp; Developing:
       - Packaging: courses/mlops/packaging.md
       - Organization: courses/mlops/organization.md
       - Logging: courses/mlops/logging.md
       - Documentation: courses/mlops/documentation.md
       - Styling: courses/mlops/styling.md
       - Makefile: courses/mlops/makefile.md
-    - 📦 &nbsp; Interfaces:
+    - 📦 &nbsp; Serving:
       - Command line: courses/mlops/cli.md
       - RESTful API: courses/mlops/api.md
     - ✅ &nbsp; Testing:

@@ -89,11 +89,11 @@ We can make batch predictions on a finite set of inputs which are then written t
     What are some tasks where batch serving is ideal?
 
     ??? quote "Show answer"
-        Recommend content that *existing* users will like based on their viewing history. However, *new* users may just receive some generic recommendations based on their explicit interests until we process their history the next day. And even if we're not doing batch serving, it might still be useful to cache very popular sets of input features (ex. combination of explicit interests > recommended content) so that we can serve those predictions faster.
+        Recommend content that *existing* users will like based on their viewing history. However, *new* users may just receive some generic recommendations based on their explicit interests until we process their history the next day. And even if we're not doing batch serving, it might still be useful to cache very popular sets of input features (ex. combination of explicit interests leads to certain recommended content) so that we can serve those predictions faster.
 
 ### Real-time serving
 
-We can also serve live predictions, typically through an HTTPS call with the appropriate input data. This will involve spinning up our ML application as a microservice since users or downstream processes will interact directly with the model.
+We can also serve live predictions, typically through a [request](api.md#request){:target="_blank"} to our [API](api.md){:target="_blank"} with the appropriate input data. This will involve spinning up our ML application as a microservice since users or downstream processes will interact directly with the model.
 
 <div class="ai-center-all">
     <img width="400" src="/static/images/mlops/infrastructure/real_time_serving.png">
@@ -109,7 +109,7 @@ We can also serve live predictions, typically through an HTTPS call with the app
     ??? quote "Show answer"
         With batch processing, we generate content recommendations for users offline using their history. These recommendations won't change until we process the batch the next day using the updated user features. But what is the user's taste significantly changes during the day (ex. user is searching for horror movies to watch). With real-time serving, we can use these recent features to recommend highly relevant content based on the immediate searches.
 
-> Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers, such as [MLFlow](https://mlflow.org/){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, [RedisAI](https://oss.redislabs.com/redisai/){:target="_blank"} or [Nvidia's Triton](https://developer.nvidia.com/nvidia-triton-inference-server){:target="_blank"} inference server, provide a common interface to interact with models for inspection, inference, etc. In fact, modules like RedisAI can even offer added benefits such as data locality for super fast inference.
+> Besides wrapping our model(s) as separate, scalable microservices, we can also have a purpose-built [model server](api.md#model-server){:target="_blank"} to seamlessly inspect, update, serve, rollback, etc. multiple versions of models.
 
 ## Processing
 
@@ -127,8 +127,6 @@ Batch process features for a given entity at a previous point in time, which are
 
 - ✅&nbsp; can perform heavy feature computations offline and have it ready for fast inference.
 - ❌&nbsp; features can become stale since they were predetermined a while ago. This can be a huge disadvantage when your prediction depends on very recent events. (ex. catching fraudulent transactions as quickly as possible).
-
-> We discuss more about different [data management architectures](pipelines.md#extraction){:target="_blank"}, such as databases and data warehouses (DWH) in the [pipelines](pipelines.md){:target="_blank"} lesson.
 
 ### Stream processing
 
@@ -192,13 +190,13 @@ In order to truly serve the most informed predictions, we should have a model tr
 There are many different experimentation strategies we can use to measure real-time performance before committing to replace our existing version of the system.
 
 ### AB tests
-AB tests involve sending production traffic to the different systems that we're evaluating and then using statistical hypothesis testing to decide which system is better. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination.
+AB testing involves sending production traffic to our current system (control group) and the new version (treatment group) and measuring if there is a statistical difference between the values for two metrics. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination.
 
 <div class="ai-center-all">
     <img width="500" src="/static/images/mlops/infrastructure/ab.png">
 </div>
 
-> In many cases, if we're simply trying to compare the different versions for a certain metric, multi-armed bandits will be a better approach.
+> In many cases, if we're simply trying to compare the different versions for a certain metric, AB testing can take while before we reach statical significance since traffic is evenly split between the different groups. In this scenario, [multi-armed bandits](https://en.wikipedia.org/wiki/Multi-armed_bandit){:target="_blank"} will be a better approach since they continuously assign traffic to the better performing version.
 
 ### Canary tests
 Canary tests involve sending most of the production traffic to the currently deployed system but sending traffic from a small cohort of users to the new system we're trying to evaluate. Again we need to make sure that the same users continue to interact with the same system as we gradually roll out the new system.

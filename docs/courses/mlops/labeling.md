@@ -96,7 +96,7 @@ import pandas as pd
 from urllib.request import urlopen
 ```
 
-> Traditionally, our data assets will be stored, versioned and updated in a database, warehouse, etc. We'll learn more about these different [data management systems](infrastructure.md#data-management-systems) later, but for now, we'll load our data as a JSON file from our repository.
+> Traditionally, our data assets will be stored, versioned and updated in a database, warehouse, etc. We'll learn more about these different [data management systems](infrastructure.md#data-management-systems){:target="_blank"} later, but for now, we'll load our data as a JSON file from our repository.
 
 ```python linenums="1"
 # Load projects
