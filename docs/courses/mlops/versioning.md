@@ -33,7 +33,7 @@ We'll be using DVC to version our datasets and model weights and store them in a
 Let's start by installing DVC and initializing it to create a [.dvc](https://github.com/GokuMohandas/MLOps/tree/main/.dvc){:target="_blank"} directory.
 ```bash
 # Initialization
-pip install dvc
+pip install dvc==2.1.0
 pip uninstall dataclasses (Python < 3.8)
 dvc init
 ```

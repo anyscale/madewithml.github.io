@@ -408,8 +408,8 @@ With our datasets, we may often notice a data imbalance problem where a range of
 
 > We'll use the [imblearn package](https://imbalanced-learn.org/stable/){:target="_blank"} to ensure that we oversample our minority classes to be equal to the majority class (tag with most samples).
 
-```python linenums="1"
-!pip install imbalanced-learn==0.8.1 -q
+```bash
+pip install imbalanced-learn==0.8.1 -q
 ```
 ```python linenums="1"
 from imblearn.over_sampling import RandomOverSampler

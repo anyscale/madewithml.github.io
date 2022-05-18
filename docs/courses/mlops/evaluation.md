@@ -288,8 +288,8 @@ But these are fairly crude techniques because neural networks are easily [overco
 
 Recent work on [confident learning](https://arxiv.org/abs/1911.00068){:target="_blank"} ([cleanlab](https://github.com/cleanlab/cleanlab){:target="_blank"}) focuses on identifying noisy labels (with calibration), which can then be properly relabeled and used for training.
 
-```python linenums="1"
-!pip install cleanlab==1.0.1 -q
+```bash
+pip install cleanlab==1.0.1 -q
 ```
 ```python linenums="1"
 import cleanlab
@@ -342,8 +342,8 @@ Just inspecting the overall and class metrics isn't enough to deploy our new ver
 
 An easy way to create and evaluate slices is to define slicing functions.
 
-```python linenums="1"
-!pip install snorkel==0.9.7 -q
+```bash
+pip install snorkel==0.9.7 -q
 ```
 
 ```python linenums="1"
@@ -549,8 +549,8 @@ Another recent work on [model patching](https://arxiv.org/abs/2008.06775){:targe
 
 Besides just comparing predicted outputs with ground truth values, we can also inspect the inputs to our models. What aspects of the input are more influential towards the prediction? If the focus is not on the relevant features of our input, then we need to explore if there is a hidden pattern we're missing or if our model has learned to overfit on the incorrect features. We can use techniques such as [SHAP](https://github.com/slundberg/shap){:target="_blank"} (SHapley Additive exPlanations) or [LIME](https://github.com/marcotcr/lime){:target="_blank"} (Local Interpretable Model-agnostic Explanations) to inspect feature importance. On a high level, these techniques learn which features have the most signal by assessing the performance in their absence. These inspections can be performed on a global level (ex. per-class) or on a local level (ex. single prediction).
 
-```python linenums="1"
-!pip install lime==0.2.0.1 -q
+```bash
+pip install lime==0.2.0.1 -q
 ```
 ```python linenums="1"
 from lime.lime_text import LimeTextExplainer

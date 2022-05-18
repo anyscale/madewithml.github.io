@@ -21,7 +21,7 @@ We'll be using the [Pre-commit](https://pre-commit.com/){:target="_blank"} frame
 
 ```bash
 # Install pre-commit
-pip install pre-commit
+pip install pre-commit==2.11.1
 pre-commit install
 ```
 

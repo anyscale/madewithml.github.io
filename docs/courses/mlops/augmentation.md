@@ -66,8 +66,8 @@ Depending on the feature types and tasks, there are many data augmentation libra
 Let's use the [nlpaug](https://github.com/makcedward/nlpaug){:target="_blank"} library to augment our dataset and assess the quality of the generated samples.
 
 ```bash
-!pip install nlpaug==1.1.0 transformers==3.0.2 -q
-!pip install snorkel==0.9.7 -q
+pip install nlpaug==1.1.0 transformers==3.0.2 -q
+pip install snorkel==0.9.7 -q
 ```
 
 ```python linenums="1"

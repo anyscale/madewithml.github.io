@@ -13,9 +13,9 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/
 ## Intuition
 So far, we've been training and evaluating our different baselines but haven't really been tracking these experiments. We'll fix this but defining a proper process for experiment tracking which we'll use for all future experiments (including hyperparameter optimization). Experiment tracking is the processing of managing all the different experiments and their components, such as parameters, metrics, models and other artifacts and it enables us to:
 
-- *Organize* all the necessary components of a specific experiment. It's important to have everything in one place and know where it is so you can use them later.
-- *Reproduce* past results (easily) using saved experiments.
-- *Log* iterative improvements across time, data, ideas, teams, etc.
+- **Organize** all the necessary components of a specific experiment. It's important to have everything in one place and know where it is so you can use them later.
+- **Reproduce** past results (easily) using saved experiments.
+- **Log** iterative improvements across time, data, ideas, teams, etc.
 
 ## Tools
 There are many options for experiment tracking but we're going to use [MLFlow](https://mlflow.org/){:target="_blank"} (100% free and [open-source](https://github.com/mlflow/mlflow){:target="_blank"}) because it has all the functionality we'll need (and [growing integration support](https://medium.com/pytorch/mlflow-and-pytorch-where-cutting-edge-ai-meets-mlops-1985cf8aa789){:target="_blank"}). We can run MLFlow on our own servers and databases so there are no storage cost / limitations, making it one of the most popular options and is used by Microsoft, Facebook, Databricks and others. You can also set up your own Tracking servers to synchronize runs amongst multiple team members collaborating on the same task.
@@ -27,304 +27,130 @@ There are also several popular options such as a [Comet ML](https://www.comet.ml
 ## Application
 
 We'll start by initializing all the required arguments for our experiment.
+
+```bash
+pip install mlflow==1.13.1 -q
+```
+
 ```python linenums="1"
 from argparse import Namespace
 import mlflow
 from pathlib import Path
 ```
+The input argument `args`contains all the parameters needed and it's nice to have it all organized under one variable so we can easily log it and tweak it for different experiments (we'll see this when we do [hyperparameter optimization](optimization.md){:target="_blank"}).
+
 ```python linenums="1"
 # Specify arguments
-params = Namespace(
-    char_level=True,
-    filter_sizes=list(range(1, 11)),
-    batch_size=64,
-    embedding_dim=128,
-    num_filters=128,
-    hidden_dim=128,
-    dropout_p=0.5,
-    lr=2e-4,
-    num_epochs=200,
-    patience=10,
+args = Namespace(
+    lower=True,
+    stem=False,
+    analyzer="char",
+    ngram_max_range=7,
+    alpha=1e-4,
+    learning_rate=1e-1,
+    power_t=0.1
 )
 ```
 
-> When we move to Python scripts, we'll use the [Typer](https://typer.tiangolo.com/){:target="_blank"} package instead of argparse for a better CLI experience.
-
 Next, we'll set up our model registry where all the experiments and their respective runs will be stored. We'll load trained models from this registry as well using specific run IDs.
 ```python linenums="1"
-# Model registry
-MODEL_REGISTRY = Path(STORES_DIR, "model")
-MODEL_REGISTRY.mkdir(parents=True, exist_ok=True)
+# Set tracking URI
+MODEL_REGISTRY = Path("experiments")
+Path(MODEL_REGISTRY).mkdir(exist_ok=True) # create experiments dir
 mlflow.set_tracking_uri("file://" + str(MODEL_REGISTRY.absolute()))
 ```
 
-!!! note
+!!! tip
     On Windows, the last line where we set the tracking URI should have three forwards slashes:
     ```python linenums="1"
     mlflow.set_tracking_uri("file:///" + str(MODEL_REGISTRY.absolute()))
     ```
 
+```bash linenums="1"
+ls
+```
+<pre class="output">
+experiments  labeled_projects.json  sample_data
+</pre>
+
 > When we're collaborating with other team members, this model registry will live on the cloud. Members from our team can connect to it (with authentication) to save and load trained models. If you don't want to set up and maintain a model registry, this is where platforms like [Comet ML](https://www.comet.ml/site/){:target="_blank"}, [Weights and Biases](https://www.wandb.com/){:target="_blank"} and others offload a lot of technical setup.
 
 ## Training
 
-Next, we're going to modify our `Trainer` object so that we can log the metrics from each epoch. The only addition are these lines:
-```python linenums="1"
-class Trainer(object):
-    ...
-    def train(self, ...):
-        ...
-        # Tracking
-        mlflow.log_metrics(
-            {"train_loss": train_loss, "val_loss": val_loss}, step=epoch
-        )
-        ...
-        return best_model, best_val_loss
-```
+And to make things simple, we'll encapsulate all the components for training into one function which returns all the artifacts we want to be able to track from our experiment.
 
-??? quote "Code for complete `Trainer` class"
-    ```python linenums="1" hl_lines="102-105"
-    # Modified for experiment tracking
-    class Trainer(object):
-        def __init__(self, model, device, loss_fn=None, optimizer=None, scheduler=None):
-
-            # Set params
-            self.model = model
-            self.device = device
-            self.loss_fn = loss_fn
-            self.optimizer = optimizer
-            self.scheduler = scheduler
-
-        def train_step(self, dataloader):
-            """Train step."""
-            # Set model to train mode
-            self.model.train()
-            loss = 0.0
-
-            # Iterate over train batches
-            for i, batch in enumerate(dataloader):
-
-                # Step
-                batch = [item.to(self.device) for item in batch]  # Set device
-                inputs, targets = batch[:-1], batch[-1]
-                self.optimizer.zero_grad()  # Reset gradients
-                z = self.model(inputs)  # Forward pass
-                J = self.loss_fn(z, targets)  # Define loss
-                J.backward()  # Backward pass
-                self.optimizer.step()  # Update weights
-
-                # Cumulative Metrics
-                loss += (J.detach().item() - loss) / (i + 1)
-
-            return loss
-
-        def eval_step(self, dataloader):
-            """Validation or test step."""
-            # Set model to eval mode
-            self.model.eval()
-            loss = 0.0
-            y_trues, y_probs = [], []
-
-            # Iterate over val batches
-            with torch.inference_mode():
-                for i, batch in enumerate(dataloader):
-
-                    # Step
-                    batch = [item.to(self.device) for item in batch]  # Set device
-                    inputs, y_true = batch[:-1], batch[-1]
-                    z = self.model(inputs)  # Forward pass
-                    J = self.loss_fn(z, y_true).item()
-
-                    # Cumulative Metrics
-                    loss += (J - loss) / (i + 1)
-
-                    # Store outputs
-                    y_prob = torch.sigmoid(z).cpu().numpy()
-                    y_probs.extend(y_prob)
-                    y_trues.extend(y_true.cpu().numpy())
-
-            return loss, np.vstack(y_trues), np.vstack(y_probs)
-
-        def predict_step(self, dataloader):
-            """Prediction step."""
-            # Set model to eval mode
-            self.model.eval()
-            y_probs = []
-
-            # Iterate over val batches
-            with torch.inference_mode():
-                for i, batch in enumerate(dataloader):
-
-                    # Forward pass w/ inputs
-                    inputs, targets = batch[:-1], batch[-1]
-                    z = self.model(inputs)
-
-                    # Store outputs
-                    y_prob = torch.sigmoid(z).cpu().numpy()
-                    y_probs.extend(y_prob)
-
-            return np.vstack(y_probs)
-
-        def train(self, num_epochs, patience, train_dataloader, val_dataloader,
-                tolerance=1e-5):
-            best_val_loss = np.inf
-            for epoch in range(num_epochs):
-                # Steps
-                train_loss = self.train_step(dataloader=train_dataloader)
-                val_loss, _, _ = self.eval_step(dataloader=val_dataloader)
-                self.scheduler.step(val_loss)
-
-                # Early stopping
-                if val_loss < best_val_loss - tolerance:
-                    best_val_loss = val_loss
-                    best_model = self.model
-                    _patience = patience  # reset _patience
-                else:
-                    _patience -= 1
-                if not _patience:  # 0
-                    print("Stopping early!")
-                    break
-
-                # Tracking
-                mlflow.log_metrics(
-                    {"train_loss": train_loss, "val_loss": val_loss}, step=epoch
-                )
-
-                # Logging
-                print(
-                    f"Epoch: {epoch+1} | "
-                    f"train_loss: {train_loss:.5f}, "
-                    f"val_loss: {val_loss:.5f}, "
-                    f"lr: {self.optimizer.param_groups[0]['lr']:.2E}, "
-                    f"_patience: {_patience}"
-                )
-            return best_model, best_val_loss
-    ```
-
-And to make things simple, we'll encapsulate all the components for training into one function which returns all the artifacts we want to be able to track from our experiment. The input argument `args`contains all the parameters needed and it's nice to have it all organized under one variable so we can easily log it and tweak it for different experiments (we'll see this when we do [hyperparameter optimization](optimization.md)).
+> Ignore the `trial` argument for now (default is `None`) as it will be used during the [hyperparameter optimization](optimization.md){:target="_blank"} lesson for pruning unpromising trials.
 
 ```python linenums="1"
-def train_cnn(params, df):
-    """Train a CNN using specific arguments."""
-    ...
+def train(args, df, trial=None):
+    """Train model on data."""
+
+    # Set seeds
+    set_seeds()
+
+    # Get data splits
+    preprocessed_df = df.copy()
+    preprocessed_df.text = preprocessed_df.text.apply(preprocess, lower=args.lower, stem=args.stem)
+    X_train, X_val, X_test, y_train, y_val, y_test, label_encoder = get_data_splits(preprocessed_df)
+
+    # Tf-idf
+    vectorizer = TfidfVectorizer(analyzer=args.analyzer, ngram_range=(2,args.ngram_max_range))  # char n-grams
+    X_train = vectorizer.fit_transform(X_train)
+    X_val = vectorizer.transform(X_val)
+    X_test = vectorizer.transform(X_test)
+
+    # Oversample
+    oversample = RandomOverSampler(sampling_strategy="all")
+    X_over, y_over = oversample.fit_resample(X_train, y_train)
+
+    # Model
+    model = SGDClassifier(
+        loss="log", penalty="l2", alpha=args.alpha, max_iter=1,
+        learning_rate="constant", eta0=args.learning_rate, power_t=args.power_t,
+        warm_start=True)
+
+    # Training
+    for epoch in range(100):
+        model.fit(X_over, y_over)
+        train_loss = log_loss(y_train, model.predict_proba(X_train))
+        val_loss = log_loss(y_val, model.predict_proba(X_val))
+        if not epoch%10:
+            print(
+                f"Epoch: {epoch:02d} | "
+                f"train_loss: {train_loss:.5f}, "
+                f"val_loss: {val_loss:.5f}"
+            )
+
+        # Log
+        if not trial:
+            mlflow.log_metrics({"train_loss": train_loss, "val_loss": val_loss}, step=epoch)
+
+        # Pruning (for optimization in next section)
+        if trial:
+            trial.report(val_loss, epoch)
+            if trial.should_prune():
+                raise optuna.TrialPruned()
+
+    # Evaluation
+    y_pred = predict(X_test, model=model, index=label_encoder.class_to_index["other"])
+    metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
+    performance = {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
+    print (json.dumps(performance, indent=2))
+
     return {
-        "params": params,
-        "tokenizer": tokenizer,
+        "args": args,
         "label_encoder": label_encoder,
-        "model": best_model,
-        "performance": performance,
-        "best_val_loss": best_val_loss,
+        "vectorizer": vectorizer,
+        "model": model,
+        "performance": performance
     }
 ```
-
-The input argument `params`contains all the parameters needed and it's nice to have it all organized under one variable so we can easily log it and tweak it for different experiments (we'll see this when we do hyperparameter optimization).
-
-??? quote "Code for complete `train_cnn` function"
-    ```python linenums="1"
-    def train_cnn(params, df):
-        """Train a CNN using specific arguments."""
-
-        # Set seeds
-        set_seeds()
-
-        # Get data splits
-        preprocessed_df = df.copy()
-        preprocessed_df.text = preprocessed_df.text.apply(preprocess, lower=True)
-        X_train, X_val, X_test, y_train, y_val, y_test, label_encoder = get_data_splits(preprocessed_df)
-        X_test_raw = X_test
-        num_classes = len(label_encoder)
-
-        # Set device
-        cuda = True
-        device = torch.device("cuda" if (
-            torch.cuda.is_available() and cuda) else "cpu")
-        torch.set_default_tensor_type("torch.FloatTensor")
-        if device.type == "cuda":
-            torch.set_default_tensor_type("torch.cuda.FloatTensor")
-
-        # Tokenize
-        tokenizer = Tokenizer(char_level=params.char_level)
-        tokenizer.fit_on_texts(texts=X_train)
-        vocab_size = len(tokenizer)
-
-        # Convert texts to sequences of indices
-        X_train = np.array(tokenizer.texts_to_sequences(X_train))
-        X_val = np.array(tokenizer.texts_to_sequences(X_val))
-        X_test = np.array(tokenizer.texts_to_sequences(X_test))
-
-        # Class weights
-        counts = np.bincount([label_encoder.class_to_index[class_] for class_ in all_tags])
-        class_weights = {i: 1.0/count for i, count in enumerate(counts)}
-
-        # Create datasets
-        train_dataset = CNNTextDataset(
-            X=X_train, y=y_train, max_filter_size=max(params.filter_sizes))
-        val_dataset = CNNTextDataset(
-            X=X_val, y=y_val, max_filter_size=max(params.filter_sizes))
-        test_dataset = CNNTextDataset(
-            X=X_test, y=y_test, max_filter_size=max(params.filter_sizes))
-
-        # Create dataloaders
-        train_dataloader = train_dataset.create_dataloader(
-            batch_size=params.batch_size)
-        val_dataloader = val_dataset.create_dataloader(
-            batch_size=params.batch_size)
-        test_dataloader = test_dataset.create_dataloader(
-            batch_size=params.batch_size)
-
-        # Initialize model
-        model = CNN(
-            embedding_dim=params.embedding_dim, vocab_size=vocab_size,
-            num_filters=params.num_filters, filter_sizes=params.filter_sizes,
-            hidden_dim=params.hidden_dim, dropout_p=params.dropout_p,
-            num_classes=num_classes)
-        model = model.to(device)
-
-        # Define loss
-        class_weights_tensor = torch.Tensor(np.array(list(class_weights.values())))
-        loss_fn = nn.BCEWithLogitsLoss(weight=class_weights_tensor)
-
-        # Define optimizer & scheduler
-        optimizer = torch.optim.Adam(model.parameters(), lr=params.lr)
-        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer, mode="min", factor=0.1, patience=5)
-
-        # Trainer module
-        trainer = Trainer(
-            model=model, device=device, loss_fn=loss_fn,
-            optimizer=optimizer, scheduler=scheduler)
-
-        # Train
-        best_model, best_val_loss = trainer.train(
-            params.num_epochs, params.patience, train_dataloader, val_dataloader)
-
-        # Best threshold for f1
-        train_loss, y_true, y_prob = trainer.eval_step(dataloader=train_dataloader)
-        precisions, recalls, thresholds = precision_recall_curve(y_true.ravel(), y_prob.ravel())
-        threshold = find_best_threshold(y_true.ravel(), y_prob.ravel())
-
-        # Determine predictions using threshold
-        test_loss, y_true, y_prob = trainer.eval_step(dataloader=test_dataloader)
-        y_pred = np.array([np.where(prob >= threshold, 1, 0) for prob in y_prob])
-
-        # Evaluate
-        performance = get_metrics(
-            y_true=y_test, y_pred=y_pred, classes=label_encoder.classes)
-
-        return {
-            "params": params,
-            "tokenizer": tokenizer,
-            "label_encoder": label_encoder,
-            "model": best_model,
-            "performance": performance,
-            "best_val_loss": best_val_loss,
-        }
-    ```
 
 ## Tracking
 With MLFlow we need to first initialize an experiment and then you can do runs under that experiment.
 
 ```python linenums="1"
+import joblib
 import tempfile
 ```
 ```python linenums="1"
@@ -335,16 +161,17 @@ mlflow.set_experiment(experiment_name="baselines")
 INFO: 'baselines' does not exist. Creating a new experiment
 </pre>
 ```python linenums="1"
-def save_dict(d, filepath, cls=None, sortkeys=False):
+def save_dict(d, filepath):
+    """Save dict to a json file."""
     with open(filepath, "w") as fp:
-        json.dump(d, indent=2, fp=fp, cls=cls, sort_keys=sortkeys)
+        json.dump(d, indent=2, sort_keys=False, fp=fp)
 ```
 ```python linenums="1"
 # Tracking
-with mlflow.start_run(run_name="cnn") as run:
+with mlflow.start_run(run_name="sgd"):
 
     # Train & evaluate
-    artifacts = train_cnn(args=args, df=df)
+    artifacts = train(args=args, df=df)
 
     # Log key metrics
     mlflow.log_metrics({"precision": artifacts["performance"]["precision"]})
@@ -353,9 +180,9 @@ with mlflow.start_run(run_name="cnn") as run:
 
     # Log artifacts
     with tempfile.TemporaryDirectory() as dp:
-        artifacts["tokenizer"].save(Path(dp, "tokenizer.json"))
         artifacts["label_encoder"].save(Path(dp, "label_encoder.json"))
-        torch.save(artifacts["model"].state_dict(), Path(dp, "model.pt"))
+        joblib.dump(artifacts["vectorizer"], Path(dp, "vectorizer.pkl"))
+        joblib.dump(artifacts["model"], Path(dp, "model.pkl"))
         save_dict(artifacts["performance"], Path(dp, "performance.json"))
         mlflow.log_artifacts(dp)
 
@@ -363,56 +190,48 @@ with mlflow.start_run(run_name="cnn") as run:
     mlflow.log_params(vars(artifacts["args"]))
 ```
 <pre class="output">
-Epoch: 1 | train_loss: 0.00606, val_loss: 0.00291, lr: 2.00E-04, _patience: 10
-Epoch: 2 | train_loss: 0.00407, val_loss: 0.00293, lr: 2.00E-04, _patience: 9
-Epoch: 3 | train_loss: 0.00366, val_loss: 0.00270, lr: 2.00E-04, _patience: 10
-...
-Epoch: 50 | train_loss: 0.00068, val_loss: 0.00156, lr: 2.00E-06, _patience: 3
-Epoch: 51 | train_loss: 0.00066, val_loss: 0.00155, lr: 2.00E-06, _patience: 2
-Epoch: 52 | train_loss: 0.00066, val_loss: 0.00155, lr: 2.00E-06, _patience: 1
-Stopping early!
+Epoch: 00 | train_loss: 1.16930, val_loss: 1.21451
+Epoch: 10 | train_loss: 0.46116, val_loss: 0.65903
+Epoch: 20 | train_loss: 0.31565, val_loss: 0.56018
+Epoch: 30 | train_loss: 0.25207, val_loss: 0.51967
+Epoch: 40 | train_loss: 0.21740, val_loss: 0.49822
+Epoch: 50 | train_loss: 0.19615, val_loss: 0.48529
+Epoch: 60 | train_loss: 0.18249, val_loss: 0.47708
+Epoch: 70 | train_loss: 0.17330, val_loss: 0.47158
+Epoch: 80 | train_loss: 0.16671, val_loss: 0.46765
+Epoch: 90 | train_loss: 0.16197, val_loss: 0.46488
+{
+  "precision": 0.8929962902778195,
+  "recall": 0.8333333333333334,
+  "f1": 0.8485049088497365
+}
 </pre>
 
 ## Viewing
-Let's view what we've tracked from our experiment. MLFlow serves a dashboard for us to view and explore our experiments on a localhost port but since we're inside a notebook, we're going to use public tunnel ([ngrok](https://ngrok.com/){:target="_blank"}) to view it.
+Let's view what we've tracked from our experiment. MLFlow serves a dashboard for us to view and explore our experiments on a localhost port. If you're running this on your local computer, you can simply run the MLFlow server:
 
-```python linenums="1"
-from pyngrok import ngrok
+```bash
+mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri $PWD/experiments/
 ```
 
-> You may need to rerun the cell below multiple times if the connection times out it is overloaded.
+and open [http://localhost:5000/](http://localhost:5000/){:target="_blank"} to view the dashboard. But if you're on Google colab, we're going to use [localtunnel](https://github.com/localtunnel/localtunnel){:target="_blank"} to create a connection between this notebook and a public URL.
+
+> If localtunnel is not installed, you may need to run `!npm install -g localtunnel` in a cell first.
 
 ```python linenums="1"
-# https://stackoverflow.com/questions/61615818/setting-up-mlflow-on-google-colab
-get_ipython().system_raw("mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri $PWD/mlruns/ &")
-ngrok.kill()
-ngrok.set_auth_token("")
-ngrok_tunnel = ngrok.connect(addr="5000", proto="http", bind_tls=True)
-print("MLflow Tracking UI:", ngrok_tunnel.public_url)
+# Run MLFlow server and localtunnel
+get_ipython().system_raw("mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri $PWD/experiments/ &")
+!npx localtunnel --port 5000
 ```
-<pre class="output">
-MLflow Tracking UI: https://476803694c2e.ngrok.io
-</pre>
 
-MLFlow creates a main dashboard with all your experiments and their respective runs. You can sort runs by clicking on the column headers.
+MLFlow creates a main dashboard with all your experiments and their respective runs. We can sort runs by clicking on the column headers.
 <div class="ai-center-all">
     <img src="/static/images/mlops/experiment_tracking/dashboard.png" style="width: 100rem;" alt="mlflow dashboard">
 </div>
-We can click on any of our experiments on the main dashboard to further explore it:
-<div class="row">
-  <div class="col-6">
-    <div class="ai-center-all">
-      <img src="/static/images/mlops/experiment_tracking/parameters.png" width="400" alt="mlflow dashboard">
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="ai-center-all">
-      <img src="/static/images/mlops/experiment_tracking/metrics.png" width="400" alt="mlflow dashboard">
-    </div>
-  </div>
-</div>
+
+We can click on any of our experiments on the main dashboard to further explore it (click on the timestamp link for each run). Then click on metrics on the left side to view them in a plot:
 <div class="ai-center-all">
-    <img src="/static/images/mlops/experiment_tracking/plots.png" width="1000" alt="mlflow dashboard">
+    <img src="https://madewithml.com/static/images/mlops/experiment_tracking/plots.png" width="1000" alt="experiment metrics">
 </div>
 
 ## Loading
@@ -426,32 +245,51 @@ def load_dict(filepath):
     return d
 ```
 ```python linenums="1"
-# Load components
-client = mlflow.tracking.MlflowClient()
+# Load all runs from experiment
 experiment_id = mlflow.get_experiment_by_name("baselines").experiment_id
-all_runs = mlflow.search_runs(experiment_ids=experiment_id, order_by=["metrics.f1 DESC"])
+all_runs = mlflow.search_runs(experiment_ids=experiment_id, order_by=["metrics.val_loss ASC"])
 print (all_runs)
 ```
 <pre class="output">
                              run_id  ... tags.mlflow.runName
-0  db54fa3bc6b945f7b7f814843551df36  ...                 cnn
+0  3e5327289e9c499cabfda4fe8b09c037  ...                 sgd
 
-[1 rows x 25 columns]
+[1 rows x 22 columns]
 </pre>
+
 ```python linenums="1"
 # Best run
-device = torch.device("cpu")
 best_run_id = all_runs.iloc[0].run_id
 best_run = mlflow.get_run(run_id=best_run_id)
+client = mlflow.tracking.MlflowClient()
 with tempfile.TemporaryDirectory() as dp:
     client.download_artifacts(run_id=best_run_id, path="", dst_path=dp)
-    tokenizer = Tokenizer.load(fp=Path(dp, "tokenizer.json"))
+    vectorizer = joblib.load(Path(dp, "vectorizer.pkl"))
     label_encoder = LabelEncoder.load(fp=Path(dp, "label_encoder.json"))
-    model_state = torch.load(Path(dp, "model.pt"), map_location=device)
+    model = joblib.load(Path(dp, "model.pkl"))
     performance = load_dict(filepath=Path(dp, "performance.json"))
 ```
+```python linenums="1"
+print (json.dumps(performance, indent=2))
+```
+<pre class="output">
+{
+  "precision": 0.8929962902778195,
+  "recall": 0.8333333333333334,
+  "f1": 0.8485049088497365
+}
+</pre>
+```python linenums="1"
+# Inference
+text = "Transfer learning with transformers for text classification."
+y_pred = model.predict(vectorizer.transform([text]))
+label_encoder.decode(y_pred)
+```
+<pre class="output">
+['natural-language-processing']
+</pre>
 
-!!! note
+!!! tip
     We can also load a specific run's model artifacts, by using it's run ID, directly from the model registry without having to save them to a temporary directory.
     ```python linenums="1"
     artifact_uri = mlflow.get_run(run_id=run_id).info.artifact_uri.split("file://")[-1]
@@ -461,76 +299,6 @@ with tempfile.TemporaryDirectory() as dp:
     model_state = torch.load(Path(artifact_uri, "model.pt"), map_location=device)
     performance = utils.load_dict(filepath=Path(artifact_uri, "performance.json"))
     ```
-
-```python linenums="1"
-print (json.dumps(performance["overall"], indent=2))
-```
-<pre class="output">
-{
-  "precision": 0.8332201275597738,
-  "recall": 0.5110345795419687,
-  "f1": 0.6072536294437475,
-  "num_samples": 480.0
-}
-</pre>
-```python linenums="1"
-# Load artifacts
-device = torch.device("cpu")
-model = CNN(
-    embedding_dim=params.embedding_dim, vocab_size=len(tokenizer),
-    num_filters=params.num_filters, filter_sizes=params.filter_sizes,
-    hidden_dim=params.hidden_dim, dropout_p=params.dropout_p,
-    num_classes=len(label_encoder))
-model.load_state_dict(model_state)
-model.to(device)
-```
-<pre class="output">
-CNN(
-  (embeddings): Embedding(39, 128, padding_idx=0)
-  (conv): ModuleList(
-    (0): Conv1d(128, 128, kernel_size=(1,), stride=(1,))
-    (1): Conv1d(128, 128, kernel_size=(2,), stride=(1,))
-    (2): Conv1d(128, 128, kernel_size=(3,), stride=(1,))
-    (3): Conv1d(128, 128, kernel_size=(4,), stride=(1,))
-    (4): Conv1d(128, 128, kernel_size=(5,), stride=(1,))
-    (5): Conv1d(128, 128, kernel_size=(6,), stride=(1,))
-    (6): Conv1d(128, 128, kernel_size=(7,), stride=(1,))
-    (7): Conv1d(128, 128, kernel_size=(8,), stride=(1,))
-    (8): Conv1d(128, 128, kernel_size=(9,), stride=(1,))
-    (9): Conv1d(128, 128, kernel_size=(10,), stride=(1,))
-  )
-  (dropout): Dropout(p=0.5, inplace=False)
-  (fc1): Linear(in_features=1280, out_features=128, bias=True)
-  (fc2): Linear(in_features=128, out_features=35, bias=True)
-)
-</pre>
-```python linenums="1"
-# Initialize trainer
-trainer = Trainer(model=model, device=device)
-```
-```python linenums="1"
-# Dataloader
-text = "Transfer learning with BERT for self-supervised learning"
-X = np.array(tokenizer.texts_to_sequences([preprocess(text)]))
-y_filler = label_encoder.encode([np.array([label_encoder.classes[0]]*len(X))])
-dataset = CNNTextDataset(
-    X=X, y=y_filler, max_filter_size=max(filter_sizes))
-dataloader = dataset.create_dataloader(
-    batch_size=batch_size)
-```
-```python linenums="1"
-# Inference
-y_prob = trainer.predict_step(dataloader)
-y_pred = np.array([np.where(prob >= threshold, 1, 0) for prob in y_prob])
-label_encoder.decode(y_pred)
-```
-<pre class="output">
-[['natural-language-processing',
-  'self-supervised-learning',
-  'transfer-learning',
-  'transformers']]
-</pre>
-
 
 <!-- Citation -->
 {% include "cite.md" %}

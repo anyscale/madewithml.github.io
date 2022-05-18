@@ -66,11 +66,7 @@ We're going to leverage [Feast](https://feast.dev/){:target="_blank"} as the fea
 ```bash
 # Install Feast
 pip install feast==0.10.5 -q
-pip freeze | grep feast
 ```
-<pre class="output">
-feast==0.10.5
-</pre>
 
 We're going to create a feature repository at the root of our project. Feast will create a configuration file for us and we're going to add an additional [features.py](https://github.com/GokuMohandas/MLOps/blob/main/features/features.py){:target="_blank"} file to define our features.
 
