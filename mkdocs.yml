@@ -62,9 +62,9 @@ nav:
       - System design: courses/mlops/product/#systems-design
       - Project: courses/mlops/product/#project-management
     - 🔢 &nbsp; Data:
+      - Exploration: courses/mlops/exploratory-data-analysis.md
       - Labeling: courses/mlops/labeling.md
       - Preprocessing: courses/mlops/preprocessing.md
-      - Exploration: courses/mlops/exploratory-data-analysis.md
       - Splitting: courses/mlops/splitting.md
       - Augmentation: courses/mlops/augmentation.md
     - 📈 &nbsp; Modeling:

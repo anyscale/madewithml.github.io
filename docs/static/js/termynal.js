@@ -31,13 +31,13 @@ class Termynal {
         this.container = (typeof container === 'string') ? document.querySelector(container) : container;
         this.pfx = `data-${options.prefix || 'ty'}`;
         this.originalStartDelay = this.startDelay = options.startDelay
-            || parseFloat(this.container.getAttribute(`${this.pfx}-startDelay`)) || 600;
+            || parseFloat(this.container.getAttribute(`${this.pfx}-startDelay`)) || 400;
         this.originalTypeDelay = this.typeDelay = options.typeDelay
-            || parseFloat(this.container.getAttribute(`${this.pfx}-typeDelay`)) || 90;
+            || parseFloat(this.container.getAttribute(`${this.pfx}-typeDelay`)) || 30;
         this.originalLineDelay = this.lineDelay = options.lineDelay
-            || parseFloat(this.container.getAttribute(`${this.pfx}-lineDelay`)) || 1500;
+            || parseFloat(this.container.getAttribute(`${this.pfx}-lineDelay`)) || 500;
         this.progressLength = options.progressLength
-            || parseFloat(this.container.getAttribute(`${this.pfx}-progressLength`)) || 40;
+            || parseFloat(this.container.getAttribute(`${this.pfx}-progressLength`)) || 25;
         this.progressChar = options.progressChar
             || this.container.getAttribute(`${this.pfx}-progressChar`) || '█';
 		this.progressPercent = options.progressPercent

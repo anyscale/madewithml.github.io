@@ -467,7 +467,7 @@ def preprocess(text, stopwords=STOPWORDS):
     pattern = re.compile(r"\b(" + r"|".join(stopwords) + r")\b\s*")
     text = pattern.sub("", text)
 
-    # Remove words in paranthesis
+    # Remove words in parenthesis
     text = re.sub(r"\([^)]*\)", "", text)
 
     # Spacing and filters

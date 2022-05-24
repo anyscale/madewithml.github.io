@@ -464,7 +464,7 @@ Once we have validated our data, we're ready to compute features. We have a wide
 compute_features = PythonOperator(
     task_id="compute_features",
     python_callable=main.compute_features,
-    op_kwargs={"params_fp": Path(config.CONFIG_DIR, "params.json")},
+    op_kwargs={"params_fp": Path(config.CONFIG_DIR, "args.json")},
 )
 ```
 

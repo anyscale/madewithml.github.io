@@ -387,7 +387,7 @@ embedding_dim = embeddings_layer.embedding_dim
 
 ```python linenums="1"
 def get_data_tensor(texts):
-    preprocessed_texts = [data.preprocess(text, lower=params.lower, stem=params.stem) for text in texts]
+    preprocessed_texts = [data.clean_text(text, lower=params.lower, stem=params.stem) for text in texts]
     X = np.array(tokenizer.texts_to_sequences(preprocessed_texts), dtype="object")
     y_filler = np.zeros((len(X), len(label_encoder)))
     dataset = data.CNNTextDataset(X=X, y=y_filler, max_filter_size=int(params.max_filter_size))

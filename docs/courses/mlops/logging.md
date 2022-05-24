@@ -11,21 +11,21 @@ repository: https://github.com/GokuMohandas/follow/tree/logging
 
 ## Intuition
 
-Logging is the process of tracking and recording key events that occur in our applications. We want to log events so we can use them to inspect processes, fix issues, etc. They're a whole lot more powerful than `print` statements because they allow us to send specific pieces of information to specific locations, not to mention custom formatting, shared interface with other Python packages, etc. This makes logging a key proponent in being able to surface insightful information from the internal processes of our application.
+Logging is the process of tracking and recording key events that occur in our applications for the purpose of inspection, debugging, etc. They're a whole lot more powerful than `print` statements because they allow us to send specific pieces of information to specific locations with custom formatting, shared interfaces, etc. This makes logging a key proponent in being able to surface insightful information from the internal processes of our application.
 
 ## Components
 
-There are a few overarching concepts to be aware of first before we can create and use our loggers.
+There are a few overarching concepts to be aware of:
 
-- `#!js Logger`: the main object that emits the log messages from our application.
-- `#!js Handler`: used for sending log records to a specific location and specifications for that location (name, size, etc.).
-- `#!js Formatter`: used for style and layout of the log records.
+- `#!js Logger`: emits the log messages from our application.
+- `#!js Handler`: sends log records to a specific location.
+- `#!js Formatter`: formats and styles the log records.
 
 There is so much [more](https://docs.python.org/3/library/logging.html){:target="_blank"} to logging such as filters, exception logging, etc. but these basics will allows us to do everything we need for our application.
 
 ## Levels
 
-Before we create our specialized, configured logger, let's look at what logged messages even look like by using a very basic configuration.
+Before we create our specialized, configured logger, let's look at what logged messages look like by using the basic configuration.
 ```python linenums="1"
 import logging
 import sys
@@ -48,7 +48,7 @@ ERROR:root:There's been a mistake with the process.
 CRITICAL:root:There is something terribly wrong and process may terminate.
 </pre>
 
-These are the basic [levels](https://docs.python.org/3/library/logging.html#logging-levels){:target="_blank"} of logging, where `DEBUG` is the lowest priority and `CRITICAL` is the highest. We defined our logger using [`basicConfig`](https://docs.python.org/3/library/logging.html#logging.basicConfig){:target="_blank"} to emit log messages to our stdout console (we also could've written to any other stream or even a file) and to be sensitive to log messages starting from level `DEBUG`. This means that all of our logged messages will be displayed since `DEBUG` is the lowest level. Had we made the level `ERROR`, then only `ERROR` and `CRITICAL` log message would be displayed.
+These are the basic [levels](https://docs.python.org/3/library/logging.html#logging-levels){:target="_blank"} of logging, where `DEBUG` is the lowest priority and `CRITICAL` is the highest. We defined our logger using [`basicConfig`](https://docs.python.org/3/library/logging.html#logging.basicConfig){:target="_blank"} to emit log messages to stdout (ie. our terminal console), but we also could've written to any other stream or even a file. We also defined our logging to be sensitive to log messages starting from level `DEBUG`. This means that all of our logged messages will be displayed since `DEBUG` is the lowest level. Had we made the level `ERROR`, then only `ERROR` and `CRITICAL` log message would be displayed.
 
 ```python linenums="1" hl_lines="5"
 import logging
@@ -71,20 +71,20 @@ CRITICAL:root:There is something terribly wrong and process may terminate.
 
 ## Configuration
 
-First we want to configure where our logs will be written to. We're creating a separate `logs` directory which is part of our [.gitignore](https://github.com/GokuMohandas/MLOps/blob/main/.gitignore){:target="_blank"} file so it won't be written to [git](git.md){:target="_blank"}.
+First we'll set the location of our logs in our `config.py` script:
 
 ``` python linenums="1"
-# Configure location for logs
+# config/config.py
 LOGS_DIR = Path(BASE_DIR, "logs")
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
 ```
 
-> If we wanted to save our logs in production, we would simply [upload](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-uploading-files.html){:target="_blank"} the log files generated inside this logs directory to a blog storage in the cloud.
-
-Next, we'll configure the loggers that will be useful for our application (our logger configuration is inside [`config/config.py`](https://github.com/GokuMohandas/MLOps/blob/main/config/config.py){:target="_blank"}).
+Next, we'll configure the logger for our application:
 
 ```python linenums="1"
-# Logger
+# config/config.py
+import logging
+import sys
 logging_config = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -126,16 +126,18 @@ logging_config = {
 }
 ```
 
-1. `[Lines 4-9]`: define two different [Formatters](https://docs.python.org/3/library/logging.html#formatter-objects){:target="_blank"} (determine format and style of log messages), minimal and detailed, which use various [LogRecord attributes](https://docs.python.org/3/library/logging.html#logrecord-attributes){:target="_blank"} to create a formatting template for log messages.
-2. `[Lines 10-33]`: define the different [Handlers](https://docs.python.org/3/library/logging.html#handler-objects){:target="_blank"} (details about location of where to send log messages):
-    - `#!js console`: sends log messages (using the `minimal` formatter) to the `stdout` stream for messages above level `DEBUG`.
+1. `[Lines 6-11]`: define two different [Formatters](https://docs.python.org/3/library/logging.html#formatter-objects){:target="_blank"} (determine format and style of log messages), minimal and detailed, which use various [LogRecord attributes](https://docs.python.org/3/library/logging.html#logrecord-attributes){:target="_blank"} to create a formatting template for log messages.
+2. `[Lines 12-35]`: define the different [Handlers](https://docs.python.org/3/library/logging.html#handler-objects){:target="_blank"} (details about location of where to send log messages):
+    - `#!js console`: sends log messages (using the `minimal` formatter) to the `stdout` stream for messages above level `DEBUG` (ie. all logged messages).
     - `#!js info`: send log messages (using the `detailed` formatter) to `logs/info.log` (a file that can be up to `1 MB` and we'll backup the last `10` versions of it) for messages above level `INFO`.
     - `#!js error`: send log messages (using the `detailed` formatter) to `logs/error.log` (a file that can be up to `1 MB` and we'll backup the last `10` versions of it) for messages above level `ERROR`.
-3. `[Lines 34-37]`: attach our different handlers to our [Logger](https://docs.python.org/3/library/logging.html#logger-objects){:target="_blank"}.
+3. `[Lines 36-40]`: attach our different handlers to our root [Logger](https://docs.python.org/3/library/logging.html#logger-objects){:target="_blank"}.
 
-We chose to define a dictionary configuration for our logger but there are other ways too such as coding directly in scripts, using config file, etc. Click on the different options below to expand and view the respective implementation.
 
-??? note "Coding directly in scripts (click to expand)"
+
+We chose to use a dictionary to configure our logger but there are other ways such as Python script, configuration file, etc. Click on the different options below to expand and view the respective implementation.
+
+??? quote "Python script"
 
     ```python linenums="1"
     import logging
@@ -176,7 +178,7 @@ We chose to define a dictionary configuration for our logger but there are other
     logger.addHandler(hdlr=error_handler)
     ```
 
-??? note "Using a config file (click to expand)"
+??? quote "Configuration file"
 
     1. Place this inside a `logging.config` file:
     ```
@@ -236,13 +238,16 @@ We chose to define a dictionary configuration for our logger but there are other
     logger.handlers[0] = RichHandler(markup=True)  # set rich handler
     ```
 
-We can load our configuration dict like so:
+We can load our logger configuration dict like so:
+
 ```python linenums="1"
+# config/config.py
+from rich.logging import RichHandler
 logging.config.dictConfig(logging_config)
 logger = logging.getLogger()
-logger.handlers[0] = RichHandler(markup=True)
+logger.handlers[0] = RichHandler(markup=True)  # pretty formatting
 
-# Sample messages (not we use configured `logger` now)
+# Sample messages (note that we use configured `logger` now)
 logger.debug("Used for debugging your code.")
 logger.info("Informative messages from your code.")
 logger.warning("Everything works but there is something to be aware of.")
@@ -257,9 +262,26 @@ logger.critical("There is something terribly wrong and process may terminate.")
 <span style="color: #1E1E1E; background-color: #DF1426;">CRITICAL</span> There is something terribly wrong and process may terminate.  <span style="color: #A2A2A2;">config.py:75</span>
 </pre>
 
-> We use [RichHandler](https://rich.readthedocs.io/en/stable/logging.html){:target="_blank"} for our `console` handler to get pretty formatting for the log messages.
+We use [RichHandler](https://rich.readthedocs.io/en/stable/logging.html){:target="_blank"} for our `console` handler to get pretty formatting for the log messages. This is not a preinstalled library so we'll need to install and add to `requirements.txt`:
 
-We can also check our `logs/info.log` and `logs/error.log` files to see the log messages that should go to each of those files based on the levels we set for their handlers. Because we used the `detailed` formatter, we should be seeing more informative log messages there:
+```bash
+pip install rich==10.0.0
+```
+
+```bash
+# requirements.txt
+rich==10.0.0
+```
+
+Our logged messages become stored inside the respective files in our logs directory:
+
+```bash
+logs/
+    ├── info.log
+    └── error.log
+```
+
+And since we defined a detailed formatter, we would see informative log messages like these:
 <pre>
 <span style="color: #2871CF;">INFO</span> <span style="color: #5A9C4B;">2020-10-21</span> 11:18:42,102 [<span style="color: #3985B9;">config.py</span>:module:<span style="color: #3D9AD9;">72</span>]
 Informative messages from your code.
@@ -267,27 +289,28 @@ Informative messages from your code.
 
 ## Application
 
-In our project, we can replace all of our print statements into logging statements since our logging configuration is set to relay all logged messages (above DEBUG) level to the stdout.
+In our project, we can replace all of our print statements into logging statements:
 
 ```python linenums="1"
-# One of our handlers
-"console": {
-    "class": "logging.StreamHandler",
-    "stream": sys.stdout,
-    "formatter": "minimal",
-    "level": logging.DEBUG,
-},
+print("✅ Saved raw data!")
+```
+
+<div class="ai-center-all">
+    ──── &nbsp; becomes: &nbsp; ────
+</div>
+
+```python linenums="1"
+from config.config import logger
+logger.info("✅ Saved raw data!")
 ```
 
 All of our log messages are at the `INFO` level but while developing we may have had to use `DEBUG` levels and we also add some `ERROR` or `CRITICAL` log messages if our system behaves in an unintended manner.
 
 - **what**: log all the necessary details you want to surface from our application that will be useful *during* development and *aftwerwards* for retrospective inspection.
 
-- **where**: a best practice is to not clutter our modular functions with log statements. Instead we should log messages outside of small functions and inside larger workflows. For example, there are no log messages inside any of our scripts except the `main.py` and `train.py` files. This is because these scripts use the smaller functions defined in the other scripts (data.py, eval.py, etc.).
+- **where**: a best practice is to not clutter our modular functions with log statements. Instead we should log messages outside of small functions and inside larger workflows. For example, there are no log messages inside any of our scripts except the `main.py` and `train.py` files. This is because these scripts use the smaller functions defined in the other scripts (data.py, evaluate.py, etc.). If we ever feel that we the need to log within our other functions, then it usually indicates that the function needs to be broken down further.
 
-> If we ever feel that we the need to log within our other functions, then it usually indicates that the function needs to be broken down further.
-
-> The [Elastic stack](https://www.elastic.co/what-is/elk-stack){:target="_blank"} (formerly ELK stack) is a common option for production level logging. It combines the features of [Elasticsearch](https://www.elastic.co/elasticsearch/){:target="_blank"} (distributed search engine), [Logstash](https://www.elastic.co/logstash){:target="_blank"} (ingestion pipeline) and [Kibana](https://www.elastic.co/kibana){:target="_blank"} (customizable visualization).
+> The [Elastic stack](https://www.elastic.co/what-is/elk-stack){:target="_blank"} (formerly ELK stack) is a common option for production level logging. It combines the features of [Elasticsearch](https://www.elastic.co/elasticsearch/){:target="_blank"} (distributed search engine), [Logstash](https://www.elastic.co/logstash){:target="_blank"} (ingestion pipeline) and [Kibana](https://www.elastic.co/kibana){:target="_blank"} (customizable visualization). We could also simply [upload](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-uploading-files.html){:target="_blank"} our logs to a cloud blog storage (ex. S3, Google Cloud Storage, etc.).
 
 <!-- Citation -->
 {% include "cite.md" %}

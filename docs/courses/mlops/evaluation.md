@@ -23,8 +23,7 @@ metrics = {"overall": {}, "class": {}}
 ```
 ```python linenums="1"
 # Data to evaluate
-y_pred = model.predict(X_test)
-y_prob = model.predict_proba(X_test)
+y_pred = custom_predict(X_test, model=model, index=label_encoder.class_to_index["other"])
 ```
 
 ## Coarse-grained
@@ -45,9 +44,9 @@ print (json.dumps(metrics["overall"], indent=4))
 ```
 <pre class="output">
 {
-    "precision": 0.8753577441077441,
-    "recall": 0.8680555555555556,
-    "f1": 0.8654096949533866,
+    "precision": 0.8990934378802025,
+    "recall": 0.8194444444444444,
+    "f1": 0.838280325954406,
     "num_samples": 144.0
 }
 </pre>
@@ -87,9 +86,9 @@ print (json.dumps(metrics["class"][tag], indent=2))
 ```
 <pre class="output">
 {
-  "precision": 0.8833333333333333,
-  "recall": 0.9137931034482759,
-  "f1": 0.8983050847457628,
+  "precision": 0.9803921568627451,
+  "recall": 0.8620689655172413,
+  "f1": 0.9174311926605505,
   "num_samples": 58.0
 }
 </pre>
@@ -98,16 +97,49 @@ print (json.dumps(metrics["class"][tag], indent=2))
 # Sorted tags
 sorted_tags_by_f1 = OrderedDict(sorted(
         metrics["class"].items(), key=lambda tag: tag[1]["f1"], reverse=True))
-```
-```python linenums="1"
-# Best and worst classes
-print (list(sorted_tags_by_f1.items())[0])
-print (list(sorted_tags_by_f1.items())[-1])
+for item in sorted_tags_by_f1.items():
+    print (json.dumps(item, indent=2))
 ```
 <pre class="output">
-('natural-language-processing', {'precision': 0.8833333333333333, 'recall': 0.9137931034482759, 'f1': 0.8983050847457628, 'num_samples': 58.0})
-('mlops', {'precision': 0.8181818181818182, 'recall': 0.75, 'f1': 0.7826086956521738, 'num_samples': 12.0})
+[
+  "natural-language-processing",
+  {
+    "precision": 0.9803921568627451,
+    "recall": 0.8620689655172413,
+    "f1": 0.9174311926605505,
+    "num_samples": 58.0
+  }
+]
+[
+  "mlops",
+  {
+    "precision": 0.9090909090909091,
+    "recall": 0.8333333333333334,
+    "f1": 0.8695652173913043,
+    "num_samples": 12.0
+  }
+]
+[
+  "computer-vision",
+  {
+    "precision": 0.975,
+    "recall": 0.7222222222222222,
+    "f1": 0.8297872340425532,
+    "num_samples": 54.0
+  }
+]
+[
+  "other",
+  {
+    "precision": 0.4523809523809524,
+    "recall": 0.95,
+    "f1": 0.6129032258064516,
+    "num_samples": 20.0
+  }
+]
 </pre>
+
+> Due to our custom predict function, we're able to achieve high precision for the categories except for `other`. Based on our [product design](purpose.md#metrics){:target="_blank"}, we decided that it's more important to be precise about our explicit ML categories (nlp, cv, and mlops) and that we would have a manual labeling workflow to recall any missclassifications in the `other` category. Overtime, our model will become better in this category as well.
 
 ## Confusion matrix
 
@@ -174,37 +206,29 @@ for item in cm:
     true: mlops
     pred: mlops
 
-  docker help become effective data scientist look docker perspective data scientist
+  test machine learning code systems minimal examples testing machine learning correct implementation expected learned behaviour model performance
     true: mlops
     pred: mlops
 
-  machine learning deserves flavor continuous delivery traveling data science world homesick smooth continuous delivery flow thoughts approachable cd4ml
+  continuous machine learning cml cml helps organize mlops infrastructure top traditional software engineering stack instead creating separate ai platforms
     true: mlops
     pred: mlops
 
 
 === False positives ===
-  research guide data scientists tips research top data scientists
-    true: natural-language-processing
-    pred: mlops
-
-  axcell automatic extraction results machine learning papers
+  paint machine learning web app allows create landscape painting style bob ross using deep learning model served using spell model server
     true: computer-vision
     pred: mlops
 
 
 === False negatives ===
-  python template projects template gives batteries required package code ci checks auto build deploy docs easy pypi publishing support docker files
+  hidden technical debt machine learning systems using software engineering framework technical debt find common incur massive ongoing maintenance costs real world ml systems
     true: mlops
-    pred: natural-language-processing
+    pred: other
 
-  build first data warehouse airflow gcp steps building data warehouse cloud technology use use airflow orchestrate pipeline
+  neptune ai lightweight experiment management tool fits workflow
     true: mlops
-    pred: natural-language-processing
-
-  creating end end machine learning application complete end end ml application implemented tensorflow 2 0 pytorch
-    true: mlops
-    pred: computer-vision
+    pred: other
 
 </pre>
 
@@ -229,9 +253,14 @@ Simple confidence based techniques include identifying samples whose:
 
 ```python linenums="1"
 # y
-test_df = pd.DataFrame({"text": X_test_raw, "tags": label_encoder.decode(y_test)})
+y_prob = model.predict_proba(X_test)
 print (np.shape(y_test))
 print (np.shape(y_prob))
+```
+
+```python linenums="1"
+# Used to show raw text
+test_df = pd.DataFrame({"text": X_test_raw, "tags": label_encoder.decode(y_test)})
 ```
 
 ```python linenums="1"
@@ -259,17 +288,9 @@ low_confidence[0:5]
 ```
 
 <pre class="output">
-[{'pred': 'natural-language-processing',
-  'prob': 0.14445488319572966,
-  'text': 'python template projects template gives batteries required package code ci checks auto build deploy docs easy pypi publishing support docker files',
-  'true': 'mlops'},
- {'pred': 'natural-language-processing',
-  'prob': 0.17595350780543006,
-  'text': 'build first data warehouse airflow gcp steps building data warehouse cloud technology use use airflow orchestrate pipeline',
-  'true': 'mlops'},
- {'pred': 'computer-vision',
-  'prob': 0.39716683061727875,
-  'text': 'creating end end machine learning application complete end end ml application implemented tensorflow 2 0 pytorch',
+[{'pred': 'other',
+  'prob': 0.41281721056332804,
+  'text': 'neptune ai lightweight experiment management tool fits workflow',
   'true': 'mlops'}]
 </pre>
 
@@ -316,17 +337,9 @@ for index in label_error_indices[:num_samples]:
 ```
 
 <pre class="output">
-text: axcell automatic extraction results machine learning papers
+text: module 2 convolutional neural networks cs231n lecture 5 move fully connected neural networks convolutional neural networks
 true: computer-vision
-pred: mlops
-
-text: tensorflowtts real time sota speech synthesis tensorflow 2 0 tensorflowtts provides real time state art speech synthesis architectures tacotron2 melgan fastspeech
-true: natural-language-processing
-pred: computer-vision
-
-text: author identification using doc2vec web app author identification model trained pan 2012 dataset kagglespooky authorship dataset
-true: natural-language-processing
-pred: computer-vision
+pred: other
 </pre>
 
 > The operations in this section can be applied to entire labeled dataset to discover labeling errors via confidence learning.
@@ -482,10 +495,10 @@ print(json.dumps(metrics["slices"], indent=2))
     "num_samples": 1
   },
   "short_text": {
-    "precision": 0.5,
-    "recall": 0.5,
-    "f1": 0.5,
-    "num_samples": 4
+    "precision": 0.8,
+    "recall": 0.8,
+    "f1": 0.8000000000000002,
+    "num_samples": 5
   }
 }
 </pre>

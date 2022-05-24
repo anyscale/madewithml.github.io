@@ -77,7 +77,9 @@ df[np.abs(df.A - df.A.mean()) <= (2 * df.A.std())]
 - anomalies can be global (point), contextual (conditional) or collective (individual points are not anomalous and the collective group is an outlier)
 
 ### Feature engineering
-- combine features in unique ways to draw out signal
+
+Feature engineering involves combining features in unique ways to draw out signal.
+
 ```python linenums="1"
 # Input
 df.C = df.A + df.B
@@ -87,9 +89,13 @@ df.C = df.A + df.B
     Feature engineering can be done in collaboration with domain experts that can guide us on what features to engineer and use.
 
 ### Cleaning
+
+Cleaning our data involves apply constraints to make it easier for our models to draw our signal from the data.
+
 - use domain expertise and EDA
 - apply constraints via filters
 - ensure data type consistency
+- removing data points with certain or null column values
 - images (crop, resize, clip, etc.)
 ```python linenums="1"
 # Resize
@@ -284,7 +290,7 @@ Transforming the data involves feature encoding and engineering.
 
 For our application, we'll be implementing a few of these preprocessing steps that are relevant for our dataset.
 
-## Feature engineering
+### Feature engineering
 We can combine existing input features to create new meaningful signal (helping the model learn). However, there's usually no simple way to know if certain feature combinations will help or not without empirically experimenting with the different combinations. Here, we could use a project's title and description separately as features but we'll combine them to create one input feature.
 
 ```python linenums="1"
@@ -292,7 +298,19 @@ We can combine existing input features to create new meaningful signal (helping 
 df["text"] = df.title + " " + df.description
 ```
 
-And since we're dealing with text data, we can apply some of the common preparation processes:
+
+### Cleaning
+
+We can start by removing data points with no relevant tags:
+
+```python linenums="1"
+# Remove projects with no relevant tag
+print (f"{len(df)} projects")
+df = df[df.tag.notnull()]
+print (f"{len(df)} projects")
+```
+
+And since we're dealing with text data, we can apply some of the common text preprocessing steps:
 
 1. lower (conditional)
 ```python linenums="1"
@@ -338,11 +356,11 @@ text = re.sub(r"http\S+", "", text)
 text = " ".join([porter.stem(word) for word in text.split(" ")])
 ```
 
-We can apply our preprocessing steps to our text feature in the dataframe by wrapping all these processes under a function.
+We can apply our input text cleaning steps to our text feature in the dataframe by wrapping all these processes under a function.
 
 ```python linenums="1"
 # Define preprocessing function
-def preprocess(text):
+def clean_text(text):
     ...
     return text
 ```
@@ -350,7 +368,7 @@ def preprocess(text):
 ```python linenums="1"
 # Apply to dataframe
 original_df = df.copy()
-df.text = df.text.apply(preprocess, lower=True, stem=False)
+df.text = df.text.apply(clean_text, lower=True, stem=False)
 print (f"{original_df.text.values[0]}\n{df.text.values[0]}")
 ```
 <pre class="output">
@@ -358,11 +376,120 @@ Comparison between YOLO and RCNN on real world videos Bringing theory to experim
 comparison yolo rcnn real world videos bringing theory experiment cool easily train models colab find results minutes
 </pre>
 
-## Transformations
+### Encoding
 
-Many of the *transformations* we're going to do are model specific. For example, for our simple baselines we may do `label encoding` → `tf-idf` while for the more involved architectures we may do `label encoding` → `one-hot encoding` → `embeddings`. So we'll cover these in the next suite of lessons as we implement our [baselines](baselines.md){:target="_blank"}.
+We're going to encode our output labels where we'll assign each tag a unique index.
 
-> In the next section we'll be performing exploratory data analysis (EDA) on our preprocessed dataset. However, the order of the steps can be reversed depending on how well the problem is defined. If we're unsure about how to prepare the data, we can use EDA to figure it out. In fact in our [dashboard](dashboard.md){:target="_blank"} lesson, we can interactively apply data processing and EDA back and forth until we have finalized on constraints.
+```python linenums="1"
+import numpy as np
+import random
+```
+
+```python linenums="1"
+# Get data
+X = df.text.to_numpy()
+y = df.tag
+```
+
+We'll be writing our own LabelEncoder which is based on scikit-learn's [implementation](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html){:target="_blank"}. It's an extremely valuable skill to be able to write clean classes for objects we want to create.
+
+```python linenums="1"
+class LabelEncoder(object):
+    """Encode labels into unique indices"""
+    def __init__(self, class_to_index={}):
+        self.class_to_index = class_to_index
+        self.index_to_class = {v: k for k, v in self.class_to_index.items()}
+        self.classes = list(self.class_to_index.keys())
+
+    def __len__(self):
+        return len(self.class_to_index)
+
+    def __str__(self):
+        return f"<LabelEncoder(num_classes={len(self)})>"
+
+    def fit(self, y):
+        classes = np.unique(y)
+        for i, class_ in enumerate(classes):
+            self.class_to_index[class_] = i
+        self.index_to_class = {v: k for k, v in self.class_to_index.items()}
+        self.classes = list(self.class_to_index.keys())
+        return self
+
+    def encode(self, y):
+        encoded = np.zeros((len(y)), dtype=int)
+        for i, item in enumerate(y):
+            encoded[i] = self.class_to_index[item]
+        return encoded
+
+    def decode(self, y):
+        classes = []
+        for i, item in enumerate(y):
+            classes.append(self.index_to_class[item])
+        return classes
+
+    def save(self, fp):
+        with open(fp, "w") as fp:
+            contents = {"class_to_index": self.class_to_index}
+            json.dump(contents, fp, indent=4, sort_keys=False)
+
+    @classmethod
+    def load(cls, fp):
+        with open(fp, "r") as fp:
+            kwargs = json.load(fp=fp)
+        return cls(**kwargs)
+```
+
+> If you're not familiar with the `@classmethod` decorator, learn more about it from our [Python lesson](../foundations/python.md#methods){:target="_blank"}.
+
+```python linenums="1"
+# Encode
+label_encoder = LabelEncoder()
+label_encoder.fit(y)
+num_classes = len(label_encoder)
+```
+```python linenums="1"
+label_encoder.class_to_index
+```
+<pre class="output">
+{'computer-vision': 0,
+ 'mlops': 1,
+ 'natural-language-processing': 2,
+ 'other': 3}
+</pre>
+```python linenums="1"
+label_encoder.index_to_class
+```
+<pre class="output">
+{0: 'computer-vision',
+ 1: 'mlops',
+ 2: 'natural-language-processing',
+ 3: 'other'}
+</pre>
+
+```python linenums="1"
+# Encode
+label_encoder.encode(["computer-vision", "mlops", "mlops"])
+```
+<pre class="output">
+array([0, 1, 1])
+</pre>
+```python linenums="1"
+# Decode
+label_encoder.decode(np.array([0, 1, 1]))
+```
+<pre class="output">
+['computer-vision', 'mlops', 'mlops']
+</pre>
+
+```python linenums="1"
+# Encode all our labels
+y = label_encoder.encode(y)
+print (y.shape)
+```
+
+Many of the *transformations* we're going to do on our input text features are model specific. For example, for our simple baselines we may do `label encoding` → `tf-idf` while for the more involved architectures we may do `label encoding` → `one-hot encoding` → `embeddings`. So we'll cover these in the next suite of lessons as we implement our [baselines](baselines.md){:target="_blank"}.
+
+> In the next section we'll be performing exploratory data analysis (EDA) on our preprocessed dataset. However, the order of the steps can be reversed depending on how well the problem is defined. If we're unsure about how to prepare the data, we can use EDA to figure it out and vice versa.
 
 
 <!-- Citation -->

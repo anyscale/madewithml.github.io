@@ -103,7 +103,7 @@ jobs:
           key: $/{/{ env.pythonLocation /}/}-$/{/{ hashFiles('setup.py') /}/}-$/{/{ hashFiles('requirements.txt') /}/}
       - name: Install dependencies
         run: |
-          python -m pip install -e ".[test]" --no-cache-dir
+          python3 -m pip install -e ".[test]" --no-cache-dir
       - name: Execute tests
         run: pytest tests/tagifai --ignore tests/tagifai/test_main.py --ignore tests/tagifai/test_data.py
 ```

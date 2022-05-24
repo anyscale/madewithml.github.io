@@ -1,7 +1,7 @@
 ---
 template: lesson.html
 title: Documenting Code
-description: Documenting code for your users and your future self.
+description: Documenting code for your team and your future self.
 keywords: documentation, mkdocs, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
@@ -12,144 +12,121 @@ documentation: https://github.com/GokuMohandas/follow/tree/documentation
 
 ## Intuition
 
-> Code tells you *how*, comments tell you *why*. -- [Jeff Atwood](https://blog.codinghorror.com/code-tells-you-how-comments-tell-you-why/){:target="_blank"}
+> Code tells you *how*, comments tell you *why*. -- [Jeff Atwood](https://en.wikipedia.org/wiki/Jeff_Atwood){:target="_blank"}
 
-Another way to [organize](organization.md){:target="_blank"} our code is to document it. We want to do this so we can make it easier for others (and our future selves) to easily navigate the code base and build on it. We know our code base best the moment we finish writing it but fortunately documenting it will allow us to quickly get back to that stage time and time again. Documentation involves many different things to developers so let's define the most common (and required) components:
+We can further [organize](organization.md){:target="_blank"} our code by documenting it to make it easier for others (and our future selves) to easily navigate and extend it. We know our code base best the moment we finish writing it but fortunately documenting it will allow us to quickly get back to that familiar state of mind. Documentation can mean many different things to developers, so let's define the most common components:
 
-- `#!js comments`: short descriptions of why a piece of code exists.
-- `#!js typing`: specification of a function's inputs and outputs data types, providing insight into what a function consumes and produces at a quick glance.
-- `#!js docstrings`: meaningful descriptions for functions and classes that describe overall utility as well as arguments, returns, etc.
-- `#!js documentation`: rendered webpage that summarizes all the functions, classes, API calls, workflows, examples, etc. so we can view and traverse through the code base without actually having to look at the code just yet.
+- `#!js comments`: short descriptions as to why a piece of code exists.
+- `#!js typing`: specification of a function's inputs and outputs' data types, providing information pertaining to what a function consumes and produces.
+- `#!js docstrings`: meaningful descriptions for functions and classes that describe overall utility, arguments, returns, etc.
+- `#!js docs`: rendered webpage that summarizes all the functions, classes, workflows, examples, etc.
+
+> For now, we'll produce our documentation locally but be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}. We'll learn how to automatically create and keep our docs up-to-date in our [CI/CD](cicd.md){:target="_blank"} lesson every time we make changes to our code base.
 
 !!! question "Code collaboration"
     How do you currently share your code with others on your team? What can be improved?
 
-> Be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}.
-
 ## Typing
-It's important to be as explicit as possible with our code. We're already discussed choosing explicit names for variables, functions, etc. but another way we can be explicit is by defining the types for our function's inputs and outputs. We want to do this so we can quickly know what data types a function expects and how we can utilize it's outputs for downstream processes.
+It's important to be as explicit as possible with our code. We've already discussed choosing explicit names for variables, functions, etc. but another way we can be explicit is by defining the types for our function's inputs and outputs.
 
 So far, our functions have looked like this:
 ```python linenums="1"
-def pad_sequences(sequences, max_seq_len):
-    ...
-    return padded_sequences
+def some_function(a, b):
+    return c
 ```
 
 But we can incorporate so much more information using typing:
 ```python linenums="1"
-def pad_sequences(sequences: np.ndarray, max_seq_len: int = 0) -> np.ndarray:
-    ...
-    return padded_sequences
+from typing import List
+def some_function(a: List, b: int = 0) -> np.ndarray:
+    return c
 ```
 
-Here we're defining that our input argument `sequences` is a NumPy array, `max_seq_len` is an integer with a default value of 0 and our output is also a NumPy array. There are many data types that we can work with, including but not limited to `List`, `Set`, `Dict`, `Tuple`, `Sequence` and [more](https://docs.python.org/3/library/typing.html){:target="_blank"}, as well as included types such as `int`, `float`, etc. You can also use any of your own defined classes as types (ex. `nn.Module`, `LabelEncoder`, etc.).
+Here we've defined:
+
+- input parameter `a` is a list
+- input parameter `b` is an integer with default value 0
+- output parameter `c` is a NumPy array
+
+There are many other data types that we can work with, including `List`, `Set`, `Dict`, `Tuple`, `Sequence` and [more](https://docs.python.org/3/library/typing.html){:target="_blank"}, as well as included types such as `int`, `float`, etc. You can also use types from packages we install (ex. `np.ndarray`) and even from our own defined classes (ex. `LabelEncoder`).
 
 > Starting from Python 3.9+, common types are [built in](https://docs.python.org/3/whatsnew/3.9.html#type-hinting-generics-in-standard-collections){:target="_blank"} so we don't need to import them with ```from typing import List, Set, Dict, Tuple, Sequence``` anymore.
 
-
 ## Docstrings
-We can make our code even more explicit by adding docstrings to functions and classes to describe overall utility, arguments, returns, exceptions and more. Let's take a look at an example:
+We can make our code even more explicit by adding docstrings to describe overall utility, arguments, returns, exceptions and more. Let's take a look at an example:
 
 ```python linenums="1"
-def pad_sequences(sequences: np.ndarray, max_seq_len: int = 0) -> np.ndarray:
-    """Zero pad sequences to a specified `max_seq_len`
-    or to the length of the largest sequence in `sequences`.
-
-    Usage:
+from typing import List
+def some_function(a: List, b: int = 0) -> np.ndarray:
+    """Function description.
 
     ```python
-    # Pad inputs
-    seq = np.array([[1, 2, 3], [1, 2]], dtype=object)
-    padded_seq = pad_sequences(sequences=seq, max_seq_len=5)
-    print (padded_seq)
+    c = some_function(a=[], b=0)
+    print (c)
     ```
     <pre>
-    [[1. 2. 3. 0. 0.]
-     [1. 2. 0. 0. 0.]]
+    [[1 2]
+     [3 4]]
     </pre>
 
-    Note:
-        Input `sequences` must be 2D.
-
     Args:
-        sequences (np.ndarray): 2D array of data to be padded.
-        max_seq_len (int, optional): Length to pad sequences to. Defaults to 0.
+        a (List): description of `a`.
+        b (int, optional): description of `b`. Defaults to 0.
 
     Raises:
-        ValueError: Input sequences are not two-dimensional.
+        ValueError: Input list is not one-dimensional.
 
     Returns:
-        An array with the zero padded sequences.
+        np.ndarray: Description of `c`.
 
     """
-    # Check shape
-    if not sequences.ndim == 2:
-        raise ValueError("Input sequences are not two-dimensional.")
-
-    # Get max sequence length
-    max_seq_len = max(
-        max_seq_len, max(len(sequence) for sequence in sequences)
-    )
-
-    # Pad
-    padded_sequences = np.zeros((len(sequences), max_seq_len))
-    for i, sequence in enumerate(sequences):
-        padded_sequences[i][: len(sequence)] = sequence
-    return padded_sequences
+    return c
 ```
 
 Let's unpack the different parts of this function's docstring:
 
-- `#!js [Lines 2-3]`: Summary of the overall utility of the function.
-- `#!js [Lines 5-16]`: Example of how to use our function.
-- `#!js [Lines 18-19]`: Insertion of a `Note` or other types of [admonitions](https://squidfunk.github.io/mkdocs-material/reference/admonitions/){:target="_blank"}.
-- `#!js [Lines 21-23]`: Description of the function's input arguments.
-- `#!js [Lines 25-26]`: Any exceptions that may be raised in the function.
-- `#!js [Lines 28-29]`: Description of the function's output(s).
+- `#!js [Line 3]`: Summary of the overall utility of the function.
+- `#!js [Lines 5-12]`: Example of how to use our function.
+- `#!js [Lines 14-16]`: Description of the function's input arguments.
+- `#!js [Lines 18-19]`: Any exceptions that may be raised in the function.
+- `#!js [Lines 21-22]`: Description of the function's output(s).
 
-!!! note
-    If you're using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank"}, you should get the free [Python Docstrings Generator](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring){:target="_blank"} extension so you can type `"""` under a function and then hit the ++shift++ key to generate a template docstring. It will autofill parts of the docstring using the typing information and even exception in your code!
+We'll render these docstrings in the [docs](#docs) section below to produce this:
+
+<div class="ai-center-all">
+    <img src="/static/images/mlops/documentation/docstrings.png" width="500" alt="docstrings">
+</div>
+
+Take this time to update all the functions and classes in our project with docstrings and be sure to refer to the [repository](https://github.com/GokuMohandas/MLOps){:target="_blank"} as a guide. Note that you my have to explicitly import some libraries to certain scripts because the `type` requires it. For example, we don't explicitly use the Pandas library in our `data.py` script, however, we do use pandas dataframes as input arguments.
+```python linenums="1" hl_lines="5"
+# tagifai/data.py
+import pandas as pd
+from typing import List
+
+def replace_oos_labels(df: pd.DataFrame, labels: List, label_col: str, oos_label: str = "other"):
+    ...
+```
+
+> Ideally we would add docstrings to our functions and classes as we develop them, as opposed to doing it all at once at the end.
+
+!!! tip
+    If using [Visual Studio Code](https://code.visualstudio.com/){:target="_blank"}, be sure to use the [Python Docstrings Generator](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring){:target="_blank"} extension so you can type `"""` under a function and then hit the ++shift++ key to generate a template docstring. It will autofill parts of the docstring using the typing information and even exception in your code!
 
     ![vscode docstring generation](https://github.com/NilsJPWerner/autoDocstring/blob/13875f7e5d3a2ad2a2a7e42bad6a10d09fed7472/images/demo.gif?raw=true)
 
-## Mkdocs
+## Docs
 
-So we're going through all this effort to including typing and docstrings to our functions but it's all tucked away inside our scripts. But what if we can collect all this effort and **automatically** surface it as documentation? Well that's exactly what we'll do with the following open-source packages → final result [here](https://gokumohandas.github.io/MLOps/){:target="_blank"}.
+So we're going through all this effort of including typing and docstrings to our functions but it's all tucked away inside our scripts. What if we can collect all this effort and **automatically** surface it as documentation? Well that's exactly what we'll do with the following open-source packages → final result [here](https://gokumohandas.github.io/MLOps/){:target="_blank"}.
 
-- [mkdocs](https://github.com/mkdocs/mkdocs){:target="_blank"}                                  (generates project documentation)
-- [mkdocs-material](https://github.com/squidfunk/mkdocs-material){:target="_blank"}             (styling to beautiful render documentation)
-- [mkdocstrings](https://github.com/pawamoy/mkdocstrings){:target="_blank"}                     (fetch documentation automatically from docstrings)
-
-Here are the steps we'll follow to automatically generate our documentation and serve it. You can find all the files we're talking about in our [repository](https://github.com/GokuMohandas/MLOps){:target="_blank"}.
-
-1. Install the required packages. We already did this when we initially set up our dev environment.
-```python linenums="1"
-# setup.py
-...
-docs_packages = [
-    "mkdocs==1.1.2",
-    "mkdocs-material==7.2.3",
-    "mkdocstrings==0.15.2",
-]
-...
-setup(
-    ...
-    extras_require={
-        "test": test_packages,
-        "dev": test_packages + dev_packages + docs_packages,
-        "docs": docs_packages,
-    },
-    ...
-)
-```
+1. Install required packages:
 ```bash
-python -m pip install -e ".[dev]"
+pip install mkdocs==1.3.0 mkdocstrings==0.18.1
 ```
-> Mkdocs related packages are part of the docs packages and not part of the required packages specified in [requirements.txt](https://github.com/GokuMohandas/MLOps/blob/main/requirements.txt){:target="_blank"} since not all users will be maintaining the documentation.
+> We won't add these to our `requirements.txt` like we have been doing. Since these libraries are not core to our project, we'll be isolating them. We'll learn about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
+
 2. Initialize mkdocs
 ```bash
-mkdocs new .
+python3 -m mkdocs new .
 ```
 This will create the following files:
 ```bash
@@ -158,94 +135,71 @@ This will create the following files:
 │  └─ index.md
 └─ mkdocs.yml
 ```
-3. Create a documentation file for each item in our navigation tree and add ` ::: tagifai.<SCRIPT_NAME>` to each Markdown file to populate it with the information from function and class docstrings from `tagifai/<SCRIPT_NAME>.py`. We can add our own text directly to the Markdown file as well, like we do in [`docs/tagifai/config.md`](https://github.com/GokuMohandas/follow/blob/main/docs/config/config.md){:target="_blank"}.
-```bash
-# Documentation directory structure
-docs/
-├── app/
-| ├── api.md
-| └── schemas.md
-├── config/
-| ├── config.md
-├── tagifai/
-| ├── data.md
-| ├── ...
-| └── utils.md
-├── getting_started.md
-└── index.md
+
+3. We'll start by overwriting the default `index.md` file in our `docs` directory with information specific to our project:
+```md linenums="1" title="index.md"
+## Documentation
+
+- [Workflows](tagifai/main.md): main workflows.
+- [tagifai](tagifai/data.md): documentation of functionality.
+
+## MLOps Lessons
+
+Learn how to apply ML to build a production grade product to deliver value.
+
+- Lessons: [https://madewithml.com/](https://madewithml.com/#mlops)
+- Code: [GokuMohandas/MLOps](https://github.com/GokuMohandas/MLOps)
 ```
+
+4. Next we'll create documentation files for each script in our `tagifai` directory:
+```
+mkdir docs/tagifai
+cd docs/tagifai
+touch main.md utils.md data.md train.md evaluate.md predict.md
+cd ../../
+```
+> It's helpful to have the `docs` directory structure mimic our project's structure as much as possible. This becomes even more important as we document more directories in future lessons.
+
+5. Next we'll add `::: tagifai.<SCRIPT_NAME>` to each file under `docs/tagifai`. This will populate the file with information about the functions and classes (using their docstrings) from `tagifai/<SCRIPT_NAME>.py` thanks to the `mkdocstrings` plugin.
+> Be sure to check out the complete list of [mkdocs plugins](https://github.com/mkdocs/mkdocs/wiki/MkDocs-Plugins){:target="_blank"}.
 ```bash
 # docs/tagifai/data.md
 ::: tagifai.data
 ```
-4. Fill in project metadata inside [mkdocs.yaml](https://github.com/GokuMohandas/follow/blob/main/mkdocs.yml){:target="_blank"}.
-```yaml linenums="1"
-# Project information
-site_name: TagifAI
-site_url: https://madewithml.com/#mlops
-site_description: Tag suggestions for projects on Made With ML.
-site_author: Goku Mohandas
 
-# Repository
-repo_url: https://github.com/GokuMohandas/MLOps
-repo_name: GokuMohandas/MLOps
-edit_uri: "" #disables edit button
-...
-```
-5. Add theme, extensions and plugins (see more [options](https://squidfunk.github.io/mkdocs-material/setup/changing-the-colors/){:target="_blank"}).
-```yaml linenums="1"
-# Configuration
-theme:
-  name: material
-
-# Extensions
-markdown_extensions:
-  - admonition # alerts
-  - codehilite
-  - pymdownx.highlight
-
-# Plugins
-plugins:
-  - search
-  - mkdocstrings
-```
-6. Create our documentation's navigation tree.
-```yaml linenums="1"
-# Page tree
+6. Finally, we'll add some configurations to our `mkdocs.yml` file that mkdocs automatically created:
+```yml
+# mkdocs.yml
+site_name: Made With ML
+site_url: https://madewithml.com/
+repo_url: https://github.com/GokuMohandas/MLOps/
 nav:
-  - Home:
-      - TagIfAI: index.md
-  - Getting started: getting_started.md
-  - Application:
-    - API: app/api.md
-    - Schemas: app/schemas.md
-  - Operations: tagifai/main.md
-  - Configurations: config/config.md
-  - Reference:
-    - Data: tagifai/data.md
-    - Eval: tagifai/eval.md
-    - Models: tagifai/models.md
-    - Training: tagifai/train.md
-    - Inference: tagifai/predict.md
-    - Utilities: tagifai/utils.md
+  - Home: index.md
+  - workflows:
+    - main: tagifai/main.md
+  - tagifai:
+    - data: tagifai/data.md
+    - evaluate: tagifai/evaluate.md
+    - predict: tagifai/predict.md
+    - train: tagifai/train.md
+    - utils: tagifai/utils.md
+theme: readthedocs
+plugins:
+  - mkdocstrings
+watch:
+  - .  # reload docs for any file changes
 ```
-7. Run `python -m mkdocs serve -a localhost:8000` to serve your docs.
-<div class="animated-code">
 
-    ```console
-    # Serve documentation
-    $ python -m mkdocs serve -a localhost:8000
-    INFO    -  Building documentation...
-    INFO    -  Cleaning site directory
-    INFO    -  Serving on http://localhost:8000
-    ```
+7. Serve our documentation locally:
+```bash
+python3 -m mkdocs serve
+```
 
-</div>
-<script src="../../../static/js/termynal.js"></script>
+## Publishing
 
-We can easily serve our documentation for free using [GitHub pages](https://squidfunk.github.io/mkdocs-material/publishing-your-site/){:target="_blank"} for public repositories as wells as [private documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site){:target="_blank"} for private repositories. And we can even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"} (ex. company's subdomain).
+We can easily serve our documentation for free using [GitHub pages](https://www.mkdocs.org/user-guide/deploying-your-docs/){:target="_blank"} for public repositories as wells as [private documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site){:target="_blank"} for private repositories. And we can even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"} (ex. company's subdomain).
 
-> :octicons-info-24: View our rendered documentation via GitHub pages → [here](https://gokumohandas.github.io/MLOps/){:target="_blank"}. We'll be using a workflow to build and deploy our documentation every time we push to the `main` branch with GitHub Actions in our [CI/CD lesson](cicd.md){:target="_blank"}.
+> Be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}. We'll learn how to automatically create and keep our docs up-to-date in our [CI/CD](cicd.md){:target="_blank"} lesson every time we make changes to our code base.
 
 <!-- Citation -->
 {% include "cite.md" %}

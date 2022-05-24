@@ -85,13 +85,14 @@ And to make things simple, we'll encapsulate all the components for training int
 def train(args, df, trial=None):
     """Train model on data."""
 
-    # Set seeds
+    # Setup
     set_seeds()
-
-    # Get data splits
-    preprocessed_df = df.copy()
-    preprocessed_df.text = preprocessed_df.text.apply(preprocess, lower=args.lower, stem=args.stem)
-    X_train, X_val, X_test, y_train, y_val, y_test, label_encoder = get_data_splits(preprocessed_df)
+    df = pd.DataFrame(json.load(open("labeled_projects.json", "r")))
+    df = df.sample(frac=1).reset_index(drop=True)
+    df = preprocess(df, lower=True, stem=False)
+    label_encoder = LabelEncoder().fit(df.tag)
+    X_train, X_val, X_test, y_train, y_val, y_test = \
+        get_data_splits(X=df.text.to_numpy(), y=label_encoder.encode(df.tag))
 
     # Tf-idf
     vectorizer = TfidfVectorizer(analyzer=args.analyzer, ngram_range=(2,args.ngram_max_range))  # char n-grams
@@ -132,7 +133,7 @@ def train(args, df, trial=None):
                 raise optuna.TrialPruned()
 
     # Evaluation
-    y_pred = predict(X_test, model=model, index=label_encoder.class_to_index["other"])
+    y_pred = custom_predict(X_test, model=model, index=label_encoder.class_to_index["other"])
     metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
     performance = {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
     print (json.dumps(performance, indent=2))
@@ -231,7 +232,7 @@ MLFlow creates a main dashboard with all your experiments and their respective r
 
 We can click on any of our experiments on the main dashboard to further explore it (click on the timestamp link for each run). Then click on metrics on the left side to view them in a plot:
 <div class="ai-center-all">
-    <img src="https://madewithml.com/static/images/mlops/experiment_tracking/plots.png" width="1000" alt="experiment metrics">
+    <img src="/static/images/mlops/experiment_tracking/plots.png" width="1000" alt="experiment metrics">
 </div>
 
 ## Loading
@@ -282,7 +283,8 @@ print (json.dumps(performance, indent=2))
 ```python linenums="1"
 # Inference
 text = "Transfer learning with transformers for text classification."
-y_pred = model.predict(vectorizer.transform([text]))
+x = vectorizer.transform([text])
+y_pred = custom_predict(x=x, model=model, index=label_encoder.class_to_index["other"])
 label_encoder.decode(y_pred)
 ```
 <pre class="output">
@@ -293,7 +295,7 @@ label_encoder.decode(y_pred)
     We can also load a specific run's model artifacts, by using it's run ID, directly from the model registry without having to save them to a temporary directory.
     ```python linenums="1"
     artifact_uri = mlflow.get_run(run_id=run_id).info.artifact_uri.split("file://")[-1]
-    params = Namespace(**utils.load_dict(filepath=Path(artifact_uri, "params.json")))
+    params = Namespace(**utils.load_dict(filepath=Path(artifact_uri, "args.json")))
     label_encoder = data.MultiLabelLabelEncoder.load(fp=Path(artifact_uri, "label_encoder.json"))
     tokenizer = data.Tokenizer.load(fp=Path(artifact_uri, "tokenizer.json"))
     model_state = torch.load(Path(artifact_uri, "model.pt"), map_location=device)

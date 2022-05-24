@@ -92,7 +92,7 @@ tests/
 |   └── test_behavioral.py
 └── tagifai/
 |   ├── test_data.py
-|   ├── test_eval.py
+|   ├── test_evaluate.py
 |   ├── test_main.py
 |   ├── test_models.py
 |   ├── test_train.py

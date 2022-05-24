@@ -90,7 +90,7 @@ We can list all the CLI commands for our application like so:
 <script src="../../../static/js/termynal.js"></script>
 
 !!! warning
-    We may need to run `#!bash python -m pip install -e .` again to connect the entry point since `tagifai.main:app` didn't exist when we initially set up the environment.
+    We may need to run `#!bash python3 -m pip install -e .` again to connect the entry point since `tagifai.main:app` didn't exist when we initially set up the environment.
 
 ## Arguments
 

@@ -495,9 +495,9 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </ul>
     <b><span class="mr-1">🔢</span> Data</b>
     <ul>
+    <li><a href="/courses/mlops/exploratory-data-analysis/">Exploration</a></li>
     <li><a href="/courses/mlops/labeling/">Labeling</a></li>
     <li><a href="/courses/mlops/preprocessing/">Preprocessing</a></li>
-    <li><a href="/courses/mlops/exploratory-data-analysis/">Exploration</a></li>
     <li><a href="/courses/mlops/splitting/">Splitting</a></li>
     <li><a href="/courses/mlops/augmentation/">Augmentation</a></li>
     </ul>
@@ -735,9 +735,9 @@ We will be applying the concepts we learn each week to iteratively complete two 
                 <div><a data-toggle="collapse" href="#collapseData" aria-expanded="false" aria-controls="collapseData">Data</a></div>
                 <div class="collapse multi-collapse" id="collapseData">
                     <ul class="ai-course-list">
+                    <li><a href="/courses/mlops/exploratory-data-analysis/">Exploration</a></li>
                     <li><a href="/courses/mlops/labeling/">Labeling</a></li>
                     <li><a href="/courses/mlops/preprocessing/">Preprocessing</a></li>
-                    <li><a href="/courses/mlops/exploratory-data-analysis/">Exploration</a></li>
                     <li><a href="/courses/mlops/splitting/">Splitting</a></li>
                     <li><a href="/courses/mlops/augmentation/">Augmentation</a></li>
                     </ul>

@@ -98,45 +98,44 @@ We'll motivate the need for slowly adding complexity to both the **representatio
 
 We'll first set up some functions that we'll be using across the different baseline experiments.
 ```python linenums="1"
+import random
+```
+```python linenums="1"
 def set_seeds(seed=42):
     """Set seeds for reproducibility."""
     np.random.seed(seed)
     random.seed(seed)
 ```
 ```python linenums="1"
-def get_data_splits(df, train_size=0.7):
-    """"""
-    # Get data
-    X = df.text.to_numpy()
-    y = df.tag
-
-    # Binarize y
-    label_encoder = LabelEncoder()
-    label_encoder.fit(y)
-    y = label_encoder.encode(y)
-
-    # Split
+def preprocess(df, lower, stem):
+    """Preprocess the data."""
+    df = df[df.tag.notnull()]  # remove projects with no tags
+    df["text"] = df.title + " " + df.description  # feature engineering
+    df.text = df.text.apply(clean_text, lower=lower, stem=stem)  # clean text
+    return df
+```
+```python linenums="1"
+def get_data_splits(X, y, train_size=0.7):
+    """Generate balanced data splits."""
     X_train, X_, y_train, y_ = train_test_split(
         X, y, train_size=train_size, stratify=y)
     X_val, X_test, y_val, y_test = train_test_split(
         X_, y_, train_size=0.5, stratify=y_)
-
-    return X_train, X_val, X_test, y_train, y_val, y_test, label_encoder
+    return X_train, X_val, X_test, y_train, y_val, y_test
 ```
 
-!!! tip "Quick iterations"
+Our dataset is small so we'll train using the whole dataset but for larger datasets, we should always test on a small subset (after shuffling when necessary) so we aren't wasting time on compute.
 
-    Our dataset is small so we'll train using the whole dataset but for larger datasets, we should always test on a small subset (after shuffling when necessary) so we aren't wasting time on compute.
+```python linenums="1"
+df = df.sample(frac=1).reset_index(drop=True)  # shuffle
+df = df[: num_samples]  # None = all samples
+```
 
-    ```python linenums="1"
-    # Shuffling since projects are chronologically organized
-    if shuffle:
-        df = df.sample(frac=1).reset_index(drop=True)
+!!! question "Do we need to shuffle?"
+    Why is it important that we shuffle our dataset?
 
-    # Subset
-    if num_samples:
-        df = df[:num_samples]
-    ```
+    ??? quote "Show answer"
+        We *need* to shuffle our data since our data is chronologically organized. The latest projects may have certain features or tags that are prevalent compared to earlier projects. If we don't shuffle before creating our data splits, then our model will only be trained on the earlier signals and fail to generalize. However, in other scenarios (ex. time-series forecasting), shuffling will lead do data leaks.
 
 ### Random
 <u><i>motivation</i></u>: We want to know what random (chance) performance looks like. All of our efforts should be well above this baseline.
@@ -145,14 +144,14 @@ def get_data_splits(df, train_size=0.7):
 from sklearn.metrics import precision_recall_fscore_support
 ```
 ```python linenums="1"
-# Set seeds
+# Setup
 set_seeds()
-```
-```python linenums="1"
-# Get data splits
-preprocessed_df = df.copy()
-preprocessed_df.text = preprocessed_df.text.apply(preprocess, lower=True)
-X_train, X_val, X_test, y_train, y_val, y_test, label_encoder = get_data_splits(preprocessed_df)
+df = pd.DataFrame(json.load(open("labeled_projects.json", "r")))
+df = df.sample(frac=1).reset_index(drop=True)
+df = preprocess(df, lower=True, stem=False)
+label_encoder = LabelEncoder().fit(df.tag)
+X_train, X_val, X_test, y_train, y_val, y_test = \
+    get_data_splits(X=df.text.to_numpy(), y=label_encoder.encode(df.tag))
 ```
 ```python linenums="1"
 # Label encoder
@@ -223,8 +222,14 @@ print (json.dumps(performance, indent=2))
 <u><i>motivation</i></u>: we want to use signals in our inputs (along with domain expertise and auxiliary data) to determine the labels.
 
 ```python linenums="1"
-# Set seeds
+# Setup
 set_seeds()
+df = pd.DataFrame(json.load(open("labeled_projects.json", "r")))
+df = df.sample(frac=1).reset_index(drop=True)
+df = preprocess(df, lower=True, stem=False)
+label_encoder = LabelEncoder().fit(df.tag)
+X_train, X_val, X_test, y_train, y_val, y_test = \
+    get_data_splits(X=df.text.to_numpy(), y=label_encoder.encode(df.tag))
 ```
 ```python linenums="1"
 # Restrict to relevant tags
@@ -238,19 +243,12 @@ print (len(tags_dict))
 </pre>
 
 ```python linenums="1"
-# Get data splits
-preprocessed_df = df.copy()
-preprocessed_df.text = preprocessed_df.text.apply(preprocess, lower=True)
-X_train, X_val, X_test, y_train, y_val, y_test, label_encoder = get_data_splits(preprocessed_df)
-```
-
-```python linenums="1"
 # Map aliases
 aliases = {}
 for tag, values in tags_dict.items():
-    aliases[preprocess(tag)] = tag
+    aliases[clean_text(tag)] = tag
     for alias in values["aliases"]:
-        aliases[preprocess(alias)] = tag
+        aliases[clean_text(alias)] = tag
 aliases
 ```
 <pre class="output">
@@ -277,7 +275,7 @@ def get_tag(text, aliases, tags_dict):
 ```python linenums="1"
 # Sample
 text = "A pretrained model hub for popular nlp models."
-get_tag(text=preprocess(text), aliases=aliases, tags_dict=tags_dict)
+get_tag(text=clean_text(text), aliases=aliases, tags_dict=tags_dict)
 ```
 <pre class="output">
 'natural-language-processing'
@@ -318,7 +316,7 @@ print (json.dumps(performance, indent=2))
 ```python linenums="1"
 # Pitfalls
 text = "Transfer learning with transformers for text classification."
-print (get_tag(text=preprocess(text), aliases=aliases, tags_dict=tags_dict))
+print (get_tag(text=clean_text(text), aliases=aliases, tags_dict=tags_dict))
 ```
 <pre class="output">
 None
@@ -368,14 +366,17 @@ $$ w_{i, j} = \text{tf}_{i, j} * log(\frac{N}{\text{df}_i}) $$
 from sklearn.feature_extraction.text import TfidfVectorizer
 ```
 ```python linenums="1"
-# Set seeds
+# Setup
 set_seeds()
+df = pd.DataFrame(json.load(open("labeled_projects.json", "r")))
+df = df.sample(frac=1).reset_index(drop=True)
+df = preprocess(df, lower=True, stem=False)
+label_encoder = LabelEncoder().fit(df.tag)
+X_train, X_val, X_test, y_train, y_val, y_test = \
+    get_data_splits(X=df.text.to_numpy(), y=label_encoder.encode(df.tag))
 ```
 ```python linenums="1"
-# Get data splits
-preprocessed_df = df.copy()
-preprocessed_df.text = preprocessed_df.text.apply(preprocess, lower=True, stem=False)
-X_train, X_val, X_test, y_train, y_val, y_test, label_encoder = get_data_splits(preprocessed_df)
+# Saving raw X_test to compare with later
 X_test_raw = X_test
 ```
 ```python linenums="1"
@@ -580,13 +581,13 @@ We're going to create a custom predict function where if the majority class is n
     Our models can suffer from overconfidence so applying this limitation may not be as effective as we'd imagine, especially for larger neural networks. See the [confident learning](evaluation.md#confident-learning){:target="_blank"} section of the [evaluation lesson](evaluation.md){:target="_blank"} for more information.
 
 ```python linenums="1"
-# Predict function
-def predict(x, model, index):
+# Custom predict function
+def custom_predict(x, model, index):
     """Custom predict function that defaults
     to an index if conditions are not met."""
     y_prob = model.predict_proba(x)
     y_pred = [np.argmax(p) if max(p) > 0.6 else index for p in y_prob]
-    return y_pred
+    return np.array(y_pred)
 ```
 
 !!! tip
@@ -602,7 +603,7 @@ def predict(x, model, index):
 ```python linenums="1"
 # Inference (with tokens not similar to training data)
 text = "Interpretability methods for explaining model behavior."
-y_pred = predict(vectorizer.transform([text]), model=model, index=label_encoder.class_to_index["other"])
+y_pred = custom_predict(vectorizer.transform([text]), model=model, index=label_encoder.class_to_index["other"])
 label_encoder.decode(y_pred)
 ```
 <pre class="output">
@@ -612,7 +613,7 @@ label_encoder.decode(y_pred)
 ```python linenums="1"
 # Evaluate
 other_index = label_encoder.class_to_index["other"]
-y_pred = predict(X_test, model=model, index=label_encoder.class_to_index["other"])
+y_pred = custom_predict(X_test, model=model, index=label_encoder.class_to_index["other"])
 metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
 performance = {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
 print (json.dumps(performance, indent=2))

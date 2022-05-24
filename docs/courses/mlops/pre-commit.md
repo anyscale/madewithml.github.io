@@ -171,7 +171,7 @@ We can also add this command to our Makefile to execute when a development envir
 ...
 .PHONY: install-dev
 install-dev:
-	python -m pip install -e ".[dev]" --no-cache-dir
+	python3 -m pip install -e ".[dev]" --no-cache-dir
 	pre-commit install
 	pre-commit autoupdate
 ...

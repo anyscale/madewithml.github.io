@@ -107,8 +107,8 @@ Each line in a recipe for a rule will execute in a separate sub-shell. However f
 venv:
     python3 -m venv ${name}
     source ${name}/bin/activate
-    python -m pip install --upgrade pip setuptools wheel
-    python -m pip install -e ".[dev]" --no-cache-dir
+    python3 -m pip install --upgrade pip setuptools wheel
+    python3 -m pip install -e ".[dev]" --no-cache-dir
     pre-commit install
     pre-commit autoupdate
     pip uninstall dataclasses -y
@@ -121,8 +121,8 @@ However this is only available in Make version 3.82 and above and most Macs curr
 venv:
     python3 -m venv ${name}
     source ${name}/bin/activate && \
-    python -m pip install --upgrade pip setuptools wheel && \
-    python -m pip install -e ".[dev]" --no-cache-dir && \
+    python3 -m pip install --upgrade pip setuptools wheel && \
+    python3 -m pip install -e ".[dev]" --no-cache-dir && \
     pre-commit install && \
     pre-commit autoupdate && \
     pip uninstall dataclasses -y

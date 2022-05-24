@@ -115,7 +115,7 @@ The data directory containing the files will also have a [.gitignore](https://gi
     # Model artifacts
     📂 config
       📄 run_id.txt
-      📄 params.json
+      📄 args.json
       📄 performance.json
     ```
 

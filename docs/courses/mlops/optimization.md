@@ -54,7 +54,7 @@ We need to define an objective function that will consume a trial and a set of a
 ```python linenums="1"
 def objective(args, trial):
     """Objective function for optimization trials."""
-    # Paramters to tune
+    # Parameters to tune
     args.analyzer = trial.suggest_categorical("analyzer", ["word", "char", "char_wb"])
     args.ngram_max_range = trial.suggest_int("ngram_max_range", 3, 10)
     args.learning_rate = trial.suggest_loguniform("learning_rate", 1e-2, 1e0)
@@ -64,11 +64,13 @@ def objective(args, trial):
     artifacts = train(args=args, df=df, trial=trial)
 
     # Set additional attributes
-    trial.set_user_attr("precision", artifacts["performance"]["precision"])
-    trial.set_user_attr("recall", artifacts["performance"]["recall"])
-    trial.set_user_attr("f1", artifacts["performance"]["f1"])
+    performance = artifacts["performance"]
+    print(json.dumps(performance, indent=2))
+    trial.set_user_attr("precision", performance["precision"])
+    trial.set_user_attr("recall", performance["recall"])
+    trial.set_user_attr("f1", performance["f1"])
 
-    return artifacts["performance"]["f1"]
+    return performance["f1"]
 ```
 
 ## Study
@@ -121,16 +123,16 @@ get_ipython().system_raw("mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri $
 3. Click on the **Compare** button.
 
 <div class="ai-center-all">
-    <img src="https://madewithml.com/static/images/mlops/hyperparameter_optimization/compare.png" width="1000" alt="compare">
+    <img src="/static/images/mlops/hyperparameter_optimization/compare.png" width="1000" alt="compare">
 </div>
 
 4. In the comparison page, we can then view the results through various lens (contours, parallel coordinates, etc.)
 
 <div class="ai-center-all">
-    <img src="https://madewithml.com/static/images/mlops/hyperparameter_optimization/contour.png" width="1000" alt="contour plots">
+    <img src="/static/images/mlops/hyperparameter_optimization/contour.png" width="1000" alt="contour plots">
 </div>
 <div class="ai-center-all">
-    <img src="https://madewithml.com/static/images/mlops/hyperparameter_optimization/parallel_coordinates.png" width="1000" alt="parallel coordinates">
+    <img src="/static/images/mlops/hyperparameter_optimization/parallel_coordinates.png" width="1000" alt="parallel coordinates">
 </div>
 
 ```python linenums="1"
@@ -247,17 +249,22 @@ trials_df.head()
 ```python linenums="1"
 # Best trial
 print (f"Best value (f1): {study.best_trial.value}")
-print (f"Best hyperparameters: {study.best_trial.params}")
+print (f"Best hyperparameters: {json.dumps(study.best_trial.params, indent=2)}")
 ```
 <pre class="output">
-Best value (f1): 0.8470890576153735
-Best hyperparameters: {'analyzer': 'char_wb', 'ngram_max_range': 4, 'learning_rate': 0.08833689034118489, 'power_t': 0.1181958972675695}
+Best value (f1): 0.8535985582060417
+Best hyperparameters: {
+  "analyzer": "char_wb",
+  "ngram_max_range": 4,
+  "learning_rate": 0.08981103667371809,
+  "power_t": 0.2583427488720579
+}
 </pre>
 
 ```python linenums="1"
-# Save best parameters
-params = {**args.__dict__, **study.best_trial.params}
-print (json.dumps(params, indent=2, cls=NumpyEncoder))
+# Save best parameter values
+args = {**args.__dict__, **study.best_trial.params}
+print (json.dumps(args, indent=2, cls=NumpyEncoder))
 ```
 <pre class="output">
 {

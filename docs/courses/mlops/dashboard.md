@@ -83,12 +83,12 @@ We can essentially walk viewers through our entire data phase (EDA, preprocessin
 
 ```python linenums="1"
 # Sliders
-min_tag_freq = st.slider("min_tag_freq", min_value=1, value=30, step=1)
+min_freq = st.slider("min_freq", min_value=1, value=30, step=1)
 df, tags_above_freq, tags_below_freq = data.prepare(
     df=df,
     include=list(tags_dict.keys()),
     exclude=config.EXCLUDED_TAGS,
-    min_tag_freq=min_tag_freq,
+    min_freq=min_freq,
 )
 col1, col2, col3 = st.beta_columns(3)
 with col1:
@@ -115,7 +115,7 @@ What makes this truly interactive is that when we alter the value here, all the 
 
 ```python linenums="1" hl_lines="2"
 # Plots
-num_tags_per_project = [len(tags) for tags in df.tags]  # df is dependent on min_tag_freq slider's value
+num_tags_per_project = [len(tags) for tags in df.tags]  # df is dependent on min_freq slider's value
 num_tags, num_projects = zip(*Counter(num_tags_per_project).items())
 plt.figure(figsize=(10, 3))
 ax = sns.barplot(list(num_tags), list(num_projects))
@@ -139,7 +139,7 @@ filters = st.text_input("filters", "[!\"'#$%&()*+,-./:;<=>?@\\[]^_`{|}~]")
 lower = st.checkbox("lower", True)
 stem = st.checkbox("stem", False)
 text = st.text_input("Input text", "Conditional generation using Variational Autoencoders.")
-preprocessed_text = data.preprocess(text=text, lower=lower, stem=stem, filters=filters)
+preprocessed_text = data.clean_text(text=text, lower=lower, stem=stem, filters=filters)
 st.write("Preprocessed text", preprocessed_text)
 ```
 

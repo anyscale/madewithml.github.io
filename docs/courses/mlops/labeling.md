@@ -79,159 +79,9 @@ Regardless of whether we have a custom labeling platform or we choose a generali
 > Check out the [data-centric AI lesson](data-centric-ai.md){:target="_blank"} to learn more about the nuances of how labeling plays a crucial part of the data-driven development process.
 
 ## Labeling
-- [projects.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json){:target="_blank"}: projects with title, description and tag.
-- [tags.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json){:target="_blank"}: auxiliary information on the tags we are about of our platform.
 
-> Recall that our objective was to classify incoming content so that the community can discover them.
+Based on our findings from [EDA](exploratory-data-analysis.md){:target="_blank"}, we're going to apply several constraints for labeling our data:
 
-### Projects
-We'll first load our dataset from the JSON file.
-
-```python linenums="1"
-from collections import Counter
-import ipywidgets as widgets
-import itertools
-import json
-import pandas as pd
-from urllib.request import urlopen
-```
-
-> Traditionally, our data assets will be stored, versioned and updated in a database, warehouse, etc. We'll learn more about these different [data management systems](infrastructure.md#data-management-systems){:target="_blank"} later, but for now, we'll load our data as a JSON file from our repository.
-
-```python linenums="1"
-# Load projects
-url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json"
-projects = json.loads(urlopen(url).read())
-print (f"{len(projects)} projects")
-print (json.dumps(projects[0], indent=2))
-```
-<pre class="output">
-955 projects
-{
-  "id": 6,
-  "created_on": "2020-02-20 06:43:18",
-  "title": "Comparison between YOLO and RCNN on real world videos",
-  "description": "Bringing theory to experiment is cool. We can easily train models in colab and find the results in minutes.",
-  "tag": "computer-vision"
-}
-</pre>
-Now we can load our data into a Pandas DataFrame.
-```python linenums="1"
-# Create dataframe
-df = pd.DataFrame(projects)
-print (f"{len(df)} projects")
-df.head(5)
-```
-<pre class="output">
-<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>created_on</th>
-      <th>title</th>
-      <th>description</th>
-      <th>tag</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>6</td>
-      <td>2020-02-20 06:43:18</td>
-      <td>Comparison between YOLO and RCNN on real world...</td>
-      <td>Bringing theory to experiment is cool. We can ...</td>
-      <td>computer-vision</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>7</td>
-      <td>2020-02-20 06:47:21</td>
-      <td>Show, Infer &amp; Tell: Contextual Inference for C...</td>
-      <td>The beauty of the work lies in the way it arch...</td>
-      <td>computer-vision</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9</td>
-      <td>2020-02-24 16:24:45</td>
-      <td>Awesome Graph Classification</td>
-      <td>A collection of important graph embedding, cla...</td>
-      <td>graph-learning</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>15</td>
-      <td>2020-02-28 23:55:26</td>
-      <td>Awesome Monte Carlo Tree Search</td>
-      <td>A curated list of Monte Carlo tree search pape...</td>
-      <td>reinforcement-learning</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>19</td>
-      <td>2020-03-03 13:54:31</td>
-      <td>Diffusion to Vector</td>
-      <td>Reference implementation of Diffusion2Vec (Com...</td>
-      <td>graph-learning</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</pre>
-
-```python linenums="1"
-# Most common tags
-tags = Counter(df.tag.values)
-tags.most_common()
-```
-<pre class="output">
-[('natural-language-processing', 388),
- ('computer-vision', 356),
- ('mlops', 79),
- ('reinforcement-learning', 56),
- ('graph-learning', 45),
- ('time-series', 31)]
-</pre>
-
-> We'll address the [data imbalance](baselines.md#data-imbalance){:target="_blank"} after splitting into our train split and prior to training our model.
-
-### Tags
-
-We're also going to be using an [auxiliary dataset](https://github.com/GokuMohandas/MadeWithML/blob/main/datasets/tags.json){:target="_blank"} which contains a collection of all the tags that are currently relevant to us.
-
-```python linenums="1"
-# Load tags
-url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json"
-tags_dict = {}
-for item in json.loads(urlopen(url).read()):
-    key = item.pop("tag")
-    tags_dict[key] = item
-print (f"{len(tags_dict)} tags")
-```
-<pre class="output">
-4 tags
-</pre>
-```python linenums="1"
-@widgets.interact(tag=list(tags_dict.keys()))
-def display_tag_details(tag="computer-vision"):
-    print (json.dumps(tags_dict[tag], indent=2))
-```
-<pre class="output">
-"computer-vision": {
-  "aliases": [
-    "cv",
-    "vision"
-  ]
-}
-</pre>
-
-> It's important that this auxillary information about our tags resides in a separate location so that everyone uses the same source of truth. This asset can also be [versioned](versioning.md){:target="_blank"} and kept up-to-date.
-
-### Constraints
-
-We're going to apply several constraints on labeling our data:
 - if a data point has a tag that we currently don't support, we'll replace it with `other`
 - if a certain tag doesn't have *enough* samples, we'll replace it with `other`
 
@@ -380,18 +230,18 @@ We're also going to restrict the mapping to only tags that are above a certain f
 
 ```python linenums="1"
 # Minimum frequency required for a tag
-min_tag_freq = 75
+min_freq = 75
 tags = Counter(df.tag.values)
 ```
 
 ```python linenums="1"
 # Tags that just made / missed the cut
-@widgets.interact(min_tag_freq=(0, tags.most_common()[0][1]))
-def separate_tags_by_freq(min_tag_freq=min_tag_freq):
+@widgets.interact(min_freq=(0, tags.most_common()[0][1]))
+def separate_tags_by_freq(min_freq=min_freq):
     tags_above_freq = Counter(tag for tag in tags.elements()
-                                    if tags[tag] >= min_tag_freq)
+                                    if tags[tag] >= min_freq)
     tags_below_freq = Counter(tag for tag in tags.elements()
-                                    if tags[tag] < min_tag_freq)
+                                    if tags[tag] < min_freq)
     print ("Most popular tags:\n", tags_above_freq.most_common(3))
     print ("\nTags that just made the cut:\n", tags_above_freq.most_common()[-3:])
     print ("\nTags that just missed the cut:\n", tags_below_freq.most_common(3))
@@ -416,9 +266,9 @@ def filter(tag, include=[]):
 ```
 
 ```python linenums="1"
-# Filter tags that have fewer than <min_tag_freq> occurrences
+# Filter tags that have fewer than <min_freq> occurrences
 tags_above_freq = Counter(tag for tag in tags.elements()
-                          if (tags[tag] >= min_tag_freq))
+                          if (tags[tag] >= min_freq))
 df.tag = df.tag.apply(filter, include=list(tags_above_freq.keys()))
 ```
 
@@ -435,14 +285,6 @@ print (f"{len(df)} projects")
 <pre class="output">
 955 projects
 </pre>
-
-We'll save our clean, labeled data as a separate asset so we don't have to repeat these steps later on and so we don't alter the integrity of our raw data assets.
-
-```python linenums="1"
-# Save clean labeled data
-with open("labeled_projects.json", "w") as fp:
-    json.dump(df.to_dict("records"), fp, indent=4)
-```
 
 ## Libraries
 
