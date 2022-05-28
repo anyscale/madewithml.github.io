@@ -214,7 +214,7 @@ project_details_view = FeatureView(
     ),
     features=[
         Feature(name="text", dtype=ValueType.STRING),
-        Feature(name="tags", dtype=ValueType.STRING_LIST),
+        Feature(name="tag", dtype=ValueType.STRING_LIST),
     ],
     online=True,
     input=project_details,
@@ -260,7 +260,7 @@ So let's go ahead and define our feature views by moving this code into [feature
         ),
         features=[
             Feature(name="text", dtype=ValueType.STRING),
-            Feature(name="tags", dtype=ValueType.STRING_LIST),
+            Feature(name="tag", dtype=ValueType.STRING_LIST),
         ],
         online=True,
         input=project_details,
@@ -400,7 +400,7 @@ training_df.head()
     ```
 
     ```python linenums="1"
-    # tests/tagifai/test_main.py
+    # tests/code/test_main.py
     @pytest.mark.training
     def test_get_historical_features():
         result = runner.invoke(app, ["get-historical-features"])

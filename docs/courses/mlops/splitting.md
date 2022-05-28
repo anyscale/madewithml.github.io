@@ -204,9 +204,9 @@ np.mean(np.std(dist_df.to_numpy(), axis=0))
 
 ```python linenums="1"
 # Split DataFrames
-train_df = pd.DataFrame({"text": X_train, "tags": label_encoder.decode(y_train)})
-val_df = pd.DataFrame({"text": X_val, "tags": label_encoder.decode(y_val)})
-test_df = pd.DataFrame({"text": X_test, "tags": label_encoder.decode(y_test)})
+train_df = pd.DataFrame({"text": X_train, "tag": label_encoder.decode(y_train)})
+val_df = pd.DataFrame({"text": X_val, "tag": label_encoder.decode(y_val)})
+test_df = pd.DataFrame({"text": X_test, "tag": label_encoder.decode(y_test)})
 train_df.head()
 ```
 <div class="output_subarea output_html rendered_html"><div>

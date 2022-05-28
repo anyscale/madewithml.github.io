@@ -28,9 +28,9 @@ We will be using a very popular blend of style and formatting conventions that m
 
 Install required packages:
 ```bash
-pip install black==20.8b1 flake8==3.8.3 isort==5.5.3
+pip install black==22.3.0 flake8==3.9.2 isort==5.10.1
 ```
-> We won't add these to our `requirements.txt` like we have been doing. Since these libraries are not core to our project, we'll be isolating them. We'll learn about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
+> We won't add these to our `requirements.txt` like we have been doing. Since these libraries are not core to our project, we'll be isolating them. We'll learn more about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
 
 ## Configuration
 
@@ -128,7 +128,7 @@ black .
 All done! ✨ 🍰 ✨
 9 files left unchanged.
 flake8
-isort .
+python3 -m isort . isort .
 Fixing ...
 </pre>
 

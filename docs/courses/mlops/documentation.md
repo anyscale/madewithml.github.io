@@ -122,7 +122,7 @@ So we're going through all this effort of including typing and docstrings to our
 ```bash
 pip install mkdocs==1.3.0 mkdocstrings==0.18.1
 ```
-> We won't add these to our `requirements.txt` like we have been doing. Since these libraries are not core to our project, we'll be isolating them. We'll learn about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
+> We won't add these to our `requirements.txt` like we have been doing. Since these libraries are not core to our project, we'll be isolating them. We'll learn more about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
 
 2. Initialize mkdocs
 ```bash

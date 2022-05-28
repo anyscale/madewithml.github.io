@@ -67,7 +67,7 @@ Let's use the [nlpaug](https://github.com/makcedward/nlpaug){:target="_blank"} l
 
 ```bash
 pip install nlpaug==1.1.0 transformers==3.0.2 -q
-pip install snorkel==0.9.7 -q
+pip install snorkel==0.9.8 -q
 ```
 
 ```python linenums="1"

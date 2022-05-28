@@ -236,7 +236,7 @@ import itertools
 class LabelEncoder(object):
     """Label encoder for tag labels."""
     def __init__(self, class_to_index={}):
-        self.class_to_index = class_to_index
+        self.class_to_index = class_to_index or {}  # mutable defaults ;)
         self.index_to_class = {v: k for k, v in self.class_to_index.items()}
         self.classes = list(self.class_to_index.keys())
 

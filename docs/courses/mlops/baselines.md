@@ -109,7 +109,6 @@ def set_seeds(seed=42):
 ```python linenums="1"
 def preprocess(df, lower, stem):
     """Preprocess the data."""
-    df = df[df.tag.notnull()]  # remove projects with no tags
     df["text"] = df.title + " " + df.description  # feature engineering
     df.text = df.text.apply(clean_text, lower=lower, stem=stem)  # clean text
     return df
@@ -460,7 +459,8 @@ model = SGDClassifier(
 ```
 ```python linenums="1"
 # Train model
-for epoch in range(100):
+num_epochs = 100
+for epoch in range(num_epochs):
     # Training
     model.fit(X_over, y_over)
 
@@ -575,36 +575,47 @@ y_prob = model.predict_proba(vectorizer.transform([text]))
  'other': 0.17248570271336786}
 </pre>
 
-We're going to create a custom predict function where if the majority class is not above 60%, then we predict the `other` class. Precision is really important for us and we can leverage the labeling and QA workflows to improve the recall during subsequent manual inspection.
+We're going to create a custom predict function where if the majority class is not above a certain softmax score, then we predict the `other` class. In our [objectives](purpose.md#objective){:target="_blank"}, we decided that precision is really important for us and that we can leverage the labeling and QA workflows to improve the recall during subsequent manual inspection.
 
 !!! warning
     Our models can suffer from overconfidence so applying this limitation may not be as effective as we'd imagine, especially for larger neural networks. See the [confident learning](evaluation.md#confident-learning){:target="_blank"} section of the [evaluation lesson](evaluation.md){:target="_blank"} for more information.
 
 ```python linenums="1"
+# Determine first quantile softmax score for the correct class (on validation split)
+y_pred = model.predict(X_val)
+y_prob = model.predict_proba(X_val)
+threshold = np.quantile([y_prob[i][j] for i, j in enumerate(y_pred)], q=0.25)  # Q1
+threshold
+```
+
+<pre class="output">
+0.6742890218960005
+</pre>
+
+!!! warning
+    It's very important that we do this on our validation split so we aren't inflating the value using the train split or leaking information prior to evaluation on the test split.
+
+```python linenums="1"
 # Custom predict function
-def custom_predict(x, model, index):
+def custom_predict(y_prob, threshold, index):
     """Custom predict function that defaults
     to an index if conditions are not met."""
-    y_prob = model.predict_proba(x)
-    y_pred = [np.argmax(p) if max(p) > 0.6 else index for p in y_prob]
+    y_pred = [np.argmax(p) if max(p) > threshold else index for p in y_prob]
     return np.array(y_pred)
 ```
 
-!!! tip
-    We could've also calculated the mean softmax score for the correct class or even quantiles. Note that this is performed on the validation split so as to not influence evaluation on the test split.
-
-    ```python linenums="1"
-    y_pred = model.predict(X_val)
-    y_prob = model.predict_proba(X_val)
-    np.mean([y_prob[i][j] for i, j in enumerate(y_pred)])  # mean
-    np.quantile([y_prob[i][j] for i, j in enumerate(y_pred)], q=0.25)  # Q1
-    ```
+```python linenums="1"
+def predict_tag(texts):
+    y_prob = model.predict_proba(vectorizer.transform(texts))
+    other_index = label_encoder.class_to_index["other"]
+    y_pred = custom_predict(y_prob=y_prob, threshold=threshold, index=other_index)
+    return label_encoder.decode(y_pred)
+```
 
 ```python linenums="1"
 # Inference (with tokens not similar to training data)
 text = "Interpretability methods for explaining model behavior."
-y_pred = custom_predict(vectorizer.transform([text]), model=model, index=label_encoder.class_to_index["other"])
-label_encoder.decode(y_pred)
+predict_tag(texts=[text])
 ```
 <pre class="output">
 ['other']
@@ -612,17 +623,17 @@ label_encoder.decode(y_pred)
 
 ```python linenums="1"
 # Evaluate
-other_index = label_encoder.class_to_index["other"]
-y_pred = custom_predict(X_test, model=model, index=label_encoder.class_to_index["other"])
+y_prob = model.predict_proba(X_test)
+y_pred = custom_predict(y_prob=y_prob, threshold=threshold, index=other_index)
 metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
 performance = {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
 print (json.dumps(performance, indent=2))
 ```
 <pre class="output">
 {
-  "precision": 0.8929962902778195,
-  "recall": 0.8333333333333334,
-  "f1": 0.8485049088497365
+  "precision": 0.9116161616161617,
+  "recall": 0.7569444444444444,
+  "f1": 0.7929971988795519
 }
 </pre>
 

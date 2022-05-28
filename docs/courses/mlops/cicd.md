@@ -105,7 +105,7 @@ jobs:
         run: |
           python3 -m pip install -e ".[test]" --no-cache-dir
       - name: Execute tests
-        run: pytest tests/tagifai --ignore tests/tagifai/test_main.py --ignore tests/tagifai/test_data.py
+        run: pytest tests/tagifai --ignore tests/code/test_main.py --ignore tests/code/test_data.py
 ```
 
 > We are only executing a subset of the tests here because we won't access to data or model artifacts when these tests are executed on GitHub's runners. However, if our blob storage and model registry are on the cloud (as they would be for a collaborative project), we can access them and perform all the tests. This will often involve using credentials to access these resources, which we can set as Action secrets (GitHub repository page > `Settings` > `Secrets`).

@@ -57,7 +57,7 @@ with col1:
     st.subheader("Projects (sample)")
     st.write(projects[0])
 with col2:
-    st.subheader("Tags")
+    st.subheader("Tag")
     tag = st.selectbox("Choose a tag", list(tags_dict.keys()))
     st.write(tags_dict[tag])
 ```
@@ -115,7 +115,7 @@ What makes this truly interactive is that when we alter the value here, all the 
 
 ```python linenums="1" hl_lines="2"
 # Plots
-num_tags_per_project = [len(tags) for tags in df.tags]  # df is dependent on min_freq slider's value
+num_tags_per_project = [len(tags) for tags in df.tag]  # df is dependent on min_freq slider's value
 num_tags, num_projects = zip(*Counter(num_tags_per_project).items())
 plt.figure(figsize=(10, 3))
 ax = sns.barplot(list(num_tags), list(num_projects))

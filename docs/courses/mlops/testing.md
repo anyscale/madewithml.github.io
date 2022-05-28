@@ -11,26 +11,25 @@ repository: https://github.com/GokuMohandas/follow/tree/testing
 
 ## Intuition
 
-Tests are a way for us to ensure that something works as intended. We're incentivized to implement tests and discover sources of error as early in the development cycle as possible so that we can reduce [increasing downstream costs](https://assets.deepsource.io/39ed384/images/blog/cost-of-fixing-bugs/chart.jpg){:target="_blank"} and wasted time. Once we've designed our tests, we can automatically execute them every time we implement a change to our system and continue to build on them over time. In this lesson, we'll learn how to test machine learning code, data and models to construct a system that we can reliably iterate on.
+In this lesson, we'll learn how to test code, data and models to construct a machine learning system that we can reliably iterate on. Tests are a way for us to ensure that something works as intended. We're incentivized to implement tests and discover sources of error as early in the development cycle as possible so that we can decrease [downstream costs](https://assets.deepsource.io/39ed384/images/blog/cost-of-fixing-bugs/chart.jpg){:target="_blank"} and wasted time. Once we've designed our tests, we can automatically execute them every time we change or add to our codebase.
 
 ### Types of tests
 
-There are many four majors types of tests which are utilized at different points in the development cycle:
+There are four majors types of tests which are utilized at different points in the development cycle:
 
 1. `#!js Unit tests`: tests on individual components that each have a [single responsibility](https://en.wikipedia.org/wiki/Single-responsibility_principle){:target="_blank"} (ex. function that filters a list).
 2. `#!js Integration tests`: tests on the combined functionality of individual components (ex. data processing).
 3. `#!js System tests`: tests on the design of a system for expected outputs given inputs (ex. training, inference, etc.).
 4. `#!js Acceptance tests`: tests to verify that requirements have been met, usually referred to as User Acceptance Testing (UAT).
-5. `#!js Regression tests`: testing errors we've seen before to ensure new changes don't reintroduce them.
+5. `#!js Regression tests`: tests based on errors we've seen before to ensure new changes don't reintroduce them.
 
-!!! warning
-    These types of test are not specific to machine learning. However, while ML systems are probabilistic in nature, they are composed of many deterministic components that can be tested in a similar manner as traditional software systems. The distinction between testing ML systems begins when we move from testing code to testing the [data](testing.md#data){:target="_blank"} and [models](testing.md#models){:target="_blank"}.
+While ML systems are probabilistic in nature, they are composed of many deterministic components that can be tested in a similar manner as traditional software systems. The distinction between testing ML systems begins when we move from testing code to testing the [data](testing.md#data){:target="_blank"} and [models](testing.md#models){:target="_blank"}.
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/testing/tests.png">
+    <img width="700" src="/static/images/mlops/testing/tests.png" alt="types of tests">
 </div>
 
-> There are many other types of functional and non-functional tests as well, such as smoke tests (quick health checks), performance tests (load, stress), security tests, etc. but we can generalize these under the system tests above.
+> There are many other types of functional and non-functional tests as well, such as smoke tests (quick health checks), performance tests (load, stress), security tests, etc. but we can generalize all of these under the system tests above.
 
 ### How should we test?
 
@@ -40,9 +39,9 @@ The framework to use when composing tests is the [Arrange Act Assert](http://wik
 - `#!js Act`: apply the inputs on the component we want to test.
 - `#!js Assert`: confirm that we received the expected output.
 
-> `#!js Cleaning` is an unofficial fourth step to this methodology because it's important to not leave remnants of a previous state which may affect subsequent tests. We can use packages such as [pytest-randomly](https://github.com/pytest-dev/pytest-randomly){:target="_blank"} to test against state dependency by executing tests randomly.
+> `#!js Cleaning` is an unofficial fourth step to this methodology because it's important to not leave remnants of a previous test which may affect subsequent tests. We can use packages such as [pytest-randomly](https://github.com/pytest-dev/pytest-randomly){:target="_blank"} to test against state dependency by executing tests randomly.
 
-In Python, there are many tools, such as [unittest](https://docs.python.org/3/library/unittest.html){:target="_blank"}, [pytest](https://docs.pytest.org/en/stable/){:target="_blank"}, etc., that allow us to easily implement our tests while adhering to the *Arrange Act Assert* framework above. These tools come with powerful built-in functionality such as parametrization, filters, and more, to test many conditions at scale.
+In Python, there are many tools, such as [unittest](https://docs.python.org/3/library/unittest.html){:target="_blank"}, [pytest](https://docs.pytest.org/en/stable/){:target="_blank"}, etc. that allow us to easily implement our tests while adhering to the *Arrange Act Assert* framework. These tools come with powerful built-in functionality such as parametrization, filters, and more, to test many conditions at scale.
 
 !!! question "What should we be testing for?"
     When *arranging* our inputs and *asserting* our expected outputs, what are some aspects of our inputs and outputs that we should be testing for?
@@ -55,58 +54,59 @@ In Python, there are many tools, such as [unittest](https://docs.python.org/3/li
 ## Best practices
 Regardless of the framework we use, it's important to strongly tie testing into the development process.
 
-- `#!js atomic`: when creating unit components, we need to ensure that they have a [single responsibility](https://en.wikipedia.org/wiki/Single-responsibility_principle){:target="_blank"} so that we can easily test them. If not, we'll need to split them into more granular units.
+- `#!js atomic`: when creating functions and classes, we need to ensure that they have a [single responsibility](https://en.wikipedia.org/wiki/Single-responsibility_principle){:target="_blank"} so that we can easily test them. If not, we'll need to split them into more granular components.
 - `#!js compose`: when we create new components, we want to compose tests to validate their functionality. It's a great way to ensure reliability and catch errors early on.
 - `#!js regression`: we want to account for new errors we come across with a regression test so we can ensure we don't reintroduce the same errors in the future.
 - `#!js coverage`: we want to ensure that 100% of our codebase has been accounter for. This doesn't mean writing a test for every single line of code but rather accounting for every single line (more on this in the [coverage section](#coverage) below).
-- `#!js automate`: in the event we forget to run our tests before committing to a repository, we want to auto run tests for every commit. We'll learn how to do this locally using [pre-commit hooks](git.md#pre-commit){:target="_blank"} and remotely (ie. main branch) via GitHub actions in subsequent lessons.
+- `#!js automate`: in the event we forget to run our tests before committing to a repository, we want to auto run tests when we make changes to our codebase. We'll learn how to do this locally using [pre-commit hooks](pre-commit.md){:target="_blank"} and remotely via [GitHub actions](cicd.md#github-actions){:target="_blank"} in subsequent lessons.
 
 ## Test-driven development
 
-[Test-driven development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development){:target="_blank"} is the process where you write a test before completely writing the functionality to ensure that tests are always written. This is in contrast to writing functionality first and then composing tests afterwards. Here are my thoughts on this:
+[Test-driven development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development){:target="_blank"} is the process of writing a test before writing the functionality to ensure that tests are always written. This is in contrast to writing functionality first and then composing tests afterwards. Here are our thoughts on this:
 
-- good to write tests as we progress, but it's not the representation of correctness.
+- good to write tests as we progress, but it does signify 100% correctness.
 - initial time should be spent on design before ever getting into the code or tests.
-- using a test as guide doesn't mean that our functionality is error free.
 
-Perfect coverage doesn't mean that our application is error free if those tests aren't meaningful and don't encompass the field of possible inputs, intermediates and outputs. Therefore, we should work towards better design and agility when facing errors, quickly resolving them and writing test cases around them to avoid them next time.
-
-> This topic is still highly debated and I'm only reflecting on [my experience](https://linkedin.com/in/goku){:target="_blank"} and what's worked well for my teams. What's most important is that the team is producing reliable systems that can be tested and improved upon.
+Perfect coverage doesn't mean that our application is error free if those tests aren't meaningful and don't encompass the field of possible inputs, intermediates and outputs. Therefore, we should work towards better design and agility when facing errors, quickly resolving them and writing test cases around them to avoid next time.
 
 ## Application
 
-In our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}, we'll be testing the code, data and models. Be sure to look inside each of the different testing scripts after reading through the components below.
+In our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}, we'll be testing the code, data and models. We'll start by creating a separate `tests` directory with `code` subdirectory for testing our `tagifai` scripts. We'll create subdirectories for testing [data](#🔢nbsp-data) and [models](#🤖nbsp-models) soon below.
+
+```bash
+mkdir tests
+cd tests
+mkdir app config model tagifai
+touch <SCRIPTS>
+cd ../
+```
 
 ```bash
 tests/
-├── app/
-|   └── test_api.py
-├── config/
-|   └── test_config.py
-├── great_expectations/
-|   ├── expectations/
-|   |   ├── projects.json
-|   |   └── tags.json
-|   ├── ...
-├── model/
-|   └── test_behavioral.py
-└── tagifai/
+└── code/
 |   ├── test_data.py
 |   ├── test_evaluate.py
 |   ├── test_main.py
-|   ├── test_models.py
-|   ├── test_train.py
+|   ├── test_predict.py
 |   └── test_utils.py
 ```
 
-> Alternatively, we could've organized our tests by types of tests as well (unit, integration, etc.) but I find it more intuitive for navigation by organizing by how our application is set up. But regardless of how we organize our tests, we can use [markers](#markers) to  allow us to run any subset of tests by specifying filters.
+Feel free to write the tests and organize them in these scripts *after* learning about all the concepts in this lesson. We suggest using our [`tests`](https://github.com/GokuMohandas/MLOps/tree/main/tests){:target="_blank"} directory on GitHub as a reference.
+
+> Notice that our `tagifai/train.py` script does not have it's respective `tests/code/test_train.py`. Some scripts have large functions (ex. `train.train()`, `train.optimize()`, `predict.predict()`, etc.) with dependencies (ex. artifacts) and it makes sense to test them via `tests/code/test_main.py`.
 
 ## 🧪&nbsp; Pytest
 
-We're going to be using [pytest](https://docs.pytest.org/en/stable/){:target="_blank"} as our testing framework for it's powerful builtin features such as [parametrization](#parametrize), [fixtures](#fixtures), [markers](#markers), etc.
+We're going to be using [pytest](https://docs.pytest.org/en/stable/){:target="_blank"} as our testing framework for it's powerful builtin features such as [parametrization](#parametrize), [fixtures](#fixtures), [markers](#markers) and more.
+
+```bash
+pip install pytest==7.1.2
+```
+
+> We won't add pytest to our `requirements.txt` like we have been doing. Since this library are not core to our project, we'll be isolating it. We'll learn more about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
 
 ### Configuration
-Pytest expects tests to be organized under a `tests` directory by default. However, we can also use our [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} file to configure any other test path directories as well. Once in the directory, pytest looks for python scripts starting with `tests_*.py` but we can configure it to read any other file patterns as well.
+Pytest expects tests to be organized under a `tests` directory by default. However, we can also add to our existing `pyproject.toml` file to configure any other test directories as well. Once in the directory, pytest looks for python scripts starting with `tests_*.py` but we can configure it to read any other file patterns as well.
 
 ```toml linenums="1"
 # Pytest
@@ -117,7 +117,7 @@ python_files = "test_*.py"
 
 ### Assertions
 
-Let's see what a sample test and it's results look like. Assume we have a simple function that determines whether a fruit is crisp or not (notice: [single responsibility](https://en.wikipedia.org/wiki/Single-responsibility_principle){:target="_blank"}):
+Let's see what a sample test and it's results look like. Assume we have a simple function that determines whether a fruit is crisp or not:
 
 ```python linenums="1"
 # food/fruits.py
@@ -133,12 +133,12 @@ def is_crisp(fruit):
     return False
 ```
 
-To test this function, we can use [assert statements](https://docs.pytest.org/en/stable/assert.html){:target="_blank"} to map inputs with expected outputs:
+To test this function, we can use [assert statements](https://docs.pytest.org/en/stable/assert.html){:target="_blank"} to map inputs with expected outputs. The statement following the word `assert` must return True.
 
 ```python linenums="1"
 # tests/food/test_fruits.py
 def test_is_crisp():
-    assert is_crisp(fruit="apple") #  or == True
+    assert is_crisp(fruit="apple")
     assert is_crisp(fruit="Apple")
     assert not is_crisp(fruit="orange")
     with pytest.raises(ValueError):
@@ -148,24 +148,55 @@ def test_is_crisp():
 
 > We can also have assertions about [exceptions](https://docs.pytest.org/en/stable/assert.html#assertions-about-expected-exceptions){:target="_blank"} like we do in lines 6-8 where all the operations under the with statement are expected to raise the specified exception.
 
+??? quote "Example of using `assert` in our project"
+
+    ```python linenums="1"
+    # tests/code/test_evaluate.py
+    def test_get_metrics():
+        y_true = np.array([0, 0, 1, 1])
+        y_pred = np.array([0, 1, 0, 1])
+        classes = ["a", "b"]
+        performance = evaluate.get_metrics(y_true=y_true, y_pred=y_pred, classes=classes, df=None)
+        assert performance["overall"]["precision"] == 2/4
+        assert performance["overall"]["recall"] == 2/4
+        assert performance["class"]["a"]["precision"] == 1/2
+        assert performance["class"]["a"]["recall"] == 1/2
+        assert performance["class"]["b"]["precision"] == 1/2
+        assert performance["class"]["b"]["recall"] == 1/2
+    ```
+
 ### Execution
 
 We can execute our tests above using several different levels of granularity:
 
 ```bash
-pytest                                           # all tests
-pytest tests/food                                # tests under a directory
-pytest tests/food/test_fruits.py                 # tests for a single file
-pytest tests/food/test_fruits.py::test_is_crisp  # tests for a single function
+python3 -m pytest                                           # all tests
+python3 -m pytest tests/food                                # tests under a directory
+python3 -m pytest tests/food/test_fruits.py                 # tests for a single file
+python3 -m pytest tests/food/test_fruits.py::test_is_crisp  # tests for a single function
 ```
 
 Running our specific test above would produce the following output:
+```bash
+python3 -m pytest tests/food/test_fruits.py::test_is_crisp
+```
 <pre class="output">
-tests/food/test_fruits.py::test_is_crisp <span style="color: #5A9C4B; font-weight: 600;">PASSED</span>      [100%]
+tests/food/test_fruits.py::test_is_crisp <span style="color: #5A9C4B; font-weight: 600;">.           [100%]</span>
 </pre>
-Had any of our assertions in this test failed, we would see the failed assertions as well as the expected output and the output we received from our function.
 
-> It's important to test for the variety of inputs and expected outputs that we outlined [above](#how-should-we-test) and to **never assume that a test is trivial**. In our example above, it's important that we test for both "apple" and "Apple" in the event that our function didn't account for casing!
+Had any of our assertions in this test failed, we would see the failed assertions, along with the expected and actual output from our function.
+
+<pre class="output">
+tests/food/test_fruits.py <span style="color: #F50071; font-weight: 600;">F                          [100%]</span>
+
+    def test_is_crisp():
+>       assert is_crisp(fruit="orange")
+<span style="color: #F50071; font-weight: 600;">E       AssertionError: assert False</span>
+<span style="color: #F50071; font-weight: 600;">E        +  where False = is_crisp(fruit='orange')</span>
+</pre>
+
+!!! tip
+    It's important to test for the variety of inputs and expected outputs that we outlined [above](#how-should-we-test) and to **never assume that a test is trivial**. In our example above, it's important that we test for both "apple" and "Apple" in the event that our function didn't account for casing!
 
 ### Classes
 
@@ -180,7 +211,6 @@ We can also test classes and their respective functions by creating test classes
 class Fruit(object):
     def __init__(self, name):
         self.name = name
-
 
 class TestFruit(object):
     @classmethod
@@ -208,41 +238,75 @@ class TestFruit(object):
 We can execute all the tests for our class by specifying the class name:
 
 ```bash
-tests/food/test_fruits.py::TestFruit .  [100%]
+python3 -m pytest tests/food/test_fruits.py::TestFruit
 ```
+<pre class="output">
+tests/food/test_fruits.py::TestFruit <span style="color: #5A9C4B; font-weight: 600;">.           [100%]</span>
+</pre>
 
-> We use test classes to test all of our class modules such as `LabelEncoder`, `Tokenizer`, `CNN`, etc.
+??? quote "Example of testing a Class in our project"
 
-### Interfaces
+    ```python linenums="1"
+    # tests/code/test_data.py
+    class TestLabelEncoder:
+    @classmethod
+    def setup_class(cls):
+        """Called before every class initialization."""
+        pass
 
-We can also easily test our CLI and API interfaces using their built-in test clients.
+    @classmethod
+    def teardown_class(cls):
+        """Called after every class initialization."""
+        pass
 
-```python linenums="1"
-from typer.testing import CliRunner
-from tagifai.main import app
+    def setup_method(self):
+        """Called before every method."""
+        self.label_encoder = data.LabelEncoder()
 
-# Initialize runner
-runner = CliRunner()
+    def teardown_method(self):
+        """Called after every method."""
+        del self.label_encoder
 
-def test_cli_command():
-    result = runner.invoke(app, <CLI_COMMAND>)
-    assert result.exit_code == 0
-    assert ...
-```
+    def test_empty_init(self):
+        label_encoder = data.LabelEncoder()
+        assert label_encoder.index_to_class == {}
+        assert len(label_encoder.classes) == 0
 
-and similarly for the API:
+    def test_dict_init(self):
+        class_to_index = {"apple": 0, "banana": 1}
+        label_encoder = data.LabelEncoder(class_to_index=class_to_index)
+        assert label_encoder.index_to_class == {0: "apple", 1: "banana"}
+        assert len(label_encoder.classes) == 2
 
-```python linenums="1"
-from fastapi.testclient import TestClient
+    def test_len(self):
+        assert len(self.label_encoder) == 0
 
-# Initialize client
-client = TestClient(app)
+    def test_save_and_load(self):
+        with tempfile.TemporaryDirectory() as dp:
+            fp = Path(dp, "label_encoder.json")
+            self.label_encoder.save(fp=fp)
+            label_encoder = data.LabelEncoder.load(fp=fp)
+            assert len(label_encoder.classes) == 0
 
-def test_api_command():
-    response = client.get(<ENDPOINT_PATH>)
-    assert response.status_code == HTTPStatus.OK
-    assert ...
-```
+    def test_str(self):
+        assert str(data.LabelEncoder()) == "<LabelEncoder(num_classes=0)>"
+
+    def test_fit(self):
+        label_encoder = data.LabelEncoder()
+        label_encoder.fit(["apple", "apple", "banana"])
+        assert "apple" in label_encoder.class_to_index
+        assert "banana" in label_encoder.class_to_index
+        assert len(label_encoder.classes) == 2
+
+    def test_encode_decode(self):
+        class_to_index = {"apple": 0, "banana": 1}
+        y_encoded = [0, 0, 1]
+        y_decoded = ["apple", "apple", "banana"]
+        label_encoder = data.LabelEncoder(class_to_index=class_to_index)
+        label_encoder.fit(["apple", "apple", "banana"])
+        assert np.array_equal(label_encoder.encode(y_decoded), np.array(y_encoded))
+        assert label_encoder.decode(y_encoded) == y_decoded
+    ```
 
 ### Parametrize
 
@@ -262,7 +326,7 @@ def test_is_crisp_parametrize(fruit, crisp):
 ```
 
 <pre class="output">
-pytest tests/food/test_is_crisp_parametrize.py <span style="color: #5A9C4B; font-weight: 600;">...</span>   [100%]
+python3 -m pytest tests/food/test_is_crisp_parametrize.py <span style="color: #5A9C4B; font-weight: 600;">...</span>   [100%]
 </pre>
 
 1. `#!js [Line 2]`: define the names of the parameters under the decorator, ex. "fruit, crisp" (note that this is one string).
@@ -270,26 +334,48 @@ pytest tests/food/test_is_crisp_parametrize.py <span style="color: #5A9C4B; font
 3. `#!js [Line 9]`: pass in parameter names to the test function.
 4. `#!js [Line 10]`: include necessary assert statements which will be executed for each of the combinations in the list from Step 2.
 
+Similarly, we could pass in an exception as the expected result as well:
 
-> In our application, we use parametrization to test components that require varied sets of inputs and expected outputs such as preprocessing, filtering, etc.
+```python linenums="1"
+@pytest.mark.parametrize(
+    "fruit, exception",
+    [
+        ("pear", ValueError),
+    ],
+)
+def test_is_crisp_exceptions(fruit, exception):
+    with pytest.raises(exception):
+        is_crisp(fruit=fruit)
+```
 
-!!! note
-    We could pass in an exception as the expected result as well:
+??? quote "Example of `parametrize` in our project"
+
     ```python linenums="1"
+    # tests/code/test_data.py
+    from tagifai import data
     @pytest.mark.parametrize(
-        "fruit, exception",
+        "text, lower, stem, stopwords, cleaned_text",
         [
-            ("pear", ValueError),
+            ("Hello worlds", False, False, [], "Hello worlds"),
+            ("Hello worlds", True, False, [], "hello worlds"),
+            ...
         ],
     )
-    def test_is_crisp_exceptions(fruit, exception):
-        with pytest.raises(exception):
-            is_crisp(fruit=fruit)
+    def test_preprocess(text, lower, stem, stopwords, cleaned_text):
+        assert (
+            data.clean_text(
+                text=text,
+                lower=lower,
+                stem=stem,
+                stopwords=stopwords,
+            )
+            == cleaned_text
+        )
     ```
 
 ### Fixtures
 
-Parametrization allows us to efficiently reduce redundancy inside test functions but what about its inputs? Here, we can use pytest's builtin [fixture](https://docs.pytest.org/en/stable/fixture.html){:target="_blank"}, which is a function that is executed before the test function. This significantly reduces redundancy when multiple test functions want to use the same inputs.
+Parametrization allows us to reduce redundancy inside test functions but what about reducing redundancy across different test functions? For example, suppose that different functions all have a dataframe as an input. Here, we can use pytest's builtin [fixture](https://docs.pytest.org/en/stable/fixture.html){:target="_blank"}, which is a function that is executed before the test function.
 
 ```python linenums="1"
 @pytest.fixture
@@ -297,10 +383,11 @@ def my_fruit():
     fruit = Fruit(name="apple")
     return fruit
 
-
 def test_fruit(my_fruit):
     assert my_fruit.name == "apple"
 ```
+
+> Note that the name of fixture and the input to the test function are identical (`my_fruit`).
 
 We can apply fixtures to classes as well where the fixture function will be invoked when any method in the class is called.
 
@@ -310,39 +397,61 @@ class TestFruit:
     ...
 ```
 
-We use fixtures to efficiently pass a set of inputs (ex. Pandas DataFrame) to different testing functions that require them (cleaning, splitting, etc.).
+??? quote "Example of `fixtures` in our project"
+    In our project, we use fixtures to efficiently pass a set of inputs (ex. Pandas DataFrame) to different testing functions that require them (cleaning, splitting, etc.).
 
-```python linenums="1"
-@pytest.fixture(scope="module")
-def df():
-    projects_fp = Path(config.DATA_DIR, "projects.json")
-    projects_dict = utils.load_dict(filepath=projects_fp)
-    df = pd.DataFrame(projects_dict)
-    return df
+    ```python linenums="1"
+    # tests/code/test_data.py
+    @pytest.fixture(scope="module")
+    def df():
+        data = [
+            {"title": "a0", "description": "b0", "tag": "c0"},
+            {"title": "a1", "description": "b1", "tag": "c1"},
+            {"title": "a2", "description": "b2", "tag": "c1"},
+            {"title": "a3", "description": "b3", "tag": "c2"},
+            {"title": "a4", "description": "b4", "tag": "c2"},
+            {"title": "a5", "description": "b5", "tag": "c2"},
+        ]
+        df = pd.DataFrame(data * 10)
+        return df
 
 
-def test_split(df):
-    splits = split_data(df=df)
-    ...
-```
+    @pytest.mark.parametrize(
+        "labels, unique_labels",
+        [
+            ([], ["other"]),  # no set of approved labels
+            (["c3"], ["other"]),  # no overlap b/w approved/actual labels
+            (["c0"], ["c0", "other"]),  # partial overlap
+            (["c0", "c1", "c2"], ["c0", "c1", "c2"]),  # complete overlap
+        ],
+    )
+    def test_replace_oos_labels(df, labels, unique_labels):
+        replaced_df = data.replace_oos_labels(
+            df=df.copy(), labels=labels, label_col="tag", oos_label="other"
+        )
+        assert set(replaced_df.tag.unique()) == set(unique_labels)
+    ```
 
-> Typically, when we have too many fixtures in a particular test file, we can organize them all in a `fixtures.py` script and invoke them as needed.
+    Note that we don't use the `df` fixture directly (we pass in `df.copy()`) inside our parametrized test function. If we did, then we'd be changing `df`'s values after each parametrization.
 
-!!! note
-    Fixtures can have different scopes depending on how we want to use them. For example our `df` fixture has the module scope because we don't want to keep recreating it after every test but, instead, we want to create it just once for all the tests in our module ([tests/test_data.py](https://github.com/GokuMohandas/MLOps/blob/main/tests/test_data.py){:target="_blank"}).
+    !!! tip
+        When creating fixtures around datasets, it's best practice to create a simplified version that still adheres to the same schema. For example, in our dataframe fixture above, we're creating a smaller dataframe that still has the same column names as our actual dataframe. While we could have loaded our actual dataset, it can cause issues as our dataset changes over time (new labels, removed labels, very large dataset, etc.)
 
-    - `function`: fixture is destroyed after every test. `#!js [default]`
-    - `class`: fixture is destroyed after the last test in the class.
-    - `module`: fixture is destroyed after the last test in the module (script).
-    - `package`: fixture is destroyed after the last test in the package.
-    - `session`: fixture is destroyed after the last test of the session.
+Fixtures can have different scopes depending on how we want to use them. For example our `df` fixture has the module scope because we don't want to keep recreating it after every test but, instead, we want to create it just once for all the tests in our module (`tests/test_data.py`).
 
-    Functions are lowest level scope while [sessions](https://docs.pytest.org/en/6.2.x/fixture.html#scope-sharing-fixtures-across-classes-modules-packages-or-session){:target="_blank"} are the highest level. The highest level scoped fixtures are executed first.
+- `function`: fixture is destroyed after every test. `#!js [default]`
+- `class`: fixture is destroyed after the last test in the class.
+- `module`: fixture is destroyed after the last test in the module (script).
+- `package`: fixture is destroyed after the last test in the package.
+- `session`: fixture is destroyed after the last test of the session.
 
+Functions are lowest level scope while [sessions](https://docs.pytest.org/en/6.2.x/fixture.html#scope-sharing-fixtures-across-classes-modules-packages-or-session){:target="_blank"} are the highest level. The highest level scoped fixtures are executed first.
+
+> Typically, when we have many fixtures in a particular test file, we can organize them all in a `fixtures.py` script and invoke them as needed.
 
 ### Markers
 
-We've been able to execute our tests at various levels of granularity (all tests, script, function, etc.) but we can create custom granularity by using [markers](https://docs.pytest.org/en/stable/mark.html){:target="_blank"}. We've already used one type of marker (parametrize) but there are several other [builtin markers](https://docs.pytest.org/en/stable/mark.html#mark){:target="_blank"} as well. For example, the [`skipif`](https://docs.pytest.org/en/stable/skipping.html#id1){:target="_blank"} marker allows us to skip execution of a test if a condition is met.
+We've been able to execute our tests at various levels of granularity (all tests, script, function, etc.) but we can create custom granularity by using [markers](https://docs.pytest.org/en/stable/mark.html){:target="_blank"}. We've already used one type of marker (parametrize) but there are several other [builtin markers](https://docs.pytest.org/en/stable/mark.html#mark){:target="_blank"} as well. For example, the [`skipif`](https://docs.pytest.org/en/stable/skipping.html#id1){:target="_blank"} marker allows us to skip execution of a test if a condition is met. For example, supposed we only wanted to test training our model if a GPU is available:
 
 ```python linenums="1"
 @pytest.mark.skipif(
@@ -368,43 +477,43 @@ pytest -m "fruits"      #  runs all tests marked with `fruits`
 pytest -m "not fruits"  #  runs all tests besides those marked with `fruits`
 ```
 
-The proper way to use markers is to explicitly list the ones we've created in our [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} file. Here we can specify that all markers must be defined in this file with the `--strict-markers` flag and then declare our markers (with some info about them) in our `markers` list:
-```toml linenums="1"
-# Pytest
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = "test_*.py"
-addopts = "--strict-markers --disable-pytest-warnings"
-markers = [
-    "training: tests that involve training",
-]
-```
+!!! tip
+    The proper way to use markers is to explicitly list the ones we've created in our [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} file. Here we can specify that all markers must be defined in this file with the `--strict-markers` flag and then declare our markers (with some info about them) in our `markers` list:
 
-Once we do this, we can view all of our existing list of markers by executing `#!bash pytest --markers` and we'll also receive an error when we're trying to use a new marker that's not defined here.
+    ```python linenums="1"
+    @pytest.mark.training
+    def test_train_model():
+        assert ...
+    ```
 
-> We use custom markers to label which of our test functions involve training so we can separate long running tests from everything else.
-```python linenums="1"
-@pytest.mark.training
-def test_train_model():
-    experiment_name = "test_experiment"
-    run_name = "test_run"
-    result = runner.invoke()
-    ...
-```
-
-> Another way to run custom tests is to use the `-k` flag when running pytest. The [k expression](https://docs.pytest.org/en/stable/example/markers.html#using-k-expr-to-select-tests-based-on-their-name){:target="_blank"} is much less strict compared to the marker expression where we can define expressions even based on names.
-
+    ```toml linenums="1" hl_lines="6-8"
+    # Pytest
+    [tool.pytest.ini_options]
+    testpaths = ["tests"]
+    python_files = "test_*.py"
+    addopts = "--strict-markers --disable-pytest-warnings"
+    markers = [
+        "training: tests that involve training",
+    ]
+    ```
+    Once we do this, we can view all of our existing list of markers by executing `#!bash pytest --markers` and we'll receive an error when we're trying to use a new marker that's not defined here.
 
 ### Coverage
 
 As we're developing tests for our application's components, it's important to know how well we're covering our code base and to know if we've missed anything. We can use the [Coverage](https://coverage.readthedocs.io/){:target="_blank"} library to track and visualize how much of our codebase our tests account for. With pytest, it's even easier to use this package thanks to the [pytest-cov](https://pytest-cov.readthedocs.io/){:target="_blank"} plugin.
 
 ```bash
-pytest --cov config --cov tagifai --cov app --cov-report html
+pip install pytest-cov==2.10.1
+```
+
+> We won't add pytest-cov to our `requirements.txt` like we have been doing. Since this library are not core to our project, we'll be isolating it. We'll learn more about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
+
+```bash
+python3 -m pytest --cov tagifai --cov-report html
 ```
 
 <div class="ai-center-all">
-    <img width="650" src="/static/images/mlops/testing/pytest.png" style="border-radius: 7px;">
+    <img width="600" src="/static/images/mlops/testing/pytest.png">
 </div>
 
 Here we're asking for coverage for all the code in our tagifai and app directories and to generate the report in HTML format. When we run this, we'll see the tests from our tests directory executing while the coverage plugin is keeping tracking of which lines in our application are being executed. Once our tests are complete, we can view the generated report (default is `htmlcov/index.html`) and click on individual files to see which parts were not covered by any tests. This is especially useful when we forget to test for certain conditions, exceptions, etc.
@@ -422,11 +531,13 @@ Sometimes it doesn't make sense to write tests to cover every single line in our
 
 1. Excusing lines by adding this comment `# pragma: no cover, <MESSAGE>`
 ```python linenums="1"
-if self.trial.should_prune():  # pragma: no cover, optuna pruning
-    pass
+if trial:  # pragma: no cover, optuna pruning
+    trial.report(val_loss, epoch)
+    if trial.should_prune():
+        raise optuna.TrialPruned()
 ```
 
-2. Excluding files by specifying them in our [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} configuration, such as our [gunicorn.py](https://github.com/GokuMohandas/MLOps/blob/main/app/gunicorn.py){:target="_blank"} script since it's from a trusted template. We could, however, compose some tests to use this script but for now, we'll omit it.
+2. Excluding files by specifying them in our `pyproject.toml` configuration:
 
 ```toml linenums="1"
 # Pytest coverage
@@ -440,13 +551,13 @@ Now that we have a foundation for testing traditional software, let's dive into 
 
 ## 🔢&nbsp; Data
 
-We've already tested the functions that act on our data through unit and integration tests but we haven't tested the validity of the data itself. Once we define what our data should look like, we can use, expand and adapt these expectations as our dataset grows.
+So far, we've used unit and integration tests to test the functions that interact with our data but we haven't tested the validity of the data itself. Once we define what our data should look like, we can use, expand and adapt these *expectations* as our dataset grows.
 
 ### Expectations
 
-There are many dimensions to what our data is expected to look like. We'll briefly talk about a few of them, including ones that may not directly be applicable to our task but, nonetheless, are very important to be aware of.
+There are many dimensions to consider for what our data is expected to look like. We'll briefly talk about a few of them, including ones that may not directly be applicable to our task but, nonetheless, are very important to be aware of.
 
-- `#!js rows / cols`: the most basic expectation is validating the presence of samples (rows) and features (columns). These can help identify mismatches between upstream backend database schema changes, upstream UI form changes, etc.
+- `#!js rows / cols`: the most basic expectation is validating the presence of samples (rows) and features (columns). These can help identify inconsistencies between upstream backend database schema changes, upstream UI form changes, etc.
 
     !!! question "Rows/cols"
         What are aspects of rows and cols in our dataset that we should test for?
@@ -476,17 +587,26 @@ There are many dimensions to what our data is expected to look like. We'll brief
             - value statistics (mean, std, median, max, min, sum, etc.)
             - distribution shift by comparing current values to previous values (useful for detecting drift)
 
-To implement these expectations, we could compose assert statements or we could leverage the open-source library called [Great Expectations](https://github.com/great-expectations/great_expectations){:target="_blank"}. It's a fantastic library that already has many of these expectations builtin (map, aggregate, multi-column, distributional, etc.) and allows us to create custom expectations as well. It also provides modules to seamlessly connect with backend data sources such as local file systems, S3, databases and even DAG runners. Let's explore the library by implementing the expectations we'll need for our application.
+To implement these expectations, we could compose assert statements or we could leverage the open-source library called [Great Expectations](https://github.com/great-expectations/great_expectations){:target="_blank"}.
+
+```bash
+pip install great-expectations==0.15.7
+```
+
+> Similar to our other testing libraries, We won't add great expectations to our `requirements.txt` like we have been doing. Since this library are not core to our project, we'll be isolating it. We'll learn more about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
+
+It's a library that already has many of these expectations builtin (map, aggregate, multi-column, distributional, etc.) and allows us to create custom expectations as well. It also provides modules to seamlessly connect with backend data sources such as local file systems, S3, databases and even DAG runners. Let's explore the library by implementing the expectations we'll need for our application.
 
 > Though Great Expectations has all the data validation functionality we need, there are several other production-grade data validation options available as well, such as [TFX](https://www.tensorflow.org/tfx/data_validation/get_started){:target="_blank"}, [AWS Deequ](https://github.com/awslabs/deequ){:target="_blank"}, etc.
 
-First we'll load the data we'd like to apply our expectations on. We can load our data from a variety of [sources](https://docs.greatexpectations.io/en/latest/guides/how_to_guides/configuring_datasources.html){:target="_blank"} (filesystem, S3, DB, etc.) which we can then wrap around a [Dataset module](https://docs.greatexpectations.io/en/latest/autoapi/great_expectations/dataset/index.html){:target="_blank"} (Pandas / Spark DataFrame, SQLAlchemy).
+First we'll load the data we'd like to apply our expectations on. We can load our data from a variety of [sources](https://docs.greatexpectations.io/docs/guides/connecting_to_your_data/connect_to_data_overview){:target="_blank"} (filesystem, database, cloud etc.) which we can then wrap around a [Dataset module](https://legacy.docs.greatexpectations.io/en/latest/autoapi/great_expectations/dataset/index.html){:target="_blank"} (Pandas / Spark DataFrame, SQLAlchemy).
 
 ```python linenums="1"
 from pathlib import Path
 import great_expectations as ge
 import pandas as pd
-from tagifai import config, utils
+from config import config
+from tagifai import utils
 
 # Create Pandas DataFrame
 projects_fp = Path(config.DATA_DIR, "projects.json")
@@ -503,49 +623,49 @@ df = ge.dataset.PandasDataset(projects_dict)
       <th>created_on</th>
       <th>title</th>
       <th>description</th>
-      <th>tags</th>
+      <th>tag</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
-      <td>2020-02-17 06:30:41</td>
-      <td>Machine Learning Basics</td>
-      <td>A practical set of notebooks on machine learni...</td>
-      <td>[code, tutorial, keras, pytorch, tensorflow, d...</td>
+      <td>6</td>
+      <td>2020-02-20 06:43:18</td>
+      <td>Comparison between YOLO and RCNN on real world...</td>
+      <td>Bringing theory to experiment is cool. We can ...</td>
+      <td>computer-vision</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2</td>
-      <td>2020-02-17 06:41:45</td>
-      <td>Deep Learning with Electronic Health Record (E...</td>
-      <td>A comprehensive look at recent machine learnin...</td>
-      <td>[article, tutorial, deep-learning, health, ehr]</td>
+      <td>7</td>
+      <td>2020-02-20 06:47:21</td>
+      <td>Show, Infer &amp; Tell: Contextual Inference for C...</td>
+      <td>The beauty of the work lies in the way it arch...</td>
+      <td>computer-vision</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>3</td>
-      <td>2020-02-20 06:07:59</td>
-      <td>Automatic Parking Management using computer vi...</td>
-      <td>Detecting empty and parked spaces in car parki...</td>
-      <td>[code, tutorial, video, python, machine-learni...</td>
+      <td>9</td>
+      <td>2020-02-24 16:24:45</td>
+      <td>Awesome Graph Classification</td>
+      <td>A collection of important graph embedding, cla...</td>
+      <td>graph-learning</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>4</td>
-      <td>2020-02-20 06:21:57</td>
-      <td>Easy street parking using region proposal netw...</td>
-      <td>Get a text on your phone whenever a nearby par...</td>
-      <td>[code, tutorial, python, pytorch, machine-lear...</td>
+      <td>15</td>
+      <td>2020-02-28 23:55:26</td>
+      <td>Awesome Monte Carlo Tree Search</td>
+      <td>A curated list of Monte Carlo tree search pape...</td>
+      <td>reinforcement-learning</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>5</td>
-      <td>2020-02-20 06:29:18</td>
-      <td>Deep Learning based parking management system ...</td>
-      <td>Fastai provides easy to use wrappers to quickl...</td>
-      <td>[code, tutorial, fastai, deep-learning, parkin...</td>
+      <td>19</td>
+      <td>2020-03-03 13:54:31</td>
+      <td>Diffusion to Vector</td>
+      <td>Reference implementation of Diffusion2Vec (Com...</td>
+      <td>graph-learning</td>
     </tr>
   </tbody>
 </table>
@@ -555,33 +675,36 @@ df = ge.dataset.PandasDataset(projects_dict)
 
 #### Built-in
 
-Once we have our data source wrapped in a Dataset module, we can compose and apply expectations on it. There are many [built-in expectations](https://docs.greatexpectations.io/en/latest/reference/glossary_of_expectations.html#missing-values-unique-values-and-types){:target="blank"} to choose from:
+Once we have our data source wrapped in a Dataset module, we can compose and apply expectations on it. There are many [built-in expectations](https://greatexpectations.io/expectations/){:target="blank"} to choose from:
 
+##### Table expectations
 ```python linenums="1"
-# Presence of features
-expected_columns = ["id", "title", "description", "tags"]
-df.expect_table_columns_to_match_ordered_list(column_list=expected_columns)
+df.expect_table_columns_to_match_ordered_list(
+    column_list=["id", "created_on", "title", "description", "tag"])
+df.expect_compound_columns_to_be_unique(column_list=["title", "description"])  # data leak
+```
 
-# Unique
+##### Column expectations
+```python linenums="1"
+# id
 df.expect_column_values_to_be_unique(column="id")
 
-# No null values
+# created_on
 df.expect_column_values_to_not_be_null(column="created_on")
-df.expect_column_values_to_not_be_null(column="title")
-df.expect_column_values_to_not_be_null(column="description")
-df.expect_column_values_to_not_be_null(column="tags")
-
-# Type
-df.expect_column_values_to_be_of_type(column="title", type_="str")
-df.expect_column_values_to_be_of_type(column="description", type_="str")
-df.expect_column_values_to_be_of_type(column="tags", type_="list")
-
-# Format
 df.expect_column_values_to_match_strftime_format(
     column="created_on", strftime_format="%Y-%m-%d %H:%M:%S")
 
-# Data leaks
-df.expect_compound_columns_to_be_unique(column_list=["title", "description"])
+# title
+df.expect_column_values_to_not_be_null(column="title")
+df.expect_column_values_to_be_of_type(column="title", type_="str")
+
+# description
+df.expect_column_values_to_not_be_null(column="description")
+df.expect_column_values_to_be_of_type(column="description", type_="str")
+
+# tag
+df.expect_column_values_to_not_be_null(column="tag")
+df.expect_column_values_to_be_of_type(column="tag", type_="str")
 ```
 
 Each of these expectations will create an output with details about success or failure, expected and observed values, expectations raised, etc. For example, the expectation ```#!python df.expect_column_values_to_be_of_type(column="title", type_="str")``` would produce the following if successful:
@@ -616,7 +739,7 @@ Each of these expectations will create an output with details about success or f
 }
 ```
 
-and this output if it failed (notice the counts and examples for what caused the failure):
+and if we have a failed expectation (ex. ```#!python  df.expect_column_values_to_be_of_type(column="title", type_="str")```), we'd receive this output(notice the counts and examples for what caused the failure):
 ```json linenums="1" hl_lines="2 17-30"
 {
   "success": false,
@@ -656,7 +779,7 @@ We can group all the expectations together to create an [Expectation Suite](http
 
 ```python linenums="1"
 # Expectation suite
-expectation_suite = df.get_expectation_suite()
+expectation_suite = df.get_expectation_suite(discard_failed_expectations=False)
 print(df.validate(expectation_suite=expectation_suite, only_return_failures=True))
 ```
 ```json linenums="1"
@@ -664,8 +787,8 @@ print(df.validate(expectation_suite=expectation_suite, only_return_failures=True
   "success": true,
   "results": [],
   "statistics": {
-    "evaluated_expectations": 9,
-    "successful_expectations": 9,
+    "evaluated_expectations": 11,
+    "successful_expectations": 11,
     "unsuccessful_expectations": 0,
     "success_percent": 100.0
   },
@@ -673,93 +796,180 @@ print(df.validate(expectation_suite=expectation_suite, only_return_failures=True
 }
 ```
 
-#### Custom
-
-Our `tags` feature column is a list of tags for each input. The Great Expectation's library doesn't come equipped to process a list feature but we can easily do so by creating a [custom expectation](https://docs.greatexpectations.io/en/latest/guides/how_to_guides/creating_and_editing_expectations/how_to_create_custom_expectations.html){:target="_blank"}.
-
-1. Create a custom Dataset module to wrap our data around.
-2. Define expectation functions that can map to each individual row of the feature column ([map](https://docs.greatexpectations.io/en/latest/autoapi/great_expectations/dataset/dataset/index.html#great_expectations.dataset.dataset.MetaDataset.column_map_expectation){:target="_blank"}) or to the entire feature column ([aggregate](https://docs.greatexpectations.io/en/latest/autoapi/great_expectations/dataset/dataset/index.html#great_expectations.dataset.dataset.MetaDataset.column_aggregate_expectation){:target="_blank"}) by specifying the appropriate decorator.
-```python linenums="1"
-class CustomPandasDataset(ge.dataset.PandasDataset):
-    _data_asset_type = "CustomPandasDataset"
-
-    @ge.dataset.MetaPandasDataset.column_map_expectation
-    def expect_column_list_values_to_be_not_null(self, column):
-        return column.map(lambda x: None not in x)
-
-    @ge.dataset.MetaPandasDataset.column_map_expectation
-    def expect_column_list_values_to_be_unique(self, column):
-        return column.map(lambda x: len(x) == len(set(x)))
-```
-3. Wrap data with the custom Dataset module and use the custom expectations.
-```python linenums="1"
-df = CustomPandasDataset(projects_dict)
-df.expect_column_values_to_not_be_null(column="tags")
-df.expect_column_list_values_to_be_unique(column="tags")
-```
-
-> There are various levels of [abstraction](https://docs.greatexpectations.io/en/latest/guides/how_to_guides/creating_and_editing_expectations/how_to_create_custom_expectations.html){:target="_blank"} (following a template vs. completely from scratch) available when it comes to creating a custom expectation with Great Expectations.
-
+> We could also create [custom expectations](https://docs.greatexpectations.io/docs/guides/expectations/creating_custom_expectations/overview){:target="_blank"} for our data.
 
 ### Projects
 So far we've worked with the Great Expectations library at the Python script level but we can organize our expectations even more by creating a Project.
 
-1. Initialize the Project using ```#!bash great_expectations init -d tests/```. This will interactively walk us through setting up data sources, naming, etc. and set up a [great_expectations](https://github.com/GokuMohandas/MLOps/blob/main/great_expectations){:target="_blank"} directory with the following structure:
+```bash
+cd tests
+great_expectations init
+```
+This will interactively walk us through setting up data sources, naming, etc. and set up a `tests/great_expectations`]directory with the following structure:
 ```bash
 tests/great_expectations/
 |   ├── checkpoints/
 |   ├── expectations/
-|   ├── notebooks/
 |   ├── plugins/
 |   ├── uncommitted/
 |   ├── .gitignore
 |   └── great_expectations.yml
 ```
-2. Define our [custom module](https://github.com/GokuMohandas/MLOps/blob/main/great_expectations/plugins/custom_module/custom_dataset.py){:target="_blank"} under the [plugins](https://github.com/GokuMohandas/MLOps/blob/main/great_expectations/plugins){:target="_blank"} directory and use it to define our data sources in our [great_expectations.yml](https://github.com/GokuMohandas/MLOps/blob/main/great_expectations/great_expectations.yml){:target="_blank"} configuration file.
-```yaml linenums="1" hl_lines="5-6"
-datasources:
-  data:
-    class_name: PandasDatasource
-    data_asset_type:
-      module_name: custom_module.custom_dataset
-      class_name: CustomPandasDataset
-    module_name: great_expectations.datasource
-    batch_kwargs_generators:
-      subdir_reader:
-        class_name: SubdirReaderBatchKwargsGenerator
-        base_directory: ../data
-```
-3. Create expectations using the profiler, which creates automatic expectations based on the data, or we can also create our own expectations. All of this is done interactively via a launched Jupyter notebook and saved under our [great_expectations/expectations](https://github.com/GokuMohandas/MLOps/tree/main/great_expectations/expectations){:target="_blank"} directory.
+
+#### Data source
+
 ```bash
-cd tests
-great_expectations suite scaffold SUITE_NAME  # uses profiler
-great_expectations suite new --suite  # no profiler
-great_expectations suite edit SUITE_NAME  # add your own custom expectations
+great_expectations datasource new
 ```
-> When using the automatic profiler, you can choose which feature columns to apply profiling to. Since our tags feature is a list feature, we'll leave it commented and create our own expectations using the `suite edit` command.
-
-4. Create Checkpoints where a Suite of Expectations are applied to a specific Data Asset. This is a great way of programmatically applying checkpoints on our existing and new data sources.
 ```bash
-cd tests
-great_expectations checkpoint new CHECKPOINT_NAME SUITE_NAME
-great_expectations checkpoint run CHECKPOINT_NAME
+What data would you like Great Expectations to connect to?
+    1. Files on a filesystem (for processing with Pandas or Spark) 👈
+    2. Relational database (SQL)
 ```
-5. Run checkpoints on new batches of incoming data by adding to our testing pipeline via Makefile, or workflow orchestrator like [Airflow](https://airflow.apache.org/){:target="_blank"}, [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"}, etc. We can also use the [Great Expectations GitHub Action](https://github.com/great-expectations/great_expectations_action){:target="_blank"} to automate validating our data pipeline code when we push a change. More on using these Checkpoints with pipelines in our [Pipelines](pipelines.md){:target="_blank"} lesson.
-
-```makefile linenums="1"
-# Test
-.PHONY: test
-test:
-	cd tests && great_expectations checkpoint run projects
-	cd tests && great_expectations checkpoint run tags
-	pytest -m "not training"
+```bash
+What are you processing your files with?
+1. Pandas 👈
+2. PySpark
 ```
+Set our data path to `../data` (if you're doing this inside `tests`) and run the cells in this notebook and change the `datasource_name` to `data`. After we run the cells, we can close the notebook (and end the process on the terminal with ++ctrl++ + c) and we can see the Datasource being added to `great_expectations.yml`.
 
-> Note that we're only executing the tests with the `training` [marker](testing.md#markers).
+
+#### Suites
+Create expectations manually, interactively or automatically and save them as suites (a set of expectations for a particular data asset).
+```bash
+great_expectations suite new
+```
+```bash
+How would you like to create your Expectation Suite?
+    1. Manually, without interacting with a sample batch of data (default)
+    2. Interactively, with a sample batch of data 👈
+    3. Automatically, using a profiler
+```
+```
+Which data asset (accessible by data connector "default_inferred_data_connector_name") would you like to use?
+    1. labeled_projects.json
+    2. projects.json 👈
+    3. tags.json
+```
+This will open up an interactive notebook where we can add expectations. Copy and paste the expectations below and run all the cells. Repeat this step for `tags.json`.
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/testing/ge.png" style="border-radius: 7px;">
+    <img width="700" src="/static/images/mlops/testing/suite.png">
 </div>
+
+??? quote "Expectations for `projects.json`"
+    Table expectations
+    ```python linenums="1"
+    # Presence of features
+    df.expect_table_columns_to_match_ordered_list(
+        column_list=["id", "created_on", "title", "description", "tag"])
+    df.expect_compound_columns_to_be_unique(column_list=["title", "description"])  # data leak
+    ```
+
+    Column expectations:
+    ```python linenums="1"
+    # id
+    df.expect_column_values_to_be_unique(column="id")
+
+    # create_on
+    df.expect_column_values_to_not_be_null(column="created_on")
+    df.expect_column_values_to_match_strftime_format(
+        column="created_on", strftime_format="%Y-%m-%d %H:%M:%S")
+
+    # title
+    df.expect_column_values_to_not_be_null(column="title")
+    df.expect_column_values_to_be_of_type(column="title", type_="str")
+
+    # description
+    df.expect_column_values_to_not_be_null(column="description")
+    df.expect_column_values_to_be_of_type(column="description", type_="str")
+
+    # tag
+    df.expect_column_values_to_not_be_null(column="tag")
+    df.expect_column_values_to_be_of_type(column="tag", type_="str")
+    ```
+??? quote "Expectations for `tags.json`"
+    Table expectations
+    ```python linenums="1"
+    validator.expect_table_columns_to_match_ordered_list(column_list=["tag", "aliases"])
+    ```
+
+    Column expectations:
+    ```python linenums="1"
+    # tag
+    validator.expect_column_values_to_be_unique(column="tag")
+    validator.expect_column_values_to_not_be_null(column="tag")
+    validator.expect_column_values_to_be_of_type(column="tag", type_="str")
+
+    # aliases
+    validator.expect_column_values_to_be_of_type(column="aliases", type_="list")
+    ```
+
+All of these expectation suites will be saved under `great_expectations/expectations`:
+
+```bash
+great_expectations/
+|   ├── expectations/
+|   |   ├── labeled_projects.json
+|   |   ├── projects.json
+|   |   └── tags.json
+```
+
+To edit a suite, we can execute the follow CLI command:
+```bash
+great_expectations suite edit <SUITE_NAME>
+```
+
+#### Checkpoints
+Create Checkpoints where a Suite of Expectations are applied to a specific data asset. This is a great way of programmatically applying checkpoints on our existing and new data sources.
+```bash
+cd tests
+great_expectations checkpoint new CHECKPOINT_NAME
+```
+So for our project, it would be:
+```
+great_expectations checkpoint new projects
+great_expectations checkpoint new tags
+great_expectations checkpoint new labeled_projects
+```
+Each of these checkpoint creation calls will launch a notebook where we can define which suites to apply this checkpoint to. We have to change the lines for `data_asset_name` (which data asset to run the checkpoint suite on) and `expectation_suite_name` (name of the suite to use). For example, the `labeled_projects` checkpoint would use the `labeled_projects.json` data asset but use the `projects` suite (same suite as the `projects` checkpoint).
+```python linenums="1" hl_lines="12 15"
+my_checkpoint_name = "labeled_projects"  # This was populated from your CLI command.
+
+yaml_config = f"""
+name: {my_checkpoint_name}
+config_version: 1.0
+class_name: SimpleCheckpoint
+run_name_template: "%Y%m%d-%H%M%S-my-run-name-template"
+validations:
+  - batch_request:
+      datasource_name: data
+      data_connector_name: default_inferred_data_connector_name
+      data_asset_name: labeled_projects.json
+      data_connector_query:
+        index: -1
+    expectation_suite_name: projects
+"""
+print(yaml_config)
+```
+
+Once we've defined our checkpoint, we're ready to execute them:
+```bash
+great_expectations checkpoint run projects
+great_expectations checkpoint run tags
+great_expectations checkpoint run labeled_projects
+```
+
+<div class="ai-center-all">
+    <img width="650" src="/static/images/mlops/testing/checkpoint.png">
+</div>
+
+At the end of this lesson, we'll create a target in our `Makefile` that run all these tests (code, data and models) and we'll automate their execution in our [pre-commit lesson](pre-commit.md){:target="_blank"}.
+
+> We can also use the [Great Expectations GitHub Action](https://github.com/great-expectations/great_expectations_action){:target="_blank"} to automate validating our data pipeline code when we push a change to a remote host (ex. GitHub).
+
+!!! note
+    By default, Great Expectations stores our expectations, results and metrics locally but for production, we'll want to set up remote [metadata stores](https://docs.greatexpectations.io/docs/guides/setup/#metadata-stores){:target="_blank"}. This is typically something our data engineering team would help set up as validation should occur [prior](#best-practices-1) to downstream application such as machine learning (though ML teams can certainly help craft more expectations to ensure data validity).
 
 
 ### Data docs
@@ -786,7 +996,7 @@ Also note that the way we performed data validation on our static data file is n
 
 ## 🤖&nbsp; Models
 
-The other half of testing ML systems involves testing our models during training, evaluation, inference and deployment.
+The final aspect of testing ML systems involves testing our models during training, evaluation, inference and deployment.
 
 ### Training
 
@@ -827,50 +1037,121 @@ assert train(model, device=torch.device("cuda"))
 
 ### Behavioral testing
 
-Besides just looking at metrics, we also want to conduct some behavior sanity tests. Behavioral testing is the process of testing input data and expected outputs while treating the model as a black box. They don't necessarily have to be adversarial in nature but more along the types of perturbations we'll see in the real world once our model is deployed. A landmark paper on this topic is [Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://arxiv.org/abs/2005.04118){:target="_blank"} which breaks down behavioral testing into three types of tests:
+Behavioral testing is the process of testing input data and expected outputs while treating the model as a black box (model agnostic evaluation). They don't necessarily have to be adversarial in nature but more along the types of perturbations we may expect to see in the real world once our model is deployed. A landmark paper on this topic is [Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://arxiv.org/abs/2005.04118){:target="_blank"} which breaks down behavioral testing into three types of tests:
 
 - `#!js invariance`: Changes should not affect outputs.
 ```python linenums="1"
 # INVariance via verb injection (changes should not affect outputs)
 tokens = ["revolutionized", "disrupted"]
-tags = [["transformers"], ["transformers"]]
-texts = [f"Transformers have {token} the ML field." for token in tokens]
+texts = [f"Transformers applied to NLP have {token} the ML field." for token in tokens]
+predict_tag(texts=texts)
 ```
+<pre class="output">
+['natural-language-processing', 'natural-language-processing']
+</pre>
 - `#!js directional`: Change should affect outputs.
 ```python linenums="1"
 # DIRectional expectations (changes with known outputs)
-tokens = ["PyTorch", "Huggingface"]
-tags = [
-    ["pytorch", "transformers"],
-    ["huggingface", "transformers"],
-]
-texts = [f"A {token} implementation of transformers." for token in tokens]
+tokens = ["text classification", "image classification"]
+texts = [f"ML applied to {token}." for token in tokens]
+predict_tag(texts=texts)
 ```
+<pre class="output">
+['natural-language-processing', 'computer-vision']
+</pre>
 - `#!js minimum functionality`: Simple combination of inputs and expected outputs.
 ```python linenums="1"
 # Minimum Functionality Tests (simple input/output pairs)
-tokens = ["transformers", "graph neural networks"]
-tags = [["transformers"], ["graph-neural-networks"]]
-texts = [f"{token} have revolutionized machine learning." for token in tokens]
+tokens = ["natural language processing", "mlops"]
+texts = [f"{token} is the next big wave in machine learning." for token in tokens]
+predict_tag(texts=texts)
 ```
+<pre class="output">
+['natural-language-processing', 'mlops']
+</pre>
 
-And we can easily convert these behavioral tests into parameterized pytest functions.
+And we can convert these behavioral tests into systematic parameterized tests:
+
+```bash
+mkdir tests/model
+touch tests/model/test_behavioral.py
+```
 
 ```python linenums="1"
+# tests/model/test_behavioral.py
+from pathlib import Path
+import pytest
+from config import config
+from tagifai import main, predict
+
+@pytest.fixture(scope="module")
+def artifacts():
+    run_id = open(Path(config.CONFIG_DIR, "run_id.txt")).read()
+    artifacts = main.load_artifacts(run_id=run_id)
+    return artifacts
+
 @pytest.mark.parametrize(
-    "text, tags",
+    "text, tag",
     [
-        ("Transformers have revolutionized machine learning.", ["transformers"]),
-        ("GNNs have revolutionized machine learning.", ["graph-neural-networks"]),
+        ("Transformers applied to NLP have revolutionized machine learning.", "natural-language-processing"),
+        ("Transformers applied to NLP have disrupted machine learning.", "natural-language-processing"),
     ],
 )
-def test_mft(text, tags, artifacts):
-    """# Minimum Functionality Tests (simple input/output pairs)."""
-    results = predict.predict(texts=[text], artifacts=artifacts)
-    assert [set(result["predicted_tags"]).issubset(set(tags)) for result in results]
+def test_inv(text, tag, artifacts):
+    """INVariance via verb injection (changes should not affect outputs)."""
+    predicted_tag = predict.predict(texts=[text], artifacts=artifacts)[0]["predicted_tag"]
+    assert tag == predicted_tag
 ```
 
-> If not all behavioral tests are meant to be passed, then we could compute a behavioral score and use that as part of our evaluation criteria.
+??? quote "View `tests/model/test_behavioral.py`
+    ```python linenums="1"
+    from pathlib import Path
+    import pytest
+    from config import config
+    from tagifai import main, predict
+
+    @pytest.fixture(scope="module")
+    def artifacts():
+        run_id = open(Path(config.CONFIG_DIR, "run_id.txt")).read()
+        artifacts = main.load_artifacts(run_id=run_id)
+        return artifacts
+
+    @pytest.mark.parametrize(
+        "text, tag",
+        [
+            ("Transformers applied to NLP have revolutionized machine learning.", "natural-language-processing"),
+            ("Transformers applied to NLP have disrupted machine learning.", "natural-language-processing"),
+        ],
+    )
+    def test_inv(text, tag, artifacts):
+        """INVariance via verb injection (changes should not affect outputs)."""
+        predicted_tag = predict.predict(texts=[text], artifacts=artifacts)[0]["predicted_tag"]
+        assert tag == predicted_tag
+
+    @pytest.mark.parametrize(
+        "text, tag",
+        [
+            ("ML applied to text classification.", "natural-language-processing"),
+            ("ML applied to image classification.", "computer-vision"),
+        ],
+    )
+    def test_dir(text, tag, artifacts):
+        """DIRectional expectations (changes with known outputs)."""
+        predicted_tag = predict.predict(texts=[text], artifacts=artifacts)[0]["predicted_tag"]
+        assert tag == predicted_tag
+
+    @pytest.mark.parametrize(
+        "text, tag",
+        [
+            ("Natural language processing is the next big wave in machine learning..", "natural-language-processing"),
+            ("MLOps is the next big wave in machine learning..", "mlops"),
+        ],
+    )
+    def test_mft(text, tag, artifacts):
+        """Minimum Functionality Tests (simple input/output pairs)."""
+        predicted_tag = predict.predict(texts=[text], artifacts=artifacts)[0]["predicted_tag"]
+        assert tag == predicted_tag
+    ```
 
 !!! note
     Be sure to explore the [NLP Checklist](https://github.com/marcotcr/checklist){:target="_blank"} package which simplifies and augments the creation of these behavioral tests via functions, templates, pretrained models and interactive GUIs in Jupyter notebooks.
@@ -890,27 +1171,42 @@ When our model is deployed, most users will be using it for inference (directly 
 This is the first time we're not loading our components from in-memory so we want to ensure that the required artifacts (model weights, encoders, config, etc.) are all able to be loaded.
 
 ```python linenums="1"
-artifacts = main.load_artifacts(run_id=run_id, device=torch.device("cpu"))
-assert isinstance(artifacts["model"], nn.Module)
+artifacts = main.load_artifacts(run_id=run_id)
+assert isinstance(artifacts["label_encoder"], data.LabelEncoder)
 ...
 ```
 
 #### Prediction
 Once we have our artifacts loaded, we're readying to test our prediction pipelines. We should test samples with just one input, as well as a batch of inputs (ex. padding can have unintended consequences sometimes).
 ```python linenums="1"
-# tests/app/test_api.py | test_best_predict()
+# test our API call directly
 data = {
-    "run_id": "",
     "texts": [
-        {"text": "Transfer learning with transformers for self-supervised learning."},
+        {"text": "Transfer learning with transformers for text classification."},
         {"text": "Generative adversarial networks in both PyTorch and TensorFlow."},
-    ],
+    ]
 }
 response = client.post("/predict", json=data)
 assert response.status_code == HTTPStatus.OK
 assert response.request.method == "POST"
 assert len(response.json()["data"]["predictions"]) == len(data["texts"])
 ...
+```
+
+## Makefile
+Let's create a target in our `Makefile` that will allow us to execute all of our tests with one call:
+```bash
+# Test
+.PHONY: test
+test:
+	pytest -m "not training"
+	cd tests && great_expectations checkpoint run projects
+	cd tests && great_expectations checkpoint run tags
+	cd tests && great_expectations checkpoint run labeled_projects
+```
+
+```bash
+make test
 ```
 
 ## Testing vs. monitoring

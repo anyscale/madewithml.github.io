@@ -11,155 +11,135 @@ repository: https://github.com/GokuMohandas/follow/tree/cli
 
 ## Intuition
 
-Recall from our [Organization lesson](organization.md){:target="_blank"} when we executed [main operations](organization.md#operations){:target="_blank"} via code. This is acceptable for most developers, but sometimes, we want to enable others to be able to interact with our application without having to dig into the code and execute functions one at a time. One method is to build a CLI application that allows for interaction via any shell. It should designed such that we can see all possible operations as well the appropriate assistance needed for configuring options and other arguments for each of those operations. Let's see what a CLI looks like for our application which has many different operations (training, prediction, etc.).
+When it comes to serving our models, we need to think about exposing the application's functionality to ourselves, team members and ultimately our end users. And the interfaces to achieve this will be different. Recall from our [Organization lesson](organization.md){:target="_blank"} where we executed our [main operations](organization.md#operations){:target="_blank"} via the terminal and Python interpreter.
 
-```bash
-tagifai/
-├── data.py       - data processing utilities
-├── ...
-├── main.py       - main operations with CLI wrapper
-├── ...
-└── utils.py      - supplementary utilities
+```python
+from tagifai import main
+main.load_data()
 ```
+
+or the alternative was to call the operation explicity inside our `main.py` file:
+
+```python
+# tagifai/main.py
+if __name__ == "__main__":
+    load_data()
+```
+
+This becomes extremely tedious having to dig into the code and execute functions one at a time. A solution is to build a command line interface (CLI) application that allows for interaction at the operational level. It should designed such that we can view all possible operations (and their required arguments) and execute them from the shell.
 
 ## Application
 
-We're going to create our CLI using [Typer](https://typer.tiangolo.com/){:target="_blank"}, an open-source tool for building command line interface (CLI) applications. It's as simple as initializing the app and then adding the appropriate decorator to each function operation we wish to use as a CLI command.
+We're going to create our CLI using [Typer](https://typer.tiangolo.com/){:target="_blank"}:
+
+```bash
+pip install typer==0.4.1
+```
+
+```bash
+# requirements.txt
+typer==0.4.1
+```
+
+It's as simple as initializing the app and then adding the appropriate decorator to each function operation we wish to use as a CLI command in our `main.py`:
 
 ```python linenums="1"
-# Initialize Typer CLI app
+# tagifai/main.py
 import typer
 app = typer.Typer()
 ```
 
-```python linenums="1" hl_lines="2"
-# Repeat for all functions we want to interact via CLI
+```python linenums="1" hl_lines="1"
 @app.command()
-def predict_tags(
-    text: str = "Transfer learning with BERT for self-supervised learning",
-    run_id: str = "",
-) -> Dict:
-...
+def load_data():
+    ...
 ```
 
-!!! note
-    We're combining console scripts (from `setup.py`) and our Typer app to create a CLI application but there are many [different ways](https://typer.tiangolo.com/typer-cli/){:target="_blank"} to use Typer as well. We're going to have other programs use our application so this approach works best.
-    ```python linenums="1"
-    # setup.py
-    setup(
-        name="tagifai",
-        version="0.1",
-        ...
-        entry_points={
-            "console_scripts": [
-                "tagifai = tagifai.main:app",
-            ],
-        },
-    )
-    ```
+We'll repeat the same for all the other functions we want to access via the CLI: `load_data()`, `label_data()`, `train_model()`, `optimize()`, `predict_tag()`.
 
 ## Commands
 
-In [`main.py`](https://github.com/GokuMohandas/MLOps/tree/main/tagifai/main.py){:target="_blank"} script we have defined the following operations:
+To use our CLI app, we can first view the available commands thanks to the decorators we added to certain functions we wanted to expose to the CLI:
 
-- `download-auxiliary-data`: download data from online to local drive.
-- `compute-features`: compute and save features for training.
-- `optimize`: optimize a subset of hyperparameters towards an objective.
-- `train-model`: train a model using the specified parameters.
-- `predict-tags`: predict tags for a give input text using a trained model.
-- + more!
+```bash
+python tagifai/main.py --help
+```
 
-We can list all the CLI commands for our application like so:
+> Typer also comes with a utility tool called [typer-cli](https://typer.tiangolo.com/typer-cli/){:target="_blank"} but there are some dependency conflicts with our other libraries so we won't be using it.
 
-<div class="animated-code">
+<pre class="output">
+Usage: main.py [OPTIONS] COMMAND [ARGS]...
 
-    ```console
-    # View all Typer commands
-    $ tagifai --help
-    Usage: tagifai [OPTIONS] COMMAND [ARGS]
-    👉  Commands:
-        download-auxiliary-data     Download data from online to local drive.
-        compute-features  Compute and save features for training.
-        optimize          Optimize a subset of hyperparameters towards ...
-        train-model       Predict tags for a give input text using a ...
-        predict-tags      Train a model using the specified parameters.
-        ...
-    ```
+Options:
+  --help       Show this message and exit.
 
-</div>
-<script src="../../../static/js/termynal.js"></script>
-
-!!! warning
-    We may need to run `#!bash python3 -m pip install -e .` again to connect the entry point since `tagifai.main:app` didn't exist when we initially set up the environment.
+Commands:
+  label-data   Label data with constraints.
+  load-data    Load data from URLs and save to local drive.
+  optimize     Optimize hyperparameters.
+  predict-tag  Predict tag for text.
+  train-model  Train a model given arguments.
+</pre>
 
 ## Arguments
 
-With Typer, a function's input arguments automatically get rendered as command line options. For example, our `predict_tags` function consumes `text` and an optional `model_dir` as inputs which automatically become arguments for the `predict-tags` CLI command.
+With Typer, a function's input arguments automatically get rendered as command line options. For example, our `predict_tags` function consumes `text` and an optional `run_id` as inputs which automatically become arguments for the `predict-tags` CLI command.
 
 ```python linenums="1"
 @app.command()
-def predict_tags(text: str, run_id: str,) -> Dict:
-    """Predict tags for a give input text using a trained model.
-
-    Warning:
-        Make sure that you have a trained model first!
+def predict_tag(text: str, run_id: str = None) -> None:
+    """Predict tag for text.
 
     Args:
-        text (str, optional): Input text to predict tags for.
-        run_id (str, optional): ID of the model run to load artifacts.
-
-    Raises:
-        ValueError: Run id doesn't exist in experiment.
-
-    Returns:
-        Predicted tags for input text.
+        text (str): input text to predict label for.
+        run_id (str, optional): run id to load artifacts for prediction. Defaults to None.
     """
-    # Predict
-    artifacts = main.load_artifacts(run_id=run_id)
+    if not run_id:
+        run_id = open(Path(config.CONFIG_DIR, "run_id.txt")).read()
+    artifacts = load_artifacts(run_id=run_id)
     prediction = predict.predict(texts=[text], artifacts=artifacts)
     logger.info(json.dumps(prediction, indent=2))
-
-    return prediction
 ```
 
-<div class="animated-code">
+But we can also ask for help with this specific command without having to go into the code:
 
-    ```console
-    # Help for a specific command
-    $ tagifai predict-tags --help
+```bash
+python tagifai/main.py predict-tag --help
+```
 
-    Usage: tagifai predict-tags [OPTIONS]
-    ...
-    Options:
-        --text TEXT
-        --run-id TEXT
-        --help         Show this message and exit.
-    ```
-</div>
+<pre class="output">
+Usage: main.py predict-tag [OPTIONS] TEXT
+
+  Predict tag for text.
+
+  Args:
+    text (str): input text to predict label for.
+    run_id (str, optional): run id to load artifacts for prediction. Defaults to None.
+
+Arguments:
+  TEXT  [required]
+
+Options:
+  --run-id TEXT
+  --help   Show this message and exit.
+</pre>
 
 ## Usage
 
-And we can easily use our CLI app to execute these commands with the appropriate options:
-<div class="animated-code">
+Finally, we can execute the specific command with all the arguments:
 
-    ```console
-    # Prediction
-    $ tagifai predict-tags "Transfer learning with BERT" $RUN_ID
+```bash
+python tagifai/main.py predict-tag "Transfer learning with transformers for text classification."
+```
+
+<pre class="output">
+[
     {
-        "input_text": "Transfer learning with BERT.",
-        "preprocessed_text": "transfer learning bert",
-        "predicted_tags": [
-            "attention",
-            "natural-language-processing",
-            "transfer-learning",
-            "transformers"
-        ]
+        "input_text": "Transfer learning with transformers for text classification.",
+        "predicted_tag": "natural-language-processing"
     }
-    ```
-
-</div>
-
-> You'll most likely be using the CLI application to optimize and train your models. If you don't have access to GPUs (personal machine, AWS, GCP, etc.), check out the [optimize.ipynb](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/optimize.ipynb){:target="_blank"} notebook for how to train on Google Colab and transfer the entire MLFlow experiment to your local machine. We essentially run optimization, then train the best model to download and transfer it's artifacts.
+]
+</pre>
 
 <!-- Citation -->
 {% include "cite.md" %}

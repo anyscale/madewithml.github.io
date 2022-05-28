@@ -76,7 +76,7 @@ Next, we'll set up a [virtual environment](https://docs.python.org/3/library/ven
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-python3 -m pip install pip==22.1.1 setuptools==62.3.2 wheel==0.37.1
+python3 -m pip install pip setuptools wheel
 ```
 
 Let's unpack what's happening here:
@@ -111,8 +111,16 @@ We'll create a separate file called `requirements.txt` where we'll specify the p
 touch requirements.txt
 ```
 
+We should be adding packages with their versions to our `requirements.txt` as we require them for our project. It's inadvisable to install all packages and then do `pip freeze > requirements.txt` because it dumps the dependencies of all our packages into the file (even the ones we didn't explicitly install). To mitigate this, there are tools such as [pipreqs](https://github.com/bndr/pipreqs){:target="_blank"}, [pip-tools](https://github.com/jazzband/pip-tools){:target="_blank"}, [pipchill](https://github.com/rbanffy/pip-chill){:target="_blank"}, etc. that will only list the packages that are not dependencies. However, they're dependency resolving is not always accurate and don't work when you want to separate packages for different tasks (developing, testing, etc.).
+
 !!! tip
-    A good practice is to add packages with their versions to our `requirements.txt` as we require them for our project. It's inadvisable to install all packages and then do `pip freeze > requirements.txt` because it dumps the dependencies of all our packages into the file (even the ones we didn't explicitly install). To mitigate this, there are tools such as [pipreqs](https://github.com/bndr/pipreqs){:target="_blank"}, [pip-tools](https://github.com/jazzband/pip-tools){:target="_blank"}, [pipchill](https://github.com/rbanffy/pip-chill){:target="_blank"}, etc. that will only list the packages that are not dependencies. However, they're dependecy resolving is not always accurate and don't work when you want to separate packages for different tasks (developing, testing, etc.).
+    If we experience conflicts between package versions, we can relax constraints by specifying that the package needs to be above a certain version, as opposed to the exact version. We could also specify no version for all packages and allow pip to resolve all conflicts. And then we can see which version were actually installed and add that information to our `requirements.txt` file.
+    ```bash
+    # requirements.txt
+    <PACKAGE>==<VERSION>  # exact version
+    <PACKAGE>==<VERSION>  # above version
+    <PACKAGE>             # no version
+    ```
 
 ### Setup
 

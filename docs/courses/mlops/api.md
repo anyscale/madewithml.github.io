@@ -11,18 +11,25 @@ repository: https://github.com/GokuMohandas/follow/tree/api
 
 ## Intuition
 
-So far our workflows have involved directly running functions from our Python scripts and more recently, using the [CLI application](cli.md){:target="_blank"} to quickly execute commands. But not all of our users will want to work at the code level or even download the package as we would need to for the CLI app. Instead, many users will simply want to use the trained model for inference. To address this, we can develop an application programming interface (API) that delivers the appropriate level of abstraction in order to serve our models.
+Our [CLI application](cli.md){:target="_blank"} made it much easier to interact with our models, especially for fellow team members who may not want to delve into the codebase. But there are several limitations to serving our models with a CLI:
+
+- users need access to the terminal, codebase, virtual environment, etc.
+- CLI outputs on the terminal are not exportable
+
+To address these issues, we're going to develop an application programming interface (API) that will *anyone* to interact with our application with a simple request.
+
+> The end user may not directly interact with our API but may use UI/UX components that send requests to our it.
 
 ## Serving
 
-When it comes to serving predictions, we need to decide if we'll do that in batches or real-time, which is entirely based on the feature space (finite vs. unbound).
+APIs allow different applications to communicate with each other in real-time. But when it comes to serving predictions, we need to first decide if we'll do that in batches or real-time, which is entirely based on the feature space (finite vs. unbound).
 
 ### Batch serving
 
 We can make batch predictions on a finite set of inputs which are then written to a database for low latency inference. When a user or downstream process sends an inference request in real-time, cached results from the database are returned.
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/infrastructure/batch_serving.png">
+    <img width="600" src="/static/images/mlops/infrastructure/batch_serving.png" alt="batch serving">
 </div>
 
 - ✅&nbsp; generate and cache predictions for very fast inference for users.
@@ -38,55 +45,33 @@ We can make batch predictions on a finite set of inputs which are then written t
 
 ### Real-time serving
 
-We can also serve live predictions, typically through a request to an API with the appropriate input data. This will involve spinning up our ML application as a microservice since users or downstream processes will interact directly with the model.
+We can also serve live predictions, typically through a request to an API with the appropriate input data.
 
 <div class="ai-center-all">
-    <img width="400" src="/static/images/mlops/infrastructure/real_time_serving.png">
+    <img width="400" src="/static/images/mlops/infrastructure/real_time_serving.png" alt="real-time serving">
 </div>
 
 - ✅&nbsp; can yield more up-to-date predictions which may yield a more meaningful user experience, etc.
 - ❌&nbsp; requires managed microservices to handle request traffic.
 - ❌&nbsp; requires real-time monitoring since input space in unbounded, which could yield erroneous predictions.
 
-In this lesson, we'll create the API required to enable real-time serving. The interactions in our situation involve the client (users, other applications, etc.) sending a *request* (ex. prediction given inputs) to the server (our application with a trained model) and receiving a *response* (ex. prediction) in return.
+In this lesson, we'll create the API required to enable real-time serving. The interactions in our situation involve the client (users, other applications, etc.) sending a *request* (ex. prediction request) with the appropriate inputs to the server (our application with a trained model) and receiving a *response* (ex. prediction) in return.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/mlops/api/interactions.png">
+    <img width="550" src="/static/images/mlops/api/interactions.png" alt="client api interactions">
 </div>
 
 ## Request
 
-Users will interact with our API in the form of a request. We'll first take a look at the different components of a request:
+Users will interact with our API in the form of a request. Let's take a look at the different components of a request:
 
 ### URI
 
 A uniform resource identifier (URI) is an identifier for a specific resource.
 
 <pre class="output ai-center-all" style="padding-left: 0rem; padding-right: 0rem; font-weight: 600;">
-<span style="color:#d63939">https://</span><span style="color:#206bc4">localhost:</span><span style="color: #4299e1">5000</span><span style="color:#2fb344">/users/{userId}/models/{modelId}/</span><span style="color:#ae3ec9">?filter=completed</span><span style="color:#f76707">#details</span>
+<span style="color:#d63939">https://</span><span style="color:#206bc4">localhost:</span><span style="color: #4299e1">8000</span><span style="color:#2fb344">/models/{modelId}/</span><span style="color:#ae3ec9">?filter=passed</span><span style="color:#f76707">#details</span>
 </pre>
-
-<!-- <center>
-
-| Parts of the URI                                    | Description  |
-| :-------------------------------------------------- | :----------- |
-| <span style="color: #d63939;">scheme</span>         | defines which protocol to use.                                                     |
-| <span style="color: #206bc4;">domain</span>         | address of your website.                                                           |
-| <span style="color: #4299e1;">port</span>           | communication endpoint. If not define, it's usually 80 for HTTP and 443 for HTTPS. |
-| <span style="color: #2fb344;">path</span>           | location of the resource of interest.                                              |
-| <span style="color: #ae3ec9;">query string</span>   | data sent to endpoint to identify specific resources.                              |
-| <span style="color: #f76707;">anchor</span>         | specific location inside an HTML page.                                             |
-
-| Parts of the path       | Description                                                       |
-| :---------------------- | :---------------------------------------------------------------- |
-| `/users`                | collection resource of all `users`                                |
-| `/users/{userID}`       | single resource for a specific user `userId`                      |
-| `/models`               | sub-collection resource `models` for the specific user `userID`   |
-| `/models/{modelID}`     | single resource for the `userID`'s `models` sub-collection        |
-| `userID` and `modelId`  | path parameters                                                   |
-| `filter` and `lang`     | query parameters                                                  |
-
-</center> -->
 
 <div class="row">
   <div class="col-md-6">
@@ -101,27 +86,27 @@ A uniform resource identifier (URI) is an identifier for a specific resource.
         <tbody>
           <tr>
             <td align="left"><span style="color: #d63939;">scheme</span></td>
-            <td align="left">defines which protocol to use.</td>
+            <td align="left">protocol definition</td>
           </tr>
           <tr>
             <td align="left"><span style="color: #206bc4;">domain</span></td>
-            <td align="left">address of the website.</td>
+            <td align="left">address of the website</td>
           </tr>
           <tr>
             <td align="left"><span style="color: #4299e1;">port</span></td>
-            <td align="left">communication endpoint. If not defined, it's usually 80 for HTTP and 443 for HTTPS.</td>
+            <td align="left">endpoint</td>
           </tr>
           <tr>
             <td align="left"><span style="color: #2fb344;">path</span></td>
-            <td align="left">location of the resource of interest.</td>
+            <td align="left">location of the resource</td>
           </tr>
           <tr>
             <td align="left"><span style="color: #ae3ec9;">query string</span></td>
-            <td align="left">parameters sent to endpoint to identify specific resources.</td>
+            <td align="left">parameters to identify resources</td>
           </tr>
           <tr>
             <td align="left"><span style="color: #f76707;">anchor</span></td>
-            <td align="left">specific location inside an HTML page.</td>
+            <td align="left">location on webpage</td>
           </tr>
         </tbody>
       </table>
@@ -138,23 +123,15 @@ A uniform resource identifier (URI) is an identifier for a specific resource.
         </thead>
         <tbody>
           <tr>
-            <td align="left"><code>/users</code></td>
-            <td align="left">collection resource of all <code>users</code></td>
-          </tr>
-          <tr>
-            <td align="left"><code>/users/{userID}</code></td>
-            <td align="left">single resource for a specific user <code>userId</code></td>
-          </tr>
-          <tr>
             <td align="left"><code>/models</code></td>
-            <td align="left">sub-collection resource <code>models</code> for the specific user <code>userID</code></td>
+            <td align="left">collection resource of all <code>models</code></td>
           </tr>
           <tr>
             <td align="left"><code>/models/{modelID}</code></td>
-            <td align="left">single resource for the <code>userID</code>'s <code>models</code> sub-collection</td>
+            <td align="left">single resource from the <code>models</code> collection</td>
           </tr>
           <tr>
-            <td align="left"><code>userID</code> and <code>modelId</code></td>
+            <td align="left"><code>modelId</code></td>
             <td align="left">path parameters</td>
           </tr>
           <tr>
@@ -169,15 +146,15 @@ A uniform resource identifier (URI) is an identifier for a specific resource.
 
 ### Method
 
-The method is the operation to execute on the specific resource defined by the URI. There are many possible [methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods){:target="_blank"} to choose from, but here are the four most popular, which are often referred to as [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete){:target="_blank"} because they allow you to Create, Read, Update and Delete.
+The method is the operation to execute on the specific resource defined by the URI. There are many possible [methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods){:target="_blank"} to choose from, but the four below are the most popular, which are often referred to as [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete){:target="_blank"} because they allow you to **C**reate, **R**ead, **U**pdate and **D**elete.
 
-- `GET`: get a resource
-- `POST`: create or update a resource
-- `PUT/PATCH`: create or update a resource
-- `DELETE`: delete a resource
+- `#!js GET`: get a resource.
+- `#!js POST`: create or update a resource.
+- `#!js PUT/PATCH`: create or update a resource.
+- `#!js DELETE`: delete a resource.
 
 !!! note
-    You could use either the `POST` or `PUT` request method to create and modify resources but the main difference is that `PUT` is idempotent which means you can call the method repeatedly and it'll produce the same state every time. Whereas, calling `POST` multiple times can result in creating multiple instance and so changing the overall state each time.
+    You could use either the `POST` or `PUT` request method to create and modify resources but the main difference is that `PUT` is idempotent which means you can call the method repeatedly and it'll produce the same state every time. Whereas, calling `POST` multiple times can result in creating multiple instance and so changes the overall state each time.
 
     ```bash
     POST /models/<new_model> -d {}       # error since we haven't created the `new_model` resource yet
@@ -190,24 +167,21 @@ The method is the operation to execute on the specific resource defined by the U
 
 We can use [cURL](https://linuxize.com/post/curl-rest-api/){:target="_blank"} to execute our API calls with the following options:
 
-<div class="animated-code">
-
-    ```console
-    # cURL options
-    $ curl --help
-    ...
-    -X, --request  HTTP method (ie. GET)
-    -H, --header   headers to be sent to the request (ex. authentication)
-    -d, --data     data to POST, PUT/PATCH, DELETE (usually JSON)
-    ...
-    ```
-
-</div>
-<script src="../../../static/js/termynal.js"></script>
-
-For example, if we want to GET all `users`:
 ```bash
-curl -X GET "http://localhost:5000/users"
+curl --help
+```
+
+<pre class="output">
+Usage: curl [options...] <url>
+-X, --request  HTTP method (ie. GET)
+-H, --header   headers to be sent to the request (ex. authentication)
+-d, --data     data to POST, PUT/PATCH, DELETE (usually JSON)
+...
+</pre>
+
+For example, if we want to GET all `models`, our cURL command would look like this:
+```bash
+curl -X GET "http://localhost:8000/models"
 ```
 
 <br>
@@ -216,7 +190,7 @@ curl -X GET "http://localhost:5000/users"
 
 Headers contain information about a certain event and are usually found in both the client's request as well as the server's response. It can range from what type of format they'll send and receive, authentication and caching info, etc.
 ```bash
-curl -X GET "http://localhost:5000/" \          # method and URI
+curl -X GET "http://localhost:8000/" \          # method and URI
     -H  "accept: application/json"  \           # client accepts JSON
     -H  "Content-Type: application/json" \      # client sends JSON
 ```
@@ -228,7 +202,7 @@ curl -X GET "http://localhost:5000/" \          # method and URI
 The body contains information that may be necessary for the request to be processed. It's usually a JSON object sent during `POST`, `PUT`/`PATCH`, `DELETE` request methods.
 
 ```bash
-curl -X POST "http://localhost:5000/models" \   # method and URI
+curl -X POST "http://localhost:8000/models" \   # method and URI
     -H  "accept: application/json" \            # client accepts JSON
     -H  "Content-Type: application/json" \      # client sends JSON
     -d "{'name': 'RoBERTa', ...}"               # request body
@@ -245,12 +219,12 @@ The response we receive from our server is the result of the request we sent. Th
   "message": "OK",
   "method": "GET",
   "status-code": 200,
-  "url": "http://localhost:5000/",
+  "url": "http://localhost:8000/",
   "data": {}
 }
 ```
 
-> We may also want to include other metadata in the response such as model version, data lineage, etc. Anything that the downstream consumer may be interested in or metadata that might be useful for subsequent inspection.
+> We may also want to include other metadata in the response such as model version, datasets used, etc. Anything that the downstream consumer may be interested in or metadata that might be useful for inspection.
 
 There are many [HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes){:target="_blank"} to choose from depending on the situation but here are the most common options:
 
@@ -275,14 +249,21 @@ There are many [HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_st
 When designing our API, there are some best practices to follow:
 
 - URI paths, messages, etc. should be as explicit as possible. Avoid using cryptic resource names, etc.
-- Nouns not verbs when naming. The request method already takes care of the verb (`GET /users not` `GET /get_users`).
-- Plural nouns (`GET /users/{userId}` not `GET /user/{userID}`).
-- Dashes in URIs for resources and path parameters but use underscores for query parameters (`GET /admin-users/?find_desc=super`).
+- Use nouns, instead of verbs, for naming resources. The request method already accounts for the verb (✅&nbsp; `GET /users` not ❌&nbsp; `GET /get_users`).
+- Plural nouns (✅&nbsp; `GET /users/{userId}` not ❌&nbsp; `GET /user/{userID}`).
+- Use dashes in URIs for resources and path parameters but use underscores for query parameters (`GET /nlp-models/?find_desc=bert`).
 - Return appropriate HTTP and informative messages to the user.
 
 ## Application
 
-We're going to organize our API under the [app](https://github.com/GokuMohandas/MLOps/tree/main/app){:target="_blank"} directory because in the future we may have additional packages like `tagifai` so we don't want our app to be attached to any one package. Our API will be defined in the following scripts:
+We're going to define our API in a separate `app` directory because, in the future, we may have additional packages like `tagifai` and we don't want our app to be attached to any one package. Inside our `app` directory, we'll create the follow scripts:
+
+```bash
+mkdir app
+cd app
+touch api.py gunicorn.py schemas.py
+cd ../
+```
 
 ```bash
 app/
@@ -295,42 +276,53 @@ app/
 - [`gunicorn.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/gunicorn.py){:target="_blank"}: script for defining API worker configurations.
 - [`schemas.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/schemas.py){:target="_blank"}: definitions for the different objects we'll use in our resource endpoints.
 
-We'll step through the components in these scripts to show how we'll design our API.
-
 ## FastAPI
 
-We're going to use [FastAPI](https://fastapi.tiangolo.com/){:target="_blank"} as our framework to build our API service. There are plenty of other framework options out there such as Flask, Django and even non-Python based options like Node, Angular, etc. FastAPI is a relative newcomer that combines many of the advantages across these frameworks and is maturing quickly and becoming more widely adopted. It's notable advantages include:
+We're going to use [FastAPI](https://fastapi.tiangolo.com/){:target="_blank"} as our framework to build our API service. There are plenty of other framework options out there such as [Flask](https://flask.palletsprojects.com/){:target="_blank"}, [Django](https://www.djangoproject.com/){:target="_blank"} and even non-Python based options like [Node](https://nodejs.org/en/){:target="_blank"}, [Angular](https://angular.io/){:target="_blank"}, etc. FastAPI combines many of the advantages across these frameworks and is maturing quickly and becoming more widely adopted. It's notable advantages include:
 
+- development in Python
 - highly [performant](https://fastapi.tiangolo.com/benchmarks/){:target="_blank"}
 - data validation via [pydantic](https://pydantic-docs.helpmanual.io/){:target="_blank"}
 - autogenerated documentation
 - dependency injection
 - security via OAuth2
 
-> Your choice of framework also depends on your team's existing systems and processes. However, with the wide adoption of microservices, we can wrap our specific application is any framework we choose and expose the appropriate resources so all other systems can easily communicate with it.
+```bash
+pip install fastapi==0.78.0
+```
 
-To show how intuitive and powerful FastAPI is, we could laboriously go through the [documentation](https://fastapi.tiangolo.com/){:target="_blank"} but instead we'll walk through everything as we cover the components of our own application.
+```bash
+# requirements.txt
+fastapi==0.78.0
+```
 
-## Initialization
+> Your choice of framework also depends on your team's existing systems and processes. However, with the wide adoption of microservices, we can wrap our specific application in any framework we choose and expose the appropriate resources so all other systems can easily communicate with it.
 
-The first step is to initialize our API in our [app/api.py](https://github.com/GokuMohandas/MLOps/tree/main/app/api.py){:target="_blank"} file by defining metadata like the title, description and version.
+### Initialization
+
+The first step is to initialize our API in our `api.py` script` by defining metadata like the title, description and version:
+
 ```python linenums="1"
+# app/api.py
 from fastapi import FastAPI
 
 # Define application
 app = FastAPI(
     title="TagIfAI - Made With ML",
-    description="Predict relevant tags given a text input.",
+    description="Classify machine learning projects.",
     version="0.1",
 )
 ```
 
-Our first endpoint is going to be a simple one where we want to show that everything is working as intended. The path for the endpoint will just be `/` (when a user visit our base URI) and it'll be a `GET` request. This simple endpoint definition is often used as a health check to ensure that our application is indeed up and running properly.
-```python linenums="1" hl_lines="3"
+Our first endpoint is going to be a simple one where we want to show that everything is working as intended. The path for the endpoint will just be `/` (when a user visit our base URI) and it'll be a `GET` request. This simple endpoint is often used as a health check to ensure that our application is indeed up and running properly.
+
+```python linenums="1" hl_lines="4"
+# app/api.py
 from http import HTTPStatus
+from typing import Dict
 
 @app.get("/")
-def _index():
+def _index() -> Dict:
     """Health check."""
     response = {
         "message": HTTPStatus.OK.phrase,
@@ -340,50 +332,74 @@ def _index():
     return response
 ```
 
-We let our application know that the endpoint is at `/` through the path operation decorator in line 3 and we simply return a JSON response with the `200 OK` HTTP status code. Let's go ahead and start our application and see what this response looks like!
+We let our application know that the endpoint is at `/` through the path operation decorator in line 4 and we return a JSON response with the `200 OK` HTTP status code.
 
 > In our actual [`api.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/api.py){:target="_blank"} script, you'll notice that even our index function looks different. Don't worry, we're slowly adding components to our endpoints and justifying them along the way.
 
 
-## Launching
+### Launching
 
-We can launch our application with the following command (also saved as a Makefile target as `make app`):
+We're using [Uvicorn](https://www.uvicorn.org/){:target="_blank"}, a fast [ASGI](https://en.wikipedia.org/wiki/Asynchronous_Server_Gateway_Interface){:target="_blank"} server that can run asynchronous code in a single process to launch our application.
+
+```bash
+pip install uvicorn==0.17.6
+```
+
+```bash
+# requirements.txt
+uvicorn==0.17.6
+```
+
+We can launch our application with the following command:
 
 ```bash
 uvicorn app.api:app \       # location of app (`app` directory > `api.py` script > `app` object)
     --host 0.0.0.0 \        # localhost
-    --port 5000 \           # port 5000
+    --port 8000 \           # port 8000
     --reload \              # reload every time we update
     --reload-dir tagifai \  # only reload on updates to `tagifai` directory
     --reload-dir app        # and the `app` directory
 ```
 
-We're using [Uvicorn](https://www.uvicorn.org/){:target="_blank"}, a fast ASGI server (it can run asynchronous code in a single process) to launch our application. Notice that we only reload on changes to specific directories, as this is to avoid reloading on files that won't impact our application such as log files, etc.
+<pre class="output">
+INFO:     Will watch for changes in these directories: ['/Users/goku/Documents/madewithml/mlops/app', '/Users/goku/Documents/madewithml/mlops/tagifai']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [57609] using statreload
+INFO:     Started server process [57611]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+</pre>
 
-!!! note
-    If we want to manage multiple uvicorn workers to enable parallelism in our application, we can use [Gunicorn](https://gunicorn.org/){:target="_blank"} in conjunction with Uvicorn. This will usually be done in a production environment where we'll be dealing with meaningful traffic. I've included a [`app/gunicorn.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/gunicorn.py){:target="_blank"} script with the customizable configuration and we can launch all the workers with the follow command (or `make app-prod`):
-    ```bash
-    gunicorn -c config/gunicorn.py -k uvicorn.workers.UvicornWorker app.api:app
-    ```
+> Notice that we only reload on changes to specific directories, as this is to avoid reloading on files that won't impact our application such as log files, etc.
 
-## Requests
+If we want to manage multiple uvicorn workers to enable parallelism in our application, we can use [Gunicorn](https://gunicorn.org/){:target="_blank"} in conjunction with Uvicorn. This will usually be done in a production environment where we'll be dealing with meaningful traffic. We've included a [`app/gunicorn.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/gunicorn.py){:target="_blank"} script with the customizable configuration and we can launch all the workers with the follow command:
+```bash
+gunicorn -c config/gunicorn.py -k uvicorn.workers.UvicornWorker app.api:app
+```
+
+We'll add both of these commands to our `README.md` file as well:
+```md
+uvicorn app.api:app --host 0.0.0.0 --port 8000 --reload --reload-dir tagifai --reload-dir app  # dev
+gunicorn -c app/gunicorn.py -k uvicorn.workers.UvicornWorker app.api:app  # prod
+```
+
+### Requests
 
 Now that we have our application running, we can submit our `GET` request using several different methods:
 
-- Visit the endpoint on your browser at [http://localhost:5000/](http://localhost:5000/){:target="_blank"}
+- Visit the endpoint on a browser at [http://localhost:8000/](http://localhost:8000/){:target="_blank"}
 - cURL
 ```bash
-curl -X GET http://localhost:5000/
+curl -X GET http://localhost:8000/
 ```
 - Access endpoints via code. Here we show how to do it with the [requests](https://requests.readthedocs.io/en/master/){:target="_blank"} library in Python but it can be done with most popular languages. You can even use an [online tool](https://curl.trillworks.com/){:target="_blank"} to convert your cURL commands into code!
 ```python linenums="1"
 import json
 import requests
 
-response = requests.get("http://localhost:5000/")
+response = requests.get("http://localhost:8000/")
 print (json.loads(response.text))
 ```
-- Directly in the API's autogenerated documentation (which we'll see later).
 - Using external tools like [Postman](https://www.postman.com/use-cases/application-development/){:target="_blank"}, which is great for managed tests that you can save and share with other, etc.
 
 For all of these, we'll see the exact same response from our API:
@@ -396,18 +412,21 @@ For all of these, we'll see the exact same response from our API:
 </pre>
 
 
-## Decorators
-We're going to use [decorators](../foundations/python.md#decorators){:target="_blank"} to wrap some of our endpoints so we can customize our function's inputs and outputs. In our `GET \` request's response above, there was not a whole lot of information about the actual request, so we should append details such as URL, timestamp, etc. But we don't want to do this individually for each endpoint so let's use a decorator to append the request information for every response.
+### Decorators
+In our `GET \` request's response above, there was not a whole lot of information about the actual request, but it's useful to have details such as URL, timestamp, etc. But we don't want to do this individually for each endpoint, so let's use [decorators](../foundations/python.md#decorators){:target="_blank"} to automatically add relevant metadata to our responses
 
-```python linenums="1" hl_lines="6"
+```python linenums="1" hl_lines="10"
+# app/api.py
+from datetime import datetime
+from functools import wraps
+from fastapi import FastAPI, Request
+
 def construct_response(f):
-    """Construct a JSON response for an endpoint's results."""
+    """Construct a JSON response for an endpoint."""
 
     @wraps(f)
-    def wrap(request: Request, *args, **kwargs):
+    def wrap(request: Request, *args, **kwargs) -> Dict:
         results = f(request, *args, **kwargs)
-
-        # Construct response
         response = {
             "message": results["message"],
             "method": request.method,
@@ -415,22 +434,19 @@ def construct_response(f):
             "timestamp": datetime.now().isoformat(),
             "url": request.url._url,
         }
-
-        # Add data
         if "data" in results:
             response["data"] = results["data"]
-
         return response
 
     return wrap
 ```
 
-We're passing in a [Request](https://fastapi.tiangolo.com/advanced/using-request-directly/){:target="_blank"} instance in line 6 so we can access information like the request method and URL. Therefore, our endpoint functions also need to have this Request object as an input argument. Once we receive the results from our endpoint function `f`, we can append the extra details and return more informative `response`. To use this decorator, we just have to wrap our functions accordingly.
+We're passing in a [Request](https://fastapi.tiangolo.com/advanced/using-request-directly/){:target="_blank"} instance in line 10 so we can access information like the request method and URL. Therefore, our endpoint functions also need to have this Request object as an input argument. Once we receive the results from our endpoint function `f`, we can append the extra details and return a more informative response. To use this decorator, we just have to wrap our functions accordingly.
 
 ```python linenums="1" hl_lines="2"
 @app.get("/")
 @construct_response
-def _index(request: Request):
+def _index(request: Request) -> Dict:
     """Health check."""
     response = {
         "message": HTTPStatus.OK.phrase,
@@ -445,41 +461,46 @@ def _index(request: Request):
     method: "GET",
     status-code: 200,
     timestamp: "2021-02-08T13:19:11.343801",
-    url: "http://localhost:5000/",
+    url: "http://localhost:8000/",
     data: { }
 }
 </pre>
 
-There are also some built-in decorators we should be aware of. We've already seen the path operation decorator (ex. `@app.get("/")`) which defines the path for the endpoint as well as [other attributes](https://fastapi.tiangolo.com/tutorial/path-operation-configuration/){:target="_blank"}. There is also the [events decorator](https://fastapi.tiangolo.com/advanced/events/){:target="_blank"} (`@app.on_event()`) which we can use to startup and shutdown our application. For example, we use the (`@app.on_event("startup")`) event to load all the previous best runs and identify the best run (and model) to use for inference. The advantage of doing this as an Event is that our service won't start until this is ready so no requests will be prematurely processed and error out. Similarly, we can perform shutdown events with (`@app.on_event("shutdown")`), such as logging, cleaning, etc.
+There are also some built-in decorators we should be aware of. We've already seen the path operation decorator (ex. `@app.get("/")`) which defines the path for the endpoint as well as [other attributes](https://fastapi.tiangolo.com/tutorial/path-operation-configuration/){:target="_blank"}. There is also the [events decorator](https://fastapi.tiangolo.com/advanced/events/){:target="_blank"} (`@app.on_event()`) which we can use to startup and shutdown our application. For example, we use the (`@app.on_event("startup")`) event to load the artifacts for the model to use for inference. The advantage of doing this as an event is that our service won't start until this is complete and so no requests will be prematurely processed and cause errors. Similarly, we can perform shutdown events with (`@app.on_event("shutdown")`), such as saving logs, cleaning, etc.
 
-```python linenums="1" hl_lines="1"
+```python linenums="1" hl_lines="6"
+from pathlib import Path
+from config import config
+from config.config import logger
+from tagifai import main
+
 @app.on_event("startup")
 def load_artifacts():
     global artifacts
+    run_id = open(Path(config.CONFIG_DIR, "run_id.txt")).read()
     artifacts = main.load_artifacts(model_dir=config.MODEL_DIR)
     logger.info("Ready for inference!")
 ```
 
+### Documentation
 
-## Documentation
-
-When we define an endpoint, FastAPI automatically generates some documentation, adhering to [OpenAPI](https://swagger.io/specification/){:target="_blank"} standards, based on the function's inputs, typing, outputs, etc. We can access the [Swagger UI](https://swagger.io/tools/swagger-ui/){:target="_blank"} for our documentation by going to `/docs` endpoints on any browser.
+When we define an endpoint, FastAPI automatically generates some documentation (adhering to [OpenAPI](https://swagger.io/specification/){:target="_blank"} standards) based on the it's inputs, typing, outputs, etc. We can access the [Swagger UI](https://swagger.io/tools/swagger-ui/){:target="_blank"} for our documentation by going to `/docs` endpoints on any browser while the api is running.
 
 <div class="ai-center-all">
-    <img width="400" src="/static/images/mlops/api/documentation.png">
+    <img width="500" src="/static/images/mlops/api/documentation.png">
 </div>
 
 Click on an endpoint > `Try it out` > `Execute` to see what the server's response will look like. Since this was a `GET` request without any inputs, our request body was empty but for other method's we'll need to provide some information (we'll illustrate this when we do a `POST` request).
 
 <div class="ai-center-all">
-    <img width="450" src="/static/images/mlops/api/execute.png">
+    <img width="600" src="/static/images/mlops/api/execute.png">
 </div>
 
-You'll notice that our endpoints are organized under sections in the UI. This is because we used `tags` when defining our endpoints in the script.
+Notice that our endpoint is organized under sections in the UI. We can use `tags` when defining our endpoints in the script:
 ```python linenums="1" hl_lines="1"
 @app.get("/", tags=["General"])
 @construct_response
-def _index(request: Request):
+def _index(request: Request) -> Dict:
     """Health check."""
     response = {
         "message": HTTPStatus.OK.phrase,
@@ -493,34 +514,46 @@ def _index(request: Request):
 
 ## Resources
 
-When designing the resources for our API service, we need to think about the following questions:
+When designing the resources for our API , we need to think about the following questions:
 
-- Who are the users? This will define what resources need to be exposed.
-> Our users include anyone will want to receive the relevant tags for a given input. They may not necessarily be technical or aware of how machine learning works.
-- What functionality do we want to enable our users with?
-> Though there are many different operations we *could* enable for our users (optimize, train, delete, update models, etc.), we're going to scope our service by only enabling prediction at this time. However, our Python scripts and the CLI application are available if a developer wants to be able to do more (ie. train a model).
-- What are the objects (or entities) that we'll need to build and expose resources around?
-> We want to be able to explore and use parameters and performance metrics from our trained models.
+- `#!js [USERS]`: Who are the end users? This will define what resources need to be exposed.
+
+    - developers who want to interact with the API.
+    - product team who wants to test and inspect the model and it's performance.
+    - backend service that wants to classify incoming projects.
+
+- `#!js [ACTIONS]`: What actions do our users want to be able to perform?
+
+    - prediction for a given set of inputs
+    - inspection of performance
+    - inspection of training arguments
 
 ### Query parameters
 
 ```python linenums="1" hl_lines="3"
 @app.get("/performance", tags=["Performance"])
 @construct_response
-def _performance(request: Request, filter: Optional[str] = None) -> Dict:
-    """Get the performance metrics for a run."""
-    ...
+def _performance(request: Request, filter: str = None) -> Dict:
+    """Get the performance metrics."""
+    performance = artifacts["performance"]
+    data = {"performance":performance.get(filter, performance)}
+    response = {
+        "message": HTTPStatus.OK.phrase,
+        "status-code": HTTPStatus.OK,
+        "data": data,
+    }
     return response
 ```
-You'll notice that we're passing an optional query parameter `filter` here to indicate the subset of performance we care about. We'd include this parameter in our `GET` request like so:
+
+Notice that we're passing an optional query parameter `filter` here to indicate the subset of performance we care about. We can include this parameter in our `GET` request like so:
 
 ```bash
 curl -X "GET" \
-  "http://localhost:5000/performance?filter=overall" \
+  "http://localhost:8000/performance?filter=overall" \
   -H "accept: application/json"
 ```
 
-And this will only produce the subset of the performance we indicated through the query parameter.
+And this will only produce the subset of the performance we indicated through the query parameter:
 
 ```json
 {
@@ -528,31 +561,31 @@ And this will only produce the subset of the performance we indicated through th
   "method": "GET",
   "status-code": 200,
   "timestamp": "2021-03-21T13:12:01.297630",
-  "url": "http://localhost:5000/performance?filter=overall",
+  "url": "http://localhost:8000/performance?filter=overall",
   "data": {
-    "overall": {
-      "precision": 0.843033473244977,
-      "recall": 0.597872340425532,
-      "f1": 0.6821603372348584,
-      "num_samples": 217
+    "performance": {
+      "precision": 0.8941372402587212,
+      "recall": 0.8333333333333334,
+      "f1": 0.8491658224308651,
+      "num_samples": 144
     }
   }
 }
 ```
 
 ### Path parameters
-Our next endpoint will be to `GET` the parameters for our trained model. This time, we're using a path parameter `param`, which is a **required** field in the URI.
+Our next endpoint will be to `GET` the arguments used to train the model. This time, we're using a path parameter `args`, which is a **required** field in the URI.
 
 ```python linenums="1" hl_lines="1 3"
-@app.get("/params/{param}", tags=["Parameters"])
+@app.get("/args/{arg}", tags=["Arguments"])
 @construct_response
-def _param(request: Request, param: str) -> Dict:
-    """Get a specific parameter's value used for a run."""
+def _arg(request: Request, arg: str) -> Dict:
+    """Get a specific parameter's value used for the run."""
     response = {
         "message": HTTPStatus.OK.phrase,
         "status-code": HTTPStatus.OK,
         "data": {
-            param: vars(artifacts["params"]).get(param, ""),
+            arg: vars(artifacts["args"]).get(arg, ""),
         },
     }
     return response
@@ -561,7 +594,7 @@ def _param(request: Request, param: str) -> Dict:
 We can perform our `GET` request like so, where the `param` is part of the request URI's path as opposed to being part of it's query string.
 ```bash
 curl -X "GET" \
-  "http://localhost:5000/params/hidden_dim" \
+  "http://localhost:8000/args/learning_rate" \
   -H "accept: application/json"
 ```
 
@@ -573,22 +606,103 @@ And we'd receive a response like this:
   "method": "GET",
   "status-code": 200,
   "timestamp": "2021-03-21T13:13:46.696429",
-  "url": "http://localhost:5000/params/hidden_dim",
+  "url": "http://localhost:8000/params/hidden_dim",
   "data": {
-    "hidden_dim": 443
+    "learning_rate": 0.14688087680118794
   }
 }
 ```
 
+We can also create an endpoint to produce all the arguments that were used:
+
+??? quote "View `GET /args`"
+
+    ```python linenums="1"
+    @app.get("/args", tags=["Arguments"])
+    @construct_response
+    def _args(request: Request) -> Dict:
+        """Get all arguments used for the run."""
+        response = {
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "data": {
+                "args": vars(artifacts["args"]),
+            },
+        }
+        return response
+    ```
+
+    We can perform our `GET` request like so, where the `param` is part of the request URI's path as opposed to being part of it's query string.
+
+    ```bash
+    curl -X "GET" \
+    "http://localhost:8000/args" \
+    -H "accept: application/json"
+    ```
+
+    And we'd receive a response like this:
+
+    ```json
+    {
+    "message":"OK",
+    "method":"GET",
+    "status-code":200,
+    "timestamp":"2022-05-25T11:56:37.344762",
+    "url":"http://localhost:8001/args",
+    "data":{
+        "args":{
+        "shuffle":true,
+        "subset":null,
+        "min_freq":75,
+        "lower":true,
+        "stem":false,
+        "analyzer":"char_wb",
+        "ngram_max_range":8,
+        "alpha":0.0001,
+        "learning_rate":0.14688087680118794,
+        "power_t":0.158985493618746
+        }
+      }
+    }
+    ```
+
 ### Schemas
 
-Users can list all runs, find out more information about a specific run and now we want to enable them to get predictions on some input text from any of these runs.
-```python linenums="1" hl_lines="4"
+Now it's time to define our endpoint for prediction. We need to consume the inputs that we want to classify and so we need to define the schema that needs to be followed when defining those inputs.
+
+```python
+# app/schemas.py
+from typing import List
+from fastapi import Query
+from pydantic import BaseModel
+
+class Text(BaseModel):
+    text: str = Query(None, min_length=1)
+
+class PredictPayload(BaseModel):
+    texts: List[Text]
+```
+
+Here we're defining a `PredictPayload` object as a List of `Text` objects called `texts`. Each `Text` object is a string that defaults to `#!python None` and must have a minimum length of 1 character.
+
+!!! note
+    We could've just defined our `PredictPayload` like so:
+    ```python linenums="1"
+    class PredictPayload(BaseModel):
+        texts: List[str] = Query(None, min_length=1)
+    ```
+    But we wanted to create very explicit schemas in case we want to incorporate more [validation](#validation) or add additional parameters in the future.
+
+We can now use this payload in our predict endpoint:
+
+```python linenums="1" hl_lines="6"
+from app.schemas import PredictPayload
+from tagifai import predict
+
 @app.post("/predict", tags=["Prediction"])
 @construct_response
 def _predict(request: Request, payload: PredictPayload) -> Dict:
-    """Predict tags for a list of texts using the best run. """
-    # Predict
+    """Predict tags for a list of texts."""
     texts = [item.text for item in payload.texts]
     predictions = predict.predict(texts=texts, artifacts=artifacts)
     response = {
@@ -599,73 +713,52 @@ def _predict(request: Request, payload: PredictPayload) -> Dict:
     return response
 ```
 
-We receive a payload from the request's body which contains information as to what to predict on. The definition of this `PredictionPayload` is defined in our [app/schemas.py](https://github.com/GokuMohandas/MLOps/tree/main/app/schemas.py){:target="_blank"} script:
-```python linenums="1"
-from typing import List
-
-from fastapi import Query
-from pydantic import BaseModel, validator
-
-
-class Text(BaseModel):
-    text: str = Query(None, min_length=1)
-
-
-class PredictPayload(BaseModel):
-    texts: List[Text]
-
-    @validator("texts")
-    def list_must_not_be_empty(cls, value):
-        if not len(value):
-            raise ValueError("List of texts to classify cannot be empty.")
-        return value
-
-    class Config:
-        schema_extra = {
-            "example": {
-                "texts": [
-                    {"text": "Transfer learning with transformers for self-supervised learning."},
-                    {"text": "Generative adversarial networks in both PyTorch and TensorFlow."},
-                ]
-            }
-        }
-```
-
-In line 12, we're defining the `PredictPayload` object as a list of `Text` objects called `texts`. Each `Text` object is a string that defaults to `None` and must have a minimum length of 1 character.
-
-!!! note
-    We could've just defined our `PredictPayload` like so:
-    ```python linenums="1"
-    class PredictPayload(BaseModel):
-        texts: List[str] = Query(None, min_length=1)
-    ```
-    But we wanted to create very explicit schemas in case we add different parameters in the future and to show how to apply granular validation to them.
-
-We need to adhere to this schema when we want to this our `/predict` endpoint:
+We need to adhere to the `PredictPayload` schema when we want to user our `/predict` endpoint:
 
 ```bash
-curl -X 'POST' 'http://0.0.0.0:5000/predict' \
+curl -X 'POST' 'http://0.0.0.0:8000/predict' \
     -H 'accept: application/json' \
     -H 'Content-Type: application/json' \
     -d '{
     "texts": [
-        {"text": "Transfer learning with transformers for self-supervised learning."},
-        {"text": "Generative adversarial networks in both PyTorch and TensorFlow."}
-        ]
+        {"text": "Transfer learning with transformers for text classification."},
+        {"text": "Generative adversarial networks for image generation."}
+      ]
     }'
 ```
+
+<pre class="output">
+{
+  "message":"OK",
+  "method":"POST",
+  "status-code":200,
+  "timestamp":"2022-05-25T12:23:34.381614",
+  "url":"http://0.0.0.0:8001/predict",
+  "data":{
+    "predictions":[
+      {
+        "input_text":"Transfer learning with transformers for text classification.",
+        "predicted_tag":"natural-language-processing"
+      },
+      {
+        "input_text":"Generative adversarial networks for image generation.",
+        "predicted_tag":"computer-vision"
+      }
+    ]
+  }
+}
+</pre>
 
 ### Validation
 
 #### Built-in
 
-We're using pydantic's [`BaseModel`](https://pydantic-docs.helpmanual.io/usage/models/){:target="_blank"} object here because it offers built-in validation for all of our schemas. In our case, if a `Text` instance is less than 1 character, then our service will return the appropriate error message and code.
+We're using pydantic's [`BaseModel`](https://pydantic-docs.helpmanual.io/usage/models/){:target="_blank"} object here because it offers built-in validation for all of our schemas. In our case, if a `Text` instance is less than 1 character, then our service will return the appropriate error message and code:
 
 ```bash
-curl -X POST "http://localhost:5000/predict" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"texts\":[{\"text\":\"\"}]}"
+curl -X POST "http://localhost:8000/predict" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"texts\":[{\"text\":\"\"}]}"
 ```
 <pre class="output">
-# 422 Error: Unprocessable Entity
 {
   "detail": [
     {
@@ -689,7 +782,7 @@ curl -X POST "http://localhost:5000/predict" -H  "accept: application/json" -H  
 
 We can also add custom validation on a specific entity by using the `@validator` decorator, like we do to ensure that list of `texts` is not empty.
 
-```python linenums="1" hl_lines="4"
+```python linenums="1" hl_lines="4-8"
 class PredictPayload(BaseModel):
     texts: List[Text]
 
@@ -698,18 +791,16 @@ class PredictPayload(BaseModel):
         if not len(value):
             raise ValueError("List of texts to classify cannot be empty.")
         return value
-
-    ...
 ```
 
 ```bash
-curl -X POST "http://localhost:5000/predict" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"texts\":[]}"
+curl -X POST "http://localhost:8000/predict" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"texts\":[]}"
 ```
 <pre class="output">
 {
-  "detail": [
+  "detail":[
     {
-      "loc": [
+      "loc":[
         "body",
         "texts"
       ],
@@ -722,7 +813,28 @@ curl -X POST "http://localhost:5000/predict" -H  "accept: application/json" -H  
 
 ### Extras
 
-Lastly, we have a [`schema_extra`](https://fastapi.tiangolo.com/tutorial/schema-extra-example/){:target="_blank"} object under the `Config` class to depict what an example `PredictPayload` should look like. When we do this, it automatically appears in our endpoint's documentation when we want to "Try it out".
+Lastly, we can add a [`schema_extra`](https://fastapi.tiangolo.com/tutorial/schema-extra-example/){:target="_blank"} object under a `Config` class to depict what an example `PredictPayload` should look like. When we do this, it automatically appears in our endpoint's documentation (click `Try it out`).
+
+```python linenums="1" hl_lines="10-18"
+class PredictPayload(BaseModel):
+    texts: List[Text]
+
+    @validator("texts")
+    def list_must_not_be_empty(cls, value):
+        if not len(value):
+            raise ValueError("List of texts to classify cannot be empty.")
+        return value
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "texts": [
+                    {"text": "Transfer learning with transformers for text classification."},
+                    {"text": "Generative adversarial networks in both PyTorch and TensorFlow."},
+                ]
+            }
+        }
+```
 
 <div class="ai-center-all">
     <img width="1000" src="/static/images/mlops/api/predict.png">

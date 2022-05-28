@@ -23,7 +23,9 @@ metrics = {"overall": {}, "class": {}}
 ```
 ```python linenums="1"
 # Data to evaluate
-y_pred = custom_predict(X_test, model=model, index=label_encoder.class_to_index["other"])
+other_index = label_encoder.class_to_index["other"]
+y_prob = model.predict_proba(X_test)
+y_pred = custom_predict(y_prob=y_prob, threshold=threshold, index=other_index)
 ```
 
 ## Coarse-grained
@@ -260,7 +262,7 @@ print (np.shape(y_prob))
 
 ```python linenums="1"
 # Used to show raw text
-test_df = pd.DataFrame({"text": X_test_raw, "tags": label_encoder.decode(y_test)})
+test_df = pd.DataFrame({"text": X_test_raw, "tag": label_encoder.decode(y_test)})
 ```
 
 ```python linenums="1"
@@ -331,7 +333,7 @@ Not all of these are necessarily labeling errors but situations where the predic
 num_samples = 5
 for index in label_error_indices[:num_samples]:
     print ("text:", test_df.iloc[index].text)
-    print ("true:", test_df.iloc[index].tags)
+    print ("true:", test_df.iloc[index].tag)
     print ("pred:", label_encoder.decode([y_pred[index]])[0])
     print ()
 ```
@@ -356,7 +358,7 @@ Just inspecting the overall and class metrics isn't enough to deploy our new ver
 An easy way to create and evaluate slices is to define slicing functions.
 
 ```bash
-pip install snorkel==0.9.7 -q
+pip install snorkel==0.9.8 -q
 ```
 
 ```python linenums="1"
@@ -369,7 +371,7 @@ from snorkel.slicing import slicing_function
 @slicing_function()
 def nlp_cnn(x):
     """NLP Projects that use convolution."""
-    nlp_projects = "natural-language-processing" in x.tags
+    nlp_projects = "natural-language-processing" in x.tag
     convolution_projects = "CNN" in x.text or "convolution" in x.text
     return (nlp_projects and convolution_projects)
 ```
@@ -384,7 +386,7 @@ Here we're using Snorkel's [`slicing_function`](https://snorkel.readthedocs.io/e
 
 ```python linenums="1"
 nlp_cnn_df = slice_dataframe(test_df, nlp_cnn)
-nlp_cnn_df[["text", "tags"]].head()
+nlp_cnn_df[["text", "tag"]].head()
 ```
 
 <div class="output_subarea output_html rendered_html"><div>
@@ -408,7 +410,7 @@ nlp_cnn_df[["text", "tags"]].head()
 
 ```python linenums="1"
 short_text_df = slice_dataframe(test_df, short_text)
-short_text_df[["text", "tags"]].head()
+short_text_df[["text", "tag"]].head()
 ```
 
 <div class="output_subarea output_html rendered_html"><div>
@@ -604,34 +606,40 @@ Another way to evaluate our systems is to identify counterfactuals -- data with 
 
 ## Behavioral testing
 
-Besides just looking at metrics, we also want to conduct some behavior sanity tests. Behavioral testing is the process of testing input data and expected outputs while treating the model as a black box. They don't necessarily have to be adversarial in nature but more along the types of perturbations we'll see in the real world once our model is deployed. A landmark paper on this topic is [Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://arxiv.org/abs/2005.04118){:target="_blank"} which breaks down behavioral testing into three types of tests:
+Besides just looking at metrics, we also want to conduct some behavioral sanity tests. Behavioral testing is the process of testing input data and expected outputs while treating the model as a black box. They don't necessarily have to be adversarial in nature but more along the types of perturbations we'll see in the real world once our model is deployed. A landmark paper on this topic is [Beyond Accuracy: Behavioral Testing of NLP Models with CheckList](https://arxiv.org/abs/2005.04118){:target="_blank"} which breaks down behavioral testing into three types of tests:
 
 - `#!js invariance`: Changes should not affect outputs.
 ```python linenums="1"
 # INVariance via verb injection (changes should not affect outputs)
 tokens = ["revolutionized", "disrupted"]
-tags = [["transformers"], ["transformers"]]
-texts = [f"Transformers have {token} the ML field." for token in tokens]
+texts = [f"Transformers applied to NLP have {token} the ML field." for token in tokens]
+predict_tag(texts=texts)
 ```
+<pre class="output">
+['natural-language-processing', 'natural-language-processing']
+</pre>
 - `#!js directional`: Change should affect outputs.
 ```python linenums="1"
 # DIRectional expectations (changes with known outputs)
-tokens = ["PyTorch", "Huggingface"]
-tags = [
-    ["pytorch", "transformers"],
-    ["huggingface", "transformers"],
-]
-texts = [f"A {token} implementation of transformers." for token in tokens]
+tokens = ["text classification", "image classification"]
+texts = [f"ML applied to {token}." for token in tokens]
+predict_tag(texts=texts)
 ```
+<pre class="output">
+['natural-language-processing', 'computer-vision']
+</pre>
 - `#!js minimum functionality`: Simple combination of inputs and expected outputs.
 ```python linenums="1"
 # Minimum Functionality Tests (simple input/output pairs)
-tokens = ["transformers", "graph neural networks"]
-tags = [["transformers"], ["graph-neural-networks"]]
-texts = [f"{token} have revolutionized machine learning." for token in tokens]
+tokens = ["natural language processing", "mlops"]
+texts = [f"{token} is the next big wave in machine learning." for token in tokens]
+predict_tag(texts=texts)
 ```
+<pre class="output">
+['natural-language-processing', 'mlops']
+</pre>
 
-> We'll learn how to systematically create tests in our [testing lesson](testing.md){:target="_blank"}.
+> We'll learn how to systematically create tests in our [testing lesson](testing.md#behavioral-testing){:target="_blank"}.
 
 ## Evaluating evaluations
 

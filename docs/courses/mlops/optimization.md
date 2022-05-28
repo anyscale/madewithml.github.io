@@ -32,7 +32,7 @@ There are many factors to consider when performing hyperparameter optimization a
 4. Define the parameters to tune in each [trial](https://optuna.readthedocs.io/en/stable/reference/trial.html){:target="_blank"} and the [distribution](https://optuna.readthedocs.io/en/stable/reference/generated/optuna.trial.Trial.html#optuna-trial-trial){:target="_blank"} of values to sample.
 
 ```bash
-pip install optuna==2.4.0 numpyencoder==0.3.0 -q
+pip install optuna==2.10.0 numpyencoder==0.3.0 -q
 ```
 
 ```python linenums="1"
@@ -115,8 +115,8 @@ Trial 19 finished with value: 0.8470890576153735 and parameters: {'analyzer': 'c
 
 ```python linenums="1"
 # Run MLFlow server and localtunnel
-get_ipython().system_raw("mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri $PWD/experiments/ &")
-!npx localtunnel --port 5000
+get_ipython().system_raw("mlflow server -h 0.0.0.0 -p 8000 --backend-store-uri $PWD/experiments/ &")
+!npx localtunnel --port 8000
 ```
 1. Click on the "optimization" experiment on the left side under **Experiments**.
 2. Select runs to compare by clicking on the toggle box to the left of each run or by clicking on the toggle box in the header to select all runs in this experiment.

@@ -117,7 +117,7 @@ Breakdown the product into key objectives that we want to focus on.
 
     - Allow customers to add and categorize their own projects.
     - Discover ML content from trusted sources to bring into our platform.
-    - Classify incoming content (>85% precision) for our customers to easily discover. **[OUR FOCUS]**
+    - Classify incoming content (with high precision) for our customers to easily discover. **[OUR FOCUS]**
     - Display categorized content on our platform (recent, popular, recommended, etc.)
 
     <table>
@@ -426,7 +426,7 @@ We need to break down all the [objectives](#objectives) for a particular release
     </thead>
     <tbody>
     <tr>
-        <td>Classify incoming content (>85% precision) for our customers to easily discover.</td>
+        <td>Classify incoming content (with high precision) for our customers to easily discover.</td>
         <td>High</td>
         <td>v1</td>
     </tr>
@@ -452,7 +452,7 @@ We need to break down all the [objectives](#objectives) for a particular release
         <td>Complete</td>
     </tr>
     <tr>
-        <td>Trained model with high >85% precision</td>
+        <td>Trained model with high precision</td>
         <td>Data scientist</td>
         <td>Labeled dataset</td>
         <td>Versioned, reproducible, test coverage report and evaluation results</td>
@@ -480,7 +480,7 @@ We need to break down all the [objectives](#objectives) for a particular release
 This is where the project scoping begins to take place. Often, the stakeholders will have a desired time for release and the functionality to be delivered. There *will* be a lot of back and forth on this based on the results from the feasibility studies, so it's very important to be thorough and transparent to set expectations.
 
 ??? quote "Our task"
-    **v1**: classify incoming content (>85% precision) for our customers to easily discover.
+    **v1**: classify incoming content (with high precision) for our customers to easily discover.
 
     - Exploration studies conducted by XX
     - Pushed to dev for A/B testing by XX

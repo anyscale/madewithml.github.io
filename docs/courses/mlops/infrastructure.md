@@ -93,7 +93,7 @@ We can make batch predictions on a finite set of inputs which are then written t
 
 ### Real-time serving
 
-We can also serve live predictions, typically through a [request](api.md#request){:target="_blank"} to our [API](api.md){:target="_blank"} with the appropriate input data. This will involve spinning up our ML application as a microservice since users or downstream processes will interact directly with the model.
+We can also serve live predictions, typically through a [request](api.md#request){:target="_blank"} to our [API](api.md){:target="_blank"} with the appropriate input data.
 
 <div class="ai-center-all">
     <img width="400" src="/static/images/mlops/infrastructure/real_time_serving.png">

@@ -301,69 +301,57 @@ df["text"] = df.title + " " + df.description
 
 ### Cleaning
 
-We can start by removing data points with no relevant tags:
+Since we're dealing with text data, we can apply some of the common text preprocessing steps:
 
-```python linenums="1"
-# Remove projects with no relevant tag
-print (f"{len(df)} projects")
-df = df[df.tag.notnull()]
-print (f"{len(df)} projects")
+```bash
+!pip install nltk==3.7 -q
 ```
 
-And since we're dealing with text data, we can apply some of the common text preprocessing steps:
-
-1. lower (conditional)
 ```python linenums="1"
-text = text.lower()
-```
-2. remove stopwords (from [NLTK](https://github.com/nltk/nltk){:target="_blank"} package)
-```python linenums="1"
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
 import re
-# Remove stopwords
-if len(stopwords):
-    pattern = re.compile(r"\b(" + r"|".join(stopwords) + r")\b\s*")
-    text = pattern.sub("", text)
 ```
 
-3. Filters and spacing
 ```python linenums="1"
-# Separate filters attached to tokens
-filters = r"([-;;.,!?<=>])"
-text = re.sub(filters, r" \1 ", text)
+nltk.download("stopwords")
+STOPWORDS = stopwords.words("english")
+stemmer = PorterStemmer()
+```
 
-# Remove non alphanumeric chars
-text = re.sub("[^A-Za-z0-9]+", " ", text)
+```python linenums="1"
+def clean_text(text, lower=True, stem=False, stopwords=STOPWORDS):
+    """Clean raw text."""
+    # Lower
+    if lower:
+        text = text.lower()
 
-# Remove multiple spaces
-text = re.sub(" +", " ", text)
+    # Remove stopwords
+    if len(stopwords):
+        pattern = re.compile(r'\b(' + r"|".join(stopwords) + r")\b\s*")
+        text = pattern.sub('', text)
 
-# Strip white space at the ends
-text = text.strip()
+    # Spacing and filters
+    text = re.sub(
+        r"([!\"'#$%&()*\+,-./:;<=>?@\\\[\]^_`{|}~])", r" \1 ", text
+    )  # add spacing between objects to be filtered
+    text = re.sub("[^A-Za-z0-9]+", " ", text)  # remove non alphanumeric chars
+    text = re.sub(" +", " ", text)  # remove multiple spaces
+    text = text.strip()  # strip white space at the ends
+
+    # Remove links
+    text = re.sub(r"http\S+", "", text)
+
+    # Stemming
+    if stem:
+        text = " ".join([stemmer.stem(word, to_lowercase=lower) for word in text.split(" ")])
+
+    return text
 ```
 
     !!! note
         We could definitely try and include emojis, punctuations, etc. because they do have a lot of signal for the task but it's best to simplify the initial feature set we use to just what we think are the most influential and then we can slowly introduce other features and assess utility.
-
-    !!! warning
-        We'll want to introduce less frequent features as they become more frequent or encode them in a clever way (ex. binning, extract general attributes, common n-grams, mean encoding using other feature values, etc.) so that we can mitigate the feature value dimensionality issue until we're able to collect more data.
-
-4. remove URLs using regex (discovered during EDA)
-```python linenums="1"
-text = re.sub(r"http\S+", "", text)
-```
-5. stemming (conditional)
-```python linenums="1"
-text = " ".join([porter.stem(word) for word in text.split(" ")])
-```
-
-We can apply our input text cleaning steps to our text feature in the dataframe by wrapping all these processes under a function.
-
-```python linenums="1"
-# Define preprocessing function
-def clean_text(text):
-    ...
-    return text
-```
 
 ```python linenums="1"
 # Apply to dataframe
@@ -375,6 +363,9 @@ print (f"{original_df.text.values[0]}\n{df.text.values[0]}")
 Comparison between YOLO and RCNN on real world videos Bringing theory to experiment is cool. We can easily train models in colab and find the results in minutes.
 comparison yolo rcnn real world videos bringing theory experiment cool easily train models colab find results minutes
 </pre>
+
+!!! warning
+    We'll want to introduce less frequent features as they become more frequent or encode them in a clever way (ex. binning, extract general attributes, common n-grams, mean encoding using other feature values, etc.) so that we can mitigate the feature value dimensionality issue until we're able to collect more data.
 
 ### Encoding
 
@@ -397,7 +388,7 @@ We'll be writing our own LabelEncoder which is based on scikit-learn's [implemen
 class LabelEncoder(object):
     """Encode labels into unique indices"""
     def __init__(self, class_to_index={}):
-        self.class_to_index = class_to_index
+        self.class_to_index = class_to_index or {}  # mutable defaults ;)
         self.index_to_class = {v: k for k, v in self.class_to_index.items()}
         self.classes = list(self.class_to_index.keys())
 

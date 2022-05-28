@@ -48,7 +48,8 @@ args = Namespace(
     ngram_max_range=7,
     alpha=1e-4,
     learning_rate=1e-1,
-    power_t=0.1
+    power_t=0.1,
+    num_epochs=100
 )
 ```
 
@@ -111,7 +112,7 @@ def train(args, df, trial=None):
         warm_start=True)
 
     # Training
-    for epoch in range(100):
+    for epoch in range(args.num_epochs):
         model.fit(X_over, y_over)
         train_loss = log_loss(y_train, model.predict_proba(X_train))
         val_loss = log_loss(y_val, model.predict_proba(X_val))
@@ -132,8 +133,16 @@ def train(args, df, trial=None):
             if trial.should_prune():
                 raise optuna.TrialPruned()
 
+    # Threshold
+    y_pred = model.predict(X_val)
+    y_prob = model.predict_proba(X_val)
+    args.threshold = np.quantile(
+        [y_prob[i][j] for i, j in enumerate(y_pred)], q=0.25)  # Q1
+
     # Evaluation
-    y_pred = custom_predict(X_test, model=model, index=label_encoder.class_to_index["other"])
+    other_index = label_encoder.class_to_index["other"]
+    y_prob = model.predict_proba(X_test)
+    y_pred = custom_predict(y_prob=y_prob, threshold=args.threshold, index=other_index)
     metrics = precision_recall_fscore_support(y_test, y_pred, average="weighted")
     performance = {"precision": metrics[0], "recall": metrics[1], "f1": metrics[2]}
     print (json.dumps(performance, indent=2))
@@ -212,17 +221,17 @@ Epoch: 90 | train_loss: 0.16197, val_loss: 0.46488
 Let's view what we've tracked from our experiment. MLFlow serves a dashboard for us to view and explore our experiments on a localhost port. If you're running this on your local computer, you can simply run the MLFlow server:
 
 ```bash
-mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri $PWD/experiments/
+mlflow server -h 0.0.0.0 -p 8000 --backend-store-uri $PWD/experiments/
 ```
 
-and open [http://localhost:5000/](http://localhost:5000/){:target="_blank"} to view the dashboard. But if you're on Google colab, we're going to use [localtunnel](https://github.com/localtunnel/localtunnel){:target="_blank"} to create a connection between this notebook and a public URL.
+and open [http://localhost:8000/](http://localhost:8000/){:target="_blank"} to view the dashboard. But if you're on Google colab, we're going to use [localtunnel](https://github.com/localtunnel/localtunnel){:target="_blank"} to create a connection between this notebook and a public URL.
 
 > If localtunnel is not installed, you may need to run `!npm install -g localtunnel` in a cell first.
 
 ```python linenums="1"
 # Run MLFlow server and localtunnel
-get_ipython().system_raw("mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri $PWD/experiments/ &")
-!npx localtunnel --port 5000
+get_ipython().system_raw("mlflow server -h 0.0.0.0 -p 8000 --backend-store-uri $PWD/experiments/ &")
+!npx localtunnel --port 8000
 ```
 
 MLFlow creates a main dashboard with all your experiments and their respective runs. We can sort runs by clicking on the column headers.
@@ -283,9 +292,7 @@ print (json.dumps(performance, indent=2))
 ```python linenums="1"
 # Inference
 text = "Transfer learning with transformers for text classification."
-x = vectorizer.transform([text])
-y_pred = custom_predict(x=x, model=model, index=label_encoder.class_to_index["other"])
-label_encoder.decode(y_pred)
+predict_tag(texts=[text])
 ```
 <pre class="output">
 ['natural-language-processing']

@@ -265,12 +265,12 @@ logger.critical("There is something terribly wrong and process may terminate.")
 We use [RichHandler](https://rich.readthedocs.io/en/stable/logging.html){:target="_blank"} for our `console` handler to get pretty formatting for the log messages. This is not a preinstalled library so we'll need to install and add to `requirements.txt`:
 
 ```bash
-pip install rich==10.0.0
+pip install rich==12.4.4
 ```
 
 ```bash
 # requirements.txt
-rich==10.0.0
+rich==12.4.4
 ```
 
 Our logged messages become stored inside the respective files in our logs directory:

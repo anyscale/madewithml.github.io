@@ -86,6 +86,10 @@ Based on our findings from [EDA](exploratory-data-analysis.md){:target="_blank"}
 - if a certain tag doesn't have *enough* samples, we'll replace it with `other`
 
 ```python linenums="1"
+df = df[df.tag.notnull()]  # remove projects with no label
+```
+
+```python linenums="1"
 # Out of scope (OOS) tags
 oos_tags = [item for item in df.tag.unique() if item not in tags_dict.keys()]
 oos_tags
@@ -276,15 +280,6 @@ df.tag = df.tag.apply(filter, include=list(tags_above_freq.keys()))
 # Fill None with other
 df.tag = df.tag.fillna("other")
 ```
-
-```python linenums="1"
-# Remove projects with no relevant tags
-df = df[df.tag.notnull()]
-print (f"{len(df)} projects")
-```
-<pre class="output">
-955 projects
-</pre>
 
 ## Libraries
 

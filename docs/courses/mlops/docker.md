@@ -83,7 +83,7 @@ RUN dvc pull
 Since our application (API) requires PORT 500 to be open, we need to specify in our Dockerfile to expose it.
 ```dockerfile
 # Export ports
-EXPOSE 5000
+EXPOSE 8000
 ```
 
 The final step in building our image is to specify the executable to be run when a container is built from our image. For our application, we want to launch our API with gunicorn.
@@ -127,20 +127,20 @@ Once we've built our image, we're ready to run a container using that image with
 
 ```bash
 # Run container
-docker run -p 5000:5000 --name tagifai tagifai:latest
+docker run -p 8000:8000 --name tagifai tagifai:latest
 ```
 
-Once we have our container running, we can use the API thanks for the port we're sharing (5000):
+Once we have our container running, we can use the API thanks for the port we're sharing (8000):
 
 ```bash
 curl -X 'POST' \
-  'http://localhost:5000/predict' \
+  'http://localhost:8000/predict' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
   "texts": [
     {
-      "text": "Transfer learning with transformers for self-supervised learning."
+      "text": "Transfer learning with transformers for text classification."
     }
   ]
 }'
@@ -154,7 +154,7 @@ docker ps -a  # stopped containers
 ```
 <pre class="output">
 CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS    PORTS                    NAMES
-ee5f1b08abd5   tagifai:latest   "gunicorn -c config…"    19 minutes ago   Created   0.0.0.0:5000->5000/tcp   tagifai
+ee5f1b08abd5   tagifai:latest   "gunicorn -c config…"    19 minutes ago   Created   0.0.0.0:8000->8000/tcp   tagifai
 </pre>
 
 We can also stop and remove any or all containers based on their unique IDs.
@@ -175,7 +175,7 @@ In the event that we run into errors while building our image layers, a very eas
 
 ```bash
 # Run container
-docker run -p 5000:5000 -it tagifai /bin/bash
+docker run -p 8000:8000 -it tagifai /bin/bash
 ```
 
 Once we have our container running, we can use our application as we would on our local machine but now it's reproducible on any operating system that can run the Docker container engine. We've covered just what we need from Docker to deploy our application but there is so much more to Docker, which you can explore in the official [docs](https://docs.docker.com/){:target="_blank"}.

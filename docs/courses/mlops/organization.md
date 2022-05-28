@@ -85,7 +85,7 @@ Let's start by adding the instructions we used for creating a [virtual environme
 # Inside README.md
 python3 -m venv venv
 source venv/bin/activate
-python3 -m pip install pip==22.1.1 setuptools==62.3.2 wheel==0.37.1
+python3 -m pip install pip setuptools wheel
 python3 -m pip install -e .
 ```
 
@@ -388,7 +388,6 @@ This way when the names of columns change or we want to replace with different l
 
     ```python linenums="1"
     # tagifai/main.py
-
     if __name__ == "__main__":
         load_data()
     ```
@@ -479,12 +478,12 @@ This way when the names of columns change or we want to replace with different l
     Install required packages and add to `requirements.txt`:
 
     ```bash
-    pip install pandas==1.1.5
+    pip install pandas==1.3.5
     ```
 
     ```bash
     # requirements.txt
-    pandas==1.1.5
+    pandas==1.3.5
     ```
 
     Run the operation to label our dataset:
@@ -510,7 +509,6 @@ This way when the names of columns change or we want to replace with different l
     # tagifai/data.py
     def preprocess(df, lower, stem):
         """Preprocess the data."""
-        df = df[df.tag.notnull()]  # remove projects with no tags
         df["text"] = df.title + " " + df.description  # feature engineering
         df.text = df.text.apply(clean_text, lower=lower, stem=stem)  # clean text
         return df
@@ -525,16 +523,16 @@ This way when the names of columns change or we want to replace with different l
 
     from config import config
 
-    def clean_text(text, lower, stem):
+    def clean_text(text, lower=True, stem=False, stopwords=config.STOPWORDS):
         """Clean raw text."""
         # Lower
         if lower:
             text = text.lower()
 
         # Remove stopwords
-        if len(config.STOPWORDS):
-            pattern = re.compile(r"\b(" + r"|".join(config.STOPWORDS) + r")\b\s*")
-            text = pattern.sub("", text)
+        if len(stopwords):
+            pattern = re.compile(r'\b(' + r"|".join(stopwords) + r")\b\s*")
+            text = pattern.sub('', text)
 
         # Spacing and filters
         text = re.sub(
@@ -542,15 +540,14 @@ This way when the names of columns change or we want to replace with different l
         )  # add spacing between objects to be filtered
         text = re.sub("[^A-Za-z0-9]+", " ", text)  # remove non alphanumeric chars
         text = re.sub(" +", " ", text)  # remove multiple spaces
-        text = text.strip()
+        text = text.strip()  # strip white space at the ends
 
         # Remove links
         text = re.sub(r"http\S+", "", text)
 
         # Stemming
         if stem:
-            stemmer = Stemmer()
-            text = " ".join([stemmer.stem(word) for word in text.split(" ")])
+            text = " ".join([stemmer.stem(word, to_lowercase=lower) for word in text.split(" ")])
 
         return text
     ```
@@ -558,12 +555,12 @@ This way when the names of columns change or we want to replace with different l
     Install required packages and add to `requirements.txt`:
 
     ```bash
-    pip install nltk==3.2.5
+    pip install nltk==3.7
     ```
 
     ```bash
     # requirements.txt
-    nltk==3.2.5
+    nltk==3.7
     ```
 
     Notice that we're using an explicit set of stopwords instead of NLTK's default list:
@@ -588,46 +585,6 @@ This way when the names of columns change or we want to replace with different l
     ]
     ```
 
-    And lastly, notice that we use a custom Stemmer class instead of using NLTK's [default Stemmer](https://github.com/nltk/nltk/blob/develop/nltk/stem/porter.py){:target="_blank"}. In our [testing lesson](testing.md){:target="_blank"}, we'll be writing tests for all the functions and classes we're developing right now. Through that process, we discovered that the NLTK package automatically lowers text when stemming. We decided to override that oversight using a modified Stemmer class.
-
-    ```python linenums="1" hl_lines="4"
-    class Stemmer(PorterStemmer):
-        def stem(self, word):
-
-            # stem = word.lower()  # this is the line we're removing
-
-            if self.mode == self.NLTK_EXTENSIONS and word in self.pool:  # pragma: no cover, nltk
-                return self.pool[word]
-
-            if self.mode != self.ORIGINAL_ALGORITHM and len(word) <= 2:  # pragma: no cover, nltk
-                # With this line, strings of length 1 or 2 don't go through
-                # the stemming process, although no mention is made of this
-                # in the published algorithm.
-                return word
-
-            stem = self._step1a(word)
-            stem = self._step1b(stem)
-            stem = self._step1c(stem)
-            stem = self._step2(stem)
-            stem = self._step3(stem)
-            stem = self._step4(stem)
-            stem = self._step5a(stem)
-            stem = self._step5b(stem)
-
-            return stem
-    ```
-
-    !!! tip
-        If you find that a repository has the fix but it's not yet pushed to PyPI, we can download a specific commit using pip:
-        ```bash
-        pip install git+https://github.com/nltk/nltk.git@4616bcdf3b045e4c76b724e210f11fd0b8b9a501
-        ```
-        In our case, at least at the time of writing, the NLTK repository has fixed the stemming issue but it has not passed it's tests so the change doesn't reflect even when we download using the commit hash... which we can verify by looking at the default NLTK Stemmer locally:
-        ```bash
-        code $PWD/venv/lib/python3.7/site-packages/nltk/stem/porter.py
-        ```
-
-
 ### Encode
 
 ??? quote "Encode labels"
@@ -642,7 +599,7 @@ This way when the names of columns change or we want to replace with different l
     class LabelEncoder(object):
         """Encode labels into unique indices."""
         def __init__(self, class_to_index={}):
-            self.class_to_index = class_to_index
+            self.class_to_index = class_to_index or {}  # mutable defaults ;)
             self.index_to_class = {v: k for k, v in self.class_to_index.items()}
             self.classes = list(self.class_to_index.keys())
 
@@ -735,7 +692,6 @@ This way when the names of columns change or we want to replace with different l
 
         # Train
         args = Namespace(**utils.load_dict(filepath=args_fp))
-        df = df[: args.subset]  # None = all samples
         artifacts = train.train(df=df, args=args)
         performance = artifacts["performance"]
         print(json.dumps(performance, indent=2))
@@ -747,6 +703,7 @@ This way when the names of columns change or we want to replace with different l
     # tagifai/train.py
     from imblearn.over_sampling import RandomOverSampler
     import json
+    import numpy as np
     import pandas as pd
     from sklearn.feature_extraction.text import TfidfVectorizer
     from sklearn.linear_model import SGDClassifier
@@ -761,11 +718,12 @@ This way when the names of columns change or we want to replace with different l
         # Setup
         utils.set_seeds()
         if args.shuffle: df = df.sample(frac=1).reset_index(drop=True)
+        df = df[: args.subset]  # None = all samples
         df = data.preprocess(df, lower=args.lower, stem=args.stem)
         label_encoder = data.LabelEncoder().fit(df.tag)
         X_train, X_val, X_test, y_train, y_val, y_test = \
             data.get_data_splits(X=df.text.to_numpy(), y=label_encoder.encode(df.tag))
-        test_df = pd.DataFrame({"text": X_test, "tags": label_encoder.decode(y_test)})
+        test_df = pd.DataFrame({"text": X_test, "tag": label_encoder.decode(y_test)})
 
         # Tf-idf
         vectorizer = TfidfVectorizer(analyzer=args.analyzer, ngram_range=(2,args.ngram_max_range))  # char n-grams
@@ -784,7 +742,7 @@ This way when the names of columns change or we want to replace with different l
             warm_start=True)
 
         # Training
-        for epoch in range(100):
+        for epoch in range(args.num_epochs):
             model.fit(X_over, y_over)
             train_loss = log_loss(y_train, model.predict_proba(X_train))
             val_loss = log_loss(y_val, model.predict_proba(X_val))
@@ -795,16 +753,26 @@ This way when the names of columns change or we want to replace with different l
                     f"val_loss: {val_loss:.5f}"
                 )
 
+        # Threshold
+        y_pred = model.predict(X_val)
+        y_prob = model.predict_proba(X_val)
+        args.threshold = np.quantile(
+            [y_prob[i][j] for i, j in enumerate(y_pred)], q=0.25)  # Q1
+
         # Evaluation
-        y_pred = predict.custom_predict(X_test, model=model, index=label_encoder.class_to_index["other"])
-        performance = evaluate.get_metrics(y_true=y_test, y_pred=y_pred, classes=label_encoder.classes, df=test_df)
+        other_index = label_encoder.class_to_index["other"]
+        y_prob = model.predict_proba(X_test)
+        y_pred = predict.custom_predict(y_prob=y_prob, threshold=args.threshold, index=other_index)
+        performance = evaluate.get_metrics(
+            y_true=y_test, y_pred=y_pred, classes=label_encoder.classes, df=test_df
+        )
 
         return {
             "args": args,
             "label_encoder": label_encoder,
             "vectorizer": vectorizer,
             "model": model,
-            "performance": performance
+            "performance": performance,
         }
     ```
 
@@ -814,13 +782,11 @@ This way when the names of columns change or we want to replace with different l
     # tagifai/predict.py
     import numpy as np
 
-    def custom_predict(x, model, index):
+    def custom_predict(y_prob, threshold, index):
         """Custom predict function that defaults
         to an index if conditions are not met."""
-        y_prob = model.predict_proba(x)
-        y_pred = [np.argmax(p) if max(p) > 0.6 else index for p in y_prob]
+        y_pred = [np.argmax(p) if max(p) > threshold else index for p in y_prob]
         return np.array(y_pred)
-
     ```
 
     ```python linenums="1"
@@ -833,7 +799,7 @@ This way when the names of columns change or we want to replace with different l
     @slicing_function()
     def nlp_cnn(x):
         """NLP Projects that use convolution."""
-        nlp_projects = "natural-language-processing" in x.tags
+        nlp_projects = "natural-language-processing" in x.tag
         convolution_projects = "CNN" in x.text or "convolution" in x.text
         return (nlp_projects and convolution_projects)
 
@@ -882,9 +848,9 @@ This way when the names of columns change or we want to replace with different l
 
         # Slice metrics
         if df is not None:
-            applier = PandasSFApplier([nlp_cnn, short_text])
+            slices = PandasSFApplier([nlp_cnn, short_text]).apply(df)
             metrics["slices"] = get_slice_metrics(
-                y_true=y_true, y_pred=y_pred, slices=applier.apply(df))
+                y_true=y_true, y_pred=y_pred, slices=slices)
 
         return metrics
     ```
@@ -1044,7 +1010,7 @@ This way when the names of columns change or we want to replace with different l
     def train():
         ...
         # Training
-        for epoch in range(100):
+        for epoch in range(args.num_epochs):
             ...
             # Pruning (for optimization in next section)
             if trial:
@@ -1067,14 +1033,14 @@ This way when the names of columns change or we want to replace with different l
     Install required packages and add to `requirements.txt`:
 
     ```bash
-    pip install mlflow==1.13.1 optuna==2.4.0 numpyencoder==0.3.0
+    pip install mlflow==1.13.1 optuna==2.10.0 numpyencoder==0.3.0
     ```
 
     ```bash
     # requirements.txt
     mlflow==1.13.1
     numpyencoder==0.3.0
-    optuna==2.4.0
+    optuna==2.10.0
     ```
 
     Commands to optimize hyperparameters:
@@ -1129,7 +1095,6 @@ This way when the names of columns change or we want to replace with different l
         with mlflow.start_run(run_name=run_name):
             run_id = mlflow.active_run().info.run_id
             print(f"Run ID: {run_id}")
-            df = df[: args.subset]  # None = all samples
             artifacts = train.train(df=df, args=args)
             performance = artifacts["performance"]
             print(json.dumps(performance, indent=2))
@@ -1163,7 +1128,7 @@ This way when the names of columns change or we want to replace with different l
     def train():
         ...
         # Training
-        for epoch in range(100):
+        for epoch in range(args.num_epochs):
             ...
             # Log
             if not trial:
@@ -1269,11 +1234,13 @@ This way when the names of columns change or we want to replace with different l
     # tagifai/main.py
     from tagifai import data, predict, train, utils
 
-    def predict_tag(text, run_id):
+    def predict_tag(text, run_id=None):
         """Predict tag for text."""
+        if not run_id:
+            run_id = open(Path(config.CONFIG_DIR, "run_id.txt")).read()
         artifacts = load_artifacts(run_id=run_id)
         prediction = predict.predict(texts=[text], artifacts=artifacts)
-        print(json.dump(prediction, indent=2))
+        print(json.dumps(prediction, indent=2))
     ```
 
     This involves creating the `load_artifacts()` function inside our `main.py` script:
@@ -1312,7 +1279,8 @@ This way when the names of columns change or we want to replace with different l
         """Predict tags for given texts."""
         x = artifacts["vectorizer"].transform(texts)
         y_pred = custom_predict(
-            x=x, model=artifacts["model"],
+            y_prob=artifacts["model"].predict_proba(x),
+            threshold=artifacts["args"].threshold,
             index=artifacts["label_encoder"].class_to_index["other"])
         tags = artifacts["label_encoder"].decode(y_pred)
         predictions = [
