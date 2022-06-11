@@ -37,12 +37,25 @@ The Docker container engine is responsible for spinning up configured containers
 
 Now we're ready to [install](https://docs.docker.com/get-docker/){:target="_blank"} Docker based on our operating system. Once installed, we can start the Docker Desktop which will allow us to create and deploy our containerized applications.
 
+```bash
+docker --version
+```
+<pre class="output">
+Docker version 20.10.8, build 3967b7d
+</pre>
+
 ## Images
 The first step is to build a docker image which has the application and all it's specified dependencies. We can create this image using a Dockerfile which outlines a set of instructions. These instructions essentially build read-only image layers on top of each other to construct our entire image. Let's take a look at our application's [Dockerfile](https://github.com/GokuMohandas/MLOps/blob/main/Dockerfile){:target="_blank"} and the image layers it creates.
 
 ## Dockerfile
 
-The first line specifies the base image we want to pull [FROM](https://docs.docker.com/engine/reference/builder/#from){:target="_blank"}. Here we want to use the [base image](https://hub.docker.com/_/python){:target="_blank"} for running Python based applications and specifically for Python 3.7 with the slim variant. Since we're only deploying a Python application, this slim variant with minimal packages satisfies our requirements while keeping the size of the image layer low.
+We'll start by creating a Dockerfile:
+
+```bash
+touch Dockerfile
+```
+
+The first line we'll write in our `Dockerfiel` specifies the base image we want to pull [FROM](https://docs.docker.com/engine/reference/builder/#from){:target="_blank"}. Here we want to use the [base image](https://hub.docker.com/_/python){:target="_blank"} for running Python based applications and specifically for Python 3.7 with the slim variant. Since we're only deploying a Python application, this slim variant with minimal packages satisfies our requirements while keeping the size of the image layer low.
 
 ```dockerfile
 # Base image
@@ -53,7 +66,7 @@ Next we're going to install our application dependencies. First, we'll [COPY](ht
 
 ```dockerfile
 # Install dependencies
-WORKDIR mlops
+WORKDIR /mlops
 COPY setup.py setup.py
 COPY requirements.txt requirements.txt
 RUN apt-get update \
@@ -61,6 +74,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && python3 -m pip install --upgrade pip setuptools wheel \
     && python3 -m pip install -e . --no-cache-dir \
+    && python3 -m pip install protobuf==3.20.1 --no-cache-dir \
     && apt-get purge -y --auto-remove gcc build-essential
 ```
 
@@ -80,13 +94,13 @@ RUN dvc remote add -d storage stores/blob
 RUN dvc pull
 ```
 
-Since our application (API) requires PORT 500 to be open, we need to specify in our Dockerfile to expose it.
+Since our application (API) requires PORT 8000 to be open, we need to specify in our Dockerfile to expose it.
 ```dockerfile
 # Export ports
 EXPOSE 8000
 ```
 
-The final step in building our image is to specify the executable to be run when a container is built from our image. For our application, we want to launch our API with gunicorn.
+The final step in building our image is to specify the executable to be run when a container is built from our image. For our application, we want to launch our API with gunicorn since this Dockerfile may be used to deploy our service to production at scale.
 
 ```dockerfile
 # Start app
@@ -99,13 +113,11 @@ ENTRYPOINT ["gunicorn", "-c", "app/gunicorn.py", "-k", "uvicorn.workers.UvicornW
 Once we're done composing the Dockerfile, we're ready to build our image using the [*build*](https://docs.docker.com/engine/reference/commandline/build/){:target="_blank"} command which allows us to add a tag and specify the location of the Dockerfile to use.
 
 ```bash
-# Build image
 docker build -t tagifai:latest -f Dockerfile .
 ```
 
 We can inspect all built images and their attributes like so:
 ```bash
-# Images
 docker images
 ```
 <pre class="output">
@@ -116,7 +128,6 @@ tagifai      latest    02c88c95dd4c   23 minutes ago   2.57GB
 We can also remove any or all images based on their unique IDs.
 
 ```bash
-# Remove images
 docker rmi <IMAGE_ID>              # remove an image
 docker rmi $(docker images -a -q)  # remove all images
 ```
@@ -126,7 +137,6 @@ docker rmi $(docker images -a -q)  # remove all images
 Once we've built our image, we're ready to run a container using that image with the [*run*](https://docs.docker.com/engine/reference/run/){:target="_blank"} command which allows us to specify the image, port forwarding, etc.
 
 ```bash
-# Run container
 docker run -p 8000:8000 --name tagifai tagifai:latest
 ```
 
@@ -148,7 +158,6 @@ curl -X 'POST' \
 
 We can inspect all containers (running or stopped) like so:
 ```bash
-# Containers
 docker ps     # running containers
 docker ps -a  # stopped containers
 ```
@@ -157,10 +166,9 @@ CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS
 ee5f1b08abd5   tagifai:latest   "gunicorn -c config…"    19 minutes ago   Created   0.0.0.0:8000->8000/tcp   tagifai
 </pre>
 
-We can also stop and remove any or all containers based on their unique IDs.
+We can also stop and remove any or all containers based on their unique IDs:
 
 ```bash
-# Stop and remove containers
 docker stop <CONTAINER_ID>      # stop a running container
 docker rm <CONTAINER_ID>        # remove a container
 docker stop $(docker ps -a -q)  # stop all containers
@@ -171,14 +179,25 @@ docker rm $(docker ps -a -q)    # remove all containers
 
 ## Debug
 
-In the event that we run into errors while building our image layers, a very easy way to debug the issue is to run the container with the image layers that have been build so far. We can do this by only including the commands that have executed so far (and all COPY statements) and then run the container.
+In the event that we run into errors while building our image layers, a very easy way to debug the issue is to run the container with the image layers that have been build so far. We can do this by **only including the commands that have ran successfully** so far (and all COPY statements) in the `Dockerfile`. And then we need to rebuild the image (since we altered the Dockerfile) and run the container:
 
 ```bash
-# Run container
+docker build -t tagifai:latest -f Dockerfile .
 docker run -p 8000:8000 -it tagifai /bin/bash
 ```
 
-Once we have our container running, we can use our application as we would on our local machine but now it's reproducible on any operating system that can run the Docker container engine. We've covered just what we need from Docker to deploy our application but there is so much more to Docker, which you can explore in the official [docs](https://docs.docker.com/){:target="_blank"}.
+Once we have our container running, we can use our application as we would on our local machine but now it's reproducible on any operating system that can run the Docker container engine. We've covered just what we need from Docker to deploy our application but there is so much more to Docker, which you can explore in the [docs](https://docs.docker.com/){:target="_blank"}.
+
+## Production
+
+This `Dockerfile` is commonly the end artifact a data scientist or ML engineer delivers to their DevOps teams to deploy and scale their services, with a few changes:
+
+- data assets would be pulled from a remote storage location (ex. S3).
+- model artifacts would be loaded from a remote model registry.
+- code would be loaded from a remote repository (ex. GitHub) via `git clone`.
+
+All of these changes would involve using the proper credentials (via [encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets){:target=“_blank”} and can even be automatically deployed via [CI/CD workflows](cicd.md){:target=“_blank”}. But, of course, there are subsequent responsibilities such as [monitoring](monitoring.md){:target="_blank"} and [iterating](continual-learning.md){:target="_blank"}.
+
 
 <!-- Citation -->
 {% include "cite.md" %}

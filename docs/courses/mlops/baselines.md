@@ -448,7 +448,7 @@ We're going to use a stochastic gradient descent classifier ([SGDClassifier](htt
 ```python linenums="1"
 from sklearn import metrics
 from sklearn.linear_model import SGDClassifier
-from sklearn.metrics import log_loss, precision_recall_curve, precision_recall_fscore_support
+from sklearn.metrics import log_loss, precision_recall_fscore_support
 ```
 ```python linenums="1"
 # Initialize model

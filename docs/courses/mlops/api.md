@@ -292,7 +292,7 @@ pip install fastapi==0.78.0
 ```
 
 ```bash
-# requirements.txt
+# Add to requirements.txt
 fastapi==0.78.0
 ```
 
@@ -346,7 +346,7 @@ pip install uvicorn==0.17.6
 ```
 
 ```bash
-# requirements.txt
+# Add to requirements.txt
 uvicorn==0.17.6
 ```
 

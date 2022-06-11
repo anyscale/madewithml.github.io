@@ -33,7 +33,7 @@ y_pred = custom_predict(y_prob=y_prob, threshold=threshold, index=other_index)
 While we were iteratively developing our baselines, our evaluation process involved computing the coarse-grained metrics such as overall precision, recall and f1 metrics.
 
 ```python linenums="1"
-from sklearn.metrics import precision_recall_curve
+from sklearn.metrics import precision_recall_fscore_support
 ```
 ```python linenums="1"
 # Overall metrics

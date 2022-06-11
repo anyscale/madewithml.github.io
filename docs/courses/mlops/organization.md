@@ -368,7 +368,7 @@ This way when the names of columns change or we want to replace with different l
     ```
 
     ```bash
-    # requirements.txt
+    # Add to requirements.txt
     numpy==1.19.5
     pretty-errors==1.2.19
     ```
@@ -482,7 +482,7 @@ This way when the names of columns change or we want to replace with different l
     ```
 
     ```bash
-    # requirements.txt
+    # Add to requirements.txt
     pandas==1.3.5
     ```
 
@@ -559,7 +559,7 @@ This way when the names of columns change or we want to replace with different l
     ```
 
     ```bash
-    # requirements.txt
+    # Add to requirements.txt
     nltk==3.7
     ```
 
@@ -666,7 +666,7 @@ This way when the names of columns change or we want to replace with different l
     ```
 
     ```bash
-    # requirements.txt
+    # Add to requirements.txt
     scikit-learn==0.24.2
     ```
 
@@ -862,7 +862,7 @@ This way when the names of columns change or we want to replace with different l
     ```
 
     ```bash
-    # requirements.txt
+    # Add to requirements.txt
     imbalanced-learn==0.8.1
     snorkel==0.9.8
     ```
@@ -1037,7 +1037,7 @@ This way when the names of columns change or we want to replace with different l
     ```
 
     ```bash
-    # requirements.txt
+    # Add to requirements.txt
     mlflow==1.13.1
     numpyencoder==0.3.0
     optuna==2.10.0
@@ -1249,19 +1249,16 @@ This way when the names of columns change or we want to replace with different l
     # tagifai/main.py
     def load_artifacts(run_id):
         """Load artifacts for a given run_id."""
-        # Load arguments used for this specific run
+        # Locate specifics artifacts directory
         experiment_id = mlflow.get_run(run_id=run_id).info.experiment_id
         artifacts_dir = Path(config.MODEL_REGISTRY, experiment_id, run_id, "artifacts")
-        args = Namespace(**utils.load_dict(filepath=Path(artifacts_dir, "args.json")))
 
         # Load objects from run
-        client = mlflow.tracking.MlflowClient()
-        with tempfile.TemporaryDirectory() as dp:
-            client.download_artifacts(run_id=run_id, path="", dst_path=dp)
-            vectorizer = joblib.load(Path(dp, "vectorizer.pkl"))
-            label_encoder = data.LabelEncoder.load(fp=Path(dp, "label_encoder.json"))
-            model = joblib.load(Path(dp, "model.pkl"))
-            performance = utils.load_dict(filepath=Path(dp, "performance.json"))
+        args = Namespace(**utils.load_dict(filepath=Path(artifacts_dir, "args.json")))
+        vectorizer = joblib.load(Path(artifacts_dir, "vectorizer.pkl"))
+        label_encoder = data.LabelEncoder.load(fp=Path(artifacts_dir, "label_encoder.json"))
+        model = joblib.load(Path(artifacts_dir, "model.pkl"))
+        performance = utils.load_dict(filepath=Path(artifacts_dir, "performance.json"))
 
         return {
             "args": args,

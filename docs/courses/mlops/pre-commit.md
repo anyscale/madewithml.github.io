@@ -21,13 +21,13 @@ We'll be using the [Pre-commit](https://pre-commit.com/){:target="_blank"} frame
 
 ```bash
 # Install pre-commit
-pip install pre-commit==2.11.1
+pip install pre-commit==2.19.0
 pre-commit install
 ```
 
 ## Config
 
-We define our pre-commit hooks via a [.pre-commit-config.yaml](https://github.com/GokuMohandas/MLOps/blob/main/.pre-commit-config.yaml){:target="_blank"} configuration file. We can either create our yaml configuration from scratch or use the pre-commit CLI to create a sample configuration which we can add to.
+We define our pre-commit hooks via a `.pre-commit-config.yaml` configuration file. We can either create our yaml configuration from scratch or use the pre-commit CLI to create a sample configuration which we can add to.
 
 ```bash
 # Simple config
@@ -61,6 +61,7 @@ Inside the sample configuration, we can see that pre-commit has added some defau
 ...
 -   id: check-added-large-files
     args: ['--maxkb=1000']
+    exclude: "notebooks/tagifai.ipynb"
 ...
 ```
 
@@ -118,15 +119,82 @@ We can also create our own local hooks without configuring a separate .pre-commi
       pass_filenames: false
 ```
 
+??? quote "View our complete `.pre-commit-config.yaml`"
+
+    ```yaml
+    # See https://pre-commit.com for more information
+    # See https://pre-commit.com/hooks.html for more hooks
+    repos:
+    -   repo: https://github.com/pre-commit/pre-commit-hooks
+        rev: v4.3.0
+        hooks:
+        -   id: trailing-whitespace
+        -   id: end-of-file-fixer
+            exclude: "config/run_id.txt"
+        -   id: check-yaml
+            exclude: "mkdocs.yml"
+        -   id: check-added-large-files
+            args: ['--maxkb=1000']
+            exclude: "notebooks/tagifai.ipynb"
+        -   id: check-ast
+        -   id: check-json
+        -   id: check-merge-conflict
+        -   id: detect-aws-credentials
+        -   id: detect-private-key
+    -   repo: https://github.com/psf/black
+        rev: 22.3.0
+        hooks:
+        -   id: black
+            args: []
+            files: .
+    -   repo: https://gitlab.com/PyCQA/flake8
+        rev: 3.9.2
+        hooks:
+        -   id: flake8
+    -   repo: https://github.com/PyCQA/isort
+        rev: 5.10.1
+        hooks:
+        -   id: isort
+            args: []
+            files: .
+    -   repo: https://github.com/asottile/pyupgrade  # update python syntax
+        rev: v2.34.0
+        hooks:
+        -   id: pyupgrade
+            args: [--py36-plus]
+    - repo: local
+    hooks:
+        - id: test
+        name: test
+        entry: make
+        args: ["test"]
+        language: system
+        pass_filenames: false
+        - id: clean
+        name: clean
+        entry: make
+        args: ["clean"]
+        language: system
+        pass_filenames: false
+    ```
+
 ## Commit
 
 Our pre-commit hooks will automatically execute when we try to make a commit. We'll be able to see if each hook passed or failed and make any changes. If any of the hooks failed, we have to fix the corresponding file or in many instances, reformatting will occur automatically.
 
-<div class="ai-center-all">
-    <img width="650" src="/static/images/mlops/pre-commit/reformat.png" style="border-radius: 7px;">
-</div>
+<pre class="output">
+...
+detect private key.....................................<span style="color: #39BC70;">PASSED</span>
+black..................................................<span style="color: #F50071;">FAILED</span>
+...
+</pre>
 
-Once we've made or approved the changes, we can commit again to ensure that all hooks are passed.
+In the event that any of the hooks failed, we need to `add` and `commit` again to ensure that all hooks are passed.
+
+```bash
+git add .
+git commit -m <MESSAGE>
+```
 
 <div class="ai-center-all">
     <img width="650" src="/static/images/mlops/pre-commit/commit.png" style="border-radius: 7px;">
@@ -157,24 +225,25 @@ git commit -m <MESSAGE> --no-verify
 
 ## Update
 
-In our [.pre-commit-config.yaml](https://github.com/GokuMohandas/MLOps/blob/main/.pre-commit-config.yaml){:target="_blank"} configuration files, we've had to specify the versions for each of the repositories so we can use their latest hooks. Pre-commit has an autoupdate CLI command which will update these versions as they become available.
+In our `.pre-commit-config.yaml` configuration files, we've had to specify the versions for each of the repositories so we can use their latest hooks. Pre-commit has an autoupdate CLI command which will update these versions as they become available.
 
 ```bash
 # Autoupdate
 pre-commit autoupdate
 ```
 
-We can also add this command to our Makefile to execute when a development environment is created so everything is up-to-date.
+We can also add this command to our `Makefile` to execute when a development environment is created so everything is up-to-date.
 
-```yaml linenums="1" hl_lines="7"
+```yaml hl_lines="8 9"
 # Makefile
-...
-.PHONY: install-dev
-install-dev:
-	python3 -m pip install -e ".[dev]" --no-cache-dir
-	pre-commit install
+.ONESHELL:
+venv:
+	python3 -m venv venv
+	source venv/bin/activate && \
+	python3 -m pip install --upgrade pip setuptools wheel && \
+	python3 -m pip install -e . && \
+	pre-commit install && \
 	pre-commit autoupdate
-...
 ```
 
 <!-- Citation -->

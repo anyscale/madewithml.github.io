@@ -269,7 +269,7 @@ pip install rich==12.4.4
 ```
 
 ```bash
-# requirements.txt
+# Add to requirements.txt
 rich==12.4.4
 ```
 

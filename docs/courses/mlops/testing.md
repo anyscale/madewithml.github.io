@@ -1211,7 +1211,7 @@ make test
 
 ## Testing vs. monitoring
 
-We'll conclude by talking about the similarities and distinctions between testing and [monitoring](monitoring.md){:target="_blank"}. They're both integral parts of the ML development pipeline and depend on each other for iteration. Testing is assuring that our system (code, data and models) passes the expectations that we've established at $t_0$. Whereas, monitoring involves that these expectations continue to pass on live production data while also ensuring that their data distributions are [comparable](monitoring.md#measuring-drift){:target="_blank"} to the reference window (typically subset of training data) through $t_n$. When these conditions no longer hold true, we need to inspect more closely (retraining may not always fix our root problem).
+We'll conclude by talking about the similarities and distinctions between testing and [monitoring](monitoring.md){:target="_blank"}. They're both integral parts of the ML development pipeline and depend on each other for iteration. Testing is assuring that our system (code, data and models) passes the expectations that we've established offline. Whereas, monitoring involves that these expectations continue to pass online on live production data while also ensuring that their data distributions are [comparable](monitoring.md#measuring-drift){:target="_blank"} to the reference window (typically subset of training data) through $t_n$. When these conditions no longer hold true, we need to inspect more closely (retraining may not always fix our root problem).
 
 With [monitoring](monitoring.md){:target="_blank"}, there are quite a few distinct concerns that we didn't have to consider during testing since it involves (live) data we have yet to see.
 

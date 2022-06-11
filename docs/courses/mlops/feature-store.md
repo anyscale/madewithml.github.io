@@ -499,12 +499,11 @@ Additional functionality that many feature store providers are currently (or rec
 Though we could continue to [version](versioning.md){:target="blank"} our training data with [DVC](https://dvc.org/){:target="_blank"} whenever we release a version of the model, it might not be necessary. When we pull data from source or compute features, should they save the data itself or just the operations?
 
 - **Version the data**
-    - But what happens as data becomes larger and larger and you keep making copies of it.
-    - This is okay if the data is manageable, if your team is small/early stage ML or if changes to the data are infrequent.
-    - But what happens when the underlying data changes (labels are fixed, etc.)? Now the same operations result is different data and reproducibility is not possible.
+    - This is okay if (1) the data is manageable, (2) if our team is small/early stage ML or (3) if changes to the data are infrequent.
+    - But what happens as data becomes larger and larger and we keep making copies of it.
 - **Version the operations**
-    - We could keep snapshots of the data and provided the operations and timestamp, we can execute operations on those snapshots of the data. Many data systems use [time-travel](https://docs.snowflake.com/en/user-guide/data-time-travel.html){:target="blank"} to achieve this efficiently.
-    - But eventually this also results in data storage bulk. What we need is an append-only data source where all changes are kept in a log instead of directly changing the data itself. So we can use the data system with the logs to deterministically produce versions of the data as they were without having to store the data itself!
+    - We could keep snapshots of the data (separate from our projects) and provided the operations and timestamp, we can execute operations on those snapshots of the data to recreate the precise data artifact used for training. Many data systems use [time-travel](https://docs.snowflake.com/en/user-guide/data-time-travel.html){:target="blank"} to achieve this efficiently.
+    - But eventually this also results in data storage bulk. What we need is an *append-only* data source where all changes are kept in a log instead of directly changing the data itself. So we can use the data system with the logs to produce versions of the data as they were without having to store separate snapshots of the the data itself.
 
 Regardless of the choice above, feature stores are very useful here. Instead of coupling data pulls and feature compute with the time of modeling, we can separate these two processes so that features are up-to-date when we need them. And we can still achieve reproducibility via efficient point-in-time correctness, low latency snapshots, etc. This essentially creates the ability to work with any version of the dataset at any point in time.
 

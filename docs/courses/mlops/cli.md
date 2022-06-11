@@ -37,7 +37,7 @@ pip install typer==0.4.1
 ```
 
 ```bash
-# requirements.txt
+# Add to requirements.txt
 typer==0.4.1
 ```
 
