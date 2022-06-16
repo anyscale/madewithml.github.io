@@ -3,7 +3,7 @@ template: lesson.html
 title: Designing Machine Learning Products
 description: A template to guide the development cycle for machine learning systems that factors in product requirements, design docs and project considerations.
 keywords: project management, product management, design docs, scoping, management, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/mlops.png
+image: https://madewithml.com/static/images/mlops/purpose/ml_canvas.png
 ---
 
 {% include "styles/lesson.md" %}
