@@ -4,7 +4,7 @@ title: "Pre-commit"
 description: Using the pre-commit git hooks to ensure checks before committing.
 keywords: pre-commit, git hooks, git, versioning, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/follow/tree/pre-commit
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}
@@ -32,7 +32,7 @@ And we'll add this to our `setup.py` script instead of our `requirements.txt` fi
 setup(
     ...
     extras_require={
-        "dev": docs_packages + style_packages + test_packages + "pre-commit==2.19.0",
+        "dev": docs_packages + style_packages + test_packages + ["pre-commit==2.19.0"],
         "docs": docs_packages,
         "test": test_packages,
     },

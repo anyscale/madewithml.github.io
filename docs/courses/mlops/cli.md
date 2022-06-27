@@ -4,7 +4,7 @@ title: Command Line Interface (CLI) Applications
 description: Using a command line interface (CLI) application to organize our application's processes.
 keywords: cli, application, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/follow/tree/cli
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}

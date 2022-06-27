@@ -65,23 +65,25 @@ Not all machine learning tasks require a feature store. In fact, our use case is
 We're going to leverage [Feast](https://feast.dev/){:target="_blank"} as the feature store for our application for it's ease of local setup, SDK for training/serving, etc.
 
 ```bash
-# Install Feast
-pip install feast==0.10.5 -q
+# Install Feast and dependencies
+pip install feast==0.10.5 PyYAML==5.3.1 -q
 ```
 
-We're going to create a feature repository at the root of our project. Feast will create a configuration file for us and we're going to add an additional [features.py](https://github.com/GokuMohandas/MLOps/blob/main/features/features.py){:target="_blank"} file to define our features.
+We're going to create a feature repository at the root of our project. [Feast](https://feast.dev/) will create a configuration file for us and we're going to add an additional [features.py](https://github.com/GokuMohandas/MLOps/blob/main/features/features.py){:target="_blank"} file to define our features.
+
+> Traditionally, the feature repository would be it's own isolated repository that other services will use to read/write features from.
 
 ```bash
+mkdir -p stores/feature
+mkdir -p data
 feast init --minimal --template local features
 cd features
 touch features.py
 ```
 
 <pre class="output">
-Creating a new Feast repository in /Users/goku/Documents/madewithml/mlops/features.
+Creating a new Feast repository in /content/features.
 </pre>
-
-> Traditionally, the feature repository would be it's own isolated repository that other services will use to read/write features from but we're going to simplify it and create it directly in our application's repository.
 
 The initialized feature repository (with the additional file we've added) will include:
 
@@ -91,22 +93,23 @@ features/
 └── features.py         - feature definitions
 ```
 
-We're going to configure the locations for our registry and online store in our [features/feature_store.yaml](https://github.com/GokuMohandas/MLOps/blob/main/features/feature_store.yaml){:target="_blank"} file.
+We're going to configure the locations for our registry and online store (SQLite) in our `feature_store.yaml` file.
 
 <div class="ai-center-all">
     <img src="/static/images/mlops/feature_store/batch.png" width="1000" alt="batch processing">
 </div>
 
-- **registry**: contains information about our feature repository, such as data sources, feature views, etc. Since it's in a database, instead of a Python file, it can very quickly be accessed in production.
-- **online store**: DB (SQLite for local) that stores the (latest) features for defined entities (users, projects, etc.) to be used for online inference.
+- **registry**: contains information about our feature repository, such as data sources, feature views, etc. Since it's in a DB, instead of a Python file, it can very quickly be accessed in production.
+- **online store**: DB (SQLite for local) that stores the (latest) features for defined entities to be used for online inference.
+
+If all our [feature definitions](#feature-definitions) look valid, Feast will sync the metadata about Feast objects to the registry. The registry is a tiny database storing most of the same information you have in the feature repository. This step is necessary because the production feature serving infrastructure won't be able to access Python files in the feature repository at run time, but it will be able to efficiently and securely read the feature definitions from the registry.
 
 > When we run Feast locally, the offline store is effectively represented via Pandas point-in-time joins. Whereas, in production, the offline store can be something more robust like [Google BigQuery](https://cloud.google.com/bigquery){:target="_blank"}, [Amazon RedShift](https://aws.amazon.com/redshift/){:target="_blank"}, etc.
 
-If all definitions look valid, Feast will sync the metadata about Feast objects to the registry. This step is necessary because the production feature serving infrastructure won't be able to access Python files in the feature repository at run time, but it will be able to efficiently and securely read the feature definitions from the registry.
 
-Paste the following into our [features/feature_store.yaml](https://github.com/GokuMohandas/MLOps/blob/main/features/feature_store.yaml){:target="_blank"}:
+We'll go ahead and paste this into our `features/feature_store.yaml` file (the [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/feature_store.ipynb){:target="_blank"} cell is automatically do this):
+
 ```yaml
-# features/feature_store.yaml
 project: features
 registry: ../stores/feature/registry.db
 provider: local
@@ -120,18 +123,75 @@ The first step is to establish connections with our data sources (databases, dat
 
 
 ```python linenums="1"
+import os
+import json
 import pandas as pd
 from pathlib import Path
-from config import config
-from tagifai import utils
+from urllib.request import urlopen
 ```
 
 ```python linenums="1"
-# Load features to df
-features_fp = Path(config.DATA_DIR, "features.json")
-features = utils.load_dict(filepath=features_fp)
-df = pd.DataFrame(features)
+# Load projects
+url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json"
+projects = json.loads(urlopen(url).read())
+df = pd.DataFrame(projects)
+df["text"] = df.title + " " + df.description
+df.drop(["title", "description"], axis=1, inplace=True)
+df.head(5)
 ```
+
+<pre class="output">
+<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>created_on</th>
+      <th>tag</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>2020-02-20 06:43:18</td>
+      <td>computer-vision</td>
+      <td>Comparison between YOLO and RCNN on real world...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>2020-02-20 06:47:21</td>
+      <td>computer-vision</td>
+      <td>Show, Infer &amp; Tell: Contextual Inference for C...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>2020-02-24 16:24:45</td>
+      <td>graph-learning</td>
+      <td>Awesome Graph Classification A collection of i...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15</td>
+      <td>2020-02-28 23:55:26</td>
+      <td>reinforcement-learning</td>
+      <td>Awesome Monte Carlo Tree Search A curated list...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>19</td>
+      <td>2020-03-03 13:54:31</td>
+      <td>graph-learning</td>
+      <td>Diffusion to Vector Reference implementation o...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</pre>
 
 ```python linenums="1"
 # Format timestamp
@@ -140,33 +200,13 @@ df.created_on = pd.to_datetime(df.created_on)
 
 ```python linenums="1"
 # Convert to parquet
+DATA_DIR = Path(os.getcwd(), "data")
 df.to_parquet(
-    Path(config.DATA_DIR, "features.parquet"),
+    Path(DATA_DIR, "features.parquet"),
     compression=None,
     allow_truncated_timestamps=True,
 )
 ```
-
-!!! note
-    Since this is a new data file, we need to version it accordingly:
-
-    ```bash
-    dvc add data/features.parquet
-    dvc push
-    ```
-
-    And make the appropriate change to our Makefile as well:
-
-    ```bash hl_lines="7"
-    # DVC
-    .PHONY: dvc
-    dvc:
-        dvc add data/projects.json
-        dvc add data/tags.json
-        dvc add data/features.json
-        dvc add data/features.parquet
-        dvc push
-    ```
 
 ### Feature definitions
 
@@ -174,10 +214,10 @@ Now that we have our data source prepared, we can define our features for the fe
 
 ```python linenums="1"
 from datetime import datetime
+from pathlib import Path
 from feast import Entity, Feature, FeatureView, ValueType
 from feast.data_source import FileSource
 from google.protobuf.duration_pb2 import Duration
-from tagifai import config
 ```
 
 The first step is to define the location of the features (FileSource in our case) and the timestamp column for each data point.
@@ -186,7 +226,7 @@ The first step is to define the location of the features (FileSource in our case
 # Read data
 START_TIME = "2020-02-17"
 project_details = FileSource(
-    path=str(Path(config.DATA_DIR, "features.parquet")),
+    path=str(Path(DATA_DIR, "features.parquet")),
     event_timestamp_column="created_on",
 )
 ```
@@ -202,7 +242,7 @@ project = Entity(
 )
 ```
 
-Finally, we're ready to create a [FeatureView](https://docs.feast.dev/concepts/feature-view){:target="_blank"} that loads specific features (`features`), of various [value types](https://api.docs.feast.dev/python/feast.html?highlight=valuetype#feast.value_type.ValueType){:target="_blank"}, from a data source (`input`) for a specific period of time (`ttl`).
+Finally, we're ready to create a [FeatureView](https://docs.feast.dev/concepts/feature-views){:target="_blank"} that loads specific features (`features`), of various [value types](https://api.docs.feast.dev/python/feast.html?highlight=valuetype#feast.value_type.ValueType){:target="_blank"}, from a data source (`input`) for a specific period of time (`ttl`).
 
 ```python linenums="1" hl_lines="5 8 13"
 # Define a Feature View for each project
@@ -214,7 +254,7 @@ project_details_view = FeatureView(
     ),
     features=[
         Feature(name="text", dtype=ValueType.STRING),
-        Feature(name="tag", dtype=ValueType.STRING_LIST),
+        Feature(name="tag", dtype=ValueType.STRING),
     ],
     online=True,
     input=project_details,
@@ -222,11 +262,10 @@ project_details_view = FeatureView(
 )
 ```
 
-So let's go ahead and define our feature views by moving this code into [features/features.py](https://github.com/GokuMohandas/MLOps/blob/main/features/features.py){:target="_blank"}:
+So let's go ahead and define our feature views by moving this code into our `features/features.py` script (the [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/feature_store.ipynb){:target="_blank"} cell is automatically do this):
 
 ??? quote "Show code"
     ```python
-    # Feature definition
     from datetime import datetime
     from pathlib import Path
 
@@ -234,12 +273,11 @@ So let's go ahead and define our feature views by moving this code into [feature
     from feast.data_source import FileSource
     from google.protobuf.duration_pb2 import Duration
 
-    from config import config
 
     # Read data
     START_TIME = "2020-02-17"
     project_details = FileSource(
-        path=str(Path(config.DATA_DIR, "features.parquet")),
+        path="/content/data/features.parquet",
         event_timestamp_column="created_on",
     )
 
@@ -260,7 +298,7 @@ So let's go ahead and define our feature views by moving this code into [feature
         ),
         features=[
             Feature(name="text", dtype=ValueType.STRING),
-            Feature(name="tag", dtype=ValueType.STRING_LIST),
+            Feature(name="tag", dtype=ValueType.STRING),
         ],
         online=True,
         input=project_details,
@@ -268,7 +306,7 @@ So let's go ahead and define our feature views by moving this code into [feature
     )
     ```
 
-Once we've defined our feature views, we can apply it to push a version controlled definition of our features to the registry for fast access. It will also configure our registry and online stores that we've defined in our [feature_store.yaml](https://github.com/GokuMohandas/MLOps/blob/main/features/feature_store.yaml){:target="_blank"} file.
+Once we've defined our feature views, we can `apply` it to push a version controlled definition of our features to the registry for fast access. It will also configure our registry and online stores that we've defined in our `feature_store.yaml`.
 
 ```bash
 cd features
@@ -292,7 +330,7 @@ from feast import FeatureStore
 
 ```python linenums="1"
 # Identify entities
-project_ids = [1, 2, 3]
+project_ids = df.id[0:3].to_list()
 now = datetime.now()
 timestamps = [datetime(now.year, now.month, now.day)]*len(project_ids)
 entity_df = pd.DataFrame.from_dict({"id": project_ids, "event_timestamp": timestamps})
@@ -311,18 +349,18 @@ entity_df.head()
   <tbody>
     <tr>
       <th>0</th>
-      <td>1</td>
-      <td>2021-06-07</td>
+      <td>6</td>
+      <td>2022-06-23</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2</td>
-      <td>2021-06-07</td>
+      <td>7</td>
+      <td>2022-06-23</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>3</td>
-      <td>2021-06-07</td>
+      <td>9</td>
+      <td>2022-06-23</td>
     </tr>
   </tbody>
 </table>
@@ -330,10 +368,10 @@ entity_df.head()
 
 ```python linenums="1"
 # Get historical features
-store = FeatureStore(repo_path=Path(config.BASE_DIR, "features"))
+store = FeatureStore(repo_path="features")
 training_df = store.get_historical_features(
     entity_df=entity_df,
-    feature_refs=["project_details:text", "project_details:tags"],
+    feature_refs=["project_details:text", "project_details:tag"],
 ).to_df()
 training_df.head()
 ```
@@ -345,39 +383,39 @@ training_df.head()
       <th></th>
       <th>event_timestamp</th>
       <th>id</th>
-      <th>project_details__text	</th>
-      <th>project_details__tags</th>
+      <th>project_details__text</th>
+      <th>project_details__tag</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>2021-06-07 00:00:00+00:00</td>
-      <td>1</td>
-      <td>Machine Learning Basics A practical set of not...</td>
-      <td>[code, tutorial, keras, pytorch, tensorflow, d...</td>
+      <td>2022-06-23 00:00:00+00:00</td>
+      <td>6</td>
+      <td>Comparison between YOLO and RCNN on real world...</td>
+      <td>computer-vision</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2021-06-07 00:00:00+00:00</td>
-      <td>2</td>
-      <td>Deep Learning with Electronic Health Record (E...	</td>
-      <td>[article, tutorial, deep-learning, health, ehr]</td>
+      <td>2022-06-23 00:00:00+00:00</td>
+      <td>7</td>
+      <td>Show, Infer &amp; Tell: Contextual Inference for C...</td>
+      <td>computer-vision</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2021-06-07 00:00:00+00:00</td>
-      <td>3</td>
-      <td>Automatic Parking Management using computer vi...</td>
-      <td>[code, tutorial, video, python, machine-learni...</td>
+      <td>2022-06-23 00:00:00+00:00</td>
+      <td>9</td>
+      <td>Awesome Graph Classification A collection of i...</td>
+      <td>graph-learning</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 
-### Online features
+### Materialize
 
-For online inference, we want to retrieve features very quickly via our online store, as opposed to fetching them from slow joins. However, the features are not in our online store just yet, so we'll need to [materialize](https://docs.feast.dev/quickstart#4-materializing-features-to-the-online-store){:target="_blank"} them first.
+For online inference, we want to retrieve features very quickly via our online store, as opposed to fetching them from slow joins. However, the features are not in our online store just yet, so we'll need to [materialize](https://docs.feast.dev/quickstart#4-materializing-features-to-the-online-store) them first.
 
 ```bash
 cd features
@@ -386,35 +424,32 @@ feast materialize-incremental $CURRENT_TIME
 ```
 
 <pre class="output">
-Materializing 1 feature views to 2021-06-07 13:14:52-07:00 into the sqlite online store.
-project_details from 2020-02-17 13:14:53-08:00 to 2021-06-07 13:14:52-07:00:
-100%|████████████████████████████████████████████████████████| 2030/2030 [00:00<00:00, 14949.12it/s]
+Materializing 1 feature views to 2022-06-23 19:16:05+00:00 into the sqlite online store.
+project_details from 2020-02-17 19:16:06+00:00 to 2022-06-23 19:16:05+00:00:
+100%|██████████████████████████████████████████████████████████| 955/955 [00:00<00:00, 10596.97it/s]
 </pre>
 
 This has moved the features for all of our projects into the online store since this was first time materializing to the online store. When we subsequently run the [`materialize-incremental`](https://docs.feast.dev/getting-started/load-data-into-the-online-store#2-b-materialize-incremental-alternative){:target="_blank"} command, Feast keeps track of previous materializations and so we'll only materialize the new data since the last attempt.
 
+### Online features
+
+Once we've materialized the features (or directly sent to the online store in the stream scenario), we can use the online store to retrieve features.
+
 ```python linenums="1"
 # Get online features
-store = FeatureStore(repo_path=Path(config.BASE_DIR, "features"))
+store = FeatureStore(repo_path="features")
 feature_vector = store.get_online_features(
-    feature_refs=["project_details:text", "project_details:tags"],
-    entity_rows=[{"id": 1000}],
+    feature_refs=["project_details:text", "project_details:tag"],
+    entity_rows=[{"id": 6}],
 ).to_dict()
 feature_vector
 ```
 
 ```python linenums="1"
-{'project_details__tags': [['code',
-   'course',
-   'tutorial',
-   'video',
-   'natural-language-processing',
-   'low-resource']],
- 'id': [1000],
- 'project_details__text': ['CMU LTI Low Resource NLP Bootcamp 2020 A low-resource natural language and speech processing bootcamp held by the Carnegie Mellon University Language Technologies Institute in May 2020.']}
+{'id': [6],
+ 'project_details__tag': ['computer-vision'],
+ 'project_details__text': ['Comparison between YOLO and RCNN on real world videos Bringing theory to experiment is cool. We can easily train models in colab and find the results in minutes.']}
 ```
-
-> We can establish all of these components by running [Feast on Kubernetes](https://docs.feast.dev/feast-on-kubernetes/getting-started){:target="_blank"} as well, which I highly recommend when dealing with data streams ([Kafka](https://kafka.apache.org/){:target="_blank"} / [Kinesis](https://aws.amazon.com/kinesis/){:target="_blank"}).
 
 ## Architecture
 

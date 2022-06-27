@@ -5,7 +5,7 @@ description: Documenting code for your team and your future self.
 keywords: documentation, mkdocs, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/MLOps
-documentation: https://github.com/GokuMohandas/follow/tree/documentation
+documentation: https://gokumohandas.github.io/MLOps/
 ---
 
 {% include "styles/lesson.md" %}

@@ -4,7 +4,7 @@ title: APIs for Model Serving
 description: Designing and deploying an API to serve machine learning models.
 keywords: serving, deployment,api, fastapi, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/follow/tree/api
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}

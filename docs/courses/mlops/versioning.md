@@ -4,7 +4,7 @@ title: "Versioning Code, Data and Models"
 description: Versioning code, data and models to ensure reproducible behavior in ML systems.
 keywords: versioning, dvc, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/follow/tree/versioning
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}

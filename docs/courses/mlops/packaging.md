@@ -4,7 +4,7 @@ title: Packaging a Python Codebase
 description: Using configurations and virtual environments to create a setting for reproducing results.
 keywords: packaging, pip, setup.py, virtual environment, reproducibility, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/follow/tree/packaging
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}

@@ -4,7 +4,7 @@ title: "Testing Machine Learning Systems: Code, Data and Models"
 description: Learn how to test ML models (and their code and data) to ensure consistent behavior in our ML systems.
 keywords: testing, testing ml, pytest, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/follow/tree/testing
+repository: https://github.com/GokuMohandas/MLOps
 notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/expectations.ipynb
 ---
 
@@ -642,16 +642,19 @@ It's a library that already has many of these expectations builtin (map, aggrega
 First we'll load the data we'd like to apply our expectations on. We can load our data from a variety of [sources](https://docs.greatexpectations.io/docs/guides/connecting_to_your_data/connect_to_data_overview){:target="_blank"} (filesystem, database, cloud etc.) which we can then wrap around a [Dataset module](https://legacy.docs.greatexpectations.io/en/latest/autoapi/great_expectations/dataset/index.html){:target="_blank"} (Pandas / Spark DataFrame, SQLAlchemy).
 
 ```python linenums="1"
-from pathlib import Path
 import great_expectations as ge
+import json
 import pandas as pd
-from config import config
-from tagifai import utils
+from urllib.request import urlopen
+```
 
-# Create Pandas DataFrame
-projects_fp = Path(config.DATA_DIR, "projects.json")
-projects_dict = utils.load_dict(filepath=projects_fp)
-df = ge.dataset.PandasDataset(projects_dict)
+```python linenums="1"
+# Load projects
+url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json"
+projects = json.loads(urlopen(url).read())
+df = ge.dataset.PandasDataset(projects)
+print (f"{len(df)} projects")
+df.head(5)
 ```
 <pre class="output">
 <div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
@@ -719,9 +722,12 @@ Once we have our data source wrapped in a Dataset module, we can compose and app
 
 ##### Table expectations
 ```python linenums="1"
+# columns
 df.expect_table_columns_to_match_ordered_list(
     column_list=["id", "created_on", "title", "description", "tag"])
-df.expect_compound_columns_to_be_unique(column_list=["title", "description"])  # data leak
+
+# data leak
+df.expect_compound_columns_to_be_unique(column_list=["title", "description"])
 ```
 
 ##### Column expectations
@@ -749,7 +755,7 @@ df.expect_column_values_to_be_of_type(column="tag", type_="str")
 
 Each of these expectations will create an output with details about success or failure, expected and observed values, expectations raised, etc. For example, the expectation ```#!python df.expect_column_values_to_be_of_type(column="title", type_="str")``` would produce the following if successful:
 
-```json linenums="1" hl_lines="5 18-26"
+```json linenums="1" hl_lines="7"
 {
   "exception_info": {
     "raised_exception": false,
@@ -768,7 +774,7 @@ Each of these expectations will create an output with details about success or f
     "expectation_type": "_expect_column_values_to_be_of_type__map"
   },
   "result": {
-    "element_count": 2032,
+    "element_count": 955,
     "missing_count": 0,
     "missing_percent": 0.0,
     "unexpected_count": 0,
@@ -779,8 +785,8 @@ Each of these expectations will create an output with details about success or f
 }
 ```
 
-and if we have a failed expectation (ex. ```#!python  df.expect_column_values_to_be_of_type(column="title", type_="str")```), we'd receive this output(notice the counts and examples for what caused the failure):
-```json linenums="1" hl_lines="2 17-30"
+and if we have a failed expectation (ex. ```#!python  df.expect_column_values_to_be_of_type(column="title", type_="int")```), we'd receive this output(notice the counts and examples for what caused the failure):
+```json linenums="1" hl_lines="2 24"
 {
   "success": false,
   "exception_info": {
@@ -798,10 +804,10 @@ and if we have a failed expectation (ex. ```#!python  df.expect_column_values_to
     "expectation_type": "_expect_column_values_to_be_of_type__map"
   },
   "result": {
-    "element_count": 2032,
+    "element_count": 955,
     "missing_count": 0,
     "missing_percent": 0.0,
-    "unexpected_count": 2032,
+    "unexpected_count": 955,
     "unexpected_percent": 100.0,
     "unexpected_percent_nonmissing": 100.0,
     "partial_unexpected_list": [
@@ -839,7 +845,7 @@ print(df.validate(expectation_suite=expectation_suite, only_return_failures=True
 > We could also create [custom expectations](https://docs.greatexpectations.io/docs/guides/expectations/creating_custom_expectations/overview){:target="_blank"} for our data.
 
 ### Projects
-So far we've worked with the Great Expectations library at the Python script level but we can further organize our expectations by creating a Project.
+So far we've worked with the Great Expectations library at the adhoc script / notebook level but we can further organize our expectations by creating a Project.
 
 ```bash
 cd tests

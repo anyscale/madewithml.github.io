@@ -4,7 +4,7 @@ title: Organizing Machine Learning Code
 description: Organizing our code when moving from notebooks to Python scripts.
 keywords: git, github, organization, repository, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/follow/tree/organization
+repository: https://github.com/GokuMohandas/MLOps
 ---
 
 {% include "styles/lesson.md" %}

@@ -12,7 +12,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/
 
 Even though we've trained and thoroughly evaluated our model, the real work begins once we deploy to production. This is one of the fundamental differences between traditional software engineering and ML development. Traditionally, with rule based, deterministic, software, the majority of the work occurs at the initial stage and once deployed, our system works as we've defined it. But with machine learning, we haven't explicitly defined how something works but used data to architect a probabilistic solution. This approach is subject to natural performance degradation over time, as well as unintended behavior, since the data exposed to the model will be different from what it has been trained on. This isn't something we should be trying to avoid but rather understand and mitigate as much as possible. In this lesson, we'll understand the short comings from attempting to capture performance degradation in order to motivate the need for [drift](#drift) detection.
 
-> Testing and monitoring share a lot of similarities, such as ensuring that certain [expectations](testing.md#expectations){:target="_blank"} around data completeness, distributions, schema adherence, etc. are met. However, a key distinction is that monitoring involves *comparing* live, streaming data distributions from production to fixed/sliding reference distributions from training data.
+> Testing and monitoring share a lot of similarities, such as ensuring that certain [expectations](testing.md#expectations){:target="_blank"} around data completeness, distributions, schema adherence, etc. are met. However, a key distinction is that monitoring involves comparing live data distributions from production with fixed/sliding reference distributions from training data.
 
 ## System health
 
@@ -60,7 +60,7 @@ sliding_f1 = np.convolve(hourly_f1, np.ones(window_size)/window_size, mode="vali
 print (f"Average sliding f1 on the last day: {np.mean(sliding_f1[-24:]):.1f}")
 ```
 <pre class="output">
-Average sliding f1 on the last day: 88.8
+Average sliding f1 on the last day: 88.6
 </pre>
 ```python linenums="1"
 plt.ylim([80, 100])
@@ -164,21 +164,79 @@ Since we're dealing with online drift detection (ie. detecting drift in live pro
 
 Once we have the window of points we wish to compare, we need to know how to compare them.
 
+```python linenums="1"
+import great_expectations as ge
+import json
+import pandas as pd
+from urllib.request import urlopen
+```
+```python linenums="1"
+# Load projects
+url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json"
+projects = json.loads(urlopen(url).read())
+df = ge.dataset.PandasDataset(projects)
+df["text"] = df.title + " " + df.description
+df.drop(["title", "description"], axis=1, inplace=True)
+df.head(5)
+```
+
+<pre class="output">
+<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>created_on</th>
+      <th>tag</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>2020-02-20 06:43:18</td>
+      <td>computer-vision</td>
+      <td>Comparison between YOLO and RCNN on real world...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>2020-02-20 06:47:21</td>
+      <td>computer-vision</td>
+      <td>Show, Infer &amp; Tell: Contextual Inference for C...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>2020-02-24 16:24:45</td>
+      <td>graph-learning</td>
+      <td>Awesome Graph Classification A collection of i...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15</td>
+      <td>2020-02-28 23:55:26</td>
+      <td>reinforcement-learning</td>
+      <td>Awesome Monte Carlo Tree Search A curated list...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>19</td>
+      <td>2020-03-03 13:54:31</td>
+      <td>graph-learning</td>
+      <td>Diffusion to Vector Reference implementation o...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</pre>
+
 ### Expectations
 
 The first line of measurement can be rule-based such as validating [expectations](https://docs.greatexpectations.io/en/latest/reference/glossary_of_expectations.html){:target="_blank"} around missing values, data types, value ranges, etc. as we did in our [data testing lesson](testing.md#expectations){:target="_blank"}. These can be done with or without a reference window and using the [mostly argument](https://docs.greatexpectations.io/en/latest/reference/core_concepts/expectations/standard_arguments.html#mostly){:target="_blank"} for some level of tolerance.
 
-```python linenums="1"
-import great_expectations as ge
-import pandas as pd
-from tagifai import config, utils
-```
-```python linenums="1"
-# Create DataFrame
-features_fp = Path(config.DATA_DIR, "features.json")
-features = utils.load_dict(filepath=features_fp)
-df = ge.dataset.PandasDataset(features)
-```
 ```python linenums="1"
 # Simulated production data
 prod_df = ge.dataset.PandasDataset([{"text": "hello"}, {"text": 0}, {"text": "world"}])
@@ -195,9 +253,9 @@ df.validate(expectation_suite=expectation_suite, only_return_failures=True)["sta
 ```
 <pre class="output">
 {'evaluated_expectations': 2,
+ 'success_percent': 100.0,
  'successful_expectations': 2,
- 'unsuccessful_expectations': 0,
- 'success_percent': 100.0}
+ 'unsuccessful_expectations': 0}
 </pre>
 ```python linenums="1"
 # Validate production data
@@ -205,20 +263,23 @@ prod_df.validate(expectation_suite=expectation_suite, only_return_failures=True)
 ```
 <pre class="output">
 {'evaluated_expectations': 2,
+ 'success_percent': 50.0,
  'successful_expectations': 1,
- 'unsuccessful_expectations': 1,
- 'success_percent': 50.0}
+ 'unsuccessful_expectations': 1}
 </pre>
+
+Once we've validated our rule-based expectations, we need to quantitatively measure drift across the different features in our data.
 
 ### Univariate
 
-Once we've validated our rule-based expectations, we need to quantitatively measure drift. Traditionally, in order to compare two different sets of points to see if they come from the same distribution, we use [two-sample hypothesis testing](https://en.wikipedia.org/wiki/Two-sample_hypothesis_testing){:target="_blank"} on the distance measured by a test.
+Our task may involve univariate (1D) features that we will want to monitor. While there are many types of hypothesis tests we can use, a popular option is the [Kolmogorov-Smirnov (KS) test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test){:target="_blank"}.
 
 #### Kolmogorov-Smirnov (KS) test
 
-For example, a Kolmogorov-Smirnov (KS) test, which determines the maximum distance between two distribution's cumulative density functions.
+The KS test determines the maximum distance between two distribution's cumulative density functions. Here, we'll measure if there is any drift on the size of our input text feature between two different data subsets.
 
-> We want to monitor the distribution of the # of tags for a given input so we can capture issues around irregular inference behavior. Other univariate data we may want to monitor include # of tokens in text, % of unknown tokens in text, etc.
+!!! tip
+    While text is a direct feature in our task, we can also monitor other implicit features such as % of unknown tokens in text (need to maintain a training vocabulary), etc. While they may not be used for our machine learning model, they can be great indicators for detecting drift.
 
 ```python linenums="1"
 from alibi_detect.cd import KSDrift
@@ -226,66 +287,81 @@ from alibi_detect.cd import KSDrift
 
 ```python linenums="1"
 # Reference
-df["num_tags"] = df.tags.apply(lambda x: len(x))
-reference = df["num_tags"][-400:-200].to_numpy()
-```
-
-```python linenums="1"
-# Initialize drift detector
-length_drift_detector = KSDrift(reference, p_val=0.01)
-```
-
-```python linenums="1"
-# No drift
-no_drift = df["num_tags"][-200:].to_numpy()
-length_drift_detector.predict(no_drift, return_p_val=True, return_distance=True)
-plt.hist(reference, alpha=0.75, label="reference")
-plt.hist(no_drift, alpha=0.5, label="production")
+df["num_tokens"] = df.text.apply(lambda x: len(x.split(" ")))
+ref = df["num_tokens"][0:200].to_numpy()
+plt.hist(ref, alpha=0.75, label="reference")
 plt.legend()
 plt.show()
 ```
 
-<pre class="output">
-{'data': {'is_drift': 0,
-  'distance': array([0.06], dtype=float32),
-  'p_val': array([0.8428848], dtype=float32),
-  'threshold': 0.01},
- 'meta': {'name': 'KSDrift', 'detector_type': 'offline', 'data_type': None}}
-</pre>
+```python linenums="1"
+# Initialize drift detector
+length_drift_detector = KSDrift(ref, p_val=0.01)
+```
 
-> &darr; p-value = &uarr; confident that the distributions are different.
+```python linenums="1"
+# No drift
+no_drift = df["num_tokens"][200:400].to_numpy()
+plt.hist(ref, alpha=0.75, label="reference")
+plt.hist(no_drift, alpha=0.5, label="test")
+plt.legend()
+plt.show()
+```
 
 <div class="ai-center-all">
     <img width="500" src="/static/images/mlops/monitoring/ks_no_drift.png">
 </div>
 
 ```python linenums="1"
-# Drift
-drift = np.random.normal(loc=10, scale=2, size=len(reference))
-length_drift_detector.predict(drift, return_p_val=True, return_distance=True)
-plt.hist(reference, alpha=0.75, label="reference")
-plt.hist(drift, alpha=0.5, label="production")
-plt.legend()
-plt.show()
+length_drift_detector.predict(no_drift, return_p_val=True, return_distance=True)
 ```
 
 <pre class="output">
-{'data': {'is_drift': 1,
-  'distance': array([0.61], dtype=float32),
-  'p_val': array([2.9666908e-36], dtype=float32),
+{'data': {'distance': array([0.09], dtype=float32),
+  'is_drift': 0,
+  'p_val': array([0.3927307], dtype=float32),
   'threshold': 0.01},
- 'meta': {'name': 'KSDrift', 'detector_type': 'offline', 'data_type': None}}
+ 'meta': {'data_type': None,
+  'detector_type': 'offline',
+  'name': 'KSDrift',
+  'version': '0.9.1'}}
 </pre>
+
+> &darr; p-value = &uarr; confident that the distributions are different.
+
+```python linenums="1"
+# Drift
+drift = np.random.normal(30, 5, len(ref))
+plt.hist(ref, alpha=0.75, label="reference")
+plt.hist(drift, alpha=0.5, label="test")
+plt.legend()
+plt.show()
+```
 
 <div class="ai-center-all">
     <img width="500" src="/static/images/mlops/monitoring/ks_drift.png">
 </div>
 
+```python linenums="1"
+length_drift_detector.predict(drift, return_p_val=True, return_distance=True)
+```
+
+<pre class="output">
+{'data': {'distance': array([0.63], dtype=float32),
+  'is_drift': 1,
+  'p_val': array([6.7101775e-35], dtype=float32),
+  'threshold': 0.01},
+ 'meta': {'data_type': None,
+  'detector_type': 'offline',
+  'name': 'KSDrift',
+  'version': '0.9.1'}}
+</pre>
+
 #### Chi-squared test
 
-And similarly for categorical data (input features, targets, etc.) we can apply the [Pearson's chi-squared test](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test){:target="_blank"} to determine if a frequency of events (1D) is consistent with a reference distribution.
+Similarly, for categorical data (input features, targets, etc.), we can apply the [Pearson's chi-squared test](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test){:target="_blank"} to determine if a frequency of events in production is consistent with a reference distribution.
 
-> We're creating a categorical variable for the # of predicted tags but we could very very apply it to the tag distribution it self, individual tags (binary), slices of tags, etc.
+> We're creating a categorical variable for the # of tokens in our text feature but we could very very apply it to the tag distribution itself, individual tags (binary), slices of tags, etc.
 
 ```python linenums="1"
 from alibi_detect.cd import ChiSquareDrift
@@ -293,42 +369,59 @@ from alibi_detect.cd import ChiSquareDrift
 
 ```python linenums="1"
 # Reference
-df.tag_count = df.tags.apply(lambda x: "small" if len(x) <= 3 else ("medium" if len(x) <= 8 else "large"))
-reference = df.tag_count[-400:-200].to_numpy()
-plt.hist(reference, alpha=0.75, label="reference")
+df.token_count = df.num_tokens.apply(lambda x: "small" if x <= 10 else ("medium" if x <=25 else "large"))
+ref = df.token_count[0:200].to_numpy()
+plt.hist(ref, alpha=0.75, label="reference")
 plt.legend()
-target_drift_detector = ChiSquareDrift(reference, p_val=0.01)
+```
+
+```python linenums="1"
+# Initialize drift detector
+target_drift_detector = ChiSquareDrift(ref, p_val=0.01)
 ```
 
 ```python linenums="1"
 # No drift
-no_drift = df.tag_count[-200:].to_numpy()
-plt.hist(reference, alpha=0.75, label="reference")
-plt.hist(no_drift, alpha=0.5, label="production")
+no_drift = df.token_count[200:400].to_numpy()
+plt.hist(ref, alpha=0.75, label="reference")
+plt.hist(no_drift, alpha=0.5, label="test")
 plt.legend()
-target_drift_detector.predict(no_drift, return_p_val=True, return_distance=True)
+plt.show()
 ```
-
-<pre class="output">
-{'data': {'is_drift': 0,
-  'distance': array([2.008658], dtype=float32),
-  'p_val': array([0.36629033], dtype=float32),
-  'threshold': 0.01},
- 'meta': {'name': 'ChiSquareDrift',
-  'detector_type': 'offline',
-  'data_type': None}}
-</pre>
 
 <div class="ai-center-all">
     <img width="500" src="/static/images/mlops/monitoring/chi_no_drift.png">
 </div>
 
 ```python linenums="1"
+target_drift_detector.predict(no_drift, return_p_val=True, return_distance=True)
+```
+
+<pre class="output">
+{'data': {'distance': array([4.135522], dtype=float32),
+  'is_drift': 0,
+  'p_val': array([0.12646863], dtype=float32),
+  'threshold': 0.01},
+ 'meta': {'data_type': None,
+  'detector_type': 'offline',
+  'name': 'ChiSquareDrift',
+  'version': '0.9.1'}}
+</pre>
+
+```python linenums="1"
 # Drift
 drift = np.array(["small"]*80 + ["medium"]*40 + ["large"]*80)
-plt.hist(reference, alpha=0.75, label="reference")
-plt.hist(drift, alpha=0.5, label="production")
+plt.hist(ref, alpha=0.75, label="reference")
+plt.hist(drift, alpha=0.5, label="test")
 plt.legend()
+plt.show()
+```
+
+<div class="ai-center-all">
+    <img width="500" src="/static/images/mlops/monitoring/chi_drift.png">
+</div>
+
+```python linenums="1"
 target_drift_detector.predict(drift, return_p_val=True, return_distance=True)
 ```
 
@@ -342,10 +435,6 @@ target_drift_detector.predict(drift, return_p_val=True, return_distance=True)
   'data_type': None}}
 </pre>
 
-<div class="ai-center-all">
-    <img width="500" src="/static/images/mlops/monitoring/chi_drift.png">
-</div>
-
 ### Multivariate
 
 As we can see, measuring drift is fairly straightforward for univariate data but difficult for multivariate data. We'll summarize the reduce and measure approach outlined in the following paper: [Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift](https://arxiv.org/abs/1810.11953){:target="_blank"}.
@@ -353,182 +442,244 @@ As we can see, measuring drift is fairly straightforward for univariate data but
 <div class="ai-center-all">
     <img width="700" src="/static/images/mlops/monitoring/failing_loudly.png">
 </div>
-<div class="ai-center-all mt-2">
-    <small>Detecting drift as outlined in <a href="https://arxiv.org/abs/1810.11953" target="_blank">Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift</a></small>
-</div>
-
 We vectorized our text using tf-idf (to keep modeling simple), which has high dimensionality and is not semantically rich in context. However, typically with text, word/char embeddings are used. So to illustrate what drift detection on multivariate data would look like, let's represent our text using pretrained embeddings.
 
-> Be sure to refer to our [embeddings](../foundations/embeddings.md){:target="_blank"} and [transformers](../foundations/transformers.md){:target="_blank"} lessons to learn more about these topics.
+> Be sure to refer to our [embeddings](../foundations/embeddings.md){:target="_blank"} and [transformers](../foundations/transformers.md){:target="_blank"} lessons to learn more about these topics. But note that detecting drift on multivariate text embeddings is still quite difficult so it's typically more common to use these methods applied to tabular features or images.
 
-We'll use the embedded inputs from our model as our multivariate data. We'll first apply dimensionality reduction and then conduct two different tests to detect drift. We'll start by establishing our reference window:
+We'll start by loading the tokenizer from a pretrained model.
 
 ```python linenums="1"
-import torch
-import torch.nn as nn
-
-def get_data_tensor(texts):
-    preprocessed_texts = [data.preprocess(text, lower=params.lower, stem=params.stem) for text in texts]
-    X = np.array(tokenizer.texts_to_sequences(preprocessed_texts), dtype="object")
-    y_filler = np.zeros((len(X), len(label_encoder)))
-    dataset = data.CNNTextDataset(X=X, y=y_filler, max_filter_size=int(params.max_filter_size))
-    dataloader = dataset.create_dataloader(batch_size=len(texts))
-    return next(iter(dataloader))[0]
-
-# Reference data
-reference = get_data_tensor(texts=df.text[-400:-200].to_list())
+from transformers import AutoTokenizer
 ```
 
-> We can't use encoded text because each character's categorical representation is arbitrary. However, the embedded text's representation does capture semantic meaning which makes it possible for us to detect drift on. With tabular data and images, we can use those numerical representation as is (can preprocess if needed) since the values are innately meaningful.
+```python linenums="1"
+model_name = "allenai/scibert_scivocab_uncased"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+vocab_size = len(tokenizer)
+print (vocab_size)
+```
+
+<pre class="output">
+31090
+</pre>
+
+```python linenums="1"
+# Tokenize inputs
+encoded_input = tokenizer(df.text.tolist(), return_tensors="pt", padding=True)
+ids = encoded_input["input_ids"]
+masks = encoded_input["attention_mask"]
+```
+
+```python linenums="1"
+# Decode
+print (f"{ids[0]}\n{tokenizer.decode(ids[0])}")
+```
+
+<pre class="output">
+tensor([  102,  2029,   467,  1778,   609,   137,  6446,  4857,   191,  1332,
+         2399, 13572, 19125,  1983,   147,  1954,   165,  6240,   205,   185,
+          300,  3717,  7434,  1262,   121,   537,   201,   137,  1040,   111,
+          545,   121,  4714,   205,   103,     0,     0,     0,     0,     0,
+            0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+            0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+            0])
+[CLS] comparison between yolo and rcnn on real world videos bringing theory to experiment is cool. we can easily train models in colab and find the results in minutes. [SEP] [PAD] [PAD] ...
+</pre>
+
+```python linenums="1"
+# Sub-word tokens
+print (tokenizer.convert_ids_to_tokens(ids=ids[0]))
+```
+
+<pre class="output">
+['[CLS]', 'comparison', 'between', 'yo', '##lo', 'and', 'rc', '##nn', 'on', 'real', 'world', 'videos', 'bringing', 'theory', 'to', 'experiment', 'is', 'cool', '.', 'we', 'can', 'easily', 'train', 'models', 'in', 'col', '##ab', 'and', 'find', 'the', 'results', 'in', 'minutes', '.', '[SEP]', '[PAD]', '[PAD]', ...]
+</pre>
+
+Next, we'll load the pretrained model's weights and use the `TransformerEmbedding` object to extract the embeddings from the hidden state (averaged across tokens).
+
+```python linenums="1"
+from alibi_detect.models.pytorch import TransformerEmbedding
+```
+
+```python linenums="1"
+# Embedding layer
+emb_type = "hidden_state"
+layers = [-x for x in range(1, 9)]  # last 8 layers
+embedding_layer = TransformerEmbedding(model_name, emb_type, layers)
+```
+
+```python linenums="1"
+# Embedding dimension
+embedding_dim = embedding_layer.model.embeddings.word_embeddings.embedding_dim
+embedding_dim
+```
+
+<pre class="output">
+768
+</pre>
 
 #### Dimensionality reduction
 
-We first apply dimensionality reduction to the data before hypothesis testing. Popular options include:
+Now we need to use a dimensionality reduction method to reduce our representations dimensions into something more manageable (ex. 32 dim) so we can run our two-sample tests on to detect drift. Popular options include:
 
 - [Principle component analysis (PCA)](https://en.wikipedia.org/wiki/Principal_component_analysis){:target="_blank"}: orthogonal transformations that preserve the variability of the dataset.
 - [Autoencoders (AE)](https://en.wikipedia.org/wiki/Autoencoder){:target="_blank"}: networks that consume the inputs and attempt to reconstruct it from an lower dimensional space while minimizing the error. These can either be trained or untrained (the Failing loudly paper recommends untrained).
 - [Black box shift detectors (BBSD)](https://arxiv.org/abs/1802.03916){:target="_blank"}: the actual model trained on the training data can be used as a dimensionality reducer. We can either use the softmax outputs (multivariate) or the actual predictions (univariate).
 
 ```python linenums="1"
-```python
-
-from functools import partial
-from alibi_detect.cd.pytorch import preprocess_drift
-
-# Isolate embeddings layer
-embeddings_layer = model.embeddings
-embedding_dim = embeddings_layer.embedding_dim
-
-# Untrained autoencoder (UAE) reducer
-enc_dim = 32
-reducer = nn.Sequential(
-    embeddings_layer,
-    nn.AdaptiveAvgPool2d((1, embedding_dim)),
-    nn.Flatten(),
-    nn.Linear(embedding_dim, 256),
-    nn.ReLU(),
-    nn.Linear(256, enc_dim)
-).to(device).eval()
-
-# Preprocessing with the reducer
-preprocess_fn = partial(preprocess_drift, model=reducer, batch_size=params.batch_size)
+import torch
+import torch.nn as nn
 ```
 
-#### Two-sample tests
+```python linenums="1"
+# Device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(device)
+```
 
-The different dimensionality reduction techniques applied on multivariate data yield either 1D or multidimensional data and so different **statistical tests** are used to calculate drift:
+<pre class="output">
+cuda
+</pre>
 
-- **[Maximum Mean Discrepancy (MMD)](https://jmlr.csail.mit.edu/papers/v13/gretton12a.html){:target="_blank"}**: a kernel-based approach that determines the distance between two distributions by computing the distance between the mean embeddings of the features from both distributions.
+```python linenums="1"
+# Untrained autoencoder (UAE) reducer
+encoder_dim = 32
+reducer = nn.Sequential(
+    embedding_layer,
+    nn.Linear(embedding_dim, 256),
+    nn.ReLU(),
+    nn.Linear(256, encoder_dim)
+).to(device).eval()
+```
+
+We can wrap all of the operations above into one preprocessing function that will consume input text and produce the reduced representation.
+
+```python linenums="1"
+from alibi_detect.cd.pytorch import preprocess_drift
+from functools import partial
+```
+
+```python linenums="1"
+# Preprocessing with the reducer
+max_len = 100
+batch_size = 32
+preprocess_fn = partial(preprocess_drift, model=reducer, tokenizer=tokenizer,
+                        max_len=max_len, batch_size=batch_size, device=device)
+```
+
+#### Maximum Mean Discrepancy (MMD)
+
+After applying dimensionality reduction techniques on our multivariate data, we can use different statistical tests to calculate drift. A popular option is [Maximum Mean Discrepancy (MMD)](https://jmlr.csail.mit.edu/papers/v13/gretton12a.html){:target="_blank"}, a kernel-based approach that determines the distance between two distributions by computing the distance between the mean embeddings of the features from both distributions.
 
 ```python linenums="1"
 from alibi_detect.cd import MMDDrift
-
-# Initialize drift detector
-embeddings_mmd_drift_detector = MMDDrift(reference, backend="pytorch", p_val=.01, preprocess_fn=preprocess_fn)
-
-# No drift
-no_drift = get_data_tensor(texts=df.text[-200:].to_list())
-embeddings_mmd_drift_detector.predict(no_drift)
-```
-
-<pre class="output">
-{'data': {'is_drift': 0,
-  'distance': 0.0006961822509765625,
-  'p_val': 0.2800000011920929,
-  'threshold': 0.01,
-  'distance_threshold': 0.008359015},
- 'meta': {'name': 'MMDDriftTorch',
-  'detector_type': 'offline',
-  'data_type': None,
-  'backend': 'pytorch'}}
-</pre>
-
-```python linenums="1"
-# Drift
-texts = ["UNK " + text for text in df.text[-200:].to_list()]
-drift = get_data_tensor(texts=texts)
-embeddings_mmd_drift_detector.predict(drift)
-```
-
-<pre class="output">
-{'data': {'is_drift': 1,
-  'distance': 0.009676754474639893,
-  'p_val': 0.009999999776482582,
-  'threshold': 0.01,
-  'distance_threshold': 0.005815625},
- 'meta': {'name': 'MMDDriftTorch',
-  'detector_type': 'offline',
-  'data_type': None,
-  'backend': 'pytorch'}}
-</pre>
-
-<hr>
-
-- **[Kolmogorov-Smirnov (KS) Test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test){:target="_blank"} + [Bonferroni Correction](https://en.wikipedia.org/wiki/Bonferroni_correction){:target="_blank"}**: determines the maximum distance between two distribution's cumulative density functions. We can apply this on each dimension of the multidimensional data and then use the Bonferroni correction (conservative) or the [False discovery rate](https://en.wikipedia.org/wiki/False_discovery_rate){:target="_blank"} (FDR) correction to mitigate issues stemming from multiple comparisons.
-
-```python linenums="1"
-from alibi_detect.cd import KSDrift
 ```
 
 ```python linenums="1"
 # Initialize drift detector
-embeddings_ks_drift_detector = KSDrift(reference, p_val=.01, preprocess_fn=preprocess_fn, correction="bonferroni")
+mmd_drift_detector = MMDDrift(ref, backend="pytorch", p_val=.01, preprocess_fn=preprocess_fn)
 ```
 
 ```python linenums="1"
 # No drift
-no_drift = get_data_tensor(texts=df.text[-200:].to_list())
-embeddings_ks_drift_detector.predict(no_drift)
+no_drift = df.text[200:400].to_list()
+mmd_drift_detector.predict(no_drift)
 ```
 
 <pre class="output">
-{'data': {'is_drift': 0,
-  'distance': array([0.115, 0.08 , 0.09 , 0.07 , 0.11 , 0.15 , 0.155, 0.075, 0.085,
-         0.08 , 0.075, 0.105, 0.14 , 0.09 , 0.065, 0.11 , 0.065, 0.09 ,
-         0.085, 0.07 , 0.065, 0.12 , 0.115, 0.065, 0.105, 0.095, 0.115,
-         0.17 , 0.095, 0.055, 0.08 , 0.05 ], dtype=float32),
-  'p_val': array([0.13121547, 0.51821935, 0.37063202, 0.6846707 , 0.16496263,
-         0.01983924, 0.01453765, 0.60035014, 0.44107372, 0.51821935,
-         0.60035014, 0.20524779, 0.03582512, 0.37063202, 0.7671913 ,
-         0.16496263, 0.7671913 , 0.37063202, 0.44107372, 0.6846707 ,
-         0.7671913 , 0.10330375, 0.13121547, 0.7671913 , 0.20524779,
-         0.30775842, 0.13121547, 0.00537641, 0.30775842, 0.9063568 ,
-         0.51821935, 0.95321596], dtype=float32),
-  'threshold': 0.0003125},
- 'meta': {'name': 'KSDrift', 'detector_type': 'offline', 'data_type': None}}
+{'data': {'distance': 0.0021169185638427734,
+  'distance_threshold': 0.0032651424,
+  'is_drift': 0,
+  'p_val': 0.05999999865889549,
+  'threshold': 0.01},
+ 'meta': {'backend': 'pytorch',
+  'data_type': None,
+  'detector_type': 'offline',
+  'name': 'MMDDriftTorch',
+  'version': '0.9.1'}}
 </pre>
 
 ```python linenums="1"
 # Drift
-texts = ["UNK " + text for text in df.text[-200:].to_list()]
-drift = get_data_tensor(texts=texts)
-embeddings_ks_drift_detector.predict(drift)
+drift = ["UNK " + text for text in no_drift]
+mmd_drift_detector.predict(drift)
 ```
 
 <pre class="output">
-{'data': {'is_drift': 1,
-  'distance': array([0.17 , 0.125, 0.085, 0.09 , 0.14 , 0.175, 0.21 , 0.17 , 0.14 ,
-         0.08 , 0.08 , 0.105, 0.205, 0.115, 0.065, 0.075, 0.055, 0.135,
-         0.065, 0.08 , 0.105, 0.13 , 0.125, 0.095, 0.105, 0.17 , 0.13 ,
-         0.26 , 0.115, 0.055, 0.095, 0.05 ], dtype=float32),
-  'p_val': array([5.3764065e-03, 8.0500402e-02, 4.4107372e-01, 3.7063202e-01,
-         3.5825118e-02, 3.7799652e-03, 2.3947345e-04, 5.3764065e-03,
-         3.5825118e-02, 5.1821935e-01, 5.1821935e-01, 2.0524779e-01,
-         3.6656143e-04, 1.3121547e-01, 7.6719129e-01, 6.0035014e-01,
-         9.0635681e-01, 4.7406290e-02, 7.6719129e-01, 5.1821935e-01,
-         2.0524779e-01, 6.2092341e-02, 8.0500402e-02, 3.0775842e-01,
-         2.0524779e-01, 5.3764065e-03, 6.2092341e-02, 1.8819204e-06,
-         1.3121547e-01, 9.0635681e-01, 3.0775842e-01, 9.5321596e-01],
-        dtype=float32),
-  'threshold': 0.0003125},
- 'meta': {'name': 'KSDrift', 'detector_type': 'offline', 'data_type': None}}
+{'data': {'distance': 0.014705955982208252,
+  'distance_threshold': 0.003908038,
+  'is_drift': 1,
+  'p_val': 0.0,
+  'threshold': 0.01},
+ 'meta': {'backend': 'pytorch',
+  'data_type': None,
+  'detector_type': 'offline',
+  'name': 'MMDDriftTorch',
+  'version': '0.9.1'}}
 </pre>
 
-> Note that each feature (enc_dim=32) has a distance and an associated p-value.
+## Online
 
-We could repeat this process for tensor outputs at various layers in our model (embedding, conv layers, softmax, etc.). Another interesting approach for detecting drift involves training a separate model that can distinguish between data from the reference and production distributions. If such a classifier can be trained that it performs better than random chance (0.5), confirmed with a [binomial test](https://en.wikipedia.org/wiki/Binomial_test){:target="_blank"}, then we have two statistically different distributions. This isn't a popular approach because it involves creating distinct datasets and the compute for training every time we want to measure drift with two windows of data.
+So far we've applied our drift detection methods on offline data to try and understand what reference window sizes should be, what p-values are appropriate, etc. However, we'll need to apply these methods in the online production setting so that we can catch drift as easy as possible.
 
-> [TorchDrift](https://torchdrift.org/){:target="_blank"} is another great package that offers a suite of reducers (PCA, AE, etc.) and drift detectors (MMD) to monitor for drift at any stage in our model.
+> Many monitoring libraries and platforms come with [online equivalents](https://docs.seldon.io/projects/alibi-detect/en/latest/cd/methods.html#online){:target="_blank"} for their detection methods.
+
+Typically, reference windows are large so that we have a proper benchmark to compare our production data points to. As for the test window, the smaller it is, the more quickly we can catch sudden drift. Whereas, a larger test window will allow us to identify more subtle/gradual drift. So it's best to compose windows of different sizes to regularly monitor.
+
+```python linenums="1"
+from alibi_detect.cd import MMDDriftOnline
+```
+
+```python linenums="1"
+# Online MMD drift detector
+ref = df.text[0:800].to_list()
+online_mmd_drift_detector = MMDDriftOnline(
+    ref, ert=400, window_size=200, backend="pytorch", preprocess_fn=preprocess_fn)
+```
+
+<pre class="output">
+Generating permutations of kernel matrix..
+100%|██████████| 1000/1000 [00:00<00:00, 13784.22it/s]
+Computing thresholds: 100%|██████████| 200/200 [00:32<00:00,  6.11it/s]
+</pre>
+
+As data starts to flow in, we can use the detector to predict drift at every point. Our detector should detect drift sooner in our drifter dataset than in our normal data.
+
+```python linenums="1"
+def simulate_production(test_window):
+    i = 0
+    online_mmd_drift_detector.reset()
+    for text in test_window:
+        result = online_mmd_drift_detector.predict(text)
+        is_drift = result["data"]["is_drift"]
+        if is_drift:
+            break
+        else:
+            i += 1
+    print (f"{i} steps")
+```
+
+```python linenums="1"
+# Normal
+test_window = df.text[800:]
+simulate_production(test_window)
+```
+
+<pre class="output">
+27 steps
+</pre>
+
+```python linenums="1"
+# Drift
+test_window = "UNK" * len(df.text[800:])
+simulate_production(test_window)
+```
+
+<pre class="output">
+11 steps
+</pre>
+
+There are also several considerations around how often to refresh both the reference and test windows. We could base in on the number of new observations or time without drift, etc. We can also adjust the various thresholds (ERT, window size, etc.) based on what we learn about our system through monitoring.
 
 ## Outliers
 
