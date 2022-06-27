@@ -463,7 +463,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <hr>
 
 ## MLOps
-> Learn how to apply ML to build a production grade product and deliver value. &rarr; [GokuMohandas/MadeWithML](https://github.com/GokuMohandas/MadeWithML){:target="_blank"}
+> Learn how to apply ML to build a production grade product and deliver value. &rarr; [GokuMohandas/MLOps](https://github.com/GokuMohandas/MLOps){:target="_blank"}
 
 <div class="row mt-4 ai-course-list" data-aos="fade-down">
 <div class="col-md-4">
