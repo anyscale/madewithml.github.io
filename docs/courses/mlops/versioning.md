@@ -37,6 +37,8 @@ pip install dvc==2.10.2
 dvc init
 ```
 
+> Be sure to add this package and version to our `requirements.txt` file.
+
 ## Remote storage
 After initializing DVC, we can establish where our remote storage will be. We'll be creating and using the `stores/blob` directory as our remote storage but in a production setting this would be something like S3. We'll define our blob store in our `config/config.py` file:
 

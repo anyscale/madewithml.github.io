@@ -122,7 +122,37 @@ So we're going through all this effort of including typing and docstrings to our
 ```bash
 pip install mkdocs==1.3.0 mkdocstrings==0.18.1
 ```
-> We won't add these to our `requirements.txt` like we have been doing. Since these libraries are not core to our project, we'll be isolating them. We'll learn more about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
+Instead of directly adding these requirements to our `requirements.txt` file, we're going to isolate it from our core required libraries. We want to do this because not everyone will need to create documentation as it's not a core machine learning operation (training, inference, etc.). We'll tweak our `setup.py` script to make this possible.
+We'll define these packages under a `docs_packages` object:
+```python
+# setup.py
+docs_packages = [
+    "mkdocs==1.3.0",
+    "mkdocstrings==0.18.1"
+]
+```
+and then we'll add this to `setup()` object in the script:
+```python linenums="1" hl_lines="5-8"
+# Define our package
+setup(
+    ...
+    install_requires=[required_packages],
+    extras_require={
+        "dev": docs_packages,
+        "docs": docs_packages,
+    },
+)
+```
+Now we can install this package with:
+```bash
+python3 -m pip install -e ".[docs]"
+```
+We're also defining a `dev` option which we'll update over the course so that developers can install all required and extra packages in one call, instead of calling each extra required packages one at a time.
+```bash
+python3 -m pip install -e ".[dev]"
+```
+We created an explicit `doc` option because a user will want to only download the documentation packages to generate documentation (none of the other packages will be required). We'll see this in action when we use [CI/CD workflows](cicd.md){:target="_blank"} to autogenerate documentation via GitHub Actions.
+
 
 2. Initialize mkdocs
 ```bash

@@ -110,6 +110,40 @@ jobs:
 
 > We are only executing a subset of the tests here because we won't access to data or model artifacts when these tests are executed on GitHub's runners. However, if our blob storage and model registry are on the cloud, we can access them and perform all the tests. This will often involve using credentials to access these resources, which we can set as Action secrets (GitHub repository page > `Settings` > `Secrets`).
 
+??? quote "View `.github/workflows/testing.yml`"
+    ```yaml linenums="1"
+    name: testing
+    on:
+    push:
+        branches:
+        - master
+        - main
+    pull_request:
+        branches:
+        - master
+        - main
+    jobs:
+    test-code:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout repo
+            uses: actions/checkout@v2
+        - name: Set up Python
+            uses: actions/setup-python@v2
+            with:
+            python-version: 3.7.10
+        - name: Caching
+            uses: actions/cache@v2
+            with:
+            path: $/{/{ env.pythonLocation /}/}
+            key: $/{/{ env.pythonLocation /}/}-$/{/{ hashFiles('setup.py') /}/}-$/{/{ hashFiles('requirements.txt') /}/}
+        - name: Install dependencies
+            run: |
+            python -m pip install -e ".[test]" --no-cache-dir
+        - name: Execute tests
+            run: pytest tests/tagifai --ignore tests/tagifai/test_main.py --ignore tests/tagifai/test_data.py
+    ```
+
 Notice that one of our steps is to [cache](https://docs.github.com/en/actions/guides/caching-dependencies-to-speed-up-workflows){:target="_blank"} the entire Python environment with a specific key. This will significantly speed up the time required to run our Action the next time as long as the key remains unchanged (same python location, setup.py and requirements.txt).
 
 <div class="ai-center-all">
@@ -128,6 +162,40 @@ jobs:
       - name: Deploy documentation
         run: mkdocs gh-deploy --force
 ```
+
+??? quote "View `.github/workflows/documentation.yml`"
+    ```yaml linenums="1"
+    name: documentation
+    on:
+    push:
+        branches:
+        - master
+        - main
+    pull_request:
+        branches:
+        - master
+        - main
+    jobs:
+    build-docs:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout repo
+            uses: actions/checkout@v2
+        - name: Set up Python
+            uses: actions/setup-python@v2
+            with:
+            python-version: 3.7.10
+        - name: Caching
+            uses: actions/cache@v2
+            with:
+            path: $/{/{ env.pythonLocation /}/}
+            key: $/{/{ env.pythonLocation /}/}-$/{/{ hashFiles('setup.py') /}/}-$/{/{ hashFiles('requirements.txt') /}/}
+        - name: Install dependencies
+            run: |
+            python -m pip install -e ".[docs]" --no-cache-dir
+        - name: Deploy documentation
+            run: mkdocs gh-deploy --force
+    ```
 
 > We can also generate [private documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site){:target="_blank"} for private repositories and even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"}.
 
@@ -155,12 +223,10 @@ The specific deployment method we use it entirely up dependent on the applicatio
 
 ## Marketplace
 
-So what exactly are these actions that we're using from the marketplace? For example, our first step in the `test-code` job above is to checkout the repo using the [actions/checkout@v2](https://github.com/marketplace/actions/checkout){:target="_blank"} GitHub Action. The Action's link contains information about how to use it, scenarios, etc.
-
-The Marketplace has actions for a variety of needs, ranging from continuous deployment for various cloud providers, code quality checks, etc. Below are a few GitHub Actions that we highly recommend.
+So what exactly are these actions that we're using from the marketplace? For example, our first step in the `test-code` job above is to checkout the repo using the [actions/checkout@v2](https://github.com/marketplace/actions/checkout){:target="_blank"} GitHub Action. The Action's link contains information about how to use it, scenarios, etc. The Marketplace has actions for a variety of needs, ranging from continuous deployment for various cloud providers, code quality checks, etc.
 
 - [Great Expectations](https://github.com/marketplace/actions/great-expectations-data){:target="_blank"}: ensure that our GE checkpoints pass when any changes are made that could affect the data engineering pipelines. This action also creates a free GE dashboard with [Netlify](https://www.netlify.com/){:target="_blank"} that has the updated data docs.
-- [Continuous ML](https://github.com/iterative/cml){:target="_blank"}: train, evaluate and monitor your ML models and generate a report summarizing the findings. I personally use this GitHub Action for automatic training jobs on cloud infrastructure (AWS/GCP) or [self hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners?learn=hosting_your_own_runners){:target="_blank"} when a change triggers the training pipeline, as opposed to working with [Terraform](https://www.terraform.io/){:target="_blank"}.
+- [Continuous ML](https://github.com/iterative/cml){:target="_blank"}: train, evaluate and monitor your ML models and generate a report summarizing the workflows. If you don't want to train offline, you can manually/auto trigger the training pipeline to run on cloud infrastructure (AWS/GCP) or [self hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners?learn=hosting_your_own_runners){:target="_blank"}.
 
 > Don't restrict your workflows to only what's available on the Marketplace or single command operations. We can do things like include code coverage reports, deploy an updated Streamlit dashboard and attach it's URL to the PR, deliver (CD) our application to an AWS Lambda / EC2, etc.
 

@@ -15,144 +15,96 @@ When developing an application, there are a lot of technical decisions and resul
 
 ## Streamlit
 
-There are some great tooling options, such as [Dash](https://plotly.com/dash/){:target="_blank"}, [Gradio](https://gradio.app/){:target="_blank"}, [Streamlit](https://streamlit.io/){:target="_blank"}, [Tableau](https://www.tableau.com/){:target="_blank"}, [Looker](https://looker.com/){:target="_blank"}, etc. for creating dashboards to deliver data oriented insights. Traditionally, interactive dashboards were exclusively created using front-end programming languages such as HTML Javascript, CSS, etc. However, given that many developers working in machine learning are using Python, the tooling landscape has evolved to bridge this gap. These tools now allow ML developers to create interactive dashboards and visualizations in Python while offering full customization via HTML, JS, and CSS. We'll be using Streamlit to create our dashboards because of it's intuitive API, sharing capabilities and increasing community adoption.
+There are some great tooling options, such as [Dash](https://plotly.com/dash/){:target="_blank"}, [Gradio](https://gradio.app/){:target="_blank"}, [Streamlit](https://streamlit.io/){:target="_blank"}, [Tableau](https://www.tableau.com/){:target="_blank"}, [Looker](https://looker.com/){:target="_blank"}, etc. for creating dashboards to deliver data oriented insights. Traditionally, interactive dashboards were exclusively created using front-end programming languages such as HTML Javascript, CSS, etc. However, given that many developers working in machine learning are using Python, the tooling landscape has evolved to bridge this gap. These tools now allow ML developers to create interactive dashboards and visualizations in Python while offering full customization via HTML, JS, and CSS. We'll be using [Streamlit](https://streamlit.io/){:target="_blank"} to create our dashboards because of it's intuitive API, sharing capabilities and increasing community adoption.
 
 ## Set up
 With Streamlit, we can quickly create an empty application and as we develop, the UI will update as well.
 ```bash
 # Setup
-pip install streamlit
+pip install streamlit==1.10.0
 mkdir streamlit
-touch streamlit/st_app.py
-streamlit run streamlit/st_app.py
+touch streamlit/app.py
+streamlit run streamlit/app.py
 ```
 <pre class="output">
-Local URL: http://localhost:8501
+You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://10.0.1.93:8501
 </pre>
 
-## Components
-Before we create a dashboard for our specific application, we need to learn about the different Streamlit [API components](https://docs.streamlit.io/en/stable/api.html){:target="_blank"}. Instead of going through them all in this lesson, take ten minutes and go through the entire documentation page. It's quite short and we promise you'll be amazed at how many UI components (styled text, latex, tables, plots, etc.) you can create using just Python. We'll explore the different components in detail as they apply to creating different interactions for our specific dashboard below.
+This will automatically open up the streamlit dashboard for us on [http://localhost:8501](http://localhost:8501){:target="_blank"}.
 
-## Pages
-Our application's [dashboard](https://github.com/GokuMohandas/MLOps/blob/main/streamlit/st_app.py){:target="_blank"} will feature several pages organized by the insight they will provide where the view can choose what via interactive [radio buttons](https://docs.streamlit.io/en/stable/api.html#streamlit.radio){:target="_blank"}.
+> Be sure to add this package and version to our `requirements.txt` file.
+
+## API Reference
+Before we create a dashboard for our specific application, we need to learn about the different Streamlit components. Instead of going through them all in this lesson, take a few minutes and go through the [API reference](https://docs.streamlit.io/library/api-reference){:target="_blank"}. It's quite short and we promise you'll be amazed at how many UI components (styled text, latex, tables, plots, etc.) you can create using just Python. We'll explore the different components in detail as they apply to creating different interactions for our specific dashboard below.
+
+## Sections
+We'll start by outlining the sections we want to have in our dashboard by editing our `streamlit/app.py` script:
+
+```python linenums="1"
+import pandas as pd
+from pathlib import Path
+import streamlit as st
+
+from config import config
+from tagifai import main, utils
+```
+
+```python linenums="1"
+# Title
+st.title("TagIfAI · MLOps · Made With ML")
+
+# ToC
+st.markdown("🔢 [Data](#data)", unsafe_allow_html=True)
+st.markdown("📊 [Performance](#performance)", unsafe_allow_html=True)
+st.markdown("🚀 [Inference](#inference)", unsafe_allow_html=True)
+
+# Sections
+st.header("🔢 Data")
+st.header("📊 Performance")
+st.header("🚀 Inference")
+```
+
+To see these changes on our dashboard, we can refresh our dashboard page (press `R`) or set it `Always rerun` (press `A`).
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/dashboard/pages.png">
+    <img width="600" src="/static/images/mlops/dashboard/sections.png">
 </div>
 
 ### Data
 
-The data page contains findings from data [labeling](labeling.md){:target="_blank"}, [exploratory data analysis](exploratory-data-analysis.md){:target="_blank"} and [preprocessing](preprocessing.md){:target="_blank"} but with interactive components.
-
-We start by showing a sample of our different data sources because, for many people, this may be the first time they see the data so it's a good opportunity for them to understand all the different features, formats, etc. For displaying the tags, we don't want to just dump all of them on the dashboard but instead we can use a [selectbox](https://docs.streamlit.io/en/stable/api.html#streamlit.selectbox){:target="_blank"} to allow the user to view them one at a time.
+We're going to keep our dashboard simple, so we'll just display the labeled projects.
 
 ```python linenums="1"
-# Load data
-projects_fp = Path(config.DATA_DIR, "projects.json")
-tags_fp = Path(config.DATA_DIR, "tags.json")
+st.header("Data")
+projects_fp = Path(config.DATA_DIR, "labeled_projects.json")
 projects = utils.load_dict(filepath=projects_fp)
-tags_dict = utils.list_to_dict(utils.load_dict(filepath=tags_fp), key="tag")
-col1, col2 = st.beta_columns(2)
-with col1:
-    st.subheader("Projects (sample)")
-    st.write(projects[0])
-with col2:
-    st.subheader("Tag")
-    tag = st.selectbox("Choose a tag", list(tags_dict.keys()))
-    st.write(tags_dict[tag])
+df = pd.DataFrame(projects)
+st.text(f"Projects (count: {len(df)})")
+st.write(df)
 ```
 
 <div class="ai-center-all">
     <img width="700" src="/static/images/mlops/dashboard/data.png">
 </div>
 
-We can also show our a snapshot of the loaded DataFrame which has sortable columns that people can play with to explore the data.
-
-```python linenums="1"
-# Dataframe
-df = pd.DataFrame(projects)
-st.text(f"Projects (count: {len(df)}):")
-st.write(df)
-```
-
-<div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/dashboard/df.png">
-</div>
-
-We can essentially walk viewers through our entire data phase (EDA, preprocessing, etc.) and allow them (and ourselves) to explore key decisions. For example, we chose to introduce a minimum tag frequency constraint so that we can have enough samples. We can now interactively change that value with a [slider widget](https://docs.streamlit.io/en/stable/api.html#streamlit.slider){:target="_blank"} and see which tags just made and missed the cut.
-
-```python linenums="1"
-# Sliders
-min_freq = st.slider("min_freq", min_value=1, value=30, step=1)
-df, tags_above_freq, tags_below_freq = data.prepare(
-    df=df,
-    include=list(tags_dict.keys()),
-    exclude=config.EXCLUDED_TAGS,
-    min_freq=min_freq,
-)
-col1, col2, col3 = st.beta_columns(3)
-with col1:
-    st.write("**Most common tags**:")
-    for item in tags_above_freq.most_common(5):
-        st.write(item)
-with col2:
-    st.write("**Tags that just made the cut**:")
-    for item in tags_above_freq.most_common()[-5:]:
-        st.write(item)
-with col3:
-    st.write("**Tags that just missed the cut**:")
-    for item in tags_below_freq.most_common(5):
-        st.write(item)
-with st.beta_expander("Excluded tags"):
-    st.write(config.EXCLUDED_TAGS)
-```
-
-<div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/dashboard/frequency.png">
-</div>
-
-What makes this truly interactive is that when we alter the value here, all the downstream tables and plots will update to reflect that change immediately. This is a great way to explore what constraints to use because we can quickly visualize the impact it can have on our data.
-
-```python linenums="1" hl_lines="2"
-# Plots
-num_tags_per_project = [len(tags) for tags in df.tag]  # df is dependent on min_freq slider's value
-num_tags, num_projects = zip(*Counter(num_tags_per_project).items())
-plt.figure(figsize=(10, 3))
-ax = sns.barplot(list(num_tags), list(num_projects))
-plt.title("Tags per project", fontsize=20)
-plt.xlabel("Number of tags", fontsize=16)
-ax.set_xticklabels(range(1, len(num_tags) + 1), rotation=0, fontsize=16)
-plt.ylabel("Number of projects", fontsize=16)
-plt.show()
-st.pyplot(plt)
-```
-
-<div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/dashboard/plots.png">
-</div>
-
-On a similar note, we can also interactively view how our preprocessing functions behave. We can alter any of the function's default input arguments, as well as the input text.
-
-```python linenums="1"
-# Preprocessing
-filters = st.text_input("filters", "[!\"'#$%&()*+,-./:;<=>?@\\[]^_`{|}~]")
-lower = st.checkbox("lower", True)
-stem = st.checkbox("stem", False)
-text = st.text_input("Input text", "Conditional generation using Variational Autoencoders.")
-preprocessed_text = data.clean_text(text=text, lower=lower, stem=stem, filters=filters)
-st.write("Preprocessed text", preprocessed_text)
-```
-
-<div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/dashboard/preprocessing.png">
-</div>
-
-!!! bug
-    In fact, we were able to discover and fix a bug here where the NLTK package automatically lowers text when stemming which we had to override using our `Stemmer` class in our [data script](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/data.py){:target="_blank"}.
-
 ### Performance
 
-This page allows us to quickly compare the improvements and regressions of our local system and what's currently in production. We want to provide the key differences in both the performance and parameters used for each system version. We could also use constructs, such as [Git tags](git.md#tags){:target="_blank"}, to visualize these details across multiple previous releases.
+In this section, we'll display the performance of from our latest trained model. Again, we're going to keep it simple but we could also overlay more information such as improvements or regressions from previous deployments by accessing the model store.
+
+```python linenums="1"
+st.header("📊 Performance")
+performance_fp = Path(config.CONFIG_DIR, "performance.json")
+performance = utils.load_dict(filepath=performance_fp)
+st.text("Overall:")
+st.write(performance["overall"])
+tag = st.selectbox("Choose a tag: ", list(performance["class"].keys()))
+st.write(performance["class"][tag])
+tag = st.selectbox("Choose a slice: ", list(performance["slices"].keys()))
+st.write(performance["slices"][tag])
+```
 
 <div class="ai-center-all">
     <img width="700" src="/static/images/mlops/dashboard/performance.png">
@@ -160,66 +112,44 @@ This page allows us to quickly compare the improvements and regressions of our l
 
 ### Inference
 
-With the inference page, we want to be able to test our model using various inputs to receive predictions, as well as intermediate outputs (ex. preprocessed text). This is a great way for our team members to quickly play with the latest deployed model.
+With the inference section, we want to be able to quickly predict with the latest trained model.
+
+```python linenums="1"
+st.header("🚀 Inference")
+text = st.text_input("Enter text:", "Transfer learning with transformers for text classification.")
+run_id = st.text_input("Enter run ID:", open(Path(config.CONFIG_DIR, "run_id.txt")).read())
+prediction = main.predict_tag(text=text, run_id=run_id)
+st.write(prediction)
+```
 
 <div class="ai-center-all">
     <img width="700" src="/static/images/mlops/dashboard/inference.png">
 </div>
 
-### Inspection
+!!! tip
+    Our dashboard is quite simple but we can also more comprehensive dashboards that reflect some of the core topics we covered in our [machine learning canvas](/static/templates/ml-canvas.pdf){:target="_blank"}.
 
-Our last page will enable a closer inspection on the test split's predictions to identify areas to improve, collect more data, etc. First we offer a quick view of each tag's performance and we could also do the same for specific slices of the data we may care about (high priority, minority, etc.)
-
-<div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/dashboard/inspection.png">
-</div>
-
-We're also going to inspect the true positive (TP), false positive (FP) and false negative (FN) samples across our different tags. It's a great way to catch issues with labeling (FP), weaknesses (FN), etc.
-
-<div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/dashboard/fp.png">
-</div>
-
-!!! warning
-    Be careful not to make decisions based on predicted probabilities before [calibrating](https://arxiv.org/abs/1706.04599){:target="_blank"} them to reliably use as measures of confidence.
-
-#### Extensions
-
-- Connect inspection pipelines with annotation systems so that changes to the data can be reviewed and incorporated.
-- Use false positives to identify potentially mislabeled data or [estimate training data influences (TracIn)](https://arxiv.org/abs/2002.08484){:target="_blank"} on their predictions.
-- Inspect the trained model's behavior under various conditions using the [WhatIf](https://pair-code.github.io/what-if-tool/){:target="_blank"} tool.
-- Compare performances across multiple releases to visualize improvements/regressions over time.
-
-> Our dashboard can have many other pages as well, especially critical views for [iteration](data-centric-ai.md){:target="_blank"}, such as [active learning](labeling.md#active-learning){:target="_blank"}, [composing retraining datasets](continual-learning.md#retraining){:target="_blank"}, etc.
-
+    - Display findings from our [labeling](labeling.md){:target="_blank"}, [EDA](exploratory-data-analysis.md){:target="_blank"} and [preprocessing](preprocessing.md){:target="_blank"} stages of development.
+    - View [false +/-](evaluation.md#confusion-matrix){:target="_blank"} interactively and connect with annotation pipelines so that changes to the data can be reviewed and incorporated.
+    - Compare performances across multiple releases to visualize improvements/regressions over time (using model store, git tags, etc.)
 
 ## Caching
 
-There are a few functions defined at the start of our [st_app.py](https://github.com/GokuMohandas/MLOps/blob/main/streamlit/st_app.py){:target="_blank"} script which have a `@st.cache` decorator. This calls for Streamlit to cache the function by the combination of it's inputs which will significantly improve performance involving computationally heavy functions.
+Sometimes we may have views that involve computationally heavy operations, such as loading data or model artifacts. It's best practice to cache these operations by wrapping them as a separate function with the [`@st.cache`](https://docs.streamlit.io/library/api-reference/performance/st.cache){:target="_blank"} decorator. This calls for Streamlit to cache the function by the specific combination of it's inputs to deliver the respective outputs when the function is invoked with the same inputs.
 
-```python linenums="1"
+```python linenums="1" hl_lines="1"
 @st.cache()
 def load_data():
-    # Filepaths
-    projects_fp = Path(config.DATA_DIR, "projects.json")
-    tags_fp = Path(config.DATA_DIR, "tags.json")
-    features_fp = Path(config.DATA_DIR, "features.json")
-
-    # Load data
+    projects_fp = Path(config.DATA_DIR, "labeled_projects.json")
     projects = utils.load_dict(filepath=projects_fp)
-    tags_dict = utils.list_to_dict(utils.load_dict(filepath=tags_fp), key="tag")
-    features = utils.load_dict(filepath=features_fp)
-
-    return projects, tags_dict, features
+    df = pd.DataFrame(projects)
+    return df
 ```
 
 ## Deploy
 
 We have several different options for deploying and managing our Streamlit dashboard. We could use Streamlit's [sharing feature](https://blog.streamlit.io/introducing-streamlit-sharing/){:target="_blank"} (beta) which allows us to seamlessly deploy dashboards straight from GitHub. Our dashboard will continue to stay updated as we commit changes to our repository. Another option is to deploy the Streamlit dashboard along with our API service. We can use docker-compose to spin up a separate container or simply add it to the API service's Dockerfile's [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint){:target="_blank"} with the appropriate ports exposed. The later might be ideal, especially if your dashboard isn't meant to be public and it you want added security, performance, etc.
 
-## Resources
-
-- [Streamlit API Reference](https://docs.streamlit.io/en/stable/api.html){:target="_blank"}
 
 <!-- Citation -->
 {% include "cite.md" %}

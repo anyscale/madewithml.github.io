@@ -5,6 +5,7 @@ description: Learn how to test ML models (and their code and data) to ensure con
 keywords: testing, testing ml, pytest, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/follow/tree/testing
+notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/expectations.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -56,8 +57,9 @@ Regardless of the framework we use, it's important to strongly tie testing into 
 
 - `#!js atomic`: when creating functions and classes, we need to ensure that they have a [single responsibility](https://en.wikipedia.org/wiki/Single-responsibility_principle){:target="_blank"} so that we can easily test them. If not, we'll need to split them into more granular components.
 - `#!js compose`: when we create new components, we want to compose tests to validate their functionality. It's a great way to ensure reliability and catch errors early on.
+- `#!js reuse`: we should maintain central repositories where core functionality is tested at the source and reused across many projects. This significantly reduces testing efforts for each new project's code base.
 - `#!js regression`: we want to account for new errors we come across with a regression test so we can ensure we don't reintroduce the same errors in the future.
-- `#!js coverage`: we want to ensure that 100% of our codebase has been accounter for. This doesn't mean writing a test for every single line of code but rather accounting for every single line (more on this in the [coverage section](#coverage) below).
+- `#!js coverage`: we want to ensure [100% coverage](#coverage) for our codebase. This doesn't mean writing a test for every single line of code but rather accounting for every single line.
 - `#!js automate`: in the event we forget to run our tests before committing to a repository, we want to auto run tests when we make changes to our codebase. We'll learn how to do this locally using [pre-commit hooks](pre-commit.md){:target="_blank"} and remotely via [GitHub actions](cicd.md#github-actions){:target="_blank"} in subsequent lessons.
 
 ## Test-driven development
@@ -103,7 +105,26 @@ We're going to be using [pytest](https://docs.pytest.org/en/stable/){:target="_b
 pip install pytest==7.1.2
 ```
 
-> We won't add pytest to our `requirements.txt` like we have been doing. Since this library are not core to our project, we'll be isolating it. We'll learn more about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
+Since this testing package is not integral to the core machine learning operations, let's create a separate list in our `setup.py` and add it to our `extras_require`:
+
+```python linenums="1" hl_lines="10"
+# setup.py
+test_packages = [
+    "pytest==7.1.2",
+]
+
+# Define our package
+setup(
+    ...
+    extras_require={
+        "dev": docs_packages + style_packages + test_packages,
+        "docs": docs_packages,
+        "test": test_packages,
+    },
+)
+```
+
+We created an explicit `test` option because a user will want to only download the testing packages. We'll see this in action when we use [CI/CD workflows](cicd.md){:target="_blank"} to run tests via GitHub Actions.
 
 ### Configuration
 Pytest expects tests to be organized under a `tests` directory by default. However, we can also add to our existing `pyproject.toml` file to configure any other test directories as well. Once in the directory, pytest looks for python scripts starting with `tests_*.py` but we can configure it to read any other file patterns as well.
@@ -506,7 +527,15 @@ As we're developing tests for our application's components, it's important to kn
 pip install pytest-cov==2.10.1
 ```
 
-> We won't add pytest-cov to our `requirements.txt` like we have been doing. Since this library are not core to our project, we'll be isolating it. We'll learn more about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
+And we'll add this to our `setup.py` script:
+
+```python linenums="1"
+# setup.py
+test_packages = [
+    "pytest==7.1.2",
+    "pytest-cov==2.10.1"
+]
+```
 
 ```bash
 python3 -m pytest --cov tagifai --cov-report html
@@ -555,6 +584,8 @@ So far, we've used unit and integration tests to test the functions that interac
 
 ### Expectations
 
+> Follow along with [this notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/expectations.ipynb){:target="_blank"} as we develop expectations for our dataset. We'll organize these expectations in our repository in the [projects section](testing.md#projects).
+
 There are many dimensions to consider for what our data is expected to look like. We'll briefly talk about a few of them, including ones that may not directly be applicable to our task but, nonetheless, are very important to be aware of.
 
 - `#!js rows / cols`: the most basic expectation is validating the presence of samples (rows) and features (columns). These can help identify inconsistencies between upstream backend database schema changes, upstream UI form changes, etc.
@@ -593,7 +624,16 @@ To implement these expectations, we could compose assert statements or we could 
 pip install great-expectations==0.15.7
 ```
 
-> Similar to our other testing libraries, We won't add great expectations to our `requirements.txt` like we have been doing. Since this library are not core to our project, we'll be isolating it. We'll learn more about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
+And we'll add this to our `setup.py` script:
+
+```python linenums="1"
+# setup.py
+test_packages = [
+    "pytest==7.1.2",
+    "pytest-cov==2.10.1",
+    "great-expectations==0.15.7"
+]
+```
 
 It's a library that already has many of these expectations builtin (map, aggregate, multi-column, distributional, etc.) and allows us to create custom expectations as well. It also provides modules to seamlessly connect with backend data sources such as local file systems, S3, databases and even DAG runners. Let's explore the library by implementing the expectations we'll need for our application.
 
@@ -799,7 +839,7 @@ print(df.validate(expectation_suite=expectation_suite, only_return_failures=True
 > We could also create [custom expectations](https://docs.greatexpectations.io/docs/guides/expectations/creating_custom_expectations/overview){:target="_blank"} for our data.
 
 ### Projects
-So far we've worked with the Great Expectations library at the Python script level but we can organize our expectations even more by creating a Project.
+So far we've worked with the Great Expectations library at the Python script level but we can further organize our expectations by creating a Project.
 
 ```bash
 cd tests
@@ -966,11 +1006,8 @@ great_expectations checkpoint run labeled_projects
 
 At the end of this lesson, we'll create a target in our `Makefile` that run all these tests (code, data and models) and we'll automate their execution in our [pre-commit lesson](pre-commit.md){:target="_blank"}.
 
-> We can also use the [Great Expectations GitHub Action](https://github.com/great-expectations/great_expectations_action){:target="_blank"} to automate validating our data pipeline code when we push a change to a remote host (ex. GitHub).
-
 !!! note
-    By default, Great Expectations stores our expectations, results and metrics locally but for production, we'll want to set up remote [metadata stores](https://docs.greatexpectations.io/docs/guides/setup/#metadata-stores){:target="_blank"}. This is typically something our data engineering team would help set up as validation should occur [prior](#best-practices-1) to downstream application such as machine learning (though ML teams can certainly help craft more expectations to ensure data validity).
-
+    We've applied expectations on our source dataset but there are many other key areas to test the data as well. For example, the intermediate outputs from processes such as cleaning, augmentation, splitting, preprocessing, tokenization, etc.
 
 ### Data docs
 When we create expectations using the CLI application, Great Expectations automatically generates documentation for our tests. It also stores information about validation runs and their results. We can launch the generate data documentation with the following command: ```#!bash great_expectations docs build```
@@ -979,17 +1016,14 @@ When we create expectations using the CLI application, Great Expectations automa
     <img width="700" src="/static/images/mlops/testing/docs.png">
 </div>
 
-### Best practices
+### Production
 
-We've applied expectations on our source dataset but there are many other key areas to test the data as well. Throughout the ML development pipeline, we should test the intermediate outputs from processes such as cleaning, augmentation, splitting, preprocessing, tokenization, etc. We'll use these expectations to monitor new batches of data and before combining them with our existing data assets.
+By default, Great Expectations stores our expectations, results and metrics locally but for production, we'll want to set up remote [metadata stores](https://docs.greatexpectations.io/docs/guides/setup/#metadata-stores){:target="_blank"}. This is typically something our data engineering team would help set up as validation should occur prior to downstream applications such as machine learning (though ML teams can certainly help craft more expectations to ensure data validity).
 
-Also note that the way we performed data validation on our static data file is not how it occurs in mature data pipelines. Many of these expectations will be executed when the data is originally extracted and loaded to different data platforms (ex. [data warehouse](infrastructure.md#data-management-systems){:target="_blank"}), decoupled from any downstream uses cases such as ML systems. We can see below how Great Expectations checkpoint validations are used at every step of the way, include before and after applying data transformations (using tools like [dbt](https://www.getdbt.com/){:target="_blank"}) inside our data warehouse.
+Many of these expectations will be executed when the data is extracted and loaded to different data platforms (ex. [data warehouse](infrastructure.md#data-management-systems){:target="_blank"}) and decoupled from any downstream uses cases (ex. ML). We can see below how Great Expectations checkpoint validations are used at every step of the way, include before and after applying data transformations (using tools like [dbt](https://www.getdbt.com/){:target="_blank"}) inside our data warehouse.
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/testing/pipelines.png">
-</div>
-<div class="ai-center-all mt-2">
-    <small>Using Great Expectations in mature data pipelines, decoupled from downstream use cases such as ML.</small>
+    <img width="650" src="/static/images/mlops/testing/production.png" alt="ETL pipelines in production">
 </div>
 
 > Learn more about different data management systems in our [infrastructure lesson](infrastructure.md#data-management-systems){:target="_blank"} if you're not familiar with them.
@@ -1044,7 +1078,7 @@ Behavioral testing is the process of testing input data and expected outputs whi
 # INVariance via verb injection (changes should not affect outputs)
 tokens = ["revolutionized", "disrupted"]
 texts = [f"Transformers applied to NLP have {token} the ML field." for token in tokens]
-predict_tag(texts=texts)
+predict.predict(texts=texts, artifacts=artifacts)
 ```
 <pre class="output">
 ['natural-language-processing', 'natural-language-processing']
@@ -1054,7 +1088,7 @@ predict_tag(texts=texts)
 # DIRectional expectations (changes with known outputs)
 tokens = ["text classification", "image classification"]
 texts = [f"ML applied to {token}." for token in tokens]
-predict_tag(texts=texts)
+predict.predict(texts=texts, artifacts=artifacts)
 ```
 <pre class="output">
 ['natural-language-processing', 'computer-vision']
@@ -1064,11 +1098,26 @@ predict_tag(texts=texts)
 # Minimum Functionality Tests (simple input/output pairs)
 tokens = ["natural language processing", "mlops"]
 texts = [f"{token} is the next big wave in machine learning." for token in tokens]
-predict_tag(texts=texts)
+predict.predict(texts=texts, artifacts=artifacts)
 ```
 <pre class="output">
 ['natural-language-processing', 'mlops']
 </pre>
+
+!!! tip
+    Each of these types of tests can also include adversarial tests such as testing with common biased tokens or noisy tokens, etc.
+
+    ```python linenums="1"
+    texts = [
+        "CNNs for text classification.",  # CNNs are typically seen in computer-vision projects
+        "This should not produce any relevant topics."  # should predict `other` label
+    ]
+    predict.predict(texts=texts, artifacts=artifacts)
+    ```
+    <pre class="output">
+        ['natural-language-processing', 'other']
+    </pre>
+
 
 And we can convert these behavioral tests into systematic parameterized tests:
 
@@ -1091,24 +1140,31 @@ def artifacts():
     return artifacts
 
 @pytest.mark.parametrize(
-    "text, tag",
+    "text_a, text_b, tag",
     [
-        ("Transformers applied to NLP have revolutionized machine learning.", "natural-language-processing"),
-        ("Transformers applied to NLP have disrupted machine learning.", "natural-language-processing"),
+        (
+            "Transformers applied to NLP have revolutionized machine learning.",
+            "Transformers applied to NLP have disrupted machine learning.",
+            "natural-language-processing",
+        ),
     ],
 )
-def test_inv(text, tag, artifacts):
+def test_inv(text_a, text_b, tag, artifacts):
     """INVariance via verb injection (changes should not affect outputs)."""
-    predicted_tag = predict.predict(texts=[text], artifacts=artifacts)[0]["predicted_tag"]
-    assert tag == predicted_tag
+    tag_a = predict.predict(texts=[text_a], artifacts=artifacts)[0]["predicted_tag"]
+    tag_b = predict.predict(texts=[text_b], artifacts=artifacts)[0]["predicted_tag"]
+    assert tag_a == tag_b == tag
 ```
 
-??? quote "View `tests/model/test_behavioral.py`
+??? quote "View `tests/model/test_behavioral.py`"
     ```python linenums="1"
     from pathlib import Path
+
     import pytest
+
     from config import config
     from tagifai import main, predict
+
 
     @pytest.fixture(scope="module")
     def artifacts():
@@ -1116,11 +1172,18 @@ def test_inv(text, tag, artifacts):
         artifacts = main.load_artifacts(run_id=run_id)
         return artifacts
 
+
     @pytest.mark.parametrize(
         "text, tag",
         [
-            ("Transformers applied to NLP have revolutionized machine learning.", "natural-language-processing"),
-            ("Transformers applied to NLP have disrupted machine learning.", "natural-language-processing"),
+            (
+                "Transformers applied to NLP have revolutionized machine learning.",
+                "natural-language-processing",
+            ),
+            (
+                "Transformers applied to NLP have disrupted machine learning.",
+                "natural-language-processing",
+            ),
         ],
     )
     def test_inv(text, tag, artifacts):
@@ -1128,11 +1191,22 @@ def test_inv(text, tag, artifacts):
         predicted_tag = predict.predict(texts=[text], artifacts=artifacts)[0]["predicted_tag"]
         assert tag == predicted_tag
 
+
     @pytest.mark.parametrize(
         "text, tag",
         [
-            ("ML applied to text classification.", "natural-language-processing"),
-            ("ML applied to image classification.", "computer-vision"),
+            (
+                "ML applied to text classification.",
+                "natural-language-processing",
+            ),
+            (
+                "ML applied to image classification.",
+                "computer-vision",
+            ),
+            (
+                "CNNs for text classification.",
+                "natural-language-processing",
+            )
         ],
     )
     def test_dir(text, tag, artifacts):
@@ -1140,11 +1214,22 @@ def test_inv(text, tag, artifacts):
         predicted_tag = predict.predict(texts=[text], artifacts=artifacts)[0]["predicted_tag"]
         assert tag == predicted_tag
 
+
     @pytest.mark.parametrize(
         "text, tag",
         [
-            ("Natural language processing is the next big wave in machine learning..", "natural-language-processing"),
-            ("MLOps is the next big wave in machine learning..", "mlops"),
+            (
+                "Natural language processing is the next big wave in machine learning.",
+                "natural-language-processing",
+            ),
+            (
+                "MLOps is the next big wave in machine learning.",
+                "mlops",
+            ),
+            (
+                "This should not produce any relevant topics.",
+                "other",
+            ),
         ],
     )
     def test_mft(text, tag, artifacts):
@@ -1152,16 +1237,6 @@ def test_inv(text, tag, artifacts):
         predicted_tag = predict.predict(texts=[text], artifacts=artifacts)[0]["predicted_tag"]
         assert tag == predicted_tag
     ```
-
-!!! note
-    Be sure to explore the [NLP Checklist](https://github.com/marcotcr/checklist){:target="_blank"} package which simplifies and augments the creation of these behavioral tests via functions, templates, pretrained models and interactive GUIs in Jupyter notebooks.
-
-    <div class="ai-center-all">
-        <img width="600" src="/static/images/mlops/testing/checklist.gif">
-    </div>
-    <div class="ai-center-all mt-2">
-        <a href="https://github.com/marcotcr/checklist" target="_blank">NLP Checklist</a>
-    </div>
 
 ### Inference
 

@@ -74,7 +74,7 @@ The first decision is whether to serve predictions via batches or real-time, whi
 
 ### Batch serving
 
-We can make batch predictions on a finite set of inputs which are then written to a database for low latency inference. When a user or downstream process makes an inference request in real-time, cached results from the database are returned.
+We can make batch predictions on a finite set of inputs which are then written to a database for low latency inference. When a user or downstream process makes an inference request in real-time, cached results from the database are returned (typically via a  [request](api.md#request){:target="_blank"} to an [API](api.md){:target="_blank"} to query the DB).
 
 <div class="ai-center-all">
     <img width="600" src="/static/images/mlops/infrastructure/batch_serving.png">
@@ -93,7 +93,7 @@ We can make batch predictions on a finite set of inputs which are then written t
 
 ### Real-time serving
 
-We can also serve live predictions, typically through a [request](api.md#request){:target="_blank"} to our [API](api.md){:target="_blank"} with the appropriate input data.
+We can also serve live predictions where input featured are fed to the model in real-time to retrieve predictions.
 
 <div class="ai-center-all">
     <img width="400" src="/static/images/mlops/infrastructure/real_time_serving.png">
@@ -162,7 +162,6 @@ The traditional approach is to train our models offline and then deploy them to 
 - ✅&nbsp; no urgency to get recent data immediately labeled and validated.
 - ❌&nbsp; the model can become stale and may not adapt to recent changes until some monitoring alerts trigger retraining.
 
-> Learn more about the executing MLOps pipeline tasks using a workflow orchestrator in the [Pipelines lesson](pipelines.md){:target="_blank"}.
 
 ### Online learning
 

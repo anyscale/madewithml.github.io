@@ -1,6 +1,6 @@
 ---
 template: lesson.html
-title: Pipelines
+title: Pipeline Orchestration for Machine Learning
 description: Create, schedule and monitor workflows by creating scalable pipelines.
 keywords: airflow, workflows, pipelines, orchestration, dataops, data warehouse, database, great expectations, data validation, spark, ci/cd, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png

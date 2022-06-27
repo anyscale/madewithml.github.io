@@ -99,6 +99,7 @@ def predict_tag(text: str, run_id: str = None) -> None:
     artifacts = load_artifacts(run_id=run_id)
     prediction = predict.predict(texts=[text], artifacts=artifacts)
     logger.info(json.dumps(prediction, indent=2))
+    return prediction
 ```
 
 But we can also ask for help with this specific command without having to go into the code:

@@ -12,9 +12,6 @@ notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/
 
 Let's motivate the need for a feature store by chronologically looking at what challenges developers face in their current workflows. Suppose we had a task where we needed to predict something for an entity (ex. user) using their features.
 
-!!! warning "Don't over-engineer it"
-    Not all ML tasks will require a feature store. The real utility shines when we need to have up-to-date features for an entity that we continually generate predictions for.
-
 1. **Isolation**: feature development in isolation (for each unique ML application) can lead to duplication of efforts (setting up ingestion pipelines, feature engineering, etc.).
     - `#!js Solution`: create a central feature repository where the entire team contributes maintained features that anyone can use for any application.
 2. **Skew**: we may have different pipelines for generating features for training and serving which can introduce skew through the subtle differences.
@@ -36,8 +33,12 @@ When actually constructing our feature store, there are several core components 
 
 Each of these components is fairly easy to set up but connecting them all together requires a managed service, SDK layer for interactions, etc. Instead of building from scratch, it's best to leverage one of the production-ready, feature store options such as [Feast](https://feast.dev/){:target="_blank"}, [Hopsworks](https://www.hopsworks.ai/){:target="_blank"}, [Tecton](https://www.tecton.ai/){:target="_blank"}, [Rasgo](https://www.rasgoml.com/){:target="_blank"}, etc. And of course, the large cloud providers have their own feature store options as well (Amazon's [SageMaker Feature Store](https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store.html){:target="_blank"}, Google's [Vertex AI](https://cloud.google.com/vertex-ai/docs/featurestore){:target="_blank"}, etc.)
 
+## Over-engineering
+
+Not all machine learning tasks require a feature store. In fact, our use case is a perfect example of a test that *does not* benefit from a feature store. All of our data points are independent and stateless and there is no entity that has changing features over time. The real utility of a feature store shines when we need to have up-to-date features for an entity that we continually generate predictions for. For example, a user's behavior (clicks, purchases, etc.) on an e-commerce platform or the deliveries a food runner recently made today, etc.
+
 !!! question "When do I need a feature store?"
-    The advantages of a feature store are obvious but when does our team need one?
+    Once we've determined if our task can benefit from a feature store, do we build one right away?
 
     ??? quote "Show answer"
         As usual, it depends.
@@ -49,7 +50,7 @@ Each of these components is fairly easy to set up but connecting them all togeth
 
         Delay using it until later if:
 
-        - nobody has set up one before
+        - no one on the team has set one up before
         - we need to iterate on product first (ex. early-stage startup)
         - we want to motivate the need for each advantage of a feature store
 
@@ -117,7 +118,6 @@ online_store:
 
 The first step is to establish connections with our data sources (databases, data warehouse, etc.). Feast requires it's [data sources](https://github.com/feast-dev/feast/blob/master/sdk/python/feast/data_source.py){:target="_blank"} to either come from a file ([Parquet](https://databricks.com/glossary/what-is-parquet){:target="_blank"}), data warehouse ([BigQuery](https://cloud.google.com/bigquery){:target="_blank"}) or data stream ([Kafka](https://kafka.apache.org/){:target="_blank"} / [Kinesis](https://aws.amazon.com/kinesis/){:target="_blank"}). We'll convert our generated features file from the DataOps pipeline (`features.json`) into a Parquet file, which is a column-major data format that allows fast feature retrieval and caching benefits (contrary to row-major data formats such as CSV where we have to traverse every single row to collect feature values).
 
-> Read more about these data sources in our [pipelines](https://madewithml.com/courses/mlops/pipelines/#data){:target="_blank"} and [infrastructure](../infrastructure/#batch-processing){:target="_blank"} lessons.
 
 ```python linenums="1"
 import pandas as pd
@@ -375,38 +375,6 @@ training_df.head()
 </table>
 </div></div>
 
-!!! note
-    We'll be using this function to retrieve historical feature again in our [pipelines lesson](pipelines.md){:target="_blank"} so let's add this to our [tagifai/main.py](https://github.com/GokuMohandas/MLOps/blob/main/tagifai/main.py){:target="_blank"} and write the appropriate test.
-
-    ```python linenums="1"
-    # tagifai/main.py
-    @app.command()
-    def get_historical_features():
-        """Retrieve historical features for training."""
-        # Entities to pull data for (should dynamically read this from somewhere)
-        project_ids = [1, 2, 3]
-        now = datetime.now()
-        timestamps = [datetime(now.year, now.month, now.day)] * len(project_ids)
-        entity_df = pd.DataFrame.from_dict({"id": project_ids, "event_timestamp": timestamps})
-
-        # Get historical features
-        store = FeatureStore(repo_path=Path(config.BASE_DIR, "features"))
-        training_df = store.get_historical_features(
-            entity_df=entity_df,
-            feature_refs=["project_details:text", "project_details:tags"],
-        ).to_df()
-        logger.info(training_df.head())
-        return training_df
-    ```
-
-    ```python linenums="1"
-    # tests/code/test_main.py
-    @pytest.mark.training
-    def test_get_historical_features():
-        result = runner.invoke(app, ["get-historical-features"])
-        assert result.exit_code == 0
-    ```
-
 ### Online features
 
 For online inference, we want to retrieve features very quickly via our online store, as opposed to fetching them from slow joins. However, the features are not in our online store just yet, so we'll need to [materialize](https://docs.feast.dev/quickstart#4-materializing-features-to-the-online-store){:target="_blank"} them first.
@@ -469,7 +437,7 @@ The feature store we implemented above assumes that our task requires [batch pro
 
 ### Stream processing
 
-Some applications may require [stream processing](../infrastructure/#stream-processing){:target="_blank"} where we require near real-time feature values to deliver up-to-date predictions at low latency. While we'll still utilize an offline store for retrieving historical data, our application's real-time event data will go directly through our data streams to an online store for serving.
+Some applications may require [stream processing](../infrastructure/#stream-processing){:target="_blank"} where we require near real-time feature values to deliver up-to-date predictions at low latency. While we'll still utilize an offline store for retrieving historical data, our application's real-time event data will go directly through our data streams to an online store for serving. An example where stream processing would be needed is when we want to retrieve real-time user session behavior (clicks, purchases) in an e-commerce platform so that we can recommend the appropriate items from our catalog.
 
 <div class="ai-center-all">
     <img src="/static/images/mlops/feature_store/stream.png" width="1000" alt="stream processing">

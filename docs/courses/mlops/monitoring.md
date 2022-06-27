@@ -152,9 +152,9 @@ Besides the input and output data drifting, we can have the actual relationship 
 Now that we've identified the different types of drift, we need to learn how to locate and how often to measure it. Here are the constraints we need to consider:
 
 - **reference window**: the set of points to compare production data distributions with to identify drift.
-- **target window**: the set of points to compare with the reference window to determine if drift has occurred.
+- **test window**: the set of points to compare with the reference window to determine if drift has occurred.
 
-Since we're dealing with online drift detection (ie. detecting drift in live production data as opposed to past batch data), we can employ either a [fixed or sliding window approach](https://onlinelibrary.wiley.com/doi/full/10.1002/widm.1381){:target="_blank"} to identify our set of points for comparison. Typically, the reference window is a fixed, recent subset of the training data while the target window slides over time.
+Since we're dealing with online drift detection (ie. detecting drift in live production data as opposed to past batch data), we can employ either a [fixed or sliding window approach](https://onlinelibrary.wiley.com/doi/full/10.1002/widm.1381){:target="_blank"} to identify our set of points for comparison. Typically, the reference window is a fixed, recent subset of the training data while the test window slides over time.
 
 [Scikit-multiflow](https://scikit-multiflow.github.io/){:target="_blank"} provides a toolkit for concept drift detection [techniques](https://scikit-multiflow.readthedocs.io/en/stable/api/api.html#module-skmultiflow.drift_detection){:target="_blank"} directly on streaming data. The package offers windowed, moving average functionality (including dynamic preprocessing) and even methods around concepts like [gradual concept drift](https://scikit-multiflow.readthedocs.io/en/stable/api/generated/skmultiflow.drift_detection.EDDM.html#skmultiflow-drift-detection-eddm){:target="_blank"}.
 
@@ -357,53 +357,27 @@ As we can see, measuring drift is fairly straightforward for univariate data but
     <small>Detecting drift as outlined in <a href="https://arxiv.org/abs/1810.11953" target="_blank">Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift</a></small>
 </div>
 
+We vectorized our text using tf-idf (to keep modeling simple), which has high dimensionality and is not semantically rich in context. However, typically with text, word/char embeddings are used. So to illustrate what drift detection on multivariate data would look like, let's represent our text using pretrained embeddings.
+
+> Be sure to refer to our [embeddings](../foundations/embeddings.md){:target="_blank"} and [transformers](../foundations/transformers.md){:target="_blank"} lessons to learn more about these topics.
+
 We'll use the embedded inputs from our model as our multivariate data. We'll first apply dimensionality reduction and then conduct two different tests to detect drift. We'll start by establishing our reference window:
 
 ```python linenums="1"
 import torch
 import torch.nn as nn
-from tagifai import data, main
-```
 
-```python linenums="1"
-# Set device
-device = utils.set_device(cuda=False)
-```
-
-```python linenums="1"
-# Load model
-run_id = open(Path(config.CONFIG_DIR, "run_id.txt")).read()
-artifacts = main.load_artifacts(run_id=run_id)
-```
-
-```python linenums="1"
-# Retrieve artifacts
-params = artifacts["params"]
-label_encoder = artifacts["label_encoder"]
-tokenizer = artifacts["tokenizer"]
-embeddings_layer = artifacts["model"].embeddings
-embedding_dim = embeddings_layer.embedding_dim
-```
-
-```python linenums="1"
 def get_data_tensor(texts):
-    preprocessed_texts = [data.clean_text(text, lower=params.lower, stem=params.stem) for text in texts]
+    preprocessed_texts = [data.preprocess(text, lower=params.lower, stem=params.stem) for text in texts]
     X = np.array(tokenizer.texts_to_sequences(preprocessed_texts), dtype="object")
     y_filler = np.zeros((len(X), len(label_encoder)))
     dataset = data.CNNTextDataset(X=X, y=y_filler, max_filter_size=int(params.max_filter_size))
     dataloader = dataset.create_dataloader(batch_size=len(texts))
     return next(iter(dataloader))[0]
-```
 
-```python linenums="1"
-# Reference
+# Reference data
 reference = get_data_tensor(texts=df.text[-400:-200].to_list())
-reference.shape
 ```
-
-<pre class="output">
-torch.Size([200, 186])
-</pre>
 
 > We can't use encoded text because each character's categorical representation is arbitrary. However, the embedded text's representation does capture semantic meaning which makes it possible for us to detect drift on. With tabular data and images, we can use those numerical representation as is (can preprocess if needed) since the values are innately meaningful.
 
@@ -416,11 +390,15 @@ We first apply dimensionality reduction to the data before hypothesis testing. P
 - [Black box shift detectors (BBSD)](https://arxiv.org/abs/1802.03916){:target="_blank"}: the actual model trained on the training data can be used as a dimensionality reducer. We can either use the softmax outputs (multivariate) or the actual predictions (univariate).
 
 ```python linenums="1"
+```python
+
 from functools import partial
 from alibi_detect.cd.pytorch import preprocess_drift
-```
 
-```python linenums="1"
+# Isolate embeddings layer
+embeddings_layer = model.embeddings
+embedding_dim = embeddings_layer.embedding_dim
+
 # Untrained autoencoder (UAE) reducer
 enc_dim = 32
 reducer = nn.Sequential(
@@ -431,9 +409,7 @@ reducer = nn.Sequential(
     nn.ReLU(),
     nn.Linear(256, enc_dim)
 ).to(device).eval()
-```
 
-```python linenums="1"
 # Preprocessing with the reducer
 preprocess_fn = partial(preprocess_drift, model=reducer, batch_size=params.batch_size)
 ```
@@ -446,14 +422,10 @@ The different dimensionality reduction techniques applied on multivariate data y
 
 ```python linenums="1"
 from alibi_detect.cd import MMDDrift
-```
 
-```python linenums="1"
 # Initialize drift detector
 embeddings_mmd_drift_detector = MMDDrift(reference, backend="pytorch", p_val=.01, preprocess_fn=preprocess_fn)
-```
 
-```python linenums="1"
 # No drift
 no_drift = get_data_tensor(texts=df.text[-200:].to_list())
 embeddings_mmd_drift_detector.predict(no_drift)
@@ -566,7 +538,7 @@ With drift, we're comparing a window of production data with reference data as o
     <img width="600" src="/static/images/mlops/monitoring/outliers.png">
 </div>
 
-Unfortunately, it's not very easy to detect outliers because it's hard to constitute the criteria for an outlier. Therefore the outlier detection task is typically unsupervised and requires a stochastic streaming algorithm to identify potential outliers. Luckily, there are several powerful libraries such as [PyOD](https://pyod.readthedocs.io/en/latest/){:target="_blank"}, [Alibi Detect](https://docs.seldon.io/projects/alibi-detect/en/latest/){:target="_blank"}, [WhyLogs](https://whylogs.readthedocs.io/en/latest/){:target="_blank"} (uses [Apache DataSketches](https://datasketches.apache.org/){:target="_blank"}), etc. that offer a suite of outlier detection functionality (largely for tabular and image data for now). We can use these packages with our [pipelines](pipelines.md){:target="_blank"} or even [Kafka](https://kafka.apache.org/){:target="_blank"} data streams to continuously monitor for outliers.
+Unfortunately, it's not very easy to detect outliers because it's hard to constitute the criteria for an outlier. Therefore the outlier detection task is typically unsupervised and requires a stochastic streaming algorithm to identify potential outliers. Luckily, there are several powerful libraries such as [PyOD](https://pyod.readthedocs.io/en/latest/){:target="_blank"}, [Alibi Detect](https://docs.seldon.io/projects/alibi-detect/en/latest/){:target="_blank"}, [WhyLogs](https://whylogs.readthedocs.io/en/latest/){:target="_blank"} (uses [Apache DataSketches](https://datasketches.apache.org/){:target="_blank"}), etc. that offer a suite of outlier detection functionality (largely for tabular and image data for now).
 
 Typically, outlier detection algorithms fit (ex. via reconstruction) to the training set to understand what normal data looks like and then we can use a threshold to predict outliers. If we have a small labeled dataset with outliers, we can empirically choose our threshold but if not, we can choose some reasonable tolerance.
 
@@ -620,7 +592,7 @@ Once we receive an alert, we need to inspect it before acting on it. An alert ne
 - relevant metadata (time, inputs, outputs, etc.)
 - thresholds / expectations that failed
 - drift detection tests that were conducted
-- data from reference and target windows
+- data from reference and test windows
 - [log](logging.md){:target="_blank"} records from the relevant window of time
 
 ```bash
@@ -660,8 +632,6 @@ Since detecting drift and outliers can involve compute intensive operations, we 
 When it actually comes to implementing a monitoring system, we have several options, ranging from fully managed to from-scratch. Several popular managed solutions are [Arize](https://arize.com/){:target="_blank"}, [Arthur](https://www.arthur.ai/){:target="_blank"}, [Fiddler](https://www.fiddler.ai/ml-monitoring){:target="_blank"}, [Gantry](https://gantry.io/){:target="_blank"}, [Mona](https://www.monalabs.io/){:target="_blank"}, [WhyLabs](https://whylabs.ai/){:target="_blank"}, etc., all of which allow us to create custom monitoring views, trigger alerts, etc. There are even several great open-source solutions such as [EvidentlyAI](https://evidentlyai.com/){:target="_blank"}, [TorchDrift](https://torchdrift.org/){:target="_blank"}, [WhyLogs](https://whylogs.readthedocs.io/en/latest/){:target="_blank"}, etc.
 
 We'll often notice that monitoring solutions are offered as part of the larger deployment option such as [Sagemaker](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html){:target="_blank"}, [TensorFlow Extended (TFX)](https://www.tensorflow.org/tfx){:target="_blank"}, [TorchServe](https://pytorch.org/serve/){:target="_blank"}, etc. And if we're already working with Kubernetes, we could use [KNative](https://knative.dev/){:target="_blank"} or [Kubeless](https://kubeless.io/){:target="_blank"} for serverless workload management. But we could also use a higher level framework such as [KFServing](https://www.kubeflow.org/docs/components/kfserving/){:target="_blank"} or [Seldon core](https://docs.seldon.io/projects/seldon-core/en/v0.4.0/#){:target="_blank"} that natively use a serverless framework like KNative.
-
-> Learn about how the monitoring workflows connect to the our overall ML systems in our [pipeline lesson](pipelines.md#monitoring). Monitoring offers a stream of signals that our update policy engine consumes to decide what to do next (continue, warrant an inspection, retrain the model on new data, rollback to a previous model version, etc.).
 
 ## References
 - [An overview of unsupervised drift detection methods](https://onlinelibrary.wiley.com/doi/full/10.1002/widm.1381){:target="_blank"}

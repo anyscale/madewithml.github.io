@@ -1241,6 +1241,7 @@ This way when the names of columns change or we want to replace with different l
         artifacts = load_artifacts(run_id=run_id)
         prediction = predict.predict(texts=[text], artifacts=artifacts)
         print(json.dumps(prediction, indent=2))
+        return prediction
     ```
 
     This involves creating the `load_artifacts()` function inside our `main.py` script:

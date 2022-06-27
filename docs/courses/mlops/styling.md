@@ -30,7 +30,28 @@ Install required packages:
 ```bash
 pip install black==22.3.0 flake8==3.9.2 isort==5.10.1
 ```
-> We won't add these to our `requirements.txt` like we have been doing. Since these libraries are not core to our project, we'll be isolating them. We'll learn more about this in our [CI/CD](cicd.md){:target="_blank"} lesson.
+
+Since these styling packages are are not integral to the core machine learning operations, let's create a separate list in our `setup.py`:
+
+```python linenums="1" hl_lines="12"
+# setup.py
+style_packages = [
+    "black==22.3.0",
+    "flake8==3.9.2",
+    "isort==5.10.1"
+]
+
+# Define our package
+setup(
+    ...
+    extras_require={
+        "dev": docs_packages + style_packages,
+        "docs": docs_packages,
+    },
+)
+```
+
+> Unlike `docs`, we don't add `style_packages` as a separate `extras_require` because there is no need for someone to install just the style packages. So we can just add it to the `dev` option.
 
 ## Configuration
 

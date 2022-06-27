@@ -25,6 +25,21 @@ pip install pre-commit==2.19.0
 pre-commit install
 ```
 
+And we'll add this to our `setup.py` script instead of our `requirements.txt` file because it's not core to the machine learning operations.
+
+```python linenums="1" hl_lines="5"
+# setup.py
+setup(
+    ...
+    extras_require={
+        "dev": docs_packages + style_packages + test_packages + "pre-commit==2.19.0",
+        "docs": docs_packages,
+        "test": test_packages,
+    },
+)
+```
+
+
 ## Config
 
 We define our pre-commit hooks via a `.pre-commit-config.yaml` configuration file. We can either create our yaml configuration from scratch or use the pre-commit CLI to create a sample configuration which we can add to.
