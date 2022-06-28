@@ -19,4 +19,4 @@ How come there's a lot of buzz around ML but we grossly fall short when it comes
 We will steadily address all the issues mentioned above but we're going to work backwards starting with *trust*.
 This is why we created our courses to educate the community on how to responsibly develop, iterate and deliver value via applications that are made with ML.
 
-{% include "instructor.md" %}
+{% include "styles/instructor.md" %}
