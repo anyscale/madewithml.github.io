@@ -527,9 +527,8 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
     <li><a href="/courses/mlops/continual-learning/">Continual learning</a></li>
-    <li><a style="color: #000;">Data systems</a> <small>(Sept 2022)</small></li>
-    <li><a style="color: #000;">Pipelines</a> <small>(Sept 2022)</small></li>
-    <li><a style="color: #000;">Orchestration</a> <small>(Sept 2022)</small></li>
+    <li><a style="color: #000;">Data stack</a> <small>(Aug 2022)</small></li>
+    <li><a style="color: #000;">Orchestration</a> <small>(Aug 2022)</small></li>
     </ul>
 </div>
 </div>
