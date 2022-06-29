@@ -4,14 +4,14 @@ title: Working in Notebooks
 description: Learn how to use interactive notebooks for developing in Python.
 keywords: notebooks, jupyter, ipython, jupyterlab, python, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
-repository: https://github.com/GokuMohandas/MadeWithML
-notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/01_Notebooks.ipynb
+repository: https://github.com/GokuMohandas/Made-With-ML
+notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blob/main/notebooks/01_Notebooks.ipynb
 ---
 
 {% include "styles/lesson.md" %}
 
 ## Set up
-1. Click on this link to open the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/01_Notebooks.ipynb){:target="_blank"} for this lesson or create a blank one on [Google Colab](https://colab.research.google.com/){:target="_blank"}.
+1. Click on this link to open the accompanying [notebook](https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blob/main/notebooks/01_Notebooks.ipynb){:target="_blank"} for this lesson or create a blank one on [Google Colab](https://colab.research.google.com/){:target="_blank"}.
 2. Sign into your [Google account](https://accounts.google.com/signin) to start using the notebook. If you don't want to save your work, you can skip the steps below. If you do not have access to Google, you can follow along using [Jupyter Lab](https://jupyter.org/).
 3. If you do want to save your work, click the **COPY TO DRIVE** button on the toolbar. This will open a new notebook in a new tab. Rename this new notebook by removing the words Copy of from the title (change `Copy of 01_Notebooks` to `1_Notebooks`).
 

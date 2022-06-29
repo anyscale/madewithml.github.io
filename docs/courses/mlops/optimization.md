@@ -4,8 +4,8 @@ title: Optimizing Hyperparameters
 description: Optimizing a subset of hyperparameters to achieve an objective.
 keywords: optimization, hyperparameters, optuna, ray, hyperopt, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
-notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb
+repository: https://github.com/GokuMohandas/mlops-course
+notebook: https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/tagifai.ipynb
 ---
 
 {% include "styles/lesson.md" %}

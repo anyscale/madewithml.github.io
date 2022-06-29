@@ -4,7 +4,7 @@ title: "Versioning Code, Data and Models"
 description: Versioning code, data and models to ensure reproducible behavior in ML systems.
 keywords: versioning, dvc, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/mlops-course
 ---
 
 {% include "styles/lesson.md" %}
@@ -30,7 +30,7 @@ We'll be using DVC to version our datasets and model weights and store them in a
 > We'll be using a local directory to act as our blob storage so we can develop and analyze everything locally. We'll continue to do this for other storage components as well such as feature stores and like we have been doing with our local model registry.
 
 ## Set up
-Let's start by installing DVC and initializing it to create a [.dvc](https://github.com/GokuMohandas/MLOps/tree/main/.dvc){:target="_blank"} directory.
+Let's start by installing DVC and initializing it to create a [.dvc](https://github.com/GokuMohandas/mlops-course/tree/main/.dvc){:target="_blank"} directory.
 ```bash
 # Initialization
 pip install dvc==2.10.2

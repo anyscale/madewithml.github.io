@@ -4,8 +4,8 @@ title: Modeling Baselines
 description: Motivating the use of baselines for iterative modeling.
 keywords: baselines, modeling, pytorch, transformers, huggingface, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
-notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb
+repository: https://github.com/GokuMohandas/mlops-course
+notebook: https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/tagifai.ipynb
 ---
 
 {% include "styles/lesson.md" %}

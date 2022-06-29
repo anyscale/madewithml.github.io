@@ -4,7 +4,7 @@ title: Documenting Code
 description: Documenting code for your team and your future self.
 keywords: documentation, mkdocs, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/mlops-course
 documentation: https://gokumohandas.github.io/MLOps/
 ---
 
@@ -21,7 +21,7 @@ We can further [organize](organization.md){:target="_blank"} our code by documen
 - `#!js docstrings`: meaningful descriptions for functions and classes that describe overall utility, arguments, returns, etc.
 - `#!js docs`: rendered webpage that summarizes all the functions, classes, workflows, examples, etc.
 
-> For now, we'll produce our documentation locally but be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}. We'll learn how to automatically create and keep our docs up-to-date in our [CI/CD](cicd.md){:target="_blank"} lesson every time we make changes to our code base.
+> For now, we'll produce our documentation locally but be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/mlops-course){:target="_blank"}. We'll learn how to automatically create and keep our docs up-to-date in our [CI/CD](cicd.md){:target="_blank"} lesson every time we make changes to our code base.
 
 !!! question "Code collaboration"
     How do you currently share your code with others on your team? What can be improved?
@@ -97,7 +97,7 @@ We'll render these docstrings in the [docs](#docs) section below to produce this
     <img src="/static/images/mlops/documentation/docstrings.png" width="500" alt="docstrings">
 </div>
 
-Take this time to update all the functions and classes in our project with docstrings and be sure to refer to the [repository](https://github.com/GokuMohandas/MLOps){:target="_blank"} as a guide. Note that you my have to explicitly import some libraries to certain scripts because the `type` requires it. For example, we don't explicitly use the Pandas library in our `data.py` script, however, we do use pandas dataframes as input arguments.
+Take this time to update all the functions and classes in our project with docstrings and be sure to refer to the [repository](https://github.com/GokuMohandas/mlops-course){:target="_blank"} as a guide. Note that you my have to explicitly import some libraries to certain scripts because the `type` requires it. For example, we don't explicitly use the Pandas library in our `data.py` script, however, we do use pandas dataframes as input arguments.
 ```python linenums="1" hl_lines="5"
 # tagifai/data.py
 import pandas as pd
@@ -178,7 +178,7 @@ This will create the following files:
 Learn how to apply ML to build a production grade product to deliver value.
 
 - Lessons: [https://madewithml.com/](https://madewithml.com/#mlops)
-- Code: [GokuMohandas/MLOps](https://github.com/GokuMohandas/MLOps)
+- Code: [GokuMohandas/mlops-course](https://github.com/GokuMohandas/mlops-course)
 ```
 
 4. Next we'll create documentation files for each script in our `tagifai` directory:
@@ -202,7 +202,7 @@ cd ../../
 # mkdocs.yml
 site_name: Made With ML
 site_url: https://madewithml.com/
-repo_url: https://github.com/GokuMohandas/MLOps/
+repo_url: https://github.com/GokuMohandas/mlops-course/
 nav:
   - Home: index.md
   - workflows:
@@ -229,7 +229,7 @@ python3 -m mkdocs serve
 
 We can easily serve our documentation for free using [GitHub pages](https://www.mkdocs.org/user-guide/deploying-your-docs/){:target="_blank"} for public repositories as wells as [private documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site){:target="_blank"} for private repositories. And we can even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"} (ex. company's subdomain).
 
-> Be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}. We'll learn how to automatically create and keep our docs up-to-date in our [CI/CD](cicd.md){:target="_blank"} lesson every time we make changes to our code base.
+> Be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/mlops-course){:target="_blank"}. We'll learn how to automatically create and keep our docs up-to-date in our [CI/CD](cicd.md){:target="_blank"} lesson every time we make changes to our code base.
 
 <!-- Citation -->
 {% include "cite.md" %}

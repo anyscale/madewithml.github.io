@@ -4,8 +4,8 @@ title: Feature Store
 description: Using a feature store to connect the DataOps and MLOps pipelines to enable collaborative teams to develop efficiently.
 keywords: feature stores, feast, point-in-time correctness, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
-notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/feature_store.ipynb
+repository: https://github.com/GokuMohandas/mlops-course
+notebook: https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/feature_store.ipynb
 ---
 
 ## Intuition
@@ -60,7 +60,7 @@ Not all machine learning tasks require a feature store. In fact, our use case is
 
 ### Set up
 
-> All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/feature_store.ipynb){:target="_blank"}.
+> All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/feature_store.ipynb){:target="_blank"}.
 
 We're going to leverage [Feast](https://feast.dev/){:target="_blank"} as the feature store for our application for it's ease of local setup, SDK for training/serving, etc.
 
@@ -69,7 +69,7 @@ We're going to leverage [Feast](https://feast.dev/){:target="_blank"} as the fea
 pip install feast==0.10.5 PyYAML==5.3.1 -q
 ```
 
-We're going to create a feature repository at the root of our project. [Feast](https://feast.dev/) will create a configuration file for us and we're going to add an additional [features.py](https://github.com/GokuMohandas/MLOps/blob/main/features/features.py){:target="_blank"} file to define our features.
+We're going to create a feature repository at the root of our project. [Feast](https://feast.dev/) will create a configuration file for us and we're going to add an additional [features.py](https://github.com/GokuMohandas/mlops-course/blob/main/features/features.py){:target="_blank"} file to define our features.
 
 > Traditionally, the feature repository would be it's own isolated repository that other services will use to read/write features from.
 
@@ -107,7 +107,7 @@ If all our [feature definitions](#feature-definitions) look valid, Feast will sy
 > When we run Feast locally, the offline store is effectively represented via Pandas point-in-time joins. Whereas, in production, the offline store can be something more robust like [Google BigQuery](https://cloud.google.com/bigquery){:target="_blank"}, [Amazon RedShift](https://aws.amazon.com/redshift/){:target="_blank"}, etc.
 
 
-We'll go ahead and paste this into our `features/feature_store.yaml` file (the [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/feature_store.ipynb){:target="_blank"} cell is automatically do this):
+We'll go ahead and paste this into our `features/feature_store.yaml` file (the [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/feature_store.ipynb){:target="_blank"} cell is automatically do this):
 
 ```yaml
 project: features
@@ -132,7 +132,7 @@ from urllib.request import urlopen
 
 ```python linenums="1"
 # Load projects
-url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json"
+url = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.json"
 projects = json.loads(urlopen(url).read())
 df = pd.DataFrame(projects)
 df["text"] = df.title + " " + df.description
@@ -262,7 +262,7 @@ project_details_view = FeatureView(
 )
 ```
 
-So let's go ahead and define our feature views by moving this code into our `features/features.py` script (the [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/feature_store.ipynb){:target="_blank"} cell is automatically do this):
+So let's go ahead and define our feature views by moving this code into our `features/features.py` script (the [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/feature_store.ipynb){:target="_blank"} cell is automatically do this):
 
 ??? quote "Show code"
     ```python

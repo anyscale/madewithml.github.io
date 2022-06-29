@@ -4,8 +4,8 @@ title: NumPy for Machine Learning
 description: Numerical analysis with the NumPy computing package.
 keywords: numpy, python, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
-repository: https://github.com/GokuMohandas/MadeWithML
-notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/03_NumPy.ipynb
+repository: https://github.com/GokuMohandas/Made-With-ML
+notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blob/main/notebooks/03_NumPy.ipynb
 ---
 
 {% include "styles/lesson.md" %}

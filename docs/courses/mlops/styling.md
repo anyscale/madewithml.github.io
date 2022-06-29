@@ -4,7 +4,7 @@ title: Styling and Formatting Code
 description: Style and formatting conventions to keep our code looking consistent.
 keywords: styling, formatting, pep8, black, isort, flake8, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/mlops-course
 ---
 
 {% include "styles/lesson.md" %}

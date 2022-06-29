@@ -4,8 +4,8 @@ title: Utilities for Machine Learning
 description: Explore utilities to extend and simplify preprocessing and training.
 keywords: utilities, random seed, data loader, training, pytorch, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
-repository: https://github.com/GokuMohandas/MadeWithML
-notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/10_Utilities.ipynb
+repository: https://github.com/GokuMohandas/Made-With-ML
+notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blob/main/notebooks/10_Utilities.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -59,7 +59,7 @@ import pandas as pd
 ```
 ```python linenums="1"
 # Load data
-url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/spiral.csv"
+url = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/spiral.csv"
 df = pd.read_csv(url, header=0) # load
 df = df.sample(frac=1).reset_index(drop=True) # shuffle
 df.head()

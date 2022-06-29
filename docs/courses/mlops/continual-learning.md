@@ -4,7 +4,7 @@ title: Continual learning
 description: Building a continual system that iteratively updates and gains our trust over time.
 keywords: continual learning, retraining, monitoring, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/mlops-course
 ---
 
 {% include "styles/lesson.md" %}

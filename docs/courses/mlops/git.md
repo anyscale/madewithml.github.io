@@ -76,7 +76,7 @@ __pycache__/
 For now, we're going to add `data` to our `.gitignore` file as well but this means that others will not be able to produce the same data assets when they pull from our remote host. To address this, we'll push pointers to our data files in our [versioning lesson](versioning.md){:target="_blank"} so that the data too can be reproduced exactly as we have it locally.
 
 !!! tip
-    Check out our project's [.gitignore](https://github.com/GokuMohandas/MLOps/blob/main/.gitignore){:target="_blank"} for a more complete example that also includes lots of other system artifacts that we would normally not want to push to a remote repository. Our complete `.gitignore` file is based on GitHub's [Python template](https://github.com/github/gitignore/blob/main/Python.gitignore){:target="_blank"}  and we're using a [Mac](https://github.com/github/gitignore/blob/main/Global/macOS.gitignore){:target="_blank"}, so we added the relevant [global](https://github.com/github/gitignore/tree/main/Global){:target="_blank"} file names as well.
+    Check out our project's [.gitignore](https://github.com/GokuMohandas/mlops-course/blob/main/.gitignore){:target="_blank"} for a more complete example that also includes lots of other system artifacts that we would normally not want to push to a remote repository. Our complete `.gitignore` file is based on GitHub's [Python template](https://github.com/github/gitignore/blob/main/Python.gitignore){:target="_blank"}  and we're using a [Mac](https://github.com/github/gitignore/blob/main/Global/macOS.gitignore){:target="_blank"}, so we added the relevant [global](https://github.com/github/gitignore/tree/main/Global){:target="_blank"} file names as well.
 
 If we run `git status` now, we should no longer see the files we've defined in our `.gitignore` file.
 
@@ -182,7 +182,7 @@ And we can clone a specific branch of a repository as well:
 git clone -b <BRANCH> <REMOTE_REPO_URL> <PATH_TO_PROJECT_DIR>
 ```
 
-- `<REMOTE_REPO_URL>` is the location of the remote repo (ex. https://github.com/GokuMohandas/mlops).
+- `<REMOTE_REPO_URL>` is the location of the remote repo (ex. https://github.com/GokuMohandas/mlops-course).
 - `<PATH_TO_PROJECT_DIR>` is the name of the local directory you want to clone the project into.
 
 

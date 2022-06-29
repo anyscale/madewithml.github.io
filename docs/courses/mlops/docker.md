@@ -4,7 +4,7 @@ title: "Docker"
 description: Packaging our application into reproducible and scalable containers.
 keywords: docker, containers, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/mlops-course
 ---
 
 {% include "styles/lesson.md" %}
@@ -45,7 +45,7 @@ Docker version 20.10.8, build 3967b7d
 </pre>
 
 ## Images
-The first step is to build a docker image which has the application and all it's specified dependencies. We can create this image using a Dockerfile which outlines a set of instructions. These instructions essentially build read-only image layers on top of each other to construct our entire image. Let's take a look at our application's [Dockerfile](https://github.com/GokuMohandas/MLOps/blob/main/Dockerfile){:target="_blank"} and the image layers it creates.
+The first step is to build a docker image which has the application and all it's specified dependencies. We can create this image using a Dockerfile which outlines a set of instructions. These instructions essentially build read-only image layers on top of each other to construct our entire image. Let's take a look at our application's [Dockerfile](https://github.com/GokuMohandas/mlops-course/blob/main/Dockerfile){:target="_blank"} and the image layers it creates.
 
 ## Dockerfile
 

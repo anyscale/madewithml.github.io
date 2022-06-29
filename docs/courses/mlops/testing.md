@@ -4,8 +4,8 @@ title: "Testing Machine Learning Systems: Code, Data and Models"
 description: Learn how to test ML models (and their code and data) to ensure consistent behavior in our ML systems.
 keywords: testing, testing ml, pytest, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
-notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/expectations.ipynb
+repository: https://github.com/GokuMohandas/mlops-course
+notebook: https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/expectations.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -73,7 +73,7 @@ Perfect coverage doesn't mean that our application is error free if those tests 
 
 ## Application
 
-In our [application](https://github.com/GokuMohandas/MLOps){:target="_blank"}, we'll be testing the code, data and models. We'll start by creating a separate `tests` directory with `code` subdirectory for testing our `tagifai` scripts. We'll create subdirectories for testing [data](#🔢nbsp-data) and [models](#🤖nbsp-models) soon below.
+In our [application](https://github.com/GokuMohandas/mlops-course){:target="_blank"}, we'll be testing the code, data and models. We'll start by creating a separate `tests` directory with `code` subdirectory for testing our `tagifai` scripts. We'll create subdirectories for testing [data](#🔢nbsp-data) and [models](#🤖nbsp-models) soon below.
 
 ```bash
 mkdir tests
@@ -93,7 +93,7 @@ tests/
 |   └── test_utils.py
 ```
 
-Feel free to write the tests and organize them in these scripts *after* learning about all the concepts in this lesson. We suggest using our [`tests`](https://github.com/GokuMohandas/MLOps/tree/main/tests){:target="_blank"} directory on GitHub as a reference.
+Feel free to write the tests and organize them in these scripts *after* learning about all the concepts in this lesson. We suggest using our [`tests`](https://github.com/GokuMohandas/mlops-course/tree/main/tests){:target="_blank"} directory on GitHub as a reference.
 
 > Notice that our `tagifai/train.py` script does not have it's respective `tests/code/test_train.py`. Some scripts have large functions (ex. `train.train()`, `train.optimize()`, `predict.predict()`, etc.) with dependencies (ex. artifacts) and it makes sense to test them via `tests/code/test_main.py`.
 
@@ -499,7 +499,7 @@ pytest -m "not fruits"  #  runs all tests besides those marked with `fruits`
 ```
 
 !!! tip
-    The proper way to use markers is to explicitly list the ones we've created in our [pyproject.toml](https://github.com/GokuMohandas/MLOps/blob/main/pyproject.toml){:target="_blank"} file. Here we can specify that all markers must be defined in this file with the `--strict-markers` flag and then declare our markers (with some info about them) in our `markers` list:
+    The proper way to use markers is to explicitly list the ones we've created in our [pyproject.toml](https://github.com/GokuMohandas/mlops-course/blob/main/pyproject.toml){:target="_blank"} file. Here we can specify that all markers must be defined in this file with the `--strict-markers` flag and then declare our markers (with some info about them) in our `markers` list:
 
     ```python linenums="1"
     @pytest.mark.training
@@ -584,7 +584,7 @@ So far, we've used unit and integration tests to test the functions that interac
 
 ### Expectations
 
-> Follow along with [this notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/expectations.ipynb){:target="_blank"} as we develop expectations for our dataset. We'll organize these expectations in our repository in the [projects section](testing.md#projects).
+> Follow along with [this notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/expectations.ipynb){:target="_blank"} as we develop expectations for our dataset. We'll organize these expectations in our repository in the [projects section](testing.md#projects).
 
 There are many dimensions to consider for what our data is expected to look like. We'll briefly talk about a few of them, including ones that may not directly be applicable to our task but, nonetheless, are very important to be aware of.
 
@@ -650,7 +650,7 @@ from urllib.request import urlopen
 
 ```python linenums="1"
 # Load projects
-url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json"
+url = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.json"
 projects = json.loads(urlopen(url).read())
 df = ge.dataset.PandasDataset(projects)
 print (f"{len(df)} projects")

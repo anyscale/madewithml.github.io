@@ -4,14 +4,14 @@ title: Organizing Machine Learning Code
 description: Organizing our code when moving from notebooks to Python scripts.
 keywords: git, github, organization, repository, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/mlops-course
 ---
 
 {% include "styles/lesson.md" %}
 
 ## Intuition
 
-To have organized code is to have readable, reproducible, robust code. Your team, manager and most importantly, your future self, will thank you for putting in the initial effort towards organizing your work. In this lesson, we'll discuss how to migrate and organize code from our [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb){:target="_blank"} to Python scripts.
+To have organized code is to have readable, reproducible, robust code. Your team, manager and most importantly, your future self, will thank you for putting in the initial effort towards organizing your work. In this lesson, we'll discuss how to migrate and organize code from our [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/tagifai.ipynb){:target="_blank"} to Python scripts.
 
 ## Editor
 Before we can start coding, we need a space to do it. There are several options for code editors, such as [VSCode](https://code.visualstudio.com/){:target="_blank"}, [Atom](https://atom.io/){:target="_blank"}, [Sublime](https://www.sublimetext.com/){:target="_blank"}, [PyCharm](https://www.jetbrains.com/pycharm/){:target="_blank"}, [Vim](https://www.vim.org/){:target="_blank"}, etc. and they all offer unique features while providing the basic operations for code editing and execution. We will be using VSCode to edit and execute our code thanks to its simplicity, multi-language support, add-ons and growing industry adoption.
@@ -330,8 +330,8 @@ This way when the names of columns change or we want to replace with different l
     # config/config.py
     ...
     # Assets
-    PROJECTS_URL = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json"
-    TAGS_URL = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json"
+    PROJECTS_URL = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.json"
+    TAGS_URL = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.json"
     ```
 
     Since this is a main operation, we'll define it in `main.py`:
@@ -1318,7 +1318,7 @@ This way when the names of columns change or we want to replace with different l
         As we work on more projects, we may find it useful to contribute our generalized functions and classes to a central repository. Provided that all the code is [tested](testing.md){:target="_blank"} and [documented](documentation.md){:target="_blank"}, this can reduce boilerplate code and redundant efforts. To make this central repository available for everyone, we can [package](https://packaging.python.org/tutorials/packaging-projects/){:target="_blank"} it and share it publicly or keep it private with a PyPI mirror, etc.
         ```bash
         # Ex. installing our public repo
-        pip install git+https://github.com/GokuMohandas/MLOps#egg=tagifai
+        pip install git+https://github.com/GokuMohandas/mlops-course#egg=tagifai
         ```
 
 <!-- Citation -->

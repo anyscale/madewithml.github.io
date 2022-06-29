@@ -4,8 +4,8 @@ title: Attention
 description: Incorporating attention mechanisms to create context-aware representations.
 keywords: attention, transformers, self-attention, positional encoding, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
-repository: https://github.com/GokuMohandas/MadeWithML
-notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/14_Attention.ipynb
+repository: https://github.com/GokuMohandas/Made-With-ML
+notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blob/main/notebooks/14_Attention.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -90,7 +90,7 @@ cuda
 We will download the [AG News dataset](http://www.di.unipi.it/~gulli/AG_corpus_of_news_articles.html){:target="_blank"}, which consists of 120K text samples from 4 unique classes (`Business`, `Sci/Tech`, `Sports`, `World`)
 ```python linenums="1"
 # Load data
-url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/news.csv"
+url = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/news.csv"
 df = pd.read_csv(url, header=0) # load
 df = df.sample(frac=1).reset_index(drop=True) # shuffle
 df.head()

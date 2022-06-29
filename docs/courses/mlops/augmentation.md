@@ -4,8 +4,8 @@ title: Data Augmentation
 description: Assessing data augmentation on our training data split to increase the number of quality training samples.
 keywords: data augmentation, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
-notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb
+repository: https://github.com/GokuMohandas/mlops-course
+notebook: https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/tagifai.ipynb
 ---
 
 
@@ -98,7 +98,7 @@ insertion.augment(text)
 automated conditional inverse image generation algorithms using multiple variational autoencoders and gans.
 </pre>
 
-A little better but still quite fragile and now it can potentially insert key words that can influence false positive tags to appear. Maybe instead of substituting or inserting new tokens, let's try simply swapping machine learning related keywords with their aliases from our [auxiliary data](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json){:target="_blank"}. We'll use Snorkel's [transformation functions](https://www.snorkel.org/use-cases/02-spam-data-augmentation-tutorial){:target="_blank"} to easily achieve this.
+A little better but still quite fragile and now it can potentially insert key words that can influence false positive tags to appear. Maybe instead of substituting or inserting new tokens, let's try simply swapping machine learning related keywords with their aliases from our [auxiliary data](https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.json){:target="_blank"}. We'll use Snorkel's [transformation functions](https://www.snorkel.org/use-cases/02-spam-data-augmentation-tutorial){:target="_blank"} to easily achieve this.
 
 ```python linenums="1"
 # Replace dashes from tags & aliases

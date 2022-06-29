@@ -4,14 +4,14 @@ title: Packaging a Python Codebase
 description: Using configurations and virtual environments to create a setting for reproducing results.
 keywords: packaging, pip, setup.py, virtual environment, reproducibility, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/mlops-course
 ---
 
 {% include "styles/lesson.md" %}
 
 ## Intuition
 
-So far, we've been working inside notebooks, which has allowed us to train a model very quickly. However, notebooks are not easy to put into production and we don't always have control over the environment (ex. Google Colab updates its packages periodically). When we used our [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb){:target="_blank"}, we had a preloaded set of packages (run `!pip list` inside the notebook to see all of them). But now we want to explicitly define our environment so we can reproduce it locally (for us and team members) and when we deploy to production. There are [many recommended tools](https://packaging.python.org/guides/tool-recommendations/){:target="_blank"} for when it comes to packaging in Python and we'll be using the tried and tested [Pip](https://pip.pypa.io/en/stable/){:target="_blank"}.
+So far, we've been working inside notebooks, which has allowed us to train a model very quickly. However, notebooks are not easy to put into production and we don't always have control over the environment (ex. Google Colab updates its packages periodically). When we used our [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/tagifai.ipynb){:target="_blank"}, we had a preloaded set of packages (run `!pip list` inside the notebook to see all of them). But now we want to explicitly define our environment so we can reproduce it locally (for us and team members) and when we deploy to production. There are [many recommended tools](https://packaging.python.org/guides/tool-recommendations/){:target="_blank"} for when it comes to packaging in Python and we'll be using the tried and tested [Pip](https://pip.pypa.io/en/stable/){:target="_blank"}.
 
 > There are many alternative dependency management and packaging tools, such as [Poetry](https://python-poetry.org/){:target="_blank"}, but there are still many things in flux with these newer options. We're going to stick with Pip because it works for our application and don't want to deal with issues like [long resolve periods](https://github.com/python-poetry/poetry/issues/2094){:target="_blank"}.
 

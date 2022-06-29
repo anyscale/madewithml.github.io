@@ -4,7 +4,7 @@ title: Pipeline Orchestration for Machine Learning
 description: Create, schedule and monitor workflows by creating scalable pipelines.
 keywords: airflow, workflows, pipelines, orchestration, dataops, data warehouse, database, great expectations, data validation, spark, ci/cd, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/mlops-course
 ---
 
 {% include "styles/lesson.md" %}
@@ -63,7 +63,7 @@ airflow/
 └── webserver_config.py
 ```
 
-We're going to edit the [airflow.cfg](https://github.com/GokuMohandas/MLOps/blob/main/airflow/airflow.cfg){:target="_blank"} file to best fit our needs:
+We're going to edit the [airflow.cfg](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/airflow.cfg){:target="_blank"} file to best fit our needs:
 ```bash
 # Inside airflow.cfg
 enable_xcom_pickling = True  # needed for Great Expectations airflow provider
@@ -136,7 +136,7 @@ mkdir airflow/dags
 touch airflow/dags/example.py
 ```
 
-> Before we start creating our DataOps and MLOps workflows, we'll learn about Airflow's concepts via an example DAG outlined in [airflow/dags/example.py](https://github.com/GokuMohandas/MLOps/blob/main/airflow/dags/example.py){:target="_blank"}
+> Before we start creating our DataOps and MLOps workflows, we'll learn about Airflow's concepts via an example DAG outlined in [airflow/dags/example.py](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/dags/example.py){:target="_blank"}
 
 Inside each workflow script, we can define some default arguments that will apply to all DAGs within that workflow.
 
@@ -333,7 +333,7 @@ example_dag = example()
 If we refresh our webserver page ([http://localhost:8080/](http://localhost:8080/){:target="_blank"}), the new DAG will have appeared.
 
 ### Manual
-Our DAG is initially paused since we specified `dags_are_paused_at_creation = True` inside our [airflow.cfg](https://github.com/GokuMohandas/MLOps/blob/main/airflow/airflow.cfg){:target="_blank"} configuration, so we'll have to manually execute this DAG by clicking on it > unpausing it (toggle) > triggering it (button). To view the logs for any of the tasks in our DAG run, we can click on the task > Log.
+Our DAG is initially paused since we specified `dags_are_paused_at_creation = True` inside our [airflow.cfg](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/airflow.cfg){:target="_blank"} configuration, so we'll have to manually execute this DAG by clicking on it > unpausing it (toggle) > triggering it (button). To view the logs for any of the tasks in our DAG run, we can click on the task > Log.
 
 <div class="ai-center-all">
     <img src="/static/images/mlops/pipelines/trigger.png" width="700" alt="triggering a DAG">
@@ -449,7 +449,7 @@ validate_tags = GreatExpectationsOperator(
 And we want both tasks to pass so we set the `fail_task_on_validation_failure` parameter to `True` so that downstream tasks don't execute if they fail.
 
 !!! note
-    Reminder that we previous set the following configuration in our [airflow.cfg](https://github.com/GokuMohandas/MLOps/blob/main/airflow/airflow.cfg){:target="_blank"} file since the output of the GreatExpectationsOperator is not JSON serializable.
+    Reminder that we previous set the following configuration in our [airflow.cfg](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/airflow.cfg){:target="_blank"} file since the output of the GreatExpectationsOperator is not JSON serializable.
     ```bash
     # Inside airflow.cfg
     enable_xcom_pickling = True

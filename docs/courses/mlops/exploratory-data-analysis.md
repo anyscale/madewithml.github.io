@@ -4,8 +4,8 @@ title: Exploratory Data Analysis (EDA)
 description: Exploring our dataset for insights, with intention.
 keywords: EDA, datasets, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
-notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/tagifai.ipynb
+repository: https://github.com/GokuMohandas/mlops-course
+notebook: https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/tagifai.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -23,8 +23,8 @@ We're going to start our project with EDA, a vital (and fun) process that's ofte
 
 ## Application
 
-- [projects.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json){:target="_blank"}: projects with title, description and tag.
-- [tags.json](https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json){:target="_blank"}: auxiliary information on the tags we are about of our platform.
+- [projects.json](https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.json){:target="_blank"}: projects with title, description and tag.
+- [tags.json](https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.json){:target="_blank"}: auxiliary information on the tags we are about of our platform.
 
 > Recall that our [objective](purpose.md#objective){:target="_blank"} was to classify incoming content so that the community can discover them.
 
@@ -44,7 +44,7 @@ from urllib.request import urlopen
 
 ```python linenums="1"
 # Load projects
-url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json"
+url = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.json"
 projects = json.loads(urlopen(url).read())
 print (f"{len(projects)} projects")
 print (json.dumps(projects[0], indent=2))
@@ -143,11 +143,11 @@ tags.most_common()
 
 ### Tags
 
-We're also going to be using an [auxiliary dataset](https://github.com/GokuMohandas/MadeWithML/blob/main/datasets/tags.json){:target="_blank"} which contains a collection of all the tags that are currently relevant to us.
+We're also going to be using an [auxiliary dataset](https://github.com/GokuMohandas/Made-With-ML/blob/main/datasets/tags.json){:target="_blank"} which contains a collection of all the tags that are currently relevant to us.
 
 ```python linenums="1"
 # Load tags
-url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/tags.json"
+url = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.json"
 tags_dict = {}
 for item in json.loads(urlopen(url).read()):
     key = item.pop("tag")

@@ -4,8 +4,8 @@ title: Monitoring Machine Learning Systems
 description: Monitoring ML systems to identify and mitigate sources of drift before model performance decay.
 keywords: monitoring, monitoring ml, drift, data drift, concept drift, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
-notebook: https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/monitoring.ipynb
+repository: https://github.com/GokuMohandas/mlops-course
+notebook: https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/monitoring.ipynb
 ---
 
 ## Intuition
@@ -30,7 +30,7 @@ Unfortunately, just monitoring the system's health won't be enough to capture th
 
 It's usually never enough to just analyze the cumulative performance metrics across the entire span of time since the model has been deployed. Instead, we should also inspect performance across a period of time that's significant for our application (ex. daily). These sliding metrics might be more indicative of our system's health and we might be able to identify issues faster by not obscuring them with historical data. Cumulative and sliding metrics are often referred to as rolling and window metrics but the former pair is much more intuitive (initially coined [here](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/){:target="_blank"}).
 
-> All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/MLOps/blob/main/notebooks/monitoring.ipynb){:target="_blank"}.
+> All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/monitoring.ipynb){:target="_blank"}.
 
 ```python linenums="1"
 import matplotlib.pyplot as plt
@@ -172,7 +172,7 @@ from urllib.request import urlopen
 ```
 ```python linenums="1"
 # Load projects
-url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/projects.json"
+url = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.json"
 projects = json.loads(urlopen(url).read())
 df = ge.dataset.PandasDataset(projects)
 df["text"] = df.title + " " + df.description

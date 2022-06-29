@@ -4,7 +4,7 @@ title: "CI/CD for Machine Learning"
 description: Using workflows to establish continuous integration and delivery pipelines to reliably iterate on our application.
 keywords: ci/cd, github actions, devops, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/mlops-course
 ---
 
 {% include "styles/lesson.md" %}
@@ -41,7 +41,7 @@ touch .github/workflows/testing.yml
 touch .github/workflows/documentation.yml
 ```
 
-Each workflow file will contain the specific instructions for that action. For example, this [testing workflow](https://github.com/GokuMohandas/MLOps/blob/main/.github/workflows/testing.yml){:target="_blank"} is responsible for conducting tests on our code base. We can specify the name of our workflow at the top of our YAML file.
+Each workflow file will contain the specific instructions for that action. For example, this [testing workflow](https://github.com/GokuMohandas/mlops-course/blob/main/.github/workflows/testing.yml){:target="_blank"} is responsible for conducting tests on our code base. We can specify the name of our workflow at the top of our YAML file.
 
 ```yaml linenums="1"
 # .github/workflows/testing.yml
@@ -150,7 +150,7 @@ Notice that one of our steps is to [cache](https://docs.github.com/en/actions/gu
     <img width="700" src="/static/images/mlops/cicd/cache.png">
 </div>
 
-Our other workflow is responsible for automatically generating and deploying our mkdocs documentation. The "Deploy documentation" step below will create/update a new branch in our repository called [gh-pages](https://github.com/GokuMohandas/MLOps/tree/gh-pages){:target="_blank"} which will have the generation UI files for our documentation. We can deploy this branch as a GitHub pages website by going to `Settings` > `Pages` and setting the source branch to `gh-pages` and folder to `/root` > `Save`. This will generate the public URL for our documentation and it will automatically update every time our workflow runs after each PR.
+Our other workflow is responsible for automatically generating and deploying our mkdocs documentation. The "Deploy documentation" step below will create/update a new branch in our repository called [gh-pages](https://github.com/GokuMohandas/mlops-course/tree/gh-pages){:target="_blank"} which will have the generation UI files for our documentation. We can deploy this branch as a GitHub pages website by going to `Settings` > `Pages` and setting the source branch to `gh-pages` and folder to `/root` > `Save`. This will generate the public URL for our documentation and it will automatically update every time our workflow runs after each PR.
 
 ```yaml linenums="1"
 # .github/workflows/documentation.yml

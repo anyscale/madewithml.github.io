@@ -4,8 +4,8 @@ title: Embeddings
 description: Explore and motivate the need for representation via embeddings.
 keywords: embeddings, word2vec, skipgram, glove, fasttext, CNN, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
-repository: https://github.com/GokuMohandas/MadeWithML
-notebook: https://colab.research.google.com/github/GokuMohandas/MadeWithML/blob/main/notebooks/12_Embeddings.ipynb
+repository: https://github.com/GokuMohandas/Made-With-ML
+notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blob/main/notebooks/12_Embeddings.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -53,7 +53,7 @@ np.random.seed(SEED)
 ```python linenums="1"
 # Split text into sentences
 tokenizer = nltk.data.load("tokenizers/punkt/english.pickle")
-book = urllib.request.urlopen(url="https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/harrypotter.txt")
+book = urllib.request.urlopen(url="https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/harrypotter.txt")
 sentences = tokenizer.tokenize(str(book.read()))
 print (f"{len(sentences)} sentences")
 ```
@@ -394,7 +394,7 @@ cuda
 We will download the [AG News dataset](http://www.di.unipi.it/~gulli/AG_corpus_of_news_articles.html){:target="_blank"}, which consists of 120K text samples from 4 unique classes (`Business`, `Sci/Tech`, `Sports`, `World`)
 ```python linenums="1"
 # Load data
-url = "https://raw.githubusercontent.com/GokuMohandas/MadeWithML/main/datasets/news.csv"
+url = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/news.csv"
 df = pd.read_csv(url, header=0) # load
 df = df.sample(frac=1).reset_index(drop=True) # shuffle
 df.head()

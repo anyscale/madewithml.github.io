@@ -4,7 +4,7 @@ title: APIs for Model Serving
 description: Designing and deploying an API to serve machine learning models.
 keywords: serving, deployment,api, fastapi, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/mlops-course
 ---
 
 {% include "styles/lesson.md" %}
@@ -272,9 +272,9 @@ app/
 └── schemas.py      - API model schemas
 ```
 
-- [`api.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/api.py){:target="_blank"}: the main script that will include our API initialization and endpoints.
-- [`gunicorn.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/gunicorn.py){:target="_blank"}: script for defining API worker configurations.
-- [`schemas.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/schemas.py){:target="_blank"}: definitions for the different objects we'll use in our resource endpoints.
+- [`api.py`](https://github.com/GokuMohandas/mlops-course/tree/main/app/api.py){:target="_blank"}: the main script that will include our API initialization and endpoints.
+- [`gunicorn.py`](https://github.com/GokuMohandas/mlops-course/tree/main/app/gunicorn.py){:target="_blank"}: script for defining API worker configurations.
+- [`schemas.py`](https://github.com/GokuMohandas/mlops-course/tree/main/app/schemas.py){:target="_blank"}: definitions for the different objects we'll use in our resource endpoints.
 
 ## FastAPI
 
@@ -334,7 +334,7 @@ def _index() -> Dict:
 
 We let our application know that the endpoint is at `/` through the path operation decorator in line 4 and we return a JSON response with the `200 OK` HTTP status code.
 
-> In our actual [`api.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/api.py){:target="_blank"} script, you'll notice that even our index function looks different. Don't worry, we're slowly adding components to our endpoints and justifying them along the way.
+> In our actual [`api.py`](https://github.com/GokuMohandas/mlops-course/tree/main/app/api.py){:target="_blank"} script, you'll notice that even our index function looks different. Don't worry, we're slowly adding components to our endpoints and justifying them along the way.
 
 
 ### Launching
@@ -372,7 +372,7 @@ INFO:     Application startup complete.
 
 > Notice that we only reload on changes to specific directories, as this is to avoid reloading on files that won't impact our application such as log files, etc.
 
-If we want to manage multiple uvicorn workers to enable parallelism in our application, we can use [Gunicorn](https://gunicorn.org/){:target="_blank"} in conjunction with Uvicorn. This will usually be done in a production environment where we'll be dealing with meaningful traffic. We've included a [`app/gunicorn.py`](https://github.com/GokuMohandas/MLOps/tree/main/app/gunicorn.py){:target="_blank"} script with the customizable configuration and we can launch all the workers with the follow command:
+If we want to manage multiple uvicorn workers to enable parallelism in our application, we can use [Gunicorn](https://gunicorn.org/){:target="_blank"} in conjunction with Uvicorn. This will usually be done in a production environment where we'll be dealing with meaningful traffic. We've included a [`app/gunicorn.py`](https://github.com/GokuMohandas/mlops-course/tree/main/app/gunicorn.py){:target="_blank"} script with the customizable configuration and we can launch all the workers with the follow command:
 ```bash
 gunicorn -c config/gunicorn.py -k uvicorn.workers.UvicornWorker app.api:app
 ```

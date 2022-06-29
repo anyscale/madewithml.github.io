@@ -4,7 +4,7 @@ title: Data-centric AI
 description: Leveraging data-centric views to architect a continual system that delivers trust and enables iteration.
 keywords: data-centric AI, continual learning, retraining, labeling, evaluation, monitoring, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
-repository: https://github.com/GokuMohandas/MLOps
+repository: https://github.com/GokuMohandas/mlops-course
 ---
 
 {% include "styles/lesson.md" %}
