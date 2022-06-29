@@ -5,7 +5,7 @@ description: Documenting code for your team and your future self.
 keywords: documentation, mkdocs, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/mlops-course
-documentation: https://gokumohandas.github.io/MLOps/
+documentation: https://gokumohandas.github.io/mlops-course
 ---
 
 {% include "styles/lesson.md" %}
@@ -21,7 +21,7 @@ We can further [organize](organization.md){:target="_blank"} our code by documen
 - `#!js docstrings`: meaningful descriptions for functions and classes that describe overall utility, arguments, returns, etc.
 - `#!js docs`: rendered webpage that summarizes all the functions, classes, workflows, examples, etc.
 
-> For now, we'll produce our documentation locally but be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/mlops-course){:target="_blank"}. We'll learn how to automatically create and keep our docs up-to-date in our [CI/CD](cicd.md){:target="_blank"} lesson every time we make changes to our code base.
+> For now, we'll produce our documentation locally but be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/mlops-course){:target="_blank"} for our [application](https://github.com/GokuMohandas/mlops-course){:target="_blank"}. We'll learn how to automatically create and keep our docs up-to-date in our [CI/CD](cicd.md){:target="_blank"} lesson every time we make changes to our code base.
 
 !!! question "Code collaboration"
     How do you currently share your code with others on your team? What can be improved?
@@ -116,7 +116,7 @@ def replace_oos_labels(df: pd.DataFrame, labels: List, label_col: str, oos_label
 
 ## Docs
 
-So we're going through all this effort of including typing and docstrings to our functions but it's all tucked away inside our scripts. What if we can collect all this effort and **automatically** surface it as documentation? Well that's exactly what we'll do with the following open-source packages → final result [here](https://gokumohandas.github.io/MLOps/){:target="_blank"}.
+So we're going through all this effort of including typing and docstrings to our functions but it's all tucked away inside our scripts. What if we can collect all this effort and **automatically** surface it as documentation? Well that's exactly what we'll do with the following open-source packages → final result [here](https://gokumohandas.github.io/mlops-course){:target="_blank"}.
 
 1. Install required packages:
 ```bash
@@ -229,7 +229,7 @@ python3 -m mkdocs serve
 
 We can easily serve our documentation for free using [GitHub pages](https://www.mkdocs.org/user-guide/deploying-your-docs/){:target="_blank"} for public repositories as wells as [private documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/changing-the-visibility-of-your-github-pages-site){:target="_blank"} for private repositories. And we can even host it on a [custom domain](https://docs.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site){:target="_blank"} (ex. company's subdomain).
 
-> Be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/MLOps/){:target="_blank"} for our [application](https://github.com/GokuMohandas/mlops-course){:target="_blank"}. We'll learn how to automatically create and keep our docs up-to-date in our [CI/CD](cicd.md){:target="_blank"} lesson every time we make changes to our code base.
+> Be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/mlops-course){:target="_blank"} for our [application](https://github.com/GokuMohandas/mlops-course){:target="_blank"}. We'll learn how to automatically create and keep our docs up-to-date in our [CI/CD](cicd.md){:target="_blank"} lesson every time we make changes to our code base.
 
 <!-- Citation -->
 {% include "cite.md" %}
