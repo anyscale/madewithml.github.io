@@ -196,7 +196,7 @@ This `Dockerfile` is commonly the end artifact a data scientist or ML engineer d
 - model artifacts would be loaded from a remote model registry.
 - code would be loaded from a remote repository (ex. GitHub) via `git clone`.
 
-All of these changes would involve using the proper credentials (via [encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets){:target=“_blank”} and can even be automatically deployed via [CI/CD workflows](cicd.md){:target=“_blank”}. But, of course, there are subsequent responsibilities such as [monitoring](monitoring.md){:target="_blank"} and [iterating](continual-learning.md){:target="_blank"}.
+All of these changes would involve using the proper credentials (via [encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets){:target=“_blank”} and can even be automatically deployed via [CI/CD workflows](cicd.md){:target=“_blank”}. But, of course, there are subsequent responsibilities such as [monitoring](monitoring.md){:target="_blank"}.
 
 
 <!-- Citation -->

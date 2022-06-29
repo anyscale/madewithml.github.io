@@ -76,8 +76,6 @@ Regardless of whether we have a custom labeling platform or we choose a generali
     - auto-label entire or parts of a dataset using [weak supervision](#weak-supervision)
     - focus labeling efforts on long tail of edge cases over time
 
-> Check out the [data-centric AI lesson](data-centric-ai.md){:target="_blank"} to learn more about the nuances of how labeling plays a crucial part of the data-driven development process.
-
 ## Labeling
 
 Based on our findings from [EDA](exploratory-data-analysis.md){:target="_blank"}, we're going to apply several constraints for labeling our data:
@@ -371,7 +369,7 @@ def contains_tensorflow(text):
 
 ## Iteration
 
-Labeling isn't just a one time event or something we repeat identically. As new data is available, we'll want to strategically label the appropriate samples and improve [slices](testing.md#evaluation){:target="_blank"} of our data that are lacking in [quality](../foundations/data-quality.md){:target="_blank"}. In fact, there's an entire workflow related to labeling that is initiated when we want to iterate. We'll learn more about this iterative labeling process in our [continual learning](continual-learning.md){:target="_blank"} and [data-centric AI](data-centric-ai.md){:target="_blank"} lessons.
+Labeling isn't just a one time event or something we repeat identically. As new data is available, we'll want to strategically label the appropriate samples and improve [slices](testing.md#evaluation){:target="_blank"} of our data that are lacking in [quality](../foundations/data-quality.md){:target="_blank"}. Once new data is labeled, we can have workflows that are triggered to start the (re)training process to deploy a new version of our system.
 
 ## Resources
 - [Human in the Loop: Deep Learning without Wasteful Labelling](https://oatml.cs.ox.ac.uk/blog/2019/06/24/batchbald.html){:target="_blank"}
