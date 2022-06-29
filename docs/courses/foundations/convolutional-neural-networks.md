@@ -379,7 +379,7 @@ class Tokenizer(object):
             kwargs = json.load(fp=fp)
         return cls(**kwargs)
 ```
-We're going to restrict the number of tokens in our `Tokenizer` to the top 500 most frequent tokens (stop words already removed) because the full vocabulary size (~30K) is too large to run on Google Colab notebooks.
+We're going to restrict the number of tokens in our `Tokenizer` to the top 500 most frequent tokens (stop words already removed) because the full vocabulary size (~35K) is too large to run on Google Colab notebooks.
 
 ```python linenums="1"
 # Tokenize
