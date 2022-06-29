@@ -59,7 +59,6 @@
     <li><a href="/courses/mlops/infrastructure/">Infrastructure</a></li>
     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
-    <li><a href="/courses/mlops/continual-learning/">Continual learning</a></li>
     <li><a style="color: #000;">Data stack</a> <small>(Aug 2022)</small></li>
     <li><a style="color: #000;">Orchestration</a> <small>(Aug 2022)</small></li>
     </ul>
