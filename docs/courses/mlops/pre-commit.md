@@ -150,7 +150,7 @@ We can also create our own local hooks without configuring a separate .pre-commi
             exclude: "mkdocs.yml"
         -   id: check-added-large-files
             args: ['--maxkb=1000']
-            exclude: "notebooks/tagifai.ipynb"
+            exclude: "notebooks"
         -   id: check-ast
         -   id: check-json
         -   id: check-merge-conflict

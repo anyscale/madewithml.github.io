@@ -265,7 +265,7 @@ python3 -m pytest tests/food/test_fruits.py::TestFruit
 tests/food/test_fruits.py::TestFruit <span style="color: #5A9C4B; font-weight: 600;">.           [100%]</span>
 </pre>
 
-??? quote "Example of testing a Class in our project"
+??? quote "Example of testing a `#!python class` in our project"
 
     ```python linenums="1"
     # tests/code/test_data.py
@@ -554,7 +554,7 @@ Here we're asking for coverage for all the code in our tagifai and app directori
 !!! warning
     Though we have 100% coverage, this does not mean that our application is perfect. Coverage only indicates that a piece of code executed in a test, not necessarily that every part of it was tested, let alone thoroughly tested. Therefore, coverage should **never** be used as a representation of correctness. However, it is very useful to maintain coverage at 100% so we can know when new functionality has yet to be tested. In our CI/CD lesson, we'll see how to use GitHub actions to make 100% coverage a requirement when pushing to specific branches.
 
-#### Exclusions
+### Exclusions
 
 Sometimes it doesn't make sense to write tests to cover every single line in our application yet we still want to account for these lines so we can maintain 100% coverage. We have two levels of purview when applying exclusions:
 
