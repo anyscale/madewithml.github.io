@@ -69,6 +69,8 @@ First thing we'll do is set up the correct version of Python. We'll be using ver
 </div>
 <script src="../../../static/js/termynal.js"></script>
 
+> We highly recommend using Python `3.7.10` because, while using another version of Python will work, we may face some conflicts with certain package versions that may need to be resolved.
+
 ## Virtual environment
 
 Next, we'll set up a [virtual environment](https://docs.python.org/3/library/venv.html){:target="_blank"} so we can isolate the required packages for our application. This will also keep components separated from other projects which may have different dependencies. Once we create our virtual environment, we'll activate it and install our required packages.

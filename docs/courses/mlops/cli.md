@@ -18,7 +18,7 @@ from tagifai import main
 main.load_data()
 ```
 
-or the alternative was to call the operation explicity inside our `main.py` file:
+or the alternative was to call the operation explicitly inside our `main.py` file:
 
 ```python
 # tagifai/main.py
@@ -55,7 +55,40 @@ def load_data():
     ...
 ```
 
-We'll repeat the same for all the other functions we want to access via the CLI: `load_data()`, `label_data()`, `train_model()`, `optimize()`, `predict_tag()`.
+We'll repeat the same for all the other functions we want to access via the CLI: `load_data()`, `label_data()`, `train_model()`, `optimize()`, `predict_tag()`. We'll make it such that all arguments are optional so that we can explicitly define them in our bash commands. For example, ```#!python def label_data(args_fp: str):``` will become ```#!python def label_data(args_fp: str = "config/args.json"):```.
+
+??? quote "View `tagifai/main.py` function headers"
+    ```python linenums="1"
+    @app.command()
+    def load_data():
+        ...
+
+    @app.command()
+    def label_data(args_fp: str = "config/args.json") -> None:
+        ...
+
+    @app.command()
+    def train_model(
+        args_fp: str = "config/args.json",
+        experiment_name: str = "baselines",
+        run_name: str = "sgd",
+        test_run: bool = False,
+    ) -> None:
+        ...
+
+
+    @app.command()
+    def optimize(
+        args_fp: str = "config/args.json",
+        study_name: str = "optimization",
+        num_trials: int = 20
+    ) -> None:
+        ...
+
+    @app.command()
+    def predict_tag(text: str = "", run_id: str = None) -> None:
+        ...
+    ```
 
 ## Commands
 
@@ -87,7 +120,7 @@ With Typer, a function's input arguments automatically get rendered as command l
 
 ```python linenums="1"
 @app.command()
-def predict_tag(text: str, run_id: str = None) -> None:
+def predict_tag(text: str = "", run_id: str = None) -> None:
     """Predict tag for text.
 
     Args:
@@ -109,7 +142,7 @@ python tagifai/main.py predict-tag --help
 ```
 
 <pre class="output">
-Usage: main.py predict-tag [OPTIONS] TEXT
+Usage: main.py predict-tag [OPTIONS]
 
   Predict tag for text.
 
@@ -117,12 +150,10 @@ Usage: main.py predict-tag [OPTIONS] TEXT
     text (str): input text to predict label for.
     run_id (str, optional): run id to load artifacts for prediction. Defaults to None.
 
-Arguments:
-  TEXT  [required]
-
 Options:
+  --text TEXT
   --run-id TEXT
-  --help   Show this message and exit.
+  --help         Show this message and exit.
 </pre>
 
 ## Usage
@@ -130,7 +161,7 @@ Options:
 Finally, we can execute the specific command with all the arguments:
 
 ```bash
-python tagifai/main.py predict-tag "Transfer learning with transformers for text classification."
+python tagifai/main.py predict-tag --text="Transfer learning with transformers for text classification."
 ```
 
 <pre class="output">
