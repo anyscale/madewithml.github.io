@@ -1033,12 +1033,12 @@ This way when the names of columns change or we want to replace with different l
     Install required packages and add to `requirements.txt`:
 
     ```bash
-    pip install mlflow==1.13.1 optuna==2.10.0 numpyencoder==0.3.0
+    pip install mlflow==1.23.1 optuna==2.10.0 numpyencoder==0.3.0
     ```
 
     ```bash
     # Add to requirements.txt
-    mlflow==1.13.1
+    mlflow==1.23.1
     numpyencoder==0.3.0
     optuna==2.10.0
     ```

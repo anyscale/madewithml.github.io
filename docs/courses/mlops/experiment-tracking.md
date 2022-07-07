@@ -29,7 +29,7 @@ There are also several popular options such as a [Comet ML](https://www.comet.ml
 We'll start by initializing all the required arguments for our experiment.
 
 ```bash
-pip install mlflow==1.13.1 -q
+pip install mlflow==1.23.1 -q
 ```
 
 ```python linenums="1"

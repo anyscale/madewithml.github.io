@@ -14,7 +14,7 @@ copyright: Created by <a href="https://twitter.com/GokuMohandas" target="_blank"
 
 # Google Analytics (key picked up by GitHub Actions from repo secrets)
 google_analytics:
-  - UA-157540204-1
+  - G-T1R6V3J71R
   - auto
 
 # Social media
