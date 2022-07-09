@@ -97,7 +97,7 @@ nav:
       - Feature store: courses/mlops/feature-store.md
   # - Blog: coming-soon.md
   # - Community: https://community.madewithml.com/
-  - Subscribe: https://newsletter.madewithml.com/
+  - Subscribe: subscribe.md
 
 
 # Configuration
@@ -171,7 +171,6 @@ plugins:
   - macros
   - redirects:
         redirect_maps:
-            "subscribe": "index.md"
             "topics": "index.md"
             "pivot": "index.md"
             "courses/basics.md": "courses/foundations"
