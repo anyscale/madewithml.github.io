@@ -58,16 +58,16 @@ Not all machine learning tasks require a feature store. In fact, our use case is
 
 ## Feast
 
-### Set up
-
-> All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/feature_store.ipynb){:target="_blank"}.
-
 We're going to leverage [Feast](https://feast.dev/){:target="_blank"} as the feature store for our application for it's ease of local setup, SDK for training/serving, etc.
 
 ```bash
 # Install Feast and dependencies
 pip install feast==0.10.5 PyYAML==5.3.1 -q
 ```
+
+> All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/feature_store.ipynb){:target="_blank"}.
+
+### Set up
 
 We're going to create a feature repository at the root of our project. [Feast](https://feast.dev/) will create a configuration file for us and we're going to add an additional [features.py](https://github.com/GokuMohandas/mlops-course/blob/main/features/features.py){:target="_blank"} file to define our features.
 

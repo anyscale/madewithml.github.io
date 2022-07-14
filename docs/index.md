@@ -112,22 +112,22 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/ask_katnoria.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/jeremy_jordan.jpeg">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
-                                            <b>Ash Katnoria</b>
-                                            <a href="https://twitter.com/katnoria1/status/1409782295968448514" target="_blank">
+                                            <b>Jeremy Jordan</b>
+                                            <a href="https://twitter.com/jeremyjordan/status/1316052661133815809" target="_blank">
                                                 <span class="twemoji twitter ml-1">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
                                                 </span>
                                             </a>
                                         </div>
-                                <span class="ai-testimonial-org">Katnoria</span>
+                                <span class="ai-testimonial-org">Duo Security</span>
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle">"Easily one of the most comprehensive series. I am amazed by how much ground it covers starting with data collection,  all the way up to k8s + model monitoring."</p>
+                            <p class="card-subtitle">"This will be a great journey for those interested in deploying machine learning models which lead to a positive impact on the product."</p>
                         </div>
                     </div>
                 </div>
@@ -137,22 +137,22 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/arghyadeep_das.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/karthik_bhaskar.jpeg">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
-                                            <b>Arghyadeep Das</b>
-                                            <a href="https://www.linkedin.com/posts/arghyadeep-das_made-with-ml-activity-6815267985788342272-yJ8e" target="_blank">
-                                                <span class="twemoji linkedin ml-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
+                                            <b>Karthik Bhaskar</b>
+                                            <a href="https://twitter.com/kbhaskar_95/status/1401879875955265543" target="_blank">
+                                                <span class="twemoji twitter ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
                                                 </span>
                                             </a>
                                         </div>
-                                <span class="ai-testimonial-org">Barclays</span>
+                                <span class="ai-testimonial-org">Vector Institute</span>
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle">"Ideal place for grad students and software engineers to learn about practical ML. Couldn't have a better resource collection than this!"</p>
+                            <p class="card-subtitle">"Best available practical course on MLOps. Thanks <a href="https://twitter.com/GokuMohandas" target="_blank">@GokuMohandas</a> for creating such awesome content and sharing it!"</p>
                         </div>
                     </div>
                 </div>
@@ -220,22 +220,22 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/jeremy_jordan.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/ask_katnoria.jpeg">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
-                                            <b>Jeremy Jordan</b>
-                                            <a href="https://twitter.com/jeremyjordan/status/1316052661133815809" target="_blank">
+                                            <b>Ash Katnoria</b>
+                                            <a href="https://twitter.com/katnoria1/status/1409782295968448514" target="_blank">
                                                 <span class="twemoji twitter ml-1">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
                                                 </span>
                                             </a>
                                         </div>
-                                <span class="ai-testimonial-org">Duo Security</span>
+                                <span class="ai-testimonial-org">Katnoria</span>
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle">"This will be a great journey for those interested in deploying machine learning models which lead to a positive impact on the product."</p>
+                            <p class="card-subtitle">"Easily one of the most comprehensive series. I am amazed by how much ground it covers starting with data collection,  all the way up to k8s + model monitoring."</p>
                         </div>
                     </div>
                 </div>
@@ -245,22 +245,22 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/karthik_bhaskar.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/arghyadeep_das.jpeg">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
-                                            <b>Karthik Bhaskar</b>
-                                            <a href="https://twitter.com/kbhaskar_95/status/1401879875955265543" target="_blank">
-                                                <span class="twemoji twitter ml-1">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+                                            <b>Arghyadeep Das</b>
+                                            <a href="https://www.linkedin.com/posts/arghyadeep-das_made-with-ml-activity-6815267985788342272-yJ8e" target="_blank">
+                                                <span class="twemoji linkedin ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>
                                                 </span>
                                             </a>
                                         </div>
-                                <span class="ai-testimonial-org">Vector Institute</span>
+                                <span class="ai-testimonial-org">Barclays</span>
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle">"Best available practical course on MLOps. Thanks <a href="https://twitter.com/GokuMohandas" target="_blank">@GokuMohandas</a> for creating such awesome content and sharing it!"</p>
+                            <p class="card-subtitle">"Ideal place for grad students and software engineers to learn about practical ML. Couldn't have a better resource collection than this!"</p>
                         </div>
                     </div>
                 </div>
