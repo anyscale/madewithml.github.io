@@ -9,7 +9,7 @@ title: Partnerships
 
 ### Our Mission
 
-We created Made With ML to educate and enable the community to responsibly deliver value with ML. While there are many facets to this mission, at its core are the relationships with others who share this mission. We want to connect teams with the best tools to make them as creative and production as possible.
+We created Made With ML to educate and enable the community to responsibly deliver value with ML. While there are many facets to this mission, at its core are the relationships with others who share this mission. We want to work together to help teams around the world discover the best tools and platforms for their specific context and kickoff a flywheel with the community to make those tools even better.
 
 ### Benefits
 
@@ -21,7 +21,9 @@ We created Made With ML to educate and enable the community to responsibly deliv
 - 10K+ followers on [Twitter](https://twitter.com/GokuMohandas){:target="_blank"} & [LinkedIn](https://linkedin.com/in/goku){:target="_blank"}
 - top organic SEO ([mlops lessons](https://www.google.com/search?q=mlops+lessons){:target="_blank"}, [testing ml](https://www.google.com/search?q=testing+ml){:target="_blank"}, [experiment tracking ml](https://www.google.com/search?q=experiment+tracking+ml){:target="_blank"}, [monitoring ml](https://www.google.com/search?q=monitoring+ml){:target="_blank"}, etc.)
 
+### More details
 
+If your team is interested in joining our mission, reach out to us via <a href="mailto:goku@madewithml.com" target="_blank">email</a> to learn more!
 
 
 
