@@ -107,7 +107,7 @@ Propose the value we can create through a product-centric approach:
         <img src="/static/images/mlops/purpose/product.png" width="1000" alt="product mockup"></a>
     </div>
 
-    > Yes, we actually did build this before realizing it exacerbated noise and hype. And so, we pivoted into teaching the community how to responsible deliver value with ML.
+    > Yes, we actually did build this before realizing it exacerbated noise and hype. And so, we pivoted into teaching the community how to responsibly deliver value with ML.
 
 #### Objectives
 

@@ -366,7 +366,7 @@ from airflow.utils.dates import days_ago
 ```
 
 !!! warning
-    Depending on the `start_date` and `schedule_interval`, our workflow should have been triggered several times and Airflow will try to [catchup](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html#catchup){:target="_blank"} to the current time. We can avoid this by setting `catchup=False` when defining the DAG. We can also set this configuration as part of the defualt arguments:
+    Depending on the `start_date` and `schedule_interval`, our workflow should have been triggered several times and Airflow will try to [catchup](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html#catchup){:target="_blank"} to the current time. We can avoid this by setting `catchup=False` when defining the DAG. We can also set this configuration as part of the default arguments:
 
     ```python linenums="1" hl_lines="3"
     default_args = {

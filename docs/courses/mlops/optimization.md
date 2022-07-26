@@ -123,7 +123,7 @@ get_ipython().system_raw("mlflow server -h 0.0.0.0 -p 8000 --backend-store-uri $
 3. Click on the **Compare** button.
 
 <div class="ai-center-all">
-    <img src="/static/images/mlops/hyperparameter_optimization/compare.png" width="1000" alt="compare">
+    <img src="/static/images/mlops/hyperparameter_optimization/compare.png" width="1000" alt="compare trials">
 </div>
 
 4. In the comparison page, we can then view the results through various lens (contours, parallel coordinates, etc.)
@@ -141,7 +141,7 @@ trials_df = study.trials_dataframe()
 trials_df = trials_df.sort_values(["user_attrs_f1"], ascending=False)  # sort by metric
 trials_df.head()
 ```
-<div class="output_subarea output_html rendered_html"><div>
+<div class="output_subarea output_html rendered_html ai-center-all"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">

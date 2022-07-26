@@ -16,7 +16,7 @@ In the pipelines lesson, we covered the [Dataops](pipelines.md#dataops){:target=
 > We use the word `continual` (repeat with breaks) instead of `continuous` (repeat without interruption / intervention) because we're **not** trying to create a system that will automatically update with new incoming data without human intervention.
 
 <div class="ai-center-all">
-    <img src="/static/images/mlops/continual-learning/workflows.png" width="1000" alt="mlops workflows">
+    <img src="/static/images/mlops/continual_learning/workflows.png" width="1000" alt="mlops workflows">
 </div>
 <div class="ai-center-all mt-3">
   <small>A simplified view to illustrate decoupled DataOps and MLOps workflows with data-centric views.</small>

@@ -28,7 +28,7 @@ This course brings all of the MLOps best practices into one place, allowing me t
 Here's a quick look at the curriculum:
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops.png">
+    <img width="700" src="/static/images/mlops.png" alt="MLOps course syllabus">
 </div>
 
 ### Who's teaching the course?

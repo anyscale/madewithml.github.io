@@ -80,7 +80,7 @@ Inside the sample configuration, we can see that pre-commit has added some defau
 ...
 ```
 
-> Be sure to explore the many other [built-in hooks](https://github.com/pre-commit/pre-commit-hooks){:target="_blank"} because there are some really useful ones that we use in our project. For example, `check-merge-conflict` to see if there are any lingering merge conflict strings or `detect-aws-credentials` if we accidently left our credentials exposed in a file, and so much more.
+> Be sure to explore the many other [built-in hooks](https://github.com/pre-commit/pre-commit-hooks){:target="_blank"} because there are some really useful ones that we use in our project. For example, `check-merge-conflict` to see if there are any lingering merge conflict strings or `detect-aws-credentials` if we accidentally left our credentials exposed in a file, and so much more.
 
 And we can also exclude certain files from being processed by the hooks by using the optional *exclude* key. There are many other [optional keys](https://pre-commit.com/#pre-commit-configyaml---hooks){:target="_blank"} we can configure for each hook ID.
 
@@ -212,7 +212,7 @@ git commit -m <MESSAGE>
 ```
 
 <div class="ai-center-all">
-    <img width="650" src="/static/images/mlops/pre-commit/commit.png" style="border-radius: 7px;">
+    <img width="650" src="/static/images/mlops/pre_commit/commit.png" style="border-radius: 7px;" alt="precommit">
 </div>
 
 ## Run

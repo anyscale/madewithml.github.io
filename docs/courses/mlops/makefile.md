@@ -136,7 +136,7 @@ greeting:
     @echo ${MESSAGE}
 ```
 
-- We can also use variables passed in when executing the rule like so (ensure that the variable is not overriden inside the Makefile):
+- We can also use variables passed in when executing the rule like so (ensure that the variable is not overridden inside the Makefile):
 ```bash
 make greeting MESSAGE="hi"
 ```

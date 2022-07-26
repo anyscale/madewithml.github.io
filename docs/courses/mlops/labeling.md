@@ -120,7 +120,7 @@ df[df.tag.isin(oos_tags)].head()
       <td>15</td>
       <td>2020-02-28 23:55:26</td>
       <td>Awesome Monte Carlo Tree Search</td>
-      <td>A curated list of Monte Carlo tree search pape...</td>
+      <td>A curated list of Monte Carlo tree search papers...</td>
       <td>reinforcement-learning</td>
     </tr>
     <tr>
@@ -188,7 +188,7 @@ df.iloc[oos_indices].head()
       <td>15</td>
       <td>2020-02-28 23:55:26</td>
       <td>Awesome Monte Carlo Tree Search</td>
-      <td>A curated list of Monte Carlo tree search pape...</td>
+      <td>A curated list of Monte Carlo tree search papers...</td>
       <td>other</td>
     </tr>
     <tr>

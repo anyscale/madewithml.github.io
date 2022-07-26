@@ -92,7 +92,7 @@ python3 -m pip install -e .
 If you press the Preview button located on the top right of the editor (button enclosed in red circle in the image below), you can see what the `README.md` will look like when we push to remote host for [git](git.md){:target="_blank"}.
 
 <div class="ai-center-all">
-    <img src="/static/images/mlops/organization/readme.png" width="650" alt="vscode">
+    <img src="/static/images/mlops/organization/readme.png" width="650" alt="readme file">
 </div>
 
 ### Configurations

@@ -79,7 +79,7 @@ The first decision is whether to serve predictions via batches or real-time, whi
 We can make batch predictions on a finite set of inputs which are then written to a database for low latency inference. When a user or downstream process makes an inference request in real-time, cached results from the database are returned (typically via a  [request](api.md#request){:target="_blank"} to an [API](api.md){:target="_blank"} to query the DB).
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/infrastructure/batch_serving.png">
+    <img width="600" src="/static/images/mlops/infrastructure/batch_serving.png" alt="batch serving">
 </div>
 
 - ✅&nbsp; generate and cache predictions for very fast inference for users.
@@ -98,7 +98,7 @@ We can make batch predictions on a finite set of inputs which are then written t
 We can also serve live predictions where input featured are fed to the model in real-time to retrieve predictions.
 
 <div class="ai-center-all">
-    <img width="400" src="/static/images/mlops/infrastructure/real_time_serving.png">
+    <img width="400" src="/static/images/mlops/infrastructure/real_time_serving.png" alt="realtime serving">
 </div>
 
 - ✅&nbsp; can yield more up-to-date predictions which may yield a more meaningful user experience, etc.
@@ -124,7 +124,7 @@ Our use case doesn't necessarily involve entity features changing over time so i
 Batch process features for a given entity at a previous point in time, which are later used for generating real-time predictions.
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/infrastructure/batch_processing.png">
+    <img width="600" src="/static/images/mlops/infrastructure/batch_processing.png" alt="batch processing">
 </div>
 
 - ✅&nbsp; can perform heavy feature computations offline and have it ready for fast inference.
@@ -135,7 +135,7 @@ Batch process features for a given entity at a previous point in time, which are
 Perform inference on a given set of inputs with *near* real-time, streaming, features for a given entity.
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/infrastructure/stream_processing.png">
+    <img width="600" src="/static/images/mlops/infrastructure/stream_processing.png" alt="stream processing">
 </div>
 
 - ✅&nbsp; we can generate better predictions by providing real-time, streaming, features to the model.
@@ -157,7 +157,7 @@ So far, while we have the option to use batch / streaming features and serve bat
 The traditional approach is to train our models offline and then deploy them to inference. We may periodically retrain them offline as new data becomes labeled, validated, etc. and deploy them after evaluation. We may also expedite retraining if we discover an issue during [monitoring](monitoring.md){:target="_blank"} such as drift.
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/infrastructure/offline_learning.png">
+    <img width="600" src="/static/images/mlops/infrastructure/offline_learning.png" alt="offline learning">
 </div>
 
 - ✅&nbsp; don't need to worry about provisioning resources for compute since it happens offline.
@@ -170,7 +170,7 @@ The traditional approach is to train our models offline and then deploy them to 
 In order to truly serve the most informed predictions, we should have a model trained on the most recent data. However, instead of using expensive stateless batch learning, a stateful and incremental learning approach is adopted. Here the model is trained offline, as usual, on the initial dataset but is then stochastically updated at a single instance or mini-batch level as new data becomes available. This removes the compute costs associated with traditional stateless, redundant training on same same past data.
 
 <div class="ai-center-all">
-    <img width="400" src="/static/images/mlops/infrastructure/online_learning.png">
+    <img width="400" src="/static/images/mlops/infrastructure/online_learning.png" alt="online learning">
 </div>
 
 - ✅&nbsp; model is aware of distributional shifts and can quickly adapt to provide highly informed predictions.
@@ -194,7 +194,7 @@ There are many different experimentation strategies we can use to measure real-t
 AB testing involves sending production traffic to our current system (control group) and the new version (treatment group) and measuring if there is a statistical difference between the values for two metrics. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/mlops/infrastructure/ab.png">
+    <img width="500" src="/static/images/mlops/infrastructure/ab.png" alt="ab tests">
 </div>
 
 > In many cases, if we're simply trying to compare the different versions for a certain metric, AB testing can take while before we reach statical significance since traffic is evenly split between the different groups. In this scenario, [multi-armed bandits](https://en.wikipedia.org/wiki/Multi-armed_bandit){:target="_blank"} will be a better approach since they continuously assign traffic to the better performing version.
@@ -203,14 +203,14 @@ AB testing involves sending production traffic to our current system (control gr
 Canary tests involve sending most of the production traffic to the currently deployed system but sending traffic from a small cohort of users to the new system we're trying to evaluate. Again we need to make sure that the same users continue to interact with the same system as we gradually roll out the new system.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/mlops/infrastructure/canary.png">
+    <img width="500" src="/static/images/mlops/infrastructure/canary.png" alt="canary deployment">
 </div>
 
 ### Shadow tests
 Shadow testing involves sending the same production traffic to the different systems. We don't have to worry about system contamination and it's very safe compared to the previous approaches since the new system's results are not served. However, we do need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. But overall, shadow testing is easy to monitor, validate operational consistency, etc.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/mlops/infrastructure/shadow.png">
+    <img width="500" src="/static/images/mlops/infrastructure/shadow.png" alt="shadow deployment">
 </div>
 
 !!! question "What can go wrong?"
@@ -236,7 +236,7 @@ Compute engines such as AWS EC2, Google Compute, Azure VM, on-prem, etc. that ca
 Container orchestration via [Kubernetes](https://kubernetes.io/){:target="_blank"} (K8s) for managed deployment, scaling, etc. There are several ML specific platforms to help us **self-manage** K8s via control planes such as [Seldon](https://www.seldon.io/tech/){:target="_blank"}, [KFServing](https://www.kubeflow.org/docs/components/kfserving/kfserving/){:target="_blank"}, etc. However, there are also **fully-managed** solutions, such as [SageMaker](https://aws.amazon.com/sagemaker/){:target="_blank"}, [Cortex](https://www.cortex.dev/){:target="_blank"}, [BentoML](https://www.bentoml.ai/){:target="_blank"}, etc. Many of these tools also come with additional features such as experiment tracking, monitoring, etc.
 
 <div class="ai-center-all">
-    <img width="400" src="/static/images/mlops/infrastructure/managed.png">
+    <img width="400" src="/static/images/mlops/infrastructure/managed.png" alt="container orchestration">
 </div>
 
 - **Pros**: very easy to scale our services since it's all managers with the proper components (load balancers, control planes, etc.)

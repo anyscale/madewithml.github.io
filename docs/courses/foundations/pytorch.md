@@ -367,7 +367,7 @@ print (torch.cuda.is_available())
 False
 </pre>
 
-If False (CUDA is not available), let's change that by following these steps: Go to *Runtime* > *Change runtime type* > Change *Hardware accelertor* to *GPU* > Click *Save*
+If False (CUDA is not available), let's change that by following these steps: Go to *Runtime* > *Change runtime type* > Change *Hardware accelerator* to *GPU* > Click *Save*
 ```python linenums="1"
 import torch
 ```

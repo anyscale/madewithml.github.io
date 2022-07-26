@@ -542,13 +542,13 @@ python3 -m pytest --cov tagifai --cov-report html
 ```
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/testing/pytest.png">
+    <img width="600" src="/static/images/mlops/testing/pytest.png" alt="pytest">
 </div>
 
 Here we're asking for coverage for all the code in our tagifai and app directories and to generate the report in HTML format. When we run this, we'll see the tests from our tests directory executing while the coverage plugin is keeping tracking of which lines in our application are being executed. Once our tests are complete, we can view the generated report (default is `htmlcov/index.html`) and click on individual files to see which parts were not covered by any tests. This is especially useful when we forget to test for certain conditions, exceptions, etc.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/mlops/testing/coverage.png">
+    <img width="500" src="/static/images/mlops/testing/coverage.png" alt="test coverage">
 </div>
 
 !!! warning
@@ -699,7 +699,7 @@ df.head(5)
       <td>15</td>
       <td>2020-02-28 23:55:26</td>
       <td>Awesome Monte Carlo Tree Search</td>
-      <td>A curated list of Monte Carlo tree search pape...</td>
+      <td>A curated list of Monte Carlo tree search papers...</td>
       <td>reinforcement-learning</td>
     </tr>
     <tr>
@@ -900,7 +900,7 @@ Which data asset (accessible by data connector "default_inferred_data_connector_
 This will open up an interactive notebook where we can add expectations. Copy and paste the expectations below and run all the cells. Repeat this step for `tags.json`.
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/testing/suite.png">
+    <img width="700" src="/static/images/mlops/testing/suite.png" alt="great expectations suite">
 </div>
 
 ??? quote "Expectations for `projects.json`"
@@ -1007,7 +1007,7 @@ great_expectations checkpoint run labeled_projects
 ```
 
 <div class="ai-center-all">
-    <img width="650" src="/static/images/mlops/testing/checkpoint.png">
+    <img width="650" src="/static/images/mlops/testing/checkpoint.png" alt="great expectations checkpoint">
 </div>
 
 At the end of this lesson, we'll create a target in our `Makefile` that run all these tests (code, data and models) and we'll automate their execution in our [pre-commit lesson](pre-commit.md){:target="_blank"}.
@@ -1019,7 +1019,7 @@ At the end of this lesson, we'll create a target in our `Makefile` that run all 
 When we create expectations using the CLI application, Great Expectations automatically generates documentation for our tests. It also stores information about validation runs and their results. We can launch the generate data documentation with the following command: ```#!bash great_expectations docs build```
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/testing/docs.png">
+    <img width="700" src="/static/images/mlops/testing/docs.png" alt="data documentation">
 </div>
 
 ### Production

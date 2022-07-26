@@ -109,7 +109,7 @@ df.head(5)
       <td>15</td>
       <td>2020-02-28 23:55:26</td>
       <td>Awesome Monte Carlo Tree Search</td>
-      <td>A curated list of Monte Carlo tree search pape...</td>
+      <td>A curated list of Monte Carlo tree search papers...</td>
       <td>reinforcement-learning</td>
     </tr>
     <tr>
@@ -199,7 +199,7 @@ plt.ylabel("Number of projects", fontsize=16)
 plt.show()
 ```
 <div class="ai-center-all">
-  <img src="/static/images/mlops/exploratory-data-analysis/tag_distribution.png" width="600" alt="data points per tag">
+  <img src="/static/images/mlops/eda/tag_distribution.png" width="600" alt="data points per tag">
 </div>
 
 We can see that `reinforcement-learning` and `time-series` is not our list of tags (`tags_dict`). These out of scope classes (and `graph-learning`) also don't have a lot of data points. We'll keep these details in mind when labeling and preprocessing our data.
@@ -222,7 +222,7 @@ def display_word_cloud(tag="natural-language-processing"):
     plt.imshow(cloud)
 ```
 <div class="ai-center-all">
-  <img src="/static/images/mlops/exploratory-data-analysis/word_cloud.png" width="500" alt="word cloud">
+  <img src="/static/images/mlops/eda/word_cloud.png" width="500" alt="word cloud">
 </div>
 
 Looks like the `title` text feature has some good signal for the respective classes and matches our intuition. We can repeat this for the `description` text feature as well. This information will become useful when we decide how to use our features for modeling.

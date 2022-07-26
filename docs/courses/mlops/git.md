@@ -19,7 +19,7 @@ Whether we're working individually or with a team, it's important that we have a
 ### Initialize git
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/git/environments.png">
+    <img width="600" src="/static/images/mlops/git/environments.png" alt="git environment">
 </div>
 
 Initialize a local repository (`.git` directory) to track our files:
@@ -228,7 +228,7 @@ Note that we are pushing this branch to our remote repository, which doesn't yet
 When we push our new branch to the remote repository, we'll need to create a pull request (PR) to merge with another branch (ex. our `main` branch in this case). When merging our work with another branch (ex. main), it's called a pull request because we're requesting the branch to *pull* our committed work. We can create the pull request using steps outlined here: [Creating a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request){:target="_blank"}.
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/git/merge_gh.png">
+    <img width="700" src="/static/images/mlops/git/merge_gh.png" alt="merging on github">
 </div>
 
 !!! note
@@ -272,7 +272,7 @@ So far, the workflows for integrating our iterative development has been very sm
 When we try to merge the second PR, we have to resolve the conflicts between this new PR and what already exists in the `main` branch.
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/git/resolve.png">
+    <img width="700" src="/static/images/mlops/git/resolve.png" alt="resolving conflicts on github">
 </div>
 
 We can resolve the conflict by choosing which content (current `main` which merged with the `a` branch or this `b` branch) to keep and delete the other one. Then we can merge the PR successfully and update our local `main` branch.

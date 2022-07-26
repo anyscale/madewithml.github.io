@@ -487,13 +487,13 @@ def load_artifacts():
 When we define an endpoint, FastAPI automatically generates some documentation (adhering to [OpenAPI](https://swagger.io/specification/){:target="_blank"} standards) based on the it's inputs, typing, outputs, etc. We can access the [Swagger UI](https://swagger.io/tools/swagger-ui/){:target="_blank"} for our documentation by going to `/docs` endpoints on any browser while the api is running.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/mlops/api/documentation.png">
+    <img width="500" src="/static/images/mlops/api/documentation.png" alt="API documentation">
 </div>
 
 Click on an endpoint > `Try it out` > `Execute` to see what the server's response will look like. Since this was a `GET` request without any inputs, our request body was empty but for other method's we'll need to provide some information (we'll illustrate this when we do a `POST` request).
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/api/execute.png">
+    <img width="600" src="/static/images/mlops/api/execute.png" alt="executing API calls">
 </div>
 
 Notice that our endpoint is organized under sections in the UI. We can use `tags` when defining our endpoints in the script:
@@ -837,7 +837,7 @@ class PredictPayload(BaseModel):
 ```
 
 <div class="ai-center-all">
-    <img width="1000" src="/static/images/mlops/api/predict.png">
+    <img width="1000" src="/static/images/mlops/api/predict.png" alt="inference with APIs">
 </div>
 
 

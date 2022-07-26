@@ -12,7 +12,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/mlops-course/blo
 
 ## Intuition
 
-Data preprocessing can be categorized into two types of processes: *preparation* and *transformation*. We'll explore common preprocessing techniques and then walkthrough the relevant processes for our specific application.
+Data preprocessing can be categorized into two types of processes: *preparation* and *transformation*. We'll explore common preprocessing techniques and then walk through the relevant processes for our specific application.
 
 !!! warning
     Certain preprocessing steps are `global` (don't depend on our dataset, ex. lower casing text, removing stop words, etc.) and others are `local` (constructs are learned only from the training split, ex. vocabulary, standardization, etc.). For the local, dataset-dependent preprocessing steps, we want to ensure that we [split](splitting.md){:target="_blank"} the data first before preprocessing to avoid data leaks.
@@ -243,7 +243,7 @@ Transforming the data involves feature encoding and engineering.
     print (pca.explained_variance_ratio_)
     print (pca.singular_values_)
     ```
-    <pre class="outout">
+    <pre class="output">
     [[-1.44245791 -0.1744313 ]
      [-0.1148688   0.31291575]
      [ 1.55732672 -0.13848446]]

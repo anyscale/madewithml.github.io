@@ -75,7 +75,7 @@ Distributed training strategies are great for when our data or models are too la
 - [**Distillation**](https://arxiv.org/abs/2011.14691){:target="_blank"}: training smaller networks to “mimic” larger networks by having it reproduce the larger network’s layers’ outputs.
 
 <div class="ai-center-all">
-    <img width="750" src="/static/images/mlops/baselines/kd.png">
+    <img width="750" src="/static/images/mlops/baselines/kd.png" alt="knowledge distillation">
 </div>
 <div class="ai-center-all">
     <small>Distilling the knowledge in a neural network [<a href="https://nni.readthedocs.io/en/latest/TrialExample/KDExample.html" target="_blank">source</a>]</small>

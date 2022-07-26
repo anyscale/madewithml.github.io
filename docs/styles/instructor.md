@@ -3,7 +3,7 @@
 <h2 class="ai-center-all mt-0 mb-2 md-typeset">Meet your instructor</h2>
 
 <div class="ai-center-all mt-4" data-aos="zoom-in">
-    <img class="ai-header-image" src="/static/images/goku_circle.png">
+    <img class="ai-header-image" src="/static/images/goku_circle.png" alt="Goku Mohandas">
 </div>
 <div class="ai-center-all">
     <h3 class="mb-2" style="font-weight: 500 !important;">Hi, I'm Goku Mohandas</h3>

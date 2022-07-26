@@ -24,7 +24,7 @@ Transformers are a very popular architecture that leverage and extend the concep
     - required large amounts of data (mitigated using pretrained models)
 
 <div class="ai-center-all">
-<img src="/static/images/foundations/transformers/architecture.png" width="800">
+<img src="/static/images/foundations/transformers/architecture.png" width="800" alt="transformers">
 </div>
 <div class="ai-center-all">
 <small><a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention Is All You Need</a></small>
@@ -79,7 +79,7 @@ df = pd.read_csv(url, header=0) # load
 df = df.sample(frac=1).reset_index(drop=True) # shuffle
 df.head()
 ```
-<div class="output_subarea output_html rendered_html"><div>
+<div class="output_subarea output_html rendered_html ai-center-all"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -91,7 +91,7 @@ df.head()
   <tbody>
     <tr>
       <th>0</th>
-      <td>Sharon Accepts Plan to Reduce Gaza Army Operat...</td>
+      <td>Sharon Accepts Plan to Reduce Gaza Army Operation...</td>
       <td>World</td>
     </tr>
     <tr>
@@ -651,7 +651,7 @@ This effectively allows us to represent each token's relative position using a f
 And here's how it all fits together! It's an end-to-end architecture that creates these contextual representations and uses an encoder-decoder architecture to predict the outcomes (one-to-one, many-to-one, many-to-many, etc.) Due to the complexity of the architecture, they require massive amounts of data for training without overfitting, however, they can be leveraged as pretrained models to finetune with smaller datasets that are similar to the larger set it was initially trained on.
 
 <div class="ai-center-all">
-<img src="/static/images/foundations/transformers/architecture.png" width="800">
+<img src="/static/images/foundations/transformers/architecture.png" width="800" alt="transformers architecture">
 </div>
 <div class="ai-center-all">
 <small><a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention Is All You Need</a></small>
@@ -771,7 +771,7 @@ print (model.named_parameters)
     )
   )
   (dropout): Dropout(p=0.5, inplace=False)
-  (fc1): Linear(in_features=768, out_features=35, bias=True)
+  (fc1): Linear(in_features=768, out_features=4, bias=True)
 )&gt;
 </pre>
 
@@ -780,7 +780,7 @@ print (model.named_parameters)
 ```python linenums="1"
 # Arguments
 lr = 1e-4
-num_epochs = 200
+num_epochs = 10
 patience = 10
 ```
 
@@ -1047,7 +1047,7 @@ head_view(attention=attn, tokens=tokens)
 ```
 
 <div class="ai-center-all">
-<img src="/static/images/foundations/transformers/interpretability.png" width="375">
+<img src="/static/images/foundations/transformers/interpretability.png" width="375" alt="interpretability with transformers">
 </div>
 
 Now we're ready to start the [MLOps course](https://madewithml.com/#mlops){:target="_blank"} to learn how to apply all this foundational modeling knowledge to responsibly deliver value.

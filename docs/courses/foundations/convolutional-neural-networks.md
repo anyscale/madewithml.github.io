@@ -14,7 +14,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blo
 At the core of CNNs are filters (aka weights, kernels, etc.) which convolve (slide) across our input to extract relevant features. The filters are initialized randomly but learn to act as feature extractors via parameter sharing.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/foundations/cnn/convolution.gif">
+    <img width="500" src="/static/images/foundations/cnn/convolution.gif" alt="convolution">
 </div>
 
 - **Objective**:
@@ -80,7 +80,7 @@ df = pd.read_csv(url, header=0) # load
 df = df.sample(frac=1).reset_index(drop=True) # shuffle
 df.head()
 ```
-<div class="output_subarea output_html rendered_html"><div>
+<div class="output_subarea output_html rendered_html ai-center-all"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -92,7 +92,7 @@ df.head()
   <tbody>
     <tr>
       <th>0</th>
-      <td>Sharon Accepts Plan to Reduce Gaza Army Operat...</td>
+      <td>Sharon Accepts Plan to Reduce Gaza Army Operation...</td>
       <td>World</td>
     </tr>
     <tr>
@@ -508,6 +508,12 @@ print (padded.shape)
 (3, 6, 500)
 </pre>
 
+!!! question "Is our `pad_sequences` function properly created?"
+    Notice any assumptions that could lead to hidden bugs?
+
+    ??? quote "Show answer"
+        By using `np.zeros()` to create our padded sequences, we're assuming that our pad token's index is 0. While this is the case for our project, someone could choose to use a different index and this can cause an error. Worst of all, this would be a silent error because all downstream operations would still run normally but our performance will suffer and it may not always be intuitive that this was the cause of issue!
+
 ## Dataset
 We're going to create Datasets and DataLoaders to be able to efficiently create batches with our data splits.
 
@@ -637,7 +643,7 @@ X: torch.Size([64, 10, 8])
 </pre>
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/foundations/cnn/inputs.png">
+    <img width="500" src="/static/images/foundations/cnn/inputs.png" alt="inputs to CNN">
 </div>
 <div class="ai-center-all">
   <small>This diagram above is for char-level tokens but extends to any level of tokenization.</small>
@@ -649,13 +655,13 @@ At the core of CNNs are filters (aka weights, kernels, etc.) which convolve (sli
 We can see convolution in the diagram below where we simplified the filters and inputs to be 2D for ease of visualization. Also note that the values are 0/1s but in reality they can be any floating point value.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/foundations/cnn/convolution.gif">
+    <img width="500" src="/static/images/foundations/cnn/convolution.gif" alt="convolution">
 </div>
 
 Now let's return to our actual inputs `x`, which is of shape (8, 10) [`max_seq_len`, `vocab_size`] and we want to convolve on this input using filters. We will use 50 filters that are of size (1, 3) and has the same depth as the number of channels (`num_channels` = `vocab_size` = `one_hot_size` = 10). This gives our filter a shape of (3, 10, 50) [`kernel_size`, `vocab_size`, `num_filters`]
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/foundations/cnn/filters.png">
+    <img width="500" src="/static/images/foundations/cnn/filters.png" alt="CNN filters">
 </div>
 
 * `stride`: amount the filters move from one convolution operation to the next.
@@ -669,7 +675,7 @@ Padding types:
 * `SAME`: adds padding evenly to the right (preferred) and left sides of the input so that all values in the input are processed.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/foundations/cnn/padding.png">
+    <img width="500" src="/static/images/foundations/cnn/padding.png" alt="padding">
 </div>
 
 We're going to use the [Conv1d](https://pytorch.org/docs/stable/generated/torch.nn.Conv1d.html#torch.nn.Conv1d){:target="_blank"} layer to process our inputs.
@@ -698,7 +704,7 @@ print (f"z: {z.shape}")
 z: torch.Size([64, 50, 6])
 </pre>
 <div class="ai-center-all">
-    <img width="500" src="/static/images/foundations/cnn/conv.png">
+    <img width="500" src="/static/images/foundations/cnn/conv.png" alt="convolution step">
 </div>
 
 When we apply these filter on our inputs, we receive an output of shape (N, 6, 50). We get 50 for the output channel dim because we used 50 filters and 6 for the conv outputs because:
@@ -766,7 +772,7 @@ z: torch.Size([64, 50, 8])
 ### Pooling
 The result of convolving filters on an input is a feature map. Due to the nature of convolution and overlaps, our feature map will have lots of redundant information. Pooling is a way to summarize a high-dimensional feature map into a lower dimensional one for simplified downstream computation. The pooling operation can be the max value, average, etc. in a certain receptive field. Below is an example of pooling where the outputs from a conv layer are `4X4` and we're going to apply max pool filters of size `2X2`.
 <div class="ai-center-all">
-    <img width="500" src="/static/images/foundations/cnn/pooling.png">
+    <img width="500" src="/static/images/foundations/cnn/pooling.png" alt="pooling">
 </div>
 
 $$ W_2 = \frac{W_1 - F}{S} + 1 = \frac{4 - 2}{2} + 1 = 2 $$
@@ -838,7 +844,7 @@ Let's visualize the model's forward pass.
 6. We use one more FC layer with softmax to derive class probabilities.
 
 <div class="ai-center-all">
-    <img width="1000" src="/static/images/foundations/cnn/model.png">
+    <img width="1000" src="/static/images/foundations/cnn/model.png" alt="CNN model architecture">
 </div>
 
 ```python linenums="1"
@@ -1279,8 +1285,9 @@ print (conv_outputs.shape) # (num_filters, max_seq_len)
 tokens = tokenizer.sequences_to_texts(sequences)[0].split(" ")
 sns.heatmap(conv_outputs, xticklabels=tokens)
 ```
+
 <div class="ai-center-all">
-    <img width="400" src="data:image/png;base64,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">
+    <img src="/static/images/foundations/cnn/heatmap.png" width="400" alt="interpretability heatmap">
 </div>
 
 The filters have high values for the words `stock` and `market` which influenced the `Business` category classification.

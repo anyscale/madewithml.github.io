@@ -141,7 +141,7 @@ for item in sorted_tags_by_f1.items():
 ]
 </pre>
 
-> Due to our custom predict function, we're able to achieve high precision for the categories except for `other`. Based on our [product design](purpose.md#metrics){:target="_blank"}, we decided that it's more important to be precise about our explicit ML categories (nlp, cv, and mlops) and that we would have a manual labeling workflow to recall any missclassifications in the `other` category. Overtime, our model will become better in this category as well.
+> Due to our custom predict function, we're able to achieve high precision for the categories except for `other`. Based on our [product design](purpose.md#metrics){:target="_blank"}, we decided that it's more important to be precise about our explicit ML categories (nlp, cv, and mlops) and that we would have a manual labeling workflow to recall any misclassifications in the `other` category. Overtime, our model will become better in this category as well.
 
 ## Confusion matrix
 
@@ -208,7 +208,7 @@ for item in cm:
     true: mlops
     pred: mlops
 
-  test machine learning code systems minimal examples testing machine learning correct implementation expected learned behaviour model performance
+  test machine learning code systems minimal examples testing machine learning correct implementation expected learned behavior model performance
     true: mlops
     pred: mlops
 
@@ -389,7 +389,7 @@ nlp_cnn_df = slice_dataframe(test_df, nlp_cnn)
 nlp_cnn_df[["text", "tag"]].head()
 ```
 
-<div class="output_subarea output_html rendered_html"><div>
+<div class="output_subarea output_html rendered_html ai-center-all"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -413,7 +413,7 @@ short_text_df = slice_dataframe(test_df, short_text)
 short_text_df[["text", "tag"]].head()
 ```
 
-<div class="output_subarea output_html rendered_html"><div>
+<div class="output_subarea output_html rendered_html ai-center-all"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -602,7 +602,7 @@ Another way to evaluate our systems is to identify counterfactuals -- data with 
   <small><a href="https://ai.googleblog.com/2018/09/the-what-if-tool-code-free-probing-of.html" target="_blank">Identifying counterfactuals using the What-if tool</a></small>
 </div>
 
-> For our task, this can involve projects that use algorithms are typically reserved for a certain application area (such as CNNs for computervision or transformers for NLP).
+> For our task, this can involve projects that use algorithms are typically reserved for a certain application area (such as CNNs for computer vision or transformers for NLP).
 
 ## Behavioral testing
 
@@ -643,7 +643,7 @@ predict_tag(texts=texts)
 
 ## Evaluating evaluations
 
-How can we know if our models and systems are performing better over time? Unfortunately, depending on how often we retrain or how quickly our dataset grows, it won't always be a simple decision where all metrics/slices are performing better than the previous version. In these scenarios, it's important to know what our main priorities are and where we can have some leighway:
+How can we know if our models and systems are performing better over time? Unfortunately, depending on how often we retrain or how quickly our dataset grows, it won't always be a simple decision where all metrics/slices are performing better than the previous version. In these scenarios, it's important to know what our main priorities are and where we can have some leeway:
 
 - What criteria are most important?
 - What criteria can/cannot regress?

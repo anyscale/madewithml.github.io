@@ -92,7 +92,7 @@ pd.DataFrame({
     "test": counts["test_counts"]
 }).T.fillna(0)
 ```
-<div class="output_subarea output_html rendered_html"><div>
+<div class="output_subarea output_html rendered_html ai-center-all"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -153,7 +153,7 @@ dist_df = pd.DataFrame({
 dist_df
 ```
 
-<div class="output_subarea output_html rendered_html"><div>
+<div class="output_subarea output_html rendered_html ai-center-all"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -209,7 +209,7 @@ val_df = pd.DataFrame({"text": X_val, "tag": label_encoder.decode(y_val)})
 test_df = pd.DataFrame({"text": X_test, "tag": label_encoder.decode(y_test)})
 train_df.head()
 ```
-<div class="output_subarea output_html rendered_html"><div>
+<div class="output_subarea output_html rendered_html ai-center-all"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -231,7 +231,7 @@ train_df.head()
     </tr>
     <tr>
       <th>2</th>
-      <td>big bad nlp database collection 400 nlp datase...</td>
+      <td>big bad nlp database collection 400 nlp datasets...</td>
       <td>natural-language-processing</td>
     </tr>
     <tr>

@@ -15,7 +15,7 @@ notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blo
 In the <a target="_blank" href="https://madewithml.com/courses/foundations/recurrent-neural-networks/">RNN lesson</a>, we were constrained to using the representation at the very end but what if we could give contextual weight to each encoded input ($h_i$) when making our prediction? This is also preferred because it can help mitigate the vanishing gradient issue which stems from processing very long sequences. Below is attention applied to the outputs from an RNN. In theory, the outputs can come from anywhere where we want to learn how to weight amongst them but since we're working with the context of an RNN from the previous lesson , we'll continue with that.
 
 <div class="ai-center-all">
-    <img src="/static/images/foundations/attention/attention.png" width="500">
+    <img src="/static/images/foundations/attention/attention.png" width="500" alt="attention mechanisms">
 </div>
 
 $$ \alpha = softmax(W_{attn}h) $$
@@ -95,7 +95,7 @@ df = pd.read_csv(url, header=0) # load
 df = df.sample(frac=1).reset_index(drop=True) # shuffle
 df.head()
 ```
-<div class="output_subarea output_html rendered_html"><div>
+<div class="output_subarea output_html rendered_html ai-center-all"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -107,7 +107,7 @@ df.head()
   <tbody>
     <tr>
       <th>0</th>
-      <td>Sharon Accepts Plan to Reduce Gaza Army Operat...</td>
+      <td>Sharon Accepts Plan to Reduce Gaza Army Operation...</td>
       <td>World</td>
     </tr>
     <tr>
@@ -676,7 +676,7 @@ class Trainer(object):
 Attention applied to the outputs from an RNN. In theory, the outputs can come from anywhere where we want to learn how to weight amongst them but since we're working with the context of an RNN from the previous lesson , we'll continue with that.
 
 <div class="ai-center-all">
-    <img src="/static/images/foundations/attention/attention.png" width="500">
+    <img src="/static/images/foundations/attention/attention.png" width="500" alt="attention mechanisms">
 </div>
 
 $$ \alpha = softmax(W_{attn}h) $$
@@ -1093,7 +1093,7 @@ sns.heatmap(attn_vals, xticklabels=tokens)
 ```
 
 <div class="ai-center-all">
-    <img width="700" src="data:image/png;base64,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">
+    <img src="/static/images/foundations/attention/heatmap.png" width="650" alt="interpretability heatmap">
 </div>
 
 The word `tennis` was attended to the most to result in the `Sports` label.
@@ -1106,7 +1106,7 @@ We'll briefly look at the different types of attention and when to use each them
 
 Soft attention the type of attention we've implemented so far, where we attend to all encoded inputs when creating our context vector.
 
-- **advantages**: we always have the ability to attend to all inputs in case something we saw much earlier/ see later are crucial for determing the output.
+- **advantages**: we always have the ability to attend to all inputs in case something we saw much earlier/ see later are crucial for determining the output.
 - **disadvantages**: if our input sequence is very long, this can lead to expensive compute.
 
 ### Hard attention
@@ -1117,7 +1117,7 @@ Hard attention is focusing on a specific set of the encoded inputs at each time 
 - **disadvantages**: non-differentiable and so we need to use more complex techniques (variance reduction, reinforcement learning, etc.) to train.
 
 <div class="ai-center-all">
-<img src="/static/images/foundations/attention/soft_attention.png" width="700">
+<img src="/static/images/foundations/attention/soft_attention.png" width="700" alt="soft attention">
 </div>
 <div class="ai-center-all">
 <small><a href="https://arxiv.org/abs/1502.03044" target="_blank">Show, Attend and Tell: Neural Image Caption Generation with Visual Attention</a></small>
@@ -1131,7 +1131,7 @@ Hard attention is focusing on a specific set of the encoded inputs at each time 
 - **disadvantages**: need to determine the alignment vector for each output but it's a worthwhile trade off to determine the right window of inputs to attend to in order to avoid attending to all of them.
 
 <div class="ai-center-all">
-<img src="/static/images/foundations/attention/local_attention.png" width="700">
+<img src="/static/images/foundations/attention/local_attention.png" width="700" alt="local attention">
 </div>
 <div class="ai-center-all">
 <small><a href="https://arxiv.org/abs/1508.04025" target="_blank">Effective Approaches to Attention-based Neural Machine Translation
@@ -1143,7 +1143,7 @@ Hard attention is focusing on a specific set of the encoded inputs at each time 
 We can also use attention within the encoded input sequence to create a weighted representation that based on the similarity between input pairs. This will allow us to create rich representations of the input sequence that are aware of the relationships between each other. For example, in the image below you can see that when composing the representation of the token "its", this specific attention head will be incorporating signal from the token "Law" (it's learned that "its" is referring to the "Law").
 
 <div class="ai-center-all">
-<img src="/static/images/foundations/attention/self_attention.png" width="300">
+<img src="/static/images/foundations/attention/self_attention.png" width="300" alt="self attention">
 </div>
 <div class="ai-center-all">
 <small><a href="https://arxiv.org/abs/1706.03762" target="_blank">Attention Is All You Need</a></small>

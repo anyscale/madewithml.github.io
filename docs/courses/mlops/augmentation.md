@@ -25,7 +25,7 @@ We'll often want to increase the size and diversity of our training data split t
 The exact method of data augmentation depends largely on the type of data and the application. Here are a few ways different modalities of data can be augmented:
 
 <div class="ai-center-all mt-4">
-    <img width="700" src="/static/images/mlops/augmentation/snorkel.png">
+    <img width="700" src="/static/images/mlops/augmentation/snorkel.png" alt="data augmentation types">
 </div>
 <div class="ai-center-all mb-4">
     <small><a href="https://www.snorkel.org/blog/tanda" target="_blank">Data Augmentation with Snorkel</a></small>
@@ -127,7 +127,7 @@ print (flat_tags_dict["nlp"])
 ['nlproc', 'natural language processing']
 </pre>
 
-> For now we'll use tags and aliases as they are in `tags.json` but we could account for plurality of tags using the [inflect](https://github.com/jaraco/inflect){:target="_blank"} package or apply stemmping before replacing aliases, etc.
+> For now we'll use tags and aliases as they are in `tags.json` but we could account for plurality of tags using the [inflect](https://github.com/jaraco/inflect){:target="_blank"} package or apply stemming before replacing aliases, etc.
 
 ```python linenums="1"
 # We want to match with the whole word only
@@ -216,7 +216,7 @@ train_df_augmented.drop_duplicates(subset=["text"], inplace=True)
 train_df_augmented.head()
 ```
 
-<div class="output_subarea output_html rendered_html"><div>
+<div class="output_subarea output_html rendered_html ai-center-all"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -238,7 +238,7 @@ train_df_augmented.head()
     </tr>
     <tr>
       <th>2</th>
-      <td>big bad nlp database collection 400 nlp datase...</td>
+      <td>big bad nlp database collection 400 nlp datasets...</td>
       <td>natural-language-processing</td>
     </tr>
     <tr>

@@ -70,7 +70,7 @@ st.header("🚀 Inference")
 To see these changes on our dashboard, we can refresh our dashboard page (press `R`) or set it `Always rerun` (press `A`).
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/dashboard/sections.png">
+    <img width="600" src="/static/images/mlops/dashboard/sections.png" alt="dashboard">
 </div>
 
 ### Data
@@ -87,7 +87,7 @@ st.write(df)
 ```
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/dashboard/data.png">
+    <img width="700" src="/static/images/mlops/dashboard/data.png" alt="data">
 </div>
 
 ### Performance
@@ -107,7 +107,7 @@ st.write(performance["slices"][tag])
 ```
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/dashboard/performance.png">
+    <img width="700" src="/static/images/mlops/dashboard/performance.png" alt="performance">
 </div>
 
 ### Inference
@@ -123,7 +123,7 @@ st.write(prediction)
 ```
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/dashboard/inference.png">
+    <img width="700" src="/static/images/mlops/dashboard/inference.png" alt="inference">
 </div>
 
 !!! tip

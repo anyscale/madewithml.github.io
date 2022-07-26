@@ -28,7 +28,7 @@ We're going to use Docker to deploy our application locally in an isolated, repr
 Before we install Docker, let's take a look at how the container engine works on top our operating system, which can be our local hardware or something managed on the cloud.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/mlops/docker/architecture.png">
+    <img width="500" src="/static/images/mlops/docker/architecture.png" alt="docker container architecture">
 </div>
 
 The Docker container engine is responsible for spinning up configured containers, which *contains* our application and it's dependencies (binaries, libraries, etc.). The container engine is very efficient in that it doesn't need to create a separate operating system for each containerized application. This also means that our containers can share the system's resources via the Docker engine.
@@ -55,7 +55,7 @@ We'll start by creating a Dockerfile:
 touch Dockerfile
 ```
 
-The first line we'll write in our `Dockerfiel` specifies the base image we want to pull [FROM](https://docs.docker.com/engine/reference/builder/#from){:target="_blank"}. Here we want to use the [base image](https://hub.docker.com/_/python){:target="_blank"} for running Python based applications and specifically for Python 3.7 with the slim variant. Since we're only deploying a Python application, this slim variant with minimal packages satisfies our requirements while keeping the size of the image layer low.
+The first line we'll write in our `Dockerfile` specifies the base image we want to pull [FROM](https://docs.docker.com/engine/reference/builder/#from){:target="_blank"}. Here we want to use the [base image](https://hub.docker.com/_/python){:target="_blank"} for running Python based applications and specifically for Python 3.7 with the slim variant. Since we're only deploying a Python application, this slim variant with minimal packages satisfies our requirements while keeping the size of the image layer low.
 
 ```dockerfile
 # Base image

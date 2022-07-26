@@ -306,7 +306,7 @@ logger.info("✅ Saved raw data!")
 
 All of our log messages are at the `INFO` level but while developing we may have had to use `DEBUG` levels and we also add some `ERROR` or `CRITICAL` log messages if our system behaves in an unintended manner.
 
-- **what**: log all the necessary details you want to surface from our application that will be useful *during* development and *aftwerwards* for retrospective inspection.
+- **what**: log all the necessary details you want to surface from our application that will be useful *during* development and *afterwards* for retrospective inspection.
 
 - **where**: a best practice is to not clutter our modular functions with log statements. Instead we should log messages outside of small functions and inside larger workflows. For example, there are no log messages inside any of our scripts except the `main.py` and `train.py` files. This is because these scripts use the smaller functions defined in the other scripts (data.py, evaluate.py, etc.). If we ever feel that we the need to log within our other functions, then it usually indicates that the function needs to be broken down further.
 

@@ -18,7 +18,7 @@ We learned how to version our code but there are several other very important cl
 - expose configurations so we can see and compare parameters.
 
 <div class="ai-center-all">
-    <img width="700" src="/static/images/mlops/versioning/versioning.png">
+    <img width="700" src="/static/images/mlops/versioning/versioning.png" alt="data versioning">
 </div>
 
 ## Application

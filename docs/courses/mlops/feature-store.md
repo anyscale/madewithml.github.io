@@ -337,7 +337,7 @@ entity_df = pd.DataFrame.from_dict({"id": project_ids, "event_timestamp": timest
 entity_df.head()
 ```
 
-<div class="output_subarea output_html rendered_html"><div>
+<div class="output_subarea output_html rendered_html ai-center-all"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -376,7 +376,7 @@ training_df = store.get_historical_features(
 training_df.head()
 ```
 
-<div class="output_subarea output_html rendered_html"><div>
+<div class="output_subarea output_html rendered_html ai-center-all"><div>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">

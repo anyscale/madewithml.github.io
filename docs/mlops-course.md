@@ -25,7 +25,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
     <div class="col-md-5 ai-center-all" data-aos="fade-left">
         <div class="mb-md-0 mb-4">
-            <img src="/static/images/logos.png" style="width: 12rem;">
+            <img src="/static/images/logos.png" style="width: 12rem;" alt="machine learning logos">
         </div>
     </div>
 </div>
@@ -75,7 +75,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/ritchie_ng.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/ritchie_ng.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
@@ -100,7 +100,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/daniel_bourke.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/daniel_bourke.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
@@ -129,7 +129,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/ask_katnoria.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/ask_katnoria.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
@@ -154,7 +154,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/arghyadeep_das.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/arghyadeep_das.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
@@ -183,7 +183,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/peter_ku.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/peter_ku.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
@@ -208,7 +208,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/abinaya_mahendiran.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/abinaya_mahendiran.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
@@ -237,7 +237,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/jeremy_jordan.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/jeremy_jordan.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
@@ -262,7 +262,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/karthik_bhaskar.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/karthik_bhaskar.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
@@ -291,7 +291,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/dmitry_petrov.png">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/dmitry_petrov.png" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
@@ -316,7 +316,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/lawrence_okegbemi.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/lawrence_okegbemi.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
@@ -345,7 +345,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/laxman_tomar.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/laxman_tomar.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
@@ -370,7 +370,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                             <div>
                                 <div class="row">
                                     <div class="col-3 col-md-2 pr-0 ai-center-all">
-                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/satyabrata_pal.jpeg">
+                                        <img class="ai-testimonial-profile-image" src="/static/images/testimonials/satyabrata_pal.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
                                         <div>
