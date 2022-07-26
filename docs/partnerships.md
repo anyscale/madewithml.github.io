@@ -9,7 +9,7 @@ title: Partnerships
 
 ### Our Mission
 
-We created Made With ML to educate and enable the community to responsibly deliver value with ML. While there are many facets to this mission, at its core are the relationships with others who share this mission. We want to work together to help teams around the world discover the best tools and platforms for their specific context and kickoff a flywheel with the community to make those tools even better.
+We created Made With ML to educate and enable the community to responsibly deliver value with ML. While there are many facets to this mission, at its core are the relationships with others who share this mission. We want to work together to help teams discover the best tools and platforms for their specific contexts and kickoff a flywheel with the community to make those tools even better.
 
 ### Benefits
 
