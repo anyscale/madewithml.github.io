@@ -44,13 +44,14 @@ The framework to use when composing tests is the [Arrange Act Assert](http://wik
 
 In Python, there are many tools, such as [unittest](https://docs.python.org/3/library/unittest.html){:target="_blank"}, [pytest](https://docs.pytest.org/en/stable/){:target="_blank"}, etc. that allow us to easily implement our tests while adhering to the *Arrange Act Assert* framework. These tools come with powerful built-in functionality such as parametrization, filters, and more, to test many conditions at scale.
 
-!!! question "What should we be testing for?"
-    When *arranging* our inputs and *asserting* our expected outputs, what are some aspects of our inputs and outputs that we should be testing for?
+### What should we test?
 
-    ??? quote "Show answer"
+When *arranging* our inputs and *asserting* our expected outputs, what are some aspects of our inputs and outputs that we should be testing for?
 
-        - **inputs**: data types, format, length, edge cases (min/max, small/large, etc.)
-        - **outputs**: data types, formats, exceptions, intermediary and final outputs
+- **inputs**: data types, format, length, edge cases (min/max, small/large, etc.)
+- **outputs**: data types, formats, exceptions, intermediary and final outputs
+
+> 👉 &nbsp;We'll cover specific details pertaining to what to test for regarding our [data](testing.md#data) and [models](testing.md#models) below.
 
 ## Best practices
 Regardless of the framework we use, it's important to strongly tie testing into the development process.
@@ -588,35 +589,29 @@ So far, we've used unit and integration tests to test the functions that interac
 
 There are many dimensions to consider for what our data is expected to look like. We'll briefly talk about a few of them, including ones that may not directly be applicable to our task but, nonetheless, are very important to be aware of.
 
-- `#!js rows / cols`: the most basic expectation is validating the presence of samples (rows) and features (columns). These can help identify inconsistencies between upstream backend database schema changes, upstream UI form changes, etc.
+#### Rows and columns
 
-    !!! question "Rows/cols"
-        What are aspects of rows and cols in our dataset that we should test for?
+The most basic expectation is validating the presence of samples (rows) and features (columns). These can help identify inconsistencies between upstream backend database schema changes, upstream UI form changes, etc.
 
-        ??? quote "Show answer"
-            - presence of specific features
-            - row count (exact or range) of samples
+- presence of specific features
+- row count (exact or range) of samples
 
-- `#!js individual values`: we can also have expectations about the individual values of specific features.
+#### Individual values
 
-    !!! question "Individual"
-        What are aspects of individual values that we should test for?
+We can also have expectations about the individual values of specific features.
 
-        ??? quote "Show answer"
-            - missing values
-            - type adherence (ex. feature values are all `float`)
-            - values must be unique or from a predefined set
-            - list (categorical) / range (continuous) of allowed values
-            - feature value relationships with other feature values (ex. column 1 values must always be greater than column 2)
+- missing values
+- type adherence (ex. feature values are all `float`)
+- values must be unique or from a predefined set
+- list (categorical) / range (continuous) of allowed values
+- feature value relationships with other feature values (ex. column 1 values must always be greater than column 2)
 
-- `#!js aggregate values`: we can also set expectations about all the values of specific features.
+#### Aggregate values
 
-    !!! question "Aggregate"
-        What are aspects of aggregate values that we should test for?
+We can also set expectations about all the values of specific features.
 
-        ??? quote "Show answer"
-            - value statistics (mean, std, median, max, min, sum, etc.)
-            - distribution shift by comparing current values to previous values (useful for detecting drift)
+- value statistics (mean, std, median, max, min, sum, etc.)
+- distribution shift by comparing current values to previous values (useful for detecting drift)
 
 To implement these expectations, we could compose assert statements or we could leverage the open-source library called [Great Expectations](https://github.com/great-expectations/great_expectations){:target="_blank"}.
 
