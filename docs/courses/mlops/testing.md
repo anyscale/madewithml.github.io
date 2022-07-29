@@ -621,7 +621,7 @@ There are many dimensions to consider for what our data is expected to look like
 To implement these expectations, we could compose assert statements or we could leverage the open-source library called [Great Expectations](https://github.com/great-expectations/great_expectations){:target="_blank"}.
 
 ```bash
-pip install great-expectations==0.15.7
+pip install great-expectations==0.15.15
 ```
 
 And we'll add this to our `setup.py` script:
@@ -631,7 +631,7 @@ And we'll add this to our `setup.py` script:
 test_packages = [
     "pytest==7.1.2",
     "pytest-cov==2.10.1",
-    "great-expectations==0.15.7"
+    "great-expectations==0.15.15"
 ]
 ```
 

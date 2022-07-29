@@ -461,7 +461,7 @@ The feature store we implemented above assumes that our task requires [batch pro
     <img src="/static/images/mlops/feature_store/batch.png" width="1000" alt="batch processing">
 </div>
 
-1. Application data is stored in a database and/or a data warehouse, etc. And it goes through the [DataOps pipeline](../pipelines/#dataops){:target="_blank"} to validate the data and engineer the features.
+1. Application data is stored in a database and/or a data warehouse, etc. And it goes through the necessary pipelines to be prepared for downstream application (analytics, machine learning, etc.).
 2. These features are written to the offline store which can then be used to retrieve [historical training data](#historical-features) to train a model with. In our local set up, this was join via Pandas DataFrame joins for given timestamps and entity IDs but in a production setting, something like Google BigQuery or Hive would receive the feature requests.
 3. Once we have our training data, we can start the workflows to optimize, train and validate a model.
 4. We can incrementally [materialize](#online-features) features to the online store so that we can retrieve an entity's feature values with low latency. In our local set up, this was join via SQLite for a given set of entities but in a production setting, something like Redis or DynamoDB would be used.

@@ -84,10 +84,6 @@ Based on our findings from [EDA](exploratory-data-analysis.md){:target="_blank"}
 - if a certain tag doesn't have *enough* samples, we'll replace it with `other`
 
 ```python linenums="1"
-df = df[df.tag.notnull()]  # remove projects with no label
-```
-
-```python linenums="1"
 # Out of scope (OOS) tags
 oos_tags = [item for item in df.tag.unique() if item not in tags_dict.keys()]
 oos_tags

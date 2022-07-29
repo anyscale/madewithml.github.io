@@ -15,7 +15,7 @@ When it comes to serving our models, we need to think about exposing the applica
 
 ```python
 from tagifai import main
-main.load_data()
+main.etl_data()
 ```
 
 or the alternative was to call the operation explicitly inside our `main.py` file:
@@ -23,7 +23,7 @@ or the alternative was to call the operation explicitly inside our `main.py` fil
 ```python
 # tagifai/main.py
 if __name__ == "__main__":
-    load_data()
+    etl_data()
 ```
 
 This becomes extremely tedious having to dig into the code and execute functions one at a time. A solution is to build a command line interface (CLI) application that allows for interaction at the operational level. It should designed such that we can view all possible operations (and their required arguments) and execute them from the shell.
@@ -51,16 +51,16 @@ app = typer.Typer()
 
 ```python linenums="1" hl_lines="1"
 @app.command()
-def load_data():
+def etl_data():
     ...
 ```
 
-We'll repeat the same for all the other functions we want to access via the CLI: `load_data()`, `label_data()`, `train_model()`, `optimize()`, `predict_tag()`. We'll make it such that all arguments are optional so that we can explicitly define them in our bash commands. For example, ```#!python def label_data(args_fp: str):``` will become ```#!python def label_data(args_fp: str = "config/args.json"):```.
+We'll repeat the same for all the other functions we want to access via the CLI: `etl_data()`, `label_data()`, `train_model()`, `optimize()`, `predict_tag()`. We'll make it such that all arguments are optional so that we can explicitly define them in our bash commands. For example, ```#!python def label_data(args_fp: str):``` will become ```#!python def label_data(args_fp: str = "config/args.json"):```.
 
 ??? quote "View `tagifai/main.py` function headers"
     ```python linenums="1"
     @app.command()
-    def load_data():
+    def etl_data():
         ...
 
     @app.command()
@@ -107,8 +107,8 @@ Options:
   --help       Show this message and exit.
 
 Commands:
-  label-data   Label data with constraints.
-  load-data    Load data from URLs and save to local drive.
+  etl-data     Extract, transform and load data.
+  label-data   Label data using constraints.
   optimize     Optimize hyperparameters.
   predict-tag  Predict tag for text.
   train-model  Train a model given arguments.

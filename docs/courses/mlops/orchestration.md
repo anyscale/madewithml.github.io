@@ -1,31 +1,32 @@
 ---
 template: lesson.html
-title: Pipeline Orchestration for Machine Learning
+title: Workflow Orchestration for Machine Learning
 description: Create, schedule and monitor workflows by creating scalable pipelines.
-keywords: airflow, workflows, pipelines, orchestration, dataops, data warehouse, database, great expectations, data validation, spark, ci/cd, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
+keywords: airflow, prefect, dagster, workflows, pipelines, orchestration, dataops, data warehouse, database, great expectations, data validation, spark, ci/cd, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/mlops-course
 ---
 
 {% include "styles/lesson.md" %}
-
+`
 ## Intuition
 
-So far we've implemented the components of our DataOps (cleaning, feature engineering, preprocessing, etc.) and MLOps (optimization, training, evaluation, etc.) workflows as Python function calls. This has worked well since our dataset is not large and because we're only dealing with one version of data. But happens when we need to:
+So far we've implemented our DataOps (ETL, preprocessing, validation, etc.) and MLOps (optimization, training, evaluation, etc.) workflows as Python function calls. This has worked well since our dataset is static and small. But happens when we need to:
 
-- **trigger** or **schedule** these workflows as new data arrives?
+- **schedule** these workflows as new data arrives?
 - **scale** these workflows as our data grows?
-- **share** these workflows so others can use their outputs?
-- **monitor** these workflows individually?
+- **share** these workflows to downstream consumers?
+- **monitor** these workflows?
 
-We'll need to break down our end-to-end ML pipeline into in it's constituent DataOps and MLOps pipelines that be orchestrated and scaled as needed. There are several tools that can help us create these pipelines and orchestrate our workflows such as [Airflow](http://airflow.apache.org/){:target="_blank"}, [Prefect](https://www.prefect.io/){:target="_blank"}, [Luigi](https://luigi.readthedocs.io/en/stable/){:target="_blank"} and even some ML focused options such as [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"}, [Vertex pipelines](https://cloud.google.com/vertex-ai/docs/pipelines/introduction){:target="_blank"}, etc.. We'll be creating our pipelines using AirFlow because of it's:
+We'll need to break down our end-to-end ML pipeline into individual workflows that be orchestrated as needed. There are several tools that can help us so this such as [Airflow](http://airflow.apache.org/){:target="_blank"}, [Prefect](https://www.prefect.io/){:target="_blank"}, [Dagster](https://dagster.io/){:target="_blank"}, [Luigi](https://luigi.readthedocs.io/en/stable/){:target="_blank"} and even some ML focused options such as [Metaflow](){}, [Flyte](){}, [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"}, [Vertex pipelines](https://cloud.google.com/vertex-ai/docs/pipelines/introduction){:target="_blank"}, etc. We'll be creating our workflows using AirFlow for its:
 
 - wide adoption of the open source platform in industry
 - Python based software development kit (SDK)
 - integration with the ecosystem (data ingestion, processing, etc.)
 - ability to run locally and scale easily
+- maturity over the years and part of the apache ecosystem
 
-> We'll be running Airflow locally but we can easily scale it by running on a managed cluster platform where we can run Python, Hadoop, Spark, etc. on large batch processing jobs (AWS' [EMR](https://aws.amazon.com/emr/){:target="_blank"}, Google Cloud's [Dataproc](https://cloud.google.com/dataproc){:target="_blank"}, on-prem hardware, etc.). This is typically set up by your DevOps teams and you should be able to add your workflows accordingly using [operators](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/operators/emr.html){:target="_blank"}.
+> We'll be running Airflow locally but we can easily scale it by running on a managed cluster platform where we can run Python, Hadoop, Spark, etc. on large batch processing jobs (AWS [EMR](https://aws.amazon.com/emr/){:target="_blank"}, Google Cloud's [Dataproc](https://cloud.google.com/dataproc){:target="_blank"}, on-prem hardware, etc.).
 
 ## Airflow
 
@@ -33,15 +34,12 @@ Before we create our specific pipelines, let's understand and implement [Airflow
 
 ## Install
 
-To install and run Airflow, we can either do so [locally](https://airflow.apache.org/docs/apache-airflow/stable/start/local.html){:target="_blank"} or with [Docker](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html){:target="_blank"} and [set up a database backend](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html){:target="_blank"} (default is SQLite) and/or establish [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html){:target="_blank"}.
-
-!!! warning
-    If you do decide to use docker-compose to run Airflow inside Docker containers, you'll want to allocate at least 4 GB in memory.
+To install and run Airflow, we can either do so [locally](https://airflow.apache.org/docs/apache-airflow/stable/start/local.html){:target="_blank"} or with [Docker](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html){:target="_blank"}. If using `docker-compose` to run Airflow inside Docker containers, we'll want to allocate at least 4 GB in memory.
 
 ```bash
 # Configurations
 export AIRFLOW_HOME=${PWD}/airflow
-AIRFLOW_VERSION=2.0.1
+AIRFLOW_VERSION=2.3.3
 PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
 CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
 
@@ -73,7 +71,7 @@ load_examples = False  # don't clutter webserver with examples
 And we'll perform a reset to implement these configuration changes.
 
 ```bash
-airflow db reset
+airflow db reset -y
 ```
 
 Now we're ready to initialize our database with an admin user, which we'll use to login to access our workflows in the webserver.
@@ -82,10 +80,10 @@ Now we're ready to initialize our database with an admin user, which we'll use t
 # We'll be prompted to enter a password
 airflow users create \
     --username admin \
-    --firstname Goku \
-    --lastname Mohandas \
+    --firstname FIRSTNAME \
+    --lastname LASTNAME \
     --role Admin \
-    --email goku@madewithml.com
+    --email EMAIL
 ```
 
 ## Webserver
@@ -101,18 +99,19 @@ airflow webserver --port 8080  # http://localhost:8080
 The webserver allows us to run and inspect workflows, establish connections to external data storage, manager users, etc. through a UI. Similarly, we could also use Airflow's [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html){:target="_blank"} or [Command-line interface (CLI)](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html){:target="_blank"} to perform the same operations. However, we'll be using the webserver because it's convenient to visually inspect our workflows.
 
 <div class="ai-center-all">
-    <img src="/static/images/mlops/pipelines/webserver.png" width="700" alt="airflow webserver">
+    <img src="/static/images/mlops/orchestration/webserver.png" width="700" alt="airflow webserver">
 </div>
 
 We'll explore the different components of the webserver as we learn about Airflow and implement our workflows.
 
 ## Scheduler
 
-Next, we need to launch our scheduler, which will execute and monitor the tasks in our workflows. The schedule executes tasks by reading from the metadata database and ensures the task has what it needs to finish running.
+Next, we need to launch our scheduler, which will execute and monitor the tasks in our workflows. The schedule executes tasks by reading from the metadata database and ensures the task has what it needs to finish running. We'll go ahead and execute the following commands on the *separate terminal* window:
 
 ```bash
 # Launch scheduler (in separate terminal)
 export AIRFLOW_HOME=${PWD}/airflow
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 airflow scheduler
 ```
 
@@ -126,17 +125,15 @@ As our scheduler reads from the metadata database, the executor determines what 
 Workflows are defined by directed acyclic graphs (DAGs), whose nodes represent tasks and edges represent the data flow relationship between the tasks. Direct and acyclic implies that workflows can only execute in one direction and a previous, upstream task cannot run again once a downstream task has started.
 
 <div class="ai-center-all">
-    <img src="/static/images/mlops/pipelines/basic_dag.png" width="250" alt="basic DAG">
+    <img src="/static/images/mlops/orchestration/basic_dag.png" width="250" alt="basic DAG">
 </div>
 
-DAGs can be defined inside Python workflow scripts inside the `airflow/dags` directory and they'll automatically appear (and continuously be updated) on the webserver.
+DAGs can be defined inside Python workflow scripts inside the `airflow/dags` directory and they'll automatically appear (and continuously be updated) on the webserver. Before we start creating our DataOps and MLOps workflows, we'll learn about Airflow's concepts via an example DAG outlined in [airflow/dags/example.py](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/dags/example.py){:target="_blank"}. Execute the following commands in a new (3rd) terminal window:
 
 ```bash
 mkdir airflow/dags
 touch airflow/dags/example.py
 ```
-
-> Before we start creating our DataOps and MLOps workflows, we'll learn about Airflow's concepts via an example DAG outlined in [airflow/dags/example.py](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/dags/example.py){:target="_blank"}
 
 Inside each workflow script, we can define some default arguments that will apply to all DAGs within that workflow.
 
@@ -186,34 +183,18 @@ def example():
 
 > There are many [parameters](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html#airflow.models.dag.DAG){:target="_blank"} that we can initialize our DAGs with, including a `start_date` and a `schedule_interval`. While we could have our workflows execute on a temporal cadence, many ML workflows are initiated by events, which we can map using [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/index.html){:target="_blank"} and [hooks](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/hooks/index.html){:target="_blank"} to external databases, file systems, etc.
 
-
 ## Tasks
 
 Tasks are the operations that are executed in a workflow and are represented by nodes in a DAG. Each task should be a clearly defined single operation and it should be idempotent, which means we can execute it multiple times and expect the same result and system state. This is important in the event we need to retry a failed task and don't have to worry about resetting the state of our system. Like DAGs, there are several different ways to implement tasks:
 
-- Using [Operators](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/index.html){:target="_blank"}
+- using the [task decorator](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html#concepts-task-decorator){:target="_blank"}
 ```python linenums="1"
-from airflow.operators.bash_operator import BashOperator
+from airflow.decorators import dag, task
+from airflow.utils.dates import days_ago
 
 @dag(
     dag_id="example",
-    description="Example DAG",
-    default_args=default_args,
-    schedule_interval=None,
-    start_date=days_ago(2),
-    tags=["example"],
-)
-def example():
-    # Define tasks
-    task_1 = BashOperator(task_id="task_1", bash_command="echo 1")
-    task_2 = BashOperator(task_id="task_2", bash_command="echo 1")
-```
-
-- Using the [tag decorator](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html#concepts-task-decorator){:target="_blank"}
-```python linenums="1"
-@dag(
-    dag_id="example",
-    description="Example DAG",
+    description="Example DAG with task decorators",
     default_args=default_args,
     schedule_interval=None,
     start_date=days_ago(2),
@@ -226,6 +207,26 @@ def example():
     @task
     def task_2(x):
         return x+1
+```
+
+- using [Operators](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/index.html){:target="_blank"}
+```python linenums="1"
+from airflow.decorators import dag
+from airflow.operators.bash_operator import BashOperator
+from airflow.utils.dates import days_ago
+
+@dag(
+    dag_id="example",
+    description="Example DAG with Operators",
+    default_args=default_args,
+    schedule_interval=None,
+    start_date=days_ago(2),
+    tags=["example"],
+)
+def example():
+    # Define tasks
+    task_1 = BashOperator(task_id="task_1", bash_command="echo 1")
+    task_2 = BashOperator(task_id="task_2", bash_command="echo 2")
 ```
 
 > Though the graphs are directed, we can establish certain [trigger rules](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html#trigger-rules){:target="_blank"} for each task to execute on conditional successes or failures of the parent tasks.
@@ -255,21 +256,21 @@ There are also many other Airflow native [Operators](https://airflow.apache.org/
 
 Once we've defined our tasks using Operators or as decorated functions, we need to define the relationships between them (edges). The way we define the relationships depends on how our tasks were defined:
 
-- if defined using Operators
-```python linenums="1"
-# Task relationships
-task_1 >> task_2  # same as task_1.set_downstream(task_2) or
-                  # task_2.set_upstream(task_1)
-```
-
-- if defined using decorated functions
+- using decorated functions
 ```python linenums="1"
 # Task relationships
 x = task_1()
 y = task_2(x=x)
 ```
 
-> In both scenarios, we'll setting `task_2` as the downstream task to `task_1`.
+- using Operators
+```python linenums="1"
+# Task relationships
+task_1 >> task_2  # same as task_1.set_downstream(task_2) or
+                  # task_2.set_upstream(task_1)
+```
+
+In both scenarios, we'll setting `task_2` as the downstream task to `task_1`.
 
 !!! note
     We can even create intricate DAGs by using these notations to define the relationships.
@@ -280,12 +281,12 @@ y = task_2(x=x)
     [task_3, task_4] >> task_5
     ```
     <div class="ai-center-all">
-        <img src="/static/images/mlops/pipelines/dag.png" width="500" alt="DAG">
+        <img src="/static/images/mlops/orchestration/dag.png" width="500" alt="DAG">
     </div>
 
 ### XComs
 
-When we use decorated functions, we can see how values can be passed between tasks. But, how can we pass values when using Operators? Airflow uses XComs (cross communications) objects, defined with a key, value, timestamp and task_id, to push and pull values between tasks. When we use decorated functions, XComs are being used under the hood but it's abstracted away, allowing us to pass values amongst Python functions seamlessly. But when using Operators, we'll need to explicitly push and pull the values as we need it.
+When we use task decorators, we can see how values can be passed between tasks. But, how can we pass values when using Operators? Airflow uses XComs (cross communications) objects, defined with a key, value, timestamp and task_id, to push and pull values between tasks. When we use decorated functions, XComs are being used under the hood but it's abstracted away, allowing us to pass values amongst Python functions seamlessly. But when using Operators, we'll need to explicitly push and pull the values as we need it.
 
 ```python linenums="1" hl_lines="3 6 8"
 def _task_1(ti):
@@ -315,19 +316,20 @@ def example2():
 We can also view our XComs on the webserver by going to **Admin** >> **XComs**:
 
 <div class="ai-center-all">
-    <img src="/static/images/mlops/pipelines/xcoms.png" width="700" alt="xcoms">
+    <img src="/static/images/mlops/orchestration/xcoms.png" width="700" alt="xcoms">
 </div>
 
 !!! warning
-    The data we pass between tasks should be small (metadata, metrics, etc.) because Airflow's metadata database is not equipped to hold large artifacts. However, if we do need to store and use the large results of our tasks, it's best to use an external data storage (blog storage, databases, etc.) by creating an interface via [hooks](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html#hooks){target="_blank"}.
+    The data we pass between tasks should be small (metadata, metrics, etc.) because Airflow's metadata database is not equipped to hold large artifacts. However, if we do need to store and use the large results of our tasks, it's best to use an external data storage (blog storage, model registry, etc.).
 
 
 ## DAG runs
 
 Once we've defined the tasks and their relationships, we're ready to run our DAGs. We'll start defining our DAG like so:
 ```python linenums="1"
-# Define DAG
-example_dag = example()
+# Run DAGs
+example1_dag = example_1()
+example2_dag = example_2()
 ```
 
 If we refresh our webserver page ([http://localhost:8080/](http://localhost:8080/){:target="_blank"}), the new DAG will have appeared.
@@ -336,7 +338,7 @@ If we refresh our webserver page ([http://localhost:8080/](http://localhost:8080
 Our DAG is initially paused since we specified `dags_are_paused_at_creation = True` inside our [airflow.cfg](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/airflow.cfg){:target="_blank"} configuration, so we'll have to manually execute this DAG by clicking on it > unpausing it (toggle) > triggering it (button). To view the logs for any of the tasks in our DAG run, we can click on the task > Log.
 
 <div class="ai-center-all">
-    <img src="/static/images/mlops/pipelines/trigger.png" width="700" alt="triggering a DAG">
+    <img src="/static/images/mlops/orchestration/trigger.png" width="700" alt="triggering a DAG">
 </div>
 
 !!! note
@@ -344,16 +346,16 @@ Our DAG is initially paused since we specified `dags_are_paused_at_creation = Tr
 
     ```bash
     # CLI to run dags
-    airflow dags trigger dataops
-    airflow dags trigger mlops
+    airflow dags trigger <DAG_ID>
     ```
 
 ### Interval
 Had we specified a `start_date` and `schedule_interval` when defining the DAG, it would have have automatically executed at the appropriate times. For example, the DAG below will have started two days ago and will be triggered at the start of every day.
 
 ```python linenums="1"
-from datetime import timedelta
+from airflow.decorators import dag
 from airflow.utils.dates import days_ago
+from datetime import timedelta
 
 @dag(
     dag_id="example",
@@ -385,29 +387,57 @@ We could also specify a [cron](https://crontab.guru/){:target="_blank"} expressi
 
 ### Sensors
 
-While it may make sense to execute many data processing workflows on a scheduled interval, machine learning workflows may require more nuanced triggers. We shouldn't be wasting compute by running executing our DataOps and MLOps pipelines *just in case* we have new data. Instead, we can use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/){:target="_blank"} to trigger workflows when some external condition is met. For example, we can initiate data processing when a new batch of annotated data appears in a database or when a specific file appears in a file system, etc.
+While it may make sense to execute many data processing workflows on a scheduled interval, machine learning workflows may require more nuanced triggers. We shouldn't be wasting compute by running executing our workflows *just in case* we have new data. Instead, we can use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/){:target="_blank"} to trigger workflows when some external condition is met. For example, we can initiate data processing when a new batch of annotated data appears in a database or when a specific file appears in a file system, etc.
 
 > There's so much more to Airflow (monitoring, Task groups, smart senors, etc.) so be sure to explore them as you need them by using the [official documentation](https://airflow.apache.org/docs/apache-airflow/stable/index.html){:target="_blank"}.
 
 
 ## DataOps
 
-Now that we've reviewed Airflow's major concepts, we're ready to create the DataOps pipeline for our application. It involves a series of tasks, starting from extracting the data, validating it and storing it at the right place for others to use for downstream workflows and applications.
+Now that we've reviewed Airflow's major concepts, we're ready to create the DataOps workflow for our application. It involves a series of tasks around extraction, transformation, loading, validation, etc. We're going to use a simplified data stack (local file, validation, etc.) as opposed to a production [data stack](data-stack.md){:target="_blank"} but the overall workflows are similar. Instead of extracting data from a source, validating and transforming it and then loading into a data warehouse, we're going to perform ETL from a local file and load the processed data into another local file.
 
-<div class="ai-center-all">
-    <img src="/static/images/mlops/pipelines/dataops.png" width="1000" alt="dataops workflow">
-</div>
+```bash
+touch airflow/dags/workflows.py
+```
+```python linenums="1"
+from airflow.decorators import dag, task
+from airflow.utils.dates import days_ago
+
+# Default DAG args
+default_args = {
+    "owner": "airflow",
+    "catch_up": False,
+}
+
+# Define DAG
+@dag(
+    dag_id="DataOps",
+    description="DataOps tasks.",
+    default_args=default_args,
+    schedule_interval=None,
+    start_date=days_ago(2),
+    tags=["dataops"],
+)
+def dataops():
+    pass
+```
+
+!!! note "ETL vs. ELT"
+    If using a data warehouse (ex. Snowflake), it's common to see ELT (extract-load-transform) workflows to have a permanent location for all historical data. Learn more about the data stack and the different workflow options [here](data-stack.md){:target="_blank"}.
 
 ### Extraction
 
 To keep things simple, we'll continue to keep our data as a local file but in a real production setting, our data can come from a wide variety of [data management systems](infrastructure.md#data-management-sytems){:target="_blank"}.
 
 ```python linenums="1"
-# Extract data from DWH, blog storage, etc.
-extract_data = BashOperator(
-    task_id="extract_data",
-    bash_command=f"cd {config.BASE_DIR} && dvc pull",
-)
+def _extract():
+    # Extract from source (ex. DB, API, etc.)
+    projects = utils.load_json_from_url(url=config.PROJECTS_URL)  # NOQA: F841 (assigned by unused)
+    tags = utils.load_json_from_url(url=config.TAGS_URL)  # NOQA: F841 (assigned by unused)
+
+@dag(...)
+def dataops():
+    extract = PythonOperator(task_id="extract", python_callable=_extract)
 ```
 
 > Typically we'll use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/){:target="_blank"} to trigger workflows when a condition is met or trigger them directly from the external source via API calls, etc. Our workflows can communicate with the different platforms by establishing a [connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html){:target="_blank"} and then using [hooks](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/hooks/index.html){:target="_blank"} to interface with the database, data warehouse, etc.
@@ -415,9 +445,9 @@ extract_data = BashOperator(
 
 ### Validation
 
-The specific process of where and how we extract our data can be bespoke but what's important is that we have a continuous integration to execute our workflows. A key aspect to trusting this continuous integration is validation at every step of the way. We'll once again use [Great Expectations](https://greatexpectations.io/){:target="_blank"}, as we did in our [testing lesson](testing.md#data){:target="_blank"}, to [validate](testing.md#expectations){:target="_blank"} our incoming data before processing it.
+The specific process of where and how we extract our data can be bespoke but what's important is that we have a continuous integration to execute our workflows. A key aspect to trusting this continuous integration is validation at every step of the way. We'll once again use [Great Expectations](https://greatexpectations.io/){:target="_blank"}, as we did in our [testing lesson](testing.md#data){:target="_blank"}, to [validate](testing.md#expectations){:target="_blank"} our incoming data before transforming it.
 
-With the Airflow concepts we've learned so far, there are many ways to use our data validation library to validate our data. Regardless of what data validation tool we use (ex. [Great Expectations](https://greatexpectations.io/){:target="_blank"}, [TFX](https://www.tensorflow.org/tfx/data_validation/get_started){:target="_blank"}, [AWS Deequ](https://github.com/awslabs/deequ){:target="_blank"}, etc.) we could use the BashOperator, PythonOperator, etc. to run our tests. Luckily, Great Expectations has a [recommended](https://docs.greatexpectations.io/en/stable/guides/workflows_patterns/deployment_airflow.html){:target="_blank"} [Airflow Provider package](https://github.com/great-expectations/airflow-provider-great-expectations){:target="_blank"}. This package contains a `GreatExpectationsOperator` which we can use to execute specific checkpoints as tasks.
+With the Airflow concepts we've learned so far, there are many ways to use our data validation library to validate our data. Regardless of what data validation tool we use (ex. [Great Expectations](https://greatexpectations.io/){:target="_blank"}, [TFX](https://www.tensorflow.org/tfx/data_validation/get_started){:target="_blank"}, [AWS Deequ](https://github.com/awslabs/deequ){:target="_blank"}, etc.) we could use the BashOperator, PythonOperator, etc. to run our tests. However, Great Expectations has a [Airflow Provider package](https://github.com/great-expectations/airflow-provider-great-expectations){:target="_blank"} to make it even easier to validate our data. This package contains a `GreatExpectationsOperator` which we can use to execute specific checkpoints as tasks.
 
 Recall from our testing lesson that we used the following CLI commands to perform our data validation tests:
 
@@ -426,7 +456,21 @@ great_expectations checkpoint run projects
 great_expectations checkpoint run tags
 ```
 
-We can perform the same operations as Airflow tasks within our DataOps workflow, either as the bash commands above using the [BashOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/bash/index.html#airflow.operators.bash.BashOperator){:target="_blank"} or with the [custom Great Expectations operator](https://github.com/great-expectations/airflow-provider-great-expectations){:target="_blank"} like below:
+We can perform the same operations as Airflow tasks within our DataOps workflow, either with:
+
+- bash commands using the [BashOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/bash/index.html#airflow.operators.bash.BashOperator){:target="_blank"}:
+
+```python linenums="1"
+from airflow.operators.bash_operator import BashOperator
+validate_projects = BashOperator(task_id="validate_projects", bash_command="great_expectations checkpoint run projects")
+validate_tags = BashOperator(task_id="validate_tags", bash_command="great_expectations checkpoint run tags")
+```
+
+- with the [custom Great Expectations operator](https://github.com/great-expectations/airflow-provider-great-expectations){:target="_blank"}:
+
+```bash
+pip install airflow-provider-great-expectations==0.1.1
+```
 
 ```python linenums="1"
 from great_expectations_provider.operators.great_expectations import GreatExpectationsOperator
@@ -446,56 +490,81 @@ validate_tags = GreatExpectationsOperator(
 )
 ```
 
-And we want both tasks to pass so we set the `fail_task_on_validation_failure` parameter to `True` so that downstream tasks don't execute if they fail.
+And we want both tasks to pass so we set the `fail_task_on_validation_failure` parameter to `True` so that downstream tasks don't execute if either fail.
 
 !!! note
-    Reminder that we previous set the following configuration in our [airflow.cfg](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/airflow.cfg){:target="_blank"} file since the output of the GreatExpectationsOperator is not JSON serializable.
+    Reminder that we previously set the following configuration in our [airflow.cfg](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/airflow.cfg){:target="_blank"} file since the output of the GreatExpectationsOperator is not JSON serializable.
     ```bash
     # Inside airflow.cfg
     enable_xcom_pickling = True
     ```
 
-### Compute
+### Load
 
-Once we have validated our data, we're ready to compute features. We have a wide variety of Operators to choose from depending on the tools we're using for compute (ex. [Python](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.PythonOperator){target="_blank"}, [Spark](https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/operators.html){:target="_blank"}, [DBT](https://github.com/gocardless/airflow-dbt){:target="_blank"}, etc.). And of course we can easily scale all of this by running on a managed cluster platform (AWS [EMR](https://aws.amazon.com/emr/){:target="_blank"}, Google Cloud's [Dataproc](https://cloud.google.com/dataproc){:target="_blank"}, on-prem hardware, etc.). For our task, we'll just need a PythonOperator to execute our feature engineering CLI command:
-
-```python linenums="1"
-# Compute features
-compute_features = PythonOperator(
-    task_id="compute_features",
-    python_callable=main.compute_features,
-    op_kwargs={"params_fp": Path(config.CONFIG_DIR, "args.json")},
-)
-```
-
-### Cache
-
-When we establish our DataOps pipeline, it's not something that's specific to any one application. Instead it's its own repository that's responsible for extracting, transforming and loading (ETL) data for downstream pipelines who are dependent on it for their own unique applications. This is one of the most important benefits of **not doing an end-to-end ML application** because it allows for true continued collaboration. And so we need to cache our computed features to a central [feature store](feature-store.md){:target="_blank"}, database or data warehouse (depending on whether ML task involves entity features that change over time). This way, downstream developers can easily access features and use them to build applications without having to worry about doing much heavy lifting with data processing.
+Once we've validated our data, we're ready to load it into our data system (ex. data warehouse). This will be the primary system that potential downstream applications will depend on for current and future versions of data.
 
 ```python linenums="1"
-# Cache (feature store, database, warehouse, etc.)
-END_TS = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
-cache = BashOperator(
-    task_id="cache_to_feature_store",
-    bash_command=f"cd {config.BASE_DIR}/features && feast materialize-incremental {END_TS}",
-)
+def _load():
+    # Load into data system (ex. warehouse)
+    projects_fp = Path(config.DATA_DIR, "projects.json")
+    df = pd.DataFrame(get_projects())
+    utils.save_dict(d=df.to_dict(orient="records"), filepath=projects_fp)
+    tags_fp = Path(config.DATA_DIR, "tags.json")
+    utils.save_dict(d=get_tags(), filepath=tags_fp)
+
+@dag(...)
+def dataops():
+    ...
+    load = PythonOperator(task_id="load", python_callable=_load)
 ```
 
-> Learn all about what features stores are, why we need them and how to implement them in our [feature stores lesson](feature-store.md){:target="_blank"}.
+### Transform
+
+Once we have validated and loaded our data, we're ready to transform it. Our DataOps workflows are not specific to any particular downstream consumer so the transformation must be globally relevant (ex. cleaning missing date, aggregation, etc.).  We have a wide variety of Operators to choose from depending on the tools we're using for compute (ex. [Python](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.PythonOperator){target="_blank"}, [Spark](https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/operators.html){:target="_blank"}, [DBT](https://github.com/gocardless/airflow-dbt){:target="_blank"}, etc.). Many of these options have the advantage of directly performing the transformations in our data warehouse.
+
+```python linenums="1"
+def _transform():
+    # Transform (ex. using DBT inside DWH)
+    df = pd.DataFrame(get_projects())
+    df = df[df.tag.notnull()]  # drop rows w/ no tag
+    projects_fp = Path(config.DATA_DIR, "projects.json")
+    utils.save_dict(d=df.to_dict(orient="records"), filepath=projects_fp)
+
+@dag(...)
+def dataops():
+    ...
+    transform = PythonOperator(task_id="transform", python_callable=_transform)
+    validate_transforms = GreatExpectationsOperator(
+        task_id="validate_transforms",
+        checkpoint_name="projects",
+        data_context_root_dir="tests/great_expectations",
+        fail_task_on_validation_failure=True,
+    )
+```
 
 <hr>
 
 ```python linenums="1"
-# Task relationships
-extract_data >> [validate_projects, validate_tags] >> compute_features >> cache
+# Define DAG
+(
+    extract
+    >> [validate_projects, validate_tags]
+    >> load
+    >> transform
+    >> validate_transforms
+)
 ```
 
-## MLOps (model)
+<div class="ai-center-all">
+    <img src="/static/images/mlops/orchestration/dataops.png" width="1000" alt="dataops workflow">
+</div>
+
+## MLOps
 
 Once we have our features in our feature store, we can use them for MLOps tasks responsible for model creating such as optimization, training, validation, serving, etc.
 
 <div class="ai-center-all">
-    <img src="/static/images/mlops/pipelines/model.png" width="1000" alt="mlops model training workflow">
+    <img src="/static/images/mlops/orchestration/model.png" width="1000" alt="mlops model training workflow">
 </div>
 
 ### Extract data
@@ -606,7 +675,7 @@ serve = BashOperator(
 
 ```python linenums="1"
 # Task relationships
-extract_data >> optimization >> train >> evaluate >> [improved, regressed]
+etl_data >> optimization >> train >> evaluate >> [improved, regressed]
 improved >> serve
 regressed >> report
 ```
@@ -616,7 +685,7 @@ regressed >> report
 Once we've validated and served our model, how do we know *when* and *how* it needs to be updated? We'll need to compose a set of workflows that reflect the update policies we want to set in place.
 
 <div class="ai-center-all">
-    <img src="/static/images/mlops/pipelines/update.png" width="1000" alt="mlops model update workflow">
+    <img src="/static/images/mlops/orchestration/update.png" width="1000" alt="mlops model update workflow">
 </div>
 
 ### Monitoring

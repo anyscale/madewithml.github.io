@@ -40,7 +40,7 @@ import pandas as pd
 from urllib.request import urlopen
 ```
 
-> Traditionally, our data assets will be stored, versioned and updated in a database, warehouse, etc. We'll learn more about these different [data management systems](infrastructure.md#data-management-systems){:target="_blank"} later, but for now, we'll load our data as a JSON file from our repository.
+> Traditionally, our data assets will be stored, versioned and updated in a database, warehouse, etc. We'll learn more about these different [data systems](data-stack.md){:target="_blank"} later, but for now, we'll load our data as a JSON file from our repository.
 
 ```python linenums="1"
 # Load projects
@@ -124,6 +124,10 @@ df.head(5)
 </table>
 </div></div>
 </pre>
+
+```python linenums="1"
+df = df[df.tag.notnull()]  # remove projects with no tag
+```
 
 ```python linenums="1"
 # Most common tags

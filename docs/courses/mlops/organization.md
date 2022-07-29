@@ -152,12 +152,12 @@ tagifai/
 
 We'll define these core operations inside `main.py` as we move code from notebooks to the appropriate scripts [below](#project):
 
-- `#!js load_data`: load data from a URL to local drive.
-- `#!js label_data`: filter and label data for preprocessing.
-- `#!js compute_features`: computer features for training.
+- `#!js etl_data`: extract data from a URL to local drive.
+- `#!js label_data`: label data using constraints.
 - `#!js optimize`: tune hyperparameters to optimize for objective.
 - `#!js train_model`: train a model using best parameters from optimization study.
-- `#!js predict_tags`: predict tags for a given set of inputs using a trained model.
+- `#!js load_artifacts`: load trained artifacts from a given run.
+- `#!js predict_tag`: predict a tag for a given input.
 
 ### Utilities
 
@@ -346,19 +346,23 @@ This way when the names of columns change or we want to replace with different l
 
     warnings.filterwarnings("ignore")
 
-    def load_data():
-        """Load data from URLs and save to local drive."""
-        # Download data assets
+    def etl_data():
+        """Extract, load and transform our data assets."""
+        # Extract
         projects = utils.load_json_from_url(url=config.PROJECTS_URL)
-        projects_fp = Path(config.DATA_DIR, "projects.json")
-        utils.save_dict(d=projects, filepath=projects_fp)
-
-        # Download auxiliary data
         tags = utils.load_json_from_url(url=config.TAGS_URL)
+
+        # Transform
+        df = pd.DataFrame(projects)
+        df = df[df.isnull().any(axis=1)]  # drop rows w/ any missing cols
+
+        # Load
+        projects_fp = Path(config.DATA_DIR, "projects.json")
+        utils.save_dict(d=df.to_dict(orient="records"), filepath=projects_fp)
         tags_fp = Path(config.DATA_DIR, "tags.json")
         utils.save_dict(d=tags, filepath=tags_fp)
 
-        print("✅ Saved raw data!")
+        logger.info("✅ ETL on data is complete!")
     ```
 
     Before we can use this operation, we need to make sure we have the necessary packages loaded into our environment. Libraries such as `pathlib`, `json`, etc. are preloaded with native Python, but packages like `NumPy` are not. Let's load the required packages and add them to our `requirements.txt` file.
@@ -375,13 +379,13 @@ This way when the names of columns change or we want to replace with different l
 
     > We can fetch the exact version of the packages we used in our notebook by running `#!bash pip freeze` in a code cell.
 
-    Though we're not using the NumPy package for this `load_data()` operation, our Python interpreter will still require it because we invoke the `utils.py` script with the line `#!python from tagifai import utils`, which does use NumPy in its header. So if we don't install the package in our virtual environment, we'll receive an error.
+    Though we're not using the NumPy package for this `etl_data()` operation, our Python interpreter will still require it because we invoke the `utils.py` script with the line `#!python from tagifai import utils`, which does use NumPy in its header. So if we don't install the package in our virtual environment, we'll receive an error.
 
     We'll run the operation using the Python interpreter via the terminal (type `python` in the terminal and types the commands below).
 
     ```python linenums="1"
     from tagifai import main
-    main.load_data()
+    main.etl_data()
     ```
 
     We could also call this operation directly through the `main.py` script but we'll have to change it every time we want to run a new operation.
@@ -389,7 +393,7 @@ This way when the names of columns change or we want to replace with different l
     ```python linenums="1"
     # tagifai/main.py
     if __name__ == "__main__":
-        load_data()
+        etl_data()
     ```
     ```bash
     python tagifai/main.py
@@ -398,7 +402,7 @@ This way when the names of columns change or we want to replace with different l
     We'll learn about a much easier way to execute these operations in our [CLI lesson](cli.md){:target="_blank"}. But for now, either of the methods above will produce the same result.
 
     <pre class="output">
-    ✅ Saved raw data!
+    ✅ ETL on data is complete!
     </pre>
 
     We should also see the data assets saved to our `data` directory:
@@ -417,11 +421,11 @@ This way when the names of columns change or we want to replace with different l
 
                 However, as our dataset grows, it may not scale to save the raw data or even labels or features. We'll talk about more scalable alternatives in our [versioning](versioning.md#operations){:target="_blank"} lesson where we aren't saving the physical data but the instructions to retrieve them from a specific point in time.
 
-### Label
+### Transform
 
 ??? quote "Label dataset"
 
-    We'll be defining all the functionality for labeling inside the `label_data()` function in `main.py`. We'll be saving the labeled data at the end so that we don't have to rerun this operation every time we want to train a model.
+    We'll be defining all the functionality for transforming our data inside the `label_data()` function in `main.py`. We'll be loading the transformed data to a file at the end so that we don't have to rerun this operation every time we want to train a model.
 
     ```python linenums="1" hl_lines="22-23"
     from argparse import Namespace
@@ -584,6 +588,10 @@ This way when the names of columns change or we want to replace with different l
         "wouldn't",
     ]
     ```
+
+??? question "Why separate transform and preprocess?"
+    Why do we separate our transformation function and preprocessing function if they both involve manipulating the data?
+
 
 ### Encode
 

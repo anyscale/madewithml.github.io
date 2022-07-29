@@ -139,7 +139,7 @@ Sometimes we may have views that involve computationally heavy operations, such 
 
 ```python linenums="1" hl_lines="1"
 @st.cache()
-def load_data():
+def etl_data():
     projects_fp = Path(config.DATA_DIR, "labeled_projects.json")
     projects = utils.load_dict(filepath=projects_fp)
     df = pd.DataFrame(projects)

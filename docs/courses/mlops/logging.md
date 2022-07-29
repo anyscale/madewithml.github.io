@@ -292,7 +292,7 @@ Informative messages from your code.
 In our project, we can replace all of our print statements into logging statements:
 
 ```python linenums="1"
-print("✅ Saved raw data!")
+print("✅ ETL on data is complete!")
 ```
 
 <div class="ai-center-all">
@@ -301,7 +301,7 @@ print("✅ Saved raw data!")
 
 ```python linenums="1"
 from config.config import logger
-logger.info("✅ Saved raw data!")
+logger.info("✅ ETL on data is complete!")
 ```
 
 All of our log messages are at the `INFO` level but while developing we may have had to use `DEBUG` levels and we also add some `ERROR` or `CRITICAL` log messages if our system behaves in an unintended manner.
