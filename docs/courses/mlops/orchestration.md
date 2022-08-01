@@ -32,7 +32,7 @@ We'll need to break down our end-to-end ML pipeline into individual workflows th
 
 Before we create our specific pipelines, let's understand and implement [Airflow](https://airflow.apache.org/){:target="_blank"}'s overarching concepts that will allow us to "author, schedule, and monitor workflows".
 
-## Install
+### Set up
 
 To install and run Airflow, we can either do so [locally](https://airflow.apache.org/docs/apache-airflow/stable/start/local.html){:target="_blank"} or with [Docker](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html){:target="_blank"}. If using `docker-compose` to run Airflow inside Docker containers, we'll want to allocate at least 4 GB in memory.
 
@@ -86,7 +86,7 @@ airflow users create \
     --email EMAIL
 ```
 
-## Webserver
+### Webserver
 
 Once we've created a user, we're ready to launch the webserver and log in using our credentials.
 
@@ -104,7 +104,7 @@ The webserver allows us to run and inspect workflows, establish connections to e
 
 We'll explore the different components of the webserver as we learn about Airflow and implement our workflows.
 
-## Scheduler
+### Scheduler
 
 Next, we need to launch our scheduler, which will execute and monitor the tasks in our workflows. The schedule executes tasks by reading from the metadata database and ensures the task has what it needs to finish running. We'll go ahead and execute the following commands on the *separate terminal* window:
 
@@ -115,7 +115,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 airflow scheduler
 ```
 
-## Executor
+### Executor
 
 As our scheduler reads from the metadata database, the executor determines what worker processes are necessary for the task to run to completion. Since our default database SQLlite, which can't support multiple connections, our default executor is the [Sequential Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/sequential.html){:target="_blank"}. However, if we choose a more production-grade database option such as PostgresSQL or MySQL, we can choose scalable [Executor backends](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html#supported-backends){:target="_blank"} Celery, Kubernetes, etc. For example, running [Airflow with Docker](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html){:target="_blank"} uses PostgresSQL as the database and so uses the Celery Executor backend to run tasks in parallel.
 
