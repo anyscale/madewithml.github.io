@@ -662,15 +662,48 @@ And as we develop these criteria over time, we can systematically enforce them v
     With all these different evaluation methods, how can we choose "the best" version of our model if some versions are better for some evaluation criteria?
 
     ??? quote "Show answer"
-        You and your team need to agree on what evaluation criteria are most important and what is the minimum performance required for each one. This will allow us to filter amongst all the different solutions by removing ones that don't satisfy all the minimum requirements and ranking amongst the remaining by which ones perform the best for the highest priority criteria.
+        The team needs to agree on what evaluation criteria are most important and what is the minimum performance required for each one. This will allow us to filter amongst all the different solutions by removing ones that don't satisfy all the minimum requirements and ranking amongst the remaining by which ones perform the best for the highest priority criteria.
 
 ## Online evaluation
 
-Once we've evaluated our model's ability to perform on a static dataset that is representative of production data, we can run several types of **online evaluation** techniques to determine performance on actual product data. It can be performed using labels or, in the event we don't readily have labels, [proxy signals](monitoring.md#performance){:target="_blank"}.
+Once we've evaluated our model's ability to perform on a static dataset we can run several types of **online evaluation** techniques to determine performance on actual production data. It can be performed using labels or, in the event we don't readily have labels, [proxy signals](monitoring.md#performance){:target="_blank"}.
 
 - manually label a subset of incoming data to evaluate periodically.
 - asking the initial set of users viewing a newly categorized content if it's correctly classified.
 - allow users to report misclassified content by our model.
+
+And there are many different experimentation strategies we can use to measure real-time performance before committing to replace our existing version of the system.
+
+### AB tests
+AB testing involves sending production traffic to our current system (control group) and the new version (treatment group) and measuring if there is a statistical difference between the values for two metrics. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination.
+
+<div class="ai-center-all">
+    <img width="500" src="/static/images/mlops/infrastructure/ab.png" alt="ab tests">
+</div>
+
+> In many cases, if we're simply trying to compare the different versions for a certain metric, AB testing can take while before we reach statical significance since traffic is evenly split between the different groups. In this scenario, [multi-armed bandits](https://en.wikipedia.org/wiki/Multi-armed_bandit){:target="_blank"} will be a better approach since they continuously assign traffic to the better performing version.
+
+### Canary tests
+Canary tests involve sending most of the production traffic to the currently deployed system but sending traffic from a small cohort of users to the new system we're trying to evaluate. Again we need to make sure that the same users continue to interact with the same system as we gradually roll out the new system.
+
+<div class="ai-center-all">
+    <img width="500" src="/static/images/mlops/infrastructure/canary.png" alt="canary deployment">
+</div>
+
+### Shadow tests
+Shadow testing involves sending the same production traffic to the different systems. We don't have to worry about system contamination and it's very safe compared to the previous approaches since the new system's results are not served. However, we do need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. But overall, shadow testing is easy to monitor, validate operational consistency, etc.
+
+<div class="ai-center-all">
+    <img width="500" src="/static/images/mlops/infrastructure/shadow.png" alt="shadow deployment">
+</div>
+
+!!! question "What can go wrong?"
+    If shadow tests allow us to test our updated system without having to actually serve the new results, why doesn't everyone adopt it?
+
+    ??? quote "Show answer"
+        With shadow deployment, we'll miss out on any live feedback signals (explicit/implicit) from our users since users are not directly interacting with the product using our new version.
+
+        We also need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. This is rarely possible because, while your ML system may be a standalone microservice, it ultimately interacts with an intricate production environment that has *many* dependencies.
 
 ## Model CI
 

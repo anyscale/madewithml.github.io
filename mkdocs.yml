@@ -203,5 +203,6 @@ plugins:
             "courses/mlops/solution.md": "courses/mlops/purpose.md"
             "courses/mlops/iteration.md": "courses/mlops/purpose.md"
             "courses/mlops/product.md": "courses/mlops/purpose.md"
+            "courses/mlops/pipelines.md": "courses/mlops/orchestration.md"
             # "mlops-course": "index.md"
 

@@ -320,7 +320,7 @@ We can also view our XComs on the webserver by going to **Admin** >> **XComs**:
 </div>
 
 !!! warning
-    The data we pass between tasks should be small (metadata, metrics, etc.) because Airflow's metadata database is not equipped to hold large artifacts. However, if we do need to store and use the large results of our tasks, it's best to use an external data storage (blog storage, model registry, etc.).
+    The data we pass between tasks should be small (metadata, metrics, etc.) because Airflow's metadata database is not equipped to hold large artifacts. However, if we do need to store and use the large results of our tasks, it's best to use an external data storage (blog storage, model registry, etc.) and perform heavy processing using Spark or inside data systems like a data warehouse.
 
 
 ## DAG runs
@@ -396,6 +396,13 @@ While it may make sense to execute many data processing workflows on a scheduled
 
 Now that we've reviewed Airflow's major concepts, we're ready to create the DataOps workflow for our application. It involves a series of tasks around extraction, transformation, loading, validation, etc. We're going to use a simplified data stack (local file, validation, etc.) as opposed to a production [data stack](data-stack.md){:target="_blank"} but the overall workflows are similar. Instead of extracting data from a source, validating and transforming it and then loading into a data warehouse, we're going to perform ETL from a local file and load the processed data into another local file.
 
+<div class="ai-center-all">
+    <img width="650" src="/static/images/mlops/testing/production.png" alt="ETL pipelines in production">
+</div>
+
+!!! note
+    We'll be breaking apart our `etl_data()` function from our `tagifai/main.py` script so that we can show what the proper data validation tasks look like in production workflows.
+
 ```bash
 touch airflow/dags/workflows.py
 ```
@@ -425,20 +432,45 @@ def dataops():
 !!! note "ETL vs. ELT"
     If using a data warehouse (ex. Snowflake), it's common to see ELT (extract-load-transform) workflows to have a permanent location for all historical data. Learn more about the data stack and the different workflow options [here](data-stack.md){:target="_blank"}.
 
+```python linenums="1"
+# Define DAG
+(
+    extract
+    >> [validate_projects, validate_tags]
+    >> load
+    >> transform
+    >> validate_transforms
+)
+```
+
+<div class="ai-center-all">
+    <img src="/static/images/mlops/orchestration/dataops.png" width="1000" alt="dataops workflow">
+</div>
+
 ### Extraction
 
 To keep things simple, we'll continue to keep our data as a local file but in a real production setting, our data can come from a wide variety of [data management systems](infrastructure.md#data-management-sytems){:target="_blank"}.
 
+!!! note
+    Ideally, the [data labeling](labeling.md){:target="_blank"} workflows would have occurred prior to the DataOps workflows. Depending on the task, it may involve natural labels, where the event that occurred is the label. Or there may be explicit manual labeling workflows that need to be inspected and approved.
+
 ```python linenums="1"
-def _extract():
-    # Extract from source (ex. DB, API, etc.)
-    projects = utils.load_json_from_url(url=config.PROJECTS_URL)  # NOQA: F841 (assigned by unused)
-    tags = utils.load_json_from_url(url=config.TAGS_URL)  # NOQA: F841 (assigned by unused)
+def _extract(ti):
+    """Extract from source (ex. DB, API, etc.)
+    Our simple ex: extract data from a URL
+    """
+    projects = utils.load_json_from_url(url=config.PROJECTS_URL)
+    tags = utils.load_json_from_url(url=config.TAGS_URL)
+    ti.xcom_push(key="projects", value=projects)
+    ti.xcom_push(key="tags", value=tags)
 
 @dag(...)
 def dataops():
     extract = PythonOperator(task_id="extract", python_callable=_extract)
 ```
+
+!!! warning
+    [XComs](#xoms) should be used to share small metadata objects and not large data assets like this. But we're doing so only to simulate a pipeline where these assets would be prior to validation and loading.
 
 > Typically we'll use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/){:target="_blank"} to trigger workflows when a condition is met or trigger them directly from the external source via API calls, etc. Our workflows can communicate with the different platforms by establishing a [connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html){:target="_blank"} and then using [hooks](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/hooks/index.html){:target="_blank"} to interface with the database, data warehouse, etc.
 
@@ -458,7 +490,7 @@ great_expectations checkpoint run tags
 
 We can perform the same operations as Airflow tasks within our DataOps workflow, either with:
 
-- bash commands using the [BashOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/bash/index.html#airflow.operators.bash.BashOperator){:target="_blank"}:
+- a [BashOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/bash/index.html#airflow.operators.bash.BashOperator){:target="_blank"}:
 
 ```python linenums="1"
 from airflow.operators.bash_operator import BashOperator
@@ -466,7 +498,15 @@ validate_projects = BashOperator(task_id="validate_projects", bash_command="grea
 validate_tags = BashOperator(task_id="validate_tags", bash_command="great_expectations checkpoint run tags")
 ```
 
-- with the [custom Great Expectations operator](https://github.com/great-expectations/airflow-provider-great-expectations){:target="_blank"}:
+- a [PythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html){:target="_blank"}:
+
+```bash
+great_expectations checkpoint script <CHECKPOINT_NAME>
+```
+
+This will generate a python script under `great_expectations/uncommitted/run_<CHECKPOINT_NAME>.py` which you can wrap in a function to call using a `PythonOperator`.
+
+- a [custom Great Expectations operator](https://github.com/great-expectations/airflow-provider-great-expectations){:target="_blank"}:
 
 ```bash
 pip install airflow-provider-great-expectations==0.1.1
@@ -504,13 +544,14 @@ And we want both tasks to pass so we set the `fail_task_on_validation_failure` p
 Once we've validated our data, we're ready to load it into our data system (ex. data warehouse). This will be the primary system that potential downstream applications will depend on for current and future versions of data.
 
 ```python linenums="1"
-def _load():
-    # Load into data system (ex. warehouse)
-    projects_fp = Path(config.DATA_DIR, "projects.json")
-    df = pd.DataFrame(get_projects())
-    utils.save_dict(d=df.to_dict(orient="records"), filepath=projects_fp)
-    tags_fp = Path(config.DATA_DIR, "tags.json")
-    utils.save_dict(d=get_tags(), filepath=tags_fp)
+def _load(ti):
+    """Load into data system (ex. warehouse)
+    Our simple ex: load extracted data into a local file
+    """
+    projects = ti.xcom_pull(key="projects", task_ids=["extract"])[0]
+    tags = ti.xcom_pull(key="tags", task_ids=["extract"])[0]
+    utils.save_dict(d=projects, filepath=Path(config.DATA_DIR, "projects.json"))
+    utils.save_dict(d=tags, filepath=Path(config.DATA_DIR, "tags.json"))
 
 @dag(...)
 def dataops():
@@ -523,12 +564,14 @@ def dataops():
 Once we have validated and loaded our data, we're ready to transform it. Our DataOps workflows are not specific to any particular downstream consumer so the transformation must be globally relevant (ex. cleaning missing date, aggregation, etc.).  We have a wide variety of Operators to choose from depending on the tools we're using for compute (ex. [Python](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.PythonOperator){target="_blank"}, [Spark](https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/operators.html){:target="_blank"}, [DBT](https://github.com/gocardless/airflow-dbt){:target="_blank"}, etc.). Many of these options have the advantage of directly performing the transformations in our data warehouse.
 
 ```python linenums="1"
-def _transform():
-    # Transform (ex. using DBT inside DWH)
-    df = pd.DataFrame(get_projects())
+def _transform(ti):
+    """Transform (ex. using DBT inside DWH)
+    Our simple ex: using pandas to remove missing data samples
+    """
+    projects = ti.xcom_pull(key="projects", task_ids=["extract"])[0]
+    df = pd.DataFrame(projects)
     df = df[df.tag.notnull()]  # drop rows w/ no tag
-    projects_fp = Path(config.DATA_DIR, "projects.json")
-    utils.save_dict(d=df.to_dict(orient="records"), filepath=projects_fp)
+    utils.save_dict(d=df.to_dict(orient="records"), filepath=Path(config.DATA_DIR, "projects.json"))
 
 @dag(...)
 def dataops():
@@ -542,157 +585,176 @@ def dataops():
     )
 ```
 
-<hr>
+## MLOps
+
+Once we have our data prepared, we're ready to create one of the many downstream applications that will consume it. We'll set up our MLOps pipeline inside our `airflow/dags/workflows.py` script:
+
+```python linenums="1"
+# airflow/dags/workflows.py
+@dag(
+    dag_id="MLOps",
+    description="MLOps tasks.",
+    default_args=default_args,
+    schedule_interval=None,
+    start_date=days_ago(2),
+    tags=["mlops"],
+)
+def mlops():
+    pass
+```
 
 ```python linenums="1"
 # Define DAG
 (
-    extract
-    >> [validate_projects, validate_tags]
-    >> load
-    >> transform
-    >> validate_transforms
+    prepare
+    >> validate_prepared_data
+    >> optimize
+    >> train
+    >> offline_evaluation
+    >> online_evaluation
+    >> [deploy, inspect]
 )
 ```
 
 <div class="ai-center-all">
-    <img src="/static/images/mlops/orchestration/dataops.png" width="1000" alt="dataops workflow">
+    <img src="/static/images/mlops/orchestration/mlops.png" width="1000" alt="dataops workflow">
 </div>
 
-## MLOps
+### Prepare
 
-Once we have our features in our feature store, we can use them for MLOps tasks responsible for model creating such as optimization, training, validation, serving, etc.
-
-<div class="ai-center-all">
-    <img src="/static/images/mlops/orchestration/model.png" width="1000" alt="mlops model training workflow">
-</div>
-
-### Extract data
-
-The first step is to extract the relevant historical features from our feature store/DB/DWH that our DataOps workflow cached to.
+Before kicking off any experimentation, there may be task specific data preparation that may need to happen. This is different from the data transformation during the DataOps workflow because these global transformations are specific to this task. In our case, we incorporate additional labeling constraints to simplify our classification task:
 
 ```python linenums="1"
-# Extract features
-extract_features = PythonOperator(
-    task_id="extract_features",
-    python_callable=main.get_historical_features,
+prepare = PythonOperator(
+    task_id="prepare",
+    python_callable=main.label_data,
+    op_kwargs={"args_fp": Path(config.CONFIG_DIR, "args.json")},
 )
 ```
 
-We'd normally need to provide a set of entities and the timestamp to extract point-in-time features for each of them but here's what a simplified version to extract the most up-to-date features for a set of entities would look like:
+And similarly to some of the DataOps tasks, we'll validate any changes we applied to our data:
 
-```python linenums="1" hl_lines="9 14"
-# tagifai/main.py
-@app.command()
-def get_historical_features():
-    """Retrieve historical features for training."""
-    # Entities to pull data for (should dynamically read this from somewhere)
-    project_ids = [1, 2, 3]
-    now = datetime.now()
-    timestamps = [datetime(now.year, now.month, now.day)] * len(project_ids)
-    entity_df = pd.DataFrame.from_dict({"id": project_ids, "event_timestamp": timestamps})
-
-    # Get historical features
-    store = FeatureStore(repo_path=Path(config.BASE_DIR, "features"))
-    training_df = store.get_historical_features(
-        entity_df=entity_df,
-        feature_refs=["project_details:text", "project_details:tags"],
-    ).to_df()
-    logger.info(training_df.head())
-    return training_df
+```python linenums="1"
+validate_prepared_data = GreatExpectationsOperator(
+        task_id="validate_prepared_data",
+        checkpoint_name="labeled_projects",
+        data_context_root_dir="tests/great_expectations",
+        fail_task_on_validation_failure=True,
+    )
 ```
 
 ### Training
 
-Once we have our features, we can use them to optimize and train the best models. Since these tasks can require lots of compute, we would typically run this entire pipeline in a managed cluster platform which can scale up as our data and models grow.
+Once we have our data prepped, we can use them to optimize and train the best models. Since these tasks can require lots of compute, we would typically run this entire pipeline in a managed cluster platform which can scale up as our data and models grow.
 
 ```python linenums="1"
 # Optimization
-optimization = BashOperator(
-    task_id="optimization",
-    bash_command="tagifai optimize",
+optimize = PythonOperator(
+    task_id="optimize",
+    python_callable=main.optimize,
+    op_kwargs={
+        "args_fp": Path(config.CONFIG_DIR, "args.json"),
+        "study_name": "optimization",
+        "num_trials": 1,
+    },
 )
 ```
 ```python linenums="1"
 # Training
-train_model = BashOperator(
-    task_id="train_model",
-    bash_command="tagifai train-model",
+train = PythonOperator(
+    task_id="train",
+    python_callable=main.train_model,
+    op_kwargs={
+        "args_fp": Path(config.CONFIG_DIR, "args.json"),
+        "experiment_name": "baselines",
+        "run_name": "sgd",
+    },
 )
 ```
 
-### Evaluation
+### Offline evaluation
 
-It's imperative that we evaluate our trained models so we can be confident in it's ability. We've extensively covered [model evaluation](testing.md#evaluation){:target="_blank"} in our [testing lesson](testing.md){:target="_blank"}, so here we'll talk about what happens after evaluation. We want to execute a chain of tasks depending on whether the model improved or regressed. To do this, we're using a [BranchPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html?highlight=branch#branching){:target="_blank"} for the evaluation task so it can return the appropriate task id.
+It's imperative that we evaluate our trained models so that we can trust it. We've extensively covered [offline evaluation](evaluation.md){:target="_blank"} before, so here we'll talk about how the evaluation is used. Tt won't always be a simple decision where all metrics/slices are performing better than the previous version. In these scenarios, it's important to know what our main priorities are and where we can have some leeway:
+
+- What criteria are most important?
+- What criteria can/cannot regress?
+- How much of a regression can be tolerated?
+
+```python linenums="1"
+assert precision > prev_precision  # most important, cannot regress
+assert recall >= best_prev_recall - 0.03  # recall cannot regress > 3%
+assert metrics["class"]["nlp"]["f1"] > prev_nlp_f1  # priority class
+assert metrics["slices"]["class"]["nlp_cnn"]["f1"] > prev_nlp_cnn_f1  # priority slice
+```
+
+and of course, there are some components, such as [behavioral testing](testing.md#behavioral-testing){:target="_blank"} our model's behavior of our models, that should always pass. We can in corporate this business logic into a function and determine if a newly trained version of the system is *better* than the current version.
+
+```python linenums="1"
+def _offline_evaluation():
+    """Compare offline evaluation report
+    (overall, fine-grained and slice metrics).
+    And ensure model behavioral tests pass.
+    """
+    return True
+```
+```python linenums="1"
+offline_evaluation = PythonOperator(
+    task_id="offline_evaluation",
+    python_callable=_offline_evaluation,
+)
+```
+
+### Online evaluation
+
+Once our system has passed offline evaluation criteria, we're ready to evaluate it in the [online setting](evaluation.md#online-evaluation){:target="_blank"}. Here we are using the [](https://airflow.apache.org/docs/apache-airflow/1.10.6/concepts.html?highlight=branch%20operator#branching){:target="_blank"} to execute different actions based on the results of online evaluation.
 
 ```python linenums="1"
 from airflow.operators.python import BranchPythonOperator
-
-# Evaluate
-evaluate_model = BranchPythonOperator(  # BranchPythonOperator returns a task_id or [task_ids]
-    task_id="evaluate_model",
-    python_callable=_evaluate_model,
-)
 ```
 
 This Operator will execute a function whose return response will be a single (or a list) task id.
 
 ```python linenums="1"
-def _evaluate_model():
-    if improvement_criteria():
-        return "improved"  # improved is a task id
+def _online_evaluation():
+    """Run online experiments (AB, shadow, canary) to
+    determine if new system should replace the current.
+    """
+    passed = True
+    if passed:
+        return "deploy"
     else:
-        return "regressed"  # regressed is a task id
+        return "inspect"
 ```
 
 ```python linenums="1"
-# Improved or regressed
-improved = BashOperator(
-    task_id="improved",
-    bash_command="echo IMPROVED",
-)
-regressed = BashOperator(
-    task_id="regressed",
-    bash_command="echo REGRESSED",
+online_evaluation = BranchPythonOperator(
+    task_id="online_evaluation",
+    python_callable=_online_evaluation,
 )
 ```
 
-The returning task ids can correspond to tasks that are simply used to direct the workflow towards a certain set of tasks based on upstream results. In our case, we want to serve the improved model or log a report in the event of a regression.
+The returning task ids can correspond to tasks that are simply used to direct the workflow towards a certain set of tasks based on upstream results. In our case, we want to deploy the improved model or inspect it if it failed online evaluation requirements.
 
-### Serving
+### Deploy
 
 If our model passed our evaluation criteria then we can deploy and serve our model. Again, there are many different options here such as using our CI/CD Git workflows to deploy the model wrapped as a scalable microservice or for more streamlined deployments, we can use a purpose-build [model server](api.md#model-server){:target="_blank"} to seamlessly inspect, update, serve, rollback, etc. multiple versions of models.
 
 ```python linenums="1"
-# Serve model(s)
-serve = BashOperator(
-    task_id="serve_model",
-    bash_command="echo served model",
+deploy = BashOperator(
+    task_id="deploy",
+    bash_command="echo update model endpoint w/ new artifacts",
 )
 ```
 
-<hr>
+## Continual learning
 
-```python linenums="1"
-# Task relationships
-etl_data >> optimization >> train >> evaluate >> [improved, regressed]
-improved >> serve
-regressed >> report
-```
+The DataOps and MLOps workflows connect to create an ML system that's capable of continually learning. Such a system will guide us with when to update, what exactly to update and how to update it (easily).
 
-## MLOps (update)
-
-Once we've validated and served our model, how do we know *when* and *how* it needs to be updated? We'll need to compose a set of workflows that reflect the update policies we want to set in place.
-
-<div class="ai-center-all">
-    <img src="/static/images/mlops/orchestration/update.png" width="1000" alt="mlops model update workflow">
-</div>
+> We use the word continual (repeat with breaks) instead of continuous (repeat without interruption / intervention) because we're not trying to create a system that will automatically update with new incoming data without human intervention.
 
 ### Monitoring
-Our inference application will receive requests from our user-facing application and we'll use our versioned model artifact to return inference responses. All of these inputs, predictions and other values will also be sent (batch/real-time) to a monitoring workflow that ensures the health of our system. We have already covered the foundations of monitoring in our [monitoring lesson](monitoring.md){:target="_blank"} but here we'll look at how triggered alerts fit with the overall operational workflow.
 
-### Policies
-Based on the metrics we're monitoring using various thresholds, window sizes, frequencies, etc., we'll be able to trigger events based on our update policy engine.
+Our production system is live and [monitored](monitoring.md){:target="_blank"}. When an event of interest occurs (ex. [drift](monitoring.md#drift){:target="_blank"}), one of several events needs to be triggered:
 
 - `#!js continue`: with the currently deployed model without any updates. However, an alert was raised so it should analyzed later to reduce false positive alerts.
 - `#!js improve`: by retraining the model to avoid performance degradation causes by meaningful drift (data, target, concept, etc.).
@@ -700,6 +762,7 @@ Based on the metrics we're monitoring using various thresholds, window sizes, fr
 - `#!js rollback`: to a previous version of the model because of an issue with the current deployment. Typically these can be avoided using robust deployment strategies (ex. dark canary).
 
 ### Retraining
+
 If we need to improve on the existing version of the model, it's not just the matter of fact of rerunning the model creation workflow on the new dataset. We need to carefully compose the training data in order to avoid issues such as catastrophic forgetting (forget previously learned patterns when presented with new data).
 
 - `#!js labeling`: new incoming data may need to be properly labeled before being used (we cannot just depend on proxy labels).
@@ -709,15 +772,7 @@ If we need to improve on the existing version of the model, it's not just the ma
 - `#!js sampling`: upsampling and downsampling to address imbalanced data slices.
 - `#!js evaluation`:  creation of an evaluation dataset that's representative of what the model will encounter once deployed.
 
-Once we have the proper dataset for retraining, we can kickoff the featurization and model training workflows where a new model will be trained and evaluated before being deployed and receiving new inference requests. In the [next lesson](continual-learning.md){:target="_blank"}, we'll discuss how to combine these pipelines together to create a continual learning system.
-
-<hr>
-
-```python linenums="1"
-# Task relationships
-monitoring >> update_policy_engine >> [_continue, inspect, improve, rollback]
-improve >> compose_retraining_dataset >> retrain
-```
+Once we have the proper dataset for retraining, we can kickoff the workflows to update our system!
 
 ## References
 - [Airflow official documentation](https://airflow.apache.org/docs/apache-airflow/stable/index.html){:target="_blank"}
