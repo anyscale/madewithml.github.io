@@ -95,6 +95,7 @@ nav:
       - Infrastructure: courses/mlops/infrastructure.md
       - Monitoring: courses/mlops/monitoring.md
       - Feature store: courses/mlops/feature-store.md
+      - Orchestration: courses/mlops/orchestration.md
   # - Blog: coming-soon.md
   # - Community: https://community.madewithml.com/
   - Subscribe: https://newsletter.madewithml.com/
