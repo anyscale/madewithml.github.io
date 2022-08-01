@@ -2,10 +2,10 @@
 template: lesson.html
 title: "Testing Machine Learning Systems: Code, Data and Models"
 description: Learn how to test ML models (and their code and data) to ensure consistent behavior in our ML systems.
-keywords: testing, testing ml, pytest, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
+keywords: testing, testing ml, pytest, great expectations, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/mlops-course
-notebook: https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/expectations.ipynb
+notebook: https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/testing.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -13,6 +13,9 @@ notebook: https://colab.research.google.com/github/GokuMohandas/mlops-course/blo
 ## Intuition
 
 In this lesson, we'll learn how to test code, data and models to construct a machine learning system that we can reliably iterate on. Tests are a way for us to ensure that something works as intended. We're incentivized to implement tests and discover sources of error as early in the development cycle as possible so that we can decrease [downstream costs](https://assets.deepsource.io/39ed384/images/blog/cost-of-fixing-bugs/chart.jpg){:target="_blank"} and wasted time. Once we've designed our tests, we can automatically execute them every time we change or add to our codebase.
+
+!!! note
+    If not following this course in sequential order, be sure to check out the :fontawesome-brands-github:{ .github } [testing-ml](https://github.com/GokuMohandas/testing-ml){:target="_blank"} repository to run through data and model testing concepts (w/ an interactive notebook).
 
 ### Types of tests
 
@@ -585,7 +588,7 @@ So far, we've used unit and integration tests to test the functions that interac
 
 ### Expectations
 
-> Follow along with [this notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/expectations.ipynb){:target="_blank"} as we develop expectations for our dataset. We'll organize these expectations in our repository in the [projects section](testing.md#projects).
+> Follow along with our [testing notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/testing.ipynb){:target="_blank"} as we develop expectations for our dataset. We'll organize these expectations in our repository in the [projects section](testing.md#projects).
 
 There are many dimensions to consider for what our data is expected to look like. We'll briefly talk about a few of them, including ones that may not directly be applicable to our task but, nonetheless, are very important to be aware of.
 
@@ -1021,13 +1024,13 @@ When we create expectations using the CLI application, Great Expectations automa
 
 By default, Great Expectations stores our expectations, results and metrics locally but for production, we'll want to set up remote [metadata stores](https://docs.greatexpectations.io/docs/guides/setup/#metadata-stores){:target="_blank"}. This is typically something our data engineering team would help set up as validation should occur prior to downstream applications such as machine learning use cases (though ML teams can certainly help craft more expectations to ensure comprehensive data validation).
 
-Many of these expectations will be executed when the data is extracted, loaded and transformed during out [DataOps workflows](orchestration.md#dataops){:target="_blank"}. Typically, the data will be extracted from a source (database, API, etc.) and loaded into a data system (ex. [data warehouse](infrastructure.md#data-management-systems){:target="_blank"}) before being transformed there (ex. using [dbt](https://www.getdbt.com/){:target="_blank"}) for downstream applications. Throughout these tasks, Great Expectations checkpoint validations can be run to ensure the validity of the data and the changes applied to it. We'll see a simplified version of when data validation should occur in our data workflows in the [orchestration lesson](orchestration.md#dataops){:target="_blank"}.
+Many of these expectations will be executed when the data is extracted, loaded and transformed during out [DataOps workflows](orchestration.md#dataops){:target="_blank"}. Typically, the data will be extracted from a source (database, API, etc.) and loaded into a data system (ex. [data warehouse](data-stack.md#data-warehouse){:target="_blank"}) before being transformed there (ex. using [dbt](https://www.getdbt.com/){:target="_blank"}) for downstream applications. Throughout these tasks, Great Expectations checkpoint validations can be run to ensure the validity of the data and the changes applied to it. We'll see a simplified version of when data validation should occur in our data workflows in the [orchestration lesson](orchestration.md#dataops){:target="_blank"}.
 
 <div class="ai-center-all">
     <img width="650" src="/static/images/mlops/testing/production.png" alt="ETL pipelines in production">
 </div>
 
-> Learn more about different data management systems in our [infrastructure lesson](infrastructure.md#data-management-systems){:target="_blank"} if you're not familiar with them.
+> Learn more about different data systems in our [data stack lesson](data-stack.md){:target="_blank"} if you're not familiar with them.
 
 ## 🤖&nbsp; Models
 
@@ -1105,7 +1108,7 @@ predict.predict(texts=texts, artifacts=artifacts)
 ['natural-language-processing', 'mlops']
 </pre>
 
-!!! tip
+!!! tip "Adversarial testing"
     Each of these types of tests can also include adversarial tests such as testing with common biased tokens or noisy tokens, etc.
 
     ```python linenums="1"
@@ -1120,7 +1123,7 @@ predict.predict(texts=texts, artifacts=artifacts)
     </pre>
 
 
-And we can convert these behavioral tests into systematic parameterized tests:
+And we can convert these tests into systematic parameterized tests:
 
 ```bash
 mkdir tests/model
