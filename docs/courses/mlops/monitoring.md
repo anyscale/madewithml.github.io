@@ -14,6 +14,9 @@ Even though we've trained and thoroughly evaluated our model, the real work begi
 
 > Testing and monitoring share a lot of similarities, such as ensuring that certain [expectations](testing.md#expectations){:target="_blank"} around data completeness, distributions, schema adherence, etc. are met. However, a key distinction is that monitoring involves comparing live data distributions from production with fixed/sliding reference distributions from training data.
 
+!!! note
+    If not following this course in sequential order, be sure to check out the :fontawesome-brands-github:{ .github } [monitoring-ml](https://github.com/GokuMohandas/monitoring-ml){:target="_blank"} repository to run through the monitoring concepts (w/ an interactive notebook).
+
 ## System health
 
 The first step to insure that our model is performing well is to ensure that the actual system is up and running as it should. This can include metrics specific to service requests such as latency, throughput, error rates, etc. as well as infrastructure utilization such as CPU/GPU utilization, memory, etc.
@@ -28,7 +31,7 @@ Fortunately, most cloud providers and even orchestration layers will provide thi
 
 Unfortunately, just monitoring the system's health won't be enough to capture the underlying issues with our model. So, naturally, the next layer of metrics to monitor involves the model's performance. These could be quantitative evaluation metrics that we used during model evaluation (accuracy, precision, f1, etc.) but also key business metrics that the model influences (ROI, click rate, etc.).
 
-It's usually never enough to just analyze the cumulative performance metrics across the entire span of time since the model has been deployed. Instead, we should also inspect performance across a period of time that's significant for our application (ex. daily). These sliding metrics might be more indicative of our system's health and we might be able to identify issues faster by not obscuring them with historical data. Cumulative and sliding metrics are often referred to as rolling and window metrics but the former pair is much more intuitive (initially coined [here](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/){:target="_blank"}).
+It's usually never enough to just analyze the cumulative performance metrics across the entire span of time since the model has been deployed. Instead, we should also inspect performance across a period of time that's significant for our application (ex. daily). These sliding metrics might be more indicative of our system's health and we might be able to identify issues faster by not obscuring them with historical data.
 
 > All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/monitoring.ipynb){:target="_blank"}.
 
