@@ -772,7 +772,6 @@ We will be applying the concepts we learn each week to iteratively complete two 
                     <ul class="ai-course-list">
                     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
                     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
-                    <li><a href="/courses/mlops/continual-learning/">Continual learning</a></li>
                     </ul>
                 </div>
             </div>
