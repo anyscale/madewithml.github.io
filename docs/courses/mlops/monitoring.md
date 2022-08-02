@@ -5,7 +5,7 @@ description: Learn how to monitor ML systems to identify and mitigate sources of
 keywords: monitoring, monitoring ml, drift, data drift, concept drift, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/mlops-course
-notebook: https://colab.research.google.com/github/GokuMohandas/monitoring-ml/blob/main/monitoring.ipynb
+notebook: https://github.com/GokuMohandas/monitoring-ml/blob/main/monitoring.ipynb
 ---
 
 ## Intuition

@@ -5,7 +5,7 @@ description: Learn how to test ML models (and their code and data) to ensure con
 keywords: testing, testing ml, pytest, great expectations, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/mlops-course
-notebook: https://colab.research.google.com/github/GokuMohandas/monitoring-ml/blob/main/testing.ipynb
+notebook: https://github.com/GokuMohandas/testing-ml/blob/main/testing.ipynb
 ---
 
 {% include "styles/lesson.md" %}
@@ -588,7 +588,7 @@ So far, we've used unit and integration tests to test the functions that interac
 
 ### Expectations
 
-> Follow along with our [testing notebook](https://colab.research.google.com/github/GokuMohandas/monitoring-ml/blob/main/testing.ipynb){:target="_blank"} as we develop expectations for our dataset. We'll organize these expectations in our repository in the [projects section](testing.md#projects).
+> Follow along with our [testing notebook](https://colab.research.google.com/github/GokuMohandas/testing-ml/blob/main/testing.ipynb){:target="_blank"} as we develop expectations for our dataset. We'll organize these expectations in our repository in the [projects section](testing.md#projects).
 
 There are many dimensions to consider for what our data is expected to look like. We'll briefly talk about a few of them, including ones that may not directly be applicable to our task but, nonetheless, are very important to be aware of.
 
