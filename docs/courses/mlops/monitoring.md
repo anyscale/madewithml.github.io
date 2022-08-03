@@ -1,7 +1,7 @@
 ---
 template: lesson.html
 title: Monitoring Machine Learning Systems
-description: Learn how to monitor ML systems to identify and mitigate sources of drift before model performance decay.
+description: Learn how to monitor ML systems to identify and address sources of drift to prevent model performance decay.
 keywords: monitoring, monitoring ml, drift, data drift, concept drift, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/mlops-course
@@ -10,12 +10,7 @@ notebook: https://github.com/GokuMohandas/monitoring-ml/blob/main/monitoring.ipy
 
 ## Intuition
 
-Even though we've trained and thoroughly evaluated our model, the real work begins once we deploy to production. This is one of the fundamental differences between traditional software engineering and ML development.
-
-!!! note
-    If not following this course in sequential order, be sure to check out the :fontawesome-brands-github:{ .github } [monitoring-ml](https://github.com/GokuMohandas/monitoring-ml){:target="_blank"} repository to run through the monitoring concepts (w/ an interactive notebook).
-
-Traditionally, with rule based, deterministic, software, the majority of the work occurs at the initial stage and once deployed, our system works as we've defined it. But with machine learning, we haven't explicitly defined how something works but used data to architect a probabilistic solution. This approach is subject to natural performance degradation over time, as well as unintended behavior, since the data exposed to the model will be different from what it has been trained on. This isn't something we should be trying to avoid but rather understand and mitigate as much as possible. In this lesson, we'll understand the short comings from attempting to capture performance degradation in order to motivate the need for [drift](#drift) detection.
+Even though we've trained and thoroughly evaluated our model, the real work begins once we deploy to production. This is one of the fundamental differences between traditional software engineering and ML development. Traditionally, with rule based, deterministic, software, the majority of the work occurs at the initial stage and once deployed, our system works as we've defined it. But with machine learning, we haven't explicitly defined how something works but used data to architect a probabilistic solution. This approach is subject to natural performance degradation over time, as well as unintended behavior, since the data exposed to the model will be different from what it has been trained on. This isn't something we should be trying to avoid but rather understand and mitigate as much as possible. In this lesson, we'll understand the short comings from attempting to capture performance degradation in order to motivate the need for [drift](#drift) detection.
 
 > Testing and monitoring share a lot of similarities, such as ensuring that certain [expectations](testing.md#expectations){:target="_blank"} around data completeness, distributions, schema adherence, etc. are met. However, a key distinction is that monitoring involves comparing live data distributions from production with fixed/sliding reference distributions from training data.
 
@@ -35,7 +30,7 @@ Unfortunately, just monitoring the system's health won't be enough to capture th
 
 It's usually never enough to just analyze the cumulative performance metrics across the entire span of time since the model has been deployed. Instead, we should also inspect performance across a period of time that's significant for our application (ex. daily). These sliding metrics might be more indicative of our system's health and we might be able to identify issues faster by not obscuring them with historical data.
 
-> All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/monitoring-ml/blob/main/monitoring.ipynb){:target="_blank"}.
+> 👉 &nbsp; Follow along interactive notebook in the :fontawesome-brands-github:{ .github } [**monitoring-ml**](https://github.com/GokuMohandas/monitoring-ml){:target="_blank"} repository as we implement the concepts below.
 
 ```python linenums="1"
 import matplotlib.pyplot as plt

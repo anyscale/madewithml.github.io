@@ -5,7 +5,7 @@ description: Implement basic neural networks from scratch using NumPy and then u
 keywords: neural networks, MLP, numpy, pytorch, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/Made-With-ML
-notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blob/main/notebooks/08_Neural_Networks.ipynb
+notebook: https://github.com/GokuMohandas/Made-With-ML/blob/main/notebooks/08_Neural_Networks.ipynb
 ---
 
 {% include "styles/lesson.md" %}

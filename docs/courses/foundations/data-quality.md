@@ -5,7 +5,7 @@ description: An illustrative look at the importance of data quality in machine l
 keywords: data quality, cleaning, overfitting, underfitting, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/Made-With-ML
-notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blob/main/notebooks/09_Data_Quality.ipynb
+notebook: https://github.com/GokuMohandas/Made-With-ML/blob/main/notebooks/09_Data_Quality.ipynb
 ---
 
 {% include "styles/lesson.md" %}

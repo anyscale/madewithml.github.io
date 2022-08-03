@@ -5,7 +5,7 @@ description: Implement logistic regression from scratch using NumPy and then usi
 keywords: logistic regression, regression, numpy, pytorch, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/Made-With-ML
-notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blob/main/notebooks/07_Logistic_Regression.ipynb
+notebook: https://github.com/GokuMohandas/Made-With-ML/blob/main/notebooks/07_Logistic_Regression.ipynb
 ---
 
 {% include "styles/lesson.md" %}

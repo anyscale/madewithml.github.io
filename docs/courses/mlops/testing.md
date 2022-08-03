@@ -14,9 +14,6 @@ notebook: https://github.com/GokuMohandas/testing-ml/blob/main/testing.ipynb
 
 In this lesson, we'll learn how to test code, data and models to construct a machine learning system that we can reliably iterate on. Tests are a way for us to ensure that something works as intended. We're incentivized to implement tests and discover sources of error as early in the development cycle as possible so that we can decrease [downstream costs](https://assets.deepsource.io/39ed384/images/blog/cost-of-fixing-bugs/chart.jpg){:target="_blank"} and wasted time. Once we've designed our tests, we can automatically execute them every time we change or add to our codebase.
 
-!!! note
-    If not following this course in sequential order, be sure to check out the :fontawesome-brands-github:{ .github } [testing-ml](https://github.com/GokuMohandas/testing-ml){:target="_blank"} repository to run through data and model testing concepts (w/ an interactive notebook).
-
 ### Types of tests
 
 There are four majors types of tests which are utilized at different points in the development cycle:
@@ -584,39 +581,9 @@ Now that we have a foundation for testing traditional software, let's dive into 
 
 ## 🔢&nbsp; Data
 
-So far, we've used unit and integration tests to test the functions that interact with our data but we haven't tested the validity of the data itself. Once we define what our data should look like, we can use, expand and adapt these *expectations* as our dataset grows.
+So far, we've used unit and integration tests to test the functions that interact with our data but we haven't tested the validity of the data itself. We're going to use the [great expectations](https://github.com/great-expectations/great_expectations){:target="_blank"} library to test what our data is expected to look like. It's a library that allows us to create expectations as to what our data should look like in a standardized way. It also provides modules to seamlessly connect with backend data sources such as local file systems, S3, databases, etc. Let's explore the library by implementing the expectations we'll need for our application.
 
-### Expectations
-
-> Follow along with our [testing notebook](https://colab.research.google.com/github/GokuMohandas/testing-ml/blob/main/testing.ipynb){:target="_blank"} as we develop expectations for our dataset. We'll organize these expectations in our repository in the [projects section](testing.md#projects).
-
-There are many dimensions to consider for what our data is expected to look like. We'll briefly talk about a few of them, including ones that may not directly be applicable to our task but, nonetheless, are very important to be aware of.
-
-#### Rows and columns
-
-The most basic expectation is validating the presence of samples (rows) and features (columns). These can help identify inconsistencies between upstream backend database schema changes, upstream UI form changes, etc.
-
-- presence of specific features
-- row count (exact or range) of samples
-
-#### Individual values
-
-We can also have expectations about the individual values of specific features.
-
-- missing values
-- type adherence (ex. feature values are all `float`)
-- values must be unique or from a predefined set
-- list (categorical) / range (continuous) of allowed values
-- feature value relationships with other feature values (ex. column 1 values must always be greater than column 2)
-
-#### Aggregate values
-
-We can also set expectations about all the values of specific features.
-
-- value statistics (mean, std, median, max, min, sum, etc.)
-- distribution shift by comparing current values to previous values (useful for detecting drift)
-
-To implement these expectations, we could compose assert statements or we could leverage the open-source library called [Great Expectations](https://github.com/great-expectations/great_expectations){:target="_blank"}.
+> 👉 &nbsp; Follow along interactive notebook in the :fontawesome-brands-github:{ .github } [**testing-ml**](https://github.com/GokuMohandas/testing-ml){:target="_blank"} repository as we implement the concepts below.
 
 ```bash
 pip install great-expectations==0.15.15
@@ -632,10 +599,6 @@ test_packages = [
     "great-expectations==0.15.15"
 ]
 ```
-
-It's a library that already has many of these expectations builtin (map, aggregate, multi-column, distributional, etc.) and allows us to create custom expectations as well. It also provides modules to seamlessly connect with backend data sources such as local file systems, S3, databases and even DAG runners. Let's explore the library by implementing the expectations we'll need for our application.
-
-> Though Great Expectations has all the data validation functionality we need, there are several other production-grade data validation options available as well, such as [TFX](https://www.tensorflow.org/tfx/data_validation/get_started){:target="_blank"}, [AWS Deequ](https://github.com/awslabs/deequ){:target="_blank"}, etc.
 
 First we'll load the data we'd like to apply our expectations on. We can load our data from a variety of [sources](https://docs.greatexpectations.io/docs/guides/connecting_to_your_data/connect_to_data_overview){:target="_blank"} (filesystem, database, cloud etc.) which we can then wrap around a [Dataset module](https://legacy.docs.greatexpectations.io/en/latest/autoapi/great_expectations/dataset/index.html){:target="_blank"} (Pandas / Spark DataFrame, SQLAlchemy).
 
@@ -713,42 +676,42 @@ df.head(5)
 </div></div>
 </pre>
 
+### Expectations
 
-#### Built-in
+When it comes to creating expectations as to what our data should look like, we want to think about our entire dataset and all the features (columns) within it.
 
-Once we have our data source wrapped in a Dataset module, we can compose and apply expectations on it. There are many [built-in expectations](https://greatexpectations.io/expectations/){:target="blank"} to choose from:
-
-##### Table expectations
-```python linenums="1"
-# columns
+```python
+# Presence of specific features
 df.expect_table_columns_to_match_ordered_list(
-    column_list=["id", "created_on", "title", "description", "tag"])
+    column_list=["id", "created_on", "title", "description", "tag"]
+)
+```
 
-# data leak
+```python
+# Unique combinations of features (detect data leaks!)
 df.expect_compound_columns_to_be_unique(column_list=["title", "description"])
 ```
 
-##### Column expectations
-```python linenums="1"
-# id
-df.expect_column_values_to_be_unique(column="id")
-
-# created_on
-df.expect_column_values_to_not_be_null(column="created_on")
-df.expect_column_values_to_match_strftime_format(
-    column="created_on", strftime_format="%Y-%m-%d %H:%M:%S")
-
-# title
-df.expect_column_values_to_not_be_null(column="title")
-df.expect_column_values_to_be_of_type(column="title", type_="str")
-
-# description
-df.expect_column_values_to_not_be_null(column="description")
-df.expect_column_values_to_be_of_type(column="description", type_="str")
-
-# tag
+```python
+# Missing values
 df.expect_column_values_to_not_be_null(column="tag")
-df.expect_column_values_to_be_of_type(column="tag", type_="str")
+```
+
+```python
+# Unique values
+df.expect_column_values_to_be_unique(column="id")
+```
+
+```python
+# Type adherence
+df.expect_column_values_to_be_of_type(column="title", type_="str")
+```
+
+```python
+# List (categorical) / range (continuous) of allowed values
+tags = ["computer-vision", "graph-learning", "reinforcement-learning",
+        "natural-language-processing", "mlops", "time-series"]
+df.expect_column_values_to_be_in_set(column="tag", value_set=tags)
 ```
 
 Each of these expectations will create an output with details about success or failure, expected and observed values, expectations raised, etc. For example, the expectation ```#!python df.expect_column_values_to_be_of_type(column="title", type_="str")``` would produce the following if successful:
@@ -819,6 +782,49 @@ and if we have a failed expectation (ex. ```#!python  df.expect_column_values_to
 }
 ```
 
+There are just a few of the different expectations that we can create. Be sure to explore all the [expectations](https://greatexpectations.io/expectations/), including [custom expectations](https://docs.greatexpectations.io/docs/guides/expectations/creating_custom_expectations/overview/). Here are some other popular expectations that don't pertain to our specific dataset but are widely applicable:
+
+- feature value relationships with other feature values → `expect_column_pair_values_a_to_be_greater_than_b`
+- row count (exact or range) of samples → `expect_table_row_count_to_be_between`
+- value statistics (mean, std, median, max, min, sum, etc.) → `expect_column_mean_to_be_between`
+
+### Organization
+
+When it comes to organizing expectations, it's recommended to start with table-level ones and then move on to individual feature columns.
+
+#### Table expectations
+```python linenums="1"
+# columns
+df.expect_table_columns_to_match_ordered_list(
+    column_list=["id", "created_on", "title", "description", "tag"])
+
+# data leak
+df.expect_compound_columns_to_be_unique(column_list=["title", "description"])
+```
+
+#### Column expectations
+```python linenums="1"
+# id
+df.expect_column_values_to_be_unique(column="id")
+
+# created_on
+df.expect_column_values_to_not_be_null(column="created_on")
+df.expect_column_values_to_match_strftime_format(
+    column="created_on", strftime_format="%Y-%m-%d %H:%M:%S")
+
+# title
+df.expect_column_values_to_not_be_null(column="title")
+df.expect_column_values_to_be_of_type(column="title", type_="str")
+
+# description
+df.expect_column_values_to_not_be_null(column="description")
+df.expect_column_values_to_be_of_type(column="description", type_="str")
+
+# tag
+df.expect_column_values_to_not_be_null(column="tag")
+df.expect_column_values_to_be_of_type(column="tag", type_="str")
+```
+
 We can group all the expectations together to create an [Expectation Suite](https://docs.greatexpectations.io/en/latest/reference/core_concepts/expectations/expectations.html#expectation-suites) object which we can use to validate any Dataset module.
 
 ```python linenums="1"
@@ -839,8 +845,6 @@ print(df.validate(expectation_suite=expectation_suite, only_return_failures=True
   "evaluation_parameters": {}
 }
 ```
-
-> We could also create [custom expectations](https://docs.greatexpectations.io/docs/guides/expectations/creating_custom_expectations/overview){:target="_blank"} for our data.
 
 ### Projects
 So far we've worked with the Great Expectations library at the adhoc script / notebook level but we can further organize our expectations by creating a Project.
@@ -965,6 +969,7 @@ great_expectations suite edit <SUITE_NAME>
 ```
 
 #### Checkpoints
+
 Create Checkpoints where a Suite of Expectations are applied to a specific data asset. This is a great way of programmatically applying checkpoints on our existing and new data sources.
 ```bash
 cd tests
@@ -1013,18 +1018,26 @@ At the end of this lesson, we'll create a target in our `Makefile` that run all 
 !!! note
     We've applied expectations on our source dataset but there are many other key areas to test the data as well. For example, the intermediate outputs from processes such as cleaning, augmentation, splitting, preprocessing, tokenization, etc.
 
-### Data docs
+### Documentation
+
 When we create expectations using the CLI application, Great Expectations automatically generates documentation for our tests. It also stores information about validation runs and their results. We can launch the generate data documentation with the following command: ```#!bash great_expectations docs build```
 
 <div class="ai-center-all">
     <img width="700" src="/static/images/mlops/testing/docs.png" alt="data documentation">
 </div>
 
+> By default, Great Expectations stores our expectations, results and metrics locally but for production, we'll want to set up remote [metadata stores](https://docs.greatexpectations.io/docs/guides/setup/#metadata-stores){:target="_blank"}.
+
 ### Production
 
-By default, Great Expectations stores our expectations, results and metrics locally but for production, we'll want to set up remote [metadata stores](https://docs.greatexpectations.io/docs/guides/setup/#metadata-stores){:target="_blank"}. This is typically something our data engineering team would help set up as validation should occur prior to downstream applications such as machine learning use cases (though ML teams can certainly help craft more expectations to ensure comprehensive data validation).
+The advantage of using a library such as great expectations, as opposed to isolated assert statements is that we can:
 
-Many of these expectations will be executed when the data is extracted, loaded and transformed during out [DataOps workflows](orchestration.md#dataops){:target="_blank"}. Typically, the data will be extracted from a source (database, API, etc.) and loaded into a data system (ex. [data warehouse](data-stack.md#data-warehouse){:target="_blank"}) before being transformed there (ex. using [dbt](https://www.getdbt.com/){:target="_blank"}) for downstream applications. Throughout these tasks, Great Expectations checkpoint validations can be run to ensure the validity of the data and the changes applied to it. We'll see a simplified version of when data validation should occur in our data workflows in the [orchestration lesson](orchestration.md#dataops){:target="_blank"}.
+- reduce redundant efforts for creating tests across data modalities
+- automatically create testing [checkpoints](https://madewithml.com/courses/mlops/testing#checkpoints){:target="_blank} to execute as our dataset grows
+- automatically generate [documentation](https://madewithml.com/courses/mlops/testing#documentation){:target="_blank} on expectations and report on runs
+- easily connect with backend data sources such as local file systems, S3, databases, etc.
+
+Many of these expectations will be executed when the data is extracted, loaded and transformed during our [DataOps workflows](orchestration.md#dataops){:target="_blank"}. Typically, the data will be extracted from a source ([database](data-stack.md#database){:target="_blank"}, [API](api.md){:target="_blank"}, etc.) and loaded into a data system (ex. [data warehouse](data-stack.md#data-warehouse){:target="_blank"}) before being transformed there (ex. using [dbt](https://www.getdbt.com/){:target="_blank"}) for downstream applications. Throughout these tasks, Great Expectations checkpoint validations can be run to ensure the validity of the data and the changes applied to it. We'll see a simplified version of when data validation should occur in our data workflows in the [orchestration lesson](orchestration.md#dataops){:target="_blank"}.
 
 <div class="ai-center-all">
     <img width="650" src="/static/images/mlops/testing/production.png" alt="ETL pipelines in production">

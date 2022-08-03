@@ -1,11 +1,11 @@
 ---
 template: lesson.html
 title: Feature Store
-description: Using a feature store to connect the DataOps and MLOps pipelines to enable collaborative teams to develop efficiently.
+description: Using a feature store to connect the DataOps and MLOps workflows to enable collaborative teams to develop efficiently.
 keywords: feature stores, feast, point-in-time correctness, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/mlops-course
-notebook: https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/feature_store.ipynb
+notebook: https://github.com/GokuMohandas/feature-store/blob/main/feature_store.ipynb
 ---
 
 ## Intuition
@@ -65,7 +65,7 @@ We're going to leverage [Feast](https://feast.dev/){:target="_blank"} as the fea
 pip install feast==0.10.5 PyYAML==5.3.1 -q
 ```
 
-> All the code accompanying this lesson can be found in this [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/feature_store.ipynb){:target="_blank"}.
+> 👉 &nbsp; Follow along interactive notebook in the :fontawesome-brands-github:{ .github } [**feature-store**](https://github.com/GokuMohandas/feature-store){:target="_blank"} repository as we implement the concepts below.
 
 ### Set up
 
@@ -107,7 +107,7 @@ If all our [feature definitions](#feature-definitions) look valid, Feast will sy
 > When we run Feast locally, the offline store is effectively represented via Pandas point-in-time joins. Whereas, in production, the offline store can be something more robust like [Google BigQuery](https://cloud.google.com/bigquery){:target="_blank"}, [Amazon RedShift](https://aws.amazon.com/redshift/){:target="_blank"}, etc.
 
 
-We'll go ahead and paste this into our `features/feature_store.yaml` file (the [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/feature_store.ipynb){:target="_blank"} cell is automatically do this):
+We'll go ahead and paste this into our `features/feature_store.yaml` file (the [notebook](https://github.com/GokuMohandas/feature-store/blob/main/feature_store.ipynb){:target="_blank"} cell is automatically do this):
 
 ```yaml
 project: features
@@ -262,7 +262,7 @@ project_details_view = FeatureView(
 )
 ```
 
-So let's go ahead and define our feature views by moving this code into our `features/features.py` script (the [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/feature_store.ipynb){:target="_blank"} cell is automatically do this):
+So let's go ahead and define our feature views by moving this code into our `features/features.py` script (the [notebook](https://github.com/GokuMohandas/feature-store/blob/main/feature_store.ipynb){:target="_blank"} cell is automatically do this):
 
 ??? quote "Show code"
     ```python

@@ -449,7 +449,7 @@ def dataops():
 
 ### Extraction
 
-To keep things simple, we'll continue to keep our data as a local file but in a real production setting, our data can come from a wide variety of [data management systems](infrastructure.md#data-management-sytems){:target="_blank"}.
+To keep things simple, we'll continue to keep our data as a local file but in a real production setting, our data can come from a wide variety of [data systems](data-stack.md){:target="_blank"}.
 
 !!! note
     Ideally, the [data labeling](labeling.md){:target="_blank"} workflows would have occurred prior to the DataOps workflows. Depending on the task, it may involve natural labels, where the event that occurred is the label. Or there may be explicit manual labeling workflows that need to be inspected and approved.

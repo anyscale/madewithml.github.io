@@ -11,7 +11,7 @@ repository: https://github.com/GokuMohandas/mlops-course
 
 ## Intuition
 
-To have organized code is to have readable, reproducible, robust code. Your team, manager and most importantly, your future self, will thank you for putting in the initial effort towards organizing your work. In this lesson, we'll discuss how to migrate and organize code from our [notebook](https://colab.research.google.com/github/GokuMohandas/mlops-course/blob/main/notebooks/tagifai.ipynb){:target="_blank"} to Python scripts.
+To have organized code is to have readable, reproducible, robust code. Your team, manager and most importantly, your future self, will thank you for putting in the initial effort towards organizing your work. In this lesson, we'll discuss how to migrate and organize code from our [notebook](https://github.com/GokuMohandas/mlops-course/blob/main/notebooks/tagifai.ipynb){:target="_blank"} to Python scripts.
 
 ## Editor
 Before we can start coding, we need a space to do it. There are several options for code editors, such as [VSCode](https://code.visualstudio.com/){:target="_blank"}, [Atom](https://atom.io/){:target="_blank"}, [Sublime](https://www.sublimetext.com/){:target="_blank"}, [PyCharm](https://www.jetbrains.com/pycharm/){:target="_blank"}, [Vim](https://www.vim.org/){:target="_blank"}, etc. and they all offer unique features while providing the basic operations for code editing and execution. We will be using VSCode to edit and execute our code thanks to its simplicity, multi-language support, add-ons and growing industry adoption.

@@ -5,7 +5,7 @@ description: Convolutional Neural Networks (CNNs) applied to text for natural la
 keywords: convolutional neural networks, CNN, computer vision, image classification, image recognition, batchnorm, batch normalization, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/Made-With-ML
-notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blob/main/notebooks/11_Convolutional_Neural_Networks.ipynb
+notebook: https://github.com/GokuMohandas/Made-With-ML/blob/main/notebooks/11_Convolutional_Neural_Networks.ipynb
 ---
 
 {% include "styles/lesson.md" %}

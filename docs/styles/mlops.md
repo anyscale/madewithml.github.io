@@ -3,7 +3,6 @@
     <b><span class="mr-1">📦</span> Purpose</b>
     <ul>
     <li><a href="/courses/mlops/purpose/">Product</a></li>
-    <li><a href="/courses/mlops/purpose#systems-design">Systems design</a></li>
     <li><a href="/courses/mlops/purpose#project-management">Project</a></li>
     </ul>
     <b><span class="mr-1">🔢</span> Data</b>
@@ -56,10 +55,10 @@
     <ul>
     <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
     <li><a href="/courses/mlops/cicd/">CI/CD workflows</a></li>
-    <li><a href="/courses/mlops/infrastructure/">Infrastructure</a></li>
+    <li><a style="color: #000;">Data stack</a> <small>(Aug 2022)</small></li>
+    <li><a href="/courses/mlops/systems-design/">Systems design</a></li>
     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
-    <li><a style="color: #000;">Data stack</a> <small>(Aug 2022)</small></li>
     <li><a href="/courses/mlops/orchestration/">Orchestration</a></li>
     </ul>
 </div>

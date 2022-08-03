@@ -2,7 +2,7 @@
 template: lesson.html
 title: "Versioning Code, Data and Models"
 description: Versioning code, data and models to ensure reproducible behavior in ML systems.
-keywords: versioning, dvc, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning, great expectations
+keywords: versioning, dvc, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/mlops-course
 ---

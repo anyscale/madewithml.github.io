@@ -16,7 +16,7 @@ In this course, we'll not only develop the machine learning models but talk abou
 
 This template is designed to guide machine learning product development. While this template will initially be completed in sequential order, it will naturally involve nonlinear engagement based on iterative feedback. We should follow this template for every major release of our products so that all the decision making is transparent and documented.
 
-[Product](#product) (*What* & *Why*) → [System design](#system-design) (*How*) → [Project](#project) (*Who* & *When*)
+[Product](#product) (*What* & *Why*) → [Design](#design) (*How*) → [Project](#project) (*Who* & *When*)
 
 While our documentation will be detailed, we can start the process by walking through a machine learning canvas:
 
@@ -34,7 +34,7 @@ From this high-level canvas, we can create detailed documentation for each relea
 ├── 📄 Overview
 ├── 📂 release-1
 | ├── 📄 product requirements [Product]
-| ├── 📄 design documentation [System design]
+| ├── 📄 design documentation [Design]
 | ├── 📄 project planning     [Project]
 ├── ...
 └── 📂 release-n
@@ -211,9 +211,9 @@ How feasible is our solution and do we have the required resources to deliver it
     </tbody>
     </table>
 
-## Systems design
+## Design
 
-[*How*]: describe our systemic approach towards building the product.
+[*How*]: can we design our approach for building the product.
 
 ### Data
 
@@ -301,7 +301,7 @@ One of the hardest challenges with evaluation is tying our core [objectives](#ob
     ??? quote "Show answer"
         It entirely depends on the specific task. For example, in an email spam detector, precision is very important because it's better than we some spam then completely miss an important email. Overtime, we need to iterate on our solution so all evaluation metrics improve but it's important to know which one's we can't comprise on from the get-go.
 
-#### Offline
+#### Offline evaluation
 
 [Offline evaluation](evaluation.md){:target="_blank"} requires a gold standard labeled dataset that we can use to benchmark all of our [modeling](#modeling).
 
@@ -309,15 +309,23 @@ One of the hardest challenges with evaluation is tying our core [objectives](#ob
 
     We'll be using the [historical dataset](https://github.com/GokuMohandas/Made-With-ML/blob/main/datasets/projects.json){:target="_blank"} for offline evaluation. We'll also be creating [slices](evaluation.md#slices){:target="_blank"} of data that we want to evaluate in isolation.
 
-#### Online
+#### Online evaluation
 
-Online evaluation ensures that our model continues to perform well in production and can be performed using labels or, in the event we don't readily have labels, [proxy signals](monitoring.md#performance){:target="_blank"}.
+[Online evaluation](evaluation.md#online-evaluation){:target="_blank"} ensures that our model continues to perform well in production and can be performed using labels or, in the event we don't readily have labels, [proxy signals](monitoring.md#performance){:target="_blank"}.
 
 ??? quote "Our task"
 
     - manually label a subset of incoming data to evaluate periodically.
     - asking the initial set of users viewing a newly categorized content if it's correctly classified.
     - allow users to report misclassified content by our model.
+
+It's important that we measure real-time performance before committing to replace our existing version of the system.
+
+- Internal canary rollout, monitoring for proxy/actual performance, etc.
+- Rollout to the larger internal team for more feedback.
+- A/B rollout to a subset of the population to better understand UX, utility, etc.
+
+> Not all releases have to be high stakes and external facing. We can always include internal releases, gather feedback and iterate until we’re ready to increase the scope.
 
 ### Modeling
 
@@ -363,16 +371,6 @@ While the specific methodology we employ can differ based on the problem, there 
         - get internal feedback on end-to-end utility.
         - perform A/B testing to understand UI/UX design.
         - deployed locally to start generating more data required for more complex approaches.
-
-#### Experimentation
-
-How can we [experiment](infrastructure.md#experimentation){:target="_blank"} with our model to measure real-time performance before committing to replace our existing version of the system.
-
-> Not all releases have to be high stakes and external facing. We can always include internal releases, gather feedback and iterate until we’re ready to increase the scope.
-
-- Internal canary rollout, monitoring for proxy/actual performance, etc.
-- Rollout to the larger internal team for more feedback.
-- A/B rollout to a subset of the population to better understand UX, utility, etc.
 
 #### Feedback
 

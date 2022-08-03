@@ -5,7 +5,7 @@ description: Incorporating attention mechanisms to create context-aware represen
 keywords: attention, transformers, self-attention, positional encoding, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/Made-With-ML
-notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blob/main/notebooks/14_Attention.ipynb
+notebook: https://github.com/GokuMohandas/Made-With-ML/blob/main/notebooks/14_Attention.ipynb
 ---
 
 {% include "styles/lesson.md" %}

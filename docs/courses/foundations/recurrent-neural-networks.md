@@ -5,7 +5,7 @@ description: Explore and motivate the need for representation via embeddings.
 keywords: recurrent neural networks, numpy, pytorch, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/foundations.png
 repository: https://github.com/GokuMohandas/Made-With-ML
-notebook: https://colab.research.google.com/github/GokuMohandas/Made-With-ML/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb
+notebook: https://github.com/GokuMohandas/Made-With-ML/blob/main/notebooks/13_Recurrent_Neural_Networks.ipynb
 ---
 
 {% include "styles/lesson.md" %}
