@@ -141,7 +141,7 @@ for item in sorted_tags_by_f1.items():
 ]
 </pre>
 
-> Due to our custom predict function, we're able to achieve high precision for the categories except for `other`. Based on our [product design](purpose.md#metrics){:target="_blank"}, we decided that it's more important to be precise about our explicit ML categories (nlp, cv, and mlops) and that we would have a manual labeling workflow to recall any misclassifications in the `other` category. Overtime, our model will become better in this category as well.
+> Due to our custom predict function, we're able to achieve high precision for the categories except for `other`. Based on our [product design](design.md#metrics){:target="_blank"}, we decided that it's more important to be precise about our explicit ML categories (nlp, cv, and mlops) and that we would have a manual labeling workflow to recall any misclassifications in the `other` category. Overtime, our model will become better in this category as well.
 
 ## Confusion matrix
 

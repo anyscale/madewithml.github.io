@@ -2,8 +2,8 @@
 template: lesson.html
 title: Designing Machine Learning Products
 description: A template to guide the development cycle for machine learning systems that factors in product requirements, design docs and project considerations.
-keywords: project management, product management, design docs, scoping, management, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
-image: https://madewithml.com/static/images/mlops/purpose/ml_canvas.png
+keywords: project management, product management, design, design docs, scoping, management, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
+image: https://madewithml.com/static/images/mlops/design/ml_canvas.png
 ---
 
 {% include "styles/lesson.md" %}
@@ -16,12 +16,12 @@ In this course, we'll not only develop the machine learning models but talk abou
 
 This template is designed to guide machine learning product development. While this template will initially be completed in sequential order, it will naturally involve nonlinear engagement based on iterative feedback. We should follow this template for every major release of our products so that all the decision making is transparent and documented.
 
-[Product](#product) (*What* & *Why*) → [Design](#design) (*How*) → [Project](#project) (*Who* & *When*)
+[Product](#product) (*What* & *Why*) → [Engineering](#engineering) (*How*) → [Project](#project) (*Who* & *When*)
 
 While our documentation will be detailed, we can start the process by walking through a machine learning canvas:
 
 <div class="ai-center-all">
-    <a href="/static/templates/ml-canvas.pdf" target="_blank"><img src="/static/images/mlops/purpose/ml_canvas.png" width="1000" alt="machine learning canvas"></a>
+    <a href="/static/templates/ml-canvas.pdf" target="_blank"><img src="/static/images/mlops/design/ml_canvas.png" width="1000" alt="machine learning canvas"></a>
 </div>
 
 👉 &nbsp; Download a PDF of the ML canvas to use for your own products → [ml-canvas.pdf](/static/templates/ml-canvas.pdf){:target="_blank"} (right click the link and hit "Save Link As...")
@@ -34,7 +34,7 @@ From this high-level canvas, we can create detailed documentation for each relea
 ├── 📄 Overview
 ├── 📂 release-1
 | ├── 📄 product requirements [Product]
-| ├── 📄 design documentation [Design]
+| ├── 📄 design documentation [Engineering]
 | ├── 📄 project planning     [Project]
 ├── ...
 └── 📂 release-n
@@ -104,7 +104,7 @@ Propose the value we can create through a product-centric approach:
     - `#!js advantages`: customers only have to visit our product to stay up-to-date.
 
     <div class="ai-center-all">
-        <img src="/static/images/mlops/purpose/product.png" width="1000" alt="product mockup"></a>
+        <img src="/static/images/mlops/design/product.png" width="1000" alt="product mockup"></a>
     </div>
 
     > Yes, we actually did build this before realizing it exacerbated noise and hype. And so, we pivoted into teaching the community how to responsibly deliver value with ML.
@@ -211,9 +211,9 @@ How feasible is our solution and do we have the required resources to deliver it
     </tbody>
     </table>
 
-## Design
+## Engineering
 
-[*How*]: can we design our approach for building the product.
+[*How*]: can we engineer our approach for building the product.
 
 ### Data
 

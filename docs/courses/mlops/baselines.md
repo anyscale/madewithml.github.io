@@ -575,7 +575,7 @@ y_prob = model.predict_proba(vectorizer.transform([text]))
  'other': 0.17248570271336786}
 </pre>
 
-We're going to create a custom predict function where if the majority class is not above a certain softmax score, then we predict the `other` class. In our [objectives](purpose.md#objective){:target="_blank"}, we decided that precision is really important for us and that we can leverage the labeling and QA workflows to improve the recall during subsequent manual inspection.
+We're going to create a custom predict function where if the majority class is not above a certain softmax score, then we predict the `other` class. In our [objectives](design.md#objective){:target="_blank"}, we decided that precision is really important for us and that we can leverage the labeling and QA workflows to improve the recall during subsequent manual inspection.
 
 !!! warning
     Our models can suffer from overconfidence so applying this limitation may not be as effective as we'd imagine, especially for larger neural networks. See the [confident learning](evaluation.md#confident-learning){:target="_blank"} section of the [evaluation lesson](evaluation.md){:target="_blank"} for more information.

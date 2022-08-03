@@ -26,7 +26,7 @@ We're going to start our project with EDA, a vital (and fun) process that's ofte
 - [projects.json](https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.json){:target="_blank"}: projects with title, description and tag.
 - [tags.json](https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.json){:target="_blank"}: auxiliary information on the tags we are about of our platform.
 
-> Recall that our [objective](purpose.md#objective){:target="_blank"} was to classify incoming content so that the community can discover them.
+> Recall that our [objective](design.md#objective){:target="_blank"} was to classify incoming content so that the community can discover them.
 
 ### Projects
 We'll first load our dataset from the JSON file.

@@ -55,10 +55,10 @@ nav:
       - Transformers: courses/foundations/transformers.md
   - MLOps:
     - Lessons: /#mlops
-    - 📦 &nbsp; Purpose:
-      - Product: courses/mlops/purpose.md
-      - Design: courses/mlops/product/#design
-      - Project: courses/mlops/product/#project-management
+    - 🎨 &nbsp; Design:
+      - Product: courses/mlops/design.md
+      - Engineering: courses/mlops/design/#engineering
+      - Project: courses/mlops/design/#project-management
     - 🔢 &nbsp; Data:
       - Exploration: courses/mlops/exploratory-data-analysis.md
       - Labeling: courses/mlops/labeling.md
@@ -201,10 +201,11 @@ plugins:
             "courses/applied-ml/documentation.md": "courses/mlops/documentation.md"
             "courses/applied-ml/api.md": "courses/mlops/api.md"
             "courses/applied-ml/testing.md": "courses/mlops/testing.md"
-            "courses/mlops/objective.md": "courses/mlops/purpose.md"
-            "courses/mlops/solution.md": "courses/mlops/purpose.md"
-            "courses/mlops/iteration.md": "courses/mlops/purpose.md"
-            "courses/mlops/product.md": "courses/mlops/purpose.md"
+            "courses/mlops/objective.md": "courses/mlops/design.md"
+            "courses/mlops/solution.md": "courses/mlops/design.md"
+            "courses/mlops/iteration.md": "courses/mlops/design.md"
+            "courses/mlops/product.md": "courses/mlops/design.md"
+            "courses/mlops/purpose.md": "courses/mlops/design.md"
             "courses/mlops/pipelines.md": "courses/mlops/orchestration.md"
             "courses/mlops/continual-learning.md": "courses/mlops/orchestration.md#continual-learning"
             # "mlops-course": "index.md"

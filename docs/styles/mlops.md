@@ -1,9 +1,10 @@
 <div class="row mt-4 ai-course-list" data-aos="fade-down">
 <div class="col-md-4">
-    <b><span class="mr-1">📦</span> Purpose</b>
+    <b><span class="mr-1">🎨</span> Design</b>
     <ul>
-    <li><a href="/courses/mlops/purpose/">Product</a></li>
-    <li><a href="/courses/mlops/purpose#project-management">Project</a></li>
+    <li><a href="/courses/mlops/design/">Product</a></li>
+    <li><a href="/courses/mlops/design#engineering">Engineering</a></li>
+    <li><a href="/courses/mlops/design#project-management">Project</a></li>
     </ul>
     <b><span class="mr-1">🔢</span> Data</b>
     <ul>
@@ -55,7 +56,7 @@
     <ul>
     <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
     <li><a href="/courses/mlops/cicd/">CI/CD workflows</a></li>
-    <li><a style="color: #000;">Data stack</a> <small>(Aug 2022)</small></li>
+    <li><a href="/courses/mlops/data-stack/">Data stack</a></li>
     <li><a href="/courses/mlops/systems-design/">Systems design</a></li>
     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
