@@ -61,6 +61,10 @@ Once we've identified the sources of data we want to extract data from, we need 
 
 Once we have our data sources and we know how often we want to extract data from it, we need to establish the pipelines to enable the extraction. While we could construct custom scripts to extract data from the source and load it into storage (ex. [data warehouse](#data-warehouse)), an ecosystem of data ingestion tools have standardized the entire process. They all come equipped with connectors that allow for extraction, normalization, cleaning and loading to another location. These pipelines can be scaled, monitored, etc. all with very little to no code.
 
+<div class="ai-center-all">
+    <img width="500" src="/static/images/mlops/data-stack/pipelines.png" alt="ingestion pipelines">
+</div>
+
 > 🛠&nbsp; Popular tools: [Fivetran](https://www.fivetran.com/){:target="_blank"}, [Airbyte](https://airbyte.com/){:target="_blank"}, [Stitch](https://www.stitchdata.com/){:target="_blank"}, [Talend](https://www.talend.com/){:target="_blank"}, etc.
 
 ## Load
