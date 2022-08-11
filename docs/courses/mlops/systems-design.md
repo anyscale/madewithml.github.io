@@ -34,7 +34,7 @@ The first decision is whether to serve predictions via batches or real-time, whi
 We can make batch predictions on a finite set of inputs which are then written to a database for low latency inference. When a user or downstream process makes an inference request in real-time, cached results from the database are returned (typically via a  [request](api.md#request){:target="_blank"} to an [API](api.md){:target="_blank"} to query the DB).
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/infrastructure/batch_serving.png" alt="batch serving">
+    <img width="600" src="/static/images/mlops/systems-design/batch_serving.png" alt="batch serving">
 </div>
 
 - ✅&nbsp; generate and cache predictions for very fast inference for users.
@@ -53,7 +53,7 @@ We can make batch predictions on a finite set of inputs which are then written t
 We can also serve live predictions where input featured are fed to the model in real-time to retrieve predictions.
 
 <div class="ai-center-all">
-    <img width="400" src="/static/images/mlops/infrastructure/real_time_serving.png" alt="realtime serving">
+    <img width="400" src="/static/images/mlops/systems-design/real_time_serving.png" alt="realtime serving">
 </div>
 
 - ✅&nbsp; can yield more up-to-date predictions which may yield a more meaningful user experience, etc.
@@ -79,7 +79,7 @@ Our use case doesn't necessarily involve entity features changing over time so i
 Batch process features for a given entity at a previous point in time, which are later used for generating real-time predictions.
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/infrastructure/batch_processing.png" alt="batch processing">
+    <img width="600" src="/static/images/mlops/systems-design/batch_processing.png" alt="batch processing">
 </div>
 
 - ✅&nbsp; can perform heavy feature computations offline and have it ready for fast inference.
@@ -90,7 +90,7 @@ Batch process features for a given entity at a previous point in time, which are
 Perform inference on a given set of inputs with *near* real-time, streaming, features for a given entity.
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/infrastructure/stream_processing.png" alt="stream processing">
+    <img width="600" src="/static/images/mlops/systems-design/stream_processing.png" alt="stream processing">
 </div>
 
 - ✅&nbsp; we can generate better predictions by providing real-time, streaming, features to the model.
@@ -112,7 +112,7 @@ So far, while we have the option to use batch / streaming features and serve bat
 The traditional approach is to train our models offline and then deploy them to inference. We may periodically retrain them offline as new data becomes labeled, validated, etc. and deploy them after evaluation. We may also expedite retraining if we discover an issue during [monitoring](monitoring.md){:target="_blank"} such as drift.
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/infrastructure/offline_learning.png" alt="offline learning">
+    <img width="600" src="/static/images/mlops/systems-design/offline_learning.png" alt="offline learning">
 </div>
 
 - ✅&nbsp; don't need to worry about provisioning resources for compute since it happens offline.
@@ -125,7 +125,7 @@ The traditional approach is to train our models offline and then deploy them to 
 In order to truly serve the most informed predictions, we should have a model trained on the most recent data. However, instead of using expensive stateless batch learning, a stateful and incremental learning approach is adopted. Here the model is trained offline, as usual, on the initial dataset but is then stochastically updated at a single instance or mini-batch level as new data becomes available. This removes the compute costs associated with traditional stateless, redundant training on same same past data.
 
 <div class="ai-center-all">
-    <img width="400" src="/static/images/mlops/infrastructure/online_learning.png" alt="online learning">
+    <img width="400" src="/static/images/mlops/systems-design/online_learning.png" alt="online learning">
 </div>
 
 - ✅&nbsp; model is aware of distributional shifts and can quickly adapt to provide highly informed predictions.
@@ -156,7 +156,7 @@ Compute engines such as AWS EC2, Google Compute, Azure VM, on-prem, etc. that ca
 Container orchestration via [Kubernetes](https://kubernetes.io/){:target="_blank"} (K8s) for managed deployment, scaling, etc. There are several ML specific platforms to help us **self-manage** K8s via control planes such as [Seldon](https://www.seldon.io/tech/){:target="_blank"}, [KFServing](https://www.kubeflow.org/docs/components/kfserving/kfserving/){:target="_blank"}, etc. However, there are also **fully-managed** solutions, such as [SageMaker](https://aws.amazon.com/sagemaker/){:target="_blank"}, [Cortex](https://www.cortex.dev/){:target="_blank"}, [BentoML](https://www.bentoml.ai/){:target="_blank"}, etc. Many of these tools also come with additional features such as experiment tracking, monitoring, etc.
 
 <div class="ai-center-all">
-    <img width="400" src="/static/images/mlops/infrastructure/managed.png" alt="container orchestration">
+    <img width="400" src="/static/images/mlops/systems-design/managed.png" alt="container orchestration">
 </div>
 
 - **Pros**: very easy to scale our services since it's all managers with the proper components (load balancers, control planes, etc.)

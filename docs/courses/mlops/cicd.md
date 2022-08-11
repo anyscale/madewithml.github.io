@@ -15,7 +15,7 @@ Continuous integration (CI) allows our team to develop, test and integrate code 
 
 ## GitHub Actions
 
-There are many tooling options for when it comes to creating our CI/CD pipelines, such as [Jenkins](https://www.jenkins.io/){:target="_blank"}, [TeamCity](https://www.jetbrains.com/teamcity/){:target="_blank"}, [CircleCI](https://circleci.com/){:target="_blank"} and many others. However, we're going to use [GitHub Actions](https://docs.github.com/en/actions){:target="_blank"} to create automatic workflows to setup our CI/CD pipelines.
+In this lesson we're going to use [GitHub Actions](https://docs.github.com/en/actions){:target="_blank"} to create CI/CD pertaining to the code we push to git. We'll learn more about CI/CD in our in our [orchestration lesson](orchestration.md){:target="_blank} where we'll more generally apply it to DataOps and MLOps.
 
 <div class="ai-center-all">
     <img width="700" src="/static/images/mlops/cicd/workflows.png" alt="ci/cd workflows">
@@ -220,6 +220,9 @@ There are a wide variety of GitHub actions available for deploying and serving o
 > If we want to deploy and serve multiple models at a time, it's highly recommended to use a purpose-built [model server](api.md#model-server){:target="_blank"} to seamlessly inspect, update, serve, rollback, etc. multiple versions of models.
 
 The specific deployment method we use it entirely up dependent on the application, team, existing infrastructure, etc. The key component is that we are able to update our application when all the integration tests pass without having to manually intervene for deployment.
+
+!!! note
+    We'll learn how to separate developing and serving in our [orchestration lesson](orchestration.md){:target="_blank}. We can still leverage CI/CD workflows for pushing our code to Git but separate workflows can then use the validated codebase to execute downstream workflows (evaluation, serving, retraining, etc.).
 
 ## Marketplace
 

@@ -12,7 +12,8 @@ notebook: https://github.com/GokuMohandas/monitoring-ml/blob/main/monitoring.ipy
 
 Even though we've trained and thoroughly evaluated our model, the real work begins once we deploy to production. This is one of the fundamental differences between traditional software engineering and ML development. Traditionally, with rule based, deterministic, software, the majority of the work occurs at the initial stage and once deployed, our system works as we've defined it. But with machine learning, we haven't explicitly defined how something works but used data to architect a probabilistic solution. This approach is subject to natural performance degradation over time, as well as unintended behavior, since the data exposed to the model will be different from what it has been trained on. This isn't something we should be trying to avoid but rather understand and mitigate as much as possible. In this lesson, we'll understand the short comings from attempting to capture performance degradation in order to motivate the need for [drift](#drift) detection.
 
-> Testing and monitoring share a lot of similarities, such as ensuring that certain [expectations](testing.md#expectations){:target="_blank"} around data completeness, distributions, schema adherence, etc. are met. However, a key distinction is that monitoring involves comparing live data distributions from production with fixed/sliding reference distributions from training data.
+!!! tip
+    We highly recommend that you explore this lesson *after* completing the previous lessons since the topics (and code) are iteratively developed. We did, however, create the :fontawesome-brands-github:{ .github } [monitoring-ml](https://github.com/GokuMohandas/monitoring-ml){:target="_blank"} repository for a quick overview with an interactive notebook.
 
 ## System health
 
@@ -235,7 +236,7 @@ df.head(5)
 
 ### Expectations
 
-The first line of measurement can be rule-based such as validating [expectations](https://docs.greatexpectations.io/en/latest/reference/glossary_of_expectations.html){:target="_blank"} around missing values, data types, value ranges, etc. as we did in our [data testing lesson](testing.md#expectations){:target="_blank"}. These can be done with or without a reference window and using the [mostly argument](https://docs.greatexpectations.io/en/latest/reference/core_concepts/expectations/standard_arguments.html#mostly){:target="_blank"} for some level of tolerance.
+The first form of measurement can be rule-based such as validating [expectations](https://docs.greatexpectations.io/en/latest/reference/glossary_of_expectations.html){:target="_blank"} around missing values, data types, value ranges, etc. as we did in our [data testing lesson](testing.md#expectations){:target="_blank"}. The difference now is that we'll be validating these expectations on live production data.
 
 ```python linenums="1"
 # Simulated production data

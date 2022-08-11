@@ -678,7 +678,7 @@ And there are many different experimentation strategies we can use to measure re
 AB testing involves sending production traffic to our current system (control group) and the new version (treatment group) and measuring if there is a statistical difference between the values for two metrics. There are several common issues with AB testing such as accounting for different sources of bias, such as the novelty effect of showing some users the new system. We also need to ensure that the same users continue to interact with the same systems so we can compare the results without contamination.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/mlops/infrastructure/ab.png" alt="ab tests">
+    <img width="500" src="/static/images/mlops/systems-design/ab.png" alt="ab tests">
 </div>
 
 > In many cases, if we're simply trying to compare the different versions for a certain metric, AB testing can take while before we reach statical significance since traffic is evenly split between the different groups. In this scenario, [multi-armed bandits](https://en.wikipedia.org/wiki/Multi-armed_bandit){:target="_blank"} will be a better approach since they continuously assign traffic to the better performing version.
@@ -687,14 +687,14 @@ AB testing involves sending production traffic to our current system (control gr
 Canary tests involve sending most of the production traffic to the currently deployed system but sending traffic from a small cohort of users to the new system we're trying to evaluate. Again we need to make sure that the same users continue to interact with the same system as we gradually roll out the new system.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/mlops/infrastructure/canary.png" alt="canary deployment">
+    <img width="500" src="/static/images/mlops/systems-design/canary.png" alt="canary deployment">
 </div>
 
 ### Shadow tests
 Shadow testing involves sending the same production traffic to the different systems. We don't have to worry about system contamination and it's very safe compared to the previous approaches since the new system's results are not served. However, we do need to ensure that we're replicating as much of the production system as possible so we can catch issues that are unique to production early on. But overall, shadow testing is easy to monitor, validate operational consistency, etc.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/mlops/infrastructure/shadow.png" alt="shadow deployment">
+    <img width="500" src="/static/images/mlops/systems-design/shadow.png" alt="shadow deployment">
 </div>
 
 !!! question "What can go wrong?"

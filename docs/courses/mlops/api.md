@@ -29,7 +29,7 @@ APIs allow different applications to communicate with each other in real-time. B
 We can make batch predictions on a finite set of inputs which are then written to a database for low latency inference. When a user or downstream process sends an inference request in real-time, cached results from the database are returned.
 
 <div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/infrastructure/batch_serving.png" alt="batch serving">
+    <img width="600" src="/static/images/mlops/systems-design/batch_serving.png" alt="batch serving">
 </div>
 
 - ✅&nbsp; generate and cache predictions for very fast inference for users.
@@ -48,7 +48,7 @@ We can make batch predictions on a finite set of inputs which are then written t
 We can also serve live predictions, typically through a request to an API with the appropriate input data.
 
 <div class="ai-center-all">
-    <img width="400" src="/static/images/mlops/infrastructure/real_time_serving.png" alt="real-time serving">
+    <img width="400" src="/static/images/mlops/systems-design/real_time_serving.png" alt="real-time serving">
 </div>
 
 - ✅&nbsp; can yield more up-to-date predictions which may yield a more meaningful user experience, etc.

@@ -33,6 +33,9 @@ When actually constructing our feature store, there are several core components 
 
 Each of these components is fairly easy to set up but connecting them all together requires a managed service, SDK layer for interactions, etc. Instead of building from scratch, it's best to leverage one of the production-ready, feature store options such as [Feast](https://feast.dev/){:target="_blank"}, [Hopsworks](https://www.hopsworks.ai/){:target="_blank"}, [Tecton](https://www.tecton.ai/){:target="_blank"}, [Rasgo](https://www.rasgoml.com/){:target="_blank"}, etc. And of course, the large cloud providers have their own feature store options as well (Amazon's [SageMaker Feature Store](https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store.html){:target="_blank"}, Google's [Vertex AI](https://cloud.google.com/vertex-ai/docs/featurestore){:target="_blank"}, etc.)
 
+!!! tip
+    We highly recommend that you explore this lesson *after* completing the previous lessons since the topics (and code) are iteratively developed. We did, however, create the :fontawesome-brands-github:{ .github } [feature-store](https://github.com/GokuMohandas/feature-store){:target="_blank"} repository for a quick overview with an interactive notebook.
+
 ## Over-engineering
 
 Not all machine learning tasks require a feature store. In fact, our use case is a perfect example of a test that *does not* benefit from a feature store. All of our data points are independent and stateless and there is no entity that has changing features over time. The real utility of a feature store shines when we need to have up-to-date features for an entity that we continually generate predictions for. For example, a user's behavior (clicks, purchases, etc.) on an e-commerce platform or the deliveries a food runner recently made today, etc.

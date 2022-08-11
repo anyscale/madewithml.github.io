@@ -14,6 +14,9 @@ notebook: https://github.com/GokuMohandas/testing-ml/blob/main/testing.ipynb
 
 In this lesson, we'll learn how to test code, data and models to construct a machine learning system that we can reliably iterate on. Tests are a way for us to ensure that something works as intended. We're incentivized to implement tests and discover sources of error as early in the development cycle as possible so that we can decrease [downstream costs](https://assets.deepsource.io/39ed384/images/blog/cost-of-fixing-bugs/chart.jpg){:target="_blank"} and wasted time. Once we've designed our tests, we can automatically execute them every time we change or add to our codebase.
 
+!!! tip
+    We highly recommend that you explore this lesson *after* completing the previous lessons since the topics (and code) are iteratively developed. We did, however, create the :fontawesome-brands-github:{ .github } [testing-ml](https://github.com/GokuMohandas/testing-ml){:target="_blank"} repository for a quick overview with an interactive notebook.
+
 ### Types of tests
 
 There are four majors types of tests which are utilized at different points in the development cycle:

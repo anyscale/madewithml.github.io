@@ -91,10 +91,10 @@ nav:
       - Docker: courses/mlops/docker.md
     - 🚀 &nbsp; Production:
       - Dashboard: courses/mlops/dashboard.md
-      - CI/CD workflows: courses/mlops/cicd.md
+      - CI/CD: courses/mlops/cicd.md
+      - Monitoring: courses/mlops/monitoring.md
       - Data stack: courses/mlops/data-stack.md
       - Systems design: courses/mlops/systems-design.md
-      - Monitoring: courses/mlops/monitoring.md
       - Feature store: courses/mlops/feature-store.md
       - Orchestration: courses/mlops/orchestration.md
   # - Blog: coming-soon.md
