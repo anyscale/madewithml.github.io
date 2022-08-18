@@ -613,10 +613,10 @@ from urllib.request import urlopen
 ```
 
 ```python linenums="1"
-# Load projects
-url = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.json"
-projects = json.loads(urlopen(url).read())
-df = ge.dataset.PandasDataset(projects)
+# Load labeled projects
+projects = pd.read_csv("https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.csv")
+tags = pd.read_csv("https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.csv")
+df = ge.dataset.PandasDataset(pd.merge(projects, tags, on="id"))
 print (f"{len(df)} projects")
 df.head(5)
 ```
@@ -882,7 +882,11 @@ What are you processing your files with?
 1. Pandas 👈
 2. PySpark
 ```
-Set our data path to `../data` (if you're doing this inside `tests`) and run the cells in this notebook and change the `datasource_name` to `data`. After we run the cells, we can close the notebook (and end the process on the terminal with ++ctrl++ + c) and we can see the Datasource being added to `great_expectations.yml`.
+```bash
+Enter the path of the root directory where the data files are stored: ../data
+```
+
+Run the cells in the generated notebook and change the `datasource_name` to `local_data`. After we run the cells, we can close the notebook (and end the process on the terminal with ++ctrl++ + c) and we can see the Datasource being added to `great_expectations.yml`.
 
 
 #### Suites
@@ -896,75 +900,117 @@ How would you like to create your Expectation Suite?
     2. Interactively, with a sample batch of data 👈
     3. Automatically, using a profiler
 ```
-```
+```bash
 Which data asset (accessible by data connector "default_inferred_data_connector_name") would you like to use?
-    1. labeled_projects.json
-    2. projects.json 👈
-    3. tags.json
+    1. labeled_projects.csv
+    2. projects.csv 👈
+    3. tags.csv
 ```
-This will open up an interactive notebook where we can add expectations. Copy and paste the expectations below and run all the cells. Repeat this step for `tags.json`.
+```bash
+Name the new Expectation Suite [projects.csv.warning]: projects
+```
+This will open up an interactive notebook where we can add expectations. Copy and paste the expectations below and run all the cells. Repeat this step for `tags.csv` and `labeled_projects.csv`.
 
 <div class="ai-center-all">
     <img width="700" src="/static/images/mlops/testing/suite.png" alt="great expectations suite">
 </div>
 
-??? quote "Expectations for `projects.json`"
+??? quote "Expectations for `projects.csv`"
     Table expectations
     ```python linenums="1"
     # Presence of features
-    df.expect_table_columns_to_match_ordered_list(
-        column_list=["id", "created_on", "title", "description", "tag"])
-    df.expect_compound_columns_to_be_unique(column_list=["title", "description"])  # data leak
+    validator.expect_table_columns_to_match_ordered_list(
+        column_list=["id", "created_on", "title", "description"])
+    validator.expect_compound_columns_to_be_unique(column_list=["title", "description"])  # data leak
     ```
 
     Column expectations:
     ```python linenums="1"
     # id
-    df.expect_column_values_to_be_unique(column="id")
+    validator.expect_column_values_to_be_unique(column="id")
 
     # create_on
-    df.expect_column_values_to_not_be_null(column="created_on")
-    df.expect_column_values_to_match_strftime_format(
+    validator.expect_column_values_to_not_be_null(column="created_on")
+    validator.expect_column_values_to_match_strftime_format(
         column="created_on", strftime_format="%Y-%m-%d %H:%M:%S")
 
     # title
-    df.expect_column_values_to_not_be_null(column="title")
-    df.expect_column_values_to_be_of_type(column="title", type_="str")
+    validator.expect_column_values_to_not_be_null(column="title")
+    validator.expect_column_values_to_be_of_type(column="title", type_="str")
 
     # description
-    df.expect_column_values_to_not_be_null(column="description")
-    df.expect_column_values_to_be_of_type(column="description", type_="str")
-
-    # tag
-    df.expect_column_values_to_not_be_null(column="tag")
-    df.expect_column_values_to_be_of_type(column="tag", type_="str")
+    validator.expect_column_values_to_not_be_null(column="description")
+    validator.expect_column_values_to_be_of_type(column="description", type_="str")
     ```
-??? quote "Expectations for `tags.json`"
+??? quote "Expectations for `tags.csv`"
     Table expectations
     ```python linenums="1"
-    validator.expect_table_columns_to_match_ordered_list(column_list=["tag", "aliases"])
+    # Presence of features
+    validator.expect_table_columns_to_match_ordered_list(column_list=["id", "tag"])
     ```
 
     Column expectations:
     ```python linenums="1"
+    # id
+    validator.expect_column_values_to_be_unique(column="id")
+
     # tag
-    validator.expect_column_values_to_be_unique(column="tag")
     validator.expect_column_values_to_not_be_null(column="tag")
     validator.expect_column_values_to_be_of_type(column="tag", type_="str")
-
-    # aliases
-    validator.expect_column_values_to_be_of_type(column="aliases", type_="list")
+    ```
+??? quote "Expectations for `labeled_projects.csv`"
+    Table expectations
+    ```python linenums="1"
+    # Presence of features
+    validator.expect_table_columns_to_match_ordered_list(
+        column_list=["id", "created_on", "title", "description", "tag"])
+    validator.expect_compound_columns_to_be_unique(column_list=["title", "description"])  # data leak
     ```
 
-All of these expectation suites will be saved under `great_expectations/expectations`:
+    Column expectations:
+    ```python linenums="1"
+    # id
+    validator.expect_column_values_to_be_unique(column="id")
+
+    # create_on
+    validator.expect_column_values_to_not_be_null(column="created_on")
+    validator.expect_column_values_to_match_strftime_format(
+        column="created_on", strftime_format="%Y-%m-%d %H:%M:%S")
+
+    # title
+    validator.expect_column_values_to_not_be_null(column="title")
+    validator.expect_column_values_to_be_of_type(column="title", type_="str")
+
+    # description
+    validator.expect_column_values_to_not_be_null(column="description")
+    validator.expect_column_values_to_be_of_type(column="description", type_="str")
+
+    # tag
+    validator.expect_column_values_to_not_be_null(column="tag")
+    validator.expect_column_values_to_be_of_type(column="tag", type_="str")
+    ```
+
+All of these expectations have been saved under `great_expectations/expectations`:
 
 ```bash
 great_expectations/
 |   ├── expectations/
-|   |   ├── labeled_projects.json
-|   |   ├── projects.json
-|   |   └── tags.json
+|   |   ├── labeled_projects.csv
+|   |   ├── projects.csv
+|   |   └── tags.csv
 ```
+
+And we can also list the suites with:
+```bash
+great_expectations suite list
+```
+<pre class="output">
+Using v3 (Batch Request) API
+3 Expectation Suites found:
+ - labeled_projects
+ - projects
+ - tags
+</pre>
 
 To edit a suite, we can execute the follow CLI command:
 ```bash
@@ -984,9 +1030,12 @@ great_expectations checkpoint new projects
 great_expectations checkpoint new tags
 great_expectations checkpoint new labeled_projects
 ```
-Each of these checkpoint creation calls will launch a notebook where we can define which suites to apply this checkpoint to. We have to change the lines for `data_asset_name` (which data asset to run the checkpoint suite on) and `expectation_suite_name` (name of the suite to use). For example, the `labeled_projects` checkpoint would use the `labeled_projects.json` data asset but use the `projects` suite (same suite as the `projects` checkpoint).
+Each of these checkpoint creation calls will launch a notebook where we can define which suites to apply this checkpoint to. We have to change the lines for `data_asset_name` (which data asset to run the checkpoint suite on) and `expectation_suite_name` (name of the suite to use). For example, the `projects` checkpoint would use the `projects.csv` data asset and the `projects` suite.
+
+> Checkpoints can share the same suite, as long the schema and validations are applicable.
+
 ```python linenums="1" hl_lines="12 15"
-my_checkpoint_name = "labeled_projects"  # This was populated from your CLI command.
+my_checkpoint_name = "projects"  # This was populated from your CLI command.
 
 yaml_config = f"""
 name: {my_checkpoint_name}
@@ -995,9 +1044,9 @@ class_name: SimpleCheckpoint
 run_name_template: "%Y%m%d-%H%M%S-my-run-name-template"
 validations:
   - batch_request:
-      datasource_name: data
+      datasource_name: local_data
       data_connector_name: default_inferred_data_connector_name
-      data_asset_name: labeled_projects.json
+      data_asset_name: projects.csv
       data_connector_query:
         index: -1
     expectation_suite_name: projects
@@ -1005,7 +1054,10 @@ validations:
 print(yaml_config)
 ```
 
-Once we've defined our checkpoint, we're ready to execute them:
+!!! warning "Validate autofills"
+    Be sure to ensure that the `datasource_name`, `data_asset_name` and `expectation_suite_name` are all what we want them to be (Great Expectations autofills those with assumptions which may not always be accurate).
+
+Repeat these same steps for the `tags` and `labeled_projects` checkpoints and then we're ready to execute them:
 ```bash
 great_expectations checkpoint run projects
 great_expectations checkpoint run tags

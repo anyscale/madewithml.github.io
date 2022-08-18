@@ -98,7 +98,7 @@ insertion.augment(text)
 automated conditional inverse image generation algorithms using multiple variational autoencoders and gans.
 </pre>
 
-A little better but still quite fragile and now it can potentially insert key words that can influence false positive tags to appear. Maybe instead of substituting or inserting new tokens, let's try simply swapping machine learning related keywords with their aliases from our [auxiliary data](https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.json){:target="_blank"}. We'll use Snorkel's [transformation functions](https://www.snorkel.org/use-cases/02-spam-data-augmentation-tutorial){:target="_blank"} to easily achieve this.
+A little better but still quite fragile and now it can potentially insert key words that can influence false positive tags to appear. Maybe instead of substituting or inserting new tokens, let's try simply swapping machine learning related keywords with their aliases. We'll use Snorkel's [transformation functions](https://www.snorkel.org/use-cases/02-spam-data-augmentation-tutorial){:target="_blank"} to easily achieve this.
 
 ```python linenums="1"
 # Replace dashes from tags & aliases
@@ -106,28 +106,35 @@ def replace_dash(x):
     return x.replace("-", " ")
 ```
 ```python linenums="1"
-# Create dict of aliases
-flat_tags_dict = {}
-for tag, info in tags_dict.items():
+# Aliases
+aliases_by_tag = {
+    "computer-vision": ["cv", "vision"],
+    "mlops": ["production"],
+    "natural-language-processing": ["nlp", "nlproc"]
+}
+```
+```python linenums="1"
+# Flatten dict
+flattened_aliases = {}
+for tag, aliases in aliases_by_tag.items():
     tag = replace_dash(x=tag)
-    aliases = list(map(replace_dash, info["aliases"]))
     if len(aliases):
-        flat_tags_dict[tag] = aliases
+        flattened_aliases[tag] = aliases
     for alias in aliases:
         _aliases = aliases + [tag]
         _aliases.remove(alias)
-        flat_tags_dict[alias] = _aliases
+        flattened_aliases[alias] = _aliases
 ```
 ```python linenums="1"
-print (flat_tags_dict["natural language processing"])
-print (flat_tags_dict["nlp"])
+print (flattened_aliases["natural language processing"])
+print (flattened_aliases["nlp"])
 ```
 <pre class="output">
 ['nlp', 'nlproc']
 ['nlproc', 'natural language processing']
 </pre>
 
-> For now we'll use tags and aliases as they are in `tags.json` but we could account for plurality of tags using the [inflect](https://github.com/jaraco/inflect){:target="_blank"} package or apply stemming before replacing aliases, etc.
+> For now we'll use tags and aliases as they are in `aliases_by_tag` but we could account for plurality of tags using the [inflect](https://github.com/jaraco/inflect){:target="_blank"} package or apply stemming before replacing aliases, etc.
 
 ```python linenums="1"
 # We want to match with the whole word only
@@ -166,7 +173,7 @@ def swap_aliases(x):
     """Swap ML keywords with their aliases."""
     # Find all matches
     matches = []
-    for i, tag in enumerate(flat_tags_dict):
+    for i, tag in enumerate(flattened_aliases):
         match = find_word(tag, x.text)
         if match:
             matches.append(match)
@@ -174,7 +181,7 @@ def swap_aliases(x):
     if len(matches):
         match = random.choice(matches)
         tag = x.text[match.start():match.end()]
-        x.text = f"{x.text[:match.start()]}{random.choice(flat_tags_dict[tag])}{x.text[match.end():]}"
+        x.text = f"{x.text[:match.start()]}{random.choice(flattened_aliases[tag])}{x.text[match.end():]}"
     return x
 ```
 

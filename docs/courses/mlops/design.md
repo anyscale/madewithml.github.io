@@ -222,7 +222,7 @@ Describe the training and production (batches/streams) sources of data.
 ??? quote "Our task"
 
     - **training**:
-        - access to a labeled and validated [dataset](https://github.com/GokuMohandas/Made-With-ML/blob/main/datasets/projects.json){:target="_blank"} for training.
+        - access to [input data](https://github.com/GokuMohandas/Made-With-ML/blob/main/datasets/projects.csv){:target="_blank"} and [labels](https://github.com/GokuMohandas/Made-With-ML/blob/main/datasets/tags.csv){:target="_blank"} for training.
         - information on feature origins and schemas.
         - was there sampling of any kind applied to create this dataset?
         - are we introducing any data leaks?
@@ -253,7 +253,7 @@ Describe the labeling process and how we settled on the features and labels.
 
 ??? quote "Our task"
 
-    **Labeling**: manually labeled [historical data](https://github.com/GokuMohandas/Made-With-ML/blob/main/datasets/projects.json){:target="_blank"}.
+    **Labeling**: labeled using categories of machine learning (a subset of which our platform is interested in).
 
     **Features**: text features (title and description) to provide signal for the classification task.
 
@@ -307,7 +307,7 @@ One of the hardest challenges with evaluation is tying our core [objectives](#ob
 
 ??? quote "Our task"
 
-    We'll be using the [historical dataset](https://github.com/GokuMohandas/Made-With-ML/blob/main/datasets/projects.json){:target="_blank"} for offline evaluation. We'll also be creating [slices](evaluation.md#slices){:target="_blank"} of data that we want to evaluate in isolation.
+    We'll be using the [historical dataset](https://github.com/GokuMohandas/Made-With-ML/blob/main/datasets/projects.csv){:target="_blank"} for offline evaluation. We'll also be creating [slices](evaluation.md#slices){:target="_blank"} of data that we want to evaluate in isolation.
 
 #### Online evaluation
 

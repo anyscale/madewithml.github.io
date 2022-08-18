@@ -71,7 +71,7 @@ mlflow.set_tracking_uri("file://" + str(MODEL_REGISTRY.absolute()))
 ls
 ```
 <pre class="output">
-experiments  labeled_projects.json  sample_data
+experiments  labeled_projects.csv  sample_data
 </pre>
 
 > When we're collaborating with other team members, this model registry will live on the cloud. Members from our team can connect to it (with authentication) to save and load trained models. If you don't want to set up and maintain a model registry, this is where platforms like [Comet ML](https://www.comet.ml/site/){:target="_blank"}, [Weights and Biases](https://www.wandb.com/){:target="_blank"} and others offload a lot of technical setup.
@@ -88,9 +88,9 @@ def train(args, df, trial=None):
 
     # Setup
     set_seeds()
-    df = pd.DataFrame(json.load(open("labeled_projects.json", "r")))
+    df = pd.read_csv("labeled_projects.csv")
     df = df.sample(frac=1).reset_index(drop=True)
-    df = preprocess(df, lower=True, stem=False)
+    df = preprocess(df, lower=True, stem=False, min_freq=min_freq)
     label_encoder = LabelEncoder().fit(df.tag)
     X_train, X_val, X_test, y_train, y_val, y_test = \
         get_data_splits(X=df.text.to_numpy(), y=label_encoder.encode(df.tag))

@@ -95,18 +95,18 @@ and now we're ready to add our data assets:
 
 ```bash
 # Add artifacts
-dvc add data/projects.json
-dvc add data/tags.json
-dvc add data/labeled_projects.json
+dvc add data/projects.csv
+dvc add data/tags.csv
+dvc add data/labeled_projects.csv
 ```
 
 We should now see the automatically created `data/.gitignore` file:
 
 ```bash
 # data/.gitignore
-/projects.json
-/tags.json
-/labeled_projects.json
+/projects.csv
+/tags.csv
+/labeled_projects.csv
 ```
 
 and all the pointer files that were created for each data artifact we added:
@@ -114,22 +114,22 @@ and all the pointer files that were created for each data artifact we added:
 ```bash
 data
 ├── .gitignore
-├── labeled_projects.json
-├── labeled_projects.json.dvc
-├── projects.json
-├── projects.json.dvc
-├── tags.json
-└── tags.json.dvc
+├── labeled_projects.csv
+├── labeled_projects.csv.dvc
+├── projects.csv
+├── projects.csv.dvc
+├── tags.csv
+└── tags.csv.dvc
 ```
 
 Each pointer file will contain the md5 hash, size and the location (with respect to the `data` directory) which we'll be checking into our git repository.
 
 ```yaml linenums="1"
-# data/projects.json.dvc
+# data/projects.csv.dvc
 outs:
 - md5: b103754da50e2e3e969894aa94a490ee
   size: 266992
-  path: projects.json
+  path: projects.csv
 ```
 
 !!! note
@@ -164,9 +164,9 @@ stores
     # Makefile
     .PHONY: dvc
     dvc:
-        dvc add data/projects.json
-        dvc add data/tags.json
-        dvc add data/labeled_projects.json
+        dvc add data/projects.csv
+        dvc add data/tags.csv
+        dvc add data/labeled_projects.csv
         dvc push
     ```
 

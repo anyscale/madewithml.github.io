@@ -550,8 +550,8 @@ def _load(ti):
     """
     projects = ti.xcom_pull(key="projects", task_ids=["extract"])[0]
     tags = ti.xcom_pull(key="tags", task_ids=["extract"])[0]
-    utils.save_dict(d=projects, filepath=Path(config.DATA_DIR, "projects.json"))
-    utils.save_dict(d=tags, filepath=Path(config.DATA_DIR, "tags.json"))
+    utils.save_dict(d=projects, filepath=Path(config.DATA_DIR, "projects.csv"))
+    utils.save_dict(d=tags, filepath=Path(config.DATA_DIR, "tags.csv"))
 
 @dag(...)
 def dataops():

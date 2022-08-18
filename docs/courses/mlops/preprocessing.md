@@ -367,6 +367,211 @@ comparison yolo rcnn real world videos bringing theory experiment cool easily tr
 !!! warning
     We'll want to introduce less frequent features as they become more frequent or encode them in a clever way (ex. binning, extract general attributes, common n-grams, mean encoding using other feature values, etc.) so that we can mitigate the feature value dimensionality issue until we're able to collect more data.
 
+
+### Replace labels
+
+Based on our findings from [EDA](exploratory-data-analysis.md){:target="_blank"}, we're going to apply several constraints for labeling our data:
+
+- if a data point has a tag that we currently don't support, we'll replace it with `other`
+- if a certain tag doesn't have *enough* samples, we'll replace it with `other`
+
+```python linenums="1"
+import json
+```
+
+```python linenums="1"
+# Accepted tags (external constraint)
+ACCEPTED_TAGS = ["natural-language-processing", "computer-vision", "mlops", "graph-learning"]
+```
+
+```python linenums="1"
+# Out of scope (OOS) tags
+oos_tags = [item for item in df.tag.unique() if item not in ACCEPTED_TAGS]
+oos_tags
+```
+<pre class="output">
+['reinforcement-learning', 'time-series']
+</pre>
+
+```python linenums="1"
+# Samples with OOS tags
+oos_indices = df[df.tag.isin(oos_tags)].index
+df[df.tag.isin(oos_tags)].head()
+```
+<pre class="output">
+<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>created_on</th>
+      <th>title</th>
+      <th>description</th>
+      <th>tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>15</td>
+      <td>2020-02-28 23:55:26</td>
+      <td>Awesome Monte Carlo Tree Search</td>
+      <td>A curated list of Monte Carlo tree search papers...</td>
+      <td>reinforcement-learning</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>121</td>
+      <td>2020-03-24 04:56:38</td>
+      <td>Deep Reinforcement Learning in TensorFlow2</td>
+      <td>deep-rl-tf2 is a repository that implements a ...</td>
+      <td>reinforcement-learning</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>218</td>
+      <td>2020-04-06 11:29:57</td>
+      <td>Distributional RL using TensorFlow2</td>
+      <td>🐳 Implementation of various Distributional Rei...</td>
+      <td>reinforcement-learning</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>239</td>
+      <td>2020-04-06 18:39:48</td>
+      <td>Prophet: Forecasting At Scale</td>
+      <td>Tool for producing high quality forecasts for ...</td>
+      <td>time-series</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>277</td>
+      <td>2020-04-07 00:30:33</td>
+      <td>Curriculum for Reinforcement Learning</td>
+      <td>Curriculum learning applied to reinforcement l...</td>
+      <td>reinforcement-learning</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</pre>
+
+```python linenums="1"
+# Replace this tag with "other"
+df.tag = df.tag.apply(lambda x: "other" if x in oos_tags else x)
+df.iloc[oos_indices].head()
+```
+<pre class="output">
+<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>created_on</th>
+      <th>title</th>
+      <th>description</th>
+      <th>tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>15</td>
+      <td>2020-02-28 23:55:26</td>
+      <td>Awesome Monte Carlo Tree Search</td>
+      <td>A curated list of Monte Carlo tree search papers...</td>
+      <td>other</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>121</td>
+      <td>2020-03-24 04:56:38</td>
+      <td>Deep Reinforcement Learning in TensorFlow2</td>
+      <td>deep-rl-tf2 is a repository that implements a ...</td>
+      <td>other</td>
+    </tr>
+    <tr>
+      <th>67</th>
+      <td>218</td>
+      <td>2020-04-06 11:29:57</td>
+      <td>Distributional RL using TensorFlow2</td>
+      <td>🐳 Implementation of various Distributional Rei...</td>
+      <td>other</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>239</td>
+      <td>2020-04-06 18:39:48</td>
+      <td>Prophet: Forecasting At Scale</td>
+      <td>Tool for producing high quality forecasts for ...</td>
+      <td>other</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>277</td>
+      <td>2020-04-07 00:30:33</td>
+      <td>Curriculum for Reinforcement Learning</td>
+      <td>Curriculum learning applied to reinforcement l...</td>
+      <td>other</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</pre>
+
+We're also going to restrict the mapping to only tags that are above a certain frequency threshold. The tags that don't have enough projects will not have enough samples to model their relationships.
+
+```python linenums="1"
+# Minimum frequency required for a tag
+min_freq = 75
+tags = Counter(df.tag.values)
+```
+
+```python linenums="1"
+# Tags that just made / missed the cut
+@widgets.interact(min_freq=(0, tags.most_common()[0][1]))
+def separate_tags_by_freq(min_freq=min_freq):
+    tags_above_freq = Counter(tag for tag in tags.elements()
+                                    if tags[tag] >= min_freq)
+    tags_below_freq = Counter(tag for tag in tags.elements()
+                                    if tags[tag] < min_freq)
+    print ("Most popular tags:\n", tags_above_freq.most_common(3))
+    print ("\nTags that just made the cut:\n", tags_above_freq.most_common()[-3:])
+    print ("\nTags that just missed the cut:\n", tags_below_freq.most_common(3))
+```
+<pre class="output">
+Most popular tags:
+ [('natural-language-processing', 388), ('computer-vision', 356), ('other', 87)]
+
+Tags that just made the cut:
+ [('computer-vision', 356), ('other', 87), ('mlops', 79)]
+
+Tags that just missed the cut:
+ [('graph-learning', 45)]
+</pre>
+
+```python linenums="1"
+def filter(tag, include=[]):
+    """Determine if a given tag is to be included."""
+    if tag not in include:
+        tag = None
+    return tag
+```
+
+```python linenums="1"
+# Filter tags that have fewer than <min_freq> occurrences
+tags_above_freq = Counter(tag for tag in tags.elements()
+                          if (tags[tag] >= min_freq))
+df.tag = df.tag.apply(filter, include=list(tags_above_freq.keys()))
+```
+
+```python linenums="1"
+# Fill None with other
+df.tag = df.tag.fillna("other")
+```
+
 ### Encoding
 
 We're going to encode our output labels where we'll assign each tag a unique index.

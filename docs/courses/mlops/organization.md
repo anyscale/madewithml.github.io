@@ -195,12 +195,6 @@ tagifai/
     import json
     import numpy as np
     import random
-    from urllib.request import urlopen
-
-    def load_json_from_url(url):
-        """Load JSON data from a URL."""
-        data = json.loads(urlopen(url).read())
-        return data
 
     def load_dict(filepath):
         """Load a dictionary from a JSON's filepath."""
@@ -330,14 +324,15 @@ This way when the names of columns change or we want to replace with different l
     # config/config.py
     ...
     # Assets
-    PROJECTS_URL = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.json"
-    TAGS_URL = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.json"
+    PROJECTS_URL = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.csv"
+    TAGS_URL = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.csv"
     ```
 
     Since this is a main operation, we'll define it in `main.py`:
 
     ```python linenums="1"
     # tagifai/main.py
+    import pandas as pd
     from pathlib import Path
     import warnings
 
@@ -349,31 +344,31 @@ This way when the names of columns change or we want to replace with different l
     def etl_data():
         """Extract, load and transform our data assets."""
         # Extract
-        projects = utils.load_json_from_url(url=config.PROJECTS_URL)
-        tags = utils.load_json_from_url(url=config.TAGS_URL)
+        projects = pd.read_csv(config.PROJECTS_URL)
+        tags = pd.read_csv(config.TAGS_URL)
 
         # Transform
-        df = pd.DataFrame(projects)
-        df = df[df.isnull().any(axis=1)]  # drop rows w/ any missing cols
+        df = pd.merge(projects, tags, on="id")
+        df = df[df.tag.notnull()]  # drop rows w/ no tag
 
         # Load
-        projects_fp = Path(config.DATA_DIR, "projects.json")
-        utils.save_dict(d=df.to_dict(orient="records"), filepath=projects_fp)
-        tags_fp = Path(config.DATA_DIR, "tags.json")
-        utils.save_dict(d=tags, filepath=tags_fp)
+        projects.to_csv(Path(config.DATA_DIR, "projects.csv"), index=False)
+        tags.to_csv(Path(config.DATA_DIR, "tags.csv"), index=False)
+        df.to_csv(Path(config.DATA_DIR, "labeled_projects.csv"), index=False)
 
-        logger.info("✅ ETL on data is complete!")
+        logger.info("✅ Saved data!")
     ```
 
     Before we can use this operation, we need to make sure we have the necessary packages loaded into our environment. Libraries such as `pathlib`, `json`, etc. are preloaded with native Python, but packages like `NumPy` are not. Let's load the required packages and add them to our `requirements.txt` file.
 
     ```bash
-    pip install numpy==1.19.5 pretty-errors==1.2.19
+    pip install numpy==1.19.5 pandas==1.3.5 pretty-errors==1.2.19
     ```
 
     ```bash
     # Add to requirements.txt
     numpy==1.19.5
+    pandas==1.3.5
     pretty-errors==1.2.19
     ```
 
@@ -402,106 +397,24 @@ This way when the names of columns change or we want to replace with different l
     We'll learn about a much easier way to execute these operations in our [CLI lesson](cli.md){:target="_blank"}. But for now, either of the methods above will produce the same result.
 
     <pre class="output">
-    ✅ ETL on data is complete!
+    ✅ Saved data!
     </pre>
 
     We should also see the data assets saved to our `data` directory:
 
     ```bash
     data/
-    ├── projects.json
-    └── tags.json
+    ├── projects.csv
+    └── tags.csv
     ```
 
     !!! question "Why save the raw data?"
             Why do we need to save our raw data? Why not just load it from the URL and save the downstream assets (labels, features, etc.)?
 
             ??? quote "Show answer"
-                We'll be using the raw data to generate labeled data and other downstream assets (ex. features). If the source of our raw data changes, then we'll no longer be able to produce our downstream assets. By saving it locally, we can always reproduce our results without any external dependencies.
+                We'll be using the raw data to generate labeled data and other downstream assets (ex. features). If the source of our raw data changes, then we'll no longer be able to produce our downstream assets. By saving it locally, we can always reproduce our results without any external dependencies. We'll also be executing [data validation](testing.md#data){:target="_blank"} checks on the raw data before applying transformations on it.
 
                 However, as our dataset grows, it may not scale to save the raw data or even labels or features. We'll talk about more scalable alternatives in our [versioning](versioning.md#operations){:target="_blank"} lesson where we aren't saving the physical data but the instructions to retrieve them from a specific point in time.
-
-### Transform
-
-??? quote "Label dataset"
-
-    We'll be defining all the functionality for transforming our data inside the `label_data()` function in `main.py`. We'll be loading the transformed data to a file at the end so that we don't have to rerun this operation every time we want to train a model.
-
-    ```python linenums="1" hl_lines="22-23"
-    from argparse import Namespace
-    import pandas as pd
-    from tagifai import data, utils
-
-    # tagifai/main.py
-    def label_data(args_fp):
-        """Label data with constraints."""
-        # Load projects
-        projects_fp = Path(config.DATA_DIR, "projects.json")
-        projects = utils.load_dict(filepath=project_fp)
-        df = pd.DataFrame(projects)
-
-        # Load tags
-        tags_dict = {}
-        tags_fp = Path(config.DATA_DIR, "tags.json")
-        for item in load_dict(filepath=tags_fp):
-            key = item.pop("tag")
-            tags_dict[key] = item
-
-        # Label with constrains
-        args = Namespace(**utils.load_dict(filepath=args_fp))
-        df = data.replace_oos_tags(df=df, labels=tags_dict.keys(), label_col="tag", oos_label="other")
-        df = data.replace_minority_tags(df=df, label_col="tag", min_freq=args.min_freq, new_label="other")
-
-        # Save clean labeled data
-        labeled_projects_fp = Path(config.DATA_DIR, "labeled_projects.json")
-        utils.save_dict(d=df.to_dict(orient="records"), fp=labeled_projects_fp)
-        print("✅ Saved labeled data!")
-    ```
-
-    Next, we need to define the two functions we're calling from `data.py`:
-
-    ```python linenums="1"
-    # tagifai/data.py
-    from collections import Counter
-
-    def replace_oos_labels(df, labels, label_col, oos_label="other"):
-        """Replace out of scope (oos) labels."""
-        oos_tags = [item for item in df[label_col].unique() if item not in labels]
-        df[label_col] = df[label_col].apply(lambda x: oos_label if x in oos_tags else x)
-        return df
-
-    def replace_minority_labels(df, label_col, min_freq, new_label="other"):
-        """Replace minority labels with another label."""
-        labels = Counter(df[label_col].values)
-        labels_above_freq = Counter(label for label in labels.elements() if (labels[label] >= min_freq))
-        df[label_col] = df[label_col].apply(lambda label: label if label in labels_above_freq else None)
-        df[label_col] = df[label_col].fillna(new_label)
-        return df
-    ```
-
-    Install required packages and add to `requirements.txt`:
-
-    ```bash
-    pip install pandas==1.3.5
-    ```
-
-    ```bash
-    # Add to requirements.txt
-    pandas==1.3.5
-    ```
-
-    Run the operation to label our dataset:
-
-    ```python linenums="1"
-    from config import config
-    from tagifai import main
-    args_fp = Path(config.CONFIG_DIR, "args.json")
-    main.label_data(args_fp=args_fp)
-    ```
-
-    <pre class="output">
-    ✅ Saved labeled data!
-    </pre>
 
 ### Preprocess
 
@@ -511,10 +424,17 @@ This way when the names of columns change or we want to replace with different l
 
     ```python linenums="1"
     # tagifai/data.py
-    def preprocess(df, lower, stem):
+    def preprocess(df, lower, stem, min_freq):
         """Preprocess the data."""
         df["text"] = df.title + " " + df.description  # feature engineering
         df.text = df.text.apply(clean_text, lower=lower, stem=stem)  # clean text
+        df = replace_oos_labels(
+            df=df, labels=config.ACCEPTED_TAGS, label_col="tag", oos_label="other"
+        )  # replace OOS labels
+        df = replace_minority_labels(
+            df=df, label_col="tag", min_freq=min_freq, new_label="other"
+        )  # replace labels below min freq
+
         return df
     ```
 
@@ -589,9 +509,26 @@ This way when the names of columns change or we want to replace with different l
     ]
     ```
 
-??? question "Why separate transform and preprocess?"
-    Why do we separate our transformation function and preprocessing function if they both involve manipulating the data?
+    Next, we need to define the two functions we're calling from `data.py`:
 
+    ```python linenums="1"
+    # tagifai/data.py
+    from collections import Counter
+
+    def replace_oos_labels(df, labels, label_col, oos_label="other"):
+        """Replace out of scope (oos) labels."""
+        oos_tags = [item for item in df[label_col].unique() if item not in labels]
+        df[label_col] = df[label_col].apply(lambda x: oos_label if x in oos_tags else x)
+        return df
+
+    def replace_minority_labels(df, label_col, min_freq, new_label="other"):
+        """Replace minority labels with another label."""
+        labels = Counter(df[label_col].values)
+        labels_above_freq = Counter(label for label in labels.elements() if (labels[label] >= min_freq))
+        df[label_col] = df[label_col].apply(lambda label: label if label in labels_above_freq else None)
+        df[label_col] = df[label_col].fillna(new_label)
+        return df
+    ```
 
 ### Encode
 
@@ -694,9 +631,7 @@ This way when the names of columns change or we want to replace with different l
     def train_model(args_fp):
         """Train a model given arguments."""
         # Load labeled data
-        projects_fp = Path(config.DATA_DIR, "labeled_projects.json")
-        projects = utils.load_dict(filepath=projects_fp)
-        df = pd.DataFrame(projects)
+        df = pd.read_csv(Path(config.DATA_DIR, "labeled_projects.csv"))
 
         # Train
         args = Namespace(**utils.load_dict(filepath=args_fp))
@@ -962,9 +897,7 @@ This way when the names of columns change or we want to replace with different l
     def optimize(study_name, num_trials):
         """Optimize hyperparameters."""
         # Load labeled data
-        projects_fp = Path(config.DATA_DIR, "labeled_projects.json")
-        projects = utils.load_dict(filepath=projects_fp)
-        df = pd.DataFrame(projects)
+        df = pd.read_csv(Path(config.DATA_DIR, "labeled_projects.csv"))
 
         # Optimize
         pruner = optuna.pruners.MedianPruner(n_startup_trials=5, n_warmup_steps=5)
@@ -1093,9 +1026,7 @@ This way when the names of columns change or we want to replace with different l
     def train_model(args_fp, experiment_name, run_name):
         """Train a model given arguments."""
         # Load labeled data
-        projects_fp = Path(config.DATA_DIR, "labeled_projects.json")
-        projects = utils.load_dict(filepath=projects_fp)
-        df = pd.DataFrame(projects)
+        df = pd.read_csv(Path(config.DATA_DIR, "labeled_projects.csv"))
 
         # Train
         args = Namespace(**utils.load_dict(filepath=args_fp))

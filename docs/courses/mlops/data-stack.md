@@ -65,7 +65,7 @@ Once we have our data sources and we know how often we want to extract data from
     <img width="500" src="/static/images/mlops/data-stack/pipelines.png" alt="ingestion pipelines">
 </div>
 
-> 🛠&nbsp; Popular tools: [Fivetran](https://www.fivetran.com/){:target="_blank"}, [Airbyte](https://airbyte.com/){:target="_blank"}, [Stitch](https://www.stitchdata.com/){:target="_blank"}, [Talend](https://www.talend.com/){:target="_blank"}, etc.
+> 🛠&nbsp; Popular tools: [Fivetran](https://www.fivetran.com/){:target="_blank"}, [Airbyte](https://airbyte.com/){:target="_blank"}, [Stitch](https://www.stitchdata.com/){:target="_blank"}, etc.
 
 ## Load
 
@@ -107,7 +107,7 @@ With the advent of cheap storage and cloud SaaS options to manage them, it's bec
 
 ## Transform
 
-Once we've extracted and loaded our data into, for example, a data warehouse, we'd normally need to transform the data so that it's compatible with standards. These transformations are different from the [preprocessing](preprocessing.md#transformations){:target="_blank"} we've seen before but are instead reflective of business logic that's agnostic to downstream applications. Common transformations include defining schemas and ensuring adherence (ex. [star schema](https://docs.microsoft.com/en-us/power-bi/guidance/star-schema){:target="_blank"}), filtering, cleaning and joining data across tables, etc. Additionally, many tools make it easy to transform the data directly inside our data warehouse and come with production functionality around version control, testing, documentation, etc.
+Once we've extracted and loaded our data into, for example, a data warehouse, we'd normally need to transform the data so that it's compatible with standards. These transformations are different from the [preprocessing](preprocessing.md#transformations){:target="_blank"} we've seen before but are instead reflective of business logic that's agnostic to downstream applications. Common transformations include defining schemas and ensuring adherence (ex. [star schema](https://docs.microsoft.com/en-us/power-bi/guidance/star-schema){:target="_blank"}), filtering, cleaning and joining data across tables, etc. Additionally, many tools make it easy to transform the data directly inside our data warehouse and come with production functionality around version control, testing, documentation, packaging, etc.
 
 <div class="ai-center-all">
     <img width="450" src="/static/images/mlops/data-stack/transform.png" alt="data transform">
@@ -123,7 +123,7 @@ Once we've extracted and loaded our data into, for example, a data warehouse, we
 Hopefully we created our data stack for the purpose of gaining some actionable insight about our business, users, etc. Because it's these use cases that dictate which sources of data we extract from, how often and how that data is stored and transformed. Downstream consumers of our data typically fall into one of these categories:
 
 - `#!js data analytics`: use cases focused on reporting trends, aggregate views, etc. via charts, dashboards, etc.for the purpose of providing operational insight for business stakeholders.
-> 🛠&nbsp; Popular tools: [Tableau](https://www.tableau.com/){:target="_blank"}, [Looker](https://www.looker.com/){:target="_blank"}, [Metabase](https://www.metabase.com/){:target="_blank"}, [Chartio](https://chartio.com/){:target="_blank"} (now Atlassian), etc.
+> 🛠&nbsp; Popular tools: [Tableau](https://www.tableau.com/){:target="_blank"}, [Looker](https://www.looker.com/){:target="_blank"}, [Metabase](https://www.metabase.com/){:target="_blank"}, [Superset](https://superset.apache.org/){:target="_blank"}, etc.
 - `#!js machine learning`: use cases centered around using the transformed data to construct predictive models (forecasting, personalization, etc.).
 
 !!! tip "Analytics first, then ML"
@@ -133,12 +133,12 @@ Hopefully we created our data stack for the purpose of gaining some actionable i
 
 When we create complex data workflows like this, observability becomes a top priority. Data observability is the general  concept of understanding the condition of data in our system and it involves:
 
-- `#!js data quality`: testing and monitoring our data's quality after every step (schemas, completeness, recency, etc.).
+- `#!js data quality`: testing and monitoring our [data quality](testing.md#data){:target="_blank"} after every step (schemas, completeness, recency, etc.).
 - `#!js data lineage`: mapping the where data comes from and how it's being transformed as it moves through our pipelines.
 - `#!js discoverability`: enabling discovery of the different data sources and features for downstream applications.
 - `#!js privacy + security`: are the different data assets treated and restricted appropriately amongst the consumers?
 
-> We'll learn how to incorporate many of these observability concepts into our Dataops workflow in our [orchestration lesson](orchestration.md){:target="_blank"}.
+> 🛠&nbsp; Popular tools: [Monte Carlo](https://www.montecarlodata.com/){:target="_blank"}, [Bigeye](https://www.bigeye.com/){:target="_blank"}, etc.
 
 ## Stack considerations
 

@@ -107,10 +107,21 @@ def set_seeds(seed=42):
     random.seed(seed)
 ```
 ```python linenums="1"
-def preprocess(df, lower, stem):
+def preprocess(df, lower, stem, min_freq):
     """Preprocess the data."""
     df["text"] = df.title + " " + df.description  # feature engineering
     df.text = df.text.apply(clean_text, lower=lower, stem=stem)  # clean text
+
+    # Replace OOS tags with `other`
+    oos_tags = [item for item in df.tag.unique() if item not in ACCEPTED_TAGS]
+    df.tag = df.tag.apply(lambda x: "other" if x in oos_tags else x)
+
+    # Replace tags below min_freq with `other`
+    tags_above_freq = Counter(tag for tag in tags.elements()
+                            if (tags[tag] >= min_freq))
+    df.tag = df.tag.apply(lambda tag: tag if tag in tags_above_freq else None)
+    df.tag = df.tag.fillna("other")
+
     return df
 ```
 ```python linenums="1"
@@ -143,11 +154,11 @@ df = df[: num_samples]  # None = all samples
 from sklearn.metrics import precision_recall_fscore_support
 ```
 ```python linenums="1"
-# Setup
+# Set up
 set_seeds()
-df = pd.DataFrame(json.load(open("labeled_projects.json", "r")))
+df = pd.read_csv("labeled_projects.csv")
 df = df.sample(frac=1).reset_index(drop=True)
-df = preprocess(df, lower=True, stem=False)
+df = preprocess(df, lower=True, stem=False, min_freq=min_freq)
 label_encoder = LabelEncoder().fit(df.tag)
 X_train, X_val, X_test, y_train, y_val, y_test = \
     get_data_splits(X=df.text.to_numpy(), y=label_encoder.encode(df.tag))
@@ -223,58 +234,29 @@ print (json.dumps(performance, indent=2))
 ```python linenums="1"
 # Setup
 set_seeds()
-df = pd.DataFrame(json.load(open("labeled_projects.json", "r")))
+df = pd.read_csv("labeled_projects.csv")
 df = df.sample(frac=1).reset_index(drop=True)
-df = preprocess(df, lower=True, stem=False)
+df = preprocess(df, lower=True, stem=False, min_freq=min_freq)
 label_encoder = LabelEncoder().fit(df.tag)
 X_train, X_val, X_test, y_train, y_val, y_test = \
     get_data_splits(X=df.text.to_numpy(), y=label_encoder.encode(df.tag))
 ```
 ```python linenums="1"
-# Restrict to relevant tags
-print (len(tags_dict))
-tags_dict = {tag: tags_dict[tag] for tag in label_encoder.classes if tag != "other"}
-print (len(tags_dict))
-```
-<pre class="output">
-4
-3
-</pre>
-
-```python linenums="1"
-# Map aliases
-aliases = {}
-for tag, values in tags_dict.items():
-    aliases[clean_text(tag)] = tag
-    for alias in values["aliases"]:
-        aliases[clean_text(alias)] = tag
-aliases
-```
-<pre class="output">
-{'computer vision': 'computer-vision',
- 'cv': 'computer-vision',
- 'mlops': 'mlops',
- 'natural language processing': 'natural-language-processing',
- 'nlp': 'natural-language-processing',
- 'nlproc': 'natural-language-processing',
- 'production': 'mlops',
- 'vision': 'computer-vision'}
-</pre>
-
-```python linenums="1"
-def get_tag(text, aliases, tags_dict):
+def get_tag(text, aliases_by_tag):
     """If a token matches an alias,
     then add the corresponding tag class."""
-    for alias, tag in aliases.items():
-        if alias in text:
+    for tag, aliases in aliases_by_tag.items():
+        if replace_dash(tag) in text:
             return tag
+        for alias in aliases:
+            if alias in text:
+                return tag
     return None
 ```
-
 ```python linenums="1"
 # Sample
 text = "A pretrained model hub for popular nlp models."
-get_tag(text=clean_text(text), aliases=aliases, tags_dict=tags_dict)
+get_tag(text=clean_text(text), aliases_by_tag=aliases_by_tag)
 ```
 <pre class="output">
 'natural-language-processing'
@@ -284,7 +266,7 @@ get_tag(text=clean_text(text), aliases=aliases, tags_dict=tags_dict)
 # Prediction
 tags = []
 for text in X_test:
-    tag = get_tag(text, aliases, tags_dict)
+    tag = get_tag(text, aliases_by_tag=aliases_by_tag)
     tags.append(tag)
 ```
 ```python linenums="1"
@@ -299,9 +281,9 @@ print (json.dumps(performance, indent=2))
 ```
 <pre class="output">
 {
-  "precision": 0.8322649572649572,
-  "recall": 0.16666666666666666,
-  "f1": 0.2766019343060607
+  "precision": 0.9097222222222222,
+  "recall": 0.18055555555555555,
+  "f1": 0.2919455654201417
 }
 </pre>
 
@@ -315,7 +297,7 @@ print (json.dumps(performance, indent=2))
 ```python linenums="1"
 # Pitfalls
 text = "Transfer learning with transformers for text classification."
-print (get_tag(text=clean_text(text), aliases=aliases, tags_dict=tags_dict))
+print (get_tag(text=clean_text(text), aliases_by_tag=aliases_by_tag))
 ```
 <pre class="output">
 None
@@ -367,9 +349,9 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 ```python linenums="1"
 # Setup
 set_seeds()
-df = pd.DataFrame(json.load(open("labeled_projects.json", "r")))
+df = pd.read_csv("labeled_projects.csv")
 df = df.sample(frac=1).reset_index(drop=True)
-df = preprocess(df, lower=True, stem=False)
+df = preprocess(df, lower=True, stem=False, min_freq=min_freq)
 label_encoder = LabelEncoder().fit(df.tag)
 X_train, X_val, X_test, y_train, y_val, y_test = \
     get_data_splits(X=df.text.to_numpy(), y=label_encoder.encode(df.tag))
@@ -575,7 +557,7 @@ y_prob = model.predict_proba(vectorizer.transform([text]))
  'other': 0.17248570271336786}
 </pre>
 
-We're going to create a custom predict function where if the majority class is not above a certain softmax score, then we predict the `other` class. In our [objectives](design.md#objective){:target="_blank"}, we decided that precision is really important for us and that we can leverage the labeling and QA workflows to improve the recall during subsequent manual inspection.
+We're going to create a custom predict function where if the majority class is not above a certain softmax score, then we predict the `other` class. In our [objectives](design.md#objectives){:target="_blank"}, we decided that precision is really important for us and that we can leverage the labeling and QA workflows to improve the recall during subsequent manual inspection.
 
 !!! warning
     Our models can suffer from overconfidence so applying this limitation may not be as effective as we'd imagine, especially for larger neural networks. See the [confident learning](evaluation.md#confident-learning){:target="_blank"} section of the [evaluation lesson](evaluation.md){:target="_blank"} for more information.

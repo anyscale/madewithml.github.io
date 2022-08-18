@@ -127,17 +127,14 @@ The first step is to establish connections with our data sources (databases, dat
 
 ```python linenums="1"
 import os
-import json
 import pandas as pd
-from pathlib import Path
-from urllib.request import urlopen
 ```
 
 ```python linenums="1"
-# Load projects
-url = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.json"
-projects = json.loads(urlopen(url).read())
-df = pd.DataFrame(projects)
+# Load labeled projects
+projects = pd.read_csv("https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.csv")
+tags = pd.read_csv("https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.csv")
+df = pd.merge(projects, tags, on="id")
 df["text"] = df.title + " " + df.description
 df.drop(["title", "description"], axis=1, inplace=True)
 df.head(5)

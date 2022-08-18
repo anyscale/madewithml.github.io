@@ -76,27 +76,141 @@ Regardless of whether we have a custom labeling platform or we choose a generali
     - auto-label entire or parts of a dataset using [weak supervision](#weak-supervision)
     - focus labeling efforts on long tail of edge cases over time
 
-## Labeling
+## Labeled data
 
-Based on our findings from [EDA](exploratory-data-analysis.md){:target="_blank"}, we're going to apply several constraints for labeling our data:
+For the purpose of this course, our data is already labeled, so we'll perform a basic version of ETL (extract, transform, load) to construct the labeled dataset.
 
-- if a data point has a tag that we currently don't support, we'll replace it with `other`
-- if a certain tag doesn't have *enough* samples, we'll replace it with `other`
+- [projects.csv](https://github.com/GokuMohandas/Made-With-ML/tree/main/datasets/projects.csv): projects with id, created time, title and description.
+- [tags.csv](https://github.com/GokuMohandas/Made-With-ML/tree/main/datasets/tags.csv): labels (tag category) for the projects by id.
+
+> Recall that our [objective](https://madewithml.com/courses/mlops/design#objectives) was to classify incoming content so that the community can discover them easily. These data assets will act as the training data for our first model.
+
+### Extract
+
+We'll start by extracting data from our sources (external CSV files). Traditionally, our data assets will be stored, versioned and updated in a database, warehouse, etc. We'll learn more about these different [data systems](data-stack.md){:target="_blank"} later, but for now, we'll load our data as a stand-alone CSV file.
 
 ```python linenums="1"
-# Out of scope (OOS) tags
-oos_tags = [item for item in df.tag.unique() if item not in tags_dict.keys()]
-oos_tags
+import pandas as pd
+```
+
+```python linenums="1"
+# Extract projects
+PROJECTS_URL = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.csv"
+projects = pd.read_csv(PROJECTS_URL)
+projects.head(5)
 ```
 <pre class="output">
-['reinforcement-learning', 'time-series']
+<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>created_on</th>
+      <th>title</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>2020-02-20 06:43:18</td>
+      <td>Comparison between YOLO and RCNN on real world...</td>
+      <td>Bringing theory to experiment is cool. We can ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>2020-02-20 06:47:21</td>
+      <td>Show, Infer &amp; Tell: Contextual Inference for C...</td>
+      <td>The beauty of the work lies in the way it arch...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>2020-02-24 16:24:45</td>
+      <td>Awesome Graph Classification</td>
+      <td>A collection of important graph embedding, cla...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15</td>
+      <td>2020-02-28 23:55:26</td>
+      <td>Awesome Monte Carlo Tree Search</td>
+      <td>A curated list of Monte Carlo tree search papers...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>19</td>
+      <td>2020-03-03 13:54:31</td>
+      <td>Diffusion to Vector</td>
+      <td>Reference implementation of Diffusion2Vec (Com...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
 </pre>
 
+We'll also load the labels (tag category) for our projects.
+
 ```python linenums="1"
-# Samples with OOS tags
-oos_indices = df[df.tag.isin(oos_tags)].index
-df[df.tag.isin(oos_tags)].head()
+# Extract tags
+TAGS_URL = "https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.csv"
+tags = pd.read_csv(TAGS_URL)
+tags.head(5)
 ```
+<pre class="output">
+<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>computer-vision</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>computer-vision</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>graph-learning</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15</td>
+      <td>reinforcement-learning</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>19</td>
+      <td>graph-learning</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</pre>
+
+### Transform
+
+Apply basic transformations to create our labeled dataset.
+
+```python linenums="1"
+# Join projects and tags
+df = pd.merge(projects, tags, on="id")
+df.head()
+```
+
 <pre class="output">
 <div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
 <table border="1" class="dataframe">
@@ -112,6 +226,30 @@ df[df.tag.isin(oos_tags)].head()
   </thead>
   <tbody>
     <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>2020-02-20 06:43:18</td>
+      <td>Comparison between YOLO and RCNN on real world...</td>
+      <td>Bringing theory to experiment is cool. We can ...</td>
+      <td>computer-vision</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>2020-02-20 06:47:21</td>
+      <td>Show, Infer &amp; Tell: Contextual Inference for C...</td>
+      <td>The beauty of the work lies in the way it arch...</td>
+      <td>computer-vision</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>2020-02-24 16:24:45</td>
+      <td>Awesome Graph Classification</td>
+      <td>A collection of important graph embedding, cla...</td>
+      <td>graph-learning</td>
+    </tr>
+    <tr>
       <th>3</th>
       <td>15</td>
       <td>2020-02-28 23:55:26</td>
@@ -120,36 +258,12 @@ df[df.tag.isin(oos_tags)].head()
       <td>reinforcement-learning</td>
     </tr>
     <tr>
-      <th>37</th>
-      <td>121</td>
-      <td>2020-03-24 04:56:38</td>
-      <td>Deep Reinforcement Learning in TensorFlow2</td>
-      <td>deep-rl-tf2 is a repository that implements a ...</td>
-      <td>reinforcement-learning</td>
-    </tr>
-    <tr>
-      <th>67</th>
-      <td>218</td>
-      <td>2020-04-06 11:29:57</td>
-      <td>Distributional RL using TensorFlow2</td>
-      <td>🐳 Implementation of various Distributional Rei...</td>
-      <td>reinforcement-learning</td>
-    </tr>
-    <tr>
-      <th>74</th>
-      <td>239</td>
-      <td>2020-04-06 18:39:48</td>
-      <td>Prophet: Forecasting At Scale</td>
-      <td>Tool for producing high quality forecasts for ...</td>
-      <td>time-series</td>
-    </tr>
-    <tr>
-      <th>95</th>
-      <td>277</td>
-      <td>2020-04-07 00:30:33</td>
-      <td>Curriculum for Reinforcement Learning</td>
-      <td>Curriculum learning applied to reinforcement l...</td>
-      <td>reinforcement-learning</td>
+      <th>4</th>
+      <td>19</td>
+      <td>2020-03-03 13:54:31</td>
+      <td>Diffusion to Vector</td>
+      <td>Reference implementation of Diffusion2Vec (Com...</td>
+      <td>graph-learning</td>
     </tr>
   </tbody>
 </table>
@@ -157,122 +271,16 @@ df[df.tag.isin(oos_tags)].head()
 </pre>
 
 ```python linenums="1"
-# Replace this tag with other
-df.tag = df.tag.apply(lambda x: "other" if x in oos_tags else x)
+df = df[df.tag.notnull()]  # remove projects with no tag
 ```
 
-```python linenums="1"
-# OOS samples should be "other"
-df.iloc[oos_indices].head()
-```
-<pre class="output">
-<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>created_on</th>
-      <th>title</th>
-      <th>description</th>
-      <th>tag</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3</th>
-      <td>15</td>
-      <td>2020-02-28 23:55:26</td>
-      <td>Awesome Monte Carlo Tree Search</td>
-      <td>A curated list of Monte Carlo tree search papers...</td>
-      <td>other</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>121</td>
-      <td>2020-03-24 04:56:38</td>
-      <td>Deep Reinforcement Learning in TensorFlow2</td>
-      <td>deep-rl-tf2 is a repository that implements a ...</td>
-      <td>other</td>
-    </tr>
-    <tr>
-      <th>67</th>
-      <td>218</td>
-      <td>2020-04-06 11:29:57</td>
-      <td>Distributional RL using TensorFlow2</td>
-      <td>🐳 Implementation of various Distributional Rei...</td>
-      <td>other</td>
-    </tr>
-    <tr>
-      <th>74</th>
-      <td>239</td>
-      <td>2020-04-06 18:39:48</td>
-      <td>Prophet: Forecasting At Scale</td>
-      <td>Tool for producing high quality forecasts for ...</td>
-      <td>other</td>
-    </tr>
-    <tr>
-      <th>95</th>
-      <td>277</td>
-      <td>2020-04-07 00:30:33</td>
-      <td>Curriculum for Reinforcement Learning</td>
-      <td>Curriculum learning applied to reinforcement l...</td>
-      <td>other</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</pre>
+### Load
 
-We're also going to restrict the mapping to only tags that are above a certain frequency threshold. The tags that don't have enough projects will not have enough samples to model their relationships.
+Finally, we'll load our transformed data locally so that we can use it for our machine learning application.
 
 ```python linenums="1"
-# Minimum frequency required for a tag
-min_freq = 75
-tags = Counter(df.tag.values)
-```
-
-```python linenums="1"
-# Tags that just made / missed the cut
-@widgets.interact(min_freq=(0, tags.most_common()[0][1]))
-def separate_tags_by_freq(min_freq=min_freq):
-    tags_above_freq = Counter(tag for tag in tags.elements()
-                                    if tags[tag] >= min_freq)
-    tags_below_freq = Counter(tag for tag in tags.elements()
-                                    if tags[tag] < min_freq)
-    print ("Most popular tags:\n", tags_above_freq.most_common(3))
-    print ("\nTags that just made the cut:\n", tags_above_freq.most_common()[-3:])
-    print ("\nTags that just missed the cut:\n", tags_below_freq.most_common(3))
-```
-<pre class="output">
-Most popular tags:
- [('natural-language-processing', 388), ('computer-vision', 356), ('other', 87)]
-
-Tags that just made the cut:
- [('computer-vision', 356), ('other', 87), ('mlops', 79)]
-
-Tags that just missed the cut:
- [('graph-learning', 45)]
-</pre>
-
-```python linenums="1"
-def filter(tag, include=[]):
-    """Determine if a given tag is to be included."""
-    if tag not in include:
-        tag = None
-    return tag
-```
-
-```python linenums="1"
-# Filter tags that have fewer than <min_freq> occurrences
-tags_above_freq = Counter(tag for tag in tags.elements()
-                          if (tags[tag] >= min_freq))
-df.tag = df.tag.apply(filter, include=list(tags_above_freq.keys()))
-```
-
-```python linenums="1"
-# Fill None with other
-df.tag = df.tag.fillna("other")
+# Save locally
+df.to_csv("labeled_projects.csv", index=False)
 ```
 
 ## Libraries

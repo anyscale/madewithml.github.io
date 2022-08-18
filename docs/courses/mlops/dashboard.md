@@ -54,12 +54,7 @@ from tagifai import main, utils
 
 ```python linenums="1"
 # Title
-st.title("TagIfAI · MLOps · Made With ML")
-
-# ToC
-st.markdown("🔢 [Data](#data)", unsafe_allow_html=True)
-st.markdown("📊 [Performance](#performance)", unsafe_allow_html=True)
-st.markdown("🚀 [Inference](#inference)", unsafe_allow_html=True)
+st.title("MLOps Course · Made With ML")
 
 # Sections
 st.header("🔢 Data")
@@ -79,9 +74,8 @@ We're going to keep our dashboard simple, so we'll just display the labeled proj
 
 ```python linenums="1"
 st.header("Data")
-projects_fp = Path(config.DATA_DIR, "labeled_projects.json")
-projects = utils.load_dict(filepath=projects_fp)
-df = pd.DataFrame(projects)
+projects_fp = Path(config.DATA_DIR, "labeled_projects.csv")
+df = pd.read_csv(projects_fp)
 st.text(f"Projects (count: {len(df)})")
 st.write(df)
 ```
@@ -139,10 +133,9 @@ Sometimes we may have views that involve computationally heavy operations, such 
 
 ```python linenums="1" hl_lines="1"
 @st.cache()
-def etl_data():
-    projects_fp = Path(config.DATA_DIR, "labeled_projects.json")
-    projects = utils.load_dict(filepath=projects_fp)
-    df = pd.DataFrame(projects)
+def load_data():
+    projects_fp = Path(config.DATA_DIR, "labeled_projects.csv")
+    df = pd.read_csv(projects_fp)
     return df
 ```
 
