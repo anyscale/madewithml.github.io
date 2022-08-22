@@ -93,10 +93,11 @@ nav:
       - Dashboard: courses/mlops/dashboard.md
       - CI/CD: courses/mlops/cicd.md
       - Monitoring: courses/mlops/monitoring.md
+      - Systems design: courses/mlops/systems-design.md
+    - ⎈ &nbsp; Data engineering:
       - Data stack: courses/mlops/data-stack.md
       - Orchestration: courses/mlops/orchestration.md
       - Feature store: courses/mlops/feature-store.md
-      - Systems design: courses/mlops/systems-design.md
   # - Blog: coming-soon.md
   # - Community: https://community.madewithml.com/
   - Subscribe: https://newsletter.madewithml.com/
@@ -176,7 +177,7 @@ plugins:
             "subscribe": "https://newsletter.madewithml.com/"
             "topics": "index.md"
             "pivot": "index.md"
-            "courses/basics.md": "courses/foundations"
+            "courses/basics.md": "courses/foundations.md"
             "courses/putting-ml-in-production.md": "index.md"
             "courses/applied-ml.md": "index.md"
             "courses/mlops/infrastructure.md": "courses/mlops/systems-design.md"

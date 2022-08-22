@@ -152,8 +152,7 @@ tagifai/
 
 We'll define these core operations inside `main.py` as we move code from notebooks to the appropriate scripts [below](#project):
 
-- `#!js etl_data`: extract data from a URL to local drive.
-- `#!js label_data`: label data using constraints.
+- `#!js elt_data`: extract, load and transform data.
 - `#!js optimize`: tune hyperparameters to optimize for objective.
 - `#!js train_model`: train a model using best parameters from optimization study.
 - `#!js load_artifacts`: load trained artifacts from a given run.
@@ -341,19 +340,17 @@ This way when the names of columns change or we want to replace with different l
 
     warnings.filterwarnings("ignore")
 
-    def etl_data():
+    def elt_data():
         """Extract, load and transform our data assets."""
-        # Extract
+        # Extract + Load
         projects = pd.read_csv(config.PROJECTS_URL)
         tags = pd.read_csv(config.TAGS_URL)
+        projects.to_csv(Path(config.DATA_DIR, "projects.csv"), index=False)
+        tags.to_csv(Path(config.DATA_DIR, "tags.csv"), index=False)
 
         # Transform
         df = pd.merge(projects, tags, on="id")
         df = df[df.tag.notnull()]  # drop rows w/ no tag
-
-        # Load
-        projects.to_csv(Path(config.DATA_DIR, "projects.csv"), index=False)
-        tags.to_csv(Path(config.DATA_DIR, "tags.csv"), index=False)
         df.to_csv(Path(config.DATA_DIR, "labeled_projects.csv"), index=False)
 
         logger.info("✅ Saved data!")
@@ -374,13 +371,13 @@ This way when the names of columns change or we want to replace with different l
 
     > We can fetch the exact version of the packages we used in our notebook by running `#!bash pip freeze` in a code cell.
 
-    Though we're not using the NumPy package for this `etl_data()` operation, our Python interpreter will still require it because we invoke the `utils.py` script with the line `#!python from tagifai import utils`, which does use NumPy in its header. So if we don't install the package in our virtual environment, we'll receive an error.
+    Though we're not using the NumPy package for this `elt_data()` operation, our Python interpreter will still require it because we invoke the `utils.py` script with the line `#!python from tagifai import utils`, which does use NumPy in its header. So if we don't install the package in our virtual environment, we'll receive an error.
 
     We'll run the operation using the Python interpreter via the terminal (type `python` in the terminal and types the commands below).
 
     ```python linenums="1"
     from tagifai import main
-    main.etl_data()
+    main.elt_data()
     ```
 
     We could also call this operation directly through the `main.py` script but we'll have to change it every time we want to run a new operation.
@@ -388,7 +385,7 @@ This way when the names of columns change or we want to replace with different l
     ```python linenums="1"
     # tagifai/main.py
     if __name__ == "__main__":
-        etl_data()
+        elt_data()
     ```
     ```bash
     python tagifai/main.py

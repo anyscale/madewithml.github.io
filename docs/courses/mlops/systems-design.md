@@ -74,6 +74,8 @@ We also have control over the features that we use to generate our real-time pre
 
 Our use case doesn't necessarily involve entity features changing over time so it makes sense to just have one processing pipeline. However, not all entities in ML applications work this way. Using our content recommendation example, a given user can have certain features that are updated over time, such as favorite genres, click rate, etc. As we'll see below, we have the option to batch process features for users at a previous time or we could process features in a stream as they become available and use them to make relevant predictions.
 
+> Learn more about the different data systems mentioned below in our comprehensive [data stack lesson](data-stack.md){:target="_blank"} and how to responsibly deliver high quality data in our [orchestration lesson](orchestration.md){:target="_blank}.
+
 ### Batch processing
 
 Batch process features for a given entity at a previous point in time, which are later used for generating real-time predictions.
@@ -170,11 +172,6 @@ Serverless options such as [AWS Lambda](https://aws.amazon.com/lambda/){:target=
 - **Cons**: size limits on function storage, payload, etc. based on provider and usually no accelerators (GPU, TPU, etc.)
 
 > Be sure to explore the [CI/CD workflows](cicd.md#serving){:target="_blank"} that accompany many of these deployment and serving options so you can have a continuous training, validation and serving process.
-
-## Resources
-
-- [Batch is a special case of streaming](https://www.ververica.com/blog/batch-is-a-special-case-of-streaming){:target="_blank"}
-- [Machine learning is going real-time](https://huyenchip.com/2020/12/27/real-time-machine-learning.html){:target="_blank"}
 
 <!-- Citation -->
 {% include "cite.md" %}

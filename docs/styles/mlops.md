@@ -57,10 +57,13 @@
     <li><a href="/courses/mlops/dashboard/">Dashboard</a></li>
     <li><a href="/courses/mlops/cicd/">CI/CD</a></li>
     <li><a href="/courses/mlops/monitoring/">Monitoring</a></li>
+    <li><a href="/courses/mlops/systems-design/">Systems design</a></li>
+    </ul>
+    <b><span class="mr-1">⎈</span> Data engineering</b>
+    <ul>
     <li><a href="/courses/mlops/data-stack/">Data stack</a></li>
     <li><a href="/courses/mlops/orchestration/">Orchestration</a></li>
     <li><a href="/courses/mlops/feature-store/">Feature store</a></li>
-    <li><a href="/courses/mlops/systems-design/">Systems design</a></li>
     </ul>
 </div>
 </div>

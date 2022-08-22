@@ -61,7 +61,7 @@ airflow/
 └── webserver_config.py
 ```
 
-We're going to edit the [airflow.cfg](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/airflow.cfg){:target="_blank"} file to best fit our needs:
+We're going to edit the [airflow.cfg](https://github.com/GokuMohandas/data-engineering/blob/main/airflow/airflow.cfg){:target="_blank"} file to best fit our needs:
 ```bash
 # Inside airflow.cfg
 enable_xcom_pickling = True  # needed for Great Expectations airflow provider
@@ -128,7 +128,7 @@ Workflows are defined by directed acyclic graphs (DAGs), whose nodes represent t
     <img src="/static/images/mlops/orchestration/basic_dag.png" width="250" alt="basic DAG">
 </div>
 
-DAGs can be defined inside Python workflow scripts inside the `airflow/dags` directory and they'll automatically appear (and continuously be updated) on the webserver. Before we start creating our DataOps and MLOps workflows, we'll learn about Airflow's concepts via an example DAG outlined in [airflow/dags/example.py](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/dags/example.py){:target="_blank"}. Execute the following commands in a new (3rd) terminal window:
+DAGs can be defined inside Python workflow scripts inside the `airflow/dags` directory and they'll automatically appear (and continuously be updated) on the webserver. Before we start creating our DataOps and MLOps workflows, we'll learn about Airflow's concepts via an example DAG outlined in [airflow/dags/example.py](https://github.com/GokuMohandas/data-engineering/blob/main/airflow/dags/example.py){:target="_blank"}. Execute the following commands in a new (3rd) terminal window:
 
 ```bash
 mkdir airflow/dags
@@ -335,7 +335,7 @@ example2_dag = example_2()
 If we refresh our webserver page ([http://localhost:8080/](http://localhost:8080/){:target="_blank"}), the new DAG will have appeared.
 
 ### Manual
-Our DAG is initially paused since we specified `dags_are_paused_at_creation = True` inside our [airflow.cfg](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/airflow.cfg){:target="_blank"} configuration, so we'll have to manually execute this DAG by clicking on it > unpausing it (toggle) > triggering it (button). To view the logs for any of the tasks in our DAG run, we can click on the task > Log.
+Our DAG is initially paused since we specified `dags_are_paused_at_creation = True` inside our [airflow.cfg](https://github.com/GokuMohandas/data-engineering/blob/main/airflow/airflow.cfg){:target="_blank"} configuration, so we'll have to manually execute this DAG by clicking on it > unpausing it (toggle) > triggering it (button). To view the logs for any of the tasks in our DAG run, we can click on the task > Log.
 
 <div class="ai-center-all">
     <img src="/static/images/mlops/orchestration/trigger.png" width="700" alt="triggering a DAG">
@@ -401,7 +401,7 @@ Now that we've reviewed Airflow's major concepts, we're ready to create the Data
 </div>
 
 !!! note
-    We'll be breaking apart our `etl_data()` function from our `tagifai/main.py` script so that we can show what the proper data validation tasks look like in production workflows.
+    We'll be breaking apart our `elt_data()` function from our `tagifai/main.py` script so that we can show what the proper data validation tasks look like in production workflows.
 
 ```bash
 touch airflow/dags/workflows.py
@@ -533,7 +533,7 @@ validate_tags = GreatExpectationsOperator(
 And we want both tasks to pass so we set the `fail_task_on_validation_failure` parameter to `True` so that downstream tasks don't execute if either fail.
 
 !!! note
-    Reminder that we previously set the following configuration in our [airflow.cfg](https://github.com/GokuMohandas/mlops-course/blob/main/airflow/airflow.cfg){:target="_blank"} file since the output of the GreatExpectationsOperator is not JSON serializable.
+    Reminder that we previously set the following configuration in our [airflow.cfg](https://github.com/GokuMohandas/data-engineering/blob/main/airflow/airflow.cfg){:target="_blank"} file since the output of the GreatExpectationsOperator is not JSON serializable.
     ```bash
     # Inside airflow.cfg
     enable_xcom_pickling = True
@@ -622,7 +622,7 @@ def mlops():
 
 ### Prepare
 
-Before kicking off any experimentation, there may be task specific data preparation that may need to happen. This is different from the data transformation during the DataOps workflow because these global transformations are specific to this task. In our case, we incorporate additional labeling constraints to simplify our classification task:
+First, we'll need to extract our data that was prepared in the DataOps workflows.
 
 ```python linenums="1"
 prepare = PythonOperator(
@@ -631,14 +631,13 @@ prepare = PythonOperator(
     op_kwargs={"args_fp": Path(config.CONFIG_DIR, "args.json")},
 )
 ```
-
-And similarly to some of the DataOps tasks, we'll validate any changes we applied to our data:
+Note that we're one on many potential downstream consumers of the prepared data so we'll want to execute further validation to ensure that the data is appropriate for our application.
 
 ```python linenums="1"
 validate_prepared_data = GreatExpectationsOperator(
-        task_id="validate_prepared_data",
+        task_id="validate_labeled_data",
         checkpoint_name="labeled_projects",
-        data_context_root_dir="tests/great_expectations",
+        data_context_root_dir=GE_ROOT_DIR,
         fail_task_on_validation_failure=True,
     )
 ```
