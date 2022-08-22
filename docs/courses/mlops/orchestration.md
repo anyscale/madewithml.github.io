@@ -8,7 +8,10 @@ repository: https://github.com/GokuMohandas/mlops-course
 ---
 
 {% include "styles/lesson.md" %}
-`
+
+!!! danger
+    I'm currently making major changes to this lesson, I'll announce all the updates on [Twitter](https://twitter.com/GokuMohandas){:target="_blank"} and [LinkedIn](https://linkedin.com/in/goku){:target="_blank"} in a few days!
+
 ## Intuition
 
 So far we've implemented our DataOps (ETL, preprocessing, validation, etc.) and MLOps (optimization, training, evaluation, etc.) workflows as Python function calls. This has worked well since our dataset is static and small. But happens when we need to:

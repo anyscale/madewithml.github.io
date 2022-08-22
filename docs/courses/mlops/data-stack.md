@@ -10,6 +10,11 @@ notebook: https://github.com/GokuMohandas/data-engineering/blob/main/extract_fro
 
 {% include "styles/lesson.md" %}
 
+!!! danger
+    I'm currently making major changes to this lesson, I'll announce all the updates on [Twitter](https://twitter.com/GokuMohandas){:target="_blank"} and [LinkedIn](https://linkedin.com/in/goku){:target="_blank"} in a few days!
+
+## Intuition
+
 Before we continue to learn about advanced production ML topics, we need to take a step back and understand the flow of data. It's very important that we have a way to produce high quality data and to do so in a reproducible and scalable manner. In this lesson, we're going to learn about the fundamentals of data engineering and how to construct a modern data stack that can scale and provide high quality data for our applications.
 
 > In this lesson, we'll learn how to set up and use the data stack with user interfaces (UI) but in our [orchestration lesson](orchestration.md){:target="_blank"}, we'll learn how to execute everything programmatically (Python + bash). View the :fontawesome-brands-github:{ .github } [data-engineering](https://github.com/GokuMohandas/data-engineering){:target="_blank"} repository for all the code.
