@@ -90,11 +90,11 @@ cd ../
 ```bash
 tests/
 └── code/
-|   ├── test_data.py
-|   ├── test_evaluate.py
-|   ├── test_main.py
-|   ├── test_predict.py
-|   └── test_utils.py
+│   ├── test_data.py
+│   ├── test_evaluate.py
+│   ├── test_main.py
+│   ├── test_predict.py
+│   └── test_utils.py
 ```
 
 Feel free to write the tests and organize them in these scripts *after* learning about all the concepts in this lesson. We suggest using our [`tests`](https://github.com/GokuMohandas/mlops-course/tree/main/tests){:target="_blank"} directory on GitHub as a reference.
@@ -856,18 +856,20 @@ So far we've worked with the Great Expectations library at the adhoc script / no
 cd tests
 great_expectations init
 ```
-This will interactively walk us through setting up data sources, naming, etc. and set up a `tests/great_expectations`]directory with the following structure:
+This will set up a `tests/great_expectations` directory with the following structure:
 ```bash
 tests/great_expectations/
-|   ├── checkpoints/
-|   ├── expectations/
-|   ├── plugins/
-|   ├── uncommitted/
-|   ├── .gitignore
-|   └── great_expectations.yml
+├── checkpoints/
+├── expectations/
+├── plugins/
+├── uncommitted/
+├── .gitignore
+└── great_expectations.yml
 ```
 
 #### Data source
+
+The first step is to establish our `datasource` which tells Great Expectations where our data lives:
 
 ```bash
 great_expectations datasource new
@@ -994,10 +996,10 @@ All of these expectations have been saved under `great_expectations/expectations
 
 ```bash
 great_expectations/
-|   ├── expectations/
-|   |   ├── labeled_projects.csv
-|   |   ├── projects.csv
-|   |   └── tags.csv
+├── expectations/
+│   ├── labeled_projects.csv
+│   ├── projects.csv
+│   └── tags.csv
 ```
 
 And we can also list the suites with:
@@ -1095,7 +1097,7 @@ The advantage of using a library such as great expectations, as opposed to isola
 Many of these expectations will be executed when the data is extracted, loaded and transformed during our [DataOps workflows](orchestration.md#dataops){:target="_blank"}. Typically, the data will be extracted from a source ([database](data-stack.md#database){:target="_blank"}, [API](api.md){:target="_blank"}, etc.) and loaded into a data system (ex. [data warehouse](data-stack.md#data-warehouse){:target="_blank"}) before being transformed there (ex. using [dbt](https://www.getdbt.com/){:target="_blank"}) for downstream applications. Throughout these tasks, Great Expectations checkpoint validations can be run to ensure the validity of the data and the changes applied to it. We'll see a simplified version of when data validation should occur in our data workflows in the [orchestration lesson](orchestration.md#dataops){:target="_blank"}.
 
 <div class="ai-center-all">
-    <img width="650" src="/static/images/mlops/testing/production.png" alt="ETL pipelines in production">
+    <img width="650" src="/static/images/mlops/testing/production.png" alt="ELT pipelines in production">
 </div>
 
 > Learn more about different data systems in our [data stack lesson](data-stack.md){:target="_blank"} if you're not familiar with them.

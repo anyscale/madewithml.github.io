@@ -10,9 +10,6 @@ notebook: https://github.com/GokuMohandas/data-engineering/blob/main/extract_fro
 
 {% include "styles/lesson.md" %}
 
-!!! danger
-    I'm currently making major changes to this lesson, I'll announce all the updates on [Twitter](https://twitter.com/GokuMohandas){:target="_blank"} and [LinkedIn](https://linkedin.com/in/goku){:target="_blank"} in a few days!
-
 ## Intuition
 
 Before we continue to learn about advanced production ML topics, we need to take a step back and understand the flow of data. It's very important that we have a way to produce high quality data and to do so in a reproducible and scalable manner. In this lesson, we're going to learn about the fundamentals of data engineering and how to construct a modern data stack that can scale and provide high quality data for our applications.
@@ -154,7 +151,7 @@ Location: No organization
 
 ```bash
 # Google BigQuery projects
-├── made-with-ml-359923   👈 our project
+├── made-with-ml-XXXXXX   👈 our project
 ├── bigquery-publicdata
 ├── imjasonh-storage
 └── nyc-tlc
@@ -165,14 +162,14 @@ Location: No organization
 
 #### Define BigQuery destination in Airbyte
 
-Next, we need to establish the connection between Airbyte and BigQuery so that we can load the extracted data to the destination. In order to authenticate our access to BigQuery with Airbyte, we'll need to create a service account and generate a secret key. This is basically creating an identity with certain access that we can use for verification. Follow these [instructions](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#iam-service-account-keys-create-console){:target="_blank"} to create a service and generate the key file (JSON). Note down the location of this file because we'll be using it throughout this lesson. For example ours is `/Users/goku/Downloads/made-with-ml-xxxxxx-xxxxxxxxxxxx.json`.
+Next, we need to establish the connection between Airbyte and BigQuery so that we can load the extracted data to the destination. In order to authenticate our access to BigQuery with Airbyte, we'll need to create a service account and generate a secret key. This is basically creating an identity with certain access that we can use for verification. Follow these [instructions](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#iam-service-account-keys-create-console){:target="_blank"} to create a service and generate the key file (JSON). Note down the location of this file because we'll be using it throughout this lesson. For example ours is `/Users/goku/Downloads/made-with-ml-XXXXXX-XXXXXXXXXXXX.json`.
 
 1. On our [Airbyte UI](http://localhost:8000/){:target="_blank"}, click on `Destinations` on the left menu. Then click the `+ New destination` button on the top right corner.
 2. Click on the `Destination type` dropdown and choose `BigQuery`. This will open a view to define our file data source.
 ```yaml
 Name: BigQuery
 Default Dataset ID: mlops_course  # where our data will go inside our BigQuery project
-Project ID: made-with-ml-359923  # REPLACE this with your Google BiqQuery Project ID
+Project ID: made-with-ml-XXXXXX  # REPLACE this with your Google BiqQuery Project ID
 Credentials JSON: SERVICE-ACCOUNT-KEY.json  # REPLACE this with your service account JSON location
 Dataset location: US  # select US or EU, all other options will not be compatible with dbt later
 ```
@@ -233,7 +230,7 @@ Our replication frequency is `Manual` because we'll trigger the data syncs ourse
 
 ```bash
 # Inside our data warehouse
-made-with-ml-359923               - Project
+made-with-ml-XXXXXX               - Project
 └── mlops_course                  - Dataset
 │   ├── _airbyte_raw_projects     - table
 │   ├── _airbyte_raw_tags         - table
@@ -249,7 +246,7 @@ We can easily explore and query this data using SQL directly inside our warehous
 2. Run the following SQL statement and view the data:
 ```sql linenums="1"
 SELECT *
-FROM `made-with-ml-359923.mlops_course.projects`
+FROM `made-with-ml-XXXXXX.mlops_course.projects`
 LIMIT 1000
 ```
 <pre class="output">
@@ -369,8 +366,8 @@ Inside our `models/labeled_projects/labeled_projects.sql` file we'll create a vi
 ```sql linenums="1"
 -- models/labeled_projects/labeled_projects.sql
 SELECT p.id, created_on, title, description, tag
-FROM `made-with-ml-359923.mlops_course.projects` p
-LEFT JOIN `made-with-ml-359923.mlops_course.tags` t
+FROM `made-with-ml-XXXXXX.mlops_course.projects` p  -- REPLACE
+LEFT JOIN `made-with-ml-XXXXXX.mlops_course.tags` t  -- REPLACE
 ON p.id = t.id
 ```
 
@@ -381,7 +378,7 @@ We can view the queried results by clicking the `Preview` button and view the da
 Inside our `models/labeled_projects/schema.yml` file we'll define the schemas for each of the features in our transformed data. We also define several tests that each feature should pass. View the full list of [dbt tests](https://docs.getdbt.com/docs/building-a-dbt-project/tests){:target="_blank"} but note that we'll use [Great Expectations](https://madewithml.com/courses/mlops/testing/#expectations){:target="_blank"} for more comprehensive tests when we orchestrate all these data workflows in our [orchestration lesson](orchestration.md){:target="_blank"}.
 
 
-```yml
+```yaml linenums="1"
 # models/labeled_projects/schema.yml
 
 version: 2
@@ -423,7 +420,7 @@ Once these commands run successfully, we're ready to move our transformations to
 
 ### Jobs
 
-In order to apply these transformations to the data in our data warehouse, it's best practice to create an `Environment` and then define `Jobs`:
+In order to apply these transformations to the data in our data warehouse, it's best practice to create an [Environment](https://docs.getdbt.com/guides/legacy/managing-environments){:target="_blank"} and then define [Jobs](https://docs.getdbt.com/guides/getting-started/building-your-first-project/schedule-a-job){:target="_blank"}:
 
 1. Click `Environments` on the left menu > `New Environment` button (top right corner) and fill out the details:
 ```yaml
@@ -444,7 +441,7 @@ Schedule: uncheck "RUN ON SCHEDULE"
 
 ```bash
 # Inside our data warehouse
-made-with-ml-359923               - Project
+made-with-ml-XXXXXX               - Project
 └── mlops_course                  - Dataset
 │   ├── _airbyte_raw_projects     - table
 │   ├── _airbyte_raw_tags         - table
@@ -456,7 +453,7 @@ made-with-ml-359923               - Project
 > There is so much more to dbt so be sure to check out their [official documentation](https://docs.getdbt.com/docs/building-a-dbt-project/documentation){:target="_blank"} to really customize any workflows. And be sure to check out our [orchestration lesson](orchestration.md){:target="_blank"} where we'll programmatically create and execute our dbt transformations.
 
 
-## Application
+## Applications
 
 Hopefully we created our data stack for the purpose of gaining some actionable insight about our business, users, etc. Because it's these use cases that dictate which sources of data we extract from, how often and how that data is stored and transformed. Downstream applications of our data typically fall into one of these categories:
 

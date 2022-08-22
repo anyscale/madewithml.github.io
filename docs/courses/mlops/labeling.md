@@ -78,12 +78,14 @@ Regardless of whether we have a custom labeling platform or we choose a generali
 
 ## Labeled data
 
-For the purpose of this course, our data is already labeled, so we'll perform a basic version of ETL (extract, transform, load) to construct the labeled dataset.
+For the purpose of this course, our data is already labeled, so we'll perform a basic version of ELT (extract, load, transform) to construct the labeled dataset.
+
+> In our [data-stack](data-stack.md){:target="_blank"} and [orchestration](orchestration.md){:target="_blank"} lessons, we'll construct a modern data stack and programmatically deliver high quality data via DataOps workflows.
 
 - [projects.csv](https://github.com/GokuMohandas/Made-With-ML/tree/main/datasets/projects.csv): projects with id, created time, title and description.
 - [tags.csv](https://github.com/GokuMohandas/Made-With-ML/tree/main/datasets/tags.csv): labels (tag category) for the projects by id.
 
-> Recall that our [objective](https://madewithml.com/courses/mlops/design#objectives) was to classify incoming content so that the community can discover them easily. These data assets will act as the training data for our first model.
+Recall that our [objective](https://madewithml.com/courses/mlops/design#objectives) was to classify incoming content so that the community can discover them easily. These data assets will act as the training data for our first model.
 
 ### Extract
 

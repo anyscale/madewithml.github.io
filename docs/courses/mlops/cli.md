@@ -104,7 +104,7 @@ Options:
   --help       Show this message and exit.
 
 Commands:
-  etl-data     Extract, transform and load data.
+  elt-data     Extract, load and transform data.
   label-data   Label data using constraints.
   optimize     Optimize hyperparameters.
   predict-tag  Predict tag for text.
