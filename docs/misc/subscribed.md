@@ -14,7 +14,7 @@ You're all set!
 
 - start the lessons on [Made With ML](https://madewithml.com/){:target="_blank"}
 - check out the [:fontawesome-brands-github:{ .github } GitHub repository](https://github.com/GokuMohandas){:target="_blank"} for all the code
-- follow on [:fontawesome-brands-twitter:{ .twitter } Twitter](https://twitter.com/GokuMohandas){:target="_blank"}, [:fontawesome-brands-linkedin:{ .linkedin } LinkedIn](https://www.linkedin.com/in/goku){:target="_blank"} and [:fontawesome-brands-youtube:{ .youtube } Youtube](https://www.youtube.com/c/MadeWithML){:target="_blank"}
+- connect on [:fontawesome-brands-twitter:{ .twitter } Twitter](https://twitter.com/GokuMohandas){:target="_blank"}, [:fontawesome-brands-linkedin:{ .linkedin } LinkedIn](https://www.linkedin.com/in/goku){:target="_blank"} and [:fontawesome-brands-youtube:{ .youtube } Youtube](https://www.youtube.com/c/MadeWithML){:target="_blank"}
 
 **2. Say hello**
 
