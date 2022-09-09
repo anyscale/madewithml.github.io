@@ -98,9 +98,7 @@ nav:
       - Data stack: courses/mlops/data-stack.md
       - Orchestration: courses/mlops/orchestration.md
       - Feature store: courses/mlops/feature-store.md
-  # - Blog: coming-soon.md
   # - Community: https://community.madewithml.com/
-  - Subscribe: https://newsletter.madewithml.com/
 
 
 # Configuration
@@ -174,7 +172,6 @@ plugins:
   - macros
   - redirects:
         redirect_maps:
-            "subscribe": "https://newsletter.madewithml.com/"
             "topics": "index.md"
             "pivot": "index.md"
             "courses/basics.md": "courses/foundations.md"

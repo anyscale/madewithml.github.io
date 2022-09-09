@@ -445,14 +445,14 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <hr id="lessons" style="margin-top: 2rem; margin-bottom: 2rem;">
 
 ## Foundations
-> Learn the foundations of machine learning through intuitive explanations, clean code and visualizations. &rarr; [GokuMohandas/Made-With-ML](https://github.com/GokuMohandas/Made-With-ML){:target="_blank"}
+> Learn the foundations of machine learning through intuitive explanations, clean code and visualizations. &rarr; :fontawesome-brands-github:{ .github } [GokuMohandas/Made-With-ML](https://github.com/GokuMohandas/Made-With-ML){:target="_blank"}
 
 {% include "styles/foundations.md" %}
 
 <hr>
 
 ## MLOps
-> Learn how to apply ML to build a production grade product and deliver value. &rarr; [GokuMohandas/Made-With-ML](https://github.com/GokuMohandas/Made-With-ML){:target="_blank"}
+> Learn how to combine machine learning with software engineering to build production-grade applications. &rarr; :fontawesome-brands-github:{ .github } [GokuMohandas/Made-With-ML](https://github.com/GokuMohandas/Made-With-ML){:target="_blank"}
 
 {% include "styles/mlops.md" %}
 

@@ -791,3 +791,6 @@ We'll often notice that monitoring solutions are offered as part of the larger d
 - [Monitoring and explainability of models in production](https://arxiv.org/abs/2007.06299){:target="_blank"}
 - [Detecting and Correcting for Label Shift with Black Box Predictors](https://arxiv.org/abs/1802.03916){:target="_blank"}
 - [Outlier and anomaly pattern detection on data streams](https://link.springer.com/article/10.1007/s11227-018-2674-1){:target="_blank"}
+
+<!-- Citation -->
+{% include "styles/cite.md" %}

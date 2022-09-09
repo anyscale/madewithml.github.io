@@ -94,9 +94,5 @@ Looks like the `title` text feature has some good signal for the respective clas
 
 > All of the work we've done so far are inside IPython notebooks but in our [dashboard lesson](dashboard.md){:target="_blank"}, we'll transfer all of this into an interactive dashboard using [Streamlit](https://streamlit.io/){:target="_blank"}.
 
-## Resources
-- [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/){:target="_blank"}
-- [Data Viz](https://armsp.github.io/covidviz/){:target="_blank"}
-
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

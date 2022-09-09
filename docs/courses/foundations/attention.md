@@ -1150,3 +1150,6 @@ We can also use attention within the encoded input sequence to create a weighted
 </div>
 
 In the [next lesson](transformers.md), we'll implement Transformers that leverage self-attention to create contextual representations of our inputs for downstream applications.
+
+<!-- Citation -->
+{% include "styles/cite.md" %}

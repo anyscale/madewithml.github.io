@@ -105,9 +105,3 @@ function loadVisibleTermynals() {
 window.addEventListener("scroll", loadVisibleTermynals);
 createTermynals();
 loadVisibleTermynals();
-
-// AOS scroll animation
-AOS.init({
-  duration: 900,
-  once: true
-})

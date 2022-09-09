@@ -722,4 +722,4 @@ An effective way to evaluate our systems is to encapsulate them as a collection 
 - [Model Patching: Closing the Subgroup Performance Gap with Data Augmentation](https://arxiv.org//2008.06775){:target="_blank"}
 
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

@@ -44,6 +44,10 @@
               <a href="https://github.com/gokumohandas" target="_blank">
                 <span class="twemoji github">
                   {% include ".icons/fontawesome/brands/github.svg" %}
+                </span></a> &middot;
+              <a href="https://www.youtube.com/c/MadeWithML" target="_blank">
+                <span class="twemoji youtube">
+                  {% include ".icons/fontawesome/brands/youtube.svg" %}
                 </span></a>
             </div>
           </div>
@@ -68,8 +72,8 @@
     {% endif %}
     {% if page and page.meta.video %}
       <span> · </span>
-      <span class="twemoji">
-        {% include ".icons/octicons/device-camera-video-24.svg" %}
+      <span class="twemoji youtube">
+        {% include ".icons/fontawesome/brands/youtube.svg" %}
       </span>
       <a href="{{ page.meta.video }}" target="_blank">Video</a>
     {% endif %}

@@ -862,9 +862,5 @@ Besides wrapping our models as separate, scalable microservices, we can also hav
 
 > Model servers are experiencing a lot of adoption for their ability to standardize the model deployment and serving processes across the team -- enabling seamless upgrades, validation and integration.
 
-## Resources
-
-- [FastAPI advanced documentation](https://fastapi.tiangolo.com/advanced/){:target="_blank"}
-
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

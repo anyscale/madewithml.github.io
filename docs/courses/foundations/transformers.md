@@ -1051,3 +1051,6 @@ head_view(attention=attn, tokens=tokens)
 </div>
 
 Now we're ready to start the [MLOps course](https://madewithml.com/#mlops){:target="_blank"} to learn how to apply all this foundational modeling knowledge to responsibly deliver value.
+
+<!-- Citation -->
+{% include "styles/cite.md" %}

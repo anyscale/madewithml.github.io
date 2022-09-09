@@ -86,4 +86,4 @@ These are the basic concepts we'll need to use these notebooks but we'll learn f
 
 
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

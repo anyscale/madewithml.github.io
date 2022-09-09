@@ -274,6 +274,5 @@ For now, we'll skip the data augmentation because it's quite fickle and empirica
 !!! warning
     Regardless of what method we use, it's important to validate that we're not just augmenting for the sake of augmentation. We can do this by executing any existing [data validation tests](https://madewithml.com/courses/mlops/testing#data){:target="_blank"} and even creating specific tests to apply on augmented data.
 
-## Resources
-
-- [Learning to Compose Domain-Specific Transformations for Data Augmentation](https://arxiv.org/abs/1709.01643){:target="_blank"}
+<!-- Citation -->
+{% include "styles/cite.md" %}

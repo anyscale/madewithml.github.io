@@ -161,4 +161,4 @@ In our [makefile lesson](makefile.md){:target="_blank"} we'll learn how to combi
 
 
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

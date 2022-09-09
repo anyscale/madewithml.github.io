@@ -1096,7 +1096,7 @@ The advantage of using a library such as great expectations, as opposed to isola
 
 Many of these expectations will be executed when the data is extracted, loaded and transformed during our [DataOps workflows](orchestration.md#dataops){:target="_blank"}. Typically, the data will be extracted from a source ([database](data-stack.md#database){:target="_blank"}, [API](api.md){:target="_blank"}, etc.) and loaded into a data system (ex. [data warehouse](data-stack.md#data-warehouse){:target="_blank"}) before being transformed there (ex. using [dbt](https://www.getdbt.com/){:target="_blank"}) for downstream applications. Throughout these tasks, Great Expectations checkpoint validations can be run to ensure the validity of the data and the changes applied to it. We'll see a simplified version of when data validation should occur in our data workflows in the [orchestration lesson](orchestration.md#dataops){:target="_blank"}.
 
-<div class="ai-center-all">
+<div class="ai-center-all mb-4">
     <img width="650" src="/static/images/mlops/testing/production.png" alt="ELT pipelines in production">
 </div>
 
@@ -1378,4 +1378,4 @@ With [monitoring](monitoring.md){:target="_blank"}, there are quite a few distin
 - [Robustness Gym: Unifying the NLP Evaluation Landscape](https://arxiv.org/abs/2101.04840){:target="_blank"}
 
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

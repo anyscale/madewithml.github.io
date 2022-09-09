@@ -1297,4 +1297,4 @@ The filters have high values for the words `stock` and `market` which influenced
 
 
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

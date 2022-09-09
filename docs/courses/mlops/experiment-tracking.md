@@ -1,7 +1,7 @@
 ---
 template: lesson.html
 title: Experiment Tracking
-description: Managing and tracking ML experiments and runs.
+description: Managing and tracking machine learning experiments.
 keywords: experiment tracking, mlflow, weights and biases, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/mlops-course
@@ -310,4 +310,4 @@ predict_tag(texts=[text])
     ```
 
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

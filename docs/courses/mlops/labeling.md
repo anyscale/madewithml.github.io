@@ -377,9 +377,5 @@ def contains_tensorflow(text):
 
 Labeling isn't just a one time event or something we repeat identically. As new data is available, we'll want to strategically label the appropriate samples and improve [slices](testing.md#evaluation){:target="_blank"} of our data that are lacking in [quality](../foundations/data-quality.md){:target="_blank"}. Once new data is labeled, we can have workflows that are triggered to start the (re)training process to deploy a new version of our system.
 
-## Resources
-- [Human in the Loop: Deep Learning without Wasteful Labelling](https://oatml.cs.ox.ac.uk/blog/2019/06/24/batchbald.html){:target="_blank"}
-- [Harnessing Organizational Knowledge for Machine Learning](https://ai.googleblog.com/2019/03/harnessing-organizational-knowledge-for.html){:target="_blank"}
-
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

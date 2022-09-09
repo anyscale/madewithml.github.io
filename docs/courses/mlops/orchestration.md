@@ -15,7 +15,7 @@ So far we've implemented our DataOps (ELT, validation, etc.) and MLOps (optimiza
 
 - **schedule** these workflows as new data arrives?
 - **scale** these workflows as our data grows?
-- **share** these workflows to downstream consumers?
+- **share** these workflows to downstream applications?
 - **monitor** these workflows?
 
 We'll need to break down our end-to-end ML pipeline into individual workflows that be orchestrated as needed. There are several tools that can help us so this such as [Airflow](http://airflow.apache.org/){:target="_blank"}, [Prefect](https://www.prefect.io/){:target="_blank"}, [Dagster](https://dagster.io/){:target="_blank"}, [Luigi](https://luigi.readthedocs.io/en/stable/){:target="_blank"} and even some ML focused options such as [Metaflow](https://metaflow.org/){:target="_blank"}, [Flyte](https://flyte.org/){:target="_blank"}, [KubeFlow Pipelines](https://www.kubeflow.org/docs/components/pipelines/overview/pipelines-overview/){:target="_blank"}, [Vertex pipelines](https://cloud.google.com/vertex-ai/docs/pipelines/introduction){:target="_blank"}, etc. We'll be creating our workflows using AirFlow for its:
@@ -401,7 +401,7 @@ While it may make sense to execute many data processing workflows on a scheduled
 
 Now that we've reviewed Airflow's major concepts, we're ready to create the DataOps workflows. It's the exact same workflow we defined in our [data stack lesson](data-stack.md){:target="_blank"} -- extract, load and transform -- but this time we'll be doing everything programmatically and orchestrating it with Airflow.
 
-<div class="ai-center-all">
+<div class="ai-center-all mb-4">
     <img width="650" src="/static/images/mlops/testing/production.png" alt=ELT pipelines in production">
 </div>
 
@@ -1101,8 +1101,5 @@ If we need to improve on the existing version of the model, it's not just the ma
 
 Once we have the proper dataset for retraining, we can kickoff the workflows to update our system!
 
-## References
-- [Airflow official documentation](https://airflow.apache.org/docs/apache-airflow/stable/index.html){:target="_blank"}
-
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

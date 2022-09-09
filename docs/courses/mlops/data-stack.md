@@ -6,6 +6,7 @@ keywords: data engineering, data stack, modern data stack, data warehouse, snowf
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/data-engineering
 notebook: https://github.com/GokuMohandas/data-engineering/blob/main/extract_from_dwh.ipynb
+video: https://www.youtube.com/watch?v=_sYrVHGRqPo
 ---
 
 {% include "styles/lesson.md" %}
@@ -15,6 +16,28 @@ notebook: https://github.com/GokuMohandas/data-engineering/blob/main/extract_fro
 Before we continue to learn about advanced production ML topics, we need to take a step back and understand the flow of data. It's very important that we have a way to produce high quality data and to do so in a reproducible and scalable manner. In this lesson, we're going to learn about the fundamentals of data engineering and how to construct a modern data stack that can scale and provide high quality data for our applications.
 
 > In this lesson, we'll learn how to set up and use the data stack with user interfaces (UI) but in our [orchestration lesson](orchestration.md){:target="_blank"}, we'll learn how to execute everything programmatically (Python + bash). View the :fontawesome-brands-github:{ .github } [data-engineering](https://github.com/GokuMohandas/data-engineering){:target="_blank"} repository for all the code.
+
+<div class="ai-yt-mobile">
+    <iframe id="yt-video-mobile" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="620" height="348.75" type="text/html" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<div class="ai-yt-desktop">
+    <iframe id="yt-video-desktop" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="620" height="348.75" type="text/html" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<div class="ai-yt-admonition">
+    <div class="admonition danger">
+        <p class="admonition-title">Viewing options</p>
+        <p>You can watch the entire video at once or follow along each section (each header has a link to the corresponding timestamp in the video).</p>
+    </div>
+</div>
+
+<script>
+    var yt_video_id = "_sYrVHGRqPo"
+    var yt_video_source = "https://www.youtube.com/embed/" + yt_video_id + "?autoplay=0&fs=1&iv_load_policy=1&showinfo=1&rel=0&cc_load_policy=0&start=120&end=124&vq=hd720"
+    document.getElementById("yt-video-mobile").src = yt_video_source;
+    document.getElementById("yt-video-desktop").src = yt_video_source;
+</script>
 
 At a high level, we're going to:
 
@@ -35,7 +58,13 @@ This process is more commonly known as ELT, but there are variants such as ETL a
 
 ## Data systems
 
+**[:fontawesome-brands-youtube:{ .youtube } 1:10 - 3:15](){:target="_blank"}**
+
 Before we start working with our data, it's important to understand the different types of systems that our data can live in. So far in this course we've worked with files, [APIs](api.md), etc. but there are several types of data systems that are widely adopted in industry for different purposes.
+
+<div class="ai-center-all">
+    <img width="450" src="/static/images/mlops/data_stack/systems.png" alt="data systems">
+</div>
 
 ### Data lake
 
@@ -70,10 +99,10 @@ A data warehouse (DWH) is a type of database that's designed for storing structu
 
 ## Extract and load
 
-The first step in our data pipeline is to extract data from a source and load it into the appropriate destination. While we could construct custom scripts to do this manually or on a schedule, an ecosystem of data ingestion tools have standardized the entire process. They all come equipped with connectors that allow for extraction, normalization, cleaning and loading between sources and destinations. These pipelines can be scaled, monitored, etc. all with very little to no code.
+The first step in our data pipeline is to extract data from a source and load it into the appropriate destination. While we could construct custom scripts to do this manually or on a schedule, an ecosystem of data ingestion tools have already standardized the entire process. They all come equipped with connectors that allow for extraction, normalization, cleaning and loading between sources and destinations. And these pipelines can be scaled, monitored, etc. all with very little to no code.
 
 <div class="ai-center-all">
-    <img width="500" src="/static/images/mlops/data_stack/pipelines.png" alt="ingestion pipelines">
+    <img width="600" src="/static/images/mlops/data_stack/pipelines.png" alt="ingestion pipelines">
 </div>
 
 !!! tip "Popular tools"
@@ -306,17 +335,16 @@ LIMIT 1000
 
 With the advent of cheap storage and cloud SaaS options to manage them, it's become a best practice to store raw data into data lakes. This allows for storage of raw, potentially unstructured, data without having to justify storage with downstream applications. When we do need to transform and process the data, we can move it to a data warehouse so can perform those operations efficiently.
 
-<div class="ai-center-all">
-    <img width="600" src="/static/images/mlops/data_stack/redundancy.png" alt="redundancy">
+<div class="ai-center-all mt-4">
+    <img width="600" src="/static/images/mlops/data_stack/best_practice.png" alt="best practice">
 </div>
-
 
 ## Transform
 
 Once we've extracted and loaded our data, we need to transform the data so that it's ready for downstream applications. These transformations are different from the [preprocessing](preprocessing.md#transformations){:target="_blank"} we've seen before but are instead reflective of business logic that's agnostic to downstream applications. Common transformations include defining schemas, filtering, cleaning and joining data across tables, etc. While we could do all of these things with SQL in our data warehouse (save queries as tables or views), dbt delivers production functionality around version control, testing, documentation, packaging, etc. out of the box. This becomes crucial for maintaining observability and high quality data workflows.
 
-<div class="ai-center-all">
-    <img width="450" src="/static/images/mlops/data_stack/transform.png" alt="data transform">
+<div class="ai-center-all mb-4">
+    <img width="500" src="/static/images/mlops/data_stack/transform.png" alt="data transform">
 </div>
 
 !!! tip "Popular tools"
@@ -348,7 +376,7 @@ Now we're ready to start developing our models:
 4. Repeat for another file under `models/labeled_projects` called `schema.yml`.
 
 ```bash
-dbt-cloud-xxxxx-dbt-transforms
+dbt-cloud-XXXXX-dbt-transforms
 ├── ...
 ├── models
 │   ├── example
@@ -471,8 +499,8 @@ from google.cloud import bigquery
 from google.oauth2 import service_account
 
 # Replace these with your own values
-project_id = "made-with-ml-XXXXXX"
-SERVICE_ACCOUNT_KEY_JSON = "/Users/goku/Downloads/made-with-ml-XXXXXX-XXXXXXXXXXXX.json"
+project_id = "made-with-ml-XXXXXX"  # REPLACE
+SERVICE_ACCOUNT_KEY_JSON = "/Users/goku/Downloads/made-with-ml-XXXXXX-XXXXXXXXXXXX.json"  # REPLACE
 
 # Establish connection
 credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_KEY_JSON)
@@ -544,7 +572,7 @@ results.to_dataframe().head()
 </div></div>
 
 !!! warning
-    Check out our [notebook](https://github.com/GokuMohandas/data-engineering/blob/main/extract_from_dwh.ipynb){:target="_blank"} where we extract the transformed data from our data warehouse. We do this in a separate notebook because it requires the `google-cloud-bigquery` package and until dbt [loosens](https://github.com/dbt-labs/dbt-core/issues/4748){:target="_blank"} it's Jinja versioning constraints... it'll have to be done in a separate environment. However, downstream consumers are typically analytics or ML applications which have their own environments anyway so these conflicts are not inhibiting.
+    Check out our [notebook](https://github.com/GokuMohandas/data-engineering/blob/main/extract_from_dwh.ipynb){:target="_blank"} where we extract the transformed data from our data warehouse. We do this in a separate notebook because it requires the `google-cloud-bigquery` package and until dbt [loosens](https://github.com/dbt-labs/dbt-core/issues/4748){:target="_blank"} it's Jinja versioning constraints... it'll have to be done in a separate environment. However, downstream applications are typically analytics or ML applications which have their own environments anyway so these conflicts are not inhibiting.
 
 many of the analytics (ex. dashboards) and machine learning solutions (ex. feature stores) allow for easy connection to our data warehouses so that workflows can be triggered when an event occurs or on a schedule. We're going to take this a step further in the [next lesson](orchestration.md){:target="_blank"} where we'll use a central orchestration platform to control all these workflows.
 
@@ -572,3 +600,6 @@ The data stack ecosystem to create the robust data workflows is growing and matu
 - Does the tool have the proper connectors to integrate with our data sources and the rest of the stack?
 - Does the tool fit with our team's technical aptitude (SQL, Spark, Python, etc.)?
 - What kind of support does the tool offer (enterprise, community, etc.)?
+
+<!-- Citation -->
+{% include "styles/cite.md" %}

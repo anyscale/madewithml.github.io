@@ -194,4 +194,4 @@ clean   : cleans all unnecessary files.
 > There's a whole lot [more](https://www.gnu.org/software/make/manual/make.html){:target="_blank"} to Makefiles but this is plenty for most applied ML projects.
 
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

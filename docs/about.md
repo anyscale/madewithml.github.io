@@ -20,3 +20,5 @@ We will steadily address all the issues mentioned above but we're going to work 
 This is why we created our courses to educate the community on how to responsibly deliver value via applications that are *made with ML*.
 
 {% include "styles/instructor.md" %}
+
+<hr style="margin-top: 2rem; margin-bottom: 2rem;">

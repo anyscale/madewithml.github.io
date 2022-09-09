@@ -233,10 +233,5 @@ So what exactly are these actions that we're using from the marketplace? For exa
 
 > Don't restrict your workflows to only what's available on the Marketplace or single command operations. We can do things like include code coverage reports, deploy an updated Streamlit dashboard and attach it's URL to the PR, deliver (CD) our application to an AWS Lambda / EC2, etc.
 
-## Resources
-
-- [GitHub Actions Documentation](https://docs.github.com/en/actions){:target="_blank"}
-- [Act - Run your GitHub Actions Locally](https://github.com/nektos/act){:target="_blank"}
-
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

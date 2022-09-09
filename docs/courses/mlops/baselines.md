@@ -634,4 +634,4 @@ print (json.dumps(performance, indent=2))
 > This MLOps course is actually model-agnostic (as long as it produces probability distributions) so feel free to use more complex representations ([embeddings](https://madewithml.com/courses/foundations/embeddings/){:target="_blank"}) with more sophisticated architectures ([CNNs](https://madewithml.com/courses/foundations/convolutional-neural-networks/){:target="_blank"}, [transformers](https://madewithml.com/courses/foundations/transformers/){:target="_blank"}, etc.). We're going to use this basic logistic regression model throughout the rest of the lessons because it's easy, fast and actually has comparable performance (<10% f1 diff compared to state-of-the-art pretrained transformers).
 
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

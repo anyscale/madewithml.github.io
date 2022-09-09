@@ -440,6 +440,8 @@ th {
 
 // Testimonials
 .ai-testimonial-card {
+    box-shadow: none !important;
+    border: 2px solid rgba(0, 0, 0, 0.125) !important;
     height: 10.2rem;
     @media (max-width: 480px) {
         height: 12.5rem;
@@ -488,9 +490,69 @@ th {
 }
 
 
+.ai-announce {
+    font-size: 0.75rem;
+    text-align: center;
+}
 .ai-announce-link {
-    color: #f76707 !important;
+    color: #FF6700 !important;
 }
 .ai-announce-link:hover {
-    color: #f77e2d !important;
+    color: #FF8F28 !important;
+}
+
+.ai-yt-mobile {
+    margin-top: 1.5rem;
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 25px;
+    height: 0;
+}
+
+.ai-yt-mobile iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ai-yt-desktop {
+    margin-top: 1.5rem;
+    margin-bottom: 0rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.ai-yt-mobile {
+    display: none;
+}
+
+.ai-yt-desktop {
+    display: block;
+}
+
+@media screen and (max-width: 849px) {
+
+    .ai-yt-desktop {
+        display: none
+    }
+
+    .ai-yt-mobile {
+        display: block;
+    }
+
+}
+
+.ai-yt-admonition {
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+    margin-left: 2.75rem;
+    margin-right: 2.75rem;
+    @media (max-width: 480px) {
+        margin-left: 0rem;
+        margin-right: 0rem;
+    }
 }

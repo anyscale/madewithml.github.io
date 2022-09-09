@@ -1258,4 +1258,4 @@ This way when the names of columns change or we want to replace with different l
         ```
 
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

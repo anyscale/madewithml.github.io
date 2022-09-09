@@ -1,17 +1,27 @@
+
+<!-- DONT FORGET TO CHANGE INSIDE index.html -->
+<div class="modal fade" id="newsletterForm" tabindex="-1" role="dialog" aria-labelledby="newsletterFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0.5rem 1rem 0.5rem 1rem;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <iframe width="540" height="600" src="https://c8efd03b.sibforms.com/serve/MUIEAMs1dZBzyue8b3i3Gw1PHVEmw4JOmt9cLywb0Z10_6R4KyAdiVxZRc2B0Eq19YaA37r1Tjmj4ESTiMsdWAxUKcyI5ctqqGcBFCdoskkHDydRzYCllDt7UNUQJUVsT9JDJ8a48y54PNbKvWB2mzaWtQlCqztp2aG6h9QC4-Jn2sNlTahB7_yIluIBjKjinOjsVyQERl5gwTI4" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>
+        </div>
+    </div>
+</div>
+
 <div class="mt-4 pt-2 pb-3 px-4" style="background: rgba(18,18,18,.05); border-radius: 7px;">
-  <p style="font-size: 0.8rem;">📬&nbsp; Receive new lessons straight to your inbox (once a month) and join <b>35K+</b> developers in learning how to responsibly deliver value with ML.</p>
-  <div id="revue-embed">
-    <form action="https://www.getrevue.co/profile/madewithml/add_subscriber" method="post" id="revue-form"
-      name="revue-form" target="_blank">
-      <div class="row">
-        <div class="col-md-9">
-          <input class="revue-form-field" placeholder="Your personal email address..." type="email" name="member[email]" id="member_email"
-            style="width: 100%; height: 95%; border: 1px solid #b3b3b3; border-radius: 3px;">
-        </div>
-        <div class="col-md-3 pl-md-0">
-          <button class="md-button md-button--purple-gradient mt-md-0 mt-2" type="submit" style="cursor: pointer !important;">Subscribe</button>
-        </div>
-      </div>
-    </form>
+  <p style="font-size: 0.8rem;">📬&nbsp; Receive new lessons straight to your inbox (once a month) and join <b>40K+</b> developers in learning how to responsibly deliver value with ML.</p>
+  <div class="row">
+    <div class="col-md-9">
+      <input class="revue-form-field" placeholder="Your personal email address..." type="email" name="member[email]" id="member_email"
+        style="width: 100%; height: 95%; border: 1px solid #b3b3b3; border-radius: 3px;">
+    </div>
+    <div class="col-md-3 pl-md-0">
+      <button class="md-button md-button--purple-gradient mt-md-0 mt-2" type="submit" style="cursor: pointer !important;" data-toggle="modal" data-target="#newsletterForm">Subscribe</button>
+    </div>
   </div>
 </div>

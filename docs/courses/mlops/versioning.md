@@ -204,4 +204,4 @@ When we pull data from source or compute features, should they save the data its
     - But eventually this also results in data storage bulk. What we need is an *append-only* data source where all changes are kept in a log instead of directly changing the data itself. So we can use the data system with the logs to produce versions of the data as they were without having to store separate snapshots of the the data itself.
 
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

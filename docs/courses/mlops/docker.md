@@ -200,4 +200,4 @@ All of these changes would involve using the proper credentials (via [encrypted 
 
 
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}

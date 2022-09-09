@@ -183,7 +183,7 @@ Now let's see how many samples per class each data split has:
 # Overall class distribution
 class_counts = dict(collections.Counter(y))
 print (f"Classes: {class_counts}")
-print (f"m:b = {class_counts["malignant"]/class_counts["benign"]:.2f}")
+print (f'm:b = {class_counts["malignant"]/class_counts["benign"]:.2f}')
 ```
 <pre class="output">
 Classes: {"malignant": 611, "benign": 389}
@@ -896,4 +896,4 @@ print (b_unscaled)
 
 
 <!-- Citation -->
-{% include "cite.md" %}
+{% include "styles/cite.md" %}
