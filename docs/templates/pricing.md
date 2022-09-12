@@ -9,6 +9,9 @@
 <div class="ai-center-all mt-0">
     <small><b>Start date:</b> Oct 1st, 2022</small>
 </div>
+<div class="ai-center-all mt-1">
+    <small>(less than 20 seats remaining!)</small>
+</div>
 
 <div class="row mt-4" style="margin-bottom: 2.5rem;">
     <div class="offset-md-1 col-md-5 mb-md-0 mb-4" data-aos="flip-left" data-aos-delay="0">

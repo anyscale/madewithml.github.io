@@ -62,6 +62,9 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <div class="ai-center-all mt-0">
         <small><b>Start date:</b> Oct 1st, 2022</small>
     </div>
+    <div class="ai-center-all mt-1">
+        <small>(less than 20 seats remaining!)</small>
+    </div>
 </section>
 
 <hr style="margin-top: 1rem; margin-bottom: 2rem;">
