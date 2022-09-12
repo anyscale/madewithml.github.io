@@ -159,6 +159,8 @@ Take a look at your files to see all the changes that have been made!
 
 In our [makefile lesson](makefile.md){:target="_blank"} we'll learn how to combine all these commands into one. And in our [pre-commit lesson](https://pre-commit.com/){:target="_blank"} we'll learn how to automatically execute this formatting whenever we make changes to our code.
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
 
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

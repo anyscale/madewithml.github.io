@@ -510,5 +510,8 @@ Though we could continue to [version](versioning.md){:target="blank"} our traini
 
 Regardless of the choice above, feature stores are very useful here. Instead of coupling data pulls and feature compute with the time of modeling, we can separate these two processes so that features are up-to-date when we need them. And we can still achieve reproducibility via efficient point-in-time correctness, low latency snapshots, etc. This essentially creates the ability to work with any version of the dataset at any point in time.
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

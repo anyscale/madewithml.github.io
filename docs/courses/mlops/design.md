@@ -487,5 +487,8 @@ This is where the project scoping begins to take place. Often, the stakeholders 
 
     > This is an extremely simplified timeline. An actual timeline would depict timelines from all the different teams stacked on top of each other with vertical lines at specified time-constraints or version releases.
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

@@ -1,6 +1,4 @@
-<hr id="instructor" style="margin-top: 2rem; margin-bottom: 2rem;">
-
-<h2 class="ai-center-all mt-0 mb-2 md-typeset">Meet your instructor</h2>
+<h2 id="instructor" class="ai-center-all mt-0 mb-2 md-typeset">Meet your instructor</h2>
 
 <div class="ai-center-all mt-4" data-aos="zoom-in">
     <img class="ai-header-image" src="/static/images/goku_circle.png" alt="Goku Mohandas">
@@ -19,8 +17,8 @@
     Over the past 7 years, I've worked on ML and product at a large company (<a href="https://www.apple.com/" target="_blank">Apple</a>), a startup in the oncology space (<a href="https://www.ciitizen.com/" target="_blank">Ciitizen</a>) and ran my own startup in the rideshare space (HotSpot). Throughout my journey, I've worked with brilliant developers and product managers and learned how to responsibly develop, deploy and iterate on ML systems across various industries.
 </p>
 <p>
-    I currently work closely with early-stage and mid-sized companies in helping them deliver value with ML while diving into the best and bespoke practices of this rapidly evolving space. I want to share this knowledge with the rest of the world so we can accelerate progress in this space.
+    I currently work closely with early-stage and F500 companies in helping them deliver value with ML while diving into the best and bespoke practices of this rapidly evolving space. I want to share this knowledge with the rest of the world so we can accelerate progress in this space.
 </p>
 <p>
-    ML is <b>not a separate industry</b>, instead, it's a powerful <b>way of thinking</b> about data, so let's make sure we have a solid foundation before we start changing the world. Made With ML is our medium to catalyze this goal and though we're off to great start, we still have a long way to go.
+    ML is <b>not a separate industry</b>, instead, it's a powerful <b>way of thinking</b> about data, so let's make sure we have a solid foundation before we start changing the world with it. Made With ML is our medium to catalyze this goal and though we're off to great start, we still have a long way to go.
 </p>

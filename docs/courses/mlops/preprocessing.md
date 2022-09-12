@@ -687,6 +687,8 @@ Many of the *transformations* we're going to do on our input text features are m
 
 > In the next section we'll be performing exploratory data analysis (EDA) on our preprocessed dataset. However, the order of the steps can be reversed depending on how well the problem is defined. If we're unsure about how to prepare the data, we can use EDA to figure it out and vice versa.
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
 
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

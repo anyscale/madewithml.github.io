@@ -170,5 +170,8 @@ python tagifai/main.py predict-tag --text="Transfer learning with transformers f
 ]
 </pre>
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

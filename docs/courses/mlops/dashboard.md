@@ -143,6 +143,8 @@ def load_data():
 
 We have several different options for deploying and managing our Streamlit dashboard. We could use Streamlit's [sharing feature](https://blog.streamlit.io/introducing-streamlit-sharing/){:target="_blank"} (beta) which allows us to seamlessly deploy dashboards straight from GitHub. Our dashboard will continue to stay updated as we commit changes to our repository. Another option is to deploy the Streamlit dashboard along with our API service. We can use docker-compose to spin up a separate container or simply add it to the API service's Dockerfile's [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint){:target="_blank"} with the appropriate ports exposed. The later might be ideal, especially if your dashboard isn't meant to be public and it you want added security, performance, etc.
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
 
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

@@ -399,4 +399,4 @@ True
 
 
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

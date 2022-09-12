@@ -261,5 +261,8 @@ venv:
 	pre-commit autoupdate
 ```
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

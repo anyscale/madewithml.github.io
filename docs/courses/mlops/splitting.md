@@ -268,5 +268,8 @@ train_df.head()
 
     [Iterative stratification](http://scikit.ml/_modules/skmultilearn/model_selection/iterative_stratification.html#IterativeStratification){:target="_blank"} essentially creates splits while "trying to maintain balanced representation with respect to order-th label combinations". We used to an `order=1` for our iterative split which means we cared about providing representative distribution of each tag across the splits. But we can account for [higher-order](https://arxiv.org/abs/1704.08756){:target="_blank"} label relationships as well where we may care about the distribution of label combinations.
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

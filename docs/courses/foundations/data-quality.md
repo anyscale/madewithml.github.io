@@ -745,4 +745,4 @@ So once you figure out what type of model your task needs, start with simple mod
 
 
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

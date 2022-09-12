@@ -436,5 +436,8 @@ git fetch --all --tags  # fetch all tags from remote
 
 > Tag names usually adhere to version naming conventions, such as `v1.4.2` where the numbers indicate major, minor and bug changes from left to right.
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

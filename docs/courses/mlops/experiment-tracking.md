@@ -309,5 +309,8 @@ predict_tag(texts=[text])
     performance = utils.load_dict(filepath=Path(artifact_uri, "performance.json"))
     ```
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

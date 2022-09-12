@@ -1,7 +1,7 @@
 ---
 template: main.html
 title: Our Mission
-description: Educate and enable the community to responsibly deliver value with ML.
+description: Machine learning is not a separate industry, instead, it's a powerful way of thinking about data. We aim to educate and enable the community to responsibly deliver value with ML.
 keywords: mlops, applied ml, machine learning
 ---
 
@@ -19,6 +19,6 @@ There's a lot of buzz around ML but we grossly fall short when it comes to respo
 We will steadily address all the issues mentioned above but we're going to work backwards starting with *trust*.
 This is why we created our courses to educate the community on how to responsibly deliver value via applications that are *made with ML*.
 
-{% include "styles/instructor.md" %}
-
 <hr style="margin-top: 2rem; margin-bottom: 2rem;">
+
+{% include "templates/instructor.md" %}

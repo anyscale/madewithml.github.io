@@ -1257,5 +1257,8 @@ This way when the names of columns change or we want to replace with different l
         pip install git+https://github.com/GokuMohandas/mlops-course#egg=tagifai
         ```
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

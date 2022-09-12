@@ -203,5 +203,8 @@ When we pull data from source or compute features, should they save the data its
     - We could keep snapshots of the data (separate from our projects) and provided the operations and timestamp, we can execute operations on those snapshots of the data to recreate the precise data artifact used for training. Many data systems use [time-travel](https://docs.snowflake.com/en/user-guide/data-time-travel.html){:target="blank"} to achieve this efficiently.
     - But eventually this also results in data storage bulk. What we need is an *append-only* data source where all changes are kept in a log instead of directly changing the data itself. So we can use the data system with the logs to produce versions of the data as they were without having to store separate snapshots of the the data itself.
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

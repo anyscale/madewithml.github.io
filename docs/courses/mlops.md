@@ -9,7 +9,10 @@ repository: https://github.com/GokuMohandas/mlops-course
 
 {% include "styles/lesson.md" %}
 
-{% include "styles/mlops.md" %}
+{% include "templates/mlops.md" %}
+
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
 
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

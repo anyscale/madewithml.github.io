@@ -198,6 +198,8 @@ This `Dockerfile` is commonly the end artifact a data scientist or ML engineer d
 
 All of these changes would involve using the proper credentials (via [encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets){:target=“_blank”} and can even be automatically deployed via [CI/CD workflows](cicd.md){:target=“_blank”}. But, of course, there are subsequent responsibilities such as [monitoring](monitoring.md){:target="_blank"}.
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
 
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

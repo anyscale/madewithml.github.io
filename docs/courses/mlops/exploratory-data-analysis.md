@@ -94,5 +94,8 @@ Looks like the `title` text feature has some good signal for the respective clas
 
 > All of the work we've done so far are inside IPython notebooks but in our [dashboard lesson](dashboard.md){:target="_blank"}, we'll transfer all of this into an interactive dashboard using [Streamlit](https://streamlit.io/){:target="_blank"}.
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

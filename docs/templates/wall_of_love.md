@@ -1,8 +1,8 @@
-<!-- Testimonials -->
-<h2 id="walloflove" class="ai-center-all mt-0 mb-2 md-typeset">❤️ Wall of Love</h2>
-<p class="ai-center-all" style="font-size: 0.9rem;">See what the community has to say about Made With ML.</p>
+<!-- Wall of love -->
+<h2 id="wall-of-love" class="ai-center-all mt-0 mb-2 md-typeset">❤️ Wall of Love</h2>
+<p class="ai-section-subheader ai-center-all">See what the community has to say about Made With ML.</p>
 
-<div id="testimonials" class="carousel slide" data-ride="carousel" data-interval="3000" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
+<div id="testimonials" class="carousel slide" data-ride="carousel" data-interval="5000" data-aos="fade-up" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
     <div class="carousel-inner">
         <div class="carousel-item active px-4">
             <div class="row">
@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                    <div class="col-3 col-sm-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/ritchie_ng.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
@@ -36,7 +36,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                    <div class="col-3 col-sm-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/daniel_bourke.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
@@ -61,7 +61,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                    <div class="col-3 col-sm-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/jeremy_jordan.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
@@ -86,7 +86,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                    <div class="col-3 col-sm-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/karthik_bhaskar.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
@@ -115,7 +115,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                    <div class="col-3 col-sm-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/dmitry_petrov.png" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
@@ -140,7 +140,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                    <div class="col-3 col-sm-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/lawrence_okegbemi.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
@@ -165,7 +165,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                    <div class="col-3 col-sm-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/laxman_tomar.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
@@ -190,7 +190,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                    <div class="col-3 col-sm-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/satyabrata_pal.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
@@ -219,7 +219,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                    <div class="col-3 col-sm-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/peter_ku.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
@@ -244,7 +244,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                    <div class="col-3 col-sm-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/abinaya_mahendiran.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
@@ -269,7 +269,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                    <div class="col-3 col-sm-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/ask_katnoria.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">
@@ -294,7 +294,7 @@
                         <div class="card-body">
                             <div>
                                 <div class="row">
-                                    <div class="col-3 col-md-2 pr-0 ai-center-all">
+                                    <div class="col-3 col-sm-2 pr-0 ai-center-all">
                                         <img class="ai-testimonial-profile-image" src="/static/images/testimonials/arghyadeep_das.jpeg" alt="profile">
                                     </div>
                                     <div class="col-9 col-md-10 pl-2">

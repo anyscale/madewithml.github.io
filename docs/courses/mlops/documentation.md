@@ -231,5 +231,8 @@ We can easily serve our documentation for free using [GitHub pages](https://www.
 
 > Be sure to check out the auto-generated [documentation page](https://gokumohandas.github.io/mlops-course){:target="_blank"} for our [application](https://github.com/GokuMohandas/mlops-course){:target="_blank"}. We'll learn how to automatically create and keep our docs up-to-date in our [CI/CD](cicd.md){:target="_blank"} lesson every time we make changes to our code base.
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

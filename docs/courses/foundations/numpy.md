@@ -593,4 +593,4 @@ y.shape:  (2, 3)
 
 
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

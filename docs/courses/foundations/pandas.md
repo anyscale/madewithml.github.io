@@ -1138,4 +1138,4 @@ When working with very large datasets, our Pandas DataFrames can become very lar
 And, of course, we can combine these together ([Dask-cuDF](https://github.com/rapidsai/cudf/tree/main/python/dask_cudf){:target="_blank"}) to operate on partitions of a dataframe on the GPU.
 
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

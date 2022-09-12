@@ -229,5 +229,8 @@ mlops/
 
 There are many alternatives to a setup.py file such as the [`setup.cfg`](https://setuptools.pypa.io/en/latest/userguide/declarative_config.html){:target="_blank"} and the more recent [pyproject.toml](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html){:target="_blank"}.
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

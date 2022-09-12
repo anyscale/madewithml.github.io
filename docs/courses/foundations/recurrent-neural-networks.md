@@ -1231,4 +1231,4 @@ print (json.dumps(prob_dist, indent=2))
 
 
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

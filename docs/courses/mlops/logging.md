@@ -312,5 +312,8 @@ All of our log messages are at the `INFO` level but while developing we may have
 
 > The [Elastic stack](https://www.elastic.co/what-is/elk-stack){:target="_blank"} (formerly ELK stack) is a common option for production level logging. It combines the features of [Elasticsearch](https://www.elastic.co/elasticsearch/){:target="_blank"} (distributed search engine), [Logstash](https://www.elastic.co/logstash){:target="_blank"} (ingestion pipeline) and [Kibana](https://www.elastic.co/kibana){:target="_blank"} (customizable visualization). We could also simply [upload](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-uploading-files.html){:target="_blank"} our logs to a cloud blog storage (ex. S3, Google Cloud Storage, etc.).
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

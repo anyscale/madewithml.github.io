@@ -6,17 +6,18 @@ keywords: data engineering, data stack, modern data stack, data warehouse, snowf
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/data-engineering
 notebook: https://github.com/GokuMohandas/data-engineering/blob/main/extract_from_dwh.ipynb
-video: https://www.youtube.com/watch?v=_sYrVHGRqPo
 ---
 
 {% include "styles/lesson.md" %}
 
 ## Intuition
 
-Before we continue to learn about advanced production ML topics, we need to take a step back and understand the flow of data. It's very important that we have a way to produce high quality data and to do so in a reproducible and scalable manner. In this lesson, we're going to learn about the fundamentals of data engineering and how to construct a modern data stack that can scale and provide high quality data for our applications.
+So far we've had the convenience of using local CSV files as data source but in reality, our data can come from many disparate sources. Additionally, our processes around transforming and testing our data should ideally be moved upstream so that many different downstream processes can benefit from them. Our ML use case being just one among the many potential downstream applications. To address these shortcomings, we're going to learn about the fundamentals of data engineering and construct a modern data stack that can scale and provide high quality data for our applications.
 
 > In this lesson, we'll learn how to set up and use the data stack with user interfaces (UI) but in our [orchestration lesson](orchestration.md){:target="_blank"}, we'll learn how to execute everything programmatically (Python + bash). View the :fontawesome-brands-github:{ .github } [data-engineering](https://github.com/GokuMohandas/data-engineering){:target="_blank"} repository for all the code.
 
+<!-- Youtube Video -->
+<!--
 <div class="ai-yt-mobile">
     <iframe id="yt-video-mobile" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="620" height="348.75" type="text/html" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
@@ -37,7 +38,7 @@ Before we continue to learn about advanced production ML topics, we need to take
     var yt_video_source = "https://www.youtube.com/embed/" + yt_video_id + "?autoplay=0&fs=1&iv_load_policy=1&showinfo=1&rel=0&cc_load_policy=0&start=120&end=124&vq=hd720"
     document.getElementById("yt-video-mobile").src = yt_video_source;
     document.getElementById("yt-video-desktop").src = yt_video_source;
-</script>
+</script> -->
 
 At a high level, we're going to:
 
@@ -58,7 +59,7 @@ This process is more commonly known as ELT, but there are variants such as ETL a
 
 ## Data systems
 
-**[:fontawesome-brands-youtube:{ .youtube } 1:10 - 3:15](){:target="_blank"}**
+<!-- **[:fontawesome-brands-youtube:{ .youtube } 1:10 - 3:15](){:target="_blank"}** -->
 
 Before we start working with our data, it's important to understand the different types of systems that our data can live in. So far in this course we've worked with files, [APIs](api.md), etc. but there are several types of data systems that are widely adopted in industry for different purposes.
 
@@ -348,7 +349,7 @@ Once we've extracted and loaded our data, we need to transform the data so that 
 </div>
 
 !!! tip "Popular tools"
-    Popular transformation tools include [dbt](https://www.getdbt.com/){:target="_blank"}, [Matillion](){:target="_blank"}, custom jinja templated SQL, etc.
+    Popular transformation tools include [dbt](https://www.getdbt.com/){:target="_blank"}, [Matillion](https://www.matillion.com/){:target="_blank"}, custom jinja templated SQL, etc.
 
 > In addition to data transformations, we can also process the data using large-scale analytics engines like Spark, Flink, etc. We'll learn more about batch and stream processing in our [systems design lesson](systems-design.md#processing){:target="_blank"}.
 
@@ -478,6 +479,10 @@ made-with-ml-XXXXXX               - Project
 │   └── tags                      - table
 ```
 
+<div class="ai-center-all">
+    <img width="800" src="/static/images/mlops/data_stack/dbt_run.png" alt="dbt run">
+</div>
+
 > There is so much more to dbt so be sure to check out their [official documentation](https://docs.getdbt.com/docs/building-a-dbt-project/documentation){:target="_blank"} to really customize any workflows. And be sure to check out our [orchestration lesson](orchestration.md){:target="_blank"} where we'll programmatically create and execute our dbt transformations.
 
 
@@ -596,10 +601,13 @@ When we create complex data workflows like this, observability becomes a top pri
 
 The data stack ecosystem to create the robust data workflows is growing and maturing. However, it can be overwhelming when it comes to choosing the best tooling options, especially as needs change over time. Here are a few important factors to consider when making a tooling decision in this space:
 
-- What is the cost per time per employee? Some of the tooling options can rack up quite the annual bill!
+- What is the cost per time per employee? Some of the tooling options can rack up quite the bill!
 - Does the tool have the proper connectors to integrate with our data sources and the rest of the stack?
 - Does the tool fit with our team's technical aptitude (SQL, Spark, Python, etc.)?
 - What kind of support does the tool offer (enterprise, community, etc.)?
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

@@ -53,12 +53,12 @@
   padding-right: 0rem;
 }
 .ai-header-card {
-    background-color: #f5f9fd;
+    background-color: #fff;
     border-radius: 10px;
-    border-color: #e0ecf9;
-    border-width: 0.05rem !important;
+    border-color: rgba(0, 0, 0, 0.125);
+    border-width: 0.1rem !important;
     border-style: solid;
-    box-shadow: 0 0 10px 0 rgba(100, 100, 100, 0.26);
+    box-shadow: none;
 }
 
 // Sidebar
@@ -455,6 +455,13 @@ th {
         width: 0.85rem;
     }
 }
+.ai-review-card {
+    border: none !important;
+    height: 13.5rem;
+    @media (max-width: 480px) {
+        height: 32rem;
+    }
+}
 .ai-testimonial-profile-image {
     width: 100%;
     border-radius: 10rem;
@@ -555,4 +562,16 @@ th {
         margin-left: 0rem;
         margin-right: 0rem;
     }
+}
+
+.ai-section-subheader {
+    font-size: 0.85rem;
+}
+
+.task-list {
+    font-size: 0.75rem;
+}
+
+.ai-alumni-company-image {
+    width: 1rem;
 }

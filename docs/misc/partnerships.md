@@ -19,7 +19,7 @@ We created Made With ML to educate and enable the community to responsibly deliv
 - 40K+ subscribers to our community newsletter
 - 1M+ organic monthly website traffic
 - 10K+ followers on [Twitter](https://twitter.com/GokuMohandas){:target="_blank"} & [LinkedIn](https://linkedin.com/in/goku){:target="_blank"}
-- top organic SEO ([mlops lessons](https://www.google.com/search?q=mlops+lessons){:target="_blank"}, [testing ml](https://www.google.com/search?q=testing+ml){:target="_blank"}, [experiment tracking ml](https://www.google.com/search?q=experiment+tracking+ml){:target="_blank"}, [monitoring ml](https://www.google.com/search?q=monitoring+ml){:target="_blank"}, etc.)
+- top organic SEO ([mlops lessons](https://www.google.com/search?q=mlops+lessons){:target="_blank"}, [testing ml](https://www.google.com/search?q=testing+ml){:target="_blank"}, [experiment tracking](https://www.google.com/search?q=experiment+tracking+ml){:target="_blank"}, [monitoring ml](https://www.google.com/search?q=monitoring+ml){:target="_blank"}, [data stack ml](https://www.google.com/search?q=data+stack+for+ml){:target="_blank"})
 
 ### More details
 

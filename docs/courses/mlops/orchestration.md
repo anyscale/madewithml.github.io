@@ -1101,5 +1101,8 @@ If we need to improve on the existing version of the model, it's not just the ma
 
 Once we have the proper dataset for retraining, we can kickoff the workflows to update our system!
 
+<!-- Course signup -->
+{% include "templates/course-signup.md" %}
+
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}

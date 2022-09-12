@@ -9,7 +9,7 @@ repository: https://github.com/GokuMohandas/Made-With-ML
 
 {% include "styles/lesson.md" %}
 
-{% include "styles/foundations.md" %}
+{% include "templates/foundations.md" %}
 
 <!-- Citation -->
-{% include "styles/cite.md" %}
+{% include "templates/cite.md" %}
