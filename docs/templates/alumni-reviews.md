@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-subtitle">"The course was an excellent synthesis of the rapidly evolving landscape of technologies and best practices for creating value from the application of machine learning. Goku and the close-knit community that he had put together was very knowledgeable, welcoming and engaging which made the learning experience much more fruitful. The foundation from the course has given me the know-how to make optimal choices around the design and implementation of ML engineering and Ops solutions for a variety of real-world use-cases."</p>
+                            <p class="card-subtitle">"The course is an excellent synthesis of the rapidly evolving landscape of technologies and best practices for creating value from the application of machine learning. Goku and the close-knit community that he had put together was very knowledgeable, welcoming and engaging which made the learning experience much more fruitful. The foundation from the course has given me the know-how to make optimal choices around the design and implementation of ML engineering and Ops solutions for a variety of real-world use-cases."</p>
                         </div>
                     </div>
                 </div>
