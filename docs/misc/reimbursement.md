@@ -31,7 +31,7 @@ Here's a quick look at the curriculum:
 
 ### Who's teaching the course?
 
-The course is from Made With ML, one of the [top ML repositories](https://github.com/GokuMohandas/Made-With-ML){:target="_blank"} on GitHub (30K+ stars) with a growing community (40K+) and is a [highly recommended](https://madewithml.com/#wall-of-love){:target="_blank"} resource used by industry. Their content not only covers MLOps concepts but they go deep into actually implementing everything with production quality code.
+The course is from Made With ML, one of the [top ML repositories](https://github.com/GokuMohandas/Made-With-ML){:target="_blank"} on GitHub (30K+ stars) with a growing community (30K+) and is a [highly recommended](https://madewithml.com/#wall-of-love){:target="_blank"} resource used by industry. Their content not only covers MLOps concepts but they go deep into actually implementing everything with production quality code.
 
 ### How will this help me?
 
