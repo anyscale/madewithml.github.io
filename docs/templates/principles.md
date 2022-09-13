@@ -1,7 +1,7 @@
 <section id="principles">
 
-<!-- <h2 class="ai-center-all mt-0 mb-2 md-typeset">Principles</h2>
-<p class="ai-section-subheader ai-center-all">Every lesson is written with the following principles in mind.</p> -->
+<h2 class="ai-center-all mt-0 mb-2 md-typeset">Principles</h2>
+<p class="ai-section-subheader ai-center-all">Every lesson is written with the following principles in mind.</p>
 
 <div class="row ai-features">
     <div class="col-md-6 ai-feature" data-aos="fade-right">
