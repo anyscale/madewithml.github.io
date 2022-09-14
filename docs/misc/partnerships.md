@@ -13,8 +13,8 @@ We created Made With ML to educate and enable the community to responsibly deliv
 
 ### Benefits
 
-- integrated in our [MLOps course](https://madewithml.com/){:target="_blank"} ([highly recommended](){:target="_blank"} industry resource)
-- designated tooling page highlighting tutorials, use cases, etc.
+- integrated in our [MLOps course](https://madewithml.com/#mlops){:target="_blank"} ([highly recommended](https://madewithml.com/#wall-of-love){:target="_blank"} industry resource)
+- designated comprehensive tooling page highlighting all features, use cases, etc.
 - [&#35;1](https://github.com/topics/mlops){:target="_blank"} MLOps [repository](https://github.com/GokuMohandas/made-with-ml){:target="_blank"} on GitHub (30K+ stars)
 - 30K+ subscribers to our community newsletter
 - 1M+ organic monthly website traffic
