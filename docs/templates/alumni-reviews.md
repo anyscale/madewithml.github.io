@@ -23,7 +23,7 @@
                                                 </span>
                                             </a>
                                         </div>
-                                <span class="ai-testimonial-org">Senior ML Engineer at Cars.com</span>
+                                <span class="ai-testimonial-org">Senior ML Engineer - Cars.com</span>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                                 </span>
                                             </a>
                                         </div>
-                                <span class="ai-testimonial-org">Senior Data Scientist at UPS</span>
+                                <span class="ai-testimonial-org">Senior Data Scientist - UPS</span>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                                                 </span>
                                             </a>
                                         </div>
-                                <span class="ai-testimonial-org">Lead AI Engineer at Sword Health</span>
+                                <span class="ai-testimonial-org">Lead AI Engineer - Sword Health</span>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                                                 </span>
                                             </a>
                                         </div>
-                                <span class="ai-testimonial-org">Senior Analyst at Citi</span>
+                                <span class="ai-testimonial-org">Senior Analyst - Citi</span>
                                     </div>
                                 </div>
                             </div>
