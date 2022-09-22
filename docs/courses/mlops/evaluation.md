@@ -557,7 +557,7 @@ Another recent work on [model patching](https://arxiv.org/abs/2008.06775){:targe
     <img src="/static/images/mlops/evaluation/model_patching.png" width="400" alt="Using learned subgroup transformations to augment data.">
 </div>
 <div class="ai-center-all mt-1">
-  <small><a href="https://arxiv.org//2008.06775" target="_blank">Model Patching: Closing the Subgroup Performance Gap with Data Augmentation</a></small>
+  <small><a href="https://arxiv.org/abs/2008.06775" target="_blank">Model Patching: Closing the Subgroup Performance Gap with Data Augmentation</a></small>
 </div>
 
 ## Interpretability
@@ -719,7 +719,7 @@ An effective way to evaluate our systems is to encapsulate them as a collection 
 - [SliceLine: Fast, Linear-Algebra-based Slice Finding for ML Model Debugging](https://mboehm7.github.io/resources/sigmod2021b_sliceline.pdf){:target="_blank"}
 - [Distributionally Robust Neural Networks for Group Shifts](https://arxiv.org/abs/1911.08731){:target="_blank"}
 - [No Subclass Left Behind: Fine-Grained Robustness in Coarse-Grained Classification Problems](https://arxiv.org/abs/2011.12945){:target="_blank"}
-- [Model Patching: Closing the Subgroup Performance Gap with Data Augmentation](https://arxiv.org//2008.06775){:target="_blank"}
+- [Model Patching: Closing the Subgroup Performance Gap with Data Augmentation](https://arxiv.org/abs/2008.06775){:target="_blank"}
 
 <!-- Course signup -->
 {% include "templates/course-signup.md" %}
