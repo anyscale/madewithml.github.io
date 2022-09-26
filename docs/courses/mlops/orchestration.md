@@ -22,7 +22,6 @@ We'll need to break down our end-to-end ML pipeline into individual workflows th
 
 - wide adoption of the open source platform in industry
 - Python based software development kit (SDK)
-- integration with the ecosystem (data ingestion, processing, etc.)
 - ability to run locally and scale easily
 - maturity over the years and part of the apache ecosystem
 

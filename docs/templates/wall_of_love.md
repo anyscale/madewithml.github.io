@@ -48,7 +48,7 @@
                                                 </span>
                                             </a>
                                         </div>
-                                <span class="ai-testimonial-org">Senior Data Scientist - UPS</span>
+                                <span class="ai-testimonial-org">Lead Data Scientist - Grab</span>
                                     </div>
                                 </div>
                             </div>
