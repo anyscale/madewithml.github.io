@@ -24,11 +24,11 @@ A few numbers that reflect the 100% organic traction we've had over the past few
 
 ### Integration
 
-All of our lessons focus on first principles when approaching a concept. This helps develop the foundational understanding to be able to adapt to any stack. But to really solidify the understanding, we implement everything in code within the context of an end-to-end project. This helps appreciate the implicit value a tool provides and develop the decision making framework around *build vs. buy*. And because the community adopts what they've learned to their own use cases in industry, it's imperative that we use tools that can offer that enterprise maturity.
+All of our lessons focus on first principles when approaching a concept. This helps develop the foundational understanding to be able to adapt to any stack. But to really solidify the understanding, we implement everything in code within the context of an end-to-end project. This helps understand the implicit value a tool provides and develop the decision making framework for constructing the appropriate stack. And because the community adopts what they've learned for their own use cases in industry, it's imperative that we use tools that can offer that enterprise maturity.
 
 <!-- > While ML stacks are contextual (tasks, constraints, team, maturity), we believe that a standard ML stack will emerge over time that will cater to the majority of use cases (with the flexibility to cater to the long tail of contexts). We want to work with these teams to help accelerate the progress towards this. -->
 
-Your product will be deeply integrated into the [MLOps course](https://madewithml.com/#mlops){:target="_blank"}, where thousands of developers everyday will see and use your product as the *definitive* standard to do X. All of this visibility and traction is invaluable for industry adoption, standing out in the competitive landscape and using the feedback to improve the product.
+Your product will be deeply integrated into the [MLOps course](https://madewithml.com/#mlops){:target="_blank"}, where thousands of developers everyday will see and use your product as the *definitive* standard. All of this visibility and traction is invaluable for industry adoption, standing out in the competitive landscape and using the feedback to improve the product.
 
 > We also have many downstream projects in progress to add more value on top of the content (async video course, private community, university labs, corporate onboarding, talent platform).
 
