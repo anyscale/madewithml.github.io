@@ -96,7 +96,7 @@ Perform inference on a given set of inputs with *near* real-time, streaming, fea
 </div>
 
 - ✅&nbsp; we can generate better predictions by providing real-time, streaming, features to the model.
-- ❌&nbsp; extra infrastructure needed for maintaining data streams ([Kafka](https://kafka.apache.org/){:target="_blank"}, [Kinesis](https://aws.amazon.com/kinesis/){:target="_blank"}, etc.) and for stream processing (Apache [Flink](https://flink.apache.org/){:target="_blank"}, [Beam](https://beam.apache.org/){:target="_blank"}, etc.).
+- ❌&nbsp; extra infrastructure needed for maintaining data stream storage ([Kafka](https://kafka.apache.org/){:target="_blank"}, [Kinesis](https://aws.amazon.com/kinesis/){:target="_blank"}, etc.) and for stream processing (ex. compose batch/streaming pipelines with [Beam](https://beam.apache.org/){:target="_blank"} [Java, Python, Go, SQL] and execute them on runners like [Flink](https://flink.apache.org/){:target="_blank"}, [Spark](https://spark.apache.org/){:target="_blank"}, [Dataflow](https://cloud.google.com/dataflow){:target="_blank"}, etc.).
 
 > Recommend content based on the real-time history that the users have generated. Note that the same model is used but the input data can change and grow.
 
