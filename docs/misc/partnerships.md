@@ -18,7 +18,7 @@ A few numbers that reflect the 100% organic traction we've had over the past few
 - [&#35;1](https://github.com/topics/mlops){:target="_blank"} MLOps [repository](https://github.com/GokuMohandas/made-with-ml){:target="_blank"} on GitHub (30K+ stars)
 - [35K+ subscribers](https://newsletter.madewithml.com/){:target="_blank"} to our community newsletter
 - a highly recommended industry resource ([testimonials](https://madewithml.com/#wall-of-love){:target="_blank"}, [Twitter](https://twitter.com/GokuMohandas/status/1409487532882989058){:target="_blank"}, [LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:6815254111030792192/){:target="_blank"})
-- 1M+ organic monthly website traffic (50K+ MAU)
+- 1.5M+ organic monthly website traffic (50K+ MAU)
 - 10K+ followers on [Twitter](https://twitter.com/GokuMohandas){:target="_blank"} & [LinkedIn](https://linkedin.com/in/goku){:target="_blank"} (w/ great organic [traction](https://twitter.com/GokuMohandas/status/1409487532882989058){:target="_blank"} on every post)
 - top organic SEO for common/popular search terms ([mlops lessons](https://www.google.com/search?q=mlops+lessons){:target="_blank"}, [testing ml](https://www.google.com/search?q=testing+ml){:target="_blank"}, [experiment tracking](https://www.google.com/search?q=experiment+tracking+ml){:target="_blank"}, [monitoring ml](https://www.google.com/search?q=monitoring+ml){:target="_blank"}, [data stack ml](https://www.google.com/search?q=data+stack+for+ml){:target="_blank"}, etc.)
 
