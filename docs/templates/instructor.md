@@ -14,10 +14,10 @@
 </div>
 
 <p>
-    Over the past 7 years, I've worked on ML and product at a large company (<a href="https://www.apple.com/" target="_blank">Apple</a>), a startup in the oncology space (<a href="https://www.ciitizen.com/" target="_blank">Ciitizen</a>) and ran my own startup in the rideshare space (HotSpot). Throughout my journey, I've worked with brilliant developers and product managers and learned how to responsibly develop, deploy and iterate on ML systems across various industries.
+    Over the past 7 years, I've worked on ML and product at a large company (<a href="https://www.apple.com/" target="_blank">Apple</a>), a startup in the oncology space (<a href="https://www.ciitizen.com/" target="_blank">Ciitizen</a>) and ran my own startup in the rideshare space (HotSpot). Throughout my journey, I've worked with brilliant engineering and product teams and learned how to responsibly develop, deploy and iterate on ML systems across various industries, stacks and scale
 </p>
 <p>
-    I currently work closely with early-stage and F500 companies in helping them deliver value with ML while diving into the best and bespoke practices of this rapidly evolving space. I want to share this knowledge with the rest of the world so we can accelerate progress in this space.
+    I currently work closely with teams from early-stage/F500 companies in helping them deliver value with ML while diving into the best and bespoke practices of this rapidly evolving space. I also collaborate with the best tooling/platform companies who share our mission of making responsible ML easier and faster. I want to share this knowledge with the rest of the world so we can accelerate progress in this space.
 </p>
 <p>
     ML is <b>not a separate industry</b>, instead, it's a powerful <b>way of thinking</b> about data, so let's make sure we have a solid foundation before we start changing the world with it. Made With ML is our medium to catalyze this goal and though we're off to great start, we still have a long way to go.
