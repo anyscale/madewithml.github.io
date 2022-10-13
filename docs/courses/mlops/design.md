@@ -71,7 +71,7 @@ Set the scene for what we're trying to do through a customer-centric approach:
     <thead>
     <tr>
         <th>Assumption</th>
-        <th>Actual</th>
+        <th>Reality</th>
         <th>Reason</th>
     </tr>
     </thead>
@@ -124,7 +124,7 @@ Breakdown the product into key objectives that we want to focus on.
     <thead>
     <tr>
         <th>Assumption</th>
-        <th>Actual</th>
+        <th>Reality</th>
         <th>Reason</th>
     </tr>
     </thead>
@@ -198,7 +198,7 @@ How feasible is our solution and do we have the required resources to deliver it
     <thead>
     <tr>
         <th>Assumption</th>
-        <th>Actual</th>
+        <th>Reality</th>
         <th>Reason</th>
     </tr>
     </thead>
@@ -234,7 +234,7 @@ Describe the training and production (batches/streams) sources of data.
     <thead>
     <tr>
         <th>Assumption</th>
-        <th>Actual</th>
+        <th>Reality</th>
         <th>Reason</th>
     </tr>
     </thead>
@@ -271,7 +271,7 @@ Describe the labeling process and how we settled on the features and labels.
     <thead>
     <tr>
         <th>Assumption</th>
-        <th>Actual</th>
+        <th>Reality</th>
         <th>Reason</th>
     </tr>
     </thead>
@@ -348,7 +348,7 @@ While the specific methodology we employ can differ based on the problem, there 
     <thead>
     <tr>
         <th>Assumption</th>
-        <th>Actual</th>
+        <th>Reality</th>
         <th>Reason</th>
     </tr>
     </thead>
