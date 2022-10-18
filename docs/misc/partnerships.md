@@ -28,7 +28,7 @@ All of our lessons focus on first principles when approaching a concept. This he
 
 <!-- > While ML stacks are contextual (tasks, constraints, team, maturity), we believe that a standard ML stack will emerge over time that will cater to the majority of use cases (with the flexibility to cater to the long tail of contexts). We want to work with these teams to help accelerate the progress towards this. -->
 
-Your product will be deeply integrated into the [MLOps course](https://madewithml.com/#mlops){:target="_blank"}, where thousands of developers everyday will see and use your product as the *definitive* standard. All of this visibility and traction is invaluable for industry adoption, standing out in the competitive landscape and using the feedback to improve the product.
+Your product will be deeply integrated into the [MLOps course](https://madewithml.com/#mlops){:target="_blank"}, where thousands of developers everyday will use and assess your product for their industry contexts. All of this visibility and traction is invaluable for industry adoption, standing out in the competitive landscape and using the feedback to improve the product.
 
 > We also have many downstream projects in progress to add more value on top of the content (async video course, private community, university labs, corporate onboarding, talent platform).
 
