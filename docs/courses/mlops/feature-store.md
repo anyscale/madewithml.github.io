@@ -8,7 +8,7 @@ repository: https://github.com/GokuMohandas/mlops-course
 notebook: https://github.com/GokuMohandas/feature-store/blob/main/feature_store.ipynb
 ---
 
-## Intuition
+## What is a feature store
 
 Let's motivate the need for a feature store by chronologically looking at what challenges developers face in their current workflows. Suppose we had a task where we needed to predict something for an entity (ex. user) using their features.
 

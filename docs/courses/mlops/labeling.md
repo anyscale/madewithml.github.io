@@ -10,7 +10,7 @@ notebook: https://github.com/GokuMohandas/mlops-course/blob/main/notebooks/tagif
 
 {% include "styles/lesson.md" %}
 
-## Intuition
+## What is data labeling
 
 Labeling (or annotation) is the process of identifying the inputs and outputs that are **worth** modeling (*not* just what could be modeled).
 
