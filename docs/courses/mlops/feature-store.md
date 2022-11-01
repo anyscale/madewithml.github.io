@@ -12,7 +12,7 @@ notebook: https://github.com/GokuMohandas/feature-store/blob/main/feature_store.
 
 Let's motivate the need for a feature store by chronologically looking at what challenges developers face in their current workflows. Suppose we had a task where we needed to predict something for an entity (ex. user) using their features.
 
-1. **Isolation**: feature development in isolation (for each unique ML application) can lead to duplication of efforts (setting up ingestion pipelines, feature engineering, etc.).
+1. **Duplication**: feature development in isolation (for each unique ML application) can lead to duplication of efforts (setting up ingestion pipelines, feature engineering, etc.).
     - `#!js Solution`: create a central feature repository where the entire team contributes maintained features that anyone can use for any application.
 2. **Skew**: we may have different pipelines for generating features for training and serving which can introduce skew through the subtle differences.
     - `#!js Solution`: create features using a unified pipeline and store them in a central location that the training and serving pipelines pull from.
@@ -38,26 +38,19 @@ Each of these components is fairly easy to set up but connecting them all togeth
 
 ## Over-engineering
 
-Not all machine learning tasks require a feature store. In fact, our use case is a perfect example of a test that *does not* benefit from a feature store. All of our data points are independent and stateless and there is no entity that has changing features over time. The real utility of a feature store shines when we need to have up-to-date features for an entity that we continually generate predictions for. For example, a user's behavior (clicks, purchases, etc.) on an e-commerce platform or the deliveries a food runner recently made today, etc.
+Not all machine learning platforms require a feature store. In fact, our use case is a perfect example of a task that *does not* benefit from a feature store. All of our data points are independent, stateless, from client-side and there is no entity that has changing features over time. The real utility of a feature store shines when we need to have up-to-date features for an entity that we continually generate predictions for. For example, a user's behavior (clicks, purchases, etc.) on an e-commerce platform or the deliveries a food runner recently made in the last hour, etc.
 
-!!! question "When do I need a feature store?"
-    Once we've determined if our task can benefit from a feature store, do we build one right away?
+### When do I need a feature store?
 
-    ??? quote "Show answer"
-        As usual, it depends.
+To answer this question, let's revisit the main challenges that a feature store addresses:
 
-        Use it from the very beginning if:
+- **Duplication**: if we don't have too many ML applications/models, we don't really need to add the additional complexity of a feature store to manage transformations. All the feature transformations can be done directly inside the model processing or as a separate function. We could even organize these transformations in a separate central repository for other team members to use. But this quickly becomes difficult to use because developers still need to know which transformations to invoke and which are compatible with their specific models, etc.
+!!! note
+    Additionally, if the transformations are compute intensive, then they'll incur a lot of costs by running on duplicate datasets across different applications (as opposed to having a central location with upt-o-date transformed features).
 
-        - someone on our team has set one up before
-        - we have time to focus on infrastructure
+- **Skew**: similar to duplication of efforts, if our transformations can be tied to the model or as a standalone function, then we can just reuse the same pipelines to produce the feature values for training and serving. But this becomes complex and compute intensive as the number of applications, features and transformations grow.
 
-        Delay using it until later if:
-
-        - no one on the team has set one up before
-        - we need to iterate on product first (ex. early-stage startup)
-        - we want to motivate the need for each advantage of a feature store
-
-        However, If we follow the delayed approach, we need to consider adopting a feature store if we find ourselves repeating feature preparation and serving steps repeatedly for every new project. The time wasted through these repeated efforts will be significantly more than the time needed to set up a feature store (not to mention improving the developer's experience).
+- **Value**: if we aren't working with features that need to be computed server-side (batch or streaming), then we don't have to worry about concepts like point-in-time, etc. However, if we are, a feature store can allow us to retrieve the appropriate feature values across all data sources without the developer having to worry about using disparate tools for different sources (batch, streaming, etc.)
 
 ## Feast
 
