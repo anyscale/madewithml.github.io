@@ -1,7 +1,7 @@
 ---
 template: lesson.html
 title: MLOps Course
-description: Learn how to combine machine learning with software engineering to build production-grade applications.
+description: Learn how to combine machine learning with software engineering to develop, deploy & maintain production ML applications.
 keywords: documentation, mkdocs, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/mlops-course

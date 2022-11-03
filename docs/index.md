@@ -42,7 +42,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
 <hr>
 
 <h2 id="mlops">MLOps course</h2>
-> Learn how to combine machine learning with software engineering to build production-grade applications. &rarr; :fontawesome-brands-github:{ .github } [GokuMohandas/mlops-course](https://github.com/GokuMohandas/mlops-course){:target="_blank"}
+> Learn how to combine machine learning with software engineering to develop, deploy & maintain production ML applications. &rarr; :fontawesome-brands-github:{ .github } [GokuMohandas/mlops-course](https://github.com/GokuMohandas/mlops-course){:target="_blank"}
 
 {% include "templates/mlops.md" %}
 

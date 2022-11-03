@@ -1050,7 +1050,7 @@ head_view(attention=attn, tokens=tokens)
 <img src="/static/images/foundations/transformers/interpretability.png" width="375" alt="interpretability with transformers">
 </div>
 
-Now we're ready to start the [MLOps course](https://madewithml.com/#mlops){:target="_blank"} to learn how to apply all this foundational modeling knowledge to responsibly deliver value.
+Now we're ready to start the [MLOps course](https://madewithml.com/#mlops){:target="_blank"} to learn how to apply all this foundational modeling knowledge to responsibly develop, deploy and maintain production machine learning applications.
 
 <!-- Citation -->
 {% include "templates/cite.md" %}
