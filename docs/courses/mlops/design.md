@@ -107,7 +107,7 @@ Propose the value we can create through a product-centric approach:
         <img src="/static/images/mlops/design/product.png" width="1000" alt="product mockup"></a>
     </div>
 
-    > Yes, we actually did build this before realizing it exacerbated noise and hype. And so, we pivoted into teaching the community how to responsibly deliver value with ML.
+    > Yes, we actually did build this before realizing it exacerbated noise and hype. And so, we pivoted into teaching the community how to responsibly develop, deploy & maintain ML.
 
 #### Objectives
 
@@ -356,7 +356,7 @@ While the specific methodology we employ can differ based on the problem, there 
     <tr>
         <td>Solution needs to involve ML due to unstructured data and open domain space.</td>
         <td>An iterative approach where we start with simple rule-based solutions and slowly add complexity.</td>
-        <td>This course is about responsibly deliver value with ML, so we'll jump to it right away.</td>
+        <td>This course is about responsibly delivering value with ML, so we'll jump to it right away.</td>
     </tr>
     </tbody>
     </table>

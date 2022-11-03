@@ -12,7 +12,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
         <div class="ai-hero-text">
             <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
             <p style="margin-top: 0rem; margin-bottom: 0rem !important; color: #807e7e;">Applied ML · MLOps · Production</p>
-            <p style="font-size: 0.89rem;">Join <b>30K+ developers</b> in learning how to responsibly deliver value with ML.</p>
+            <p style="font-size: 0.89rem;">Join <b>30K+ developers</b> in learning how to responsibly develop, deploy & maintain ML.</p>
             <div id="revue-embed">
                 <form action="https://www.getrevue.co/profile/madewithml/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">
                     <input class="revue-form-field" placeholder="Your personal email address..." type="email" name="member[email]" id="member_email" style="width: 80%; border: 1px solid #b3b3b3; border-radius: 3px;">

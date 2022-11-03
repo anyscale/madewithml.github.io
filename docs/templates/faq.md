@@ -34,7 +34,7 @@
                     <li>Scientific computing (<a href="../courses/foundations/numpy" target="_blank">NumPy</a>, <a href="../courses/foundations/pandas" target="_blank">Pandas</a>)</li>
                     <li>ML/DL (<a href="../courses/foundations/logistic-regression" target="_blank">logistic regression</a> w/ scikit-learn)</li>
                 </ul>
-                <p>You will <b>NOT</b> need to know any <a href="../courses/foundations" target="_blank">deep learning</a> topics or related libraries (ex. <a href="../courses/foundations/pytorch" target="_blank">PyTorch</a>) as this course is largely model-agnostic and the focus will be on how to responsibly deliver value with <b>any</b> kind of machine learning model.
+                <p>You will <b>NOT</b> need to know any <a href="../courses/foundations" target="_blank">deep learning</a> topics or related libraries (ex. <a href="../courses/foundations/pytorch" target="_blank">PyTorch</a>) as this course is largely model-agnostic and the focus will be on how to responsibly develop, deploy and maintain <b>any</b> kind of machine learning model.
             </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
             </div>
             <div id="faq-collapse3" class="collapse" aria-labelledby="heading2" data-parent="#faq-accordion">
             <div class="card-body">
-                Machine learning is increasingly incorporated into many products and so companies are looking for people with increasingly deeper knowledge on not only modeling, but how to operationalize it (MLOps). It's a major advantage to understand the fundamentals of this field at this nascent stage so you can responsibly deliver value with ML as a foundational developer in your industry.
+                Machine learning is increasingly incorporated into many products and so companies are looking for people with increasingly deeper knowledge on not only modeling, but how to operationalize it (MLOps). It's a major advantage to understand the fundamentals of this field at this nascent stage so you can responsibly develop, deploy & maintain ML as a foundational developer in your industry.
             </div>
             </div>
         </div>
