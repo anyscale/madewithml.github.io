@@ -14,7 +14,7 @@
 </div>
 
 <p>
-    Over the past 7 years, I've worked on ML and product at a large company (<a href="https://www.apple.com/" target="_blank">Apple</a>), a startup in the oncology space (<a href="https://www.ciitizen.com/" target="_blank">Ciitizen</a>) and ran my own startup in the rideshare space (HotSpot). Throughout my journey, I've worked with brilliant engineering and product teams and learned how to responsibly develop, deploy and iterate on ML systems across various industries, stacks and scale
+    Over the past 7 years, I've worked on ML at a large company (NLP & ML platform <a href="https://www.apple.com/" target="_blank">@Apple</a>), a startup in the oncology space (led the ML team <a href="https://www.ciitizen.com/" target="_blank">@Ciitizen</a> [acquired]) and ran my own startup in the rideshare space (HotSpot). Throughout my journey, I've worked with brilliant engineering and product teams and learned how to responsibly develop, deploy and iterate on ML systems across various industries, stacks and scale.
 </p>
 <p>
     I currently work closely with teams from early-stage/F500 companies in helping them develop, deploy and maintain production ML applications while diving into the best and bespoke practices of this rapidly evolving space. I also collaborate with the best tooling/platform companies who share our mission of making responsible ML easier and faster. I want to share this knowledge with the rest of the world so we can accelerate progress in this space.
