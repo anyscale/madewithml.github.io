@@ -1,7 +1,7 @@
 ---
 template: lesson.html
 title: "Testing Machine Learning Systems: Code, Data and Models"
-description: Learn how to test ML models (and their code and data) to ensure consistent behavior in our ML systems.
+description: Learn how to test ML artifacts (code, data and models) to ensure a reliable ML system.
 keywords: testing, testing ml, pytest, great expectations, unit test, parametrize, fixtures, mlops, applied ml, machine learning, ml in production, machine learning in production, applied machine learning
 image: https://madewithml.com/static/images/mlops.png
 repository: https://github.com/GokuMohandas/mlops-course
@@ -101,15 +101,15 @@ Feel free to write the tests and organize them in these scripts *after* learning
 
 > Notice that our `tagifai/train.py` script does not have it's respective `tests/code/test_train.py`. Some scripts have large functions (ex. `train.train()`, `train.optimize()`, `predict.predict()`, etc.) with dependencies (ex. artifacts) and it makes sense to test them via `tests/code/test_main.py`.
 
-## 🧪&nbsp; Pytest
+## 🐍&nbsp; Code
 
-We're going to be using [pytest](https://docs.pytest.org/en/stable/){:target="_blank"} as our testing framework for it's powerful builtin features such as [parametrization](#parametrize), [fixtures](#fixtures), [markers](#markers) and more.
+We'll start by testing our code and we'll use [pytest](https://docs.pytest.org/en/stable/){:target="_blank"} as our testing framework for it's powerful builtin features such as [parametrization](#parametrize), [fixtures](#fixtures), [markers](#markers) and more.
 
 ```bash
 pip install pytest==7.1.2
 ```
 
-Since this testing package is not integral to the core machine learning operations, let's create a separate list in our `setup.py` and add it to our `extras_require`:
+Since pytest is not integral to the core machine learning operations (ie. only a developer would need to run tests), let's create a separate list in our `setup.py` and add it to our `extras_require`:
 
 ```python linenums="1" hl_lines="10"
 # setup.py
