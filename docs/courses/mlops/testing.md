@@ -101,7 +101,7 @@ Feel free to write the tests and organize them in these scripts *after* learning
 
 > Notice that our `tagifai/train.py` script does not have it's respective `tests/code/test_train.py`. Some scripts have large functions (ex. `train.train()`, `train.optimize()`, `predict.predict()`, etc.) with dependencies (ex. artifacts) and it makes sense to test them via `tests/code/test_main.py`.
 
-## 🐍&nbsp; Code
+## 💻&nbsp; Code
 
 We'll start by testing our code and we'll use [pytest](https://docs.pytest.org/en/stable/){:target="_blank"} as our testing framework for it's powerful builtin features such as [parametrization](#parametrize), [fixtures](#fixtures), [markers](#markers) and more.
 
