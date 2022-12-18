@@ -189,7 +189,7 @@ def swap_aliases(x):
 # Swap
 for i in range(3):
     sample_df = pd.DataFrame([{"text": "a survey of reinforcement learning for nlp tasks."}])
-    sample_df.text = sample_df.text.apply(preprocess, lower=True, stem=False)
+    sample_df.text = sample_df.text.apply(clean_text, lower=True, stem=False)
     print (swap_aliases(sample_df.iloc[0]).text)
 ```
 
@@ -197,7 +197,7 @@ for i in range(3):
 # Undesired behavior (needs contextual insight)
 for i in range(3):
     sample_df = pd.DataFrame([{"text": "Autogenerate your CV to apply for jobs using NLP."}])
-    sample_df.text = sample_df.text.apply(preprocess, lower=True, stem=False)
+    sample_df.text = sample_df.text.apply(clean_text, lower=True, stem=False)
     print (swap_aliases(sample_df.iloc[0]).text)
 ```
 
