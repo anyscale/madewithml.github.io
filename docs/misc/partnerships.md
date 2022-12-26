@@ -16,7 +16,7 @@ We created Made With ML to educate and enable the community to responsibly devel
 A few numbers that reflect the 100% organic traction we've had over the past few years and the need it's filled in the community for bringing ML to production:
 
 - [&#35;1](https://github.com/topics/mlops){:target="_blank"} MLOps [repository](https://github.com/GokuMohandas/made-with-ml){:target="_blank"} on GitHub (30K+ stars)
-- [35K+ subscribers](https://newsletter.madewithml.com/){:target="_blank"} to our community newsletter
+- [40K+ subscribers](https://madewithml.com/){:target="_blank"} to our community newsletter
 - a highly recommended industry resource ([testimonials](https://madewithml.com/#wall-of-love){:target="_blank"}, [Twitter](https://twitter.com/GokuMohandas/status/1409487532882989058){:target="_blank"}, [LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:6815254111030792192/){:target="_blank"})
 - 1.5M+ organic monthly website traffic (50K+ MAU)
 - 10K+ followers on [Twitter](https://twitter.com/GokuMohandas){:target="_blank"} & [LinkedIn](https://linkedin.com/in/goku){:target="_blank"} (w/ great organic [traction](https://twitter.com/GokuMohandas/status/1409487532882989058){:target="_blank"} on every post)

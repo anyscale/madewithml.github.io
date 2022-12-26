@@ -98,7 +98,7 @@ nav:
       - Data stack: courses/mlops/data-stack.md
       - Orchestration: courses/mlops/orchestration.md
       - Feature store: courses/mlops/feature-store.md
-  - Subscribe: https://newsletter.madewithml.com/
+  - Subscribe: misc/newsletter.md
   # - Community: https://community.madewithml.com/
 
 

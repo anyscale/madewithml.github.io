@@ -14,7 +14,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!-- DON'T FORGET TO CHANGE LINK INSIDE docs/overrides/newsletter.html and mkdocs.yml -->
+            <!-- DON'T FORGET TO CHANGE INSIDE docs/overrides/newsletter.html and mkdocs.yml -->
             <iframe width="540" height="600" src="https://c8efd03b.sibforms.com/serve/MUIEAMs1dZBzyue8b3i3Gw1PHVEmw4JOmt9cLywb0Z10_6R4KyAdiVxZRc2B0Eq19YaA37r1Tjmj4ESTiMsdWAxUKcyI5ctqqGcBFCdoskkHDydRzYCllDt7UNUQJUVsT9JDJ8a48y54PNbKvWB2mzaWtQlCqztp2aG6h9QC4-Jn2sNlTahB7_yIluIBjKjinOjsVyQERl5gwTI4" frameborder="0" scrolling="auto" allowfullscreen style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>
         </div>
     </div>
@@ -30,7 +30,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
             <input class="revue-form-field" placeholder="Your personal email address..." type="email" name="member[email]" id="member_email" style="width: 80%; border: 1px solid #b3b3b3; border-radius: 3px;">
             <button class="md-button md-button--purple-gradient mr-2 mb-2 mb-md-0 mt-md-2 mt-2" style="cursor: pointer !important;" data-toggle="modal" data-target="#newsletterForm">
                 <span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M1.75 3A1.75 1.75 0 000 4.75v14c0 .966.784 1.75 1.75 1.75h20.5A1.75 1.75 0 0024 18.75v-14A1.75 1.75 0 0022.25 3H1.75zM1.5 4.75a.25.25 0 01.25-.25h20.5a.25.25 0 01.25.25v.852l-10.36 7a.25.25 0 01-.28 0l-10.36-7V4.75zm0 2.662V18.75c0 .138.112.25.25.25h20.5a.25.25 0 00.25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0L1.5 7.412z"></path></svg></span> Subscribe</button>
-                <a href="#mlops"><span class="md-button md-button--grey-secondary mr-2 mb-2 mb-md-0 mt-md-2 px-3 py-1">View lessons</span></a>
+                <a href="#foundations"><span class="md-button md-button--grey-secondary mr-2 mb-2 mb-md-0 mt-md-2 px-3 py-1">View lessons</span></a>
         </div>
     </div>
     <div class="col-md-5 ai-center-all" data-aos="fade-left">
@@ -40,32 +40,8 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     </div>
 </div>
 
-{% include "templates/accolades.md" %}
-
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
-
-## Foundations
-> Learn the foundations of machine learning through intuitive explanations, clean code and visualizations. &rarr; :fontawesome-brands-github:{ .github } [GokuMohandas/Made-With-ML](https://github.com/GokuMohandas/Made-With-ML){:target="_blank"}
-
-{% include "templates/foundations.md" %}
-
-<hr>
-
-<h2 id="mlops">MLOps course</h2>
-> Learn how to combine machine learning with software engineering to develop, deploy & maintain production ML applications. &rarr; :fontawesome-brands-github:{ .github } [GokuMohandas/mlops-course](https://github.com/GokuMohandas/mlops-course){:target="_blank"}
-
-{% include "templates/mlops.md" %}
-
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
-
-{% include "templates/principles.md" %}
-
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
-
-{% include "templates/instructor.md" %}
-
-<hr style="margin-top: 2rem; margin-bottom: 2rem;">
-
-{% include "templates/wall_of_love.md" %}
-
-{% include "templates/cite.md" %}
+<iframe width="540" height="600"
+        src="https://c8efd03b.sibforms.com/serve/MUIEAMs1dZBzyue8b3i3Gw1PHVEmw4JOmt9cLywb0Z10_6R4KyAdiVxZRc2B0Eq19YaA37r1Tjmj4ESTiMsdWAxUKcyI5ctqqGcBFCdoskkHDydRzYCllDt7UNUQJUVsT9JDJ8a48y54PNbKvWB2mzaWtQlCqztp2aG6h9QC4-Jn2sNlTahB7_yIluIBjKjinOjsVyQERl5gwTI4"
+        frameborder="0" scrolling="auto" allowfullscreen
+        style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;">
+</iframe>
