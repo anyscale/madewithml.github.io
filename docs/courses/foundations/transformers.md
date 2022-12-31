@@ -587,13 +587,13 @@ We'll first learn about the unique components within the Transformer architectur
 The most popular type of self-attention is scaled dot-product attention from the widely-cited [Attention is all you need](https://arxiv.org/abs/1706.03762){:target="_blank"} paper. This type of attention involves projecting our encoded input sequences onto three matrices, queries (Q), keys (K) and values (V), whose weights we learn.
 
 
-$$ Q = XW_q \text{where} W_q \in \mathbb{R}^{HXd_q} $$
+$$ Q = XW_q \text{ where } W_q \in \mathbb{R}^{HXd_q} $$
 
-$$ K = XW_k \text{where} W_k \in \mathbb{R}^{HXd_k} $$
+$$ K = XW_k \text{ where } W_k \in \mathbb{R}^{HXd_k} $$
 
-$$ V = XW_v \text{where} W_v \in \mathbb{R}^{HXd_v} $$
+$$ V = XW_v \text{ where } W_v \in \mathbb{R}^{HXd_v} $$
 
-$$ attention (Q, K, V) = softmax( \frac{Q K^{T}}{\sqrt{d_k}} )V \in \mathbb{R}^{MXd_v} $$
+$$ attention (Q, K, V) = softmax( \frac{Q K^{T}}{\sqrt{d_k}} ) V \in \mathbb{R}^{MXd_v} $$
 
 <center>
 
