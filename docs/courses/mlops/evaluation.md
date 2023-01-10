@@ -716,7 +716,7 @@ We've seen the many different metrics that we'll want to calculate when it comes
 - **capability**: the ability of our model to perform a task, measured by the objective function we optimize for (ex. log loss)
 - **alignment**: desired behavior of our model, measure by metrics that are not differentiable or don't account for misclassifications and probability differences (ex. accuracy, precision, recall, etc.)
 
-While our capability (ex. loss) and alignment (ex. accuracy) metrics seem to be aligned, their differences can indicate issues in our system:
+While capability (ex. loss) and alignment (ex. accuracy) metrics may seem to be aligned, their differences can indicate issues in our data:
 
 - ↓ accuracy, ↑ loss = large errors on lots of data (worst case)
 - ↓ accuracy, ↓ loss = small errors on lots of data, distributions are close but tipped towards misclassifications (misaligned)
