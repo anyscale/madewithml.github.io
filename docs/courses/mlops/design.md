@@ -290,7 +290,7 @@ Before we can model our objective, we need to be able to evaluate how we’re pe
 
 #### Metrics
 
-One of the hardest challenges with evaluation is tying our core [objectives](#objectives) (may be qualitative) with quantitative metrics that our model can optimize on.
+One of the hardest challenges with evaluation is tying our core [objectives](#objectives), many of which may be qualitative, with quantitative metrics that our model can optimize on.
 
 ??? quote "Our task"
     We want to be able to classify incoming data with high precision so we can display them properly. For the projects that we categorize as `other`, we can *recall* any misclassified content using manual labeling workflows. We may also want to evaluate performance for specific classes or [slices](evaluation.md#slices){:target="_blank"} of data.

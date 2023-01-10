@@ -709,6 +709,20 @@ Shadow testing involves sending the same production traffic to the different sys
 
 An effective way to evaluate our systems is to encapsulate them as a collection (suite) and use them for [continuous integration](cicd.md){:target="_blank"}. We would continue to add to our evaluation suites and they would be executed whenever we are experimenting with changes to our system (new models, data, etc.). Often, problematic slices of data identified during [monitoring](monitoring.md){:target="blank"} are often added to the evaluation test suite to avoid repeating the same regressions in the future.
 
+## Capability vs. alignment
+
+We've seen the many different metrics that we'll want to calculate when it comes to evaluating our model but not all metrics mean the same thing. And this becomes very important when it comes to choosing the "*best*" model(s).
+
+- **capability**: the ability of our model to perform a task, measured by the objective function we optimize for (ex. log loss)
+- **alignment**: desired behavior of our model, measure by metrics that are not differentiable or don't account for misclassifications and probability differences (ex. accuracy, precision, recall, etc.)
+
+While our capability (ex. loss) and alignment (ex. accuracy) metrics seem to be aligned, their differences can indicate issues in our system:
+
+- ↓ accuracy, ↑ loss = large errors on lots of data (worst case)
+- ↓ accuracy, ↓ loss = small errors on lots of data, distributions are close but tipped towards misclassifications (misaligned)
+- ↑ accuracy, ↑ loss = large errors on some data (incorrect predictions have very skewed distributions)
+- ↑ accuracy, ↓ loss = no/few errors on some data (best case)
+
 
 ## Resources
 
