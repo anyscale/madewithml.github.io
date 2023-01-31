@@ -162,7 +162,7 @@ We can also create our own local hooks without configuring a separate .pre-commi
         -   id: black
             args: []
             files: .
-    -   repo: https://gitlab.com/PyCQA/flake8
+    -   repo: https://github.com/PyCQA/flake8
         rev: 3.9.2
         hooks:
         -   id: flake8
