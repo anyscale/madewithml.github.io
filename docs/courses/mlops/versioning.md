@@ -33,7 +33,7 @@ We'll be using DVC to version our datasets and model weights and store them in a
 Let's start by installing DVC and initializing it to create a [.dvc](https://github.com/GokuMohandas/mlops-course/tree/main/.dvc){:target="_blank"} directory.
 ```bash
 # Initialization
-pip install dvc==2.10.2
+pip install dvc==2.43.1
 dvc init
 ```
 

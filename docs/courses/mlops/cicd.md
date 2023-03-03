@@ -95,7 +95,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.7.13
+          python-version: 3.9.1
       - name: Caching
         uses: actions/cache@v2
         with:
@@ -131,7 +131,7 @@ jobs:
         - name: Set up Python
             uses: actions/setup-python@v2
             with:
-            python-version: 3.7.13
+            python-version: 3.9.1
         - name: Caching
             uses: actions/cache@v2
             with:
@@ -184,7 +184,7 @@ jobs:
         - name: Set up Python
             uses: actions/setup-python@v2
             with:
-            python-version: 3.7.13
+            python-version: 3.9.1
         - name: Caching
             uses: actions/cache@v2
             with:

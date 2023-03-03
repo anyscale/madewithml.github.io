@@ -1,6 +1,6 @@
 <div class="row mt-4 ai-course-list" data-aos="fade-down">
 <div class="col-md-4">
-    <b><span class="mr-1">🛠</span> Toolkit</b>
+    <span class="mr-1">1. </span><b><span class="mr-1">🛠</span> Toolkit</b>
     <ul>
     <li><a href="/courses/foundations/notebooks/">Notebooks</a></li>
     <li><a href="/courses/foundations/python/">Python</a></li>
@@ -10,7 +10,7 @@
     </ul>
 </div>
 <div class="col-md-4">
-    <b><span class="mr-1">🔥</span> Machine Learning</b>
+    <span class="mr-1">2. </span><b><span class="mr-1">🔥</span> Machine Learning</b>
     <ul>
     <li><a href="/courses/foundations/linear-regression/">Linear Regression</a></li>
     <li><a href="/courses/foundations/logistic-regression/">Logistic Regression</a></li>
@@ -20,7 +20,7 @@
     </ul>
 </div>
 <div class="col-md-4">
-    <b><span class="mr-1">🤖</span> Deep Learning</b>
+    <span class="mr-1">3. </span><b><span class="mr-1">🤖</span> Deep Learning</b>
     <ul>
     <li><a href="/courses/foundations/convolutional-neural-networks/">CNNs</a></li>
     <li><a href="/courses/foundations/embeddings/">Embeddings</a></li>

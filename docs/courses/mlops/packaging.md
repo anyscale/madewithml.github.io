@@ -34,7 +34,7 @@ cd mlops
 
 ## Python
 
-First thing we'll do is set up the correct version of Python. We'll be using version `3.7.13` specifically but any version of Python 3 should work. Though you could download different Python versions online, we highly recommend using a version manager such as [pyenv](https://github.com/pyenv/pyenv){:target="_blank"}.
+First thing we'll do is set up the correct version of Python. We'll be using version `3.9.1` specifically but any version of Python 3 should work. Though you could download different Python versions online, we highly recommend using a version manager such as [pyenv](https://github.com/pyenv/pyenv){:target="_blank"}.
 
 > Pyenv works for Mac & Linux, but if you're on windows, we recommend using [pyenv-win](https://github.com/pyenv-win/pyenv-win){:target="_blank"}.
 
@@ -53,23 +53,23 @@ First thing we'll do is set up the correct version of Python. We'll be using ver
     *  3.6.9
 
     # Install new version
-    $ pyenv install 3.7.13
+    $ pyenv install 3.9.1
     ---> 100%
 
     # Set new version
-    $ pyenv local 3.7.13
+    $ pyenv local 3.9.1
     system
     3.6.9
-    * 3.7.13
+    * 3.9.1
 
     # Validate
     $ python --version
-    Python 3.7.13
+    Python 3.9.1
     ```
 </div>
 <script src="../../../static/js/termynal.js"></script>
 
-> We highly recommend using Python `3.7.13` because, while using another version of Python will work, we may face some conflicts with certain package versions that may need to be resolved.
+> We highly recommend using Python `3.9.1` because, while using another version of Python will work, we may face some conflicts with certain package versions that may need to be resolved.
 
 ## Virtual environment
 
