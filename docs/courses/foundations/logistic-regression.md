@@ -194,9 +194,9 @@ m:b = 1.57
 train_class_counts = dict(collections.Counter(y_train))
 val_class_counts = dict(collections.Counter(y_val))
 test_class_counts = dict(collections.Counter(y_test))
-print (f"train m:b = {train_class_counts["malignant"]/train_class_counts["benign"]:.2f}")
-print (f"val m:b = {val_class_counts["malignant"]/val_class_counts["benign"]:.2f}")
-print (f"test m:b = {test_class_counts["malignant"]/test_class_counts["benign"]:.2f}")
+print (f'train m:b = {train_class_counts["malignant"]/train_class_counts["benign"]:.2f}')
+print (f'val m:b = {val_class_counts["malignant"]/val_class_counts["benign"]:.2f}')
+print (f'test m:b = {test_class_counts["malignant"]/test_class_counts["benign"]:.2f}')
 ```
 <pre class="output">
 train m:b = 1.57
