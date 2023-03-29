@@ -101,7 +101,7 @@ Next we'll create a configuration directory called `config` where we can store c
 
 ```bash
 mkdir config
-touch config/main.py config/args.json
+touch config/config.py config/args.json
 ```
 
 ```bash
