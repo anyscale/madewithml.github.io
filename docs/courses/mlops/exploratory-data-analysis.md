@@ -41,7 +41,7 @@ How many data points do we have per tag?
 # Distribution of tags
 tags, tag_counts = zip(*Counter(df.tag.values).most_common())
 plt.figure(figsize=(10, 3))
-ax = sns.barplot(list(tags), list(tag_counts))
+ax = sns.barplot(x=list(tags), y=list(tag_counts))
 plt.title("Tag distribution", fontsize=20)
 plt.xlabel("Tag", fontsize=16)
 ax.set_xticklabels(tags, rotation=90, fontsize=14)
