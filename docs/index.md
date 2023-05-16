@@ -25,7 +25,7 @@ keywords: mlops, applied ml, machine learning, ml in production, machine learnin
     <div class="col-md-7" data-aos="fade-right">
         <div class="ai-hero-text">
             <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
-            <p style="margin-top: 0rem; margin-bottom: 0rem !important; color: #807e7e;">Applied ML · MLOps · Production</p>
+            <p style="margin-top: 0rem; margin-bottom: 0rem !important; color: #807e7e;">1<sup>st</sup> principles + implementations</p>
             <p style="font-size: 0.89rem;">Join <b>40K+ developers</b> in learning how to responsibly develop, deploy & maintain ML.</p>
             <input class="revue-form-field" placeholder="Your personal email address..." type="email" name="member[email]" id="member_email" style="width: 80%; border: 1px solid #b3b3b3; border-radius: 3px;">
             <button class="md-button md-button--purple-gradient mr-2 mb-2 mb-md-0 mt-md-2 mt-2" style="cursor: pointer !important;" data-toggle="modal" data-target="#newsletterForm">

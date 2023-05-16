@@ -205,9 +205,6 @@ plugins:
             "courses/mlops/iteration.md": "courses/mlops/design.md"
             "courses/mlops/product.md": "courses/mlops/design.md"
             "courses/mlops/purpose.md": "courses/mlops/design.md"
-            "courses/mlops/purpose.md/#systems-design": "courses/mlops/design.md/#engineering"
-            "courses/mlops/purpose.md/#project-management": "courses/mlops/design.md/#project-management"
             "courses/mlops/pipelines.md": "courses/mlops/orchestration.md"
-            "courses/mlops/continual-learning.md": "courses/mlops/orchestration.md#continual-learning"
             # "mlops-course": "index.md"
 
