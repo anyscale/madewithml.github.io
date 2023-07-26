@@ -49,7 +49,7 @@ Set the scene for what we're trying to do through a user-centric approach:
 
 Propose the value we can create through a product-centric approach:
 
-- `#!js product`: what needs to be build to help our users reach their goals?
+- `#!js product`: what needs to be built to help our users reach their goals?
 - `#!js alleviates`: how will the product reduce pains?
 - `#!js advantages`: how will the product create gains?
 
@@ -132,7 +132,7 @@ How feasible is our solution and do we have the required resources to deliver it
     }
     ```
 
-Now that we've set up the product design requirements for our ML service, let's
+Now that we've set up the product design requirements for our ML service, let's move on to the systems design requirements in the [next lesson](systems-design.md){:target="_blank"}.
 
 <!-- Course signup -->
 {% include "templates/signup.md" %}
