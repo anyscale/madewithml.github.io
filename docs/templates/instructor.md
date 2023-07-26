@@ -22,5 +22,5 @@
 </p>
 
 <div class="mt-4 px-3 py-3" style="background-color: #f5f9fd; text-align: center;">
-🎉&nbsp; Made With ML is now part of <a href="https://www.anyscale.com/" target="_blank">Anyscale</a>, read more about it <b><a href="https://www.anyscale.com/blog/made-with-ml-ml-for-developers" target="_blank">here</a></b>!
+🎉&nbsp; Made With ML is now part of <a href="https://www.anyscale.com/" target="_blank">Anyscale</a>, read more about it <b><a href="https://www.anyscale.com/blog/machine-learning-for-developers" target="_blank">here</a></b>!
 </div>

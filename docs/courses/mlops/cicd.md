@@ -160,7 +160,7 @@ with:
     filePath: results/evaluation_results.md
 ```
 
-So when this `workloads` workflow completes, we'll have a comment on our PR with our training and evaluation results. We can now collaboratively analyze the details and decide if we want to merge the PR.
+So when this `workloads` workflow completes, we'll have a comment on our PR ([example](https://github.com/GokuMohandas/Made-With-ML/pull/230){:target="_blank"}) with our training and evaluation results. We can now collaboratively analyze the details and decide if we want to merge the PR.
 
 <div class="ai-center-all">
     <img src="/static/images/mlops/cicd/comments.png" width="800" alt="comments on PR">
