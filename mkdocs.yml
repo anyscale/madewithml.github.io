@@ -1,0 +1,151 @@
+# Project information
+site_name: Made With ML
+site_url: https://madewithml.com/
+site_description: Learn how to responsibly design, develop, deploy and iterate on production ML applications.
+site_author: Goku Mohandas
+
+# Repository
+repo_url: https://github.com/GokuMohandas/Made-With-ML
+repo_name: GokuMohandas/MadeWithML
+edit_uri: ''  #disables edit button
+
+# Copyright
+copyright: © 2023 Anyscale, Inc. <br> <a href="https://www.anyscale.com/privacy-policy" target="_blank">Anyscale Privacy Policy</a>
+
+# Social media
+extra:
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/GokuMohandas
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/goku
+    - icon: fontawesome/brands/github
+      link: https://github.com/GokuMohandas
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/madewithml?sub_confirmation=1
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:goku@madewithml.com
+  analytics:
+    provider: google
+    property: G-T1R6V3J71R
+
+# Page tree
+nav:
+  - Home: index.md
+  - About: about.md
+  - Course:
+    - Lessons: /#course
+    - 🎨 &nbsp; Design:
+      - Setup: courses/mlops/setup.md
+      - Product: courses/mlops/product-design.md
+      - Systems: courses/mlops/systems-design.md
+    - 🔢 &nbsp; Data:
+      - Preparation: courses/mlops/preparation.md
+      - Exploration: courses/mlops/exploratory-data-analysis.md
+      - Preprocessing: courses/mlops/preprocessing.md
+      - Distributed: courses/mlops/distributed-data.md
+    - 📈 &nbsp; Model:
+      - Training: courses/mlops/training.md
+      - Tracking: courses/mlops/experiment-tracking.md
+      - Tuning: courses/mlops/tuning.md
+      - Evaluation: courses/mlops/evaluation.md
+      - Serving: courses/mlops/serving.md
+    - 💻 &nbsp; Developing:
+      - Scripting: courses/mlops/scripting.md
+      - CLI: courses/mlops/cli.md
+    - 📦 &nbsp; Utilities:
+      - Logging: courses/mlops/logging.md
+      - Documentation: courses/mlops/documentation.md
+      - Styling: courses/mlops/styling.md
+      - Pre-commit: courses/mlops/pre-commit.md
+    - ✅ &nbsp; Testing:
+      - Code: courses/mlops/testing.md
+      - Data: courses/mlops/testing/#data
+      - Models: courses/mlops/testing/#models
+    - ♻️ &nbsp; Reproducibility:
+      - Versioning: courses/mlops/versioning.md
+    - 🚀 &nbsp; Production:
+      - Jobs & Services: courses/mlops/jobs-and-services.md
+      - CI/CD workflows: courses/mlops/cicd.md
+      - Monitoring: courses/mlops/monitoring.md
+      - Data engineering: courses/mlops/data-engineering.md
+  - Subscribe: misc/newsletter.md
+  - Community: https://discord.com/channels/1078171187609337896/1078171189169635472
+
+
+# Configuration
+theme:
+  name: material
+  custom_dir: docs/overrides
+  logo: static/images/logo.png
+  favicon: favicon.ico
+  palette:
+    primary: black
+    accent: indigo
+  font:
+    text: Epilogue
+    code: Roboto Mono
+  features:
+    # - navigation.instant # causes mathjax issues
+    - navigation.tabs
+    # - navigation.expand
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+
+# Extensions
+markdown_extensions:
+  - attr_list # add HTML and CSS to Markdown elements
+  - admonition # alerts
+  - codehilite
+  - def_list
+  - footnotes
+  - md_in_html
+  - meta
+  - pymdownx.arithmatex: # mathjax
+      generic: true
+  - pymdownx.details # collapsible alerts
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.inlinehilite # inline code highlights
+  - pymdownx.keys # show keystroke symbols
+  - pymdownx.snippets # insert content from other files
+  - pymdownx.superfences # nest code and content inside alerts
+  - pymdownx.tabbed: # content tabs
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: true
+  - toc:
+      toc_depth: 3  # md-sidebar__scrollwrap is set to hidden in scss/extra.scss
+
+# Extra CSS
+extra_css:
+  - static/scss/extra.css
+  - static/scss/bs.css
+  - static/scss/termynal.css
+  # - https://unpkg.com/aos@2.3.1/dist/aos.css
+
+# Extra JS
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js
+  - https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  # - https://unpkg.com/aos@2.3.1/dist/aos.js
+  - static/js/custom.js
+  - static/js/termynal.js
+
+# Plugins
+plugins:
+  - search
+  - macros
+  - redirects:
+        redirect_maps:
+            "courses/mlops/design.md": "courses/mlops/product-design.md"
+            # "mlops-course": "index.md"
+
