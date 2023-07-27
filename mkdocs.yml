@@ -69,6 +69,26 @@ nav:
       - CI/CD workflows: courses/mlops/cicd.md
       - Monitoring: courses/mlops/monitoring.md
       - Data engineering: courses/mlops/data-engineering.md
+  - Foundations:
+    - Lessons: /courses/foundations/
+    - 🛠 &nbsp; Toolkit:
+      - Notebooks: courses/foundations/notebooks.md
+      - Python: courses/foundations/python.md
+      - NumPy: courses/foundations/numpy.md
+      - Pandas: courses/foundations/pandas.md
+      - PyTorch: courses/foundations/pytorch.md
+    - 🔥 &nbsp; Machine Learning:
+      - Linear regression: courses/foundations/linear-regression.md
+      - Logistic regression: courses/foundations/logistic-regression.md
+      - Neural networks: courses/foundations/neural-networks.md
+      - Data quality: courses/foundations/data-quality.md
+      - Utilities: courses/foundations/utilities.md
+    - 🤖 &nbsp; Deep Learning:
+      - CNNs: courses/foundations/convolutional-neural-networks.md
+      - Embeddings: courses/foundations/embeddings.md
+      - RNNs: courses/foundations/recurrent-neural-networks.md
+      - Attention: courses/foundations/attention.md
+      - Transformers: courses/foundations/transformers.md
   - Subscribe: misc/newsletter.md
   - Community: https://discord.com/channels/1078171187609337896/1078171189169635472
 
