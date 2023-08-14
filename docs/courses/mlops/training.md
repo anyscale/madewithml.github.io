@@ -857,7 +857,7 @@ import torch.nn.functional as F
 
 We'll start by defining what one step (or iteration) of training looks like. This will be a function that takes in a batch of data, a model, a loss function, and an optimizer. It will then perform a forward pass, compute the loss, and perform a backward pass to update the model's weights. And finally, it will return the loss.
 
-```python linenums="1"
+```python linenums="1" hl_lines="5"
 def train_step(ds, batch_size, model, num_classes, loss_fn, optimizer):
     """Train step."""
     model.train()
@@ -878,7 +878,7 @@ def train_step(ds, batch_size, model, num_classes, loss_fn, optimizer):
 
 The validation step is quite similar to the training step but we don't need to perform a backward pass or update the model's weights.
 
-```python linenums="1"
+```python linenums="1" hl_lines="6"
 def eval_step(ds, batch_size, model, num_classes, loss_fn):
     """Eval step."""
     model.eval()

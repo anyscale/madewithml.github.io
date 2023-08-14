@@ -71,6 +71,10 @@ def train_model(
     experiment_name: Annotated[str, typer.Option(help="name of the experiment.")] = None,
     ...):
     pass
+
+
+if __name__ == "__main__":
+    app()
 ```
 
 ### Inputs

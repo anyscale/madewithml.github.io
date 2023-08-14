@@ -102,7 +102,7 @@ The first step in our data pipeline is to extract data from a source and load it
 
 We're going to use the open-source tool [Airbyte](https://airbyte.com/){:target="_blank"} to create connections between our data sources and destinations. Let's set up Airbyte and define our data sources. As we progress in this lesson, we'll set up our destinations and create connections to extract and load data.
 
-1. Ensure that we still have Docker installed from our [Docker lesson](docker.md){:target="_blank"} but if not, download it [here](https://www.docker.com/products/docker-desktop/){:target="_blank"}. For Windows users, be sure to have these [configurations](https://docs.airbyte.com/deploying-airbyte/local-deployment/#deploy-on-windows){:target="_blank"} enabled.
+1. Ensure that we have [Docker](docker.md){:target="_blank"} installed, but if not, download it [here](https://www.docker.com/products/docker-desktop/){:target="_blank"}. For Windows users, be sure to have these [configurations](https://docs.airbyte.com/deploying-airbyte/local-deployment/#deploy-on-windows){:target="_blank"} enabled.
 2. In a parent directory, outside our project directory for the MLOps course, execute the following commands to load the Airbyte repository locally and launch the service.
 ```bash
 git clone https://github.com/airbytehq/airbyte.git
