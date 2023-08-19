@@ -30,7 +30,11 @@ pytest --run-id=$RUN_ID tests/model ...                   # test model
 python madewithml/serve.py --run_id $RUN_ID               # serve model
 ```
 
-With all of our ML workloads implemented (and tested), we're ready to go to production. In this lesson, we'll learn how to convert our ML workloads from CLI commands into a scalable, fault-tolerant and reproducible workflow. We'll combine our ML workloads up to (and including) model validation into a workflow. This workflow will then produce model artifacts, which will be saved to our model registry. And finally, we can serve that model behind an API endpoint to use in production.
+With all of our ML workloads implemented (and tested), we're ready to go to production. In this lesson, we'll learn how to convert our ML workloads from CLI commands into a scalable, fault-tolerant and reproducible workflow.
+
+1. We'll combine our ML workloads up to (and including) model validation into a workflow.
+2. This workflow will then produce model artifacts, which will be saved to our model registry.
+3. And finally, we can serve that model behind an API endpoint to use in production.
 
 <div class="ai-center-all">
     <img src="/static/images/mlops/jobs_and_services/manual.png" width="700" alt="manual deployment">
