@@ -10,7 +10,7 @@ notebook: https://github.com/GokuMohandas/Made-With-ML/blob/main/notebooks/madew
 
 {% include "styles/lesson.md" %}
 
-In this lesson, we'll setup the development environment that we'll be using in all of our lessons. We'll have instructions for both local laptop and remote scalable clusters ([Anyscale](https://anyscale.com/){:target="_blank"}). While everything will work locally on your laptop, you can sign up to join one of our upcoming live cohorts where we'll provide **live lessons + QA**, **compute (GPUs)** and **community** to learn everything in one weekend → [sign up here](https://4190urw86oh.typeform.com/madewithml){:target="_blank"}.
+In this lesson, we'll setup the development environment that we'll be using in all of our lessons. We'll have instructions for both local laptop and remote scalable clusters ([Anyscale](https://anyscale.com/){:target="_blank"}). While everything will work locally on your laptop, you can sign up to join one of our upcoming live cohorts where we'll provide **live lessons + QA**, **compute (GPUs)** and **community** to learn everything in one day → [sign up here](https://4190urw86oh.typeform.com/madewithml){:target="_blank"}.
 
 ## Cluster
 
