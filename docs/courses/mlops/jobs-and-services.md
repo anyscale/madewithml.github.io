@@ -44,7 +44,7 @@ With all of our ML workloads implemented (and tested), we're ready to go to prod
 
 ### Script
 
-Since we have our CLI commands for our ML workloads, we could just execute them one-by-one on our local machine or Workspace. But for efficiency, we're going to combine them all into one script. We'll organize this under a `workloads.sh` bash script inside our `deploy/jobs` directory. Here the workloads are very similar to our CLI commands but we have some additional steps to print and save the logs from each of our workloads. For example, our data validation workload looks like this:
+Since we have our CLI commands for our ML workloads, we could just execute them one-by-one on our local machine or Workspace. But for efficiency, we're going to combine them all into one script. We'll organize this under a []`workloads.sh`](https://github.com/GokuMohandas/Made-With-ML/blob/main/deploy/jobs/workloads.sh){:target="_blank"} bash script inside our [`deploy/jobs`](https://github.com/GokuMohandas/Made-With-ML/tree/main/deploy/jobs){:target="_blank"} directory. Here the workloads are very similar to our CLI commands but we have some additional steps to print and save the logs from each of our workloads. For example, our data validation workload looks like this:
 
 ```bash
 # deploy/jobs/workloads.sh
@@ -74,7 +74,7 @@ aws s3 cp results/ s3://madewithml/$GITHUB_USERNAME/results/ --recursive
 
 ### Configuration
 
-Now that we have our single script to execute all workloads, we can execute it with one command (`#!bash ./deploy/jobs/workloads.sh`). But even better way is to use [Anyscale Jobs](https://docs.anyscale.com/productionize/jobs/get-started){:target="_blank"} to get features like automatic failure handling, email alerts and persisted logs all out of the box for our workloads. And with our `cluster_env.yaml`, `compute_config.yaml` and `workloads.sh` files, we can create the configuration for our Anyscale Job with an `workloads.yaml` file:
+Now that we have our single script to execute all workloads, we can execute it with one command (`#!bash ./deploy/jobs/workloads.sh`). But even better way is to use [Anyscale Jobs](https://docs.anyscale.com/productionize/jobs/get-started){:target="_blank"} to get features like automatic failure handling, email alerts and persisted logs all out of the box for our workloads. And with our [`cluster_env.yaml`](https://github.com/GokuMohandas/Made-With-ML/blob/main/deploy/cluster_env.yaml){:target="_blank"}, [`cluster_compute.yaml`](https://github.com/GokuMohandas/Made-With-ML/blob/main/deploy/cluster_compute.yaml){:target="_blank"} and [`workloads.sh`](https://github.com/GokuMohandas/Made-With-ML/blob/main/deploy/jobs/workloads.sh){:target="_blank"} files, we can create the configuration for our Anyscale Job with an [`workloads.yaml`](https://github.com/GokuMohandas/Made-With-ML/blob/main/deploy/jobs/workloads.yaml){:target="_blank"} file:
 
 ```yaml linenums="1"
 # deploy/jobs/workloads.yaml
@@ -152,7 +152,7 @@ After we execute our Anyscale Job, we will have saved our model artifacts to a p
 
 ### Script
 
-Similar to Anyscale Jobs, we'll start by creating a `deploy/services/serve_model.py` and a `deploy/services/serve_model.yaml` configuration:
+Similar to Anyscale Jobs, we'll start by creating a [`serve_model.py`](https://github.com/GokuMohandas/Made-With-ML/blob/main/deploy/services/serve_model.py){:target="_blank"} and a [`serve_model.yaml`](https://github.com/GokuMohandas/Made-With-ML/blob/main/deploy/services/serve_model.yaml){:target="_blank"} configuration:
 
 ```python linenums="1"
 # deploy/services/serve_model.py

@@ -91,7 +91,7 @@ Now that we understand the basic components of a GitHub Actions workflow, let's 
 And our first workflow will be our `workloads` workflow which will be triggered on a pull request to the `main` branch. This means that we'll need to push our local code changes to Git and then submit a pull request to the `main` branch. But in order to push our code to GitHub, we'll need to first authenticate with our credentials before pushing to our repository:
 
 ```bash
-git config --global user.name "Your Name"  # <-- CHANGE THIS to your name
+git config --global user.name $GITHUB_USERNAME
 git config --global user.email you@example.com  # <-- CHANGE THIS to your email
 git add .
 git commit -m ""  # <-- CHANGE THIS to your message

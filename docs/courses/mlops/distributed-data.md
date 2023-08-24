@@ -82,7 +82,10 @@ class_to_index = {tag: i for i, tag in enumerate(tags)}
 
 ```python linenums="1"
 # Distributed preprocessing
-sample_ds = train_ds.map_batches(preprocess, fn_kwargs={"class_to_index": class_to_index}, batch_format="pandas")
+sample_ds = train_ds.map_batches(
+  preprocess,
+  fn_kwargs={"class_to_index": class_to_index},
+  batch_format="pandas")
 sample_ds.show(1)
 ```
 
