@@ -39,6 +39,7 @@ on:
 ```
 
 This creates for the following ideal workflow:
+
 1. We make changes to our code and submit a pull request to the `main` branch.
 2. Our `workloads` workflow is triggered and executes our model development workloads.
 3. If the performance of the new model is better, we can merge the pull request and push the changes to the `main` branch.

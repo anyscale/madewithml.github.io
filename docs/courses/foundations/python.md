@@ -798,6 +798,7 @@ We were able to achieve what we want but we now increased the size of our `opera
 The decorator function accepts a function `f` which is the function we wish to wrap around, in our case, it's `operations()`. The output of the decorator is its `wrapper` function which receives the arguments and keyword arguments passed to function `f`.
 
 Inside the `wrapper` function, we can:
+
 1. extract the input parameters passed to function `f`.
 2. make any changes we want to the function inputs.
 3. function `f` is executed
