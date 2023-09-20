@@ -44,7 +44,7 @@ With all of our ML workloads implemented (and tested), we're ready to go to prod
 
 ### Script
 
-Since we have our CLI commands for our ML workloads, we could just execute them one-by-one on our local machine or Workspace. But for efficiency, we're going to combine them all into one script. We'll organize this under a []`workloads.sh`](https://github.com/GokuMohandas/Made-With-ML/blob/main/deploy/jobs/workloads.sh){:target="_blank"} bash script inside our [`deploy/jobs`](https://github.com/GokuMohandas/Made-With-ML/tree/main/deploy/jobs){:target="_blank"} directory. Here the workloads are very similar to our CLI commands but we have some additional steps to print and save the logs from each of our workloads. For example, our data validation workload looks like this:
+Since we have our CLI commands for our ML workloads, we could just execute them one-by-one on our local machine or Workspace. But for efficiency, we're going to combine them all into one script. We'll organize this under a [`workloads.sh`](https://github.com/GokuMohandas/Made-With-ML/blob/main/deploy/jobs/workloads.sh){:target="_blank"} bash script inside our [`deploy/jobs`](https://github.com/GokuMohandas/Made-With-ML/tree/main/deploy/jobs){:target="_blank"} directory. Here the workloads are very similar to our CLI commands but we have some additional steps to print and save the logs from each of our workloads. For example, our data validation workload looks like this:
 
 ```bash
 # deploy/jobs/workloads.sh
