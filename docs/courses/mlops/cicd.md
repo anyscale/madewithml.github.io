@@ -28,7 +28,7 @@ Our GitHub Actions are defined under our repository's `.github/workflows` direct
 Workflows are triggered by an **event**, which can be something that occurs on an event (like a [push](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#push){:target="_blank"} or [pull request](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#pull_request){:target="_blank"}), schedule ([cron](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html){:target="_blank"}), [manually](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch){:target="_blank"} and [many more](https://docs.github.com/en/actions/reference/events-that-trigger-workflows){:target="_blank"}. In our application, our `workloads` workflow is triggered on a pull request to the main branch and then our `serve` workflow and `documentation` workflows are triggered on a push to the main branch.
 
 ```yaml linenums="1"
-# .github/workflows/workloads.yml
+# .github/workflows/workloads.yaml
 name: workloads
 on:
   workflow_dispatch:  # manual
@@ -193,7 +193,20 @@ So when this `workloads` workflow completes, we'll have a comment on our PR ([ex
 
 ### Serve
 
-If we like the results and we want to merge the PR and push to the `main` branch, our [`serve` workflow](https://github.com/GokuMohandas/Made-With-ML/blob/main/.github/workflows/serve.yaml) will be triggered. It contains a single job that serves our model with Anyscale Services. The steps in this job are as follows:
+If we like the results and we want to merge the PR and push to the `main` branch, our [`serve` workflow](https://github.com/GokuMohandas/Made-With-ML/blob/main/.github/workflows/serve.yaml) will be triggered.
+
+```yaml linenums="1"
+# .github/workflows/serve.yaml
+name: serve
+on:
+  workflow_dispatch:  # manual
+  push:
+    branches:
+    - main
+...
+```
+
+It contains a single job that serves our model with Anyscale Services. The steps in this job are as follows:
 
 1. We start by configuring our AWS credentials so that we can push/pull from our S3 buckets. Recall that we store our model registry and results in S3 buckets so we need to be able to access them.
 ```yaml linenums="1"
