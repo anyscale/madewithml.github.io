@@ -18,7 +18,7 @@
 </p>
 
 <p>
-    While this was an amazing experience, it was also a humbling one because there were obstacles around <strong>scale</strong>, <strong>integrations</strong> and <strong>productionization</strong> that I that I didn’t have great solutions for. So, I decided to join a team that has been addressing these precise obstacles with some of the <a href="https://www.anyscale.com/user-stories" target="_blank">best ML teams</a> in the world and has an even bigger vision I could stand behind. So I'm excited to announce that Made With ML is now part of <a href="https://www.anyscale.com/" target="_blank">Anyscale</a> to accelerate the path towards production ML.
+    While this was an amazing experience, it was also a humbling one because there were obstacles around <strong>scale</strong>, <strong>integrations</strong> and <strong>productionization</strong> that I didn’t have great solutions for. So, I decided to join a team that has been addressing these precise obstacles with some of the <a href="https://www.anyscale.com/user-stories" target="_blank">best ML teams</a> in the world and has an even bigger vision I could stand behind. So I'm excited to announce that Made With ML is now part of <a href="https://www.anyscale.com/" target="_blank">Anyscale</a> to accelerate the path towards production ML.
 </p>
 
 <div class="mt-4 px-3 py-3" style="background-color: #f5f9fd; text-align: center;">

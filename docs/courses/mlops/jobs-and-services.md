@@ -170,6 +170,18 @@ subprocess.check_output(["aws", "s3", "cp", f"s3://madewithml/{github_username}/
 # Entrypoint
 run_id = [line.strip() for line in open("run_id.txt")][0]
 entrypoint = ModelDeployment.bind(run_id=run_id, threshold=0.9)
+
+# Inference
+data = {"query": "What is the default batch size for map_batches?"}
+response = requests.post("http://127.0.0.1:8000/query", json=data)
+print(response.json())
+
+
+# Inference
+data = {"query": "What is the default batch size for map_batches?"}
+response = requests.post("http://127.0.0.1:8000/query", json=data)
+print(response.json())
+
 ```
 
 In this script, we first pull our previously saved artifacts from our S3 bucket to our local storage and then define the entrypoint for our model.
