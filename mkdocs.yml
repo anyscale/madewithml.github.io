@@ -25,9 +25,6 @@ extra:
       link: https://www.youtube.com/madewithml?sub_confirmation=1
     - icon: fontawesome/solid/paper-plane
       link: mailto:goku@madewithml.com
-  analytics:
-    provider: google
-    property: G-T1R6V3J71R
 
 # Page tree
 nav:
