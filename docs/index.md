@@ -24,12 +24,11 @@ keywords: mlops
 <div class="row flex-column-reverse flex-md-row">
     <div class="col-md-7" data-aos="fade-right">
         <div class="ai-hero-text">
-            <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
-            <!-- <p style="line-height: 0rem; margin-top: 0rem; margin-bottom: 0.5rem !important; color: #807e7e;">
-                <a href="https://www.anyscale.com/" target="_blank"><img src="/static/images/anyscale.png" style="width: 4rem; margin-left: 0.1rem;"></a>
-                <span class="mx-1" style="font-size: 1.5rem;">·</span>
-                <a href="https://www.ray.io/" target="_blank"><img src="/static/images/ray.png" style="width: 2.5rem;"></a>
-            </p> -->
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <h1 style="margin-bottom: 0rem; color: #000; font-weight: 500;">Made With ML</h1>
+                <p style="font-weight: 600;">BY</p>
+                <a href="https://www.anyscale.com?utm_source=madewithmml&utm_medium=website&utm_campaign=hero" target="_blank"><img src="/static/images/anyscale-black-text.svg" style="width: 8rem;"></a>
+            </div>
             <p style="font-size: 0.89rem;">Join <b>40K+ developers</b> in learning how to responsibly deliver value with ML!</p>
             <input class="revue-form-field" placeholder="Your personal email address..." type="email" name="member[email]" id="member_email" style="width: 80%; border: 1px solid #b3b3b3; border-radius: 3px;">
             <button class="md-button md-button--purple-gradient mr-2 mb-2 mb-md-0 mt-md-2 mt-2" style="cursor: pointer !important;" data-toggle="modal" data-target="#newsletterForm">
@@ -50,7 +49,7 @@ keywords: mlops
 <h2 id="course" class="ai-center-all" style="margin-bottom: 0rem;">ML for Developers</h2>
 <p style="margin-top: 0rem; margin-bottom: 0rem !important; color: #807e7e;" class="ai-center-all">Design · Develop · Deploy · Iterate</p>
 
-Learn how to combine machine learning with software engineering to design, develop, deploy and iterate on production ML applications. &rarr; :fontawesome-brands-github:{ .github } [GokuMohandas/Made-With-ML](https://github.com/GokuMohandas/Made-With-ML){:target="_blank"}
+Learn how to combine machine learning with software engineering to design, develop, deploy and iterate on production ML applications. &rarr; :fontawesome-brands-github:{ .github } [GokuMohandas/Made-With-ML](https://github.com/GokuMohandas/Made-With-ML){:target="\_blank"}
 
 {% include "templates/mlops.md" %}
 
