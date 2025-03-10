@@ -1,0 +1,99 @@
+{% extends "main.html" %}
+
+{% block content %}
+  {% if page.edit_url %}
+    <a href="{{ page.edit_url }}" title="{{ lang.t('edit.link.title') }}" class="md-content__button md-icon">
+      {% include ".icons/material/pencil.svg" %}
+    </a>
+  {% endif %}
+  {% if not "\x3ch1" in page.content %}
+    <div class="row">
+      <div class="col-md-8">
+        <h1 style="margin-bottom: 0.5rem;">{{ page.meta.title | d(config.site_name, true)}}</h1>
+      </div>
+      <div class="col-md-4 ai-center-all order-first order-md-last mb-2 mb-md-0 mb-lg-0">
+        <a href="/courses/{{ (page.meta.image.split('/') | last).split('.') | first }}" class="mb-2">
+          <span class="twemoji">
+            {% include ".icons/octicons/arrow-left-16.svg" %}
+          </span> View all lessons</a>
+      </div>
+    </div>
+    <hr class="mt-0 mt-md-2 mt-lg-2">
+    <div class="row">
+      <div class="col-md-8">
+        {% if page and page.meta.description %}
+          <span>{{ page.meta.description }}</span>
+        {% endif %}
+      </div>
+      <div class="col-md-4 order-first order-md-last">
+        <div class="row mb-4 mb-md-0 mb-lg-0">
+          <div class="col-md-3 col-2 ai-center-all" style="padding-right: 10px;">
+            <img src="/static/images/goku_circle.png" style="width: 3rem; max-width: 120%;" alt="Goku Mohandas">
+          </div>
+          <div class="col-md-9 col-10" style="padding-left: 5px;">
+            <div>Goku Mohandas</div>
+            <div>
+              <a href="https://twitter.com/GokuMohandas" target="_blank">
+                <span class="twemoji twitter">
+                  {% include ".icons/fontawesome/brands/twitter.svg" %}
+                </span></a> &middot;
+              <a href="https://linkedin.com/in/goku" target="_blank">
+                <span class="twemoji linkedin">
+                  {% include ".icons/fontawesome/brands/linkedin.svg" %}
+                </span></a> &middot;
+              <a href="https://github.com/gokumohandas" target="_blank">
+                <span class="twemoji github">
+                  {% include ".icons/fontawesome/brands/github.svg" %}
+                </span></a> &middot;
+              <a href="https://www.youtube.com/c/MadeWithML" target="_blank">
+                <span class="twemoji youtube">
+                  {% include ".icons/fontawesome/brands/youtube.svg" %}
+                </span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="mt-1"></div>
+    {% if page and page.meta.repository %}
+      <span class="twemoji">
+        {% include ".icons/octicons/mark-github-16.svg" %}
+      </span>
+      <a href="{{ page.meta.repository }}" target="_blank">Repository</a>
+    {% endif %}
+    {% if page and page.meta.notebook %}
+      <span> · </span>
+      <span class="twemoji">
+        {% include ".icons/octicons/book-24.svg" %}
+      </span>
+      <a href="{{ page.meta.notebook }}" target="_blank">Notebook</a>
+    {% endif %}
+    {% if page and page.meta.video %}
+      <span> · </span>
+      <span class="twemoji youtube">
+        {% include ".icons/fontawesome/brands/youtube.svg" %}
+      </span>
+      <a href="{{ page.meta.video }}" target="_blank">Video</a>
+    {% endif %}
+    {% if page and page.meta.documentation %}
+      <span> · </span>
+      <span class="twemoji">
+        {% include ".icons/octicons/info-24.svg" %}
+      </span>
+      <a href="{{ page.meta.documentation }}" target="_blank">Documentation</a>
+    {% endif %}
+
+    <!-- Subscribe -->
+    {% include "newsletter.html" %}
+
+  {% endif %}
+  {{ page.content }}
+  {% if page and page.meta %}
+    {% if page.meta.git_revision_date_localized or page.meta.revision_date%}
+      {% include "partials/source-date.html" %}
+    {% endif %}
+  {% endif %}
+  <br>
+{% endblock %}
