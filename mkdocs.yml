@@ -10,7 +10,7 @@ repo_name: GokuMohandas/MadeWithML
 edit_uri: ''  #disables edit button
 
 # Copyright
-copyright: © 2025 Anyscale, Inc. <br> <a href="https://www.anyscale.com/privacy-policy" target="_blank">Anyscale Privacy Policy</a>
+copyright: '<div style="display:flex; flex-direction:column;"><a href="https://www.anyscale.com?utm_source=madewithmml&utm_medium=website&utm_campaign=footer" target="_blank"><img src="/static/images/anyscale-white-text.svg" style="width: 4rem;"></a> © 2025 Anyscale, Inc. <br> <a href="https://www.anyscale.com/privacy-policy" target="_blank">Anyscale Privacy Policy</a></div>'
 
 # Social media
 extra:
