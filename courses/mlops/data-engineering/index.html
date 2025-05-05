@@ -1,0 +1,2729 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learn data engineering fundamentals by constructing a modern data stack for analytics and machine learning applications.">
+      
+      
+        <meta name="author" content="Goku Mohandas">
+      
+      
+        <link rel="canonical" href="https://madewithml.com/courses/mlops/data-engineering/">
+      
+      
+        <link rel="prev" href="../monitoring/">
+      
+      
+        <link rel="next" href="../../foundations/notebooks/">
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+    
+    
+      
+        <title>Data Engineering for Machine Learning - Made With ML by Anyscale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Epilogue:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Epilogue";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../static/scss/extra.css">
+    
+      <link rel="stylesheet" href="../../../static/scss/bs.css">
+    
+      <link rel="stylesheet" href="../../../static/scss/termynal.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+
+  <!-- Set title -->
+  
+  
+    
+  
+
+  <!-- Set description -->
+  
+  
+    
+  
+
+  <!-- Set image -->
+  
+  
+    
+  
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Data Engineering for Machine Learning - Made With ML by Anyscale" />
+  <meta property="og:description" content="Learn data engineering fundamentals by constructing a modern data stack for analytics and machine learning applications." />
+  <meta property="og:url" content="https://madewithml.com/courses/mlops/data-engineering/" />
+  <meta property="og:image" content="https://madewithml.com/static/images/mlops.png" />
+  <meta property="og:image:type" content="image/png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@GokuMohandas" />
+  <meta name="twitter:creator" content="@GokuMohandas" />
+  <meta name="twitter:title" content="Data Engineering for Machine Learning - Made With ML by Anyscale" />
+  <meta name="twitter:description" content="Learn data engineering fundamentals by constructing a modern data stack for analytics and machine learning applications." />
+  <meta name="twitter:image" content="https://madewithml.com/static/images/mlops.png" />
+
+  <!-- GTM Container -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        "gtm.start": new Date().getTime(),
+        event: "gtm.js",
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != "dataLayer" ? "&l=" + l : "";
+      j.async = true;
+      j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "dataLayer", "GTM-P8H6KQG");
+  </script>
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#intuition" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="ai-announce">
+  Try Ray with $100 credit — <a href="https://console.anyscale.com/register/ha?utm_source=made_with_ml&utm_medium=website&utm_campaign=banner" target="_blank" class="ai-announce-link">Start Now</a>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Made With ML by Anyscale" class="md-header__button md-logo" aria-label="Made With ML by Anyscale" data-md-component="logo">
+      
+  <img src="../../../static/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Made With ML by Anyscale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Engineering for Machine Learning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GokuMohandas/Made-With-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GokuMohandas/MadeWithML
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../about/" class="md-tabs__link">
+      About
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="/#course" class="md-tabs__link md-tabs__link--active">
+        Course
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="/courses/foundations/" class="md-tabs__link">
+        Foundations
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../misc/newsletter/" class="md-tabs__link">
+      Subscribe
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="https://discord.com/channels/1078171187609337896/1078171189169635472" class="md-tabs__link">
+      Community
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Made With ML by Anyscale" class="md-nav__button md-logo" aria-label="Made With ML by Anyscale" data-md-component="logo">
+      
+  <img src="../../../static/images/logo.png" alt="logo">
+
+    </a>
+    Made With ML by Anyscale
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GokuMohandas/Made-With-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GokuMohandas/MadeWithML
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Course
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Course
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/#course" class="md-nav__link">
+        Lessons
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          🎨 &nbsp; Design
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          🎨 &nbsp; Design
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../product-design/" class="md-nav__link">
+        Product
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../systems-design/" class="md-nav__link">
+        Systems
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          🔢 &nbsp; Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          🔢 &nbsp; Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preparation/" class="md-nav__link">
+        Preparation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exploratory-data-analysis/" class="md-nav__link">
+        Exploration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preprocessing/" class="md-nav__link">
+        Preprocessing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed-data/" class="md-nav__link">
+        Distributed
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+          📈 &nbsp; Model
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          📈 &nbsp; Model
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../training/" class="md-nav__link">
+        Training
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiment-tracking/" class="md-nav__link">
+        Tracking
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tuning/" class="md-nav__link">
+        Tuning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../evaluation/" class="md-nav__link">
+        Evaluation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../serving/" class="md-nav__link">
+        Serving
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+          💻 &nbsp; Developing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          💻 &nbsp; Developing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/" class="md-nav__link">
+        Scripting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        CLI
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+          📦 &nbsp; Utilities
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          📦 &nbsp; Utilities
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logging/" class="md-nav__link">
+        Logging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/" class="md-nav__link">
+        Documentation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../styling/" class="md-nav__link">
+        Styling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pre-commit/" class="md-nav__link">
+        Pre-commit
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+          ✅ &nbsp; Testing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          ✅ &nbsp; Testing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        Code
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/#data" class="md-nav__link">
+        Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/#models" class="md-nav__link">
+        Models
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+          ♻️ &nbsp; Reproducibility
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_8">
+          <span class="md-nav__icon md-icon"></span>
+          ♻️ &nbsp; Reproducibility
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../versioning/" class="md-nav__link">
+        Versioning
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+          🚀 &nbsp; Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_9">
+          <span class="md-nav__icon md-icon"></span>
+          🚀 &nbsp; Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jobs-and-services/" class="md-nav__link">
+        Jobs & Services
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cicd/" class="md-nav__link">
+        CI/CD workflows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/" class="md-nav__link">
+        Monitoring
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Data engineering
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Data engineering
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#intuition" class="md-nav__link">
+    Intuition
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-systems" class="md-nav__link">
+    Data systems
+  </a>
+  
+    <nav class="md-nav" aria-label="Data systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-lake" class="md-nav__link">
+    Data lake
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database" class="md-nav__link">
+    Database
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-warehouse" class="md-nav__link">
+    Data warehouse
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extract-and-load" class="md-nav__link">
+    Extract and load
+  </a>
+  
+    <nav class="md-nav" aria-label="Extract and load">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    Sources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destinations" class="md-nav__link">
+    Destinations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connections" class="md-nav__link">
+    Connections
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    Best practices
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transform" class="md-nav__link">
+    Transform
+  </a>
+  
+    <nav class="md-nav" aria-label="Transform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dbt-cloud" class="md-nav__link">
+    dbt Cloud
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#joins" class="md-nav__link">
+    Joins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schemas" class="md-nav__link">
+    Schemas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runs" class="md-nav__link">
+    Runs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jobs" class="md-nav__link">
+    Jobs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementations" class="md-nav__link">
+    Implementations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observability" class="md-nav__link">
+    Observability
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#considerations" class="md-nav__link">
+    Considerations
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Foundations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Foundations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/courses/foundations/" class="md-nav__link">
+        Lessons
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          🛠 &nbsp; Toolkit
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          🛠 &nbsp; Toolkit
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/notebooks/" class="md-nav__link">
+        Notebooks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/python/" class="md-nav__link">
+        Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/numpy/" class="md-nav__link">
+        NumPy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/pandas/" class="md-nav__link">
+        Pandas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/pytorch/" class="md-nav__link">
+        PyTorch
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          🔥 &nbsp; Machine Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          🔥 &nbsp; Machine Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/linear-regression/" class="md-nav__link">
+        Linear regression
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/logistic-regression/" class="md-nav__link">
+        Logistic regression
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/neural-networks/" class="md-nav__link">
+        Neural networks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/data-quality/" class="md-nav__link">
+        Data quality
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/utilities/" class="md-nav__link">
+        Utilities
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          🤖 &nbsp; Deep Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          🤖 &nbsp; Deep Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/convolutional-neural-networks/" class="md-nav__link">
+        CNNs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/embeddings/" class="md-nav__link">
+        Embeddings
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/recurrent-neural-networks/" class="md-nav__link">
+        RNNs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/attention/" class="md-nav__link">
+        Attention
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/transformers/" class="md-nav__link">
+        Transformers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/newsletter/" class="md-nav__link">
+        Subscribe
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://discord.com/channels/1078171187609337896/1078171189169635472" class="md-nav__link">
+        Community
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#intuition" class="md-nav__link">
+    Intuition
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-systems" class="md-nav__link">
+    Data systems
+  </a>
+  
+    <nav class="md-nav" aria-label="Data systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-lake" class="md-nav__link">
+    Data lake
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database" class="md-nav__link">
+    Database
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-warehouse" class="md-nav__link">
+    Data warehouse
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extract-and-load" class="md-nav__link">
+    Extract and load
+  </a>
+  
+    <nav class="md-nav" aria-label="Extract and load">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sources" class="md-nav__link">
+    Sources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destinations" class="md-nav__link">
+    Destinations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connections" class="md-nav__link">
+    Connections
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    Best practices
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transform" class="md-nav__link">
+    Transform
+  </a>
+  
+    <nav class="md-nav" aria-label="Transform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dbt-cloud" class="md-nav__link">
+    dbt Cloud
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#joins" class="md-nav__link">
+    Joins
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schemas" class="md-nav__link">
+    Schemas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runs" class="md-nav__link">
+    Runs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jobs" class="md-nav__link">
+    Jobs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementations" class="md-nav__link">
+    Implementations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#observability" class="md-nav__link">
+    Observability
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#considerations" class="md-nav__link">
+    Considerations
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+  
+    <div class="row">
+      <div class="col-md-8">
+        <h1 style="margin-bottom: 0.5rem;">Data Engineering for Machine Learning</h1>
+      </div>
+      <div class="col-md-4 ai-center-all order-first order-md-last mb-2 mb-md-0 mb-lg-0">
+        <a href="/courses/mlops" class="mb-2">
+          <span class="twemoji">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"/></svg>
+          </span> View all lessons</a>
+      </div>
+    </div>
+    <hr class="mt-0 mt-md-2 mt-lg-2">
+    <div class="row">
+      <div class="col-md-8">
+        
+          <span>Learn data engineering fundamentals by constructing a modern data stack for analytics and machine learning applications.</span>
+        
+      </div>
+      <div class="col-md-4 order-first order-md-last">
+        <div class="row mb-4 mb-md-0 mb-lg-0">
+          <div class="col-md-3 col-2 ai-center-all" style="padding-right: 10px;">
+            <img src="/static/images/goku_circle.png" style="width: 3rem; max-width: 120%;" alt="Goku Mohandas">
+          </div>
+          <div class="col-md-9 col-10" style="padding-left: 5px;">
+            <div>Goku Mohandas</div>
+            <div>
+              <a href="https://twitter.com/GokuMohandas" target="_blank">
+                <span class="twemoji twitter">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+                </span></a> &middot;
+              <a href="https://linkedin.com/in/goku" target="_blank">
+                <span class="twemoji linkedin">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+                </span></a> &middot;
+              <a href="https://github.com/gokumohandas" target="_blank">
+                <span class="twemoji github">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+                </span></a> &middot;
+              <a href="https://www.youtube.com/c/MadeWithML" target="_blank">
+                <span class="twemoji youtube">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+                </span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="mt-1"></div>
+    
+      <span class="twemoji">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+      </span>
+      <a href="https://github.com/GokuMohandas/data-engineering" target="_blank">Repository</a>
+    
+    
+      <span> · </span>
+      <span class="twemoji">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.495 4.495 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.752.752 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a2.996 2.996 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.503 4.503 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"/></svg>
+      </span>
+      <a href="https://github.com/GokuMohandas/data-engineering/blob/main/extract_from_dwh.ipynb" target="_blank">Notebook</a>
+    
+    
+    
+
+    <!-- Subscribe -->
+    <!-- DON'T FORGET TO CHANGE LINK INSIDE index.html -->
+<div class="modal fade" id="newsletterForm" tabindex="-1" role="dialog" aria-labelledby="newsletterFormLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding: 0.5rem 1rem 0.5rem 1rem;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <iframe width="540" height="600"
+        src="https://c8efd03b.sibforms.com/serve/MUIFAKa3IQxVRvYHZ_oiARAblHq4WbNhDT72vx1pHJFklbHrp4V813O6mQMUHN5ikC51vZBBw2VqyEgMGgf6NFQg9rC8qgcURZBtzPj5TjOFimUAPyYPTLFrmd6nRKV0OK09SRnZxucZX0xMGR02ADg0GSvd_see2qS0VZnFPJ_JudrivA7uA4fs4BZrNn_3_fMjmF_Bj9ZOD9Ia"
+        frameborder="0" scrolling="auto" allowfullscreen
+        style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="admonition abstract" style="margin-top: 2rem;">
+  <p class="admonition-title">Subscribe to our newsletter</p>
+  <p>📬&nbsp; Receive new lessons straight to your inbox (once a month) and join <b>40K+</b>
+    developers in learning how to responsibly deliver value with ML.</p>
+  <div class="row">
+    <div class="col-md-9">
+      <input class="revue-form-field" placeholder="Work email" type="email" name="member[email]"
+        id="member_email" style="width: 100%; height: 95%; border: 1px solid #b3b3b3; border-radius: 3px; font-size: 0.8rem;">
+    </div>
+    <div class="col-md-3 pl-md-0">
+      <button class="md-button md-button--purple-gradient mt-md-0 mt-2" type="submit"
+        style="cursor: pointer !important; height: 95%;" data-toggle="modal" data-target="#newsletterForm">Subscribe</button>
+    </div>
+  </div>
+</div>
+<hr style="margin-top: 2rem; margin-bottom: 2rem;">
+
+  
+  <style>
+  .md-content {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .md-content {
+      padding-left: 0rem;
+      padding-right: 0rem;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+
+    /* .md-nav--primary {
+      display: none !important;
+    } */
+    .md-sidebar--primary {
+      width: 9rem !important;
+    }
+
+    .md-sidebar--secondary {
+      width: 9rem !important;
+    }
+  }
+</style>
+
+<h2 id="intuition">Intuition</h2>
+<p>So far we've had the convenience of using local CSV files as data source but in reality, our data can come from many disparate sources. Additionally, our processes around transforming and testing our data should ideally be moved upstream so that many different downstream processes can benefit from them. Our ML use case being just one among the many potential downstream applications. To address these shortcomings, we're going to learn about the fundamentals of data engineering and construct a modern data stack that can scale and provide high quality data for our applications.</p>
+<blockquote>
+<p>View the <span class="twemoji github"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span> <a href="https://github.com/GokuMohandas/data-engineering" target="_blank"><strong>data-engineering</strong></a> repository for all the code.</p>
+</blockquote>
+<!-- Youtube Video -->
+<!--
+<div class="ai-yt-mobile">
+    <iframe id="yt-video-mobile" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="620" height="348.75" type="text/html" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<div class="ai-yt-desktop">
+    <iframe id="yt-video-desktop" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" width="620" height="348.75" type="text/html" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<div class="ai-yt-admonition">
+    <div class="admonition danger">
+        <p class="admonition-title">Viewing options</p>
+        <p>You can watch the entire video at once or follow along each section (each header has a link to the corresponding timestamp in the video).</p>
+    </div>
+</div>
+
+<script>
+    var yt_video_id = "_sYrVHGRqPo"
+    var yt_video_source = "https://www.youtube.com/embed/" + yt_video_id + "?autoplay=0&fs=1&iv_load_policy=1&showinfo=1&rel=0&cc_load_policy=0&start=120&end=124&vq=hd720"
+    document.getElementById("yt-video-mobile").src = yt_video_source;
+    document.getElementById("yt-video-desktop").src = yt_video_source;
+</script> -->
+
+<p>At a high level, we're going to:</p>
+<ol>
+<li><a href="#extract-and-load"><strong>E</strong>xtract and <strong>L</strong>oad</a> data from <a href="#sources">sources</a> to <a href="#destinations">destinations</a>.</li>
+<li><a href="#transform"><strong>T</strong>ransform</a> data for downstream applications.</li>
+</ol>
+<p>This process is more commonly known as ELT, but there are variants such as ETL and reverse ETL, etc. They are all essentially the same underlying workflows but have slight differences in the order of data flow and where data is processed and stored.</p>
+<div class="ai-center-all">
+    <img width="800" src="/static/images/mlops/data_stack/data.png" alt="data stack">
+</div>
+
+<div class="admonition tip">
+<p class="admonition-title">Utility and simplicity</p>
+<p>It can be enticing to set up a modern data stack in your organization, especially with all the hype. But it's very important to motivate utility and adding additional complexity:</p>
+<ul>
+<li>Start with a use case that we already have data sources for and has direct impact on the business' bottom line (ex. user churn).</li>
+<li>Start with the simplest infrastructure (source → database → report) and add complexity (in infrastructure, performance and team) as needed.</li>
+</ul>
+</div>
+<h2 id="data-systems">Data systems</h2>
+<!-- **[:fontawesome-brands-youtube:{ .youtube } 1:10 - 3:15](){:target="_blank"}** -->
+
+<p>Before we start working with our data, it's important to understand the different types of systems that our data can live in. So far in this course we've worked with files, but there are several types of data systems that are widely adopted in industry for different purposes.</p>
+<div class="ai-center-all">
+    <img width="450" src="/static/images/mlops/data_stack/systems.png" alt="data systems">
+</div>
+
+<h3 id="data-lake">Data lake</h3>
+<p>A data lake is a flat data management system that stores raw objects. It's a great option for inexpensive storage and has the capability to hold all types of data (unstructured, semi-structured and structured). Object stores are becoming the standard for data lakes with default options across the popular cloud providers. Unfortunately, because data is stored as objects in a data lake, it's not designed for operating on structured data.</p>
+<blockquote>
+<p>Popular data lake options include <a href="https://aws.amazon.com/s3/" target="_blank">Amazon S3</a>, <a href="https://azure.microsoft.com/en-us/services/storage/blobs/" target="_blank">Azure Blob Storage</a>, <a href="https://cloud.google.com/storage" target="_blank">Google Cloud Storage</a>, etc.</p>
+</blockquote>
+<h3 id="database">Database</h3>
+<p>Another popular storage option is a database (DB), which is an organized collection of structured data that adheres to either:</p>
+<ul>
+<li>relational schema (tables with rows and columns) often referred to as a Relational Database Management System (RDBMS) or SQL database.</li>
+<li>non-relational (key/value, graph, etc.), often referred to as a non-relational database or NoSQL database.</li>
+</ul>
+<p>A database is an <a href="https://en.wikipedia.org/wiki/Online_transaction_processing" target="_blank">online transaction processing (OLTP)</a> system because it's typically used for day-to-day CRUD (create, read, update, delete) operations where typically information is accessed by rows. However, they're generally used to store data from one application and is not designed to hold data from across many sources for the purpose of analytics.</p>
+<blockquote>
+<p>Popular database options include <a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a>, <a href="https://www.mysql.com/" target="_blank">MySQL</a>, <a href="https://www.mongodb.com/" target="_blank">MongoDB</a>, <a href="https://cassandra.apache.org/" target="_blank">Cassandra</a>, etc.</p>
+</blockquote>
+<h3 id="data-warehouse">Data warehouse</h3>
+<p>A data warehouse (DWH) is a type of database that's designed for storing structured data from many different sources for downstream analytics and data science. It's an <a href="https://en.wikipedia.org/wiki/Online_analytical_processing" target="_blank">online analytical processing (OLAP)</a> system that's optimized for performing operations across aggregating column values rather than accessing specific rows.</p>
+<blockquote>
+<p>Popular data warehouse options include <a href="https://www.snowflake.com/" target="_blank">SnowFlake</a>, <a href="https://cloud.google.com/bigquery" target="_blank">Google BigQuery</a>, <a href="https://aws.amazon.com/redshift/" target="_blank">Amazon RedShift</a>, <a href="https://hive.apache.org/" target="_blank">Hive</a>, etc.</p>
+</blockquote>
+<h2 id="extract-and-load">Extract and load</h2>
+<p>The first step in our data pipeline is to extract data from a source and load it into the appropriate destination. While we could construct custom scripts to do this manually or on a schedule, an ecosystem of data ingestion tools have already standardized the entire process. They all come equipped with connectors that allow for extraction, normalization, cleaning and loading between sources and destinations. And these pipelines can be scaled, monitored, etc. all with very little to no code.</p>
+<div class="ai-center-all">
+    <img width="600" src="/static/images/mlops/data_stack/pipelines.png" alt="ingestion pipelines">
+</div>
+
+<blockquote>
+<p>Popular data ingestion tools include <a href="https://www.fivetran.com/" target="_blank">Fivetran</a>, <a href="https://airbyte.com/" target="_blank">Airbyte</a>, <a href="https://www.stitchdata.com/" target="_blank">Stitch</a>, etc.</p>
+</blockquote>
+<p>We're going to use the open-source tool <a href="https://airbyte.com/" target="_blank">Airbyte</a> to create connections between our data sources and destinations. Let's set up Airbyte and define our data sources. As we progress in this lesson, we'll set up our destinations and create connections to extract and load data.</p>
+<ol>
+<li>Ensure that we have <a href="../docker/" target="_blank">Docker</a> installed, but if not, download it <a href="https://www.docker.com/products/docker-desktop/" target="_blank">here</a>. For Windows users, be sure to have these <a href="https://docs.airbyte.com/deploying-airbyte/local-deployment/#deploy-on-windows" target="_blank">configurations</a> enabled.</li>
+<li>In a parent directory, outside our project directory for the MLOps course, execute the following commands to load the Airbyte repository locally and launch the service.
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/airbytehq/airbyte.git
+<span class="nb">cd</span><span class="w"> </span>airbyte
+docker-compose<span class="w"> </span>up
+</code></pre></div></li>
+<li>After a few minutes, visit <a href="http://localhost:8000/" target="_blank">http://localhost:8000/</a> to view the launched Airbyte service.</li>
+</ol>
+<h3 id="sources">Sources</h3>
+<p>Our data sources we want to extract from can be from anywhere. They could come from 3rd party apps, files, user click streams, physical devices, data lakes, databases, data warehouses, etc. But regardless of the source of our data, they type of data should fit into one of these categories:</p>
+<ul>
+<li><code class="highlight"><span class="nx">structured</span></code>: organized data stored in an explicit structure (ex. tables)</li>
+<li><code class="highlight"><span class="nx">semi</span><span class="o">-</span><span class="nx">structured</span></code>: data with some structure but no formal schema or data types (web pages, CSV, JSON, etc.)</li>
+<li><code class="highlight"><span class="nx">unstructured</span></code>: qualitative data with no formal structure (text, images, audio, etc.)</li>
+</ul>
+<p>For our application, we'll define two data sources:</p>
+<ul>
+<li><a href="https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.csv" target="_blank">projects.csv</a>: data containing projects with their ID, create date, title and description.</li>
+<li><a href="https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.csv" target="_blank">tags.csv</a>: labels for each of project IDs in projects.csv</li>
+</ul>
+<blockquote>
+<p>Ideally, these data assets would be retrieved from a database that contains projects that we extracted and perhaps another database that stores labels from our labeling team's workflows. However, for simplicity we'll use CSV files to demonstrate how to define a data source.</p>
+</blockquote>
+<h4 id="define-file-source-in-airbyte">Define file source in Airbyte</h4>
+<p>We'll start our ELT process by defining the data source in Airbyte:</p>
+<ol>
+<li>On our <a href="http://localhost:8000/" target="_blank">Airbyte UI</a>, click on <code>Sources</code> on the left menu. Then click the <code>+ New source</code> button on the top right corner.</li>
+<li>Click on the <code>Source type</code> dropdown and choose <code>File</code>. This will open a view to define our file data source.
+<div class="highlight"><pre><span></span><code><span class="nt">Name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Projects</span>
+<span class="nt">URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.csv</span>
+<span class="nt">File Format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">csv</span>
+<span class="nt">Storage Provider: HTTPS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Public Web</span>
+<span class="nt">Dataset Name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">projects</span>
+</code></pre></div></li>
+<li>Click the <code>Set up source</code> button and our data source will be tested and saved.</li>
+<li>Repeat steps 1-3 for our tags data source as well:
+<div class="highlight"><pre><span></span><code><span class="nt">Name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tags</span>
+<span class="nt">URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.csv</span>
+<span class="nt">File Format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">csv</span>
+<span class="nt">Storage Provider: HTTPS</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Public Web</span>
+<span class="nt">Dataset Name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tags</span>
+</code></pre></div></li>
+</ol>
+<div class="ai-center-all">
+    <img width="1000" src="/static/images/mlops/data_stack/sources.png" alt="data sources">
+</div>
+
+<h3 id="destinations">Destinations</h3>
+<p>Once we know the source we want to extract data from, we need to decide the destination to load it. The choice depends on what our downstream applications want to be able to do with the data. And it's also common to store data in one location (ex. data lake) and move it somewhere else (ex. data warehouse) for specific processing.</p>
+<h4 id="set-up-google-bigquery">Set up Google BigQuery</h4>
+<p>Our destination will be a <a href="#data-warehouse">data warehouse</a> since we'll want to use the data for downstream analytical and machine learning applications. We're going to use <a href="https://cloud.google.com/bigquery" target="_blank">Google BigQuery</a> which is free under Google Cloud's <a href="https://cloud.google.com/bigquery/pricing#free-tier" target="_blank">free tier</a> for up to 10 GB storage and 1TB of queries (which is significantly more than we'll ever need for our purpose).</p>
+<ol>
+<li>Log into your <a href="https://accounts.google.com/signin" target="&quot;_blank">Google account</a> and then head over to <a href="https://cloud.google.com/" target="_blank">Google CLoud</a>. If you haven't already used Google Cloud's free trial, you'll have to sign up. It's free and you won't be autocharged unless you manually upgrade your account. Once the trial ends, we'll still have the free tier which is more than plenty for us.</li>
+<li>Go to the <a href="https://console.cloud.google.com/bigquery" target="&quot;_blank">Google BigQuery page</a> and click on the <code>Go to console</code> button.</li>
+<li>We can create a new project by following these <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#console" target="_blank">instructions</a> which will lead us to the <a href="https://console.cloud.google.com/projectcreate" target="_blank">create project page</a>.
+<div class="highlight"><pre><span></span><code><span class="nt">Project name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">made-with-ml</span><span class="w">  </span><span class="c1"># Google will append a unique ID to the end of it</span>
+<span class="nt">Location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">No organization</span>
+</code></pre></div></li>
+<li>Once the project has been created, refresh the page and we should see it (along with few other default projects from Google).</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Google BigQuery projects</span>
+├──<span class="w"> </span>made-with-ml-XXXXXX<span class="w">   </span>👈<span class="w"> </span>our<span class="w"> </span>project
+├──<span class="w"> </span>bigquery-publicdata
+├──<span class="w"> </span>imjasonh-storage
+└──<span class="w"> </span>nyc-tlc
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Console or code</p>
+<p>Most cloud providers will allow us to do everything via console but also programmatically via API, Python, etc. For example, we manually create a project but we could've also done so with code as shown <a href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#python" target="_blank">here</a>.</p>
+</div>
+<h4 id="define-bigquery-destination-in-airbyte">Define BigQuery destination in Airbyte</h4>
+<p>Next, we need to establish the connection between Airbyte and BigQuery so that we can load the extracted data to the destination. In order to authenticate our access to BigQuery with Airbyte, we'll need to create a service account and generate a secret key. This is basically creating an identity with certain access that we can use for verification. Follow these <a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys#iam-service-account-keys-create-console" target="_blank">instructions</a> to create a service and generate the key file (JSON). Note down the location of this file because we'll be using it throughout this lesson. For example ours is <code>/Users/goku/Downloads/made-with-ml-XXXXXX-XXXXXXXXXXXX.json</code>.</p>
+<ol>
+<li>On our <a href="http://localhost:8000/" target="_blank">Airbyte UI</a>, click on <code>Destinations</code> on the left menu. Then click the <code>+ New destination</code> button on the top right corner.</li>
+<li>Click on the <code>Destination type</code> dropdown and choose <code>BigQuery</code>. This will open a view to define our file data source.
+<div class="highlight"><pre><span></span><code><span class="nt">Name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BigQuery</span>
+<span class="nt">Default Dataset ID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mlops_course</span><span class="w">  </span><span class="c1"># where our data will go inside our BigQuery project</span>
+<span class="nt">Project ID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">made-with-ml-XXXXXX</span><span class="w">  </span><span class="c1"># REPLACE this with your Google BiqQuery Project ID</span>
+<span class="nt">Credentials JSON</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SERVICE-ACCOUNT-KEY.json</span><span class="w">  </span><span class="c1"># REPLACE this with your service account JSON location</span>
+<span class="nt">Dataset location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">US</span><span class="w">  </span><span class="c1"># select US or EU, all other options will not be compatible with dbt later</span>
+</code></pre></div></li>
+<li>Click the <code>Set up destination</code> button and our data destination will be tested and saved.</li>
+</ol>
+<div class="ai-center-all">
+    <img width="1000" src="/static/images/mlops/data_stack/destinations.png" alt="data destinations">
+</div>
+
+<h3 id="connections">Connections</h3>
+<p>So we've set up our data sources (public CSV files) and destination (Google BigQuery data warehouse) but they haven't been connected yet. To create the connection, we need to think about a few aspects.</p>
+<h4 id="frequency">Frequency</h4>
+<p>How often do we want to extract data from the sources and load it into the destination?</p>
+<ul>
+<li><code class="highlight"><span class="nx">batch</span></code>: extracting data in batches, usually following a schedule (ex. daily) or when an event of interest occurs (ex. new data count)</li>
+<li><code class="highlight"><span class="nx">streaming</span></code>: extracting data in a continuous stream (using tools like <a href="https://kafka.apache.org/" target="_blank">Kafka</a>, <a href="https://aws.amazon.com/kinesis/" target="_blank">Kinesis</a>, etc.)</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Micro-batch</p>
+<p>As we keep decreasing the time between batch ingestion (ex. towards 0), do we have stream ingestion? Not exactly. Batch processing is deliberately deciding to extract data from a source at a given interval. As that interval becomes &lt;15 minutes, it's referred to as a micro-batch (many data warehouses allow for batch ingestion every 5 minutes). However, with stream ingestion, the extraction process is continuously on and events will keep being ingested.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Start simple</p>
+<p>In general, it's a good idea to start with batch ingestion for most applications and slowly add the complexity of streaming ingestion (and additional infrastructure). This was we can prove that downstream applications are finding value from the data source and evolving to streaming later should only improve things.</p>
+</div>
+<blockquote>
+<p>We'll learn more about the different system design implications of batch vs. stream in our <a href="../systems-design/" target="_blank">systems design lesson</a>.</p>
+</blockquote>
+<h4 id="connecting-file-source-to-bigquery-destination">Connecting File source to BigQuery destination</h4>
+<p>Now we're ready to create the connection between our sources and destination:</p>
+<ol>
+<li>On our <a href="http://localhost:8000/" target="_blank">Airbyte UI</a>, click on <code>Connections</code> on the left menu. Then click the <code>+ New connection</code> button on the top right corner.</li>
+<li>Under <code>Select a existing source</code>, click on the <code>Source</code> dropdown and choose <code>Projects</code> and click <code>Use existing source</code>.</li>
+<li>Under <code>Select a existing destination</code>, click on the <code>Destination</code> dropdown and choose <code>BigQuery</code> and click <code>Use existing destination</code>.
+<div class="highlight"><pre><span></span><code><span class="nt">Connection name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Projects &lt;&gt; BigQuery</span>
+<span class="nt">Replication frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Manual</span>
+<span class="nt">Destination Namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Mirror source structure</span>
+<span class="nt">Normalized tabular data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w">  </span><span class="c1"># leave this selected</span>
+</code></pre></div></li>
+<li>Click the <code>Set up connection</code> button and our connection will be tested and saved.</li>
+<li>Repeat the same for our <code>Tags</code> source with the same <code>BigQuery</code> destination.</li>
+</ol>
+<blockquote>
+<p>Notice that our sync mode is <code>Full refresh | Overwrite</code> which means that every time we sync data from our source, it'll overwrite the existing data in our destination. As opposed to <code>Full refresh | Append</code> which will add entries from the source to bottom of the previous syncs.</p>
+</blockquote>
+<div class="ai-center-all">
+    <img width="1000" src="/static/images/mlops/data_stack/connections.png" alt="data connections">
+</div>
+
+<h4 id="data-sync">Data sync</h4>
+<p>Our replication frequency is <code>Manual</code> because we'll trigger the data syncs ourselves:</p>
+<ol>
+<li>On our <a href="http://localhost:8000/" target="_blank">Airbyte UI</a>, click on <code>Connections</code> on the left menu. Then click the <code>Projects &lt;&gt; BigQuery</code> connection we set up earlier.</li>
+<li>Press the <code>🔄 Sync now</code> button and once it's completed we'll see that the projects are now in our BigQuery data warehouse.</li>
+<li>Repeat the same with our <code>Tags &lt;&gt; BigQuery</code> connection.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Inside our data warehouse</span>
+made-with-ml-XXXXXX<span class="w">               </span>-<span class="w"> </span>Project
+└──<span class="w"> </span>mlops_course<span class="w">                  </span>-<span class="w"> </span>Dataset
+│<span class="w">   </span>├──<span class="w"> </span>_airbyte_raw_projects<span class="w">     </span>-<span class="w"> </span>table
+│<span class="w">   </span>├──<span class="w"> </span>_airbyte_raw_tags<span class="w">         </span>-<span class="w"> </span>table
+│<span class="w">   </span>├──<span class="w"> </span>projects<span class="w">                  </span>-<span class="w"> </span>table
+│<span class="w">   </span>└──<span class="w"> </span>tags<span class="w">                      </span>-<span class="w"> </span>table
+</code></pre></div>
+<blockquote>
+<p>In our <a href="../orchestration/" target="_blank">orchestration lesson</a>, we'll use Airflow to programmatically execute the data sync.</p>
+</blockquote>
+<p>We can easily explore and query this data using SQL directly inside our warehouse:</p>
+<ol>
+<li>On our BigQuery project page, click on the <code>🔍 QUERY</code> button and select <code>In new tab</code>.</li>
+<li>Run the following SQL statement and view the data:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">made</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">ml</span><span class="o">-</span><span class="n">XXXXXX</span><span class="p">.</span><span class="n">mlops_course</span><span class="p">.</span><span class="n">projects</span><span class="o">`</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">1000</span>
+</code></pre></div></td></tr></table></div></li>
+</ol>
+<pre class="output">
+<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>created_on</th>
+      <th>title</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>2020-02-20 06:43:18</td>
+      <td>Comparison between YOLO and RCNN on real world...</td>
+      <td>Bringing theory to experiment is cool. We can ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>2020-02-20 06:47:21</td>
+      <td>Show, Infer &amp; Tell: Contextual Inference for C...</td>
+      <td>The beauty of the work lies in the way it arch...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>2020-02-24 16:24:45</td>
+      <td>Awesome Graph Classification</td>
+      <td>A collection of important graph embedding, cla...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15</td>
+      <td>2020-02-28 23:55:26</td>
+      <td>Awesome Monte Carlo Tree Search</td>
+      <td>A curated list of Monte Carlo tree search papers...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>19</td>
+      <td>2020-03-03 13:54:31</td>
+      <td>Diffusion to Vector</td>
+      <td>Reference implementation of Diffusion2Vec (Com...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</pre>
+
+<h3 id="best-practices">Best practices</h3>
+<p>With the advent of cheap storage and cloud SaaS options to manage them, it's become a best practice to store raw data into data lakes. This allows for storage of raw, potentially unstructured, data without having to justify storage with downstream applications. When we do need to transform and process the data, we can move it to a data warehouse so can perform those operations efficiently.</p>
+<div class="ai-center-all mt-4">
+    <img width="600" src="/static/images/mlops/data_stack/best_practice.png" alt="best practice">
+</div>
+
+<h2 id="transform">Transform</h2>
+<p>Once we've extracted and loaded our data, we need to transform the data so that it's ready for downstream applications. These transformations are different from the <a href="../preprocessing/#transformations" target="_blank">preprocessing</a> we've seen before but are instead reflective of business logic that's agnostic to downstream applications. Common transformations include defining schemas, filtering, cleaning and joining data across tables, etc. While we could do all of these things with SQL in our data warehouse (save queries as tables or views), dbt delivers production functionality around version control, testing, documentation, packaging, etc. out of the box. This becomes crucial for maintaining observability and high quality data workflows.</p>
+<div class="ai-center-all mb-4">
+    <img width="500" src="/static/images/mlops/data_stack/transform.png" alt="data transform">
+</div>
+
+<blockquote>
+<p>Popular transformation tools include <a href="https://www.getdbt.com/" target="_blank">dbt</a>, <a href="https://www.matillion.com/" target="_blank">Matillion</a>, custom jinja templated SQL, etc.</p>
+</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In addition to data transformations, we can also process the data using large-scale analytics engines like <a href="https://spark.apache.org/" target="_blank">Spark</a>, <a href="https://flink.apache.org/" target="_blank">Flink</a>, etc.</p>
+</div>
+<h3 id="dbt-cloud">dbt Cloud</h3>
+<p>Now we're ready to transform our data in our data warehouse using <a href="https://www.getdbt.com/" target="_blank">dbt</a>. We'll be using a developer account on dbt Cloud (free), which provides us with an IDE, unlimited runs, etc.</p>
+<blockquote>
+<p>We'll learn how to use the <a href="https://github.com/dbt-labs/dbt-core" target="_blank">dbt-core</a> in our <a href="../orchestration/" target="_blank">orchestration lesson</a>. Unlike dbt Cloud, dbt core is completely open-source and we can programmatically connect to our data warehouse and perform transformations.</p>
+</blockquote>
+<ol>
+<li>Create a <a href="https://www.getdbt.com/signup/" target="_blank">free account</a> and verify it.</li>
+<li>Go to <a href="https://cloud.getdbt.com/" target="_blank">https://cloud.getdbt.com/</a> to get set up.</li>
+<li>Click <code>continue</code> and choose <code>BigQuery</code> as the database.</li>
+<li>Click <code>Upload a Service Account JSON file</code> and upload our file to autopopulate everything.</li>
+<li>Click the <code>Test</code> &gt; <code>Continue</code>.</li>
+<li>Click <code>Managed</code> repository and name it <code>dbt-transforms</code> (or anything else you want).</li>
+<li>Click <code>Create</code> &gt; <code>Continue</code> &gt; <code>Skip and complete</code>.</li>
+<li>This will open the project page and click <code>&gt;_ Start Developing</code> button.</li>
+<li>This will open the IDE where we can click <code>🗂 initialize your project</code>.</li>
+</ol>
+<p>Now we're ready to start developing our models:</p>
+<ol>
+<li>Click the <code>···</code> next to the <code>models</code> directory on the left menu.</li>
+<li>Click <code>New folder</code> called <code>models/labeled_projects</code>.</li>
+<li>Create a <code>New file</code> under <code>models/labeled_projects</code> called <code>labeled_projects.sql</code>.</li>
+<li>Repeat for another file under <code>models/labeled_projects</code> called <code>schema.yml</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code>dbt-cloud-XXXXX-dbt-transforms
+├──<span class="w"> </span>...
+├──<span class="w"> </span>models
+│<span class="w">   </span>├──<span class="w"> </span>example
+│<span class="w">   </span>└──<span class="w"> </span>labeled_projects
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>labeled_projects.sql
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>schema.yml
+├──<span class="w"> </span>...
+└──<span class="w"> </span>README.md
+</code></pre></div>
+<h3 id="joins">Joins</h3>
+<p>Inside our <code>models/labeled_projects/labeled_projects.sql</code> file we'll create a view that joins our project data with the appropriate tags. This will create the labeled data necessary for downstream applications such as machine learning models. Here we're joining based on the matching id between the projects and tags:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">-- models/labeled_projects/labeled_projects.sql</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">created_on</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">made</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">ml</span><span class="o">-</span><span class="n">XXXXXX</span><span class="p">.</span><span class="n">mlops_course</span><span class="p">.</span><span class="n">projects</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w">  </span><span class="c1">-- REPLACE</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="o">`</span><span class="n">made</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">ml</span><span class="o">-</span><span class="n">XXXXXX</span><span class="p">.</span><span class="n">mlops_course</span><span class="p">.</span><span class="n">tags</span><span class="o">`</span><span class="w"> </span><span class="n">t</span><span class="w">  </span><span class="c1">-- REPLACE</span>
+<span class="k">ON</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">id</span>
+</code></pre></div></td></tr></table></div>
+<p>We can view the queried results by clicking the <code>Preview</code> button and view the data lineage as well.</p>
+<h3 id="schemas">Schemas</h3>
+<p>Inside our <code>models/labeled_projects/schema.yml</code> file we'll define the schemas for each of the features in our transformed data. We also define several tests that each feature should pass. View the full list of <a href="https://docs.getdbt.com/docs/building-a-dbt-project/tests" target="_blank">dbt tests</a> but note that we'll use <a href="https://madewithml.com/courses/mlops/testing/#expectations" target="_blank">Great Expectations</a> for more comprehensive tests when we orchestrate all these data workflows in our <a href="../orchestration/" target="_blank">orchestration lesson</a>.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># models/labeled_projects/schema.yml</span>
+
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+
+<span class="nt">models</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">labeled_projects</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Tags</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">all</span><span class="nv"> </span><span class="s">projects&quot;</span>
+<span class="w">      </span><span class="nt">columns</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Unique</span><span class="nv"> </span><span class="s">ID</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">project.&quot;</span>
+<span class="w">            </span><span class="nt">tests</span><span class="p">:</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unique</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">title</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Title</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">project.&quot;</span>
+<span class="w">            </span><span class="nt">tests</span><span class="p">:</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Description</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">project.&quot;</span>
+<span class="w">            </span><span class="nt">tests</span><span class="p">:</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tag</span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Labeled</span><span class="nv"> </span><span class="s">tag</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">project.&quot;</span>
+<span class="w">            </span><span class="nt">tests</span><span class="p">:</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">not_null</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="runs">Runs</h3>
+<p>At the bottom of the IDE, we can execute runs based on the transformations we've defined. We'll run each of the following commands and once they finish, we can see the transformed data inside our data warehouse.</p>
+<div class="highlight"><pre><span></span><code>dbt<span class="w"> </span>run
+dbt<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+<p>Once these commands run successfully, we're ready to move our transformations to a production environment where we can insert this view in our data warehouse.</p>
+<h3 id="jobs">Jobs</h3>
+<p>In order to apply these transformations to the data in our data warehouse, it's best practice to create an <a href="https://docs.getdbt.com/guides/legacy/managing-environments" target="_blank">Environment</a> and then define <a href="https://docs.getdbt.com/guides/getting-started/building-your-first-project/schedule-a-job" target="_blank">Jobs</a>:</p>
+<ol>
+<li>Click <code>Environments</code> on the left menu &gt; <code>New Environment</code> button (top right corner) and fill out the details:
+<div class="highlight"><pre><span></span><code><span class="nt">Name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Production</span>
+<span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deployment</span>
+<span class="nn">...</span>
+<span class="nt">Dataset</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mlops_course</span>
+</code></pre></div></li>
+<li>Click <code>New Job</code> with the following details and then click <code>Save</code> (top right corner).
+<div class="highlight"><pre><span></span><code><span class="nt">Name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Transform</span>
+<span class="nt">Environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Production</span>
+<span class="nt">Commands</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dbt run</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">dbt test</span>
+<span class="nt">Schedule</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uncheck &quot;RUN ON SCHEDULE&quot;</span>
+</code></pre></div></li>
+<li>Click <code>Run Now</code> and view the transformed data in our data warehouse under a view called <code>labeled_projects</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Inside our data warehouse</span>
+made-with-ml-XXXXXX<span class="w">               </span>-<span class="w"> </span>Project
+└──<span class="w"> </span>mlops_course<span class="w">                  </span>-<span class="w"> </span>Dataset
+│<span class="w">   </span>├──<span class="w"> </span>_airbyte_raw_projects<span class="w">     </span>-<span class="w"> </span>table
+│<span class="w">   </span>├──<span class="w"> </span>_airbyte_raw_tags<span class="w">         </span>-<span class="w"> </span>table
+│<span class="w">   </span>├──<span class="w"> </span>labeled_projects<span class="w">          </span>-<span class="w"> </span>view
+│<span class="w">   </span>├──<span class="w"> </span>projects<span class="w">                  </span>-<span class="w"> </span>table
+│<span class="w">   </span>└──<span class="w"> </span>tags<span class="w">                      </span>-<span class="w"> </span>table
+</code></pre></div>
+<div class="ai-center-all">
+    <img width="800" src="/static/images/mlops/data_stack/dbt_run.png" alt="dbt run">
+</div>
+
+<blockquote>
+<p>There is so much more to dbt so be sure to check out their <a href="https://docs.getdbt.com/docs/building-a-dbt-project/documentation" target="_blank">official documentation</a> to really customize any workflows. And be sure to check out our <a href="../orchestration/" target="_blank">orchestration lesson</a> where we'll programmatically create and execute our dbt transformations.</p>
+</blockquote>
+<h2 id="implementations">Implementations</h2>
+<p>Hopefully we created our data stack for the purpose of gaining some actionable insight about our business, users, etc. Because it's these use cases that dictate which sources of data we extract from, how often and how that data is stored and transformed. Downstream applications of our data typically fall into one of these categories:</p>
+<ul>
+<li><code class="highlight"><span class="nx">data</span><span class="w"> </span><span class="nx">analytics</span></code>: use cases focused on reporting trends, aggregate views, etc. via charts, dashboards, etc.for the purpose of providing operational insight for business stakeholders.<blockquote>
+<p>🛠&nbsp; Popular tools: <a href="https://www.tableau.com/" target="_blank">Tableau</a>, <a href="https://www.looker.com/" target="_blank">Looker</a>, <a href="https://www.metabase.com/" target="_blank">Metabase</a>, <a href="https://superset.apache.org/" target="_blank">Superset</a>, etc.</p>
+</blockquote>
+</li>
+<li><code class="highlight"><span class="nx">machine</span><span class="w"> </span><span class="nx">learning</span></code>: use cases centered around using the transformed data to construct predictive models (forecasting, personalization, etc.).</li>
+</ul>
+<p>While it's very easy to extract data from our data warehouse:</p>
+<p><div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>google-cloud-bigquery<span class="o">==</span><span class="m">1</span>.21.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">bigquery</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.oauth2</span><span class="w"> </span><span class="kn">import</span> <span class="n">service_account</span>
+
+<span class="c1"># Replace these with your own values</span>
+<span class="n">project_id</span> <span class="o">=</span> <span class="s2">&quot;made-with-ml-XXXXXX&quot;</span>  <span class="c1"># REPLACE</span>
+<span class="n">SERVICE_ACCOUNT_KEY_JSON</span> <span class="o">=</span> <span class="s2">&quot;/Users/goku/Downloads/made-with-ml-XXXXXX-XXXXXXXXXXXX.json&quot;</span>  <span class="c1"># REPLACE</span>
+
+<span class="c1"># Establish connection</span>
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">service_account</span><span class="o">.</span><span class="n">Credentials</span><span class="o">.</span><span class="n">from_service_account_file</span><span class="p">(</span><span class="n">SERVICE_ACCOUNT_KEY_JSON</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">credentials</span><span class="o">=</span> <span class="n">credentials</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="n">project_id</span><span class="p">)</span>
+
+<span class="c1"># Query data</span>
+<span class="n">query_job</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">   SELECT *</span>
+<span class="s2">   FROM mlops_course.labeled_projects&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">query_job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></p>
+<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>created_on</th>
+      <th>title</th>
+      <th>description</th>
+      <th>tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1994.0</td>
+      <td>2020-07-29 04:51:30</td>
+      <td>Understanding the Effectivity of Ensembles in ...</td>
+      <td>The report explores the ideas presented in Dee...</td>
+      <td>computer-vision</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1506.0</td>
+      <td>2020-06-19 06:26:17</td>
+      <td>Using GitHub Actions for MLOps &amp; Data Science</td>
+      <td>A collection of resources on how to facilitate...</td>
+      <td>mlops</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>807.0</td>
+      <td>2020-05-11 02:25:51</td>
+      <td>Introduction to Machine Learning Problem Framing</td>
+      <td>This course helps you frame machine learning (...</td>
+      <td>mlops</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1204.0</td>
+      <td>2020-06-05 22:56:38</td>
+      <td>Snaked: Classifying Snake Species using Images</td>
+      <td>Proof of concept that it is possible to identi...</td>
+      <td>computer-vision</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1706.0</td>
+      <td>2020-07-04 11:05:28</td>
+      <td>PokeZoo</td>
+      <td>A deep learning based web-app developed using ...</td>
+      <td>computer-vision</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Check out our <a href="https://github.com/GokuMohandas/data-engineering/blob/main/extract_from_dwh.ipynb" target="_blank">notebook</a> where we extract the transformed data from our data warehouse. We do this in a separate notebook because it requires the <code>google-cloud-bigquery</code> package and until dbt <a href="https://github.com/dbt-labs/dbt-core/issues/4748" target="_blank">loosens</a> it's Jinja versioning constraints... it'll have to be done in a separate environment. However, downstream applications are typically analytics or ML applications which have their own environments anyway so these conflicts are not inhibiting.</p>
+</div>
+<p>many of the analytics (ex. dashboards) and machine learning solutions (ex. feature stores) allow for easy connection to our data warehouses so that workflows can be triggered when an event occurs or on a schedule. We're going to take this a step further in the <a href="../orchestration/" target="_blank">next lesson</a> where we'll use a central orchestration platform to control all these workflows.</p>
+<div class="admonition tip">
+<p class="admonition-title">Analytics first, then ML</p>
+<p>It's a good idea for the first several applications to be analytics and reporting based in order to establish a robust data stack. These use cases typically just involve displaying data aggregations and trends, as opposed to machine learning systems that involve additional complex <a href="../feature-store/" target="_blank">infrastructure</a> and <a href="../orchestration/#mlops" target="_blank">workflows</a>.</p>
+</div>
+<h2 id="observability">Observability</h2>
+<p>When we create complex data workflows like this, observability becomes a top priority. Data observability is the general  concept of understanding the condition of data in our system and it involves:</p>
+<ul>
+<li><code class="highlight"><span class="nx">data</span><span class="w"> </span><span class="nx">quality</span></code>: testing and monitoring our <a href="../testing/#data" target="_blank">data quality</a> after every step (schemas, completeness, recency, etc.).</li>
+<li><code class="highlight"><span class="nx">data</span><span class="w"> </span><span class="nx">lineage</span></code>: mapping the where data comes from and how it's being transformed as it moves through our pipelines.</li>
+<li><code class="highlight"><span class="nx">discoverability</span></code>: enabling discovery of the different data sources and features for downstream applications.</li>
+<li><code class="highlight"><span class="nx">privacy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">security</span></code>: are the different data assets treated and restricted appropriately amongst the applications?</li>
+</ul>
+<blockquote>
+<p>Popular observability tools include <a href="https://www.montecarlodata.com/" target="_blank">Monte Carlo</a>, <a href="https://www.bigeye.com/" target="_blank">Bigeye</a>, etc.</p>
+</blockquote>
+<h2 id="considerations">Considerations</h2>
+<p>The data stack ecosystem to create the robust data workflows is growing and maturing. However, it can be overwhelming when it comes to choosing the best tooling options, especially as needs change over time. Here are a few important factors to consider when making a tooling decision in this space:</p>
+<ul>
+<li>What is the cost per time per employee? Some of the tooling options can rack up quite the bill!</li>
+<li>Does the tool have the proper connectors to integrate with our data sources and the rest of the stack?</li>
+<li>Does the tool fit with our team's technical aptitude (SQL, Spark, Python, etc.)?</li>
+<li>What kind of support does the tool offer (enterprise, community, etc.)?</li>
+</ul>
+<!-- Course signup -->
+<hr style="margin-top: 2.25rem; margin-bottom: 2.25rem;">
+
+<div class="admonition question mx-md-5">
+<p class="admonition-title">Upcoming live cohorts</p>
+<p>Sign up for our upcoming live cohort, where we'll provide <b>live lessons + QA</b>, <b>compute (GPUs)</b> and <b>community</b> to learn everything in one day.
+<script src="//embed.typeform.com/next/embed.js"></script>
+</p><div class="ai-center-all mb-3">
+    <button data-tf-popup="hFw8rLTJ" data-tf-opacity="100" data-tf-size="100" data-tf-iframe-props="title=Made With ML" data-tf-transitive-search-params data-tf-medium="snippet" data-tf-hidden="utm_source="class="md-button md-button--green-gradient mb-2 mb-md-0 mt-md-0 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Learn more</a>
+</div><p></p>
+</div>
+
+<!-- Citation -->
+<hr style="margin-top: 2.25rem; margin-bottom: 2.25rem;">
+
+<p>To cite this content, please use:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nc">@article</span><span class="p">{</span><span class="nl">madewithml</span><span class="p">,</span>
+<span class="w">    </span><span class="na">author</span><span class="w">       </span><span class="p">=</span><span class="w"> </span><span class="s">{Goku Mohandas}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">title</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{ Data engineering - Made With ML }</span><span class="p">,</span>
+<span class="w">    </span><span class="na">howpublished</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{\url{https://madewithml.com/}}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">year</span><span class="w">         </span><span class="p">=</span><span class="w"> </span><span class="s">{2023}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+  
+    
+  
+  <br>
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <div style="display:flex; flex-direction:column;"><a href="https://www.anyscale.com?utm_source=madewithmml&utm_medium=website&utm_campaign=footer" target="_blank"><img src="/static/images/anyscale-white-text.svg" style="width: 4rem;"></a> © 2025 Anyscale, Inc. <br> <a href="https://www.anyscale.com/privacy-policy" target="_blank">Anyscale Privacy Policy</a></div>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/GokuMohandas" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/goku" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/GokuMohandas" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/madewithml?sub_confirmation=1" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:goku@madewithml.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+     
+
+      <script src="../../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        
+      
+        
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+        
+          <script src="../../../static/js/custom.js"></script>
+        
+      
+        
+          <script src="../../../static/js/termynal.js"></script>
+        
+      
+    
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-P8H6KQG"
+    height="0"
+    width="0"
+    style="display: none; visibility: hidden"
+  ></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+  </body>
+</html>

@@ -1,0 +1,2962 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Learn how to monitor ML systems to identify and address sources of drift to prevent model performance decay.">
+      
+      
+        <meta name="author" content="Goku Mohandas">
+      
+      
+        <link rel="canonical" href="https://madewithml.com/courses/mlops/monitoring/">
+      
+      
+        <link rel="prev" href="../cicd/">
+      
+      
+        <link rel="next" href="../data-engineering/">
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+    
+    
+      
+        <title>Monitoring Machine Learning Systems - Made With ML by Anyscale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Epilogue:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Epilogue";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../static/scss/extra.css">
+    
+      <link rel="stylesheet" href="../../../static/scss/bs.css">
+    
+      <link rel="stylesheet" href="../../../static/scss/termynal.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+
+  <!-- Set title -->
+  
+  
+    
+  
+
+  <!-- Set description -->
+  
+  
+    
+  
+
+  <!-- Set image -->
+  
+  
+    
+  
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Monitoring Machine Learning Systems - Made With ML by Anyscale" />
+  <meta property="og:description" content="Learn how to monitor ML systems to identify and address sources of drift to prevent model performance decay." />
+  <meta property="og:url" content="https://madewithml.com/courses/mlops/monitoring/" />
+  <meta property="og:image" content="https://madewithml.com/static/images/mlops.png" />
+  <meta property="og:image:type" content="image/png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@GokuMohandas" />
+  <meta name="twitter:creator" content="@GokuMohandas" />
+  <meta name="twitter:title" content="Monitoring Machine Learning Systems - Made With ML by Anyscale" />
+  <meta name="twitter:description" content="Learn how to monitor ML systems to identify and address sources of drift to prevent model performance decay." />
+  <meta name="twitter:image" content="https://madewithml.com/static/images/mlops.png" />
+
+  <!-- GTM Container -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        "gtm.start": new Date().getTime(),
+        event: "gtm.js",
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != "dataLayer" ? "&l=" + l : "";
+      j.async = true;
+      j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "dataLayer", "GTM-P8H6KQG");
+  </script>
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#intuition" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="ai-announce">
+  Try Ray with $100 credit — <a href="https://console.anyscale.com/register/ha?utm_source=made_with_ml&utm_medium=website&utm_campaign=banner" target="_blank" class="ai-announce-link">Start Now</a>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Made With ML by Anyscale" class="md-header__button md-logo" aria-label="Made With ML by Anyscale" data-md-component="logo">
+      
+  <img src="../../../static/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Made With ML by Anyscale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Monitoring Machine Learning Systems
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GokuMohandas/Made-With-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GokuMohandas/MadeWithML
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../about/" class="md-tabs__link">
+      About
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="/#course" class="md-tabs__link md-tabs__link--active">
+        Course
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="/courses/foundations/" class="md-tabs__link">
+        Foundations
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../misc/newsletter/" class="md-tabs__link">
+      Subscribe
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="https://discord.com/channels/1078171187609337896/1078171189169635472" class="md-tabs__link">
+      Community
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Made With ML by Anyscale" class="md-nav__button md-logo" aria-label="Made With ML by Anyscale" data-md-component="logo">
+      
+  <img src="../../../static/images/logo.png" alt="logo">
+
+    </a>
+    Made With ML by Anyscale
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GokuMohandas/Made-With-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GokuMohandas/MadeWithML
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Course
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Course
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/#course" class="md-nav__link">
+        Lessons
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          🎨 &nbsp; Design
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          🎨 &nbsp; Design
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../product-design/" class="md-nav__link">
+        Product
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../systems-design/" class="md-nav__link">
+        Systems
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          🔢 &nbsp; Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          🔢 &nbsp; Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preparation/" class="md-nav__link">
+        Preparation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exploratory-data-analysis/" class="md-nav__link">
+        Exploration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preprocessing/" class="md-nav__link">
+        Preprocessing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed-data/" class="md-nav__link">
+        Distributed
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+          📈 &nbsp; Model
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          📈 &nbsp; Model
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../training/" class="md-nav__link">
+        Training
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiment-tracking/" class="md-nav__link">
+        Tracking
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tuning/" class="md-nav__link">
+        Tuning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../evaluation/" class="md-nav__link">
+        Evaluation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../serving/" class="md-nav__link">
+        Serving
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+          💻 &nbsp; Developing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          💻 &nbsp; Developing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/" class="md-nav__link">
+        Scripting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        CLI
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+          📦 &nbsp; Utilities
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          📦 &nbsp; Utilities
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logging/" class="md-nav__link">
+        Logging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/" class="md-nav__link">
+        Documentation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../styling/" class="md-nav__link">
+        Styling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pre-commit/" class="md-nav__link">
+        Pre-commit
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+          ✅ &nbsp; Testing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          ✅ &nbsp; Testing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        Code
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/#data" class="md-nav__link">
+        Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/#models" class="md-nav__link">
+        Models
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+          ♻️ &nbsp; Reproducibility
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_8">
+          <span class="md-nav__icon md-icon"></span>
+          ♻️ &nbsp; Reproducibility
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../versioning/" class="md-nav__link">
+        Versioning
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+          🚀 &nbsp; Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_3_9">
+          <span class="md-nav__icon md-icon"></span>
+          🚀 &nbsp; Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jobs-and-services/" class="md-nav__link">
+        Jobs & Services
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cicd/" class="md-nav__link">
+        CI/CD workflows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Monitoring
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Monitoring
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#intuition" class="md-nav__link">
+    Intuition
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-health" class="md-nav__link">
+    System health
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    Performance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delayed-outcomes" class="md-nav__link">
+    Delayed outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importance-weighting" class="md-nav__link">
+    Importance weighting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drift" class="md-nav__link">
+    Drift
+  </a>
+  
+    <nav class="md-nav" aria-label="Drift">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-drift" class="md-nav__link">
+    Data drift
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#target-drift" class="md-nav__link">
+    Target drift
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-drift" class="md-nav__link">
+    Concept drift
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#locating-drift" class="md-nav__link">
+    Locating drift
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measuring-drift" class="md-nav__link">
+    Measuring drift
+  </a>
+  
+    <nav class="md-nav" aria-label="Measuring drift">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expectations" class="md-nav__link">
+    Expectations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#univariate" class="md-nav__link">
+    Univariate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multivariate" class="md-nav__link">
+    Multivariate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#online" class="md-nav__link">
+    Online
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outliers" class="md-nav__link">
+    Outliers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solutions" class="md-nav__link">
+    Solutions
+  </a>
+  
+    <nav class="md-nav" aria-label="Solutions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alert" class="md-nav__link">
+    Alert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inspect" class="md-nav__link">
+    Inspect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#act" class="md-nav__link">
+    Act
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production" class="md-nav__link">
+    Production
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-engineering/" class="md-nav__link">
+        Data engineering
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Foundations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Foundations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/courses/foundations/" class="md-nav__link">
+        Lessons
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          🛠 &nbsp; Toolkit
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          🛠 &nbsp; Toolkit
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/notebooks/" class="md-nav__link">
+        Notebooks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/python/" class="md-nav__link">
+        Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/numpy/" class="md-nav__link">
+        NumPy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/pandas/" class="md-nav__link">
+        Pandas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/pytorch/" class="md-nav__link">
+        PyTorch
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          🔥 &nbsp; Machine Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          🔥 &nbsp; Machine Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/linear-regression/" class="md-nav__link">
+        Linear regression
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/logistic-regression/" class="md-nav__link">
+        Logistic regression
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/neural-networks/" class="md-nav__link">
+        Neural networks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/data-quality/" class="md-nav__link">
+        Data quality
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/utilities/" class="md-nav__link">
+        Utilities
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          🤖 &nbsp; Deep Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          🤖 &nbsp; Deep Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/convolutional-neural-networks/" class="md-nav__link">
+        CNNs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/embeddings/" class="md-nav__link">
+        Embeddings
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/recurrent-neural-networks/" class="md-nav__link">
+        RNNs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/attention/" class="md-nav__link">
+        Attention
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/transformers/" class="md-nav__link">
+        Transformers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/newsletter/" class="md-nav__link">
+        Subscribe
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://discord.com/channels/1078171187609337896/1078171189169635472" class="md-nav__link">
+        Community
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#intuition" class="md-nav__link">
+    Intuition
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-health" class="md-nav__link">
+    System health
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    Performance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delayed-outcomes" class="md-nav__link">
+    Delayed outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importance-weighting" class="md-nav__link">
+    Importance weighting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drift" class="md-nav__link">
+    Drift
+  </a>
+  
+    <nav class="md-nav" aria-label="Drift">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-drift" class="md-nav__link">
+    Data drift
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#target-drift" class="md-nav__link">
+    Target drift
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-drift" class="md-nav__link">
+    Concept drift
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#locating-drift" class="md-nav__link">
+    Locating drift
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measuring-drift" class="md-nav__link">
+    Measuring drift
+  </a>
+  
+    <nav class="md-nav" aria-label="Measuring drift">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expectations" class="md-nav__link">
+    Expectations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#univariate" class="md-nav__link">
+    Univariate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multivariate" class="md-nav__link">
+    Multivariate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#online" class="md-nav__link">
+    Online
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outliers" class="md-nav__link">
+    Outliers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solutions" class="md-nav__link">
+    Solutions
+  </a>
+  
+    <nav class="md-nav" aria-label="Solutions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alert" class="md-nav__link">
+    Alert
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inspect" class="md-nav__link">
+    Inspect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#act" class="md-nav__link">
+    Act
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production" class="md-nav__link">
+    Production
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+  
+    <div class="row">
+      <div class="col-md-8">
+        <h1 style="margin-bottom: 0.5rem;">Monitoring Machine Learning Systems</h1>
+      </div>
+      <div class="col-md-4 ai-center-all order-first order-md-last mb-2 mb-md-0 mb-lg-0">
+        <a href="/courses/mlops" class="mb-2">
+          <span class="twemoji">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"/></svg>
+          </span> View all lessons</a>
+      </div>
+    </div>
+    <hr class="mt-0 mt-md-2 mt-lg-2">
+    <div class="row">
+      <div class="col-md-8">
+        
+          <span>Learn how to monitor ML systems to identify and address sources of drift to prevent model performance decay.</span>
+        
+      </div>
+      <div class="col-md-4 order-first order-md-last">
+        <div class="row mb-4 mb-md-0 mb-lg-0">
+          <div class="col-md-3 col-2 ai-center-all" style="padding-right: 10px;">
+            <img src="/static/images/goku_circle.png" style="width: 3rem; max-width: 120%;" alt="Goku Mohandas">
+          </div>
+          <div class="col-md-9 col-10" style="padding-left: 5px;">
+            <div>Goku Mohandas</div>
+            <div>
+              <a href="https://twitter.com/GokuMohandas" target="_blank">
+                <span class="twemoji twitter">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+                </span></a> &middot;
+              <a href="https://linkedin.com/in/goku" target="_blank">
+                <span class="twemoji linkedin">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+                </span></a> &middot;
+              <a href="https://github.com/gokumohandas" target="_blank">
+                <span class="twemoji github">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+                </span></a> &middot;
+              <a href="https://www.youtube.com/c/MadeWithML" target="_blank">
+                <span class="twemoji youtube">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+                </span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="mt-1"></div>
+    
+      <span class="twemoji">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+      </span>
+      <a href="https://github.com/GokuMohandas/Made-With-ML" target="_blank">Repository</a>
+    
+    
+      <span> · </span>
+      <span class="twemoji">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.495 4.495 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.752.752 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a2.996 2.996 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.503 4.503 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"/></svg>
+      </span>
+      <a href="https://github.com/GokuMohandas/monitoring-ml/blob/main/monitoring.ipynb" target="_blank">Notebook</a>
+    
+    
+    
+
+    <!-- Subscribe -->
+    <!-- DON'T FORGET TO CHANGE LINK INSIDE index.html -->
+<div class="modal fade" id="newsletterForm" tabindex="-1" role="dialog" aria-labelledby="newsletterFormLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding: 0.5rem 1rem 0.5rem 1rem;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <iframe width="540" height="600"
+        src="https://c8efd03b.sibforms.com/serve/MUIFAKa3IQxVRvYHZ_oiARAblHq4WbNhDT72vx1pHJFklbHrp4V813O6mQMUHN5ikC51vZBBw2VqyEgMGgf6NFQg9rC8qgcURZBtzPj5TjOFimUAPyYPTLFrmd6nRKV0OK09SRnZxucZX0xMGR02ADg0GSvd_see2qS0VZnFPJ_JudrivA7uA4fs4BZrNn_3_fMjmF_Bj9ZOD9Ia"
+        frameborder="0" scrolling="auto" allowfullscreen
+        style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="admonition abstract" style="margin-top: 2rem;">
+  <p class="admonition-title">Subscribe to our newsletter</p>
+  <p>📬&nbsp; Receive new lessons straight to your inbox (once a month) and join <b>40K+</b>
+    developers in learning how to responsibly deliver value with ML.</p>
+  <div class="row">
+    <div class="col-md-9">
+      <input class="revue-form-field" placeholder="Work email" type="email" name="member[email]"
+        id="member_email" style="width: 100%; height: 95%; border: 1px solid #b3b3b3; border-radius: 3px; font-size: 0.8rem;">
+    </div>
+    <div class="col-md-3 pl-md-0">
+      <button class="md-button md-button--purple-gradient mt-md-0 mt-2" type="submit"
+        style="cursor: pointer !important; height: 95%;" data-toggle="modal" data-target="#newsletterForm">Subscribe</button>
+    </div>
+  </div>
+</div>
+<hr style="margin-top: 2rem; margin-bottom: 2rem;">
+
+  
+  <h2 id="intuition">Intuition</h2>
+<p>Even though we've trained and thoroughly evaluated our model, the real work begins once we deploy to production. This is one of the fundamental differences between traditional software engineering and ML development. Traditionally, with rule based, deterministic, software, the majority of the work occurs at the initial stage and once deployed, our system works as we've defined it. But with machine learning, we haven't explicitly defined how something works but used data to architect a probabilistic solution. This approach is subject to natural performance degradation over time, as well as unintended behavior, since the data exposed to the model will be different from what it has been trained on. This isn't something we should be trying to avoid but rather understand and mitigate as much as possible. In this lesson, we'll understand the short comings from attempting to capture performance degradation in order to motivate the need for <a href="#drift">drift</a> detection.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We highly recommend that you explore this lesson <em>after</em> completing the previous lessons since the topics (and code) are iteratively developed. We did, however, create the <span class="twemoji github"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span> <a href="https://github.com/GokuMohandas/monitoring-ml" target="_blank">monitoring-ml</a> repository for a quick overview with an interactive notebook.</p>
+</div>
+<h2 id="system-health">System health</h2>
+<p>The first step to insure that our model is performing well is to ensure that the actual system is up and running as it should. This can include metrics specific to service requests such as latency, throughput, error rates, etc. as well as infrastructure utilization such as CPU/GPU utilization, memory, etc.</p>
+<div class="ai-center-all">
+    <a href="https://miro.medium.com/max/2400/1*DQdiQupXSSd3fldg9eAQjA.jpeg" target="_blank"><img width="600" src="/static/images/mlops/monitoring/system_health.png" alt="system health dashboard"></a>
+</div>
+
+<p>Fortunately, most cloud providers and even orchestration layers will provide this insight into our system's health for free through a dashboard. In the event we don't, we can easily use <a href="https://grafana.com/" target="_blank">Grafana</a>, <a href="https://www.datadoghq.com/" target="_blank">Datadog</a>, etc. to ingest system performance metrics from logs to create a customized dashboard and set alerts.</p>
+<h2 id="performance">Performance</h2>
+<p>Unfortunately, just monitoring the system's health won't be enough to capture the underlying issues with our model. So, naturally, the next layer of metrics to monitor involves the model's performance. These could be quantitative evaluation metrics that we used during model evaluation (accuracy, precision, f1, etc.) but also key business metrics that the model influences (ROI, click rate, etc.).</p>
+<p>It's usually never enough to just analyze the cumulative performance metrics across the entire span of time since the model has been deployed. Instead, we should also inspect performance across a period of time that's significant for our application (ex. daily). These sliding metrics might be more indicative of our system's health and we might be able to identify issues faster by not obscuring them with historical data.</p>
+<blockquote>
+<p>👉 &nbsp; Follow along interactive notebook in the <span class="twemoji github"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span> <a href="https://github.com/GokuMohandas/monitoring-ml" target="_blank"><strong>monitoring-ml</strong></a> repository as we implement the concepts below.</p>
+</blockquote>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Generate data</span>
+<span class="n">hourly_f1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">94</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">98</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">20</span><span class="p">))</span> <span class="o">+</span> \
+            <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">92</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span> <span class="o">+</span> \
+            <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">88</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span> <span class="o">+</span> \
+            <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">86</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">92</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Cumulative f1</span>
+<span class="n">cumulative_f1</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">hourly_f1</span><span class="p">[:</span><span class="n">n</span><span class="p">])</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hourly_f1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average cumulative f1 on the last day: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cumulative_f1</span><span class="p">[</span><span class="o">-</span><span class="mi">24</span><span class="p">:])</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<pre class="output">
+Average cumulative f1 on the last day: 93.7
+</pre>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Sliding f1</span>
+<span class="n">window_size</span> <span class="o">=</span> <span class="mi">24</span>
+<span class="n">sliding_f1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">hourly_f1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">window_size</span><span class="p">)</span><span class="o">/</span><span class="n">window_size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;valid&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average sliding f1 on the last day: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sliding_f1</span><span class="p">[</span><span class="o">-</span><span class="mi">24</span><span class="p">:])</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+Average sliding f1 on the last day: 88.6
+</pre>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">hourly_f1</span><span class="p">),</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;threshold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cumulative_f1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;cumulative&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sliding_f1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sliding&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="ai-center-all">
+    <img width="500" src="/static/images/mlops/monitoring/performance_drift.png" alt="performance drift">
+</div>
+
+<blockquote>
+<p>We may need to monitor metrics at various window sizes to catch performance degradation as soon as possible. Here we're monitoring the overall f1 but we can do the same for slices of data, individual classes, etc. For example, if we monitor the performance on a specific tag, we may be able to quickly catch new algorithms that were released for that tag (ex. new transformer architecture).</p>
+</blockquote>
+<h2 id="delayed-outcomes">Delayed outcomes</h2>
+<p>We may not always have the ground-truth outcomes available to determine the model's performance on production inputs. This is especially true if there is significant lag or annotation is required on the real-world data. To mitigate this, we could:</p>
+<ul>
+<li>devise an <strong>approximate signal</strong> that can help us <em>estimate</em> the model's performance. For example, in our tag prediction task, we could use the actual tags that an author attributes to a project as the intermediary labels until we have verified labels from an annotation pipeline.</li>
+<li>label a small subset of our live dataset to estimate performance. This subset should try to be representative of the various distributions in the live data.</li>
+</ul>
+<h2 id="importance-weighting">Importance weighting</h2>
+<p>However, approximate signals are not always available for every situation because there is no feedback on the ML system’s outputs or it’s too delayed. For these situations, a recent line of research relies on the only component that’s available in all situations: the input data.</p>
+<div class="ai-center-all">
+    <img width="700" src="/static/images/mlops/monitoring/mandoline.png" alt="importance weighting with mandoline">
+</div>
+<div class="ai-center-all">
+    <small><a href="https://arxiv.org/abs/2107.00643" target="_blank">Mandoline: Model Evaluation under Distribution Shift</a></small>
+</div>
+
+<p>The core idea is to develop slicing functions that may potentially capture the ways our data may experience distribution shift. These slicing functions should capture obvious slices such as class labels or different categorical feature values but also slices based on implicit metadata (hidden aspects of the data that are not explicit feature columns). These slicing functions are then applied to our labeled dataset to create matrices with the corresponding labels. The same slicing functions are applied to our unlabeled production data to approximate what the weighted labels would be. With this, we can determine the approximate performance! The intuition here is that we can better approximate performance on our unlabeled dataset based on the similarity between the labeled slice matrix and unlabeled slice matrix. A core dependency of this assumption is that our slicing functions are comprehensive enough that they capture the causes of distributional shift.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If we wait to catch the model decay based on the performance, it may have already caused significant damage to downstream business pipelines that are dependent on it. We need to employ more fine-grained monitoring to identify the <em>sources</em> of model drift prior to actual performance degradation.</p>
+</div>
+<h2 id="drift">Drift</h2>
+<p>We need to first understand the different types of issues that can cause our model's performance to decay (model drift). The best way to do this is to look at all the moving pieces of what we're trying to model and how each one can experience drift.</p>
+<p><center></p>
+<table>
+<thead>
+<tr>
+<th align="left">Entity</th>
+<th align="left">Description</th>
+<th align="left">Drift</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><span class="arithmatex">\(X\)</span></td>
+<td align="left">inputs (features)</td>
+<td align="left">data drift     <span class="arithmatex">\(\rightarrow P(X) \neq P_{ref}(X)\)</span></td>
+</tr>
+<tr>
+<td align="left"><span class="arithmatex">\(y\)</span></td>
+<td align="left">outputs (ground-truth)</td>
+<td align="left">target drift   <span class="arithmatex">\(\rightarrow P(y) \neq P_{ref}(y)\)</span></td>
+</tr>
+<tr>
+<td align="left"><span class="arithmatex">\(P(y \vert X)\)</span></td>
+<td align="left">actual relationship between <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(y\)</span></td>
+<td align="left">concept drift  <span class="arithmatex">\(\rightarrow P(y \vert X) \neq P_{ref}(y \vert X)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p></center></p>
+<h3 id="data-drift">Data drift</h3>
+<p>Data drift, also known as feature drift or covariate shift, occurs when the distribution of the <em>production</em> data is different from the <em>training</em> data. The model is not equipped to deal with this drift in the feature space and so, it's predictions may not be reliable. The actual cause of drift can be attributed to natural changes in the real-world but also to systemic issues such as missing data, pipeline errors, schema changes, etc. It's important to inspect the drifted data and trace it back along it's pipeline to identify when and where the drift was introduced.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Besides just looking at the distribution of our input data, we also want to ensure that the workflows to retrieve and process our input data is the same during training and serving to avoid training-serving skew. However, we can skip this step if we retrieve our features from the same source location for both training and serving, ie. from a <a href="../feature-store/" target="_blank">feature store</a>.</p>
+</div>
+<div class="ai-center-all">
+    <img width="700" src="/static/images/mlops/monitoring/data_drift.png" alt="data drift">
+</div>
+<div class="ai-center-all">
+    <small>Data drift can occur in either continuous or categorical features.</small>
+</div>
+
+<blockquote>
+<p>As data starts to drift, we may not yet notice significant decay in our model's performance, especially if the model is able to interpolate well. However, this is a great opportunity to <a href="#solutions">potentially</a> retrain before the drift starts to impact performance.</p>
+</blockquote>
+<h3 id="target-drift">Target drift</h3>
+<p>Besides just the input data changing, as with data drift, we can also experience drift in our outcomes. This can be a shift in the distributions but also the removal or addition of new classes with categorical tasks. Though retraining can mitigate the performance decay caused target drift, it can often be avoided with proper inter-pipeline communication about new classes, schema changes, etc.</p>
+<h3 id="concept-drift">Concept drift</h3>
+<p>Besides the input and output data drifting, we can have the actual relationship between them drift as well. This concept drift renders our model ineffective because the patterns it learned to map between the original inputs and outputs are no longer relevant. Concept drift can be something that occurs in <a href="https://link.springer.com/article/10.1007/s11227-018-2674-1" target="_blank">various patterns</a>:</p>
+<div class="ai-center-all">
+    <img width="500" src="/static/images/mlops/monitoring/concept_drift.png" alt="concept drift">
+</div>
+
+<ul>
+<li>gradually over a period of time</li>
+<li>abruptly as a result of an external event</li>
+<li>periodically as a result of recurring events</li>
+</ul>
+<blockquote>
+<p>All the different types of drift we discussed can can occur simultaneously which can complicated identifying the sources of drift.</p>
+</blockquote>
+<h2 id="locating-drift">Locating drift</h2>
+<p>Now that we've identified the different types of drift, we need to learn how to locate and how often to measure it. Here are the constraints we need to consider:</p>
+<ul>
+<li><strong>reference window</strong>: the set of points to compare production data distributions with to identify drift.</li>
+<li><strong>test window</strong>: the set of points to compare with the reference window to determine if drift has occurred.</li>
+</ul>
+<p>Since we're dealing with online drift detection (ie. detecting drift in live production data as opposed to past batch data), we can employ either a <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/widm.1381" target="_blank">fixed or sliding window approach</a> to identify our set of points for comparison. Typically, the reference window is a fixed, recent subset of the training data while the test window slides over time.</p>
+<p><a href="https://scikit-multiflow.github.io/" target="_blank">Scikit-multiflow</a> provides a toolkit for concept drift detection <a href="https://scikit-multiflow.readthedocs.io/en/stable/api/api.html#module-skmultiflow.drift_detection" target="_blank">techniques</a> directly on streaming data. The package offers windowed, moving average functionality (including dynamic preprocessing) and even methods around concepts like <a href="https://scikit-multiflow.readthedocs.io/en/stable/api/generated/skmultiflow.drift_detection.EDDM.html#skmultiflow-drift-detection-eddm" target="_blank">gradual concept drift</a>.</p>
+<blockquote>
+<p>We can also compare across various window sizes simultaneously to ensure smaller cases of drift aren't averaged out by large window sizes.</p>
+</blockquote>
+<h2 id="measuring-drift">Measuring drift</h2>
+<p>Once we have the window of points we wish to compare, we need to know how to compare them.</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">great_expectations</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ge</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.request</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlopen</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Load labeled projects</span>
+<span class="n">projects</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/projects.csv&quot;</span><span class="p">)</span>
+<span class="n">tags</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/GokuMohandas/Made-With-ML/main/datasets/tags.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">ge</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">PandasDataset</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">projects</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">title</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">description</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<pre class="output">
+<div class="output_subarea output_html rendered_html output_result" dir="auto"><div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>created_on</th>
+      <th>tag</th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>2020-02-20 06:43:18</td>
+      <td>computer-vision</td>
+      <td>Comparison between YOLO and RCNN on real world...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>2020-02-20 06:47:21</td>
+      <td>computer-vision</td>
+      <td>Show, Infer &amp; Tell: Contextual Inference for C...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9</td>
+      <td>2020-02-24 16:24:45</td>
+      <td>graph-learning</td>
+      <td>Awesome Graph Classification A collection of i...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15</td>
+      <td>2020-02-28 23:55:26</td>
+      <td>reinforcement-learning</td>
+      <td>Awesome Monte Carlo Tree Search A curated list...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>19</td>
+      <td>2020-03-03 13:54:31</td>
+      <td>graph-learning</td>
+      <td>Diffusion to Vector Reference implementation o...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</pre>
+
+<h3 id="expectations">Expectations</h3>
+<p>The first form of measurement can be rule-based such as validating <a href="https://docs.greatexpectations.io/en/latest/reference/glossary_of_expectations.html" target="_blank">expectations</a> around missing values, data types, value ranges, etc. as we did in our <a href="../testing/#expectations" target="_blank">data testing lesson</a>. The difference now is that we'll be validating these expectations on live production data.</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Simulated production data</span>
+<span class="n">prod_df</span> <span class="o">=</span> <span class="n">ge</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">PandasDataset</span><span class="p">([{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;world&quot;</span><span class="p">}])</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Expectation suite</span>
+<span class="n">df</span><span class="o">.</span><span class="n">expect_column_values_to_not_be_null</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">expect_column_values_to_be_of_type</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">type_</span><span class="o">=</span><span class="s2">&quot;str&quot;</span><span class="p">)</span>
+<span class="n">expectation_suite</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">get_expectation_suite</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Validate reference data</span>
+<span class="n">df</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">expectation_suite</span><span class="o">=</span><span class="n">expectation_suite</span><span class="p">,</span> <span class="n">only_return_failures</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s2">&quot;statistics&quot;</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div></p>
+<pre class="output">
+{'evaluated_expectations': 2,
+ 'success_percent': 100.0,
+ 'successful_expectations': 2,
+ 'unsuccessful_expectations': 0}
+</pre>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Validate production data</span>
+<span class="n">prod_df</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">expectation_suite</span><span class="o">=</span><span class="n">expectation_suite</span><span class="p">,</span> <span class="n">only_return_failures</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s2">&quot;statistics&quot;</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+{'evaluated_expectations': 2,
+ 'success_percent': 50.0,
+ 'successful_expectations': 1,
+ 'unsuccessful_expectations': 1}
+</pre>
+
+<p>Once we've validated our rule-based expectations, we need to quantitatively measure drift across the different features in our data.</p>
+<h3 id="univariate">Univariate</h3>
+<p>Our task may involve univariate (1D) features that we will want to monitor. While there are many types of hypothesis tests we can use, a popular option is the <a href="https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test" target="_blank">Kolmogorov-Smirnov (KS) test</a>.</p>
+<h4 id="kolmogorov-smirnov-ks-test">Kolmogorov-Smirnov (KS) test</h4>
+<p>The KS test determines the maximum distance between two distribution's cumulative density functions. Here, we'll measure if there is any drift on the size of our input text feature between two different data subsets.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>While text is a direct feature in our task, we can also monitor other implicit features such as % of unknown tokens in text (need to maintain a training vocabulary), etc. While they may not be used for our machine learning model, they can be great indicators for detecting drift.</p>
+</div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">alibi_detect.cd</span><span class="w"> </span><span class="kn">import</span> <span class="n">KSDrift</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Reference</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_tokens&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)))</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_tokens&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">200</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;reference&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Initialize drift detector</span>
+<span class="n">length_drift_detector</span> <span class="o">=</span> <span class="n">KSDrift</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">p_val</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># No drift</span>
+<span class="n">no_drift</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_tokens&quot;</span><span class="p">][</span><span class="mi">200</span><span class="p">:</span><span class="mi">400</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;reference&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">no_drift</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="ai-center-all">
+    <img width="500" src="/static/images/mlops/monitoring/ks_no_drift.png" alt="no drift with KS test">
+</div>
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">length_drift_detector</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">no_drift</span><span class="p">,</span> <span class="n">return_p_val</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+{'data': {'distance': array([0.09], dtype=float32),
+  'is_drift': 0,
+  'p_val': array([0.3927307], dtype=float32),
+  'threshold': 0.01},
+ 'meta': {'data_type': None,
+  'detector_type': 'offline',
+  'name': 'KSDrift',
+  'version': '0.9.1'}}
+</pre>
+
+<blockquote>
+<p>&darr; p-value = &uarr; confident that the distributions are different.</p>
+</blockquote>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Drift</span>
+<span class="n">drift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ref</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;reference&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">drift</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="ai-center-all">
+    <img width="500" src="/static/images/mlops/monitoring/ks_drift.png" alt="drift detection with KS">
+</div>
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">length_drift_detector</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">drift</span><span class="p">,</span> <span class="n">return_p_val</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+{'data': {'distance': array([0.63], dtype=float32),
+  'is_drift': 1,
+  'p_val': array([6.7101775e-35], dtype=float32),
+  'threshold': 0.01},
+ 'meta': {'data_type': None,
+  'detector_type': 'offline',
+  'name': 'KSDrift',
+  'version': '0.9.1'}}
+</pre>
+
+<h4 id="chi-squared-test">Chi-squared test</h4>
+<p>Similarly, for categorical data (input features, targets, etc.), we can apply the <a href="https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test" target="_blank">Pearson's chi-squared test</a> to determine if a frequency of events in production is consistent with a reference distribution.</p>
+<blockquote>
+<p>We're creating a categorical variable for the # of tokens in our text feature but we could very very apply it to the tag distribution itself, individual tags (binary), slices of tags, etc.</p>
+</blockquote>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">alibi_detect.cd</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChiSquareDrift</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Reference</span>
+<span class="n">df</span><span class="o">.</span><span class="n">token_count</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">num_tokens</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;small&quot;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">10</span> <span class="k">else</span> <span class="p">(</span><span class="s2">&quot;medium&quot;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span><span class="mi">25</span> <span class="k">else</span> <span class="s2">&quot;large&quot;</span><span class="p">))</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">token_count</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">200</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;reference&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Initialize drift detector</span>
+<span class="n">target_drift_detector</span> <span class="o">=</span> <span class="n">ChiSquareDrift</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">p_val</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># No drift</span>
+<span class="n">no_drift</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">token_count</span><span class="p">[</span><span class="mi">200</span><span class="p">:</span><span class="mi">400</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;reference&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">no_drift</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="ai-center-all">
+    <img width="500" src="/static/images/mlops/monitoring/chi_no_drift.png" alt="no drift with chi squared test">
+</div>
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">target_drift_detector</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">no_drift</span><span class="p">,</span> <span class="n">return_p_val</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+{'data': {'distance': array([4.135522], dtype=float32),
+  'is_drift': 0,
+  'p_val': array([0.12646863], dtype=float32),
+  'threshold': 0.01},
+ 'meta': {'data_type': None,
+  'detector_type': 'offline',
+  'name': 'ChiSquareDrift',
+  'version': '0.9.1'}}
+</pre>
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Drift</span>
+<span class="n">drift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">&quot;small&quot;</span><span class="p">]</span><span class="o">*</span><span class="mi">80</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;medium&quot;</span><span class="p">]</span><span class="o">*</span><span class="mi">40</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;large&quot;</span><span class="p">]</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;reference&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">drift</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="ai-center-all">
+    <img width="500" src="/static/images/mlops/monitoring/chi_drift.png" alt="drift detection with chi squared tests">
+</div>
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">target_drift_detector</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">drift</span><span class="p">,</span> <span class="n">return_p_val</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_distance</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+{'data': {'is_drift': 1,
+  'distance': array([118.03355], dtype=float32),
+  'p_val': array([2.3406739e-26], dtype=float32),
+  'threshold': 0.01},
+ 'meta': {'name': 'ChiSquareDrift',
+  'detector_type': 'offline',
+  'data_type': None}}
+</pre>
+
+<h3 id="multivariate">Multivariate</h3>
+<p>As we can see, measuring drift is fairly straightforward for univariate data but difficult for multivariate data. We'll summarize the reduce and measure approach outlined in the following paper: <a href="https://arxiv.org/abs/1810.11953" target="_blank">Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift</a>.</p>
+<div class="ai-center-all">
+    <img width="700" src="/static/images/mlops/monitoring/failing_loudly.png" alt="multivariate drift detection">
+</div>
+<p>We vectorized our text using tf-idf (to keep modeling simple), which has high dimensionality and is not semantically rich in context. However, typically with text, word/char embeddings are used. So to illustrate what drift detection on multivariate data would look like, let's represent our text using pretrained embeddings.</p>
+<blockquote>
+<p>Be sure to refer to our <a href="../../foundations/embeddings/" target="_blank">embeddings</a> and <a href="../../foundations/transformers/" target="_blank">transformers</a> lessons to learn more about these topics. But note that detecting drift on multivariate text embeddings is still quite difficult so it's typically more common to use these methods applied to tabular features or images.</p>
+</blockquote>
+<p>We'll start by loading the tokenizer from a pretrained model.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;allenai/scibert_scivocab_uncased&quot;</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">vocab_size</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+31090
+</pre>
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Tokenize inputs</span>
+<span class="n">encoded_input</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ids</span> <span class="o">=</span> <span class="n">encoded_input</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">]</span>
+<span class="n">masks</span> <span class="o">=</span> <span class="n">encoded_input</span><span class="p">[</span><span class="s2">&quot;attention_mask&quot;</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Decode</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+tensor([  102,  2029,   467,  1778,   609,   137,  6446,  4857,   191,  1332,
+         2399, 13572, 19125,  1983,   147,  1954,   165,  6240,   205,   185,
+          300,  3717,  7434,  1262,   121,   537,   201,   137,  1040,   111,
+          545,   121,  4714,   205,   103,     0,     0,     0,     0,     0,
+            0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+            0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+            0])
+[CLS] comparison between yolo and rcnn on real world videos bringing theory to experiment is cool. we can easily train models in colab and find the results in minutes. [SEP] [PAD] [PAD] ...
+</pre>
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Sub-word tokens</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">convert_ids_to_tokens</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="n">ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+['[CLS]', 'comparison', 'between', 'yo', '##lo', 'and', 'rc', '##nn', 'on', 'real', 'world', 'videos', 'bringing', 'theory', 'to', 'experiment', 'is', 'cool', '.', 'we', 'can', 'easily', 'train', 'models', 'in', 'col', '##ab', 'and', 'find', 'the', 'results', 'in', 'minutes', '.', '[SEP]', '[PAD]', '[PAD]', ...]
+</pre>
+
+<p>Next, we'll load the pretrained model's weights and use the <code>TransformerEmbedding</code> object to extract the embeddings from the hidden state (averaged across tokens).</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">alibi_detect.models.pytorch</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransformerEmbedding</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Embedding layer</span>
+<span class="n">emb_type</span> <span class="o">=</span> <span class="s2">&quot;hidden_state&quot;</span>
+<span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]</span>  <span class="c1"># last 8 layers</span>
+<span class="n">embedding_layer</span> <span class="o">=</span> <span class="n">TransformerEmbedding</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">emb_type</span><span class="p">,</span> <span class="n">layers</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Embedding dimension</span>
+<span class="n">embedding_dim</span> <span class="o">=</span> <span class="n">embedding_layer</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">word_embeddings</span><span class="o">.</span><span class="n">embedding_dim</span>
+<span class="n">embedding_dim</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+768
+</pre>
+
+<h4 id="dimensionality-reduction">Dimensionality reduction</h4>
+<p>Now we need to use a dimensionality reduction method to reduce our representations dimensions into something more manageable (ex. 32 dim) so we can run our two-sample tests on to detect drift. Popular options include:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Principal_component_analysis" target="_blank">Principle component analysis (PCA)</a>: orthogonal transformations that preserve the variability of the dataset.</li>
+<li><a href="https://en.wikipedia.org/wiki/Autoencoder" target="_blank">Autoencoders (AE)</a>: networks that consume the inputs and attempt to reconstruct it from an lower dimensional space while minimizing the error. These can either be trained or untrained (the Failing loudly paper recommends untrained).</li>
+<li><a href="https://arxiv.org/abs/1802.03916" target="_blank">Black box shift detectors (BBSD)</a>: the actual model trained on the training data can be used as a dimensionality reducer. We can either use the softmax outputs (multivariate) or the actual predictions (univariate).</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Device</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+cuda
+</pre>
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Untrained autoencoder (UAE) reducer</span>
+<span class="n">encoder_dim</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">reducer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">embedding_layer</span><span class="p">,</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">encoder_dim</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<p>We can wrap all of the operations above into one preprocessing function that will consume input text and produce the reduced representation.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">alibi_detect.cd.pytorch</span><span class="w"> </span><span class="kn">import</span> <span class="n">preprocess_drift</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Preprocessing with the reducer</span>
+<span class="n">max_len</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">preprocess_fn</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">preprocess_drift</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">reducer</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+                        <span class="n">max_len</span><span class="o">=</span><span class="n">max_len</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="maximum-mean-discrepancy-mmd">Maximum Mean Discrepancy (MMD)</h4>
+<p>After applying dimensionality reduction techniques on our multivariate data, we can use different statistical tests to calculate drift. A popular option is <a href="https://jmlr.csail.mit.edu/papers/v13/gretton12a.html" target="_blank">Maximum Mean Discrepancy (MMD)</a>, a kernel-based approach that determines the distance between two distributions by computing the distance between the mean embeddings of the features from both distributions.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">alibi_detect.cd</span><span class="w"> </span><span class="kn">import</span> <span class="n">MMDDrift</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Initialize drift detector</span>
+<span class="n">mmd_drift_detector</span> <span class="o">=</span> <span class="n">MMDDrift</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pytorch&quot;</span><span class="p">,</span> <span class="n">p_val</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span> <span class="n">preprocess_fn</span><span class="o">=</span><span class="n">preprocess_fn</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># No drift</span>
+<span class="n">no_drift</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="mi">200</span><span class="p">:</span><span class="mi">400</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">mmd_drift_detector</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">no_drift</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+{'data': {'distance': 0.0021169185638427734,
+  'distance_threshold': 0.0032651424,
+  'is_drift': 0,
+  'p_val': 0.05999999865889549,
+  'threshold': 0.01},
+ 'meta': {'backend': 'pytorch',
+  'data_type': None,
+  'detector_type': 'offline',
+  'name': 'MMDDriftTorch',
+  'version': '0.9.1'}}
+</pre>
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Drift</span>
+<span class="n">drift</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;UNK &quot;</span> <span class="o">+</span> <span class="n">text</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">no_drift</span><span class="p">]</span>
+<span class="n">mmd_drift_detector</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">drift</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+{'data': {'distance': 0.014705955982208252,
+  'distance_threshold': 0.003908038,
+  'is_drift': 1,
+  'p_val': 0.0,
+  'threshold': 0.01},
+ 'meta': {'backend': 'pytorch',
+  'data_type': None,
+  'detector_type': 'offline',
+  'name': 'MMDDriftTorch',
+  'version': '0.9.1'}}
+</pre>
+
+<h2 id="online">Online</h2>
+<p>So far we've applied our drift detection methods on offline data to try and understand what reference window sizes should be, what p-values are appropriate, etc. However, we'll need to apply these methods in the online production setting so that we can catch drift as easy as possible.</p>
+<blockquote>
+<p>Many monitoring libraries and platforms come with <a href="https://docs.seldon.io/projects/alibi-detect/en/latest/cd/methods.html#online" target="_blank">online equivalents</a> for their detection methods.</p>
+</blockquote>
+<p>Typically, reference windows are large so that we have a proper benchmark to compare our production data points to. As for the test window, the smaller it is, the more quickly we can catch sudden drift. Whereas, a larger test window will allow us to identify more subtle/gradual drift. So it's best to compose windows of different sizes to regularly monitor.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">alibi_detect.cd</span><span class="w"> </span><span class="kn">import</span> <span class="n">MMDDriftOnline</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Online MMD drift detector</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">800</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">online_mmd_drift_detector</span> <span class="o">=</span> <span class="n">MMDDriftOnline</span><span class="p">(</span>
+    <span class="n">ref</span><span class="p">,</span> <span class="n">ert</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pytorch&quot;</span><span class="p">,</span> <span class="n">preprocess_fn</span><span class="o">=</span><span class="n">preprocess_fn</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+Generating permutations of kernel matrix..
+100%|██████████| 1000/1000 [00:00<00:00, 13784.22it/s]
+Computing thresholds: 100%|██████████| 200/200 [00:32<00:00,  6.11it/s]
+</pre>
+
+<p>As data starts to flow in, we can use the detector to predict drift at every point. Our detector should detect drift sooner in our drifter dataset than in our normal data.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">simulate_production</span><span class="p">(</span><span class="n">test_window</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">online_mmd_drift_detector</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">test_window</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">online_mmd_drift_detector</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">is_drift</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;is_drift&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">is_drift</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> steps&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Normal</span>
+<span class="n">test_window</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="mi">800</span><span class="p">:]</span>
+<span class="n">simulate_production</span><span class="p">(</span><span class="n">test_window</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+27 steps
+</pre>
+
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Drift</span>
+<span class="n">test_window</span> <span class="o">=</span> <span class="s2">&quot;UNK&quot;</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="mi">800</span><span class="p">:])</span>
+<span class="n">simulate_production</span><span class="p">(</span><span class="n">test_window</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+11 steps
+</pre>
+
+<p>There are also several considerations around how often to refresh both the reference and test windows. We could base in on the number of new observations or time without drift, etc. We can also adjust the various thresholds (ERT, window size, etc.) based on what we learn about our system through monitoring.</p>
+<h2 id="outliers">Outliers</h2>
+<p>With drift, we're comparing a window of production data with reference data as opposed to looking at any one specific data point. While each individual point may not be an anomaly or outlier, the group of points may cause a drift. The easiest way to illustrate this is to imagine feeding our live model the same input data point repeatedly. The actual data point may not have anomalous features but feeding it repeatedly will cause the feature distribution to change and lead to drift.</p>
+<div class="ai-center-all">
+    <img width="600" src="/static/images/mlops/monitoring/outliers.png" alt="outlier detection">
+</div>
+
+<p>Unfortunately, it's not very easy to detect outliers because it's hard to constitute the criteria for an outlier. Therefore the outlier detection task is typically unsupervised and requires a stochastic streaming algorithm to identify potential outliers. Luckily, there are several powerful libraries such as <a href="https://pyod.readthedocs.io/en/latest/" target="_blank">PyOD</a>, <a href="https://docs.seldon.io/projects/alibi-detect/en/latest/" target="_blank">Alibi Detect</a>, <a href="https://whylogs.readthedocs.io/en/latest/" target="_blank">WhyLogs</a> (uses <a href="https://datasketches.apache.org/" target="_blank">Apache DataSketches</a>), etc. that offer a suite of outlier detection functionality (largely for tabular and image data for now).</p>
+<p>Typically, outlier detection algorithms fit (ex. via reconstruction) to the training set to understand what normal data looks like and then we can use a threshold to predict outliers. If we have a small labeled dataset with outliers, we can empirically choose our threshold but if not, we can choose some reasonable tolerance.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">alibi_detect.od</span><span class="w"> </span><span class="kn">import</span> <span class="n">OutlierVAE</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">)</span>
+<span class="n">outlier_detector</span> <span class="o">=</span> <span class="n">OutlierVAE</span><span class="p">(</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">encoder_net</span><span class="o">=</span><span class="n">encoder</span><span class="p">,</span>
+    <span class="n">decoder_net</span><span class="o">=</span><span class="n">decoder</span><span class="p">,</span>
+    <span class="n">latent_dim</span><span class="o">=</span><span class="mi">512</span>
+<span class="p">)</span>
+<span class="n">outlier_detector</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">outlier_detector</span><span class="o">.</span><span class="n">infer_threshold</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">threshold_perc</span><span class="o">=</span><span class="mi">95</span><span class="p">)</span>  <span class="c1"># infer from % outliers</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="n">outlier_detector</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">outlier_type</span><span class="o">=</span><span class="s2">&quot;instance&quot;</span><span class="p">,</span> <span class="n">outlier_perc</span><span class="o">=</span><span class="mi">75</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p>When we identify outliers, we may want to let the end user know that the model's response may not be reliable. Additionally, we may want to remove the outliers from the next training set or further inspect them and upsample them in case they're early signs of what future distributions of incoming features will look like.</p>
+</blockquote>
+<h2 id="solutions">Solutions</h2>
+<p>It's not enough to just be able to measure drift or identify outliers but to also be able to act on it. We want to be able to alert on drift, inspect it and then act on it.</p>
+<h3 id="alert">Alert</h3>
+<p>Once we've identified outliers and/or measured statistically significant drift, we need to a devise a workflow to notify stakeholders of the issues. A negative connotation with monitoring is fatigue stemming from false positive alerts. This can be mitigated by choosing the appropriate constraints (ex. alerting thresholds) based on what's important to our specific application. For example, thresholds could be:</p>
+<ul>
+<li>fixed values/range for situations where we're concretely aware of expected upper/lower bounds.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">if</span> <span class="n">percentage_unk_tokens</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">%</span><span class="p">:</span>
+    <span class="n">trigger_alert</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div></li>
+<li><a _target="_blank" href="https://www.datadoghq.com/blog/forecasts-datadog/">forecasted</a> thresholds dependent on previous inputs, time, etc.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">if</span> <span class="n">current_f1</span> <span class="o">&lt;</span> <span class="n">forecast_f1</span><span class="p">(</span><span class="n">current_time</span><span class="p">):</span>
+    <span class="n">trigger_alert</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div></li>
+<li>appropriate p-values for different drift detectors (&darr; p-value = &uarr; confident that the distributions are different).
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">alibi_detect.cd</span><span class="w"> </span><span class="kn">import</span> <span class="n">KSDrift</span>
+<span class="n">length_drift_detector</span> <span class="o">=</span> <span class="n">KSDrift</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">p_val</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></li>
+</ul>
+<p>Once we have our carefully crafted alerting workflows in place, we can notify stakeholders as issues arise via email, <a href="https://slack.com/" target="_blank">Slack</a>, <a href="https://www.pagerduty.com/" target="_blank">PageDuty</a>, etc. The stakeholders can be of various levels (core engineers, managers, etc.) and they can subscribe to the alerts that are relevant for them.</p>
+<h3 id="inspect">Inspect</h3>
+<p>Once we receive an alert, we need to inspect it before acting on it. An alert needs several components in order for us to completely inspect it:</p>
+<ul>
+<li>specific alert that was triggered</li>
+<li>relevant metadata (time, inputs, outputs, etc.)</li>
+<li>thresholds / expectations that failed</li>
+<li>drift detection tests that were conducted</li>
+<li>data from reference and test windows</li>
+<li><a href="../logging/" target="_blank">log</a> records from the relevant window of time</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Sample alerting ticket</span>
+<span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;triggered_alerts&quot;</span>:<span class="w"> </span><span class="o">[</span><span class="s2">&quot;text_length_drift&quot;</span><span class="o">]</span>,
+<span class="w">    </span><span class="s2">&quot;threshold&quot;</span>:<span class="w"> </span><span class="m">0</span>.05,
+<span class="w">    </span><span class="s2">&quot;measurement&quot;</span>:<span class="w"> </span><span class="s2">&quot;KSDrift&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;distance&quot;</span>:<span class="w"> </span><span class="m">0</span>.86,
+<span class="w">    </span><span class="s2">&quot;p_val&quot;</span>:<span class="w"> </span><span class="m">0</span>.03,
+<span class="w">    </span><span class="s2">&quot;reference&quot;</span>:<span class="w"> </span><span class="o">[]</span>,
+<span class="w">    </span><span class="s2">&quot;target&quot;</span>:<span class="w"> </span><span class="o">[]</span>,
+<span class="w">    </span><span class="s2">&quot;logs&quot;</span>:<span class="w"> </span>...
+<span class="o">}</span>
+</code></pre></div>
+<p>With these pieces of information, we can work backwards from the alert towards identifying the root cause of the issue. <strong>Root cause analysis (RCA)</strong> is an important first step when it comes to monitoring because we want to prevent the same issue from impacting our system again. Often times, many alerts are triggered but they maybe all actually be caused by the same underlying issue. In this case, we'd want to intelligently trigger just one alert that pinpoints the core issue. For example, let's say we receive an alert that our overall user satisfaction ratings are reducing but we also receive another alert that our North American users also have low satisfaction ratings. Here's the system would automatically assess for drift in user satisfaction ratings across many different slices and aggregations to discover that only users in a specific area are experiencing the issue but because it's a popular user base, it ends up triggering all aggregate downstream alerts as well!</p>
+<h3 id="act">Act</h3>
+<p>There are many different ways we can act to drift based on the situation. An initial impulse may be to retrain our model on the new data but it may not always solve the underlying issue.</p>
+<ul>
+<li>ensure all data expectations have passed.</li>
+<li>confirm no data schema changes.</li>
+<li>retrain the model on the new shifted dataset.</li>
+<li>move the reference window to more recent data or give it more weight.</li>
+<li>determine if outliers are potentially valid data points.</li>
+</ul>
+<h2 id="production">Production</h2>
+<p>Since detecting drift and outliers can involve compute intensive operations, we need a solution that can execute serverless workloads on top of our event data streams (ex. <a href="https://kafka.apache.org/" target="_blank">Kafka</a>). Typically these solutions will ingest payloads (ex. model's inputs and outputs) and can trigger monitoring workloads. This allows us to segregate the resources for monitoring from our actual ML application and scale them as needed.</p>
+<div class="ai-center-all">
+    <img width="600" src="/static/images/mlops/monitoring/serverless.png" alt="serverless production monitoring">
+</div>
+
+<p>When it actually comes to implementing a monitoring system, we have several options, ranging from fully managed to from-scratch. Several popular managed solutions are <a href="https://arize.com/" target="_blank">Arize</a>, <a href="https://www.arthur.ai/" target="_blank">Arthur</a>, <a href="https://www.fiddler.ai/ml-monitoring" target="_blank">Fiddler</a>, <a href="https://gantry.io/" target="_blank">Gantry</a>, <a href="https://www.monalabs.io/" target="_blank">Mona</a>, <a href="https://whylabs.ai/" target="_blank">WhyLabs</a>, etc., all of which allow us to create custom monitoring views, trigger alerts, etc. There are even several great open-source solutions such as <a href="https://evidentlyai.com/" target="_blank">EvidentlyAI</a>, <a href="https://torchdrift.org/" target="_blank">TorchDrift</a>, <a href="https://whylogs.readthedocs.io/en/latest/" target="_blank">WhyLogs</a>, etc.</p>
+<p>We'll often notice that monitoring solutions are offered as part of the larger deployment option such as <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html" target="_blank">Sagemaker</a>, <a href="https://www.tensorflow.org/tfx" target="_blank">TensorFlow Extended (TFX)</a>, <a href="https://pytorch.org/serve/" target="_blank">TorchServe</a>, etc. And if we're already working with Kubernetes, we could use <a href="https://knative.dev/" target="_blank">KNative</a> or <a href="https://kubeless.io/" target="_blank">Kubeless</a> for serverless workload management. But we could also use a higher level framework such as <a href="https://www.kubeflow.org/docs/components/kfserving/" target="_blank">KFServing</a> or <a href="https://docs.seldon.io/projects/seldon-core/en/v0.4.0/#" target="_blank">Seldon core</a> that natively use a serverless framework like KNative.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://onlinelibrary.wiley.com/doi/full/10.1002/widm.1381" target="_blank">An overview of unsupervised drift detection methods</a></li>
+<li><a href="https://arxiv.org/abs/1810.11953" target="_blank">Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift</a></li>
+<li><a href="https://arxiv.org/abs/2007.06299" target="_blank">Monitoring and explainability of models in production</a></li>
+<li><a href="https://arxiv.org/abs/1802.03916" target="_blank">Detecting and Correcting for Label Shift with Black Box Predictors</a></li>
+<li><a href="https://link.springer.com/article/10.1007/s11227-018-2674-1" target="_blank">Outlier and anomaly pattern detection on data streams</a></li>
+</ul>
+<!-- Course signup -->
+<hr style="margin-top: 2.25rem; margin-bottom: 2.25rem;">
+
+<div class="admonition question mx-md-5">
+<p class="admonition-title">Upcoming live cohorts</p>
+<p>Sign up for our upcoming live cohort, where we'll provide <b>live lessons + QA</b>, <b>compute (GPUs)</b> and <b>community</b> to learn everything in one day.
+<script src="//embed.typeform.com/next/embed.js"></script>
+</p><div class="ai-center-all mb-3">
+    <button data-tf-popup="hFw8rLTJ" data-tf-opacity="100" data-tf-size="100" data-tf-iframe-props="title=Made With ML" data-tf-transitive-search-params data-tf-medium="snippet" data-tf-hidden="utm_source="class="md-button md-button--green-gradient mb-2 mb-md-0 mt-md-0 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Learn more</a>
+</div><p></p>
+</div>
+
+<!-- Citation -->
+<hr style="margin-top: 2.25rem; margin-bottom: 2.25rem;">
+
+<p>To cite this content, please use:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nc">@article</span><span class="p">{</span><span class="nl">madewithml</span><span class="p">,</span>
+<span class="w">    </span><span class="na">author</span><span class="w">       </span><span class="p">=</span><span class="w"> </span><span class="s">{Goku Mohandas}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">title</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{ Monitoring - Made With ML }</span><span class="p">,</span>
+<span class="w">    </span><span class="na">howpublished</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{\url{https://madewithml.com/}}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">year</span><span class="w">         </span><span class="p">=</span><span class="w"> </span><span class="s">{2023}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+  
+    
+  
+  <br>
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <div style="display:flex; flex-direction:column;"><a href="https://www.anyscale.com?utm_source=madewithmml&utm_medium=website&utm_campaign=footer" target="_blank"><img src="/static/images/anyscale-white-text.svg" style="width: 4rem;"></a> © 2025 Anyscale, Inc. <br> <a href="https://www.anyscale.com/privacy-policy" target="_blank">Anyscale Privacy Policy</a></div>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/GokuMohandas" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/goku" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/GokuMohandas" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/madewithml?sub_confirmation=1" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:goku@madewithml.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+     
+
+      <script src="../../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        
+      
+        
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+        
+          <script src="../../../static/js/custom.js"></script>
+        
+      
+        
+          <script src="../../../static/js/termynal.js"></script>
+        
+      
+    
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-P8H6KQG"
+    height="0"
+    width="0"
+    style="display: none; visibility: hidden"
+  ></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+  </body>
+</html>

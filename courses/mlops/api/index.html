@@ -1,0 +1,2924 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Designing and deploying an API to serve machine learning models.">
+      
+      
+        <meta name="author" content="Goku Mohandas">
+      
+      
+        <link rel="canonical" href="https://madewithml.com/courses/mlops/api/">
+      
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+    
+    
+      
+        <title>APIs for Model Serving - Made With ML by Anyscale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Epilogue:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Epilogue";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../static/scss/extra.css">
+    
+      <link rel="stylesheet" href="../../../static/scss/bs.css">
+    
+      <link rel="stylesheet" href="../../../static/scss/termynal.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+
+  <!-- Set title -->
+  
+  
+    
+  
+
+  <!-- Set description -->
+  
+  
+    
+  
+
+  <!-- Set image -->
+  
+  
+    
+  
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="APIs for Model Serving - Made With ML by Anyscale" />
+  <meta property="og:description" content="Designing and deploying an API to serve machine learning models." />
+  <meta property="og:url" content="https://madewithml.com/courses/mlops/api/" />
+  <meta property="og:image" content="https://madewithml.com/static/images/mlops.png" />
+  <meta property="og:image:type" content="image/png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@GokuMohandas" />
+  <meta name="twitter:creator" content="@GokuMohandas" />
+  <meta name="twitter:title" content="APIs for Model Serving - Made With ML by Anyscale" />
+  <meta name="twitter:description" content="Designing and deploying an API to serve machine learning models." />
+  <meta name="twitter:image" content="https://madewithml.com/static/images/mlops.png" />
+
+  <!-- GTM Container -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        "gtm.start": new Date().getTime(),
+        event: "gtm.js",
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != "dataLayer" ? "&l=" + l : "";
+      j.async = true;
+      j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "dataLayer", "GTM-P8H6KQG");
+  </script>
+
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#intuition" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+<div class="ai-announce">
+  Try Ray with $100 credit — <a href="https://console.anyscale.com/register/ha?utm_source=made_with_ml&utm_medium=website&utm_campaign=banner" target="_blank" class="ai-announce-link">Start Now</a>
+</div>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Made With ML by Anyscale" class="md-header__button md-logo" aria-label="Made With ML by Anyscale" data-md-component="logo">
+      
+  <img src="../../../static/images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Made With ML by Anyscale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              APIs for Model Serving
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GokuMohandas/Made-With-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GokuMohandas/MadeWithML
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../about/" class="md-tabs__link">
+      About
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="/#course" class="md-tabs__link">
+        Course
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="/courses/foundations/" class="md-tabs__link">
+        Foundations
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../misc/newsletter/" class="md-tabs__link">
+      Subscribe
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="https://discord.com/channels/1078171187609337896/1078171189169635472" class="md-tabs__link">
+      Community
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Made With ML by Anyscale" class="md-nav__button md-logo" aria-label="Made With ML by Anyscale" data-md-component="logo">
+      
+  <img src="../../../static/images/logo.png" alt="logo">
+
+    </a>
+    Made With ML by Anyscale
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GokuMohandas/Made-With-ML" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GokuMohandas/MadeWithML
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Course
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Course
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/#course" class="md-nav__link">
+        Lessons
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          🎨 &nbsp; Design
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          🎨 &nbsp; Design
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../product-design/" class="md-nav__link">
+        Product
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../systems-design/" class="md-nav__link">
+        Systems
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          🔢 &nbsp; Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          🔢 &nbsp; Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preparation/" class="md-nav__link">
+        Preparation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exploratory-data-analysis/" class="md-nav__link">
+        Exploration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../preprocessing/" class="md-nav__link">
+        Preprocessing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../distributed-data/" class="md-nav__link">
+        Distributed
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+          📈 &nbsp; Model
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          📈 &nbsp; Model
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../training/" class="md-nav__link">
+        Training
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../experiment-tracking/" class="md-nav__link">
+        Tracking
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tuning/" class="md-nav__link">
+        Tuning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../evaluation/" class="md-nav__link">
+        Evaluation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../serving/" class="md-nav__link">
+        Serving
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+          💻 &nbsp; Developing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          💻 &nbsp; Developing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scripting/" class="md-nav__link">
+        Scripting
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        CLI
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+          📦 &nbsp; Utilities
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          📦 &nbsp; Utilities
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logging/" class="md-nav__link">
+        Logging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation/" class="md-nav__link">
+        Documentation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../styling/" class="md-nav__link">
+        Styling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pre-commit/" class="md-nav__link">
+        Pre-commit
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+          ✅ &nbsp; Testing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          ✅ &nbsp; Testing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        Code
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/#data" class="md-nav__link">
+        Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/#models" class="md-nav__link">
+        Models
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+          ♻️ &nbsp; Reproducibility
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_8">
+          <span class="md-nav__icon md-icon"></span>
+          ♻️ &nbsp; Reproducibility
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../versioning/" class="md-nav__link">
+        Versioning
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+          🚀 &nbsp; Production
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_9">
+          <span class="md-nav__icon md-icon"></span>
+          🚀 &nbsp; Production
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jobs-and-services/" class="md-nav__link">
+        Jobs & Services
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cicd/" class="md-nav__link">
+        CI/CD workflows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/" class="md-nav__link">
+        Monitoring
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-engineering/" class="md-nav__link">
+        Data engineering
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Foundations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Foundations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/courses/foundations/" class="md-nav__link">
+        Lessons
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          🛠 &nbsp; Toolkit
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          🛠 &nbsp; Toolkit
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/notebooks/" class="md-nav__link">
+        Notebooks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/python/" class="md-nav__link">
+        Python
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/numpy/" class="md-nav__link">
+        NumPy
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/pandas/" class="md-nav__link">
+        Pandas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/pytorch/" class="md-nav__link">
+        PyTorch
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          🔥 &nbsp; Machine Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          🔥 &nbsp; Machine Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/linear-regression/" class="md-nav__link">
+        Linear regression
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/logistic-regression/" class="md-nav__link">
+        Logistic regression
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/neural-networks/" class="md-nav__link">
+        Neural networks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/data-quality/" class="md-nav__link">
+        Data quality
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/utilities/" class="md-nav__link">
+        Utilities
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          🤖 &nbsp; Deep Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          🤖 &nbsp; Deep Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/convolutional-neural-networks/" class="md-nav__link">
+        CNNs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/embeddings/" class="md-nav__link">
+        Embeddings
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/recurrent-neural-networks/" class="md-nav__link">
+        RNNs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/attention/" class="md-nav__link">
+        Attention
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../foundations/transformers/" class="md-nav__link">
+        Transformers
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../misc/newsletter/" class="md-nav__link">
+        Subscribe
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://discord.com/channels/1078171187609337896/1078171189169635472" class="md-nav__link">
+        Community
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#intuition" class="md-nav__link">
+    Intuition
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serving" class="md-nav__link">
+    Serving
+  </a>
+  
+    <nav class="md-nav" aria-label="Serving">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#batch-serving" class="md-nav__link">
+    Batch serving
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-serving" class="md-nav__link">
+    Real-time serving
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#request" class="md-nav__link">
+    Request
+  </a>
+  
+    <nav class="md-nav" aria-label="Request">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uri" class="md-nav__link">
+    URI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    Method
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#headers" class="md-nav__link">
+    Headers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#body" class="md-nav__link">
+    Body
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    Best practices
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    Implementation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fastapi" class="md-nav__link">
+    FastAPI
+  </a>
+  
+    <nav class="md-nav" aria-label="FastAPI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initialization" class="md-nav__link">
+    Initialization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launching" class="md-nav__link">
+    Launching
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requests" class="md-nav__link">
+    Requests
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decorators" class="md-nav__link">
+    Decorators
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    Documentation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    Resources
+  </a>
+  
+    <nav class="md-nav" aria-label="Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#query-parameters" class="md-nav__link">
+    Query parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#path-parameters" class="md-nav__link">
+    Path parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schemas" class="md-nav__link">
+    Schemas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    Validation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extras" class="md-nav__link">
+    Extras
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#product" class="md-nav__link">
+    Product
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-server" class="md-nav__link">
+    Model server
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+  
+    <div class="row">
+      <div class="col-md-8">
+        <h1 style="margin-bottom: 0.5rem;">APIs for Model Serving</h1>
+      </div>
+      <div class="col-md-4 ai-center-all order-first order-md-last mb-2 mb-md-0 mb-lg-0">
+        <a href="/courses/mlops" class="mb-2">
+          <span class="twemoji">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"/></svg>
+          </span> View all lessons</a>
+      </div>
+    </div>
+    <hr class="mt-0 mt-md-2 mt-lg-2">
+    <div class="row">
+      <div class="col-md-8">
+        
+          <span>Designing and deploying an API to serve machine learning models.</span>
+        
+      </div>
+      <div class="col-md-4 order-first order-md-last">
+        <div class="row mb-4 mb-md-0 mb-lg-0">
+          <div class="col-md-3 col-2 ai-center-all" style="padding-right: 10px;">
+            <img src="/static/images/goku_circle.png" style="width: 3rem; max-width: 120%;" alt="Goku Mohandas">
+          </div>
+          <div class="col-md-9 col-10" style="padding-left: 5px;">
+            <div>Goku Mohandas</div>
+            <div>
+              <a href="https://twitter.com/GokuMohandas" target="_blank">
+                <span class="twemoji twitter">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+                </span></a> &middot;
+              <a href="https://linkedin.com/in/goku" target="_blank">
+                <span class="twemoji linkedin">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+                </span></a> &middot;
+              <a href="https://github.com/gokumohandas" target="_blank">
+                <span class="twemoji github">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+                </span></a> &middot;
+              <a href="https://www.youtube.com/c/MadeWithML" target="_blank">
+                <span class="twemoji youtube">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+                </span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="mt-1"></div>
+    
+      <span class="twemoji">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+      </span>
+      <a href="https://github.com/GokuMohandas/Made-With-ML" target="_blank">Repository</a>
+    
+    
+    
+    
+
+    <!-- Subscribe -->
+    <!-- DON'T FORGET TO CHANGE LINK INSIDE index.html -->
+<div class="modal fade" id="newsletterForm" tabindex="-1" role="dialog" aria-labelledby="newsletterFormLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding: 0.5rem 1rem 0.5rem 1rem;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <iframe width="540" height="600"
+        src="https://c8efd03b.sibforms.com/serve/MUIFAKa3IQxVRvYHZ_oiARAblHq4WbNhDT72vx1pHJFklbHrp4V813O6mQMUHN5ikC51vZBBw2VqyEgMGgf6NFQg9rC8qgcURZBtzPj5TjOFimUAPyYPTLFrmd6nRKV0OK09SRnZxucZX0xMGR02ADg0GSvd_see2qS0VZnFPJ_JudrivA7uA4fs4BZrNn_3_fMjmF_Bj9ZOD9Ia"
+        frameborder="0" scrolling="auto" allowfullscreen
+        style="display: block;margin-left: auto;margin-right: auto;max-width: 100%;"></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="admonition abstract" style="margin-top: 2rem;">
+  <p class="admonition-title">Subscribe to our newsletter</p>
+  <p>📬&nbsp; Receive new lessons straight to your inbox (once a month) and join <b>40K+</b>
+    developers in learning how to responsibly deliver value with ML.</p>
+  <div class="row">
+    <div class="col-md-9">
+      <input class="revue-form-field" placeholder="Work email" type="email" name="member[email]"
+        id="member_email" style="width: 100%; height: 95%; border: 1px solid #b3b3b3; border-radius: 3px; font-size: 0.8rem;">
+    </div>
+    <div class="col-md-3 pl-md-0">
+      <button class="md-button md-button--purple-gradient mt-md-0 mt-2" type="submit"
+        style="cursor: pointer !important; height: 95%;" data-toggle="modal" data-target="#newsletterForm">Subscribe</button>
+    </div>
+  </div>
+</div>
+<hr style="margin-top: 2rem; margin-bottom: 2rem;">
+
+  
+  <style>
+  .md-content {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .md-content {
+      padding-left: 0rem;
+      padding-right: 0rem;
+    }
+  }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+
+    /* .md-nav--primary {
+      display: none !important;
+    } */
+    .md-sidebar--primary {
+      width: 9rem !important;
+    }
+
+    .md-sidebar--secondary {
+      width: 9rem !important;
+    }
+  }
+</style>
+
+<h2 id="intuition">Intuition</h2>
+<p>Our <a href="../cli/" target="_blank">CLI application</a> made it much easier to interact with our models, especially for fellow team members who may not want to delve into the codebase. But there are several limitations to serving our models with a CLI:</p>
+<ul>
+<li>users need access to the terminal, codebase, virtual environment, etc.</li>
+<li>CLI outputs on the terminal are not exportable</li>
+</ul>
+<p>To address these issues, we're going to develop an application programming interface (API) that will <em>anyone</em> to interact with our application with a simple request.</p>
+<blockquote>
+<p>The end user may not directly interact with our API but may use UI/UX components that send requests to our it.</p>
+</blockquote>
+<h2 id="serving">Serving</h2>
+<p>APIs allow different applications to communicate with each other in real-time. But when it comes to serving predictions, we need to first decide if we'll do that in batches or real-time, which is entirely based on the feature space (finite vs. unbound).</p>
+<h3 id="batch-serving">Batch serving</h3>
+<p>We can make batch predictions on a finite set of inputs which are then written to a database for low latency inference. When a user or downstream process sends an inference request in real-time, cached results from the database are returned.</p>
+<div class="ai-center-all">
+    <img width="600" src="/static/images/mlops/systems-design/batch_serving.png" alt="batch serving">
+</div>
+
+<ul>
+<li>✅&nbsp; generate and cache predictions for very fast inference for users.</li>
+<li>✅&nbsp; the model doesn't need to be spun up as it's own service since it's never used in real-time.</li>
+<li>❌&nbsp; predictions can become stale if user develops new interests that aren’t captured by the old data that the current predictions are based on.</li>
+<li>❌&nbsp; input feature space must be finite because we need to generate all the predictions before they're needed for real-time.</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">Batch serving tasks</p>
+<p>What are some tasks where batch serving is ideal?</p>
+<details class="quote">
+<summary>Show answer</summary>
+<p>Recommend content that <em>existing</em> users will like based on their viewing history. However, <em>new</em> users may just receive some generic recommendations based on their explicit interests until we process their history the next day. And even if we're not doing batch serving, it might still be useful to cache very popular sets of input features (ex. combination of explicit interests leads to certain recommended content) so that we can serve those predictions faster.</p>
+</details>
+</div>
+<h3 id="real-time-serving">Real-time serving</h3>
+<p>We can also serve live predictions, typically through a request to an API with the appropriate input data.</p>
+<div class="ai-center-all">
+    <img width="400" src="/static/images/mlops/systems-design/real_time_serving.png" alt="real-time serving">
+</div>
+
+<ul>
+<li>✅&nbsp; can yield more up-to-date predictions which may yield a more meaningful user experience, etc.</li>
+<li>❌&nbsp; requires managed microservices to handle request traffic.</li>
+<li>❌&nbsp; requires real-time monitoring since input space in unbounded, which could yield erroneous predictions.</li>
+</ul>
+<p>In this lesson, we'll create the API required to enable real-time serving. The interactions in our situation involve the client (users, other applications, etc.) sending a <em>request</em> (ex. prediction request) with the appropriate inputs to the server (our application with a trained model) and receiving a <em>response</em> (ex. prediction) in return.</p>
+<div class="ai-center-all">
+    <img width="550" src="/static/images/mlops/api/interactions.png" alt="client api interactions">
+</div>
+
+<h2 id="request">Request</h2>
+<p>Users will interact with our API in the form of a request. Let's take a look at the different components of a request:</p>
+<h3 id="uri">URI</h3>
+<p>A uniform resource identifier (URI) is an identifier for a specific resource.</p>
+<pre class="output ai-center-all" style="padding-left: 0rem; padding-right: 0rem; font-weight: 600;">
+<span style="color:#d63939">https://</span><span style="color:#206bc4">localhost:</span><span style="color: #4299e1">8000</span><span style="color:#2fb344">/models/{modelId}/</span><span style="color:#ae3ec9">?filter=passed</span><span style="color:#f76707">#details</span>
+</pre>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="md-typeset__table">
+      <table>
+        <thead>
+          <tr>
+            <th align="left">Parts of the URI</th>
+            <th align="left">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td align="left"><span style="color: #d63939;">scheme</span></td>
+            <td align="left">protocol definition</td>
+          </tr>
+          <tr>
+            <td align="left"><span style="color: #206bc4;">domain</span></td>
+            <td align="left">address of the website</td>
+          </tr>
+          <tr>
+            <td align="left"><span style="color: #4299e1;">port</span></td>
+            <td align="left">endpoint</td>
+          </tr>
+          <tr>
+            <td align="left"><span style="color: #2fb344;">path</span></td>
+            <td align="left">location of the resource</td>
+          </tr>
+          <tr>
+            <td align="left"><span style="color: #ae3ec9;">query string</span></td>
+            <td align="left">parameters to identify resources</td>
+          </tr>
+          <tr>
+            <td align="left"><span style="color: #f76707;">anchor</span></td>
+            <td align="left">location on webpage</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="md-typeset__table">
+      <table>
+        <thead>
+          <tr>
+            <th align="left">Parts of the path</th>
+            <th align="left">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td align="left"><code>/models</code></td>
+            <td align="left">collection resource of all <code>models</code></td>
+          </tr>
+          <tr>
+            <td align="left"><code>/models/{modelID}</code></td>
+            <td align="left">single resource from the <code>models</code> collection</td>
+          </tr>
+          <tr>
+            <td align="left"><code>modelId</code></td>
+            <td align="left">path parameters</td>
+          </tr>
+          <tr>
+            <td align="left"><code>filter</code></td>
+            <td align="left">query parameter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<h3 id="method">Method</h3>
+<p>The method is the operation to execute on the specific resource defined by the URI. There are many possible <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank">methods</a> to choose from, but the four below are the most popular, which are often referred to as <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete" target="_blank">CRUD</a> because they allow you to <strong>C</strong>reate, <strong>R</strong>ead, <strong>U</strong>pdate and <strong>D</strong>elete.</p>
+<ul>
+<li><code class="highlight"><span class="nx">GET</span></code>: get a resource.</li>
+<li><code class="highlight"><span class="nx">POST</span></code>: create or update a resource.</li>
+<li><code class="highlight"><span class="nx">PUT</span><span class="o">/</span><span class="nx">PATCH</span></code>: create or update a resource.</li>
+<li><code class="highlight"><span class="nx">DELETE</span></code>: delete a resource.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You could use either the <code>POST</code> or <code>PUT</code> request method to create and modify resources but the main difference is that <code>PUT</code> is idempotent which means you can call the method repeatedly and it'll produce the same state every time. Whereas, calling <code>POST</code> multiple times can result in creating multiple instance and so changes the overall state each time.</p>
+<div class="highlight"><pre><span></span><code>POST<span class="w"> </span>/models/&lt;new_model&gt;<span class="w"> </span>-d<span class="w"> </span><span class="o">{}</span><span class="w">       </span><span class="c1"># error since we haven&#39;t created the `new_model` resource yet</span>
+POST<span class="w"> </span>/models<span class="w"> </span>-d<span class="w"> </span><span class="o">{}</span><span class="w">                   </span><span class="c1"># creates a new model based on information provided in data</span>
+POST<span class="w"> </span>/models/&lt;existing_model&gt;<span class="w"> </span>-d<span class="w"> </span><span class="o">{}</span><span class="w">  </span><span class="c1"># updates an existing model based on information provided in data</span>
+
+PUT<span class="w"> </span>/models/&lt;new_model&gt;<span class="w"> </span>-d<span class="w"> </span><span class="o">{}</span><span class="w">        </span><span class="c1"># creates a new model based on information provided in data</span>
+PUT<span class="w"> </span>/models/&lt;existing_model&gt;<span class="w"> </span>-d<span class="w"> </span><span class="o">{}</span><span class="w">   </span><span class="c1"># updates an existing model based on information provided in data</span>
+</code></pre></div>
+</div>
+<p>We can use <a href="https://linuxize.com/post/curl-rest-api/" target="_blank">cURL</a> to execute our API calls with the following options:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>--help
+</code></pre></div>
+<pre class="output">
+Usage: curl [options...] <url>
+-X, --request  HTTP method (ie. GET)
+-H, --header   headers to be sent to the request (ex. authentication)
+-d, --data     data to POST, PUT/PATCH, DELETE (usually JSON)
+...
+</pre>
+
+<p>For example, if we want to GET all <code>models</code>, our cURL command would look like this:
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://localhost:8000/models&quot;</span>
+</code></pre></div></p>
+<p><br></p>
+<h3 id="headers">Headers</h3>
+<p>Headers contain information about a certain event and are usually found in both the client's request as well as the server's response. It can range from what type of format they'll send and receive, authentication and caching info, etc.
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://localhost:8000/&quot;</span><span class="w"> </span><span class="se">\ </span><span class="w">         </span><span class="c1"># method and URI</span>
+<span class="w">    </span>-H<span class="w">  </span><span class="s2">&quot;accept: application/json&quot;</span><span class="w">  </span><span class="se">\ </span><span class="w">          </span><span class="c1"># client accepts JSON</span>
+<span class="w">    </span>-H<span class="w">  </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\ </span><span class="w">     </span><span class="c1"># client sends JSON</span>
+</code></pre></div></p>
+<p><br></p>
+<h3 id="body">Body</h3>
+<p>The body contains information that may be necessary for the request to be processed. It's usually a JSON object sent during <code>POST</code>, <code>PUT</code>/<code>PATCH</code>, <code>DELETE</code> request methods.</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8000/models&quot;</span><span class="w"> </span><span class="se">\ </span><span class="w">  </span><span class="c1"># method and URI</span>
+<span class="w">    </span>-H<span class="w">  </span><span class="s2">&quot;accept: application/json&quot;</span><span class="w"> </span><span class="se">\ </span><span class="w">           </span><span class="c1"># client accepts JSON</span>
+<span class="w">    </span>-H<span class="w">  </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\ </span><span class="w">     </span><span class="c1"># client sends JSON</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s2">&quot;{&#39;name&#39;: &#39;RoBERTa&#39;, ...}&quot;</span><span class="w">               </span><span class="c1"># request body</span>
+</code></pre></div>
+<p><br></p>
+<h2 id="response">Response</h2>
+<p>The response we receive from our server is the result of the request we sent. The response also includes headers and a body which should include the proper HTTP status code as well as explicit messages, data, etc.</p>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;message&quot;</span>:<span class="w"> </span><span class="s2">&quot;OK&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;method&quot;</span>:<span class="w"> </span><span class="s2">&quot;GET&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;status-code&quot;</span>:<span class="w"> </span><span class="m">200</span>,
+<span class="w">  </span><span class="s2">&quot;url&quot;</span>:<span class="w"> </span><span class="s2">&quot;http://localhost:8000/&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;data&quot;</span>:<span class="w"> </span><span class="o">{}</span>
+<span class="o">}</span>
+</code></pre></div>
+<blockquote>
+<p>We may also want to include other metadata in the response such as model version, datasets used, etc. Anything that the downstream consumer may be interested in or metadata that might be useful for inspection.</p>
+</blockquote>
+<p>There are many <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" target="_blank">HTTP status codes</a> to choose from depending on the situation but here are the most common options:</p>
+<p><center></p>
+<table>
+<thead>
+<tr>
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>200 OK</code></td>
+<td align="left">method operation was successful.</td>
+</tr>
+<tr>
+<td align="left"><code>201 CREATED</code></td>
+<td align="left"><code>POST</code> or <code>PUT</code> method successfully created a resource.</td>
+</tr>
+<tr>
+<td align="left"><code>202 ACCEPTED</code></td>
+<td align="left">the request was accepted for processing (but processing may not be done).</td>
+</tr>
+<tr>
+<td align="left"><code>400 BAD REQUEST</code></td>
+<td align="left">server cannot process the request because of a client side error.</td>
+</tr>
+<tr>
+<td align="left"><code>401 UNAUTHORIZED</code></td>
+<td align="left">you're missing required authentication.</td>
+</tr>
+<tr>
+<td align="left"><code>403 FORBIDDEN</code></td>
+<td align="left">you're not allowed to do this operation.</td>
+</tr>
+<tr>
+<td align="left"><code>404 NOT FOUND</code></td>
+<td align="left">the resource you're looking for was not found.</td>
+</tr>
+<tr>
+<td align="left"><code>500 INTERNAL SERVER ERROR</code></td>
+<td align="left">there was a failure somewhere in the system process.</td>
+</tr>
+<tr>
+<td align="left"><code>501 NOT IMPLEMENTED</code></td>
+<td align="left">this operation on the resource doesn't exist yet.</td>
+</tr>
+</tbody>
+</table>
+<p></center></p>
+<h2 id="best-practices">Best practices</h2>
+<p>When designing our API, there are some best practices to follow:</p>
+<ul>
+<li>URI paths, messages, etc. should be as explicit as possible. Avoid using cryptic resource names, etc.</li>
+<li>Use nouns, instead of verbs, for naming resources. The request method already accounts for the verb (✅&nbsp; <code>GET /users</code> not ❌&nbsp; <code>GET /get_users</code>).</li>
+<li>Plural nouns (✅&nbsp; <code>GET /users/{userId}</code> not ❌&nbsp; <code>GET /user/{userID}</code>).</li>
+<li>Use dashes in URIs for resources and path parameters but use underscores for query parameters (<code>GET /nlp-models/?find_desc=bert</code>).</li>
+<li>Return appropriate HTTP and informative messages to the user.</li>
+</ul>
+<h2 id="implementation">Implementation</h2>
+<p>We're going to define our API in a separate <code>app</code> directory because, in the future, we may have additional packages like <code>tagifai</code> and we don't want our app to be attached to any one package. Inside our <code>app</code> directory, we'll create the follow scripts:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>app
+<span class="nb">cd</span><span class="w"> </span>app
+touch<span class="w"> </span>api.py<span class="w"> </span>gunicorn.py<span class="w"> </span>schemas.py
+<span class="nb">cd</span><span class="w"> </span>../
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>app/
+├──<span class="w"> </span>api.py<span class="w">          </span>-<span class="w"> </span>FastAPI<span class="w"> </span>app
+├──<span class="w"> </span>gunicorn.py<span class="w">     </span>-<span class="w"> </span>WSGI<span class="w"> </span>script
+└──<span class="w"> </span>schemas.py<span class="w">      </span>-<span class="w"> </span>API<span class="w"> </span>model<span class="w"> </span>schemas
+</code></pre></div>
+<ul>
+<li><a href="https://github.com/GokuMohandas/Made-With-ML/tree/main/app/api.py" target="_blank"><code>api.py</code></a>: the main script that will include our API initialization and endpoints.</li>
+<li><a href="https://github.com/GokuMohandas/Made-With-ML/tree/main/app/gunicorn.py" target="_blank"><code>gunicorn.py</code></a>: script for defining API worker configurations.</li>
+<li><a href="https://github.com/GokuMohandas/Made-With-ML/tree/main/app/schemas.py" target="_blank"><code>schemas.py</code></a>: definitions for the different objects we'll use in our resource endpoints.</li>
+</ul>
+<h2 id="fastapi">FastAPI</h2>
+<p>We're going to use <a href="https://fastapi.tiangolo.com/" target="_blank">FastAPI</a> as our framework to build our API service. There are plenty of other framework options out there such as <a href="https://flask.palletsprojects.com/" target="_blank">Flask</a>, <a href="https://www.djangoproject.com/" target="_blank">Django</a> and even non-Python based options like <a href="https://nodejs.org/en/" target="_blank">Node</a>, <a href="https://angular.io/" target="_blank">Angular</a>, etc. FastAPI combines many of the advantages across these frameworks and is maturing quickly and becoming more widely adopted. It's notable advantages include:</p>
+<ul>
+<li>development in Python</li>
+<li>highly <a href="https://fastapi.tiangolo.com/benchmarks/" target="_blank">performant</a></li>
+<li>data validation via <a href="https://pydantic-docs.helpmanual.io/" target="_blank">pydantic</a></li>
+<li>autogenerated documentation</li>
+<li>dependency injection</li>
+<li>security via OAuth2</li>
+</ul>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">fastapi</span><span class="o">==</span><span class="m">0</span>.78.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Add to requirements.txt</span>
+<span class="nv">fastapi</span><span class="o">==</span><span class="m">0</span>.78.0
+</code></pre></div>
+<blockquote>
+<p>Your choice of framework also depends on your team's existing systems and processes. However, with the wide adoption of microservices, we can wrap our specific application in any framework we choose and expose the appropriate resources so all other systems can easily communicate with it.</p>
+</blockquote>
+<h3 id="initialization">Initialization</h3>
+<p>The first step is to initialize our API in our <code>api.py</code> script` by defining metadata like the title, description and version:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># app/api.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span>
+
+<span class="c1"># Define application</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;TagIfAI - Made With ML&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Classify machine learning projects.&quot;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.1&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Our first endpoint is going to be a simple one where we want to show that everything is working as intended. The path for the endpoint will just be <code>/</code> (when a user visit our base URI) and it'll be a <code>GET</code> request. This simple endpoint is often used as a health check to ensure that our application is indeed up and running properly.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># app/api.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPStatus</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span>
+<span class="hll">
+</span><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_index</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Health check.&quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="o">.</span><span class="n">phrase</span><span class="p">,</span>
+        <span class="s2">&quot;status-code&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div></td></tr></table></div>
+<p>We let our application know that the endpoint is at <code>/</code> through the path operation decorator in line 4 and we return a JSON response with the <code>200 OK</code> HTTP status code.</p>
+<blockquote>
+<p>In our actual <a href="https://github.com/GokuMohandas/Made-With-ML/tree/main/app/api.py" target="_blank"><code>api.py</code></a> script, you'll notice that even our index function looks different. Don't worry, we're slowly adding components to our endpoints and justifying them along the way.</p>
+</blockquote>
+<h3 id="launching">Launching</h3>
+<p>We're using <a href="https://www.uvicorn.org/" target="_blank">Uvicorn</a>, a fast <a href="https://en.wikipedia.org/wiki/Asynchronous_Server_Gateway_Interface" target="_blank">ASGI</a> server that can run asynchronous code in a single process to launch our application.</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">uvicorn</span><span class="o">==</span><span class="m">0</span>.17.6
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Add to requirements.txt</span>
+<span class="nv">uvicorn</span><span class="o">==</span><span class="m">0</span>.17.6
+</code></pre></div>
+<p>We can launch our application with the following command:</p>
+<div class="highlight"><pre><span></span><code>uvicorn<span class="w"> </span>app.api:app<span class="w"> </span><span class="se">\ </span><span class="w">      </span><span class="c1"># location of app (`app` directory &gt; `api.py` script &gt; `app` object)</span>
+<span class="w">    </span>--host<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span><span class="se">\ </span><span class="w">       </span><span class="c1"># localhost</span>
+<span class="w">    </span>--port<span class="w"> </span><span class="m">8000</span><span class="w"> </span><span class="se">\ </span><span class="w">          </span><span class="c1"># port 8000</span>
+<span class="w">    </span>--reload<span class="w"> </span><span class="se">\ </span><span class="w">             </span><span class="c1"># reload every time we update</span>
+<span class="w">    </span>--reload-dir<span class="w"> </span>tagifai<span class="w"> </span><span class="se">\ </span><span class="w"> </span><span class="c1"># only reload on updates to `tagifai` directory</span>
+<span class="w">    </span>--reload-dir<span class="w"> </span>app<span class="w">        </span><span class="c1"># and the `app` directory</span>
+</code></pre></div>
+<pre class="output">
+INFO:     Will watch for changes in these directories: ['/Users/goku/Documents/madewithml/mlops/app', '/Users/goku/Documents/madewithml/mlops/tagifai']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [57609] using statreload
+INFO:     Started server process [57611]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+</pre>
+
+<blockquote>
+<p>Notice that we only reload on changes to specific directories, as this is to avoid reloading on files that won't impact our application such as log files, etc.</p>
+</blockquote>
+<p>If we want to manage multiple uvicorn workers to enable parallelism in our application, we can use <a href="https://gunicorn.org/" target="_blank">Gunicorn</a> in conjunction with Uvicorn. This will usually be done in a production environment where we'll be dealing with meaningful traffic. We've included a <a href="https://github.com/GokuMohandas/Made-With-ML/tree/main/app/gunicorn.py" target="_blank"><code>app/gunicorn.py</code></a> script with the customizable configuration and we can launch all the workers with the follow command:
+<div class="highlight"><pre><span></span><code>gunicorn<span class="w"> </span>-c<span class="w"> </span>config/gunicorn.py<span class="w"> </span>-k<span class="w"> </span>uvicorn.workers.UvicornWorker<span class="w"> </span>app.api:app
+</code></pre></div></p>
+<p>We'll add both of these commands to our <code>README.md</code> file as well:
+<div class="highlight"><pre><span></span><code>uvicorn app.api:app --host 0.0.0.0 --port 8000 --reload --reload-dir tagifai --reload-dir app  # dev
+gunicorn -c app/gunicorn.py -k uvicorn.workers.UvicornWorker app.api:app  # prod
+</code></pre></div></p>
+<h3 id="requests">Requests</h3>
+<p>Now that we have our application running, we can submit our <code>GET</code> request using several different methods:</p>
+<ul>
+<li>Visit the endpoint on a browser at <a href="http://localhost:8000/" target="_blank">http://localhost:8000/</a></li>
+<li>cURL
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://localhost:8000/
+</code></pre></div></li>
+<li>Access endpoints via code. Here we show how to do it with the <a href="https://requests.readthedocs.io/en/master/" target="_blank">requests</a> library in Python but it can be done with most popular languages. You can even use an <a href="https://curl.trillworks.com/" target="_blank">online tool</a> to convert your cURL commands into code!
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://localhost:8000/&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div></li>
+<li>Using external tools like <a href="https://www.postman.com/use-cases/application-development/" target="_blank">Postman</a>, which is great for managed tests that you can save and share with other, etc.</li>
+</ul>
+<p>For all of these, we'll see the exact same response from our API:</p>
+<pre class="output">
+{
+  "message": "OK",
+  "status-code": 200,
+  "data": {}
+}
+</pre>
+
+<h3 id="decorators">Decorators</h3>
+<p>In our <code>GET \</code> request's response above, there was not a whole lot of information about the actual request, but it's useful to have details such as URL, timestamp, etc. But we don't want to do this individually for each endpoint, so let's use <a href="../../foundations/python/#decorators" target="_blank">decorators</a> to automatically add relevant metadata to our responses</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># app/api.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">Request</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">construct_response</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct a JSON response for an endpoint.&quot;&quot;&quot;</span>
+
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="hll">    <span class="k">def</span><span class="w"> </span><span class="nf">wrap</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+</span>        <span class="n">results</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
+            <span class="s2">&quot;status-code&quot;</span><span class="p">:</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;status-code&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">_url</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="s2">&quot;data&quot;</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="n">response</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+    <span class="k">return</span> <span class="n">wrap</span>
+</code></pre></div></td></tr></table></div>
+<p>We're passing in a <a href="https://fastapi.tiangolo.com/advanced/using-request-directly/" target="_blank">Request</a> instance in line 10 so we can access information like the request method and URL. Therefore, our endpoint functions also need to have this Request object as an input argument. Once we receive the results from our endpoint function <code>f</code>, we can append the extra details and return a more informative response. To use this decorator, we just have to wrap our functions accordingly.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="hll"><span class="nd">@construct_response</span>
+</span><span class="k">def</span><span class="w"> </span><span class="nf">_index</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Health check.&quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="o">.</span><span class="n">phrase</span><span class="p">,</span>
+        <span class="s2">&quot;status-code&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div></td></tr></table></div>
+<pre class="output">
+{
+    message: "OK",
+    method: "GET",
+    status-code: 200,
+    timestamp: "2021-02-08T13:19:11.343801",
+    url: "http://localhost:8000/",
+    data: { }
+}
+</pre>
+
+<p>There are also some built-in decorators we should be aware of. We've already seen the path operation decorator (ex. <code>@app.get("/")</code>) which defines the path for the endpoint as well as <a href="https://fastapi.tiangolo.com/tutorial/path-operation-configuration/" target="_blank">other attributes</a>. There is also the <a href="https://fastapi.tiangolo.com/advanced/events/" target="_blank">events decorator</a> (<code>@app.on_event()</code>) which we can use to startup and shutdown our application. For example, we use the (<code>@app.on_event("startup")</code>) event to load the artifacts for the model to use for inference. The advantage of doing this as an event is that our service won't start until this is complete and so no requests will be prematurely processed and cause errors. Similarly, we can perform shutdown events with (<code>@app.on_event("shutdown")</code>), such as saving logs, cleaning, etc.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tagifai</span><span class="w"> </span><span class="kn">import</span> <span class="n">main</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">on_event</span><span class="p">(</span><span class="s2">&quot;startup&quot;</span><span class="p">)</span>
+<span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">load_artifacts</span><span class="p">():</span>
+</span>    <span class="k">global</span> <span class="n">artifacts</span>
+    <span class="n">run_id</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">CONFIG_DIR</span><span class="p">,</span> <span class="s2">&quot;run_id.txt&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">artifacts</span> <span class="o">=</span> <span class="n">main</span><span class="o">.</span><span class="n">load_artifacts</span><span class="p">(</span><span class="n">model_dir</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">MODEL_DIR</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Ready for inference!&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="documentation">Documentation</h3>
+<p>When we define an endpoint, FastAPI automatically generates some documentation (adhering to <a href="https://swagger.io/specification/" target="_blank">OpenAPI</a> standards) based on the it's inputs, typing, outputs, etc. We can access the <a href="https://swagger.io/tools/swagger-ui/" target="_blank">Swagger UI</a> for our documentation by going to <code>/docs</code> endpoints on any browser while the api is running.</p>
+<div class="ai-center-all">
+    <img width="500" src="/static/images/mlops/api/documentation.png" alt="API documentation">
+</div>
+
+<p>Click on an endpoint &gt; <code>Try it out</code> &gt; <code>Execute</code> to see what the server's response will look like. Since this was a <code>GET</code> request without any inputs, our request body was empty but for other method's we'll need to provide some information (we'll illustrate this when we do a <code>POST</code> request).</p>
+<div class="ai-center-all">
+    <img width="600" src="/static/images/mlops/api/execute.png" alt="executing API calls">
+</div>
+
+<p>Notice that our endpoint is organized under sections in the UI. We can use <code>tags</code> when defining our endpoints in the script:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;General&quot;</span><span class="p">])</span>
+</span><span class="nd">@construct_response</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_index</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Health check.&quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="o">.</span><span class="n">phrase</span><span class="p">,</span>
+        <span class="s2">&quot;status-code&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div></td></tr></table></div></p>
+<blockquote>
+<p>You can also use <code>/redoc</code> endpoint to view the <a href="https://redocly.github.io/redoc/" target="_blank">ReDoc</a> documentation or <a href="https://www.postman.com/use-cases/application-development/" target="_blank">Postman</a> to execute and manage tests that you can save and share with others.</p>
+</blockquote>
+<h2 id="resources">Resources</h2>
+<p>When designing the resources for our API , we need to think about the following questions:</p>
+<ul>
+<li>
+<p><code class="highlight"><span class="p">[</span><span class="nx">USERS</span><span class="p">]</span></code>: Who are the end users? This will define what resources need to be exposed.</p>
+<ul>
+<li>developers who want to interact with the API.</li>
+<li>product team who wants to test and inspect the model and it's performance.</li>
+<li>backend service that wants to classify incoming projects.</li>
+</ul>
+</li>
+<li>
+<p><code class="highlight"><span class="p">[</span><span class="nx">ACTIONS</span><span class="p">]</span></code>: What actions do our users want to be able to perform?</p>
+<ul>
+<li>prediction for a given set of inputs</li>
+<li>inspection of performance</li>
+<li>inspection of training arguments</li>
+</ul>
+</li>
+</ul>
+<h3 id="query-parameters">Query parameters</h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/performance&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Performance&quot;</span><span class="p">])</span>
+<span class="nd">@construct_response</span>
+<span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">_performance</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="nb">filter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the performance metrics.&quot;&quot;&quot;</span>
+    <span class="n">performance</span> <span class="o">=</span> <span class="n">artifacts</span><span class="p">[</span><span class="s2">&quot;performance&quot;</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;performance&quot;</span><span class="p">:</span><span class="n">performance</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">filter</span><span class="p">,</span> <span class="n">performance</span><span class="p">)}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="o">.</span><span class="n">phrase</span><span class="p">,</span>
+        <span class="s2">&quot;status-code&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div></td></tr></table></div>
+<p>Notice that we're passing an optional query parameter <code>filter</code> here to indicate the subset of performance we care about. We can include this parameter in our <code>GET</code> request like so:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;http://localhost:8000/performance?filter=overall&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;accept: application/json&quot;</span>
+</code></pre></div>
+<p>And this will only produce the subset of the performance we indicated through the query parameter:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status-code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-03-21T13:12:01.297630&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://localhost:8000/performance?filter=overall&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;performance&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8941372402587212</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;recall&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8333333333333334</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;f1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8491658224308651</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;num_samples&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">144</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="path-parameters">Path parameters</h3>
+<p>Our next endpoint will be to <code>GET</code> the arguments used to train the model. This time, we're using a path parameter <code>args</code>, which is a <strong>required</strong> field in the URI.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/args/</span><span class="si">{arg}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Arguments&quot;</span><span class="p">])</span>
+</span><span class="nd">@construct_response</span>
+<span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">_arg</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">arg</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a specific parameter&#39;s value used for the run.&quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="o">.</span><span class="n">phrase</span><span class="p">,</span>
+        <span class="s2">&quot;status-code&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="n">arg</span><span class="p">:</span> <span class="nb">vars</span><span class="p">(</span><span class="n">artifacts</span><span class="p">[</span><span class="s2">&quot;args&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div></td></tr></table></div>
+<p>We can perform our <code>GET</code> request like so, where the <code>param</code> is part of the request URI's path as opposed to being part of it's query string.
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;http://localhost:8000/args/learning_rate&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;accept: application/json&quot;</span>
+</code></pre></div></p>
+<p>And we'd receive a response like this:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status-code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-03-21T13:13:46.696429&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://localhost:8000/params/hidden_dim&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;learning_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.14688087680118794</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>We can also create an endpoint to produce all the arguments that were used:</p>
+<details class="quote">
+<summary>View <code>GET /args</code></summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/args&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Arguments&quot;</span><span class="p">])</span>
+<span class="nd">@construct_response</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_args</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get all arguments used for the run.&quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="o">.</span><span class="n">phrase</span><span class="p">,</span>
+        <span class="s2">&quot;status-code&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="nb">vars</span><span class="p">(</span><span class="n">artifacts</span><span class="p">[</span><span class="s2">&quot;args&quot;</span><span class="p">]),</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div></td></tr></table></div>
+<p>We can perform our <code>GET</code> request like so, where the <code>param</code> is part of the request URI's path as opposed to being part of it's query string.</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="s2">&quot;http://localhost:8000/args&quot;</span><span class="w"> </span><span class="se">\</span>
+-H<span class="w"> </span><span class="s2">&quot;accept: application/json&quot;</span>
+</code></pre></div>
+<p>And we'd receive a response like this:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+<span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+<span class="nt">&quot;status-code&quot;</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span>
+<span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2022-05-25T11:56:37.344762&quot;</span><span class="p">,</span>
+<span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;http://localhost:8001/args&quot;</span><span class="p">,</span>
+<span class="nt">&quot;data&quot;</span><span class="p">:{</span>
+<span class="w">    </span><span class="nt">&quot;args&quot;</span><span class="p">:{</span>
+<span class="w">    </span><span class="nt">&quot;shuffle&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;subset&quot;</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;min_freq&quot;</span><span class="p">:</span><span class="mi">75</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lower&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;stem&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;analyzer&quot;</span><span class="p">:</span><span class="s2">&quot;char_wb&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;ngram_max_range&quot;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;alpha&quot;</span><span class="p">:</span><span class="mf">0.0001</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;learning_rate&quot;</span><span class="p">:</span><span class="mf">0.14688087680118794</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;power_t&quot;</span><span class="p">:</span><span class="mf">0.158985493618746</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<h3 id="schemas">Schemas</h3>
+<p>Now it's time to define our endpoint for prediction. We need to consume the inputs that we want to classify and so we need to define the schema that needs to be followed when defining those inputs.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># app/schemas.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Query</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Text</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PredictPayload</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">texts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Text</span><span class="p">]</span>
+</code></pre></div>
+<p>Here we're defining a <code>PredictPayload</code> object as a List of <code>Text</code> objects called <code>texts</code>. Each <code>Text</code> object is a string that defaults to <code class="highlight"><span class="kc">None</span></code> and must have a minimum length of 1 character.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We could've just defined our <code>PredictPayload</code> like so:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">PredictPayload</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">texts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Query</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+But we wanted to create very explicit schemas in case we want to incorporate more <a href="#validation">validation</a> or add additional parameters in the future.</p>
+</div>
+<p>We can now use this payload in our predict endpoint:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">app.schemas</span><span class="w"> </span><span class="kn">import</span> <span class="n">PredictPayload</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tagifai</span><span class="w"> </span><span class="kn">import</span> <span class="n">predict</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/predict&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Prediction&quot;</span><span class="p">])</span>
+<span class="nd">@construct_response</span>
+<span class="hll"><span class="k">def</span><span class="w"> </span><span class="nf">_predict</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">PredictPayload</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Predict tags for a list of texts.&quot;&quot;&quot;</span>
+    <span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">payload</span><span class="o">.</span><span class="n">texts</span><span class="p">]</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">predict</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">texts</span><span class="o">=</span><span class="n">texts</span><span class="p">,</span> <span class="n">artifacts</span><span class="o">=</span><span class="n">artifacts</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="o">.</span><span class="n">phrase</span><span class="p">,</span>
+        <span class="s2">&quot;status-code&quot;</span><span class="p">:</span> <span class="n">HTTPStatus</span><span class="o">.</span><span class="n">OK</span><span class="p">,</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;predictions&quot;</span><span class="p">:</span> <span class="n">predictions</span><span class="p">},</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div></td></tr></table></div>
+<p>We need to adhere to the <code>PredictPayload</code> schema when we want to user our <code>/predict</code> endpoint:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="w"> </span><span class="s1">&#39;http://0.0.0.0:8000/predict&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s1">&#39;accept: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;texts&quot;: [</span>
+<span class="s1">        {&quot;text&quot;: &quot;Transfer learning with transformers for text classification.&quot;},</span>
+<span class="s1">        {&quot;text&quot;: &quot;Generative adversarial networks for image generation.&quot;}</span>
+<span class="s1">      ]</span>
+<span class="s1">    }&#39;</span>
+</code></pre></div>
+<pre class="output">
+{
+  "message":"OK",
+  "method":"POST",
+  "status-code":200,
+  "timestamp":"2022-05-25T12:23:34.381614",
+  "url":"http://0.0.0.0:8001/predict",
+  "data":{
+    "predictions":[
+      {
+        "input_text":"Transfer learning with transformers for text classification.",
+        "predicted_tag":"natural-language-processing"
+      },
+      {
+        "input_text":"Generative adversarial networks for image generation.",
+        "predicted_tag":"computer-vision"
+      }
+    ]
+  }
+}
+</pre>
+
+<h3 id="validation">Validation</h3>
+<h4 id="built-in">Built-in</h4>
+<p>We're using pydantic's <a href="https://pydantic-docs.helpmanual.io/usage/models/" target="_blank"><code>BaseModel</code></a> object here because it offers built-in validation for all of our schemas. In our case, if a <code>Text</code> instance is less than 1 character, then our service will return the appropriate error message and code:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8000/predict&quot;</span><span class="w"> </span>-H<span class="w">  </span><span class="s2">&quot;accept: application/json&quot;</span><span class="w"> </span>-H<span class="w">  </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;texts\&quot;:[{\&quot;text\&quot;:\&quot;\&quot;}]}&quot;</span>
+</code></pre></div>
+<pre class="output">
+{
+  "detail": [
+    {
+      "loc": [
+        "body",
+        "texts",
+        0,
+        "text"
+      ],
+      "msg": "ensure this value has at least 1 characters",
+      "type": "value_error.any_str.min_length",
+      "ctx": {
+        "limit_value": 1
+      }
+    }
+  ]
+}
+</pre>
+
+<h4 id="custom">Custom</h4>
+<p>We can also add custom validation on a specific entity by using the <code>@validator</code> decorator, like we do to ensure that list of <code>texts</code> is not empty.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">PredictPayload</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">texts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Text</span><span class="p">]</span>
+
+<span class="hll">    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;texts&quot;</span><span class="p">)</span>
+</span><span class="hll">    <span class="k">def</span><span class="w"> </span><span class="nf">list_must_not_be_empty</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+</span><span class="hll">        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+</span><span class="hll">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;List of texts to classify cannot be empty.&quot;</span><span class="p">)</span>
+</span><span class="hll">        <span class="k">return</span> <span class="n">value</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://localhost:8000/predict&quot;</span><span class="w"> </span>-H<span class="w">  </span><span class="s2">&quot;accept: application/json&quot;</span><span class="w"> </span>-H<span class="w">  </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;texts\&quot;:[]}&quot;</span>
+</code></pre></div>
+<pre class="output">
+{
+  "detail":[
+    {
+      "loc":[
+        "body",
+        "texts"
+      ],
+      "msg": "List of texts to classify cannot be empty.",
+      "type": "value_error"
+    }
+  ]
+}
+</pre>
+
+<h3 id="extras">Extras</h3>
+<p>Lastly, we can add a <a href="https://fastapi.tiangolo.com/tutorial/schema-extra-example/" target="_blank"><code>schema_extra</code></a> object under a <code>Config</code> class to depict what an example <code>PredictPayload</code> should look like. When we do this, it automatically appears in our endpoint's documentation (click <code>Try it out</code>).</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">PredictPayload</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">texts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Text</span><span class="p">]</span>
+
+    <span class="nd">@validator</span><span class="p">(</span><span class="s2">&quot;texts&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_must_not_be_empty</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;List of texts to classify cannot be empty.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+<span class="hll">    <span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
+</span><span class="hll">        <span class="n">schema_extra</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="hll">            <span class="s2">&quot;example&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class="hll">                <span class="s2">&quot;texts&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class="hll">                    <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Transfer learning with transformers for text classification.&quot;</span><span class="p">},</span>
+</span><span class="hll">                    <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Generative adversarial networks in both PyTorch and TensorFlow.&quot;</span><span class="p">},</span>
+</span><span class="hll">                <span class="p">]</span>
+</span><span class="hll">            <span class="p">}</span>
+</span><span class="hll">        <span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="ai-center-all">
+    <img width="1000" src="/static/images/mlops/api/predict.png" alt="inference with APIs">
+</div>
+
+<h2 id="product">Product</h2>
+<p>To make our API a standalone product, we'll need to create and manage a database for our users and resources. These users will have credentials which they will use for authentication and use their privileges to be able to communicate with our service. And of course, we can display a rendered frontend to make all of this seamless with HTML forms, buttons, etc. This is exactly how the <a href="https://twitter.com/madewithml/status/1284503478685978625" target="_blank">old MWML platform</a> was built and we leveraged FastAPI to deliver high performance for 500K+ daily service requests.</p>
+<p>If you are building a product, then I highly recommending forking this <a href="https://fastapi.tiangolo.com/project-generation/" target="_blank">generation template</a> to get started. It includes the backbone architecture you need for your product:</p>
+<ul>
+<li>Databases (models, migrations, etc.)</li>
+<li>Authentication via JWT</li>
+<li>Asynchronous task queue with Celery</li>
+<li>Customizable frontend via Vue JS</li>
+<li>Docker integration</li>
+<li>so much more!</li>
+</ul>
+<p>However, for the majority of ML developers, thanks to the wide adoption of microservices, we don't need to do all of this. A well designed API service that can seamlessly communicate with all other services (framework agnostic) will fit into any process and add value to the overall product. Our main focus should be to ensure that our service is working as it should and constantly improve, which is exactly what the next cluster of lessons will focus on (<a href="../testing/" target="_blank">testing</a> and <a href="../monitoring/" target="_blank">monitoring</a>)</p>
+<h2 id="model-server">Model server</h2>
+<p>Besides wrapping our models as separate, scalable microservices, we can also have a purpose-built model server to host our models. Model servers provide a registry with an API layer to seamlessly inspect, update, serve, rollback, etc. multiple versions of models. They also offer automatic scaling to meet throughput and latency needs. Popular options include <a href="https://www.bentoml.com/" target="_blank">BentoML</a>, <a href="https://docs.databricks.com/applications/mlflow/model-serving.html" target="_blank">MLFlow</a>, <a href="https://pytorch.org/serve/" target="_blank">TorchServe</a>, <a href="https://oss.redislabs.com/redisai/" target="_blank">RedisAI</a>, <a href="https://developer.nvidia.com/nvidia-triton-inference-server" target="_blank">Nvidia Triton Inference Server</a>, etc.</p>
+<blockquote>
+<p>Model servers are experiencing a lot of adoption for their ability to standardize the model deployment and serving processes across the team -- enabling seamless upgrades, validation and integration.</p>
+</blockquote>
+<!-- Course signup -->
+<hr style="margin-top: 2.25rem; margin-bottom: 2.25rem;">
+
+<div class="admonition question mx-md-5">
+<p class="admonition-title">Upcoming live cohorts</p>
+<p>Sign up for our upcoming live cohort, where we'll provide <b>live lessons + QA</b>, <b>compute (GPUs)</b> and <b>community</b> to learn everything in one day.
+<script src="//embed.typeform.com/next/embed.js"></script>
+</p><div class="ai-center-all mb-3">
+    <button data-tf-popup="hFw8rLTJ" data-tf-opacity="100" data-tf-size="100" data-tf-iframe-props="title=Made With ML" data-tf-transitive-search-params data-tf-medium="snippet" data-tf-hidden="utm_source="class="md-button md-button--green-gradient mb-2 mb-md-0 mt-md-0 mt-1" style="cursor: pointer !important;"><span class="twemoji mr-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M20.322.75a10.75 10.75 0 00-7.373 2.926l-1.304 1.23A23.743 23.743 0 0010.103 6.5H5.066a1.75 1.75 0 00-1.5.85l-2.71 4.514a.75.75 0 00.49 1.12l4.571.963c.039.049.082.096.129.14L8.04 15.96l1.872 1.994c.044.047.091.09.14.129l.963 4.572a.75.75 0 001.12.488l4.514-2.709a1.75 1.75 0 00.85-1.5v-5.038a23.741 23.741 0 001.596-1.542l1.228-1.304a10.75 10.75 0 002.925-7.374V2.499A1.75 1.75 0 0021.498.75h-1.177zM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 00.121-.214v-3.822zm-10.092-2.7L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 00-.214.121l-2.167 3.612 3.223.679zm8.07-7.644a9.25 9.25 0 016.344-2.518h1.177a.25.25 0 01.25.25v1.176a9.25 9.25 0 01-2.517 6.346l-1.228 1.303a22.248 22.248 0 01-3.854 3.257l-3.288 2.192-1.743-1.858a.764.764 0 00-.034-.034l-1.859-1.744 2.193-3.29a22.248 22.248 0 013.255-3.851l1.304-1.23zM17.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm-11 13c.9-.9.9-2.6 0-3.5-.9-.9-2.6-.9-3.5 0-1.209 1.209-1.445 3.901-1.49 4.743a.232.232 0 00.247.247c.842-.045 3.534-.281 4.743-1.49z"></path></svg></span> Learn more</a>
+</div><p></p>
+</div>
+
+<!-- Citation -->
+<hr style="margin-top: 2.25rem; margin-bottom: 2.25rem;">
+
+<p>To cite this content, please use:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nc">@article</span><span class="p">{</span><span class="nl">madewithml</span><span class="p">,</span>
+<span class="w">    </span><span class="na">author</span><span class="w">       </span><span class="p">=</span><span class="w"> </span><span class="s">{Goku Mohandas}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">title</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{ APIs for Model Serving - Made With ML }</span><span class="p">,</span>
+<span class="w">    </span><span class="na">howpublished</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{\url{https://madewithml.com/}}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">year</span><span class="w">         </span><span class="p">=</span><span class="w"> </span><span class="s">{2023}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+  
+    
+  
+  <br>
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      <div style="display:flex; flex-direction:column;"><a href="https://www.anyscale.com?utm_source=madewithmml&utm_medium=website&utm_campaign=footer" target="_blank"><img src="/static/images/anyscale-white-text.svg" style="width: 4rem;"></a> © 2025 Anyscale, Inc. <br> <a href="https://www.anyscale.com/privacy-policy" target="_blank">Anyscale Privacy Policy</a></div>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/GokuMohandas" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/in/goku" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/GokuMohandas" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/madewithml?sub_confirmation=1" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:goku@madewithml.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+     
+
+      <script src="../../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        
+      
+        
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+        
+      
+        
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        
+      
+        
+          <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+      
+        
+          <script src="../../../static/js/custom.js"></script>
+        
+      
+        
+          <script src="../../../static/js/termynal.js"></script>
+        
+      
+    
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-P8H6KQG"
+    height="0"
+    width="0"
+    style="display: none; visibility: hidden"
+  ></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+  </body>
+</html>

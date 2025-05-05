@@ -1,0 +1,31 @@
+{% extends "main.html" %}
+
+<!-- Content -->
+{% block content %}
+<h1>Page Not Found</h1>
+<span class="twemoji">
+  {% include ".icons/octicons/calendar-24.svg" %}
+</span>
+This page doesn't exist yet!
+Reach out if you think it should.
+<ul>
+<li><a href="https://madewithml.com" target="_blank">
+  <span class="twemoji">
+    {% include ".icons/octicons/mail-24.svg" %}
+  </span> subscribe</a> to our monthly newsletter</a>
+</li>
+<li>
+  follow us on
+  <a href="https://twitter.com/GokuMohandas" target="_blank">
+    <span class="twemoji twitter">
+      {% include ".icons/fontawesome/brands/twitter.svg" %}
+    </span> Twitter</a> and
+    <a href="https://linkedin.com/in/goku" target="_blank">
+      <span class="twemoji linkedin">
+        {% include ".icons/fontawesome/brands/linkedin.svg" %}
+      </span> LinkedIn</a>
+</li>
+</ul>
+{% endblock %}
+
+<h2></h2>
